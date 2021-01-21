@@ -26,7 +26,7 @@
                     <div class="auth-side-form">
                         <div class="auth-content">
                             <div class="text-center">
-                                <h1 class="f-w-400">Trainers Attendance Form</h1>
+                                <h1 class="f-w-400">Attendance Form</h1>
                             </div>
 {{--                            @include('Epm.layouts.trainer-add')--}}
                             <form action="{{url('/adm/'.$auth_admin.'/save/daily/attendance/report')}}" method="post">
@@ -40,8 +40,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Email Address</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->email}}">
-                                            <span class="text-danger">{{$errors->first('name')}}</span>
+                                            <input type="text" name="emial" class="form-control" placeholder="Luke S" value="{{$trainer->email}}">
+                                            <span class="text-danger">{{$errors->first('email')}}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -156,10 +156,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <span class="text-danger">{{$errors->first('job_task_role')}}</span>
                                     <div class="col-md-12" id="otherSpecify" style="display: none;">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="text" class="form-control" name="other" placeholder="Please specify what was your other role/task">
+                                                <input type="text" class="form-control" name="other_job_task_role" placeholder="Please specify what was your other role/task">
                                             </div>
                                         </div>
                                     </div>

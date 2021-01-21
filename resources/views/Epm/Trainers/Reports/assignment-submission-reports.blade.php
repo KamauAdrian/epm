@@ -10,12 +10,12 @@
     ?>
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-6 d-flex align-items-center mb-4">
+            <div class="col-sm-12">
                 <h1 class="d-inline-block mb-0 font-weight-normal">Assignment Submission Reports</h1>
                 {{--                <h6 class="d-inline-block mb-0 ml-4"><i class="feather icon-download"></i> Download list</h6>--}}
-            </div>
-            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
-                <a href="{{url('/adm/'.$auth_admin->id.'/submit/assignment/report')}}">
+{{--            </div>--}}
+{{--            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">--}}
+                <a href="{{url('/adm/'.$auth_admin->id.'/submit/assignment/report')}}" class="float-right">
                     {{--            <a href="{{url('/adm/'.$auth_admin->id.'/view/reports')}}">--}}
                     <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Assignment</button>
                 </a>

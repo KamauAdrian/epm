@@ -10,14 +10,14 @@
     ?>
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-6 d-flex align-items-center mb-4">
-                <h1 class="d-inline-block mb-0 font-weight-normal">Assignment Submission Reports</h1>
+            <div class="col-sm-12">
+                <h1 class=" d-inline-block mb-0 font-weight-normal">Daily Ajira Digital Virtual Training Reports</h1>
                 {{--                <h6 class="d-inline-block mb-0 ml-4"><i class="feather icon-download"></i> Download list</h6>--}}
-            </div>
-            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
-                <a href="{{url('/adm/'.$auth_admin->id.'/submit/assignment/report')}}">
+{{--            </div>--}}
+{{--            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">--}}
+                <a href="{{url('/adm/'.$auth_admin->id.'/submit/virtual/training/report')}}" class="float-right">
                     {{--            <a href="{{url('/adm/'.$auth_admin->id.'/view/reports')}}">--}}
-                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i> Submit Assignment</button>
+                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Report</button>
                 </a>
             </div>
         </div>

@@ -40,23 +40,34 @@ class TrainerController extends Controller
     public function daily_attendance_report_save(Request $request,$id)
     {
         dd($request->all());
-        $trainer = User::find($id);
-        if ($trainer->role->name == 'Trainer') {
-            return view('Epm.Trainers.Reports.attendance-form',compact('trainer'));
-        }
+
     }
 
     public function virtual_training_reports($id)
     {
-        $admin = User::find($id);
+        $trainer = User::find($id);
         $reports = [];
-        if ($admin->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.virtual-training-reports',compact('admin','reports'));        }
+        if ($trainer->role->name == 'Trainer'){
+            return view('Epm.Trainers.Reports.virtual-training-reports',compact('trainer','reports'));
+        }
     }
 
     public function virtual_training_report($id,$report_id)
     {
 
+    }
+
+    public function virtual_training_report_submit($id)
+    {
+        $trainer = User::find($id);
+        if ($trainer->role->name == 'Trainer'){
+            return view('Epm.Trainers.Reports.virtual-training',compact('trainer'));
+        }
+    }
+
+    public function virtual_training_report_save(Request $request,$id)
+    {
+        dd($request->all());
     }
 
     public function daily_reports($id)// all daily reports

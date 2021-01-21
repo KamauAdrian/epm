@@ -10,50 +10,81 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     <li class="nav-item pcoded-menu-caption">
         <label>Dashboard</label>
     </li>
-    <li class="nav-item"><a href="{{url('adm/main/dashboard')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-tachometer-alt"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Emobilis HQ</span></a>
-        <ul class="pcoded-submenu">
-            <li><a href="#!">HQs</a></li>
-        </ul>
-    </li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>
-        <ul class="pcoded-submenu">
-            @if($pm_role)
-                <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">View PMO</a></li>
-            @else
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Project Manager')}}">Add PMO</a></li>
-            @endif
-        </ul>
-    </li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-sitemap"></i></span><span class="pcoded-mtext">Centers</span></a>
-        <ul class="pcoded-submenu">
-            <li><a href="{{url('/adm/'.$auth_admin->id.'/list/centers')}}">View Centers</a></li>
-        </ul>
-    </li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Center Managers</span></a>
-        <ul class="pcoded-submenu">
-            @if($cm_role)
-                <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}">View Center Managers</a></li>
-            @else
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Center Manager')}}">Add Center Manager</a></li>
-            @endif
-        </ul>
-    </li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Trainers</span></a>
-        <ul class="pcoded-submenu">
-            @if($trainer_role)
-                <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
-            @else
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Trainer')}}">Add Trainer</a></li>
-            @endif
-        </ul>
-    </li>
-    @if($auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Su Admin')
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item"><a href="{{url('adm/main/dashboard')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-tachometer-alt"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Emobilis HQ</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="#!">HQs</a></li>
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>
+            <ul class="pcoded-submenu">
+                @if($pm_role)
+                    <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">View PMO</a></li>
+                @else
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Project Manager')}}">Add PMO</a></li>
+                @endif
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-sitemap"></i></span><span class="pcoded-mtext">Centers</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/centers')}}">View Centers</a></li>
+            </ul>
+        </li>
+    @elseif($auth_admin->role->name == 'Center Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-sitemap"></i></span><span class="pcoded-mtext">Centers</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/centers')}}">View Centers</a></li>
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Center Managers</span></a>
+            <ul class="pcoded-submenu">
+                @if($cm_role)
+                    <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}">View Center Managers</a></li>
+                @else
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Center Manager')}}">Add Center Manager</a></li>
+                @endif
+            </ul>
+        </li>
+    @elseif($auth_admin->role->name == 'Center Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Center Managers</span></a>
+            <ul class="pcoded-submenu">
+                    <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}">View Center Managers</a></li>
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Trainers</span></a>
+            <ul class="pcoded-submenu">
+                @if($trainer_role)
+                    <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
+                @else
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Trainer')}}">Add Trainer</a></li>
+                @endif
+            </ul>
+        </li>
+    @elseif($auth_admin->role->name == 'Trainer')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Trainers</span></a>
+            <ul class="pcoded-submenu">
+                    <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
@@ -68,6 +99,13 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <li><a href="{{url('/adm/'.$auth_admin.'/list/my/teams')}}">My Teams</a></li>
             </ul>
         </li>
+    @elseif($auth_admin->role->name == 'Trainer')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="#!">My Teams</a></li>
+            </ul>
+        </li>
     @endif
     <li class="nav-item pcoded-hasmenu">
         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Sessions</span></a>
@@ -75,22 +113,26 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <li><a href="{{url('/adm/'.$auth_admin->id.'/list/sessions')}}">View Sessions</a></li>
         </ul>
     </li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Mentors</span></a>
-        <ul class="pcoded-submenu">
-            @if($mentor_role)
-                <li><a href="{{url('/list/all/admins/role_id='.$mentor_role->id)}}">View Mentors</a></li>
-            @else
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Mentor')}}">Add Mentor</a></li>
-            @endif
-        </ul>
-    </li>
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span><span class="pcoded-mtext">Ajira Clubs</span></a>
-        <ul class="pcoded-submenu">
-            <li><a href="{{url('/ajira-clubs')}}">View Clubs</a></li>
-        </ul>
-    </li>
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Mentors</span></a>
+            <ul class="pcoded-submenu">
+                @if($mentor_role)
+                    <li><a href="{{url('/list/all/admins/role_id='.$mentor_role->id)}}">View Mentors</a></li>
+                @else
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Mentor')}}">Add Mentor</a></li>
+                @endif
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span><span class="pcoded-mtext">Ajira Clubs</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="{{url('/ajira-clubs')}}">View Clubs</a></li>
+            </ul>
+        </li>
+    @endif
     <li class="nav-item">
         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Projects</span></a>
     </li>
@@ -133,13 +175,15 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-    <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">M & E</span></a>
-        <ul class="pcoded-submenu">
-            <li><a href="#!">Program Overview</a></li>
-            <li><a href="#!">Lessons Learnt</a></li>
-        </ul>
-    </li>
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">M & E</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="#!">Program Overview</a></li>
+                <li><a href="#!">Lessons Learnt</a></li>
+            </ul>
+        </li>
+    @endif
 </ul>
 <div class="card text-center">
     <div class="card-block">

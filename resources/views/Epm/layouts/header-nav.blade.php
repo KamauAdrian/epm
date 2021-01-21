@@ -1,5 +1,6 @@
 <!--header start-->
 <?php
+$auth_admin = auth()->user();
 $pm_role = \App\Models\Role::where('name','Project Manager')->first();
 $cm_role = \App\Models\Role::where('name','Center Manager')->first();
 $trainer_role = \App\Models\Role::where('name','Trainer')->first();
@@ -25,39 +26,106 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 </a>
                 <div class="dropdown-menu profile-notification ">
                     <ul class="pro-body">
+{{--                        //Dashboard--}}
                         <li><a href="{{url('/adm/main/dashboard')}}" class="dropdown-item"><i class="fas fa-circle"></i> Dashboard</a></li>
-                        <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Emobilis HQ</a></li>
-                        @if($pm_role)
-                            <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Ajira PMO</a></li>
-                        @else
-                            <li><a href="{{url('/adm/add/pm')}}" class="dropdown-item"><i class="fas fa-circle"></i>Ajira PMO</a></li>
+
+{{--                        //Emobilis HQs--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Emobilis HQ</a></li>
                         @endif
 
-                        <li><a href="{{url('/list-centers')}}" class="dropdown-item"><i class="fas fa-circle"></i>Centers</a></li>
+{{--                        //Ajira PMOs--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            @if($pm_role)
+                                <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Ajira PMO</a></li>
+                            @else
+                                <li><a href="{{url('/adm/add/pm')}}" class="dropdown-item"><i class="fas fa-circle"></i>Ajira PMO</a></li>
+                            @endif
+                        @endif
 
-                        @if($cm_role)
+{{--                        //centers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="{{url('/list-centers')}}" class="dropdown-item"><i class="fas fa-circle"></i>Centers</a></li>
+                        @elseif($auth_admin->role->name == 'Center Manager')
+                            <li><a href="{{url('/list-centers')}}" class="dropdown-item"><i class="fas fa-circle"></i>Centers</a></li>
+                        @endif
+
+{{--                        //Center Managers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            @if($cm_role)
+                                <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Center Managers</a></li>
+                            @else
+                                <li><a href="{{url('/adm/add/cm')}}" class="dropdown-item"><i class="fas fa-circle"></i>Center Managers</a></li>
+                            @endif
+                        @elseif($auth_admin->role->name == 'Center Manager')
                             <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Center Managers</a></li>
-                        @else
-                            <li><a href="{{url('/adm/add/cm')}}" class="dropdown-item"><i class="fas fa-circle"></i>Center Managers</a></li>
                         @endif
 
-                        @if($trainer_role)
-                            <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Trainers</a></li>
-                        @else
-                            <li><a href="{{url('/adm/add/trainer')}}" class="dropdown-item"><i class="fas fa-circle"></i>Trainers</a></li>
+{{--                        //Trainers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            @if($trainer_role)
+                                <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Trainers</a></li>
+                            @else
+                                <li><a href="{{url('/adm/add/trainer')}}" class="dropdown-item"><i class="fas fa-circle"></i>Trainers</a></li>
+                            @endif
+                        @elseif($auth_admin->role->name == 'Trainer')
+                                <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Trainers</a></li>
                         @endif
-                        <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Teams</a></li>
-                        <li><a href="{{url('/list-sessions')}}" class="dropdown-item"><i class="fas fa-circle"></i>Sessions</a></li>
 
-                        @if($mentor_role)
-                            <li><a href="{{url('/list/all/admins/role_id='.$mentor_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Mentors</a></li>
-                        @else
-                            <li><a href="{{url('/adm/add/mentor')}}" class="dropdown-item"><i class="fas fa-circle"></i>Mentors</a></li>
+{{--                        //Teams--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Teams</a></li>
+                        @elseif($auth_admin->role->name == 'Center Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Teams</a></li>
+                        @elseif($auth_admin->role->name == 'Trainer')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Teams</a></li>
                         @endif
-                        <li><a href="{{url('/ajira-clubs')}}" class="dropdown-item"><i class="fas fa-circle"></i>Ajira Clubs</a></li>
-                        <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Projects</a></li>
-                        <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Reports</a></li>
-                        <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>M & E</a></li>
+
+{{--                        //Sessions--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="{{url('/list-sessions')}}" class="dropdown-item"><i class="fas fa-circle"></i>Sessions</a></li>
+                        @elseif($auth_admin->role->name == 'Trainer')
+                            <li><a href="{{url('/list-sessions')}}" class="dropdown-item"><i class="fas fa-circle"></i>Sessions</a></li>
+                        @endif
+
+{{--                        //Mentors--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            @if($mentor_role)
+                                <li><a href="{{url('/list/all/admins/role_id='.$mentor_role->id)}}" class="dropdown-item"><i class="fas fa-circle"></i>Mentors</a></li>
+                            @else
+                                <li><a href="{{url('/adm/add/mentor')}}" class="dropdown-item"><i class="fas fa-circle"></i>Mentors</a></li>
+                            @endif
+                        @endif
+
+{{--                        //Ajira Clubs--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="{{url('/ajira-clubs')}}" class="dropdown-item"><i class="fas fa-circle"></i>Ajira Clubs</a></li>
+                        @endif
+
+{{--                        //Projects--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Projects</a></li>
+                        @elseif($auth_admin->role->name == 'Center Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Projects</a></li>
+                        @elseif($auth_admin->role->name == 'Trainer')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Projects</a></li>
+                        @endif
+
+{{--                        //Reports--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Reports</a></li>
+                        @elseif($auth_admin->role->name == 'Center Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Reports</a></li>
+                        @elseif($auth_admin->role->name == 'Trainer')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Reports</a></li>
+                        @endif
+
+{{--                        //M&E--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>M & E</a></li>
+                        @elseif($auth_admin->role->name == 'Center Manager')
+                            <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>M & E</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

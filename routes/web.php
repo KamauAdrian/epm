@@ -115,6 +115,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/submit/daily/attendance/report',[App\Http\Controllers\TrainerController::class, 'daily_attendance_report_submit']);
     Route::post('/adm/{id}/save/daily/attendance/report',[App\Http\Controllers\TrainerController::class, 'daily_attendance_report_save']);
     Route::get('/adm/{id}/view/virtual/training/reports',[App\Http\Controllers\TrainerController::class, 'virtual_training_reports']);
+    Route::get('/adm/{id}/view/virtual/training/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'virtual_training_report']);
+    Route::get('/adm/{id}/submit/virtual/training/report',[App\Http\Controllers\TrainerController::class, 'virtual_training_report_submit']);
+    Route::post('/adm/{id}/save/virtual/training/report',[App\Http\Controllers\TrainerController::class, 'virtual_training_report_save']);
     Route::get('/adm/{id}/view/daily/reports',[App\Http\Controllers\TrainerController::class, 'daily_reports']);
     Route::get('/adm/{id}/submit/daily/report',[App\Http\Controllers\TrainerController::class, 'daily_report_submit']);
     Route::get('/adm/{id}/save/daily/report',[App\Http\Controllers\TrainerController::class, 'daily_report_save']);
