@@ -30,7 +30,7 @@
                             <h1 class="f-w-400">Physical Training Daily Report</h1>
                         </div>
                         {{--                            @include('Epm.layouts.trainer-add')--}}
-                        <form action="{{url('/adm/'.$auth_admin.'/save/daily/attendance/report')}}" method="post">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/attendance/report')}}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
