@@ -129,8 +129,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What facilitation techniques were used during the training?</label>
-                                        <input type="text" name="training_techniques" class="form-control" placeholder="Your Answer">
-                                        <span class="text-danger">{{$errors->first('training_techniques')}}</span>
+                                        <input type="text" name="training_facilitation_techniques" class="form-control" placeholder="Your Answer">
+                                        <span class="text-danger">{{$errors->first('training_facilitation_techniques')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -150,8 +150,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainers were available during the training? Name any trainer who was missing and why? </label>
-                                        <input type="text" name="training_trainers_available" class="form-control" placeholder="Your Answer">
-                                        <span class="text-danger">{{$errors->first('training_trainers_available')}}</span>
+                                        <input type="text" name="training_trainers_available_missing" class="form-control" placeholder="Your Answer">
+                                        <span class="text-danger">{{$errors->first('training_trainers_available_missing')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

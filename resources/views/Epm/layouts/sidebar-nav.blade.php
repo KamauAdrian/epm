@@ -150,7 +150,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 @if($trainer_role)
                     <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/target_group_id='.$trainer_role->id)}}">Trainers</a></li>
                 @endif
-                    <li><a href="#!">Teams</a></li>
+                <li><a href="#!">Teams</a></li>
                 <li><a href="#!">Centers</a></li>
             </ul>
         </li>

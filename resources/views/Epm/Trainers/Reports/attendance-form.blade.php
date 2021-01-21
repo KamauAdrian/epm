@@ -40,7 +40,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Email Address</label>
-                                            <input type="text" name="emial" class="form-control" placeholder="Luke S" value="{{$trainer->email}}">
+                                            <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$trainer->email}}">
                                             <span class="text-danger">{{$errors->first('email')}}</span>
                                         </div>
                                     </div>
