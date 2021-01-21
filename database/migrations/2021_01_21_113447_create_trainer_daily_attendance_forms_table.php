@@ -17,6 +17,7 @@ class CreateTrainerDailyAttendanceFormsTable extends Migration
             $table->id();
             $table->string('email');
             $table->string('name');
+            $table->integer('trainer_id')->unsigned();
             $table->string('job_category');
             $table->string('job_task_role');
             $table->string('time');

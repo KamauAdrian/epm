@@ -16,6 +16,7 @@ class CreateTrainerDailyPhysicallTrainingsTable extends Migration
         Schema::create('trainer_daily_physicall_trainings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('trainer_id')->unsigned();
             $table->string('county');
             $table->string('constituency');
             $table->string('center');
