@@ -96,14 +96,14 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin.'/list/my/teams')}}">My Teams</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>
             </ul>
         </li>
     @elseif($auth_admin->role->name == 'Trainer')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="#!">My Teams</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>
             </ul>
         </li>
     @endif
