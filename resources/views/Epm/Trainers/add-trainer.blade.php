@@ -95,6 +95,24 @@
                 methods:{
                 },
         })
+        // console.log(document.getElementById('office_supplied')).value
+        function showInputSupplies(){
+            var yes = document.getElementById('office_supplied');
+            var no = document.getElementById('office_not_supplied');
+            var supplies = document.getElementById('supplies_received');
+            if (yes.checked==true){
+                supplies.style.display='block';
+            }
+
+        }
+        function hideInputSupplies(){
+            var no = document.getElementById('office_not_supplied');
+            var supplies = document.getElementById('supplies_received');
+            if (no.checked==true){
+                supplies.style.display='none';
+            }
+
+        }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9yYsUxZxbbnwhBcyRnWhorWhNPuQYPus&libraries=places&callback=activatePlacesSearch"></script>
     {{--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF1htWBhqk0WQmip2LhO3leVvRzUg3T-o&libraries=places"></script>--}}

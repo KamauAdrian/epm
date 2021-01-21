@@ -33,6 +33,9 @@ class CreateUsersTable extends Migration
             $table->integer('is_admin');
             $table->integer('role_id')->default(0);
             $table->string('employee_number')->nullable();
+            $table->string('office_supplies')->nullable();
+            $table->string('laptop_type')->nullable();
+            $table->string('laptop_serial_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

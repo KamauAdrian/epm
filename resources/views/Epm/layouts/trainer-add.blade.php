@@ -70,6 +70,50 @@
         </div>
         <div class="col-sm-12">
             <div class="form-group">
+                <label>Office Supplied Laptop</label>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="radio" value="Yes" onclick="showInputSupplies()" class="form-check-input" id="office_supplied" name="office_supplies">
+                            <label for="office_supplied" class="form-check-label">Yes</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="radio" value="No" onclick="hideInputSupplies()" class="form-check-input" id="office_not_supplied" name="office_supplies">
+                            <label for="office_not_supplied" class="form-check-label">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12" id="supplies_received" style="display: none">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Laptop Type</label>
+                        <input type="text" name="laptop_type" class="form-control" placeholder="Hp, Dell" value="{{old('laptop_type')}}">
+                        <span class="text-danger">{{$errors->first('laptop_type')}}</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Laptop serial Number</label>
+                        <input type="text" name="laptop_serial_number" class="form-control" placeholder="5CG5350BTK" value="{{old('laptop_serial_number')}}">
+                        <span class="text-danger">{{$errors->first('laptop_serial_number')}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
                 <label>Upload Image</label>
                 <input type="file" name="image" class="form-control">
                 <span class="text-danger">{{$errors->first('image')}}</span>

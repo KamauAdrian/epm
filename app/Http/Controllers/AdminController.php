@@ -700,6 +700,7 @@ $admin_user = Auth::user();
                 'start_date' => ['required'],
             ]
         );
+//        dd($request->all());
     $admin_user = Auth::user();
         //create trainer as admin user
         $trainer_adm_user = new User();
@@ -714,6 +715,10 @@ $admin_user = Auth::user();
         $trainer_adm_user->start_date = request('start_date');
         $trainer_adm_user->is_admin = 1;
         $trainer_adm_user->role_id = '';
+        $trainer_adm_user->speciality = $request->speciality;
+        $trainer_adm_user->office_supplies = $request->office_supplies;
+        $trainer_adm_user->laptop_type = $request->laptop_type;
+        $trainer_adm_user->laptop_serial_number = $request->laptop_serial_number;
         //before saving a user create a new role(Trainer) save the role and assign user to role_id
         $role = new Role();
         $role->name = 'Trainer';
