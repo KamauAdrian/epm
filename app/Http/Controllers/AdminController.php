@@ -1,0 +1,1022 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Middleware\CenterManager;
+use App\Mail\CreatePassword;
+use App\Mail\ForgotPassword;
+use App\Mail\WelcomeMail;
+use App\Models\Center;
+use App\Models\ProjectManager;
+use App\Models\Report;
+use App\Models\ReportActivity;
+use App\Models\ReportQuestion;
+use App\Models\ReportReport;
+use App\Models\ReportTemplate;
+use App\Models\ReportType;
+use App\Models\Role;
+use App\Models\TeamCenterManager;
+use App\Models\Trainee;
+use App\Models\Trainer;
+use App\Models\TrainingSession;
+use App\Models\User;
+use Faker\Calculator\Iban;
+use Faker\Provider\Image;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\New_;
+use function PHPUnit\Framework\never;
+
+class AdminController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function login()
+    {
+        return view('Epm.admin-login');
+//        return view('Epm.Layouts.adm-dashboard');
+    }
+
+    public function index()
+    {
+        return view('Epm.layouts.adm-dashboard');
+    }
+
+    public function adms_list($role_id)
+    {
+        $auth_admin = Auth::user();
+        $role = DB::table('roles')->where('id',$role_id)->first();
+        $admins = User::orderBy('id','desc')->where('role_id',$role_id)->get();
+        return view('Epm.list-admins',compact('admins','role'));
+    }
+
+    public function add_admin($id,$role){
+        if ($role == 'Project Manager'){
+            return view('Epm.PMs.add-pm');
+        }
+        elseif ($role == 'Center Manager'){
+            return view('Epm.CMs.add-cm');
+        }
+        elseif ($role == 'Trainer'){
+            return view('Epm.Trainers.add-trainer');
+        }
+        elseif ($role == 'Mentor'){
+            return view('Epm.Mentors.add-mentor');
+        }
+    }
+
+    public function view_adm_profile($id)
+    {
+        $admin = DB::table('users')->where('id',$id)->first();
+        return view('Epm.view-admin-profile',compact('admin'));
+    }
+    public function view_logged_in_adm_profile($id,$role_id)
+    {
+        $auth_adm= Auth::user();
+        if ($auth_adm->role->id == $role_id && $auth_adm->id ==$id){
+            $admin = DB::table('users')->where('id',$id)->first();
+            return view('Epm.auth-admin-profile',compact('admin'));
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function edit_adm_profile($id){
+        $auth_admin = Auth::user();
+        $admin = DB::table('users')->where('id',$id)->first();
+        return view('Epm.edit-admin-profile',compact('admin'));
+    }
+
+    public function adm_profile_update(Request $request,$id)
+    {
+        $admin = User::find($id);
+        $data = '';
+        if ($request->hasFile('image')){
+            $fileName = '';
+            $image = $request->file('image');
+            if ($image->isValid()){
+                $fileName = $image->getClientOriginalName();
+                if ($admin->role->name == 'Su Admin'){
+                    $image->move('SuAdmins/images',$fileName);
+                }elseif ($admin->role->name == 'Project Manager'){
+                    $image->move('ProjectManagers/images',$fileName);
+                }elseif ($admin->role->name == 'Center Manager'){
+                    $image->move('CenterManagers/images',$fileName);
+                }elseif ($admin->role->name == 'Trainer'){
+                    $image->move('Trainers/images',$fileName);
+                }elseif ($admin->role->name == 'Mentor'){
+                    $image->move('Mentors/images',$fileName);
+                }
+            }
+            $data = [
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'gender'=>$request->gender,
+                'county'=>$request->county,
+                'location'=>$request->location,
+                'location_lat_long'=>$request->location_lat_long,
+                'bio'=>$request->bio,
+                'image'=>$fileName,
+                'center_id'=>$request->center_id,
+                'department'=>$request->department,
+                'speciality'=>$request->speciality,
+            ];
+        }else{
+            $data = [
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'gender'=>$request->gender,
+                'county'=>$request->county,
+                'location'=>$request->location,
+                'location_lat_long'=>$request->location_lat_long,
+                'bio'=>$request->bio,
+                'center_id'=>$request->center_id,
+                'department'=>$request->department,
+                'speciality'=>$request->speciality,
+            ];
+        }
+        $admin_user = \auth()->user();
+        $updated = User::updateUser($id,$data);
+        $auth_admin = Auth::user();
+        if ($auth_admin->id == $id){
+            return redirect('/adm/'.$id.'/profile/public/role_id='.$admin->role->id.'/view')->with('success','Profile Updated Successfully');
+        }else{
+            return redirect('/adm/view/adm/'.$id.'/profile/role_id='.$admin->role->id)->with('success','Profile Updated Successfully');
+        }
+    }
+
+    public function adm_delete($id,$role_id)
+    {
+        $admin_user_id = Auth::id();
+        $admin_user = DB::table('users')->where('id',$admin_user_id)->first();
+        DB::table('users')->where('id',$id)->delete();
+        return redirect('/list/all/admins/role_id='.$role_id)->with('success','Admin deleted Successfully');
+    }
+
+    //log in all admins
+    public function admin_login(Request $request)
+    {
+        $admin_info = $request->all();
+        $user_exists = DB::table('users')->where('email',$admin_info['email'])->first();
+        if ($user_exists){
+            $result = Auth::attempt(['email'=>$admin_info['email'],'password'=>$admin_info['password']]);
+            if ($result){
+                return redirect('/adm/main/dashboard');
+            }else{
+                $request->session()->flash('error','Password error');
+                return redirect()->back()->with('message',$request->session()->get('error'));
+            }
+        }
+        $email = $admin_info['email'];
+        $request->session()->flash('failed','Oooops no record for '.$email.' found');
+        return redirect()->back()->with('error',$request->session()->get('failed'));
+    }
+
+    public function admin_logout(){
+        Auth::logout();
+        return redirect('/');
+    }
+
+    public function activate_account($id){
+        $admin_user = DB::table('users')->where('id',$id)->first();
+        return view('Epm.create-password',compact('admin_user'));
+    }
+
+    public function update_account(Request $request,$id){
+        $this->validate($request,[
+            'password'=>['required','confirmed'],
+        ]);
+        $password = Hash::make($request->password);
+        $data = [
+            'password'=>$password,
+            ];
+        $updated = User::updateUser($id,$data);
+        $request->session()->flash('message','Account activation success please login with your email address and password to continue');
+        return redirect('/')->with('success',$request->session()->get('message'));
+
+    }
+
+    public function forgot_password(){
+        return view('Epm.forgot-password');
+    }
+    public function request_reset_password(Request $request){
+        $email = $request->email;
+        $adm_user = DB::table('users')->where('email',$email)->first();
+        $reset_password_session_verification = Hash::make(rand(10001,121345678));
+        date_default_timezone_set("Africa/Nairobi");
+        $created_at = date('Y-m-d H:i:s');
+        $request->session()->flash('not_adm_user','Sorry Email Address not found');
+        $request->session()->flash('success_message','Success we emailed you instructions to reset your password check your inbox and create a new password');
+        if ($adm_user){
+            $data = [
+                'user_id'=>$adm_user->id,
+                'session_verification'=>$reset_password_session_verification,
+                'name'=>$adm_user->name,
+            ];
+            $password_reset = [
+                'email'=>$adm_user->email,
+                'token'=>$reset_password_session_verification,
+                'created_at'=>$created_at,
+            ];
+            DB::table('password_resets')->insert($password_reset);
+            Mail::to($email)->send(new ForgotPassword($data));
+            return redirect('/')->with('success',$request->session()->get('success_message'));
+        }else{
+            return redirect('/')->with('error',$request->session()->get('not_adm_user'));
+        }
+    }
+
+    public function reset_password($token,$id){
+        $admin_user = DB::table('users')->where('id',$id)->first();
+        $genuine_request = DB::table('password_resets')->where('email',$admin_user->email)->orderBy('created_at','desc')->first();
+        if ($genuine_request) {
+            date_default_timezone_set("Africa/Nairobi");
+            $date_time_now = strtotime(date('Y-m-d H:i:s'));
+            $date_time_request = strtotime($genuine_request->created_at);
+            $time_diff = $date_time_now - $date_time_request;
+            $split_token = explode('/', $genuine_request->token);
+            $confirm_token = '';
+            if (count($split_token) > 1) {
+                $confirm_token = $split_token[0];
+            } else {
+                $confirm_token = $genuine_request->token;
+            }
+//        dd($genuine_request->token,$confirm_token,$time_diff,$date_time_now,$date_time_request);
+            if ($token == $confirm_token && $time_diff <= 300) {
+                return view('Epm.reset-password', compact('admin_user'));
+            } else {
+                return redirect('/')->with('error', 'Sorry reset Password Page expired please try again later');
+            }
+        }else{
+            return redirect('/');
+        }
+
+    }
+
+    public function update_password(Request $request,$id){
+        $this->validate($request,[
+            'password'=>['required','confirmed'],
+        ]);
+        $password = Hash::make($request->password);
+        $data = [
+            'password'=>$password,
+        ];
+       User::updateUser($id,$data);
+        $request->session()->flash('message','Password changed successfully please login to continue');
+        return redirect('/')->with('success',$request->session()->get('message'));
+
+    }
+//Reports
+    public function reports_templates($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $templates = DB::table('report_templates')->orderBy('created_at','desc')->get();
+            return view('Epm.Reports.templates',compact('templates'));
+        }
+    }
+
+    public function report_create($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            return view('Epm.Reports.report-add');
+        }
+    }
+
+    public function report_save(Request $request,$id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $this->validate($request,[
+                'name'=>'required',
+                'target_groups'=>'required',
+            ]);
+            $report = new Report();
+            $report->name = $request->name;
+            $data = $request->target_groups;
+            $created = $report->save();
+            if ($created){
+                Report::find($report->id)->groups()->attach($data);
+            }
+            return redirect('/adm/'.$id.'/view/reports');
+        }
+    }
+
+    public function report_actors(){
+        $result = [];
+        $actors = DB::table('roles')->get();
+        if (!empty($actors)){
+            foreach ($actors as $actor){
+                $result[]=$actor;
+            }
+        }
+        return response()->json($result);
+    }
+
+    public function report_template_create($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            return view('Epm.Reports.template-create');
+        }
+    }
+
+//    public function new_reports(){
+//
+//        $added_reports_ids = json_decode(DB::table('report_templates')->pluck('report_type_id'));
+////        $added_cm_ids = json_decode(DB::table('team_cm_member')->where('team_id',$id)->pluck('center_manager_id'));
+////        $role = DB::table('roles')->where('name','Center Manager')->first();
+////        if ($role){}
+//            $reports_ids = json_decode(DB::table('report_types')->pluck('id'));
+////            $cm_ids = json_decode(DB::table('users')->where('role_id',$role->id)->pluck('id'));
+//
+//        $new_reports_ids = [];
+////        $cm_new_member_ids = [];
+//        foreach ($reports_ids as $report_id){
+//            if (!in_array($report_id,$added_reports_ids)){
+//                $reports = DB::table('report_types')->where('id',$report_id)->get();
+//                foreach ($reports as $report){
+//                    $new_reports_ids[] = $report;
+//                }
+//            }
+//        }
+//        return response()->json($new_reports_ids);
+//    }
+
+    public function report_template_generate(Request $request,$id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            //validate the request
+//            $this->validate($request,[
+//                'name'=>'required',
+//                'required_fields'=>'required',
+//                'questions'=>'required',
+//                'target_groups'=>'required',
+//            ]);
+            //create a new report template(add questions to a report)
+            $report_template = new ReportTemplate();
+            $report_template->name = $request->name;
+            $target_groups = $request->target_groups;
+            //option one for required fields
+            $required_fields = $request->required_fields;
+            $report_questions = $request->questions;
+            $questions = [];
+            $template_generated = $report_template->save();
+            if ($template_generated){
+                $existing_template = ReportTemplate::find($report_template->id);
+                if ($existing_template && $target_groups){
+                    $groups = [];
+                    foreach ($target_groups as $target_group){
+                        $groups[] = [
+                            'report_template_id'=>$existing_template->id,
+                            'target_group_id'=>$target_group
+                        ];
+
+                    }
+                    $existing_template->groups()->attach($target_groups);
+                }
+                if ($existing_template && $report_questions){
+                    $questions = [];
+                    foreach ($report_questions as $report_question){
+                        $questions[] = [
+                            'question'=>$report_question,
+                            'report_template_id'=>$existing_template->id,
+                        ];
+                    }
+                    DB::table('report_questions')->insert($questions);
+                }
+                if ($existing_template && $required_fields){
+                    $fields = [];
+                    foreach ($required_fields as $required_field){
+                        $fields[] = [
+                            'name'=>$required_field,
+                            'report_template_id'=>$existing_template->id,
+                        ];
+                    }
+                    DB::table('report_template_fields')->insert($fields);
+                }
+            }
+            return redirect('/adm/'.$id.'/view/reports/template')->with('success','Report Template Created successfully');
+        }
+    }
+
+    public function report_template_view($id,$template_id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $template = ReportTemplate::find($template_id);
+            return view('Epm.Reports.view-template',compact('template'));
+        }
+    }
+
+    public function report_template_edit($id,$template_id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $template = ReportTemplate::find($template_id);
+            return view('Epm.Reports.edit-template',compact('template'));
+        }
+    }
+
+    public function reports($id,$report_id){
+        //get all reports submitted using report_id
+        $reports = DB::table('reports')->orderBy('created_at','desc')->where('report_template_id',$report_id)->where('user_id',$id)->get();
+        $template = ReportTemplate::find($report_id);
+        return view('Epm.Reports.reports',compact('reports','template'));
+
+    }
+    public function view_report($id,$template_id,$report_id){
+        //get all reports submitted using report_id
+        $admin = Auth::user();
+        if ($admin->id == $id) {
+            $report = DB::table('reports')->where('id', $report_id)->first();
+            $template = ReportTemplate::find($template_id);
+            return view('Epm.Reports.view-report', compact('report', 'template'));
+        }
+    }
+
+    public function submit_report($id,$report_id)
+    {
+//        $report = DB::table('report_templates')->where('id',$report_id)->first();
+        $report = ReportTemplate::find($report_id);
+
+        return view('Epm.Reports.submit-report',compact('report'));
+    }
+
+    public function save_report(Request $request,$id,$report_id)
+    {
+        $admin = User::find($id);
+        $template = ReportTemplate::find($report_id);
+        $request_names = [];
+        $report_target_groups = [];
+        $report_questions = [];
+        foreach ($template->groups as $group){
+            $report_target_groups[] = $group->id;
+        }
+        if (in_array($admin->role->id,$report_target_groups)){
+            foreach ($template->questions as $question){
+                $report_questions[] = ['id'=>$question->id,'question'=>$question->question];
+                $request_names[] = "reports_".$question->id."_quest";
+            }
+            $new_report = new Report();
+            $new_report->name = $request->name;
+            $new_report->user_id = $admin->id;
+            $new_report->report_target_group_id = $admin->role->id;
+            $new_report->report_template_id = $request->report_template_id;
+            $new_report->employee_number = $request->employee_number;
+            $new_report->date_of_report = $request->date_of_report;
+            $new_report->role = $request->role;
+            $new_report->duty_station = $request->duty_station;
+            $report_activities = null;
+            $reports_all = null;
+            $activities = $request->activity;
+            $reports = request($request_names);
+            $keys_reports = array_keys($reports);
+            extract($reports);
+            $total_reports = count($reports);
+            $saved_report = $new_report->save();
+            if ($saved_report){
+                foreach ($activities as $value) {
+                    $new_activity = new ReportActivity();
+                    $new_activity->name = $value;
+                    $new_activity->report_id = $new_report->id;
+                    $saved_activity = $new_activity->save();
+                    $report_activities[] = $new_activity->id;
+                }
+                if ($saved_activity){
+                    for ($i=0;$i<$total_reports;$i++) {
+                        $x = $keys_reports[$i];
+                        foreach ($$x as $key=>$value) {
+                            $new_report_report = new ReportReport();
+                            $q_id = explode('_', $x);
+                            $new_report_report->report = $value;
+                            $new_report_report->report_id = $new_report->id;
+                            $new_report_report->question_id = $q_id[1];
+                            $new_report_report->activity_id = $report_activities[$key];
+                            $saved_report_report = $new_report_report->save();
+                        }
+                    }
+                    if ($saved_report_report){
+                        return redirect('/adm/'.$id.'/view/reports/template_id='.$report_id)->with('success','Successfully Submitted report');
+                    }
+                }
+            }
+        }else{
+            return redirect()->back()->with('error','Error Not authorized to submit this report');
+        }
+    }
+
+    public function reports_by_role($id,$target_group_id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $report_target_group = Role::find($target_group_id);
+            $templates = $report_target_group->templates;
+            return view('Epm.Reports.reports-by-role',compact('report_target_group','templates'));
+        }
+    }
+
+    public function reports_by_role_list($id,$template_id,$report_target_group_id){
+        $role = Role::find($report_target_group_id);
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $reports = DB::table('reports')->where('report_template_id',$template_id)->where('report_target_group_id',$report_target_group_id)->get();
+            $template = ReportTemplate::find($template_id);
+            return view('Epm.Reports.reports-by-role-list',compact('reports','template','role'));
+        }
+    }
+
+//centers
+    public function center_add(){
+        return view('Epm.Centers.add-center');
+    }
+
+    public function center_save(Request $request){
+        $this->validate($request,
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'county' => ['required'],
+                'location' => ['required'],
+            ]
+        );
+        $center = new Center();
+        $center->name = request('name');
+        $center->county = request('county');
+        $center->location = request('location');
+        $center->location_lat_long = request('location_lat_long');
+        $center_saved = $center->save();
+        if ($center_saved) {
+            $request->session()->flash('message', 'Center Added Successfully');
+            return redirect('/adm/list/centers')->with('success', $request->session()->get('message'));
+        }else{
+            $request->session()->flash('message', 'An error occurred when trying to create Center please try again later');
+            return redirect('/adm/list/centers')->with('error', $request->session()->get('message'));
+        }
+    }
+
+    public function centers_list(){
+        $centers = Center::orderBy('created_at','desc')->get();
+        return view('Epm.Centers.centers',compact('centers'));
+    }
+
+    public function view_center($id,$center_id){
+        $center = DB::table('centers')->where('id',$center_id)->first();
+        return view('Epm.Centers.view-center',compact('center'));
+    }
+
+    public function edit_center($id){
+        $center = DB::table('centers')->where('id',$id)->first();
+        return view('Epm.Centers.edit-center',compact('center'));
+    }
+
+    public function update_center(Request $request,$id){
+        $data = [];
+        if ($request->hasFile('image')){
+            $fileName = '';
+            $image = $request->file('image');
+            if ($image->isValid()){
+                $fileName = $image->getClientOriginalName();
+                $image->move('Centers/images',$fileName);
+            }
+            $data = [
+                'name'=>$request->name,
+                'county'=>$request->county,
+                'location'=>$request->location,
+                'location_lat_long'=>$request->location_lat_long,
+                'image'=>$fileName,
+                'description'=>$request->description,
+            ];
+        }else{
+            $data = [
+                'name'=>$request->name,
+                'county'=>$request->county,
+                'location'=>$request->location,
+                'location_lat_long'=>$request->location_lat_long,
+                'description'=>$request->description,
+            ];
+        }
+        $updated = DB::table('centers')->where('id',$id)->update($data);
+        return redirect('/adm/view/center/'.$id)->with('success','Center Updated Successfully');
+    }
+
+    public function delete_center(Request $request,$id){
+        $data = [
+            'center_id'=>null,
+        ];
+        $cms_in_center = DB::table('users')->where('center_id',$id)->update($data);
+
+        DB::table('centers')->where('id',$id)->delete();
+
+        return redirect('/adm/list/centers')->with('success','Center Deleted Successfully');
+    }
+
+
+    public function cm_save(Request $request)
+    {
+        $messages = [
+            'phone.regex' => 'Invalid Phone number format',
+        ];
+
+        $this->validate($request,
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'gender' => ['required'],
+                'county' => ['required'],
+                'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
+                'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
+            ],$messages
+        );
+
+$admin_user = Auth::user();
+        // first create the center manager role
+        $role = new Role();
+        $role->name ='Center Manager';
+        //check if role exists
+        $role_exists = DB::table('roles')->where('name',$role->name)->first();
+//create a center manager as admin user with center manager role (add to users table)
+        $cm_user = new User();
+        $update_center= [];
+        $center='';
+        $cm_user->name = $request->name;
+        $cm_user->gender = $request->gender;
+        $cm_user->email = $request->email;
+        $email = $cm_user->email;
+        $cm_user->phone = '';
+        $phone = $request->phone;
+        $country_code = substr($phone,0,4);
+        if ($country_code == +254){
+            $minus_code = substr($phone,4,strlen($phone));
+            $new_phone = '0'.$minus_code;
+            $cm_user->phone = $new_phone;
+        }else{
+            $cm_user->phone = $phone;
+        }
+        $cm_user->county = $request->county;
+        $cm_user->center_id = $request->center_id;
+        if ($cm_user->center_id){
+            $center = DB::table('centers')->where('id',$cm_user->center_id);
+        }
+        $cm_user->is_admin = 1;
+        $cm_user->role_id = '';
+// if role exists add existing role id to the admin user role_id
+        if ($role_exists){
+            $cm_user->role_id = $role_exists->id;
+        }else{
+// if not exist save the new role
+            $role_saved = $role->save();
+//assign admin user the new role
+            $cm_user->role_id = $role->id;
+        }
+        $new_cm = $cm_user->save();
+        if ($new_cm){
+            $data = [
+                'user_id'=>$cm_user->id,
+                'name'=>$cm_user->name,
+                'email'=>$cm_user->email,
+                'phone'=>$cm_user->phone,
+            ];
+            Mail::to($email)->send(new CreatePassword($data));
+        }
+    //redirect to center managers list page with success messages
+        $request->session()->flash('success_message','Center Manager created successfully');
+    if ($new_cm){
+        return redirect('/list/all/admins/role_id='.$cm_user->role_id)->with('success',$request->session()->get('success_message'));
+    }
+
+    }
+
+    public function trainer_save(Request $request)
+    {
+        $this->validate($request,
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
+                'phone' => ['required',  'max:10', 'unique:users'],
+                'gender' => ['required'],
+                'location' => ['required'],
+                'start_date' => ['required'],
+            ]
+        );
+    $admin_user = Auth::user();
+        //create trainer as admin user
+        $trainer_adm_user = new User();
+        $trainer_adm_user->name = request('name');
+        $trainer_adm_user->email = request('email');
+        $email = $trainer_adm_user->email;//used to send account activation email
+        $trainer_adm_user->phone = request('phone');
+        $trainer_adm_user->gender = request('gender');
+        $trainer_adm_user->county = request('county');
+        $trainer_adm_user->location = request('location');
+        $trainer_adm_user->location_lat_long = request('event-location');
+        $trainer_adm_user->start_date = request('start_date');
+        $trainer_adm_user->is_admin = 1;
+        $trainer_adm_user->role_id = '';
+        //before saving a user create a new role(Trainer) save the role and assign user to role_id
+        $role = new Role();
+        $role->name = 'Trainer';
+        //check if role already created
+        $exists_role = DB::table('roles')->where('name',$role->name)->first();
+        if ($exists_role){
+            $trainer_adm_user->role_id = $exists_role->id;
+        }else{
+            $role->save();
+            $trainer_adm_user->role_id = $role->id;
+        }
+        //save trainer admin user
+        $trainer_adm_user_saved = $trainer_adm_user->save();
+        if ($trainer_adm_user_saved){
+            $data = [
+                'user_id'=>$trainer_adm_user->id,
+                'name'=>$trainer_adm_user->name,
+                'email'=>$trainer_adm_user->email,
+                'phone'=>$trainer_adm_user->phone,
+            ];
+            Mail::to($email)->send(new CreatePassword($data));
+        }
+
+//redirect to trainers list as per role
+        $request->session()->flash('success_message','Trainer created Successfully');
+            if ($trainer_adm_user_saved){
+                return redirect('/list/all/admins/role_id='.$trainer_adm_user->role_id)->with('success',$request->session()->get('success_message'));
+            }
+    }
+
+    public function trainers(){
+        $role = DB::table('roles')->where('name','Trainer')->first();
+        $result = [];
+        if ($role){
+            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+            if (!empty($trainers)){
+                foreach ($trainers as $trainer){
+                    $result[]=$trainer;
+                }
+            }
+            return response()->json($result);
+        }
+    }
+
+    //sessions
+    public function session_add()
+    {
+        $trainers = '';
+        $role = DB::table('roles')->where('name','Trainer')->first();
+        if ($role){
+            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+        }
+        return view('Epm.Sessions.add-session',compact('trainers'));
+    }
+
+    public function sessions_list()
+    {
+        $sessions = TrainingSession::orderBy('id','desc')->get();
+        return view('Epm.Sessions.sessions',compact('sessions'));
+    }
+
+    public function view_session($id,$session_id)
+    {
+        $trainingSession = TrainingSession::find($session_id);
+        return view('Epm.Sessions.view-session',compact('trainingSession'));
+    }
+
+    public function session_save(Request $request)
+    {
+        $messages = [
+            'name.required'=>'Hey Session Name Please',
+            'type.required'=>'Session Type Field Required',
+        ];
+        $this->validate($request,[
+            'name'=>'required',
+            'date'=>'required',
+            'start_time'=>'required',
+            'end_time'=>'required',
+            'institution'=>'required',
+            'location'=>'required',
+            'type'=>'required',
+            'about'=>'required',
+        ],$messages);
+        $session = new TrainingSession();
+        $session->name = $request->name;
+        $session->date = $request->date;
+        $session->start_time = $request->start_time;
+        $session->end_time = $request->end_time;
+        $session->institution = $request->institution;
+        $session->location = $request->location;
+        $session->location_lat_long = $request->location_lat_long;
+        $session->type = $request->type;
+        $session->about = $request->about;
+        $trainers_list = null;
+        if ($request->input('trainers')){
+            $trainers_list = $request->input('trainers');
+        }
+        $saved = $session->save();
+        if ($saved && $trainers_list!=null){
+            $saved_session = TrainingSession::find($session->id);
+            $saved_session->trainers()->attach($trainers_list);
+        }
+        return redirect('/adm/list/sessions');
+
+    }
+    // create an array of trainers not added to a particular session
+    public function new_session_trainers($id){
+        $added_trainers_ids = json_decode(DB::table('trainer_training_session')->where('training_session_id',$id)->pluck('trainer_id'));
+        $role = DB::table('roles')->where('name','Trainer')->first();
+        $trainers_ids = '';
+        if ($role){
+            $trainers_ids = json_decode(DB::table('users')->where('role_id',$role->id)->pluck('id'));
+        }
+        $new_trainers_ids = [];
+        foreach ($trainers_ids as $trainer_id){
+            if (!in_array($trainer_id,$added_trainers_ids)){
+                $trainers = DB::table('users')->where('role_id',$role->id)->where('id',$trainer_id)->get();
+                foreach ($trainers as $trainer){
+                    $new_trainers_ids[] = $trainer;
+                }
+            }
+        }
+        return response()->json($new_trainers_ids);
+    }
+
+    public function session_add_trainers($id,$session_id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $session = DB::table('training_sessions')->where('id',$session_id)->first();
+            return view('Epm.SuAdmins.Sessions.add-trainers',compact('session'));
+        }
+    }
+
+    public function session_save_trainers(Request $request,$id,$session_id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $session_trainers = $request->new_session_trainers_ids;
+            TrainingSession::find($session_id)->trainers()->attach($session_trainers);
+            return redirect('/adm/'.$admin->id.'/view/session/'.$session_id)->with('success','Trainer Successfully added to Session');
+        }
+    }
+
+    public function session_add_trainees($id){
+        $session = TrainingSession::find($id)->first();
+       return view('Epm.Trainees.add-trainees',compact('session'));
+    }
+
+    public function session_save_trainees(Request $request,$id,$session_id){
+        $this->validate($request,[
+            'name'=>'required',
+            'gender'=>'required',
+            'email'=>'required',
+            'phone_number'=>'required',
+            'age'=>'required',
+            'id_number'=>'required',
+            'county'=>'required',
+            'location'=>'required',
+        ]);
+        $trainee = New Trainee();
+        $trainee->name = $request->name;
+        $trainee->gender = $request->gender;
+        $trainee->county = $request->county;
+        $trainee->location = $request->location;
+        $trainee->location_lat_long = $request->location_lat_long;
+        $trainee->category = $request->category;
+        $trainee->level_of_computer_literacy = $request->level_of_computer_literacy;
+        $trainee->level_of_education = $request->level_of_education;
+        $trainee->field_of_study = $request->field_of_study;
+        $trainee->email = $request->email;
+        $trainee->phone_number = $request->phone_number;
+        $trainee->id_number = $request->id_number;
+        $trainee->age = $request->age;
+        $trainee->interests = $request->interests;
+        $trainee->save();
+        if ($trainee->save()){
+            $session  = TrainingSession::find($session_id);
+            $session->trainees()->attach($trainee->id);
+        }
+        return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Trainee successfully added to session');
+    }
+
+    public function mentor_save(Request $request)
+    {
+        $this->validate($request, [
+            'name'=>['required'],
+            'email'=>['required','email'],
+            'phone'=>['required'],
+            'gender'=>['required'],
+            'county'=>['required'],
+        ]);
+        $mentor = new User();
+        $mentor->role_id = '';
+        $role = new Role();
+        $role->name = 'Mentor';
+        $role_exists = DB::table('roles')->where('name',$role->name)->first();
+        if ($role_exists){
+            $mentor->role_id = $role_exists->id;
+        }else{
+            $role->save();
+            $mentor->role_id = $role->id;
+        }
+        $mentor->name = $request->name;
+        $mentor->email = $request->email;
+        $email = $mentor->email;
+        $mentor->phone = $request->phone;
+        $mentor->gender = $request->gender;
+        $mentor->county = $request->county;
+        $mentor->location = $request->location;
+        $mentor->location_lat_long = $request->location_lat_long;
+        $mentor->is_admin = 1;
+        $created = $mentor->save();
+        if ($created){
+            //send email invite to new added user
+            $data = [
+                'name'=>$mentor->name,
+                'user_id'=>$mentor->id,
+                'email'=>$mentor->email,
+                'phone'=>$mentor->phone,
+                'gender'=>$mentor->gender,
+                'county'=>$mentor->county,
+                'location'=>$mentor->location,
+                'location_lat_long'=>$mentor->location_lat_long,
+            ];
+            Mail::to($email)->send(new CreatePassword($data));
+            return redirect('/list/all/admins/role_id='.$mentor->role_id)->with('success','Mentor created Successfully');
+        }
+    }
+
+    /**
+     * Teams
+     */
+    public function team_cms_list(){
+        $teams = DB::table('team_center_managers')->get();
+        $members = '';
+        foreach ($teams as $team){
+            $members = TeamCenterManager::find($team->id);
+        }
+        return view('Epm.Teams.cms',compact('teams','members'));
+    }
+
+    public function team_trainers_list(){
+        $teams = DB::table('team_trainers')->get();
+        return view('Epm.Teams.trainers',compact('teams'));
+    }
+
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
