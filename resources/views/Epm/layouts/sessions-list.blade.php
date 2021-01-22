@@ -62,7 +62,7 @@ $auth_admin = auth()->user();
                             <td>
                                 {{$session->location}}
                             </td>
-                            @if($session->status=='Pending')
+                            @if($session->status=='Pending' && $auth_admin->role->name =='Su Admin' || $auth_admin->role->name == 'Project Manager')
                             <td class="text-right">
                                 <div class="btn-group">
                                     <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">

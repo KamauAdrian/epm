@@ -175,8 +175,8 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/reports')}}">Daily Attendance Report</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/virtual/training/reports')}}">Virtual Training Report</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/reports')}}">Daily Report</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/virtual/training/reports')}}">Daily Virtual Training Report</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/reports')}}">Daily Physical Training Report</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/reports')}}">Assigment submission</a></li>
             </ul>
         </li>

@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TrainerAssignmentSubmission;
+use App\Models\TrainerAssignmentSubmissionReport;
+use App\Models\TrainerDailyAttendanceForm;
+use App\Models\TrainerDailyAttendanceReport;
+use App\Models\TrainerDailyPhysicalTrainingReport;
+use App\Models\TrainerDailyVirtualTrainingReport;
 use App\Models\TrainerReport;
+use App\Models\TrainerTrainingTaskRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +27,7 @@ class TrainerController extends Controller
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer') {
-            return view('Epm.Trainers.Reports.attendance-form-reports',compact('trainer'));
+            return view('Epm.Trainers.Reports.daily-attendance-reports',compact('trainer'));
         }
     }
 
@@ -33,13 +40,38 @@ class TrainerController extends Controller
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer') {
-            return view('Epm.Trainers.Reports.attendance-form',compact('trainer'));
+            return view('Epm.Trainers.Reports.daily-attendance-report-submit',compact('trainer'));
         }
     }
 
     public function daily_attendance_report_save(Request $request,$id)
     {
-        dd($request->all());
+
+        $trainer = User::find($id);
+        if ($trainer->role->name == 'Trainer'){
+            $daily_attendance_report = new TrainerDailyAttendanceReport();
+            $daily_attendance_report->name = $request->name;
+            $daily_attendance_report->email = $request->email;
+            $daily_attendance_report->trainer_id = $id;
+            $daily_attendance_report->speciality = $request->speciality;
+            $task_roles = $request->training_task_role;
+            $daily_attendance_report->time = $request->time;
+            $daily_attendance_report->comments = $request->comments;
+            $attendance_submitted = $daily_attendance_report->save();
+            $trainer_training_task_role = null;
+            if ($attendance_submitted && $task_roles!=null ){
+                foreach ($task_roles as $task_role){
+                    $trainer_training_task_role = new TrainerTrainingTaskRole();
+                    $trainer_training_task_role->name = $task_role;
+                    $trainer_training_task_role->daily_attendance_report_id = $daily_attendance_report->id;
+                    $trainer_training_task_role->save();
+                }
+                return redirect('/adm/'.$id.'/view/daily/attendance/reports')->with('success','Daily Attendance Report Submitted Successfully');
+            }elseif ($attendance_submitted && $task_roles==null ){
+                return redirect('/adm/'.$id.'/view/daily/attendance/reports')->with('success','Daily Attendance Report Submitted Successfully');
+            }
+        }
+
 
     }
 
@@ -48,7 +80,7 @@ class TrainerController extends Controller
         $trainer = User::find($id);
         $reports = [];
         if ($trainer->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.virtual-training-reports',compact('trainer','reports'));
+            return view('Epm.Trainers.Reports.daily-virtual-training-reports',compact('trainer','reports'));
         }
     }
 
@@ -61,36 +93,85 @@ class TrainerController extends Controller
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.virtual-training',compact('trainer'));
+            return view('Epm.Trainers.Reports.daily-virtual-training-report-submit',compact('trainer'));
         }
     }
 
     public function virtual_training_report_save(Request $request,$id)
     {
-        dd($request->all());
+        $trainer = User::find($id);
+        if ($trainer->role->name == 'Trainer'){
+            $virtual_training_report = new TrainerDailyVirtualTrainingReport();
+            $virtual_training_report->trainer_name = $request->name;
+            $virtual_training_report->trainer_id = $id;
+            $virtual_training_report->training_category = $request->training_category;
+            $virtual_training_report->total_trainees_morning_session = $request->total_trainees_morning_session;
+            $virtual_training_report->total_trainees_afternoon_session = $request->total_trainees_afternoon_session;
+            $virtual_training_report->total_trainees_all_sessions = $request->total_trainees_all_sessions;
+            $virtual_training_report->total_trainees_female = $request->total_trainees_female;
+            $virtual_training_report->total_trainees_male = $request->total_trainees_male;
+            $virtual_training_report->training_facilitation_techniques = $request->training_facilitation_techniques;
+            $virtual_training_report->training_challenges = $request->training_challenges;
+            $virtual_training_report->training_recommendation = $request->training_recommendation;
+            $virtual_training_report->training_trainers_available_missing = $request->training_trainers_available_missing;
+            $virtual_training_report->trainees_photo = $request->trainees_photo;
+            $virtual_training_report_submitted = $virtual_training_report->save();
+            if ($virtual_training_report_submitted){
+                return redirect('/adm/'.$id.'/view/virtual/training/reports')->with('success','Daily Virtual Training Report Submitted Successfully');
+            }else{
+                dd('Not saved');
+            }
+        }
     }
 
-    public function daily_reports($id)// all daily reports
+    public function daily_physical_reports($id)// all daily reports
     {
         $admin = User::find($id);
         $reports = [];
         if ($admin->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.daily-report-reports',compact('admin','reports'));
+            return view('Epm.Trainers.Reports.daily-physical-training-reports',compact('admin','reports'));
         }
 
     }
 
-    public function daily_report($id,$report_id) //single daily report
+    public function daily_physical_report($id,$report_id) //single daily report
     {
 
 
     }
 
-    public function daily_report_submit($id)
+    public function daily_physical_report_submit($id)
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.daily-report',compact('trainer'));
+            return view('Epm.Trainers.Reports.daily-physical-training-report-submit',compact('trainer'));
+        }
+
+    }
+
+
+    public function daily_physical_report_save(Request $request,$id)
+    {
+        $trainer = User::find($id);
+        if ($trainer->role->name == 'Trainer'){
+            $daily_physical_training_report = new TrainerDailyPhysicalTrainingReport();
+            $daily_physical_training_report->name = $request->name;
+            $daily_physical_training_report->trainer_id = $id;
+            $daily_physical_training_report->county = $request->county;
+            $daily_physical_training_report->constituency = $request->constituency;
+            $daily_physical_training_report->center = $request->center;
+            $daily_physical_training_report->total_trainees = $request->total_trainees;
+            $daily_physical_training_report->total_trainees_female = $request->total_trainees_female;
+            $daily_physical_training_report->total_trainees_male = $request->total_trainees_male;
+            $daily_physical_training_report->trainer_challenges_achievements = $request->trainer_challenges_achievements;
+            $daily_physical_training_report->training_recommendation = $request->training_recommendation;
+            $daily_physical_training_report->training_support = $request->training_support;
+            $daily_physical_training_report->training_photo = $request->training_photo;
+            $daily_physical_training_report->next_training = $request->next_training;
+            $daily_physical_training_report_submitted = $daily_physical_training_report->save();
+            if ($daily_physical_training_report_submitted){
+                return redirect('/adm/'.$id.'/view/daily/reports')->with('success','Daily Physical Training Report Submitted Successfully');
+            }
         }
 
     }
@@ -124,6 +205,21 @@ class TrainerController extends Controller
 
     public function assignment_submission_report_save(Request $request,$id)
     {
+//        dd($request->all());
+        $trainer = User::find($id);
+        if ($trainer->role->name == "Trainer"){
+            $assignment_submission_report = new TrainerAssignmentSubmissionReport();
+            $assignment_submission_report->name = $request->name;
+            $assignment_submission_report->trainer_id = $id;
+            $assignment_submission_report->employee_number = $request->employee_number;
+            $assignment_submission_report->speciality = $request->speciality;
+            $assignment_submission_report->assignment = $request->assignment;
+            $assignment_submission_report_submitted = $assignment_submission_report->save();
+            if ($assignment_submission_report_submitted){
+                return redirect('/adm/'.$id.'/view/assignment/submission/reports')->with('success','Assignment Submission Report Successfully Submitted');
+            }
+
+        }
         dd($request->all());
 
     }

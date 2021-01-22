@@ -14,7 +14,7 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/reports')}}">Daily Attendance Reports</a></li>
-                        <li class="breadcrumb-item"><a href="#!">Submit Daily Attendance Report</a></li>
+{{--                        <li class="breadcrumb-item"><a href="#!">Submit Daily Attendance Report</a></li>--}}
                     </ul>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                                             <label>Training Job Category</label>
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" value="Data Management"
-                                                       id="checkCategory1" name="job_category"
+                                                       id="checkCategory1" name="speciality"
                                                        <?php if ($trainer->speciality=='Data Management'){?>
                                                        checked="checked"<?php } ?>>
                                                 <label for="checkCategory1" class="form-check-label">Data Management</label>
@@ -67,7 +67,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" value="Digital Marketing"
-                                                       id="checkCategory2" name="job_category"
+                                                       id="checkCategory2" name="speciality"
                                                        <?php if ($trainer->speciality=='Digital Marketing'){?>
                                                        checked="checked"<?php } ?>>
                                                 <label for="checkCategory2" class="form-check-label">Digital Marketing</label>
@@ -78,7 +78,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" value="Transcription"
-                                                       id="checkCategory3" name="job_category"
+                                                       id="checkCategory3" name="speciality"
                                                        <?php if ($trainer->speciality=='Transcription'){?>
                                                        checked="checked"<?php } ?>>
                                                 <label for="checkCategory3" class="form-check-label">Transcription</label>
@@ -89,7 +89,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" value="Content Writing"
-                                                       id="checkCategory4" name="job_category"
+                                                       id="checkCategory4" name="speciality"
                                                        <?php if ($trainer->speciality=='Content Writing'){?>
                                                        checked="checked"<?php } ?>>
                                                 <label for="checkCategory4" class="form-check-label">Content Writing</label>
@@ -100,7 +100,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" value="Virtual Assistant"
-                                                       id="checkCategory5" name="job_category"
+                                                       id="checkCategory5" name="speciality"
                                                        <?php if ($trainer->speciality=='Virtual Assistant'){?>
                                                        checked="checked"<?php } ?>>
                                                 <label for="checkCategory5" class="form-check-label">Virtual Assistant</label>
@@ -111,7 +111,7 @@
                                         <div class="form-group">
                                             <label>Your Role/Task of The Day</label>
                                             <div class="form-check">
-                                                <input type="checkbox" value="Moderator" class="form-check-input" id="checkRole1" name="job_task_role">
+                                                <input type="checkbox" value="Moderator" class="form-check-input" id="checkRole1" name="training_task_role[]">
                                                 <label for="checkRole1" class="form-check-label">Moderator</label>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" value="Trainer" class="form-check-input" id="checkRole2" name="job_task_role">
+                                                <input type="checkbox" value="Trainer" class="form-check-input" id="checkRole2" name="training_task_role[]">
                                                 <label for="checkRole2" class="form-check-label">Trainer</label>
                                             </div>
                                         </div>
@@ -127,7 +127,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" value="Chat Manager" class="form-check-input" id="checkRole3" name="job_task_role">
+                                                <input type="checkbox" value="Chat Manager" class="form-check-input" id="checkRole3" name="training_task_role[]">
                                                 <label for="checkRole3" class="form-check-label">Chat Manager</label>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" value="Attendance Report" class="form-check-input" id="checkRole4" name="job_task_role">
+                                                <input type="checkbox" value="Attendance Report" class="form-check-input" id="checkRole4" name="training_task_role[]">
                                                 <label for="checkRole4" class="form-check-label">Attendance Report</label>
                                             </div>
                                         </div>
@@ -143,7 +143,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" value="Admitting Trainees in Class" class="form-check-input" id="checkRole5" name="job_task_role">
+                                                <input type="checkbox" value="Admitting Trainees in Class" class="form-check-input" id="checkRole5" name="training_task_role[]">
                                                 <label for="checkRole5" class="form-check-label">Admitting Trainees in Class</label>
                                             </div>
                                         </div>
@@ -151,30 +151,30 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" value="Other" onclick="showInputOther()" class="form-check-input" id="checkRole6" name="job_task_role">
+                                                <input type="checkbox" value="Other" onclick="showInputOther()" class="form-check-input" id="checkRole6">
                                                 <label for="checkRole6" class="form-check-label">Other</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="text-danger">{{$errors->first('job_task_role')}}</span>
+                                    <span class="text-danger">{{$errors->first('training_task_role')}}</span>
                                     <div class="col-md-12" id="otherSpecify" style="display: none;">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="text" class="form-control" name="other_job_task_role" placeholder="Please specify what was your other role/task">
+                                                <input type="text" class="form-control" name="training_task_role[]" placeholder="Please specify what was your other role/task">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>The Time You were Training</label>
-                                            <input type="time" name="training_time" class="form-control" value="{{old('training_time')}}">
-                                            <span class="text-danger">{{$errors->first('training_time')}}</span>
+                                            <input type="time" name="time" class="form-control" value="{{old('time')}}" required>
+                                            <span class="text-danger">{{$errors->first('time')}}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Comments</label>
-                                            <input type="text" name="comments" class="form-control" placeholder="(If you trained 2 sessions please state the sessions and time) " value="{{old('comments')}}">
+                                            <input type="text" name="comments" class="form-control" placeholder="(If you trained 2 sessions please state the sessions and time) " value="{{old('comments')}}" required>
                                             <span class="text-danger">{{$errors->first('comments')}}</span>
                                         </div>
                                     </div>

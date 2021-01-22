@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainerDailyVirtualTrainingsTable extends Migration
+class CreateTrainerDailyVirtualTrainingReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateTrainerDailyVirtualTrainingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trainer_daily_virtual_trainings', function (Blueprint $table) {
+        Schema::create('trainer_daily_virtual_training_reports', function (Blueprint $table) {
             $table->id();
             $table->string('training_category');
+            $table->string('trainer_name');
+            $table->string('trainer_id');
             $table->string('total_trainees_morning_session');
             $table->string('total_trainees_afternoon_session');
             $table->string('total_trainees_all_session');
@@ -37,6 +39,6 @@ class CreateTrainerDailyVirtualTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainer_daily_virtual_trainings');
+        Schema::dropIfExists('trainer_daily_virtual_training_reports');
     }
 }

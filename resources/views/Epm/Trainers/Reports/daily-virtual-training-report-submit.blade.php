@@ -43,7 +43,7 @@
                                         <label>Online Work Category trained </label>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Data Management"
-                                                   id="checkCategory1" name="job_category">
+                                                   id="checkCategory1" name="training_category">
                                             <label for="checkCategory1" class="form-check-label">Data Management</label>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Digital Marketing"
-                                                   id="checkCategory2" name="job_category">
+                                                   id="checkCategory2" name="training_category">
                                             <label for="checkCategory2" class="form-check-label">Digital Marketing</label>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Transcription"
-                                                   id="checkCategory3" name="job_category">
+                                                   id="checkCategory3" name="training_category">
                                             <label for="checkCategory3" class="form-check-label">Transcription</label>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Content Writing"
-                                                   id="checkCategory4" name="job_category">
+                                                   id="checkCategory4" name="training_category">
                                             <label for="checkCategory4" class="form-check-label">Content Writing</label>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Virtual Assistant"
-                                                   id="checkCategory5" name="job_category">
+                                                   id="checkCategory5" name="training_category">
                                             <label for="checkCategory5" class="form-check-label">Virtual Assistant</label>
                                         </div>
                                     </div>
@@ -87,70 +87,70 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Full name of Trainers who trained</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="name" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended morning session?</label>
-                                        <input type="text" name="total_trainees_morning_session" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees_morning_session" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_morning_session')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended the afternoon session?</label>
-                                        <input type="text" name="total_trainees_afternoon_session" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees_afternoon_session" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_afternoon_session')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended all sessions?</label>
-                                        <input type="text" name="total_trainees_both_sessions" class="form-control" placeholder="Your Answer">
-                                        <span class="text-danger">{{$errors->first('total_trainees_both_sessions')}}</span>
+                                        <input type="text" name="total_trainees_all_sessions" class="form-control" placeholder="Your Answer" required>
+                                        <span class="text-danger">{{$errors->first('total_trainees_all_sessions')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees were female?</label>
-                                        <input type="text" name="total_trainees_female" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees_female" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_female')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees were male?</label>
-                                        <input type="text" name="total_trainees_male" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees_male" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_male')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What facilitation techniques were used during the training?</label>
-                                        <input type="text" name="training_facilitation_techniques" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="training_facilitation_techniques" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_facilitation_techniques')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What challenges did you face during the training and how did you go about it?</label>
-                                        <input type="text" name="training_challenges" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="training_challenges" class="form-control" placeholder="Your Answer"required>
                                         <span class="text-danger">{{$errors->first('training_challenges')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What would you recommend to improve the training?</label>
-                                        <input type="text" name="training_recommendation" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="training_recommendation" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_recommendation')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainers were available during the training? Name any trainer who was missing and why? </label>
-                                        <input type="text" name="training_trainers_available_missing" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="training_trainers_available_missing" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_trainers_available_missing')}}</span>
                                     </div>
                                 </div>

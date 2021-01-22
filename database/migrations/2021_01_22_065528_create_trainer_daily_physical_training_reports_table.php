@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainerDailyPhysicallTrainingsTable extends Migration
+class CreateTrainerDailyPhysicalTrainingReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTrainerDailyPhysicallTrainingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trainer_daily_physicall_trainings', function (Blueprint $table) {
+        Schema::create('trainer_daily_physical_training_reports', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('trainer_id')->unsigned();
@@ -39,6 +39,6 @@ class CreateTrainerDailyPhysicallTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainer_daily_physicall_trainings');
+        Schema::dropIfExists('trainer_daily_physical_training_reports');
     }
 }

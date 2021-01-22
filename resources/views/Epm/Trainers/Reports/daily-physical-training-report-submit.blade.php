@@ -30,7 +30,7 @@
                             <h1 class="f-w-400">Physical Training Daily Report</h1>
                         </div>
                         {{--                            @include('Epm.layouts.trainer-add')--}}
-                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/attendance/report')}}" method="post">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/physical/training/report')}}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label>What County is Training being conducted</label>
                                         <input type="text" name="county" class="form-control" placeholder="Your Answer">
-                                        <span class="text-danger">{{$errors->first('name')}}</span>
+                                        <span class="text-danger">{{$errors->first('county')}}</span>
                                     </div>
                                 </div>
 
@@ -85,8 +85,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many of the trainees were men?</label>
-                                        <input type="text" name="total_trainees_men" class="form-control" placeholder="Your Answer">
-                                        <span class="text-danger">{{$errors->first('total_trainees_men')}}</span>
+                                        <input type="text" name="total_trainees_male" class="form-control" placeholder="Your Answer">
+                                        <span class="text-danger">{{$errors->first('total_trainees_male')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
