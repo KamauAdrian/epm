@@ -95,12 +95,14 @@
                                         <input type="text" value="{{$report->training_support}}" class="form-control" disabled>
                                     </div>
                                 </div>
-{{--                                <div class="col-md-12">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>Upload a Photo of the training</label>--}}
-{{--                                        <input type="file" name="training_photo" class="form-control" placeholder="Your Answer">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                @if($report->training_photo)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Photo of the training</label>
+                                            <img src="{{url('/PhysicalTrainings/images',$report->training_photo)}}" alt="">
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What will you be training the next day?</label>

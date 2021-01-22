@@ -29,7 +29,7 @@
                         <div class="text-center">
                             <h1 class="f-w-400">Physical Training Daily Report</h1>
                         </div>
-                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/physical/training/report')}}" method="post">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/physical/training/report')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
@@ -41,14 +41,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Full Names of Trainer</label>
-                                        <input type="text" name="name" class="form-control" value="{{$trainer->name}}" placeholder="Your Answer">
+                                        <input type="text" name="name" class="form-control" value="{{$trainer->name}}" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What County is Training being conducted</label>
-                                        <input type="text" name="county" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="county" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('county')}}</span>
                                     </div>
                                 </div>
@@ -56,70 +56,70 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What Constituency is training being conducted?</label>
-                                        <input type="text" name="constituency" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="constituency" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('constituency')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What is the Name of Youth Center/ TVET / University?</label>
-                                        <input type="text" name="center" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="center" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('center')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended the training?</label>
-                                        <input type="text" name="total_trainees" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many of the trainees were women? </label>
-                                        <input type="text" name="total_trainees_female" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees_female" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_female')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many of the trainees were men?</label>
-                                        <input type="text" name="total_trainees_male" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="total_trainees_male" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_male')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What achievements and challenges did you encounter as a trainer?</label>
-                                        <input type="text" name="trainer_challenges_achievements" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="trainer_challenges_achievements" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('trainer_challenges_achievements')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What would you recommend to make the training better?</label>
-                                        <input type="text" name="training_recommendation" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="training_recommendation" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_recommendation')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What support do you need to perform your role better?</label>
-                                        <input type="text" name="training_support" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="training_support" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_support')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Upload a Photo of the training</label>
-                                        <input type="file" name="training_photo" class="form-control" placeholder="Your Answer">
+                                        <input type="file" name="training_photo" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_photo')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What will you be training the next day?</label>
-                                        <input type="text" name="next_training" class="form-control" placeholder="Your Answer">
+                                        <input type="text" name="next_training" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('next_training')}}</span>
                                     </div>
                                 </div>

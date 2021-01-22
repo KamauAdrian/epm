@@ -99,13 +99,14 @@
                                         <input type="text" class="form-control" value="{{$report->training_trainers_available_missing}}" disabled>
                                     </div>
                                 </div>
-{{--                                <div class="col-md-12">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>Attach a screenshot of all the trainees that attend the training.</label>--}}
-{{--                                        <input type="file" name="trainees_photo" class="form-control">--}}
-{{--                                        <span class="text-danger">{{$errors->first('trainees_photo')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                @if($report->trainees_photo)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Screenshot of all the trainees that attend the training.</label>
+                                            <img src="{{url('/VirtualTrainings/images',$report->trainees_photo)}}" alt="{{$report->trainees_photo}}">
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </form>
                     </div>

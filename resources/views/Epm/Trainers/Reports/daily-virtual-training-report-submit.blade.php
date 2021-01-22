@@ -29,13 +29,18 @@
                             <h1 class="f-w-400">Ajira Digital Virtual Training Report</h1>
                         </div>
                         {{--                            @include('Epm.layouts.trainer-add')--}}
-                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/virtual/training/report')}}" method="post">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/virtual/training/report')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <p>This report helps in understanding how you conduct your day to day training, including any achievements or challenges you have encountered.</p>
                                         <p>The report should be submitted everyday at the end of the training session. In case of any challenges contact the Ajira Program Management Team for support.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <span class="text-danger">{{$errors->first('training_category')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -87,70 +92,70 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Full name of Trainers who trained</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended morning session?</label>
-                                        <input type="text" name="total_trainees_morning_session" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('total_trainees_morning_session')}}" name="total_trainees_morning_session" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_morning_session')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended the afternoon session?</label>
-                                        <input type="text" name="total_trainees_afternoon_session" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('total_trainees_afternoon_session')}}" name="total_trainees_afternoon_session" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_afternoon_session')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended all sessions?</label>
-                                        <input type="text" name="total_trainees_all_sessions" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('total_trainees_all_sessions')}}" name="total_trainees_all_sessions" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_all_sessions')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees were female?</label>
-                                        <input type="text" name="total_trainees_female" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('total_trainees_female')}}" name="total_trainees_female" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_female')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees were male?</label>
-                                        <input type="text" name="total_trainees_male" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('total_trainees_male')}}" name="total_trainees_male" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('total_trainees_male')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What facilitation techniques were used during the training?</label>
-                                        <input type="text" name="training_facilitation_techniques" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('training_facilitation_techniques')}}" name="training_facilitation_techniques" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_facilitation_techniques')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What challenges did you face during the training and how did you go about it?</label>
-                                        <input type="text" name="training_challenges" class="form-control" placeholder="Your Answer"required>
+                                        <input type="text" value="{{old('training_challenges')}}" name="training_challenges" class="form-control" placeholder="Your Answer"required>
                                         <span class="text-danger">{{$errors->first('training_challenges')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>What would you recommend to improve the training?</label>
-                                        <input type="text" name="training_recommendation" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('training_recommendation')}}" name="training_recommendation" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_recommendation')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainers were available during the training? Name any trainer who was missing and why? </label>
-                                        <input type="text" name="training_trainers_available_missing" class="form-control" placeholder="Your Answer" required>
+                                        <input type="text" value="{{old('training_trainers_available_missing')}}" name="training_trainers_available_missing" class="form-control" placeholder="Your Answer" required>
                                         <span class="text-danger">{{$errors->first('training_trainers_available_missing')}}</span>
                                     </div>
                                 </div>

@@ -108,6 +108,9 @@ class TrainerController extends Controller
 
     public function virtual_training_report_save(Request $request,$id)
     {
+        $this->validate($request,[
+            'training_category'=>['required'],
+        ]);
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
             $virtual_training_report = new TrainerDailyVirtualTrainingReport();
@@ -123,7 +126,15 @@ class TrainerController extends Controller
             $virtual_training_report->training_challenges = $request->training_challenges;
             $virtual_training_report->training_recommendation = $request->training_recommendation;
             $virtual_training_report->training_trainers_available_missing = $request->training_trainers_available_missing;
-            $virtual_training_report->trainees_photo = $request->trainees_photo;
+            $fileName = '';
+            if ($request->hasFile('trainees_photo')){
+                $image = $request->file('trainees_photo');
+                if ($image->isValid()){
+                    $fileName = $image->getClientOriginalName();
+                    $image->move('VirtualTrainings/images',$fileName);
+                }
+            }
+            $virtual_training_report->trainees_photo = $fileName;
             $virtual_training_report_submitted = $virtual_training_report->save();
             if ($virtual_training_report_submitted){
                 return redirect('/adm/'.$id.'/view/daily/virtual/training/reports')->with('success','Daily Virtual Training Report Submitted Successfully');
@@ -179,7 +190,13 @@ class TrainerController extends Controller
             $daily_physical_training_report->trainer_challenges_achievements = $request->trainer_challenges_achievements;
             $daily_physical_training_report->training_recommendation = $request->training_recommendation;
             $daily_physical_training_report->training_support = $request->training_support;
-            $daily_physical_training_report->training_photo = $request->training_photo;
+            $fileName = '';
+            if ($request->hasFile('training_photo')){
+                $image = $request->file('training_photo');
+                $fileName= $image->getClientOriginalName();
+                $image->move('PhysicalTrainings/images',$fileName);
+            }
+            $daily_physical_training_report->training_photo = $fileName;
             $daily_physical_training_report->next_training = $request->next_training;
             $daily_physical_training_report_submitted = $daily_physical_training_report->save();
             if ($daily_physical_training_report_submitted){
