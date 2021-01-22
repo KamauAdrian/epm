@@ -103,7 +103,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Screenshot of all the trainees that attend the training.</label>
-                                            <img src="{{url('/VirtualTrainings/images',$report->trainees_photo)}}" alt="{{$report->trainees_photo}}">
+                                            <div>
+                                                <img src="{{url('/VirtualTrainings/images',$report->trainees_photo)}}" alt="{{$report->trainees_photo}}">
+                                            </div>
                                         </div>
                                     </div>
                                 @endif

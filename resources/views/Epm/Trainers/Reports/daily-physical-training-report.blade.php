@@ -99,7 +99,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Photo of the training</label>
-                                            <img src="{{url('/PhysicalTrainings/images',$report->training_photo)}}" alt="">
+                                            <div>
+                                                <img src="{{url('/PhysicalTrainings/images',$report->training_photo)}}" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                 @endif
