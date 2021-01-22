@@ -10,7 +10,7 @@
     ?>
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 mb-2">
                 <h1 class="d-inline-block mb-0 font-weight-normal">Assignment Submission Reports</h1>
                 {{--                <h6 class="d-inline-block mb-0 ml-4"><i class="feather icon-download"></i> Download list</h6>--}}
 {{--            </div>--}}
@@ -39,33 +39,49 @@
                     @endif
                 </center>
             </div>
-            @if($reports)
-                <div class="row">
-                    @foreach($reports as $report)
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6>temp one</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row" >
-                                        <div class="col-md-6">
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/report/template/')}}">
-                                                <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">View <br> Template</p></button>
-                                            </a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="#!">
-                                                <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px;width: 150px;"><p class="align-self-center">Download <br>Template</p></button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col-sm-12 mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-center mb-0 ">
+                                <thead>
+                                <tr> <th>Report</th> <th class="text-right">Actions</th> </tr>
+                                </thead>
+                                @if($reports)
+                                    <tbody>
+                                    @foreach($reports as $report)
+                                        <tr>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="media-body ml-3 align-self-center">
+                                                        <h5 class="mb-1">{{$report->name}}</h5>
+                                                        <p class="mb-0">{{$report->employee_number}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                                                <td class="text-right">
+                                                    <div class="float-right">
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fa fa-list"></i></span></a>
+                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
+                                                    </div>
+                                                </td>
+                                            @else
+                                                <td class="text-right">
+                                                    <div class="float-right">
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
+                                                    </div>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                @endif
+                            </table>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 {{--    @include('Epm.layouts.Reports.templates')--}}

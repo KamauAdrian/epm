@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/adm/'.$auth_admin->id.'/view/virtual/training/reports')}}">Virtual Training Reports</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/reports')}}">Virtual Training Reports</a></li>
 {{--                        <li class="breadcrumb-item"><a href="#!">Submit Virtual Training Report</a></li>--}}
                     </ul>
                 </div>
@@ -29,7 +29,7 @@
                             <h1 class="f-w-400">Ajira Digital Virtual Training Report</h1>
                         </div>
                         {{--                            @include('Epm.layouts.trainer-add')--}}
-                        <form action="{{url('/adm/'.$auth_admin->id.'/save/virtual/training/report')}}" method="post">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/virtual/training/report')}}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">

@@ -8,16 +8,16 @@
     <?php
     $auth_admin = auth()->user();
     ?>
+
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class=" d-inline-block mb-0 font-weight-normal">Daily Ajira Digital Virtual Training Reports</h1>
+                <h1 class="d-inline-block mb-0 font-weight-normal">Daily Attendance</h1>
                 {{--                <h6 class="d-inline-block mb-0 ml-4"><i class="feather icon-download"></i> Download list</h6>--}}
-{{--            </div>--}}
-{{--            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">--}}
-                <a href="{{url('/adm/'.$auth_admin->id.'/submit/daily/virtual/training/report')}}" class="float-right">
-                    {{--            <a href="{{url('/adm/'.$auth_admin->id.'/view/reports')}}">--}}
-                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Report</button>
+                {{--            </div>--}}
+                {{--            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">--}}
+                <a href="{{url('/adm/'.$auth_admin->id.'/submit/daily/attendance/report')}}" class="float-right">
+                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Attendance</button>
                 </a>
             </div>
             <div class="col-sm-12">
@@ -54,21 +54,22 @@
                                             <td>
                                                 <div class="media">
                                                     <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$report->trainer_name}}</h5>
+                                                        <h5 class="mb-1">{{$report->name}}</h5>
+                                                        <p class="mb-0">{{$report->email}}</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fa fa-list"></i></span></a>
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fa fa-list"></i></span></a>
                                                         <a href="#!" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
                                                     </div>
                                                 </td>
                                             @else
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
                                                     </div>
                                                 </td>
                                             @endif
@@ -81,34 +82,6 @@
                     </div>
                 </div>
             </div>
-
-        {{--        @if($reports)--}}
-        {{--            <div class="row">--}}
-        {{--                @foreach($reports as $report)--}}
-        {{--                    <div class="col-md-6">--}}
-        {{--                        <div class="card">--}}
-        {{--                            <div class="card-header">--}}
-        {{--                                <h6>temp one</h6>--}}
-        {{--                            </div>--}}
-        {{--                            <div class="card-body">--}}
-        {{--                                <div class="row" >--}}
-        {{--                                    <div class="col-md-6">--}}
-        {{--                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/report/template/')}}">--}}
-        {{--                                            <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">View <br> Template</p></button>--}}
-        {{--                                        </a>--}}
-        {{--                                    </div>--}}
-        {{--                                    <div class="col-md-6">--}}
-        {{--                                        <a href="#!">--}}
-        {{--                                            <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px;width: 150px;"><p class="align-self-center">Download <br>Template</p></button>--}}
-        {{--                                        </a>--}}
-        {{--                                    </div>--}}
-        {{--                                </div>--}}
-        {{--                            </div>--}}
-        {{--                        </div>--}}
-        {{--                    </div>--}}
-        {{--                @endforeach--}}
-        {{--            </div>--}}
-        {{--        @endif--}}
-    </div>
+        </div>
     </div>
 @endsection

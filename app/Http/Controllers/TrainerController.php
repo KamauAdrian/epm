@@ -27,13 +27,18 @@ class TrainerController extends Controller
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer') {
-            return view('Epm.Trainers.Reports.daily-attendance-reports',compact('trainer'));
+            $reports = DB::table('trainer_daily_attendance_reports')->where('trainer_id',$id)->get();
+            return view('Epm.Trainers.Reports.daily-attendance-reports',compact('trainer','reports'));
         }
     }
 
     public function daily_attendance_report($id,$report_id)
     {
-
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager' || $admin->role->name == 'Trainer'){
+            $report = TrainerDailyAttendanceReport::find($report_id);
+            return view('Epm.Trainers.Reports.daily-attendance-report',compact('report'));
+        }
     }
 
     public function daily_attendance_report_submit($id)
@@ -78,7 +83,7 @@ class TrainerController extends Controller
     public function virtual_training_reports($id)
     {
         $trainer = User::find($id);
-        $reports = [];
+        $reports = DB::table('trainer_daily_virtual_training_reports')->where('trainer_id',$id)->get();
         if ($trainer->role->name == 'Trainer'){
             return view('Epm.Trainers.Reports.daily-virtual-training-reports',compact('trainer','reports'));
         }
@@ -86,7 +91,11 @@ class TrainerController extends Controller
 
     public function virtual_training_report($id,$report_id)
     {
-
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager' || $admin->role->name == 'Trainer'){
+            $report = TrainerDailyVirtualTrainingReport::find($report_id);
+            return view('Epm.Trainers.Reports.daily-virtual-training-report',compact('report'));
+        }
     }
 
     public function virtual_training_report_submit($id)
@@ -126,17 +135,21 @@ class TrainerController extends Controller
 
     public function daily_physical_reports($id)// all daily reports
     {
-        $admin = User::find($id);
-        $reports = [];
-        if ($admin->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.daily-physical-training-reports',compact('admin','reports'));
+        $trainer = User::find($id);
+        $reports = DB::table('trainer_daily_physical_training_reports')->where('trainer_id',$id)->get();
+        if ($trainer->role->name == 'Trainer'){
+            return view('Epm.Trainers.Reports.daily-physical-training-reports',compact('trainer','reports'));
         }
 
     }
 
     public function daily_physical_report($id,$report_id) //single daily report
     {
-
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager' || $admin->role->name == 'Trainer'){
+            $report = TrainerDailyPhysicalTrainingReport::find($report_id);
+            return view('Epm.Trainers.Reports.daily-physical-training-report',compact('report'));
+        }
 
     }
 
@@ -179,9 +192,8 @@ class TrainerController extends Controller
     public function assignment_submission_reports($id)//all assignment reports
     {
         $trainer = User::find($id);
-        $reports = DB::table('reports')->where('user_id',$id)->get();
-//        $reports = DB::table('trainer_reports')->where('trainer_id',$id)->get();
         if ($trainer->role->name == 'Trainer'){
+            $reports = DB::table('trainer_assignment_submission_reports')->where('trainer_id',$id)->get();
             return view('Epm.Trainers.Reports.assignment-submission-reports',compact('trainer','reports'));
         }
 
@@ -189,9 +201,10 @@ class TrainerController extends Controller
 
     public function assignment_submission_report($id,$report_id)//single report
     {
-        $trainer = User::find($id);
-        if ($trainer->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.assignment-submission',compact('trainer'));
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager' || $admin->role->name == 'Trainer'){
+            $report = TrainerAssignmentSubmissionReport::find($report_id);
+            return view('Epm.Trainers.Reports.assignment-submission-report',compact('report'));
         }
     }
 
@@ -199,7 +212,7 @@ class TrainerController extends Controller
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
-            return view('Epm.Trainers.Reports.assignment-submission',compact('trainer'));        }
+            return view('Epm.Trainers.Reports.assignment-submission-report-submit',compact('trainer'));        }
 
     }
 

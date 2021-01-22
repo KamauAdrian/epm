@@ -529,6 +529,44 @@ class AdminController extends Controller
         }
     }
 
+    public function reports_by_trainers($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            return view('Epm.Reports.trainer-reports');
+        }
+    }
+    public function reports_by_trainers_attendance($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $reports = DB::table('trainer_daily_attendance_reports')->orderBy('created_at','desc')->get();
+            return view('Epm.Reports.trainer-attendance-reports',compact('reports'));
+        }
+    }
+
+    public function reports_by_trainers_virtual($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $reports = DB::table('trainer_daily_virtual_training_reports')->orderBy('created_at','desc')->get();
+            return view('Epm.Reports.trainer-daily-virtual-training-reports',compact('reports'));
+        }
+    }
+
+    public function reports_by_trainers_physical($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $reports = DB::table('trainer_daily_physical_training_reports')->orderBy('created_at','desc')->get();
+            return view('Epm.Reports.trainer-daily-physical-training-reports',compact('reports'));
+        }
+    }
+
+    public function reports_by_trainers_assignment($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            $reports = DB::table('trainer_assignment_submission_reports')->orderBy('created_at','desc')->get();
+            return view('Epm.Reports.trainer-assignment-submission-reports',compact('reports'));
+        }
+    }
+
 //centers
     public function center_add(){
         return view('Epm.Centers.add-center');

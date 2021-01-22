@@ -14,7 +14,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/reports')}}">Daily Reports</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/physical/training/reports')}}">Daily Reports</a></li>
 {{--                        <li class="breadcrumb-item"><a href="#!">Submit Daily Report</a></li>--}}
                     </ul>
                 </div>
@@ -29,7 +29,6 @@
                         <div class="text-center">
                             <h1 class="f-w-400">Physical Training Daily Report</h1>
                         </div>
-                        {{--                            @include('Epm.layouts.trainer-add')--}}
                         <form action="{{url('/adm/'.$auth_admin->id.'/save/daily/physical/training/report')}}" method="post">
                             @csrf
                             <div class="row">
