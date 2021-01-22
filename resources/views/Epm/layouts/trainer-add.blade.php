@@ -114,7 +114,7 @@
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Upload Image</label>
+                <label>Upload Profile Image</label>
                 <input type="file" name="image" class="form-control">
                 <span class="text-danger">{{$errors->first('image')}}</span>
             </div>
