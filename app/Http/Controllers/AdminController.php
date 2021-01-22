@@ -539,7 +539,7 @@ class AdminController extends Controller
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
             $reports = DB::table('trainer_daily_attendance_reports')->orderBy('created_at','desc')->get();
-            return view('Epm.Reports.trainer-attendance-reports',compact('reports'));
+            return view('Epm.Reports.trainer-daily-attendance-reports',compact('reports'));
         }
     }
 

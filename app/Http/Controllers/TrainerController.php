@@ -126,7 +126,7 @@ class TrainerController extends Controller
             $virtual_training_report->trainees_photo = $request->trainees_photo;
             $virtual_training_report_submitted = $virtual_training_report->save();
             if ($virtual_training_report_submitted){
-                return redirect('/adm/'.$id.'/view/virtual/training/reports')->with('success','Daily Virtual Training Report Submitted Successfully');
+                return redirect('/adm/'.$id.'/view/daily/virtual/training/reports')->with('success','Daily Virtual Training Report Submitted Successfully');
             }else{
                 dd('Not saved');
             }
@@ -183,7 +183,7 @@ class TrainerController extends Controller
             $daily_physical_training_report->next_training = $request->next_training;
             $daily_physical_training_report_submitted = $daily_physical_training_report->save();
             if ($daily_physical_training_report_submitted){
-                return redirect('/adm/'.$id.'/view/daily/reports')->with('success','Daily Physical Training Report Submitted Successfully');
+                return redirect('/adm/'.$id.'/view/daily/physical/training/reports')->with('success','Daily Physical Training Report Submitted Successfully');
             }
         }
 

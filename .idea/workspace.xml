@@ -26,17 +26,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TrainerDailyAttendanceReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainerDailyAttendanceReport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/Reports/role-reports-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/Reports/role-reports-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +258,7 @@
       <workItem from="1611117010707" duration="22001000" />
       <workItem from="1611203714322" duration="8113000" />
       <workItem from="1611215743461" duration="18155000" />
-      <workItem from="1611291509525" duration="21746000" />
+      <workItem from="1611291509525" duration="23201000" />
     </task>
     <servers />
   </component>
