@@ -23,6 +23,12 @@ class TrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function trainer_competence($id){
+
+        return view('Epm.Trainers.competencies-checklist');
+
+    }
+
     public function daily_attendance_reports($id)
     {
         $trainer = User::find($id);

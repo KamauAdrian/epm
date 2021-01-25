@@ -23,7 +23,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/add-session.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/add-trainers.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/edit-session.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/list-sessions.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/view-session.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-cm-members.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-cms.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-trainer-members.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-trainers.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/team-cms.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/team-trainers.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Trainers/add-trainer.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Forms/leave-form.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,19 +187,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/Epm" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Mentors" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Epm/Mentors" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Sessions" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/PMs" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Mentors" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Centers" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Sessions" />
     </key>
   </component>
   <component name="RunManager">
@@ -252,7 +269,8 @@
       <workItem from="1611117010707" duration="22001000" />
       <workItem from="1611203714322" duration="8113000" />
       <workItem from="1611215743461" duration="18155000" />
-      <workItem from="1611291509525" duration="26471000" />
+      <workItem from="1611291509525" duration="27177000" />
+      <workItem from="1611551275227" duration="5917000" />
     </task>
     <servers />
   </component>

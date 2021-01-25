@@ -11,13 +11,19 @@
                 <div class="auth-side-form">
                     <div class="auth-content">
                         <div class="text-center">
-                            <h1 class="f-w-400">Employee Leave Form</h1>
+                            <h1 class="f-w-400">TRAINER’S SKILLS COMPETENCIES CHECKLIST</h1>
                         </div>
-                        @include('Epm.layouts.trainer-add')
+                        <form action="#!" method="post">
+                            @csrf
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

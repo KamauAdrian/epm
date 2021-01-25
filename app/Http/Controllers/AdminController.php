@@ -275,6 +275,12 @@ class AdminController extends Controller
         return redirect('/')->with('success',$request->session()->get('message'));
 
     }
+
+    public function employee_leave_form($id){
+        if (Auth::user()->id == $id){
+            return view('Epm.Forms.leave-form');
+        }
+    }
 //Reports
     public function reports_templates($id){
         $admin = User::find($id);

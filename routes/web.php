@@ -144,6 +144,7 @@ Route::group(['middleware'=>'admin'],function (){
     //trainers
     Route::get('/trainers',[App\Http\Controllers\AdminController::class, 'trainers']);//json array of trainers
     Route::post('/save-trainer',[App\Http\Controllers\AdminController::class, 'trainer_save']);
+    Route::get('/adm/{id}/trainers/competence/checklist',[App\Http\Controllers\TrainerController::class, 'trainer_competence']);
     //sessions
     Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\AdminController::class, 'sessions_list']);
     Route::get('/adm/{id}/view/session/{session_id}',[App\Http\Controllers\AdminController::class, 'view_session']);
@@ -161,6 +162,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/save-cm',[App\Http\Controllers\AdminController::class, 'cm_save']);
     //mentors
     Route::post('/save-mentor',[App\Http\Controllers\AdminController::class, 'mentor_save']);
+
+    //employee leave form
+    Route::get('/adm/{id}/apply/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
 
 });
 //project managers routes
