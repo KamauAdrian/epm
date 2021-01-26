@@ -41,15 +41,18 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Full Names of Trainer</label>
-                                        <input type="text" name="name" class="form-control" value="{{$trainer->name}}" placeholder="Your Answer" required>
-                                        <span class="text-danger">{{$errors->first('name')}}</span>
+                                        <input type="text" name="name" class="form-control" value="{{$trainer->name}}" placeholder="Your Answer" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group" id="county">
                                         <label>What County is Training being conducted</label>
-                                        <input type="text" name="county" class="form-control" placeholder="Your Answer" required>
-                                        <span class="text-danger">{{$errors->first('county')}}</span>
+                                        <county name="county" v-model="selectedCounty" :options="counties"
+                                                placeholder="Search"
+                                                :searchable="true" :close-on-select="true">
+                                        </county>
+                                        {{--                <input type="hidden" v-for="cm in selectedCm" name="team_leader_id" :value="selectedCm.id">--}}
+                                        <input type="hidden" name="county" :value="selectedCounty">
                                     </div>
                                 </div>
 
@@ -137,7 +140,29 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
+    <script src="{{url('assets/dist/vue.js')}}"></script>
+    <script src="{{url('assets/dist/axios.js')}}"></script>
     <script>
+        new Vue({
+            components: {
+                county: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedCounty: null,
+                    counties: [
+                        'Baringo','Bomet','Bungoma','Busia','Elgeyo Marakwet','Embu','Garissa','Homa Bay', 'Kajiado',
+                        'Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale', 'Laikipia',
+                        'Lamu','Machakos','Makueni','Mandera','Meru','Migori','Marsabit','Muranga','Nairobi','Nakuru','Nandi',
+                        'Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita Taveta','Tana River','Tharaka Nithi',
+                        'Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'
+                    ],
+                }
+            },
+            methods:{
+            },
+        }).$mount('#county')
         function showInputOther(){
             var other = document.getElementById('checkRole6');
             var spother = document.getElementById('otherSpecify');
@@ -148,4 +173,5 @@
             }
         }
     </script>
+    <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
 @endsection

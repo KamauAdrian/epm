@@ -58,15 +58,15 @@ $auth_admin = auth()->user();
                                     @else
                                         {{$members}} Members
                                     @endif
-                                    @if(auth()->user()->role->name == 'Su Admin' || auth()->user()->role->name == 'Project Manager')
-                                        <a href="{{url('/adm/'.$auth_admin->id.'/add/team/cms/members',$team->id)}}">
+                                    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                                        <a href="{{url('/adm/'.$auth_admin->id.'/add/team/cms/members/team_id='.$team->id)}}">
                                             <button type="button" title="Add Members" class="btn btn-icon"><i class="feather icon-plus"></i></button>
                                         </a>
                                     @endif
                                 </p>
                             </td>
                                 <td class="text-right">
-                                    @if(auth()->user()->role->name == 'Su Admin' || auth()->user()->role->name == 'Project Manager')
+                                    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                         <div class="float-right">
                                             <a href="#!" class="btn btn-sm btn-outline-info" title="View">
                                                 <span><i class="fa fa-list"></i></span>

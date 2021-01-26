@@ -7,6 +7,7 @@ use App\Mail\CreatePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\WelcomeMail;
 use App\Models\Center;
+use App\Models\EmployeeLeaveApplication;
 use App\Models\ProjectManager;
 use App\Models\Report;
 use App\Models\ReportActivity;
@@ -280,6 +281,51 @@ class AdminController extends Controller
         if (Auth::user()->id == $id){
             return view('Epm.Forms.leave-form');
         }
+    }
+
+    public function employee_leave_request(Request $request, $id){
+        $messeges = [
+            'leave_type[].required'=>'Please select the leave type your are taking'
+        ];
+        $this->validate($request,[
+            'leave_type[]'=>['required'],
+        ],$messeges);
+        $leave_application = new EmployeeLeaveApplication();
+        //applicant info
+        $leave_application->applicant_name = $request->applicant_name;
+        $leave_application->applicant_id = $id;
+        $leave_application->applicant_email = $request->applicant_email;
+        $leave_application->applicant_phone = $request->applicant_phone;
+        $leave_application->leave_days = $request->leave_days;
+        $leave_application->leave_first_day = $request->leave_first_day;
+        $leave_application->leave_last_day = $request->leave_last_day;
+        $leave_application->applicant_duty_station = $request->applicant_duty_station;
+        $leave_application->applicant_maternity_leave_due_date = $request->applicant_maternity_leave_due_date;
+        //proof of sick off or study leave file upload (doctors note or exam timetable)
+        $fileName = '';
+        if ($request->hasFile('applicant_sick_off_study_leave_proof')){
+            $image = $request->file('applicant_sick_off_study_leave_proof');
+            if ($image->isValid()){
+                $fileName = $image->getClientOriginalName();
+            }
+            $image->move('LeaveApplications/Proof',$fileName);
+        }
+        $leave_application->applicant_sick_off_study_leave_proof = $fileName;
+        //colleague info (to take over responsibility)
+        $leave_application->colleague_name = $request->colleague_name;
+        $leave_application->colleague_email = $request->colleague_email;
+        $leave_application->colleague_phone = $request->colleague_phone;
+        $leave_application->colleague_designation = $request->colleague_designation;
+        $leave_application->colleague_duty_station = $request->colleague_duty_station;
+        $leave_application->next_of_kin_name = $request->next_of_kin_name;
+        $leave_application->next_of_kin_email = $request->next_of_kin_email;
+        $leave_application->next_of_kin_phone = $request->next_of_kin_phone;
+        $leave_application->general_comment_concern = $request->general_comment_concern;
+
+        $leave_application->save();
+
+        return redirect('/adm/main/dashboard')->with('success','leave Application Success');
+
     }
 //Reports
     public function reports_templates($id){
@@ -906,7 +952,7 @@ $admin_user = Auth::user();
     }
 
     public function session_add_trainees($id){
-        $session = TrainingSession::find($id)->first();
+        $session = TrainingSession::find($id);
        return view('Epm.Trainees.add-trainees',compact('session'));
     }
 

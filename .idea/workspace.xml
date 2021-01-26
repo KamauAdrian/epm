@@ -23,23 +23,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/add-session.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/add-trainers.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/edit-session.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/list-sessions.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Sessions/view-session.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-cm-members.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-cms.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-trainer-members.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/add-team-trainers.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/team-cms.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Teams/team-trainers.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/Trainers/add-trainer.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Forms/leave-form.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-cm-member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-cm-member.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainer-member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainer-member.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/cms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/cms.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/competencies-checklist.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/competencies-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -270,7 +269,8 @@
       <workItem from="1611203714322" duration="8113000" />
       <workItem from="1611215743461" duration="18155000" />
       <workItem from="1611291509525" duration="27177000" />
-      <workItem from="1611551275227" duration="5917000" />
+      <workItem from="1611551275227" duration="7445000" />
+      <workItem from="1611636190318" duration="24294000" />
     </task>
     <servers />
   </component>

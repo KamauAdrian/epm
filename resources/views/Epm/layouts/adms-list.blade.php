@@ -66,7 +66,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-center mb-0 ">
+                        <table id="myDataTable" class="table table-center mb-0">
                             @if($role->name == 'Project Manager')
                                 <thead>
                                 <tr> <th>Project Manager</th> <th>Active Projects</th> <th class="text-right">Actions</th> </tr>

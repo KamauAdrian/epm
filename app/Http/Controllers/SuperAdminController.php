@@ -473,7 +473,7 @@ class SuperAdminController extends Controller
         if ($role){
             $trainers = DB::table('users')->where('role_id',$role->id)->get();
         }
-        return view('Epm.SuAdmins.Teams.add-team-trainers',compact('trainers'));
+        return view('Epm.Teams.add-team-trainers',compact('trainers'));
     }
 
     public function team_trainers_save(Request $request,$id){
@@ -491,10 +491,9 @@ class SuperAdminController extends Controller
         }
         return redirect('/adm/'.$admin->id.'/list/team/trainers');
     }
-    public function team_trainer_members_add($id){
-        $team = DB::table('team_trainers')->where('id',$id)->first();
-//dd($team);
-        return view('Epm.SuAdmins.Teams.add-team-trainer-members',compact('team'));
+    public function team_trainer_members_add($team_id){
+        $team = DB::table('team_trainers')->where('id',$team_id)->first();
+        return view('Epm.Teams.add-team-trainer-member',compact('team'));
     }
 
     public function team_trainer_members_save(Request $request,$id,$team_id){
@@ -521,7 +520,7 @@ class SuperAdminController extends Controller
         if ($role){
             $cms = DB::table('users')->where('role_id',$role->id)->get();
         }
-        return view('Epm.SuAdmins.Teams.add-team-cms',compact('cms'));
+        return view('Epm.Teams.add-team-cms',compact('cms'));
     }
 
     public function team_cms_save(Request $request, $id){
@@ -543,7 +542,7 @@ class SuperAdminController extends Controller
 
     public function team_cms_members_add($id,$team_id){
         $team = DB::table('team_center_managers')->where('id',$team_id)->first();
-        return view('Epm.SuAdmins.Teams.add-team-cm-members',compact('team'));
+        return view('Epm.Teams.add-team-cm-member',compact('team'));
     }
 
     public function team_cms_members_save(Request $request,$id,$team_id){

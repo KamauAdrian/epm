@@ -61,12 +61,12 @@ Route::group(['middleware'=>'super_admin'],function (){
     //teams
     Route::get('/add-team-trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_add']);
     Route::post('/adm/{id}/save/team/trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_save']);
-    Route::get('/add-team-trainer-members/{id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_add']);
+    Route::get('/adm/{id}/add/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_add']);
     Route::post('/adm/{id}/save/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_save']);
     Route::get('/cms/teams',[App\Http\Controllers\SuperAdminController::class, 'team_cms']);
-    Route::get('/adm/add/team/cms',[App\Http\Controllers\SuperAdminController::class, 'team_cms_add']);
+    Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\SuperAdminController::class, 'team_cms_add']);
     Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\SuperAdminController::class, 'team_cms_save']);
-    Route::get('/adm/{id}/add/team/cms/members/{team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_cms_members_add']);
+    Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_cms_members_add']);
     Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_cms_members_save']);
     //ajira clubs
     Route::get('/ajira-clubs',[App\Http\Controllers\SuperAdminController::class, 'ajira_clubs']);
@@ -144,7 +144,10 @@ Route::group(['middleware'=>'admin'],function (){
     //trainers
     Route::get('/trainers',[App\Http\Controllers\AdminController::class, 'trainers']);//json array of trainers
     Route::post('/save-trainer',[App\Http\Controllers\AdminController::class, 'trainer_save']);
-    Route::get('/adm/{id}/trainers/competence/checklist',[App\Http\Controllers\TrainerController::class, 'trainer_competence']);
+    Route::get('/adm/{id}/asses/trainer/competence',[App\Http\Controllers\TrainerController::class, 'asses_trainer']);
+    Route::post('/adm/{id}/save/trainer/competence/assessment',[App\Http\Controllers\TrainerController::class, 'save_trainer_assessment']);
+    Route::get('/adm/{id}/view/competence/reports',[App\Http\Controllers\TrainerController::class, 'trainer_competence_reports']);
+    Route::get('/adm/{id}/view/competence/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'trainer_competence_report']);
     //sessions
     Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\AdminController::class, 'sessions_list']);
     Route::get('/adm/{id}/view/session/{session_id}',[App\Http\Controllers\AdminController::class, 'view_session']);
@@ -165,6 +168,7 @@ Route::group(['middleware'=>'admin'],function (){
 
     //employee leave form
     Route::get('/adm/{id}/apply/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
+    Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_request']);
 
 });
 //project managers routes

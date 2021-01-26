@@ -9,6 +9,7 @@ use App\Models\TrainerDailyAttendanceReport;
 use App\Models\TrainerDailyPhysicalTrainingReport;
 use App\Models\TrainerDailyVirtualTrainingReport;
 use App\Models\TrainerReport;
+use App\Models\TrainerSkillCompetence;
 use App\Models\TrainerTrainingTaskRole;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,9 +24,96 @@ class TrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function trainer_competence($id){
+    public function asses_trainer($id){
+        $admin = User::find($id);
+        $trainers = '';
+        $role = DB::table('roles')->where('name','Trainer')->first();
+        if ($role){
+            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+        }
+        if ($admin->role->name == 'Su Admin'){
+            return view('Epm.Trainers.asses-trainer',compact('trainers'));
+        }
+    }
 
-        return view('Epm.Trainers.competencies-checklist');
+    public function trainer_competence_reports($id){
+
+        return view('Epm.Trainers.competencies-reports');
+
+    }
+
+    public function save_trainer_assessment(Request $request, $id){
+//        dd($request->all());
+        $assessment = new TrainerSkillCompetence();
+        //trainer info
+        $assessment->trainer_id = $request->trainer_id;
+        $assessment->trainer_name = $request->trainer_name;
+        $assessment->training_category = $request->training_category;
+
+        //evaluator info
+        $assessment->evaluator_id = Auth::id();
+        $assessment->evaluator_name = Auth::user()->name;
+        $assessment->evaluation_date = $request->date;
+        $delivery_skills = [];
+        foreach ($request->delivery as $key=>$delivery_skill){
+            $delivery_skills[] = $delivery_skill;
+        }
+        $assessment->delivery_skills_rating_q1= $delivery_skills[0];
+        $assessment->delivery_skills_rating_q2= $delivery_skills[1];
+        $assessment->delivery_skills_rating_q3= $delivery_skills[2];
+        $assessment->delivery_skills_rating_q4= $delivery_skills[3];
+        $assessment->delivery_skills_rating_q5= $delivery_skills[4];
+        $assessment->delivery_skills_rating_q6= $delivery_skills[5];
+        $assessment->delivery_skills_rating_q7= $delivery_skills[6];
+        $visual_aids_skills = [];
+        foreach ($request->visual_aids as $visual_aid_skill){
+            $visual_aids_skills[] = $visual_aid_skill;
+        }
+        $assessment->visual_aids_skills_rating_q1 = $visual_aids_skills[0];
+        $assessment->visual_aids_skills_rating_q2 = $visual_aids_skills[1];
+        $assessment->visual_aids_skills_rating_q3 = $visual_aids_skills[2];
+        $assessment->visual_aids_skills_rating_q4 = $visual_aids_skills[3];
+        $assessment->visual_aids_skills_rating_q5 = $visual_aids_skills[4];
+        $assessment->visual_aids_skills_rating_q6 = $visual_aids_skills[5];
+        $body_language_skills = [];
+        foreach ($request->body_language as $body_language_skill){
+            $body_language_skills[] = $body_language_skill;
+        }
+        $assessment->body_language_skills_rating_q1 = $body_language_skills[0];
+        $assessment->body_language_skills_rating_q2 = $body_language_skills[1];
+        $assessment->body_language_skills_rating_q3 = $body_language_skills[2];
+        $audience_participation_skills = [];
+        foreach ($request->audience_participation as $audience_participation_skill){
+            $audience_participation_skills[] = $audience_participation_skill;
+        }
+        $assessment->audience_participation_skills_rating_q1 = $audience_participation_skills[0];
+        $assessment->audience_participation_skills_rating_q2 = $audience_participation_skills[1];
+        $assessment->audience_participation_skills_rating_q3 = $audience_participation_skills[2];
+        $assessment->audience_participation_skills_rating_q4 = $audience_participation_skills[3];
+        $assessment->audience_participation_skills_rating_q5 = $audience_participation_skills[4];
+        $technical_competence_skills = [];
+        foreach ($request->technical_competence as $technical_competence_skill){
+            $technical_competence_skills[] = $technical_competence_skill;
+        }
+        $assessment->technical_competence_skills_rating_q1 = $technical_competence_skills[0];
+        $assessment->technical_competence_skills_rating_q2 = $technical_competence_skills[1];
+        $assessment->technical_competence_skills_rating_q3 = $technical_competence_skills[2];
+        $assessment->technical_competence_skills_rating_q4 = $technical_competence_skills[3];
+
+        $assessment->topics_trainer_lacks_knowledge_expertise = $request->topics_trainer_lacks_knowledge_expertise;
+        $recommendations = [];
+        foreach ($request->ways_trainer_can_connect_with_audience as $recommendation){
+            $recommendations[] = $recommendation;
+        }
+
+        $assessment->ways_trainer_can_connect_with_audience_q1 = $recommendations[0];
+        $assessment->ways_trainer_can_connect_with_audience_q2 = $recommendations[1];
+        $assessment->ways_trainer_can_connect_with_audience_q3 = $recommendations[2];
+        $assessment->ways_trainer_can_connect_with_audience_q4 = $recommendations[3];
+
+        $assessment->save();
+        return redirect('/adm/main/dashboard')->with('success','Assessment Checklist Submitted successfully');
+
 
     }
 

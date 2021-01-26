@@ -40,15 +40,13 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Email Address</label>
-                                            <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$trainer->email}}">
-                                            <span class="text-danger">{{$errors->first('email')}}</span>
+                                            <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$trainer->email}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Full Name</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}">
-                                            <span class="text-danger">{{$errors->first('name')}}</span>
+                                            <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

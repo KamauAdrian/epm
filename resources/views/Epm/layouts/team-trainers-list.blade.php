@@ -59,7 +59,7 @@ $auth_admin = auth()->user();
                                         {{$members}} Members
                                     @endif
                                     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
-                                        <a href="{{url('add-team-trainer-members',$team->id)}}">
+                                        <a href="{{url('adm/'.$auth_admin->id.'/add/team/trainer/members/team_id='.$team->id)}}">
                                             <button type="button" title="Add Members" class="btn btn-icon"><i class="feather icon-plus"></i></button>
                                         </a>
                                     @endif

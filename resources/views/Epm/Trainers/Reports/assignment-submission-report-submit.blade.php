@@ -27,16 +27,14 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Full Name (In the order of First Name, Middle Name, Surname) </label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}">
-                                        <span class="text-danger">{{$errors->first('name')}}</span>
+                                        <label>Full Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Employee Number</label>
-                                        <input type="text" name="employee_number" class="form-control" placeholder="00198" value="{{$trainer->employee_number}}">
-                                        <span class="text-danger">{{$errors->first('name')}}</span>
+                                        <input type="text" name="employee_number" class="form-control" placeholder="00198" value="{{$trainer->employee_number}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

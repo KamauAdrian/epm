@@ -40,6 +40,12 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label>Full Name</label>
+                                        <input type="text" name="name" value="{{$auth_admin->name}}" class="form-control" placeholder="Your Answer" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <span class="text-danger">{{$errors->first('training_category')}}</span>
                                     </div>
                                 </div>
@@ -48,7 +54,10 @@
                                         <label>Online Work Category trained </label>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Data Management"
-                                                   id="checkCategory1" name="training_category">
+                                                   id="checkCategory1" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Data Management'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
                                             <label for="checkCategory1" class="form-check-label">Data Management</label>
                                         </div>
                                     </div>
@@ -57,7 +66,10 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Digital Marketing"
-                                                   id="checkCategory2" name="training_category">
+                                                   id="checkCategory2" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Digital Marketing'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
                                             <label for="checkCategory2" class="form-check-label">Digital Marketing</label>
                                         </div>
                                     </div>
@@ -66,7 +78,10 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Transcription"
-                                                   id="checkCategory3" name="training_category">
+                                                   id="checkCategory3" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Transcription'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
                                             <label for="checkCategory3" class="form-check-label">Transcription</label>
                                         </div>
                                     </div>
@@ -75,7 +90,10 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Content Writing"
-                                                   id="checkCategory4" name="training_category">
+                                                   id="checkCategory4" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Content Writing'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
                                             <label for="checkCategory4" class="form-check-label">Content Writing</label>
                                         </div>
                                     </div>
@@ -84,16 +102,12 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Virtual Assistant"
-                                                   id="checkCategory5" name="training_category">
+                                                   id="checkCategory5" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Virtual Assistant'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
                                             <label for="checkCategory5" class="form-check-label">Virtual Assistant</label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Full name of Trainers who trained</label>
-                                        <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Your Answer" required>
-                                        <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

@@ -108,6 +108,12 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @endif
     <li class="nav-item pcoded-hasmenu">
+        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Classes</span></a>
+        <ul class="pcoded-submenu">
+            <li><a href="#!">View Classes</a></li>
+        </ul>
+    </li>
+    <li class="nav-item pcoded-hasmenu">
         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Sessions</span></a>
         <ul class="pcoded-submenu">
             <li><a href="{{url('/adm/'.$auth_admin->id.'/list/sessions')}}">View Sessions</a></li>
@@ -178,6 +184,8 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/reports')}}">Daily Virtual Training Report</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/physical/training/reports')}}">Daily Physical Training Report</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/reports')}}">Assigment submission</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/competence/reports')}}">Competency Reports</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/apply/employee/leave')}}">Employee Leave</a></li>
             </ul>
         </li>
     @endif
