@@ -1,5 +1,9 @@
 @extends('Epm.layouts.master')
 
+@section('styles')
+    <link rel="stylesheet" href="{{url('assets/css/plugins/dataTables.bootstrap4.min.css')}}">
+@endsection
+
 @section('content')
     <?php
     $auth_admin = auth()->user();
@@ -22,7 +26,9 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
+
                 @include('Epm.layouts.sessions-list')
+
                 @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                     <a href="{{url('/adm/'.$auth_admin->id.'/add/session')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add Session</a>
                 @endif
@@ -30,4 +36,14 @@
         </div>
     </div>
 
+@endsection
+
+@section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('#sessionsTable').DataTable();
+        } );
+    </script>
 @endsection

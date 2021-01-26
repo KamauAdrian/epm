@@ -25,12 +25,12 @@ $auth_admin = auth()->user();
         <div class="table-responsive">
             <table class="table table-center mb-0 ">
                 <thead>
-                <tr>
-                    <th>Teams</th>
-                    <th>Team Leader</th>
-                    <th>Team Members</th>
-                    <th class="text-right float-right">Actions</th>
-                </tr>
+                    <tr>
+                        <th>Teams</th>
+                        <th>Team Leader</th>
+                        <th>Team Members</th>
+                        <th class="text-right float-right">Actions</th>
+                    </tr>
                 </thead>
                 @if($teams)
                     <tbody>

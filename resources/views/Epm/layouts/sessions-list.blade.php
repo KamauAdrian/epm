@@ -21,7 +21,7 @@ $auth_admin = auth()->user();
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-center mb-0 ">
+            <table id="sessionsTable" class="table table-center mb-0 ">
                 <thead>
                 <tr>
                     <th>Sessions</th>
