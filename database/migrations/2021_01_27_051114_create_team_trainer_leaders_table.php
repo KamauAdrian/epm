@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamCenterManagersTable extends Migration
+class CreateTeamTrainerLeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateTeamCenterManagersTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_center_managers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->integer('creator_id')->unsigned();
+        Schema::create('team_trainer_leaders', function (Blueprint $table) {
+            $table->id();
+            $table->integer('team_leader_id');
+            $table->integer('team_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateTeamCenterManagersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('team_center_managers');
+        Schema::dropIfExists('team_trainer_leaders');
     }
 }

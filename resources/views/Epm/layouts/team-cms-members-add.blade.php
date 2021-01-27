@@ -7,7 +7,7 @@ $auth_admin = auth()->user();
         <div class="col-sm-12">
             <div team_id="{{$team->id}}" class="form-group" id="cms_new">
 {{--            <div class="form-group" id="cms">--}}
-                <label>Choose Team Member</label>
+                <label>Select Team Members</label>
                 <testkit name="cms" v-model="selectedCm" :options="cms"
                              placeholder="Search" label="name" track-by="id"
                              :searchable="false" :close-on-select="true" multiple>

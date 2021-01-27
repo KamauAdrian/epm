@@ -24,11 +24,11 @@ $auth_admin = auth()->user();
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-center mb-0 ">
+            <table id="teamTrainersList" class="table table-center mb-0 ">
                 <thead>
                 <tr>
                     <th>Teams</th>
-                    <th>Team Leader</th>
+                    <th>Team Leaders</th>
                     <th>Members</th>
                     <th class="text-right">Actions</th>
                 </tr>
@@ -36,6 +36,9 @@ $auth_admin = auth()->user();
                 @if($teams)
                     <tbody>
                     @foreach($teams as $team)
+                        <?php
+                        $team_leaders = \App\Models\TeamTrainer::find($team->id)->teamLeaders;
+                        ?>
                         <tr>
                             <td>
                                 <div class="media">
@@ -45,6 +48,13 @@ $auth_admin = auth()->user();
                                 </div>
                             </td>
                             <td>{{$team->team_leader_name}}</td>
+{{--                            @if($team_leaders)--}}
+{{--                                <td>--}}
+{{--                                    @foreach($team_leaders as $team_leader)--}}
+{{--                                        {{$team_leader->name}}--}}
+{{--                                    @endforeach--}}
+{{--                                </td>--}}
+{{--                            @endif--}}
                             <?php
                             $members = count($teamTrainers->find($team->id)->trainers)
 //                            dd(count($teamTrainers::find($team->id)->trainers));

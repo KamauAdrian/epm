@@ -49,8 +49,13 @@ Route::group(['middleware'=>'super_admin'],function (){
     //trainers
     Route::get('/trainers/new/team/members/{id}',[App\Http\Controllers\SuperAdminController::class, 'trainers_team_new']);//json array of trainers
     //mentors
-    //sessions
+    //sessions and classes
     Route::get('/confirm/session/{id}',[App\Http\Controllers\SuperAdminController::class, 'confirm_session']);
+    Route::get('/adm/{id}/list/classes',[App\Http\Controllers\SuperAdminController::class, 'view_classes']);
+    Route::get('/adm/{id}/view/class/class_id={class_id}',[App\Http\Controllers\SuperAdminController::class, 'view_class']);
+    Route::get('/adm/{id}/create/class',[App\Http\Controllers\SuperAdminController::class, 'create_class']);
+    Route::post('/adm/{id}/save/class',[App\Http\Controllers\SuperAdminController::class, 'save_class']);
+    Route::get('/session/classes',[App\Http\Controllers\AdminController::class, 'session_classes']);//json array of trainers
     //emobilis Hqs
     Route::get('/emobilis/hq/hqs',[App\Http\Controllers\SuperAdminController::class, 'emobilis_hqs']);
     //    reports

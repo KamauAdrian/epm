@@ -14,12 +14,11 @@ $auth_admin = auth()->user();
             <div class="col-sm-12">
                 <div class="form-group" id="trainers">
                     <label>Team Leader</label>
-                    <multiselect name="team_leader" v-model="selectedTrainer" :options="trainers"
+                    <multiselect v-model="selectedTrainer" :options="trainers"
                                  placeholder="Search" label="name" track-by="id"
-                                 :searchable="true" :close-on-select="true">
+                                 :searchable="true" :close-on-select="true" multiple>
                     </multiselect>
-                    <input type="hidden" v-for="trainer in selectedTrainer" name="team_leader_id" :value="selectedTrainer.id">
-                    <input type="hidden" v-for="trainer in selectedTrainer" name="team_leader_name" :value="selectedTrainer.name">
+                    <input type="hidden" v-for="trainer in selectedTrainer" name="team_leader_ids[]" :value="trainer.id">
                 </div>
             </div>
         @endif

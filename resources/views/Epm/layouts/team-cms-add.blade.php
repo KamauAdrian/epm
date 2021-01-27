@@ -13,13 +13,12 @@ $auth_admin = auth()->user();
         @if($cms!='')
             <div class="col-sm-12">
                 <div class="form-group" id="cms">
-                    <label>Team Leader</label>
+                    <label>Select Team Leaders</label>
             <multiselect name="cms" v-model="selectedCm" :options="cms"
                          placeholder="Search" label="name" track-by="id"
-                         :searchable="true" :close-on-select="true">
+                         :searchable="true" :close-on-select="true" multiple>
             </multiselect>
-            <input type="hidden" v-for="cm in selectedCm" name="team_leader_id" :value="selectedCm.id">
-            <input type="hidden" v-for="cm in selectedCm" name="team_leader_name" :value="selectedCm.name">
+            <input type="hidden" v-for="cm in selectedCm" name="team_leader_ids[]" :value="cm.id">
                 </div>
             </div>
         @endif

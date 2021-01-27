@@ -857,11 +857,24 @@ $admin_user = Auth::user();
     public function session_add()
     {
         $trainers = '';
+        $classes = DB::table('session_classes')->get();
         $role = DB::table('roles')->where('name','Trainer')->first();
         if ($role){
             $trainers = DB::table('users')->where('role_id',$role->id)->get();
         }
-        return view('Epm.Sessions.add-session',compact('trainers'));
+        return view('Epm.Sessions.add-session',compact('trainers','classes'));
+    }
+
+    public function session_classes(){
+        $result = [];
+            $classes = DB::table('session_classes')->orderBy('created_at','desc')->get();
+            if (!empty($classes)){
+                foreach ($classes as $class){
+                    $result[]=$class;
+                }
+            }
+            return response()->json($result);
+
     }
 
     public function sessions_list()
@@ -878,6 +891,7 @@ $admin_user = Auth::user();
 
     public function session_save(Request $request)
     {
+        dd($request->all());
         $messages = [
             'name.required'=>'Hey Session Name Please',
             'type.required'=>'Session Type Field Required',
@@ -1041,7 +1055,7 @@ $admin_user = Auth::user();
      * Teams
      */
     public function team_cms_list(){
-        $teams = DB::table('team_center_managers')->get();
+        $teams = DB::table('team_center_managers')->orderBy('created_at','desc')->get();
         $members = '';
         foreach ($teams as $team){
             $members = TeamCenterManager::find($team->id);
@@ -1050,7 +1064,7 @@ $admin_user = Auth::user();
     }
 
     public function team_trainers_list(){
-        $teams = DB::table('team_trainers')->get();
+        $teams = DB::table('team_trainers')->orderBy('created_at','desc')->get();
         return view('Epm.Teams.trainers',compact('teams'));
     }
 

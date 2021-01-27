@@ -35,7 +35,7 @@ $auth_admin = auth()->user();
         <div class="col-sm-6">
             <div class="form-group">
                 <label>INSTITUTION</label>
-                <input type="text" name="institution" class="form-control">
+                <input type="text" name="institution" class="form-control" placeholder="Institution">
                 <span class="text-danger">{{$errors->first('institution')}}</span>
             </div>
         </div>
@@ -47,12 +47,23 @@ $auth_admin = auth()->user();
                 <span class="text-danger">{{$errors->first('town')}}</span>
             </div>
         </div>
+        <div class="col-sm-12">
+            <div class="form-group" id="session_type">
+                <label>SESSION TYPE</label>
+                <multiselect :options="types" v-model="selectedType"
+                             placeholder="Select Session Type"
+                             :searchable="true" :close-on-select="true">
+                </multiselect>
+                <input type="hidden" name="type" :value="selectedType">
+                <span class="text-danger">{{$errors->first('type')}}</span>
+            </div>
+        </div>
         @if($trainers!='')
             <div class="col-sm-12">
                 <div class="form-group" id="trainers">
-                    <label>SELECT TRAINERS</label>
+                    <label>SESSION TRAINERS</label>
                     <multiselect :options="trainers" v-model="selectedTrainer"
-                                 placeholder="Search" label="name" track-by="id"
+                                 placeholder="Select Session Trainers" label="name" track-by="id"
                                  :searchable="true" :close-on-select="true"
                                  multiple>
                     </multiselect>
@@ -62,19 +73,31 @@ $auth_admin = auth()->user();
             </div>
         @endif
         <div class="col-sm-12">
-            <div class="form-group" id="session_type">
-                <label>SESSION TYPE</label>
-                <multiselect :options="type" v-model="selectedType"
-                             placeholder="Search"
-                             :searchable="true" :close-on-select="true">
-                </multiselect>
-                <input type="hidden" name="type" :value="selectedType">
-                <span class="text-danger">{{$errors->first('type')}}</span>
+            <div class="form-group" id="category">
+                <label>SESSION CATEGORY</label>
+                <category name="speciality" v-model="selectedCategory" :options="categories"
+                          placeholder="Select The Session Category"
+                          :searchable="true" :close-on-select="true">
+                </category>
+                <input type="hidden" name="category" :value="selectedCategory">
             </div>
         </div>
+        @if($classes!='')
+            <div class="col-sm-12">
+                <div class="form-group" id="sessionClasses">
+                    <label>SESSION TARGET CLASS</label>
+                    <multiselect :options="session_classes" v-model="selectedSessionClass"
+                                 placeholder="Select Session Target Class" label="name" track-by="id"
+                                 :searchable="true" :close-on-select="true">
+                    </multiselect>
+                    <input type="hidden" name="s_classes[]" v-for="sclass in selectedSessionClass"  :value="sclass.id">
+                    <span class="text-danger">{{$errors->first('classes')}}</span>
+                </div>
+            </div>
+        @endif
         <div class="col-sm-12">
             <div class="form-group">
-                <label>ABOUT SESSION</label>
+                <label>SESSION ABOUT</label>
                 <textarea name="about" class="form-control" placeholder="Short Description" cols="30" rows="5"></textarea>
                 <span class="text-danger">{{$errors->first('about')}}</span>
             </div>

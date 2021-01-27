@@ -11,4 +11,8 @@ class TeamTrainer extends Model
     public function trainers(){
         return $this->belongsToMany('App\Models\User','team_trainer_member','team_id','trainer_id');
     }
+
+    public function teamLeaders(){
+        return $this->hasMany('App\Models\TeamTrainerLeader','team_id',);
+    }
 }

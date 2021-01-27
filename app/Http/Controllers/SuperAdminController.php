@@ -7,6 +7,7 @@ use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\ProjectManager;
 use App\Models\Role;
+use App\Models\SessionClass;
 use App\Models\TeamCenterManager;
 use App\Models\TeamTrainer;
 use App\Models\TrainingSession;
@@ -426,6 +427,47 @@ class SuperAdminController extends Controller
      * Sessions
      **/
 
+    public function view_classes($id){
+        $admin = User::find($id);
+        $classes = DB::table('session_classes')->orderBy('created_at','desc')->get();
+//        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){}
+            return view('Epm.Classes.classes',compact('classes'));
+    }
+    public function view_class($id,$class_id){
+        $admin = User::find($id);
+//        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){{}
+        return view('Epm.Classes.view-class');
+
+    }
+
+    public function create_class($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            return view('Epm.Classes.create-class');
+        }
+    }
+
+    public function save_class(Request $request,$id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager') {
+            $this->validate($request, [
+                'name' => ['required'],
+                'description' => ['required'],
+            ]);
+
+            $data = [
+                'name' => $request->name,
+                'description' => $request->description,
+            ];
+            $new_class = new SessionClass();
+            $new_class->name = $data['name'];
+            $new_class->description = $data['description'];
+            $new_class->save();
+            return redirect('/adm/' . $id . '/list/classes');
+        }
+
+    }
+
     public function confirm_session($id)
     {
         $admin_user = Auth::user();
@@ -480,18 +522,25 @@ class SuperAdminController extends Controller
         $admin = User::find($id);
         $trainers_team = new TeamTrainer();
         $trainers_team->name = $request->name;
-        $trainers_team->description = $request->about;
-        $trainers_team->team_leader_name = $request->team_leader_name;
-        $trainers_team->team_leader_id = $request->team_leader_id;
-        $team_leader_id = $trainers_team->team_leader_id;
+        $trainers_team->description = $request->about;;
+        $team_leaders = $request->input('team_leader_ids');
         $trainers_team->creator_id = Auth::id();
-        $trainers_team->save();
-        if ($team_leader_id){
-            TeamTrainer::find($trainers_team->id)->trainers()->attach($team_leader_id);
+        $new_team_created = $trainers_team->save();
+        if ($new_team_created){
+            $saved_team = TeamTrainer::find($trainers_team->id);
+            $team_leader_ids = [];
+            foreach ($team_leaders as $team_leader){
+                $team_leader_ids[] = [
+                  'team_leader_id'=>$team_leader,
+                  'team_id'=>$saved_team->id,
+                ];
+            }
+            $saved_team->trainers()->attach($team_leaders);
+            DB::table('team_trainer_leaders')->insert($team_leader_ids);
         }
         return redirect('/adm/'.$admin->id.'/list/team/trainers');
     }
-    public function team_trainer_members_add($team_id){
+    public function team_trainer_members_add($id,$team_id){
         $team = DB::table('team_trainers')->where('id',$team_id)->first();
         return view('Epm.Teams.add-team-trainer-member',compact('team'));
     }
@@ -528,14 +577,21 @@ class SuperAdminController extends Controller
         $cms_team = new TeamCenterManager();
         $cms_team->name = $request->name;
         $cms_team->description = $request->about;
-        $cms_team->team_leader_name = $request->team_leader_name;
-        $cms_team->team_leader_id = $request->team_leader_id;
-        $team_leader_id = $cms_team->team_leader_id;
+        $team_leaders = $request->input('team_leader_ids');
         $cms_team->creator_id = Auth::id();
-        $cms_team->save();
-        if ($team_leader_id){
-            $cms_team_saved = TeamCenterManager::find($cms_team->id);
-            $cms_team_saved->centerManagers()->attach($team_leader_id);
+        $new_team_created = $cms_team->save();
+
+        if ($new_team_created && $team_leaders!=null){
+            $saved_cms_team = TeamCenterManager::find($cms_team->id);
+            $team_leaders_ids = [];
+            foreach ($team_leaders as $team_leader){
+                $team_leaders_ids[] = [
+                    'team_leader_id'=>$team_leader,
+                    'team_id'=>$saved_cms_team->id,
+                ];
+            }
+            DB::table('team_cms_leaders')->insert($team_leaders_ids);
+            $saved_cms_team->centerManagers()->attach($team_leaders);
         }
         return redirect('/adm/'.$admin->id.'/list/team/cms');
     }
@@ -546,6 +602,7 @@ class SuperAdminController extends Controller
     }
 
     public function team_cms_members_save(Request $request,$id,$team_id){
+        dd($request->all());
         $admin = User::find($id);
         $cm_team_member_s_id = $request->input('cm_team_member_s_id');
           $team_cm =   TeamCenterManager::find($team_id);

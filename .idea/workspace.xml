@@ -26,18 +26,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-cm-member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-cm-member.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TeamCenterManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TeamCenterManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TeamTrainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TeamTrainer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_09_074555_create_team_center_managers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_09_074555_create_team_center_managers_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainer-member.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainer-member.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/cms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/cms.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/competencies-checklist.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/competencies-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/trainers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/trainers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-members-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-cms-members-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -178,7 +179,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/Epm/Mentors" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EPM" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="terminal" />
@@ -270,7 +271,8 @@
       <workItem from="1611215743461" duration="18155000" />
       <workItem from="1611291509525" duration="27177000" />
       <workItem from="1611551275227" duration="7445000" />
-      <workItem from="1611636190318" duration="24294000" />
+      <workItem from="1611636190318" duration="26537000" />
+      <workItem from="1611722833983" duration="14655000" />
     </task>
     <servers />
   </component>
@@ -310,11 +312,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1606914575160" />
-    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1610345431529">
+    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1611662960732">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="464" y="121" key="FileChooserDialogImpl/0.0.1360.728/0.0.1360.728@0.0.1360.728" timestamp="1608364782150" />
-    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1610345431529" />
+    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611662960732" />
     <state x="187" y="0" key="SettingsEditor" timestamp="1608007201970">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

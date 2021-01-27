@@ -35,8 +35,11 @@
                 }
             },
             mounted () {
-                console.log('this is the team_id: '+this.$el.attributes.team_id.value)
-                console.log('/trainers/new/'+this.$el.attributes.team_id.value)
+                var idTeam = this.$el.attributes.team_id.value;
+                var idTim = document.getElementById('trainers_new');
+                console.log(idTim.attributes.team_id);
+                console.log(idTeam);
+                console.log('/trainers/new/'+this.$el.attributes.team_id.value);
                 this.getCms()
                 // this.getCms(this.cms)
             },

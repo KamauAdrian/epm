@@ -35,7 +35,7 @@
             data() {
                 return {
                     selectedType: null,
-                    type: [
+                    types: [
                         'Private',
                         'Public',
                     ],
@@ -74,6 +74,52 @@
                 },
             },
         }).$mount('#trainers')
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data() {
+                return {
+                    selectedSessionClass: null,
+                    session_classes: [],
+                }
+            },
+            mounted () {
+                this.getClasses()
+            },
+            methods:{
+                getClasses(){
+                    axios
+                        .get('/session/classes')
+                        .then(response => {
+                            this.session_classes = response.data
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true)
+                },
+            },
+        }).$mount('#sessionClasses')
+        new Vue({
+            el: '#category',
+            components: {
+                category: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedCategory: null,
+                    categories: [
+                        'Data Management','Digital Marketing','Transcription',
+                        'Writing and Translation','Virtual Assistant'
+                    ],
+                }
+            },
+            methods:{
+            },
+        })
         function activatePlacesSearch() {
             var input = document.getElementById('location');
             var autocomplete = new google.maps.places.Autocomplete(input);

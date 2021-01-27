@@ -1,5 +1,10 @@
 @extends('Epm.layouts.master')
 @inject('teamCM', 'App\Models\TeamCenterManager')
+
+@section('styles')
+    <link rel="stylesheet" href="{{url('assets/css/plugins/dataTables.bootstrap4.min.css')}}">
+@endsection
+
 <?php
 $auth_admin = auth()->user();
 ?>
@@ -30,4 +35,13 @@ $auth_admin = auth()->user();
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('#teamCmsList').DataTable();
+        } );
+    </script>
 @endsection
