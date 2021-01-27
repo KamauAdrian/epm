@@ -895,7 +895,6 @@ $admin_user = Auth::user();
         $messages = [
             'name.required'=>'Hey Session Name Please',
             'type.required'=>'Session Type Field Required',
-            's_classes[].required'=>'Session Target Class Field is Required',
         ];
         $this->validate($request,[
             'name'=>'required',
@@ -906,7 +905,6 @@ $admin_user = Auth::user();
             'location'=>'required',
             'type'=>'required',
             'category'=>'required',
-            's_classes[]'=>'required',
             'about'=>'required',
         ],$messages);
         $session = new TrainingSession();

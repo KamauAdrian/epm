@@ -92,7 +92,6 @@ $auth_admin = auth()->user();
                                  :searchable="true" :close-on-select="true" multiple>
                     </multiselect>
                     <input type="hidden" name="s_classes[]" v-for="sclass in selectedSessionClass"  :value="sclass.id">
-                    <span class="text-danger">{{$errors->first('s_classes[]')}}</span>
                 </div>
             </div>
         @endif
