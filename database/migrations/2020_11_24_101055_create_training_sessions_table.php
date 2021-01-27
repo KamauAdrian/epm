@@ -24,6 +24,7 @@ class CreateTrainingSessionsTable extends Migration
             $table->string('about');//short session description
             $table->string('status')->default('Pending');//ie active or pending or complete default pending
             $table->string('type');
+            $table->string('category');
             $table->string('google_meet_link')->nullable();//Google meet link
             $table->timestamps();
         });

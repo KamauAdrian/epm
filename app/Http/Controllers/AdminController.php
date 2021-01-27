@@ -854,7 +854,7 @@ $admin_user = Auth::user();
     }
 
     //sessions
-    public function session_add()
+    public function session_add($id)
     {
         $trainers = '';
         $classes = DB::table('session_classes')->get();
@@ -879,7 +879,8 @@ $admin_user = Auth::user();
 
     public function sessions_list()
     {
-        $sessions = TrainingSession::orderBy('id','desc')->get();
+//        $sessions = TrainingSession::orderBy('created_at','desc')->get();
+        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get();
         return view('Epm.Sessions.sessions',compact('sessions'));
     }
 
@@ -889,9 +890,8 @@ $admin_user = Auth::user();
         return view('Epm.Sessions.view-session',compact('trainingSession'));
     }
 
-    public function session_save(Request $request)
+    public function session_save(Request $request,$id)
     {
-        dd($request->all());
         $messages = [
             'name.required'=>'Hey Session Name Please',
             'type.required'=>'Session Type Field Required',
@@ -914,18 +914,28 @@ $admin_user = Auth::user();
         $session->institution = $request->institution;
         $session->location = $request->location;
         $session->location_lat_long = $request->location_lat_long;
+        $session->category = $request->category;
+        $classes = null;
         $session->type = $request->type;
         $session->about = $request->about;
         $trainers_list = null;
         if ($request->input('trainers')){
             $trainers_list = $request->input('trainers');
         }
-        $saved = $session->save();
-        if ($saved && $trainers_list!=null){
-            $saved_session = TrainingSession::find($session->id);
-            $saved_session->trainers()->attach($trainers_list);
+        if ($request->input('s_classes')){
+            $classes = $request->input('s_classes');
         }
-        return redirect('/adm/list/sessions');
+        $saved = $session->save();
+        if ($saved){
+            $saved_session = TrainingSession::find($session->id);
+            if ($trainers_list!=null){
+                $saved_session->trainers()->attach($trainers_list);
+            }
+            if ($classes!=null){
+                $saved_session->classes()->attach($classes);
+            }
+        }
+        return redirect('/adm/'.$id.'/list/sessions')->with('success','New Session successfully created');
 
     }
     // create an array of trainers not added to a particular session

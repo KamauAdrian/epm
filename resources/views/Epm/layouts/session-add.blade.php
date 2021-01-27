@@ -75,7 +75,7 @@ $auth_admin = auth()->user();
         <div class="col-sm-12">
             <div class="form-group" id="category">
                 <label>SESSION CATEGORY</label>
-                <category name="speciality" v-model="selectedCategory" :options="categories"
+                <category v-model="selectedCategory" :options="categories"
                           placeholder="Select The Session Category"
                           :searchable="true" :close-on-select="true">
                 </category>
@@ -88,7 +88,7 @@ $auth_admin = auth()->user();
                     <label>SESSION TARGET CLASS</label>
                     <multiselect :options="session_classes" v-model="selectedSessionClass"
                                  placeholder="Select Session Target Class" label="name" track-by="id"
-                                 :searchable="true" :close-on-select="true">
+                                 :searchable="true" :close-on-select="true" multiple>
                     </multiselect>
                     <input type="hidden" name="s_classes[]" v-for="sclass in selectedSessionClass"  :value="sclass.id">
                     <span class="text-danger">{{$errors->first('classes')}}</span>
@@ -98,7 +98,7 @@ $auth_admin = auth()->user();
         <div class="col-sm-12">
             <div class="form-group">
                 <label>SESSION ABOUT</label>
-                <textarea name="about" class="form-control" placeholder="Short Description" cols="30" rows="5"></textarea>
+                <textarea name="about" class="form-control" placeholder="Short Session Description" cols="30" rows="5"></textarea>
                 <span class="text-danger">{{$errors->first('about')}}</span>
             </div>
         </div>
