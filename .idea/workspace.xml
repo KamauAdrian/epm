@@ -25,9 +25,6 @@
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/SessionClass.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SessionClass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TrainingSession.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainingSession.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_24_101055_create_training_sessions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_24_101055_create_training_sessions_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -260,7 +257,7 @@
       <workItem from="1611291509525" duration="27177000" />
       <workItem from="1611551275227" duration="7445000" />
       <workItem from="1611636190318" duration="26537000" />
-      <workItem from="1611722833983" duration="19962000" />
+      <workItem from="1611722833983" duration="20811000" />
     </task>
     <servers />
   </component>
