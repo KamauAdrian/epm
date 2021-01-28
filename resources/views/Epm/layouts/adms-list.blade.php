@@ -38,6 +38,13 @@
                         @endif
                     </a>
                 @endif
+                @if($auth_admin->role->name == 'Project Manager')
+                    <a href="{{url('/'.$url)}}">
+                        @if($role->name != 'Project Manager')
+                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i>Add {{$role->name}}</button>
+                        @endif
+                    </a>
+                @endif
             <a href="#!">
                 <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Export List</button>
             </a>
