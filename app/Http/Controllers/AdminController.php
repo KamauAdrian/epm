@@ -285,18 +285,22 @@ class AdminController extends Controller
 
     public function employee_leave_request(Request $request, $id){
         $messeges = [
-            'leave_type[].required'=>'Please select the leave type your are taking'
+            'leave_type.required'=>'Please select the leave type your are taking'
         ];
         $this->validate($request,[
-            'leave_type[]'=>['required'],
+            'leave_type'=>['required'],
         ],$messeges);
+        $leave_applicant = User::find($id);
         $leave_application = new EmployeeLeaveApplication();
         //applicant info
-        $leave_application->applicant_name = $request->applicant_name;
-        $leave_application->applicant_id = $id;
-        $leave_application->applicant_email = $request->applicant_email;
-        $leave_application->applicant_phone = $request->applicant_phone;
+        $leave_application->applicant_name = $leave_applicant->name;
+        $leave_application->applicant_id = $leave_applicant->id;
+        $leave_application->applicant_email = $leave_applicant->email;
+        $leave_application->applicant_phone = $leave_applicant->phone;
+        $leave_application->applicant_employee_number = $leave_applicant->employee_number;
+        $leave_application->application_date = $request->application_date;
         $leave_application->leave_days = $request->leave_days;
+        $leave_application->other_leave_type = $request->other_leave_type;
         $leave_application->leave_first_day = $request->leave_first_day;
         $leave_application->leave_last_day = $request->leave_last_day;
         $leave_application->applicant_duty_station = $request->applicant_duty_station;
@@ -378,28 +382,6 @@ class AdminController extends Controller
             return view('Epm.Reports.template-create');
         }
     }
-
-//    public function new_reports(){
-//
-//        $added_reports_ids = json_decode(DB::table('report_templates')->pluck('report_type_id'));
-////        $added_cm_ids = json_decode(DB::table('team_cm_member')->where('team_id',$id)->pluck('center_manager_id'));
-////        $role = DB::table('roles')->where('name','Center Manager')->first();
-////        if ($role){}
-//            $reports_ids = json_decode(DB::table('report_types')->pluck('id'));
-////            $cm_ids = json_decode(DB::table('users')->where('role_id',$role->id)->pluck('id'));
-//
-//        $new_reports_ids = [];
-////        $cm_new_member_ids = [];
-//        foreach ($reports_ids as $report_id){
-//            if (!in_array($report_id,$added_reports_ids)){
-//                $reports = DB::table('report_types')->where('id',$report_id)->get();
-//                foreach ($reports as $report){
-//                    $new_reports_ids[] = $report;
-//                }
-//            }
-//        }
-//        return response()->json($new_reports_ids);
-//    }
 
     public function report_template_generate(Request $request,$id){
         $admin = User::find($id);
@@ -713,10 +695,11 @@ class AdminController extends Controller
         $this->validate($request,
             [
                 'name' => ['required', 'string', 'max:255'],
-                'gender' => ['required'],
-                'county' => ['required'],
                 'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
                 'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
+                'gender' => ['required'],
+                'employee_number' => ['required','unique:users'],
+                'county' => ['required'],
             ],$messages
         );
 
@@ -744,8 +727,10 @@ $admin_user = Auth::user();
         }else{
             $cm_user->phone = $phone;
         }
+        $cm_user->employee_number = $request->employee_number;
         $cm_user->county = $request->county;
         $cm_user->center_id = $request->center_id;
+        $cm_user->bio = $request->bio;
         if ($cm_user->center_id){
             $center = DB::table('centers')->where('id',$cm_user->center_id);
         }
@@ -759,6 +744,14 @@ $admin_user = Auth::user();
             $role_saved = $role->save();
 //assign admin user the new role
             $cm_user->role_id = $role->id;
+        }
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            if ($image->isValid()){
+                $fileName = $image->getClientOriginalName();
+                $image->move('CenterManagers/images',$fileName);
+                $cm_user->image = $fileName;
+            }
         }
         $new_cm = $cm_user->save();
         if ($new_cm){
@@ -784,8 +777,10 @@ $admin_user = Auth::user();
             [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
-                'phone' => ['required',  'max:10', 'unique:users'],
+                'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
                 'gender' => ['required'],
+                'employee_number' => ['required','unique:users'],
+                'county' => ['required'],
                 'location' => ['required'],
                 'start_date' => ['required'],
             ]
@@ -799,6 +794,7 @@ $admin_user = Auth::user();
         $email = $trainer_adm_user->email;//used to send account activation email
         $trainer_adm_user->phone = request('phone');
         $trainer_adm_user->gender = request('gender');
+        $trainer_adm_user->employee_number = request('employee_number');
         $trainer_adm_user->county = request('county');
         $trainer_adm_user->location = request('location');
         $trainer_adm_user->location_lat_long = request('event-location');
@@ -809,6 +805,7 @@ $admin_user = Auth::user();
         $trainer_adm_user->office_supplies = $request->office_supplies;
         $trainer_adm_user->laptop_type = $request->laptop_type;
         $trainer_adm_user->laptop_serial_number = $request->laptop_serial_number;
+        $trainer_adm_user->bio = $request->bio;
         //before saving a user create a new role(Trainer) save the role and assign user to role_id
         $role = new Role();
         $role->name = 'Trainer';
@@ -819,6 +816,14 @@ $admin_user = Auth::user();
         }else{
             $role->save();
             $trainer_adm_user->role_id = $role->id;
+        }
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            if ($image->isValid()){
+                $fileName = $image->getClientOriginalName();
+                $image->move('Trainers/images',$fileName);
+                $trainer_adm_user->image = $fileName;
+            }
         }
         //save trainer admin user
         $trainer_adm_user_saved = $trainer_adm_user->save();
@@ -1018,11 +1023,12 @@ $admin_user = Auth::user();
     public function mentor_save(Request $request)
     {
         $this->validate($request, [
-            'name'=>['required'],
-            'email'=>['required','email'],
-            'phone'=>['required'],
-            'gender'=>['required'],
-            'county'=>['required'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
+            'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
+            'gender' => ['required'],
+            'employee_number' => ['required','unique:users'],
+            'county' => ['required'],
         ]);
         $mentor = new User();
         $mentor->role_id = '';
@@ -1040,10 +1046,20 @@ $admin_user = Auth::user();
         $email = $mentor->email;
         $mentor->phone = $request->phone;
         $mentor->gender = $request->gender;
+        $mentor->employee_number = $request->employee_number;
         $mentor->county = $request->county;
         $mentor->location = $request->location;
         $mentor->location_lat_long = $request->location_lat_long;
         $mentor->is_admin = 1;
+        $mentor->bio = $request->bio;
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            if ($image->isValid()){
+                $fileName = $image->getClientOriginalName();
+                $image->move('Mentors/images',$fileName);
+                $mentor->image = $fileName;
+            }
+        }
         $created = $mentor->save();
         if ($created){
             //send email invite to new added user

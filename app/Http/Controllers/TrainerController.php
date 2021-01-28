@@ -145,33 +145,41 @@ class TrainerController extends Controller
 
     public function daily_attendance_report_save(Request $request,$id)
     {
-
+        $messages = [
+            'training_task_role.required'=>'Your Role/Task of the day is required'
+        ];
+        $this->validate($request,[
+            'date'=>'required',
+            'training_task_role'=>'required',
+        ],$messages);
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
             $daily_attendance_report = new TrainerDailyAttendanceReport();
-            $daily_attendance_report->name = $request->name;
-            $daily_attendance_report->email = $request->email;
-            $daily_attendance_report->trainer_id = $id;
+            $daily_attendance_report->name = $trainer->name;
+            $daily_attendance_report->email = $trainer->email;
+            $daily_attendance_report->phone = $trainer->phone;
+            $daily_attendance_report->employee_number = $trainer->employee_number;
+            $daily_attendance_report->trainer_id = $trainer->id;
             $daily_attendance_report->speciality = $request->speciality;
             $task_roles = $request->training_task_role;
+            $daily_attendance_report->other_training_task_roles = $request->other_training_task_roles;
+            $daily_attendance_report->date = $request->date;
             $daily_attendance_report->time = $request->time;
             $daily_attendance_report->comments = $request->comments;
             $attendance_submitted = $daily_attendance_report->save();
             $trainer_training_task_role = null;
-            if ($attendance_submitted && $task_roles!=null ){
-                foreach ($task_roles as $task_role){
+            if ($attendance_submitted && $task_roles!=null){
+                foreach ($task_roles as $task_role) {
                     $trainer_training_task_role = new TrainerTrainingTaskRole();
                     $trainer_training_task_role->name = $task_role;
                     $trainer_training_task_role->daily_attendance_report_id = $daily_attendance_report->id;
                     $trainer_training_task_role->save();
                 }
-                return redirect('/adm/'.$id.'/view/daily/attendance/reports')->with('success','Daily Attendance Report Submitted Successfully');
-            }elseif ($attendance_submitted && $task_roles==null ){
+                return redirect('/adm/' . $id . '/view/daily/attendance/reports')->with('success', 'Daily Attendance Report Submitted Successfully');
+            }elseif ($attendance_submitted && $task_roles == null){
                 return redirect('/adm/'.$id.'/view/daily/attendance/reports')->with('success','Daily Attendance Report Submitted Successfully');
             }
         }
-
-
     }
 
     public function virtual_training_reports($id)
@@ -202,14 +210,19 @@ class TrainerController extends Controller
 
     public function virtual_training_report_save(Request $request,$id)
     {
+//        dd($request->all());
         $this->validate($request,[
             'training_category'=>['required'],
         ]);
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
             $virtual_training_report = new TrainerDailyVirtualTrainingReport();
-            $virtual_training_report->trainer_name = $request->name;
-            $virtual_training_report->trainer_id = $id;
+            $virtual_training_report->name = $trainer->name;
+            $virtual_training_report->email = $trainer->email;
+            $virtual_training_report->phone = $trainer->phone;
+            $virtual_training_report->employee_number = $trainer->employee_number;
+            $virtual_training_report->trainer_id = $trainer->id;
+            $virtual_training_report->date = $request->date;
             $virtual_training_report->training_category = $request->training_category;
             $virtual_training_report->total_trainees_morning_session = $request->total_trainees_morning_session;
             $virtual_training_report->total_trainees_afternoon_session = $request->total_trainees_afternoon_session;
@@ -270,11 +283,16 @@ class TrainerController extends Controller
 
     public function daily_physical_report_save(Request $request,$id)
     {
+//        dd($request->all());
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer'){
             $daily_physical_training_report = new TrainerDailyPhysicalTrainingReport();
-            $daily_physical_training_report->name = $request->name;
-            $daily_physical_training_report->trainer_id = $id;
+            $daily_physical_training_report->name = $trainer->name;
+            $daily_physical_training_report->email = $trainer->email;
+            $daily_physical_training_report->phone = $trainer->phone;
+            $daily_physical_training_report->employee_number = $trainer->employee_number;
+            $daily_physical_training_report->date = $request->date;
+            $daily_physical_training_report->trainer_id = $trainer->id;
             $daily_physical_training_report->county = $request->county;
             $daily_physical_training_report->constituency = $request->constituency;
             $daily_physical_training_report->center = $request->center;
@@ -333,11 +351,21 @@ class TrainerController extends Controller
         $trainer = User::find($id);
         if ($trainer->role->name == "Trainer"){
             $assignment_submission_report = new TrainerAssignmentSubmissionReport();
-            $assignment_submission_report->name = $request->name;
-            $assignment_submission_report->trainer_id = $id;
-            $assignment_submission_report->employee_number = $request->employee_number;
+            $assignment_submission_report->name = $trainer->name;
+            $assignment_submission_report->email = $trainer->email;
+            $assignment_submission_report->phone = $trainer->phone;
+            $assignment_submission_report->employee_number = $trainer->employee_number;
+            $assignment_submission_report->date = $request->date;
+            $assignment_submission_report->trainer_id = $trainer->id;
             $assignment_submission_report->speciality = $request->speciality;
-            $assignment_submission_report->assignment = $request->assignment;
+            $fileName = '';
+            if ($request->hasFile('assignment')){
+                $assigment = $request->file('assignment');
+                $fileName = $assigment->getClientOriginalName();
+                $assigment->move('Trainers/Assignments',$fileName);
+            }
+            $assignment_submission_report->assignment = $fileName;
+
             $assignment_submission_report_submitted = $assignment_submission_report->save();
             if ($assignment_submission_report_submitted){
                 return redirect('/adm/'.$id.'/view/assignment/submission/reports')->with('success','Assignment Submission Report Successfully Submitted');

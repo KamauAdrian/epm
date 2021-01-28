@@ -37,16 +37,42 @@
                                             <p>This form should be completed daily, this is to help track your activities and tasks during the day.</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Email Address</label>
-                                            <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$trainer->email}}" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Full Name</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" disabled>
+                                            <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$trainer->email}}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" name="phone" class="form-control" value="{{$trainer->phone}}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Employee Number</label>
+                                            <input type="text" name="employee_number" class="form-control" value="{{$trainer->employee_number}}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Date</label>
+                                            <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
+                                            <span class="text-danger">{{$errors->first('date')}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>The Time You were Training</label>
+                                            <input type="time" name="time" class="form-control" value="{{old('time')}}" required>
+                                            <span class="text-danger">{{$errors->first('time')}}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -108,6 +134,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Your Role/Task of The Day</label>
+                                            <span class="text-danger">{{$errors->first('training_task_role[]')}}</span>
                                             <div class="form-check">
                                                 <input type="checkbox" value="Moderator" class="form-check-input" id="checkRole1" name="training_task_role[]">
                                                 <label for="checkRole1" class="form-check-label">Moderator</label>
@@ -158,15 +185,8 @@
                                     <div class="col-md-12" id="otherSpecify" style="display: none;">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="text" class="form-control" name="training_task_role[]" placeholder="Please specify what was your other role/task">
+                                                <input type="text" class="form-control" name="other_training_task_roles" placeholder="Please specify what was your other role/task">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>The Time You were Training</label>
-                                            <input type="time" name="time" class="form-control" value="{{old('time')}}" required>
-                                            <span class="text-danger">{{$errors->first('time')}}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

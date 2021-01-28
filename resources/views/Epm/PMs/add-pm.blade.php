@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12" style="padding-left: 150px; padding-right: 150px">
@@ -14,8 +15,8 @@
                 @include('Epm.layouts.pm-add')
             </div>
         </div>
-        </div>
     </div>
+
 @endsection
 
 @section('js')
@@ -24,6 +25,25 @@
     <script src="{{url('assets/dist/axios.js')}}"></script>
 {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
+        new Vue({
+            components: {
+                county: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedCounty: null,
+                    counties: [
+                        'Baringo','Bomet','Bungoma','Busia','Elgeyo Marakwet','Embu','Garissa','Homa Bay', 'Kajiado',
+                        'Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale', 'Laikipia',
+                        'Lamu','Machakos','Makueni','Mandera','Meru','Migori','Marsabit','Murang\'a','Nairobi','Nakuru','Nandi',
+                        'Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita Taveta','Tana River','Tharaka Nithi',
+                        'Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'
+                    ],
+                }
+            },
+            methods:{
+            },
+        }).$mount('#county')
         new Vue({
             components: {
                 gender: window.VueMultiselect.default,

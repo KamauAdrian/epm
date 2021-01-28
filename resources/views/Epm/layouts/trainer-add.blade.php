@@ -1,21 +1,32 @@
 <form class="my-5" method="post" action="{{url('/save-trainer')}}">
     @csrf
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Full Name</label>
                 <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}">
                 <span class="text-danger">{{$errors->first('name')}}</span>
             </div>
         </div>
-        <div class="col-sm-12">
-            <div class="form-group" id="gender">
-                <label>Gender</label>
-                <gender name="gender" v-model="selectedGender" :options="gender"
-                             placeholder="Select Gender"
-                             :searchable="true" :close-on-select="true">
-                </gender>
-                <input type="hidden"name="gender" :value="selectedGender">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Employee Number</label>
+                <input type="text" name="employee_number" class="form-control" placeholder="Luke S" value="{{old('employee_number')}}">
+                <span class="text-danger">{{$errors->first('employee_number')}}</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" class="form-control" placeholder="Ex. luke@jacademy.org" value="{{old('email')}}">
+                <span class="text-danger">{{$errors->first('email')}}</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" class="form-control" placeholder="0728909090" value="{{old('phone')}}">
+                <span class="text-danger">{{$errors->first('phone')}}</span>
             </div>
         </div>
         <div class="col-sm-6">
@@ -37,18 +48,14 @@
                 <span class="text-danger">{{$errors->first('location')}}</span>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" class="form-control" placeholder="Ex. luke@jacademy.org" value="{{old('email')}}">
-                <span class="text-danger">{{$errors->first('email')}}</span>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="text" name="phone" class="form-control" placeholder="0728909090" value="{{old('phone')}}">
-                <span class="text-danger">{{$errors->first('phone')}}</span>
+        <div class="col-sm-12">
+            <div class="form-group" id="gender">
+                <label>Gender</label>
+                <gender name="gender" v-model="selectedGender" :options="gender"
+                        placeholder="Select Gender"
+                        :searchable="true" :close-on-select="true">
+                </gender>
+                <input type="hidden"name="gender" :value="selectedGender">
             </div>
         </div>
         <div class="col-sm-12">

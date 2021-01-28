@@ -25,16 +25,35 @@
                                         <p>Please complete the form by attaching your Assignment. Use the template that we sent you.</p>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" disabled>
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" name="email" class="form-control" value="{{$trainer->email}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" name="phone" class="form-control" value="{{$trainer->phone}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Employee Number</label>
+                                        <input type="text" name="employee_number" class="form-control" value="{{$trainer->employee_number}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Employee Number</label>
-                                        <input type="text" name="employee_number" class="form-control" placeholder="00198" value="{{$trainer->employee_number}}" disabled>
+                                        <label>Date</label>
+                                        <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
+                                        <span class="text-danger">{{$errors->first('date')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -97,7 +116,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Kindly Upload your complete assignment as a Word Document</label>
-                                        <input type="file" name="assignment" class="form-control" placeholder="Upload assignment">
+                                        <input type="file" name="assignment" class="form-control" placeholder="Upload assignment" required>
                                         <span class="text-danger">{{$errors->first('assignment')}}</span>
                                     </div>
                                 </div>

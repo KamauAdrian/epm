@@ -177,10 +177,14 @@ class SuperAdminController extends Controller
         ];
         $this->validate($request,
             [
-                'name' => ['required', 'string', 'max:255','regex:/^([A-Za-z]+) ?([A-Za-z]+)? ?([A-Za-z]+)? ?([A-Za-z]+)?$/'],
-                'gender' => ['required',],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'phone' => ['required','regex:/^(\+254|0)\d{9}$/', 'unique:users'],
+//                'name' => ['required', 'string', 'max:255','regex:/^([A-Za-z]+) ?([A-Za-z]+)? ?([A-Za-z]+)? ?([A-Za-z]+)?$/'],
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
+                'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
+                'gender' => ['required'],
+                'employee_number' => ['required','unique:users'],
+                'county' => ['required'],
+                'department' => ['required'],
                 'image'=>['image|mimes:png,jpg,jpeg|max:1000'],
             ],$messages
         );
@@ -188,10 +192,12 @@ class SuperAdminController extends Controller
         //create the project manager as admin user(add to users table)
         $pm_user = new User();
         $pm_user->name = request('name');
-        $pm_user->gender = request('gender');
         $pm_user->email = request('email');
         $email = $pm_user->email;
         $pm_user->phone = '';
+        $pm_user->gender = request('gender');
+        $pm_user->employee_number = request('employee_number');
+        $pm_user->county = request('county');
         $phone = request('phone');
         $country_code = substr($phone,0,4);
         if ($country_code == +254){

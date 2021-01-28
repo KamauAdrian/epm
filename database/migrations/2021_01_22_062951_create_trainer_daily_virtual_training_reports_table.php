@@ -15,8 +15,12 @@ class CreateTrainerDailyVirtualTrainingReportsTable extends Migration
     {
         Schema::create('trainer_daily_virtual_training_reports', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('employee_number');
+            $table->date('date');
             $table->string('training_category');
-            $table->string('trainer_name');
             $table->string('trainer_id');
             $table->string('total_trainees_morning_session');
             $table->string('total_trainees_afternoon_session');

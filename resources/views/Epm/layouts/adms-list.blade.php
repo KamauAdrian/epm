@@ -207,6 +207,11 @@
                     <a href="{{url('/'.$url)}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add {{$role->name}}</a>
                 @endif
             @endif
+            @if($auth_admin->role->name == 'Project Manager')
+                @if($role->name != 'Project Manager')
+                    <a href="{{url('/'.$url)}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add {{$role->name}}</a>
+                @endif
+            @endif
         </div>
     </div>
 </div>

@@ -38,10 +38,35 @@
                                         <p>The report should be submitted everyday at the end of the training session. In case of any challenges contact the Ajira Program Management Team for support.</p>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input type="text" name="name" value="{{$auth_admin->name}}" class="form-control" placeholder="Your Answer" disabled>
+                                        <input type="text" name="name" value="{{$auth_admin->name}}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="text" name="email" value="{{$auth_admin->email}}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" name="phone" value="{{$auth_admin->phone}}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Employee Number</label>
+                                        <input type="text" name="employee_number" value="{{$auth_admin->employee_number}}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
+                                        <span class="text-danger">{{$errors->first('date')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

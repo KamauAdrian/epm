@@ -24,7 +24,34 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_054515_create_trainer_daily_attendance_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_054515_create_trainer_daily_attendance_reports_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_062951_create_trainer_daily_virtual_training_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_062951_create_trainer_daily_virtual_training_reports_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_065528_create_trainer_daily_physical_training_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_065528_create_trainer_daily_physical_training_reports_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_071214_create_trainer_assignment_submission_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_071214_create_trainer_assignment_submission_reports_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_26_065828_create_employee_leave_applications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_26_065828_create_employee_leave_applications_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/CMs/add-cm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/CMs/add-cm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Mentors/add-mentor.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Mentors/add-mentor.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/add-pm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/add-pm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/add-trainer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/add-trainer.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/cm-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/cm-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/mentor-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/mentor-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/pm-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/pm-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/trainer-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/trainer-add.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +284,7 @@
       <workItem from="1611551275227" duration="7445000" />
       <workItem from="1611636190318" duration="26537000" />
       <workItem from="1611722833983" duration="21805000" />
-      <workItem from="1611808305754" duration="735000" />
+      <workItem from="1611808305754" duration="16725000" />
     </task>
     <servers />
   </component>
@@ -306,6 +333,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="187" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1608007201970" />
+    <state x="0" y="0" width="1009" height="686" key="dock-window-1" timestamp="1611811041579">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="0" y="0" width="1009" height="686" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1611811041579" />
     <state x="0" y="0" width="587" height="728" key="find.popup" timestamp="1610344476754">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -333,7 +364,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Epm/layouts/trainer-add.blade.php</url>
-          <line>21</line>
+          <line>32</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

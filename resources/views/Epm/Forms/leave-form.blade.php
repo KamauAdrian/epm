@@ -34,22 +34,34 @@
                                                 <p>Male employees shall be entitled 2 Calendar weeks paternity leave with full pay. And it cannot be extended without salary deduction.  The employee shall be required to produce a certificate of the expectant partner medical condition from a qualified medical practitioner or midwife.</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" name="applicant_name" placeholder="Your Answer" class="form-control" value="{{$auth_admin->name}}" disabled>
+                                                <input type="text" name="applicant_name" class="form-control" value="{{$auth_admin->name}}" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input type="email" name="applicant_email" placeholder="Your Email" class="form-control" value="{{$auth_admin->email}}" disabled>
+                                                <input type="email" name="applicant_email" class="form-control" value="{{$auth_admin->email}}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Phone Number</label>
+                                                <input type="text" name="applicant_phone" class="form-control" value="{{$auth_admin->phone}}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Employee Number</label>
+                                                <input type="text" name="applicant_employee_number" class="form-control" value="{{$auth_admin->employee_number}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Phone Number</label>
-                                                <input type="text" name="applicant_phone" placeholder="Your Answer" class="form-control" value="{{$auth_admin->phone}}" disabled>
+                                                <label>Date of Leave Application</label>
+                                                <input type="date" name="application_date" class="form-control" value="{{old('application_date')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -104,7 +116,7 @@
                                         <div class="col-md-12" id="otherSpecify" style="display: none;">
                                             <div class="form-group">
                                                 <div class="form-check">
-                                                    <input type="text" class="form-control" name="leave_type[]" placeholder="Please specify what type of leave you are taking">
+                                                    <input type="text" class="form-control" name="other_leave_type" placeholder="Please specify what type of leave you are taking">
                                                 </div>
                                             </div>
                                         </div>
@@ -116,25 +128,25 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>How many leave days are you taking?</label>
-                                                <input type="text" name="leave_days" placeholder="Your Answer" class="form-control" value="{{old('leave_days')}}">
+                                                <input type="text" name="leave_days" placeholder="Your Answer" class="form-control" value="{{old('leave_days')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>First Day of Leave.</label>
-                                                <input type="date" name="leave_first_day" placeholder="Your Answer" class="form-control" value="{{old('leave_first_day')}}">
+                                                <input type="date" name="leave_first_day" placeholder="Your Answer" class="form-control" value="{{old('leave_first_day')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Last Day of Leave.</label>
-                                                <input type="date" name="leave_last_day" placeholder="Your Answer" class="form-control" value="{{old('leave_last_day')}}">
+                                                <input type="date" name="leave_last_day" placeholder="Your Answer" class="form-control" value="{{old('leave_last_day')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Where is your Duty Station?</label>
-                                                <input type="text" name="applicant_duty_station" placeholder="Your Answer" class="form-control" value="{{old('applicant_duty_station')}}">
+                                                <input type="text" name="applicant_duty_station" placeholder="Your Answer" class="form-control" value="{{old('applicant_duty_station')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -158,31 +170,31 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Full Names</label>
-                                                <input type="text" name="colleague_name" placeholder="Your Answer" class="form-control" value="{{old('colleague_name')}}">
+                                                <input type="text" name="colleague_name" placeholder="Your Answer" class="form-control" value="{{old('colleague_name')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input type="email" name="colleague_email" placeholder="Your Answer" class="form-control" value="{{old('colleague_email')}}">
+                                                <input type="email" name="colleague_email" placeholder="Your Answer" class="form-control" value="{{old('colleague_email')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input type="text" name="colleague_phone" placeholder="Your Answer" class="form-control" value="{{old('colleague_phone')}}">
+                                                <input type="text" name="colleague_phone" placeholder="Your Answer" class="form-control" value="{{old('colleague_phone')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Designation</label>
-                                                <input type="text" name="colleague_designation" placeholder="Your Answer" class="form-control" value="{{old('colleague_designation')}}">
+                                                <input type="text" name="colleague_designation" placeholder="Your Answer" class="form-control" value="{{old('colleague_designation')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Duty Station</label>
-                                                <input type="text" name="colleague_duty_station" placeholder="Your Answer" class="form-control" value="{{old('colleague_duty_station')}}">
+                                                <input type="text" name="colleague_duty_station" placeholder="Your Answer" class="form-control" value="{{old('colleague_duty_station')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -194,25 +206,25 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" name="next_of_kin_name" placeholder="Your Answer" class="form-control" value="{{old('next_of_kin_name')}}">
+                                                <input type="text" name="next_of_kin_name" placeholder="Your Answer" class="form-control" value="{{old('next_of_kin_name')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input type="text" name="next_of_kin_email" placeholder="Your Answer" class="form-control" value="{{old('next_of_kin_email')}}">
+                                                <input type="text" name="next_of_kin_email" placeholder="Your Answer" class="form-control" value="{{old('next_of_kin_email')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input type="text" name="next_of_kin_phone" placeholder="Your Answer" class="form-control" value="{{old('next_of_kin_phone')}}">
+                                                <input type="text" name="next_of_kin_phone" placeholder="Your Answer" class="form-control" value="{{old('next_of_kin_phone')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Any other comment or concerns, please indicate below.</label>
-                                                <input type="text" name="general_comment_concern" placeholder="Your Answer" class="form-control" value="{{old('general_comment_concern')}}">
+                                                <input type="text" name="general_comment_concern" placeholder="Your Answer" class="form-control" value="{{old('general_comment_concern')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

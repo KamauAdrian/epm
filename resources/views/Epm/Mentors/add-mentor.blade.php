@@ -5,20 +5,18 @@
 @endsection
 
 @section('content')
+
     <div class="col-md-12">
         <div class="row">
-            <div class="auth-wrapper align-items-stretch bg-white">
-                <div class="auth-side-form">
-                    <div class="auth-content">
-                        <div class="text-center">
-                            <h1 class="f-w-400">Add a New Mentor</h1>
-                        </div>
-                        @include('Epm.layouts.mentor-add')
-                    </div>
+            <div class="col-md-12" style="padding-left: 150px; padding-right: 150px">
+                <div class="text-center">
+                    <h1 class="f-w-400">Add a New Mentor</h1>
                 </div>
+                @include('Epm.layouts.mentor-add')
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('js')

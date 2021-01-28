@@ -19,6 +19,9 @@ class CreateEmployeeLeaveApplicationsTable extends Migration
             $table->string('applicant_name');
             $table->string('applicant_email');
             $table->string('applicant_phone');
+            $table->string('applicant_employee_number');
+            $table->date('application_date');
+            $table->date('other_leave_type')->nullable();
             $table->string('leave_days');
             $table->string('leave_first_day');
             $table->string('leave_last_day');

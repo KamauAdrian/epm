@@ -42,7 +42,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Full name of Trainers who trained</label>
-                                        <input type="text" value="{{$report->trainer_name}}" class="form-control" disabled>
+                                        <input type="text" value="{{$report->name}}" class="form-control" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

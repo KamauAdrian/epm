@@ -32,17 +32,28 @@
                         </div>
                         <form action="#!">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Email Address</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$report->email}}" disabled>
-                                        <span class="text-danger">{{$errors->first('email')}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Full Name</label>
                                         <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$report->name}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$report->email}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$report->phone}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$report->date}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
