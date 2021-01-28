@@ -40,11 +40,14 @@
                         <div class="table-responsive">
                             <table class="table table-center mb-0 ">
                                 <thead>
-                                <tr> <th>Report</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                                 @if($reports)
                                     <tbody>
                                     @foreach($reports as $report)
+                                        <?php
+                                        $format_date = date('l dS M Y',strtotime($report->date))
+                                        ?>
                                         <tr>
                                             <td>
                                                 <div class="media">
@@ -54,6 +57,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>{{$format_date}}</td>
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                                 <td class="text-right">
                                                     <div class="float-right">
