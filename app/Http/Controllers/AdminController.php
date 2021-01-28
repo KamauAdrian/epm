@@ -569,6 +569,10 @@ class AdminController extends Controller
             return view('Epm.Reports.trainer-reports');
         }
     }
+    public function session_allocations($id){
+        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get();
+        return view('Epm.Trainers.training-sessions-allocations');
+    }
     public function reports_by_trainers_attendance($id){
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){

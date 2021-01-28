@@ -117,6 +117,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/reports/template_id={template_id}/report_target_group_id={report_id}',[App\Http\Controllers\AdminController::class, 'reports_by_role_list']);
     //trainers reports
     Route::get('/adm/{id}/view/trainer/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers']);
+    Route::get('/adm/{id}/view/training/sessions/allocations',[App\Http\Controllers\AdminController::class, 'session_allocations']);
     Route::get('/adm/{id}/view/trainer/daily/attendance/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_attendance']);
     Route::get('/adm/{id}/view/trainer/daily/virtual/training/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_virtual']);
     Route::get('/adm/{id}/view/trainer/daily/physical/training/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_physical']);
