@@ -38,7 +38,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Evaluation Date</label>
-                                        <input type="date" name="date" class="form-control">
+                                        <input type="date" name="date" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

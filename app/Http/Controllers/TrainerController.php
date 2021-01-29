@@ -122,7 +122,7 @@ class TrainerController extends Controller
         $assessment->ways_trainer_can_connect_with_audience_q4 = $recommendations[3];
 
         $assessment->save();
-        return redirect('/adm/main/dashboard')->with('success','Assessment Checklist Submitted successfully');
+        return redirect('/adm/'.$id.'/view/trainer/competence/reports')->with('success','Assessment Checklist Submitted successfully');
 
 
     }
