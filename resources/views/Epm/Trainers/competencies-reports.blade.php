@@ -78,8 +78,7 @@
                                             @else
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="View">
-                                                            {{--                                                        <a href="{{url('/adm/view/adm/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-info" title="View">--}}
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/competence/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View">
                                                             <span><i class="fa fa-list"></i></span>
                                                         </a>
                                                         <a href="#!" class="btn btn-sm btn-outline-info" title="Edit">

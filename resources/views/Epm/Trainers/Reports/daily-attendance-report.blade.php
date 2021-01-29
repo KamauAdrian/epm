@@ -77,6 +77,15 @@
                                             value="{{$array_string}}" disabled>
                                     </div>
                                 </div>
+                                @if($report->other_training_task_roles!=null)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Other Roles</label>
+                                            <input type="text" class="form-control"
+                                                   value="{{$report->other_training_task_roles}}" disabled>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>The Time You were Training</label>

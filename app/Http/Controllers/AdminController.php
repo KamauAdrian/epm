@@ -290,9 +290,23 @@ class AdminController extends Controller
         }
     }
 
+    public function employee_leave_application($id,$application_id){
+        if (Auth::user()->id == $id){
+            $application = EmployeeLeaveApplication::find($application_id);
+            return view('Epm.Trainers.leave-application',compact('application'));
+        }
+    }
+
     public function trainer_leave_applications($id){
         if (Auth::user()->id == $id){
             $applications = EmployeeLeaveApplication::where('applicant_id',$id)->get();
+            return view('Epm.Trainers.leave-applications',compact('applications'));
+        }
+    }
+
+    public function adm_view_trainer_leave_applications($id){
+        if (Auth::user()->id == $id){
+            $applications = EmployeeLeaveApplication::orderBy('created_at','desc')->get();
             return view('Epm.Trainers.leave-applications',compact('applications'));
         }
     }
@@ -910,6 +924,7 @@ $admin_user = Auth::user();
 
     public function view_session($id,$session_id)
     {
+//        $data = new ExcelReader();
         $trainingSession = TrainingSession::find($session_id);
         return view('Epm.Sessions.view-session',compact('trainingSession'));
     }

@@ -1,7 +1,7 @@
 <?php
 $auth_admin = auth()->user();
 ?>
-<form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/session/save/trainees/'.$session->id)}}">
+<form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/session/'.$session->id.'/save/trainees/')}}">
     @csrf
     <div class="row">
         <div class="col-sm-12">

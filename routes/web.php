@@ -153,6 +153,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/asses/trainer/competence',[App\Http\Controllers\TrainerController::class, 'asses_trainer']);
     Route::post('/adm/{id}/save/trainer/competence/assessment',[App\Http\Controllers\TrainerController::class, 'save_trainer_assessment']);
     Route::get('/adm/{id}/view/competence/reports',[App\Http\Controllers\TrainerController::class, 'trainer_competence_reports']);
+    Route::get('/adm/{id}/view/trainer/competence/reports',[App\Http\Controllers\TrainerController::class, 'adm_view_trainer_competence_reports']);
     Route::get('/adm/{id}/view/competence/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'trainer_competence_report']);
     //sessions
     Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\AdminController::class, 'sessions_list']);
@@ -176,7 +177,8 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/apply/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
     Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\AdminController::class,'employee_leave_applications']);
     Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\AdminController::class,'trainer_leave_applications']);
-    Route::get('/adm/{id}/view/leave/application/application_id={application_id}',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
+    Route::get('/adm/{id}/view/trainer/leave/applications',[App\Http\Controllers\AdminController::class,'adm_view_trainer_leave_applications']);
+    Route::get('/adm/{id}/view/leave/application/application_id={application_id}',[App\Http\Controllers\AdminController::class,'employee_leave_application']);
     Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_request']);
 
 });

@@ -39,7 +39,11 @@ class TrainerController extends Controller
     public function trainer_competence_reports($id){
         $reports = TrainerSkillCompetence::where('trainer_id',$id)->get();
         return view('Epm.Trainers.competencies-reports',compact('reports'));
+    }
 
+    public function adm_view_trainer_competence_reports($id){
+        $reports = TrainerSkillCompetence::orderBy('created_at','desc')->get();
+        return view('Epm.Trainers.competencies-reports',compact('reports'));
     }
 
     public function trainer_competence_report($id,$report_id){

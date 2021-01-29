@@ -127,6 +127,52 @@
                 </div>
             </div>
 
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Competence Reports</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" >
+                            <div class="col-md-6">
+                                {{--                                    <a href="#!">--}}
+                                <a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/competence/reports')}}">
+                                    <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">View <br> Reports</p></button>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#!">
+                                    <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">Download <br> Reports</p></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Leave Application Reports</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" >
+                            <div class="col-md-6">
+                                {{--                                    <a href="#!">--}}
+                                <a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/leave/applications')}}">
+                                    <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">View <br> Reports</p></button>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#!">
+                                    <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">Download <br> Reports</p></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
