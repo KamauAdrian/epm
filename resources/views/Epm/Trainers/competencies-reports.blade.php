@@ -15,6 +15,11 @@
             <div class="col-sm-6 d-flex align-items-center mb-4">
                 <h1 class="d-inline-block mb-0 font-weight-normal">Competencies Reports</h1>
             </div>
+            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
+                <a href="{{url('/adm/'.$auth_admin->id.'/asses/trainer/competence')}}">
+                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Assess Trainer</button>
+                </a>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
