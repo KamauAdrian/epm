@@ -56,17 +56,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($sessions)
+                @if($day_one_sessions)
                     <tr>
-                        <td rowspan="{{count($sessions_today)}}">{{$today}}</td>
-                        <td rowspan="{{count($sessions_today)}}">Health<br /> Break  5 <br /> minutes</td>
-                        <td>{{$sessions_today[0]->start_time}} - {{$sessions_today[0]->end_time}}</td>
-                        <td>{{$sessions_today[0]->name}}</td>
-                        <td>
-                            @foreach($sessions_today[0]->trainers as $trainer)
-                                {{$trainer->name}}<br />
-                            @endforeach
-                        </td>
+                        @if($sessions_today)
+                            <td rowspan="{{count($sessions_today)}}">{{$today}}</td>
+                            <td rowspan="{{count($sessions_today)}}">Health<br /> Break  5 <br /> minutes</td>
+                            <td>{{$sessions_today[0]->start_time}} - {{$sessions_today[0]->end_time}}</td>
+                            <td>{{$sessions_today[0]->name}}</td>
+                            <td>
+                                @foreach($sessions_today[0]->trainers as $trainer)
+                                    {{$trainer->name}}<br />
+                                @endforeach
+                            </td>
+                        @endif
                     </tr>
                     @foreach($new_sessions_today as $new_session_today)
                         <tr>
@@ -85,15 +87,17 @@
                 @endif
                 @if($day_two_sessions)
                     <tr>
-                        <td rowspan="{{count($sessions_tomorrow)}}">{{$tomorrow}}</td>
-                        <td rowspan="{{count($sessions_tomorrow)}}">Health<br /> Break  5 <br /> minutes</td>
-                        <td>{{$sessions_tomorrow[0]->start_time}} - {{$sessions_tomorrow[0]->end_time}}</td>
-                        <td>{{$sessions_tomorrow[0]->name}}</td>
-                        <td>
-                            @foreach($sessions_tomorrow[0]->trainers as $trainer)
-                                {{$trainer->name}}<br />
-                            @endforeach
-                        </td>
+                        @if($sessions_tomorrow)
+                            <td rowspan="{{count($sessions_tomorrow)}}">{{$tomorrow}}</td>
+                            <td rowspan="{{count($sessions_tomorrow)}}">Health<br /> Break  5 <br /> minutes</td>
+                            <td>{{$sessions_tomorrow[0]->start_time}} - {{$sessions_tomorrow[0]->end_time}}</td>
+                            <td>{{$sessions_tomorrow[0]->name}}</td>
+                            <td>
+                                @foreach($sessions_tomorrow[0]->trainers as $trainer)
+                                    {{$trainer->name}}<br />
+                                @endforeach
+                            </td>
+                        @endif
                     </tr>
                     @foreach($new_sessions_tomorrow as $new_session_tomorrow)
                         <tr>
