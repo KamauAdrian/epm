@@ -26,12 +26,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group" id="trainers">
                                             <label>Name of Trainer</label>
-                                            <multiselect name="trainer" v-model="selectedTrainer" :options="trainers"
+                                            <multiselect v-model="selectedTrainer" :options="trainers"
                                                          placeholder="Select Trainer" label="name" track-by="id"
-                                                         :searchable="true" :close-on-select="true">
+                                                         :searchable="true" :close-on-select="true" required>
                                             </multiselect>
                                             <input type="hidden" v-for="trainer in selectedTrainer" name="trainer_id" :value="selectedTrainer.id">
                                             <input type="hidden" v-for="trainer in selectedTrainer" name="trainer_name" :value="selectedTrainer.name">
+                                            <span class="text-danger">{{$errors->first('trainer_id')}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -76,87 +77,87 @@
                                             </tr>
                                             <tr>
                                                 <td><ul><li>greeted the audience warmly.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" value="{{old('delivery[0]')}}" required></td>
                                                 <td><ul><li>maintained good eye contact <br> with the audience.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used a voice loud and clear<br />enough to hear easily.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
                                                 <td><ul><li>was friendly and smiled.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>delivered a talk designed in a <br>logical way from beginning to <br>middle and end,</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
                                                 <td><ul><li>used body language to help <br>communicate ideas visually</li></ul></td>
-                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>clearly described what to expect <br> from the presentation.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
                                                 <td class="thead-light"><b>Audience Participation</b> — the trainer:</td>
-                                                <td><input type="text" style="border: none" name="" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="" class="form-control" disabled></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used effective examples and <br> illustrations.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
                                                 <td><ul><li>involved the audience.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>defined unfamiliar technical terms.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
                                                 <td><ul><li>handled questions and <br>comments with calm courtesy.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>summarized the main points <br> before finishing.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
                                                 <td><ul><li>broke up lectures/discussion at <br>appropriate points.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td class="thead-light"><b>Visual Aids</b> — the trainer:</td>
-                                                <td><input type="text" style="border: none" name="" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="" class="form-control" disabled></td>
                                                 <td><ul><li>provided clear instructions for all <br>activities.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used visual aids</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
                                                 <td><ul><li>clarified or rephrased questions <br>to elicit audience participation.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>made sure materials could be <br>read easily from where I was <br>sitting.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
                                                 <td class="thead-light"><b>Technical Competency</b> — the trainer:</td>
-                                                <td><input type="text" style="border: none" name="" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="" class="form-control" disabled></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>got the point across in a clear and <br>simple way.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
                                                 <td><ul><li>taught technically accurate <br>content.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>did not block the screen or <br> flipchart.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
                                                 <td><ul><li>answered technical questions <br>from the audience.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>talked to the audience rather than <br> to the screen or flipchart.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
                                                 <td><ul><li>gauged audience level of <br>technical knowledge and <br>adjusted the presentation <br>accordingly.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used key words rather than <br> sentences</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
                                                 <td><ul><li>accurately broke down <br>technical/complex concepts in a <br>way participants could <br>understand.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control"></td>
+                                                <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="text-center"><b>Please use the space below to specify:</b></td>

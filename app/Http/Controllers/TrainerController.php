@@ -53,6 +53,13 @@ class TrainerController extends Controller
     }
 
     public function save_trainer_assessment(Request $request, $id){
+//        dd($request->delivery[0]);
+        $messages = [
+            'trainer_id.required'=>'Please select Trainer'
+        ];
+        $this->validate($request,[
+            'trainer_id'=>'required',
+        ],$messages);
 //        dd($request->all());
         $assessment = new TrainerSkillCompetence();
         //trainer info
