@@ -96,14 +96,16 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>
+{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
+                <li><a href="#!">My Teams</a></li>
             </ul>
         </li>
     @elseif($auth_admin->role->name == 'Trainer')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>
+{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
+                <li><a href="#!">My Teams</a></li>
             </ul>
         </li>
     @endif
@@ -186,7 +188,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/physical/training/reports')}}">Daily Physical Training Report</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/reports')}}">Assigment submission</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/competence/reports')}}">Competency Reports</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/apply/employee/leave')}}">Employee Leave</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/leave/applications')}}">Leave Applications</a></li>
             </ul>
         </li>
     @endif

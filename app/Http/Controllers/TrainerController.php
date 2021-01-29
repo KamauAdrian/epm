@@ -31,14 +31,20 @@ class TrainerController extends Controller
         if ($role){
             $trainers = DB::table('users')->where('role_id',$role->id)->get();
         }
-        if ($admin->role->name == 'Su Admin'){
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
             return view('Epm.Trainers.asses-trainer',compact('trainers'));
         }
     }
 
     public function trainer_competence_reports($id){
+        $reports = TrainerSkillCompetence::where('trainer_id',$id)->get();
+        return view('Epm.Trainers.competencies-reports',compact('reports'));
 
-        return view('Epm.Trainers.competencies-reports');
+    }
+
+    public function trainer_competence_report($id,$report_id){
+        $report = TrainerSkillCompetence::find($report_id);
+        return view('Epm.Trainers.competence-report',compact('report'));
 
     }
 

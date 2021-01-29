@@ -283,6 +283,20 @@ class AdminController extends Controller
         }
     }
 
+    public function employee_leave_applications($id){
+        if (Auth::user()->id == $id){
+            $applications = EmployeeLeaveApplication::where('applicant_id',$id)->get();
+            return view('Epm.Forms.leave-applications');
+        }
+    }
+
+    public function trainer_leave_applications($id){
+        if (Auth::user()->id == $id){
+            $applications = EmployeeLeaveApplication::where('applicant_id',$id)->get();
+            return view('Epm.Trainers.leave-applications',compact('applications'));
+        }
+    }
+
     public function employee_leave_request(Request $request, $id){
         $messeges = [
             'leave_type.required'=>'Please select the leave type your are taking'
@@ -328,7 +342,7 @@ class AdminController extends Controller
 
         $leave_application->save();
 
-        return redirect('/adm/main/dashboard')->with('success','leave Application Success');
+        return redirect('/adm/'.$id.'/view/leave/applications')->with('success','leave Application Success');
 
     }
 //Reports

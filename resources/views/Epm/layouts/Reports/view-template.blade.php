@@ -5,6 +5,7 @@ $groups = $template->groups;
 foreach ($groups as $group){
     $reporting_groups[] = $group->name;
 }
+$reporting_groups_string = implode(', ',$reporting_groups);
 ?>
 <div class="col-sm-12">
     <div class="page-header">
@@ -22,11 +23,7 @@ foreach ($groups as $group){
     <div class="row">
         <div class="col-sm-6 d-flex align-items-center mb-4">
             <h1 class="d-inline-block mb-0 font-weight-normal">{{$template->name}}
-                [@foreach($reporting_groups as $reporting_group)
-                    {{$reporting_group}},
-                @endforeach]
-
-
+                ({{$reporting_groups_string}})
             </h1>
             {{--                <h6 class="d-inline-block mb-0 ml-4"><i class="feather icon-download"></i> Download list</h6>--}}
         </div>

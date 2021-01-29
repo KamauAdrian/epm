@@ -174,6 +174,9 @@ Route::group(['middleware'=>'admin'],function (){
 
     //employee leave form
     Route::get('/adm/{id}/apply/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
+    Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\AdminController::class,'employee_leave_applications']);
+    Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\AdminController::class,'trainer_leave_applications']);
+    Route::get('/adm/{id}/view/leave/application/application_id={application_id}',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
     Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_request']);
 
 });

@@ -37,7 +37,7 @@
                                 @endif
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Date</label>
+                                        <label for="">Evaluation Date</label>
                                         <input type="date" name="date" class="form-control">
                                     </div>
                                 </div>

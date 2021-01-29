@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/plugins/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 @section('content')
@@ -41,7 +42,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-center mb-0 ">
+                            <table id="reportsTableList" class="table table-center mb-0 ">
                                 <thead>
                                 <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
@@ -84,34 +85,24 @@
                     </div>
                 </div>
             </div>
-
-        {{--        @if($reports)--}}
-        {{--            <div class="row">--}}
-        {{--                @foreach($reports as $report)--}}
-        {{--                    <div class="col-md-6">--}}
-        {{--                        <div class="card">--}}
-        {{--                            <div class="card-header">--}}
-        {{--                                <h6>temp one</h6>--}}
-        {{--                            </div>--}}
-        {{--                            <div class="card-body">--}}
-        {{--                                <div class="row" >--}}
-        {{--                                    <div class="col-md-6">--}}
-        {{--                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/report/template/')}}">--}}
-        {{--                                            <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">View <br> Template</p></button>--}}
-        {{--                                        </a>--}}
-        {{--                                    </div>--}}
-        {{--                                    <div class="col-md-6">--}}
-        {{--                                        <a href="#!">--}}
-        {{--                                            <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px;width: 150px;"><p class="align-self-center">Download <br>Template</p></button>--}}
-        {{--                                        </a>--}}
-        {{--                                    </div>--}}
-        {{--                                </div>--}}
-        {{--                            </div>--}}
-        {{--                        </div>--}}
-        {{--                    </div>--}}
-        {{--                @endforeach--}}
-        {{--            </div>--}}
-        {{--        @endif--}}
     </div>
     </div>
+@endsection
+@section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('#reportsTableList').DataTable();
+        } );
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".deleteAdmin").click(function () {
+                var url = $(this).attr('data-url');
+                console.log('this is the url'+ url);
+                $("#deleteAdminForm").attr("action", url);
+            })
+        });
+    </script>
 @endsection

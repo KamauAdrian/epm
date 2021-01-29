@@ -63,21 +63,20 @@
                                     </div>
                                 </div>
                                 <?php
-                                $role_tasks = [];
-                                foreach($report->roles as $role){
-                                    $role_tasks[] = $role->name;
+                                $roles = \Illuminate\Support\Facades\DB::table('trainer_training_task_roles')->where('daily_attendance_report_id',$report->id)->get();
+                                $all = array();
+                                foreach ($roles as $role){
+                                    $all[] = $role->name;
                                 }
+                                $array_string = implode(", ",$all);
                                 ?>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Your Role/Task of The Day</label>
                                             <input type="text" class="form-control"
-                                                   <?php foreach ($role_tasks as $key=>$role_task){ ?>
-                                            value="{{$role_tasks[$key]}}" <?php } ?>
-                                            disabled>
+                                            value="{{$array_string}}" disabled>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>The Time You were Training</label>

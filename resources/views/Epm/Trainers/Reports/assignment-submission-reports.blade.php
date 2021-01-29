@@ -41,7 +41,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-center mb-0 ">
+                            <table id="reportsTableList" class="table table-center mb-0 ">
                                 <thead>
                                 <tr> <th>Report</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
@@ -86,5 +86,22 @@
             </div>
         </div>
     </div>
-{{--    @include('Epm.layouts.Reports.templates')--}}
+@endsection
+@section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('#reportsTableList').DataTable();
+        } );
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".deleteAdmin").click(function () {
+                var url = $(this).attr('data-url');
+                console.log('this is the url'+ url);
+                $("#deleteAdminForm").attr("action", url);
+            })
+        });
+    </script>
 @endsection

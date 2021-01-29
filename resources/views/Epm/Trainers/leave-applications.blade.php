@@ -13,7 +13,12 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-6 d-flex align-items-center mb-4">
-                <h1 class="d-inline-block mb-0 font-weight-normal">Competencies Reports</h1>
+                <h1 class="d-inline-block mb-0 font-weight-normal">Leave Applications</h1>
+            </div>
+            <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
+                <a href="{{url('/adm/'.$auth_admin->id.'/apply/employee/leave')}}">
+                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Apply Leave</button>
+                </a>
             </div>
         </div>
         <div class="row">
@@ -38,38 +43,33 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="competenceTableList" class="table table-center mb-0 ">
+                            <table id="leavesTableList" class="table table-center mb-0 ">
                                 <thead>
                                 <tr>
-                                    <th>Reports</th>
+                                    <th>Applications</th>
                                     <th>Date</th>
-                                    <th>Evaluator</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
                                 </thead>
-                                @if($reports!='')
+                                @if($applications!='')
                                     <tbody>
-                                    @foreach($reports as $report)
+                                    @foreach($applications as $application)
                                         <tr>
                                             <td>
                                                 <div class="media">
                                                     <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$report->trainer_name}}</h5>
+                                                        <h5 class="mb-1">{{$application->applicant_name}}</h5>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <?php $format_date = date('l dS M Y',strtotime($report->evaluation_date)); ?>
+                                                <?php $format_date = date('l dS M Y',strtotime($application->application_date)); ?>
                                                 {{$format_date}}
-                                            </td>
-
-                                            <td>
-                                                {{$report->evaluator_name}}
                                             </td>
                                             @if($auth_admin->role->name != 'Su Admin')
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/competence/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View">
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/competence/report/report_id='.$application->id)}}" class="btn btn-sm btn-outline-info" title="View">
                                                             {{--                                                        <a href="{{url('/adm/view/adm/'.$auth_admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-info" title="View">--}}
                                                             <span><i class="fa fa-list"></i></span>
                                                         </a>
@@ -109,7 +109,7 @@
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready( function () {
-            $('#competenceTableList').DataTable();
+            $('#leavesTableList').DataTable();
         } );
     </script>
     <script type="text/javascript">
