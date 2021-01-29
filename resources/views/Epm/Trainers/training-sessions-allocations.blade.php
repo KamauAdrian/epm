@@ -56,7 +56,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($day_one_sessions)
+                @if($sessions)
                     <tr>
                         <td rowspan="{{count($sessions_today)}}">{{$today}}</td>
                         <td rowspan="{{count($sessions_today)}}">Health<br /> Break  5 <br /> minutes</td>

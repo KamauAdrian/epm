@@ -584,8 +584,9 @@ class AdminController extends Controller
         }
     }
     public function session_allocations($id){
-        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get();
-        return view('Epm.Trainers.training-sessions-allocations');
+        $today = date('Y-m-d');
+        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->where('date',$today)->get();
+        return view('Epm.Trainers.training-sessions-allocations',compact('sessions'));
     }
     public function reports_by_trainers_attendance($id){
         $admin = User::find($id);
