@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TraineesTemplateExport;
 use App\Http\Middleware\CenterManager;
 use App\Imports\TraineesImport;
 use App\Mail\CreatePassword;
@@ -1036,6 +1037,12 @@ $admin_user = Auth::user();
         $session = TrainingSession::find($session_id);
         return view('Epm.Trainees.upload-trainees',compact('session'));
     }
+
+    public function download_trainees_excel_template()
+    {
+        return Excel::download(new TraineesTemplateExport(), 'trainees.xlsx');
+    }
+
     public function upload_trainees(Request $request,$id,$session_id){
         $messages = [
             'trainees.required'=>'Please Select trainees Excel File to Upload',

@@ -25,10 +25,7 @@
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/view-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/view-session.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/session-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/session-view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +271,7 @@
       <workItem from="1611894732710" duration="28964000" />
       <workItem from="1612157051066" duration="37000" />
       <workItem from="1612157147404" duration="6627000" />
-      <workItem from="1612167926840" duration="15938000" />
+      <workItem from="1612167926840" duration="17032000" />
     </task>
     <servers />
   </component>

@@ -27,6 +27,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <a href="{{url('/download/trainees/excel/template')}}" class="text-success">
+                                        Download excel Template
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <input type="submit" value="Upload" class="float-right btn btn-outline-info">
                                     </div>

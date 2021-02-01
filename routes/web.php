@@ -166,6 +166,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/session/{session_id}/save/trainers',[App\Http\Controllers\AdminController::class, 'session_save_trainers']);
     Route::get('/adm/{id}/session/{session_id}/add/trainees',[App\Http\Controllers\AdminController::class, 'session_add_trainees']);
     Route::get('/adm/{id}/session/{session_id}/upload/trainees',[App\Http\Controllers\AdminController::class, 'session_upload_trainees']);
+    Route::get('/download/trainees/excel/template',[App\Http\Controllers\AdminController::class, 'download_trainees_excel_template']);
     Route::post('/adm/{id}/session/{session_id}/save/trainees',[App\Http\Controllers\AdminController::class, 'session_save_trainees']);
     Route::post('/adm/{id}/session/{session_id}/save/uploaded/trainees',[App\Http\Controllers\AdminController::class, 'upload_trainees']);
     //teams
