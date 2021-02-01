@@ -1026,7 +1026,7 @@ $admin_user = Auth::user();
     }
 
     public function session_upload_trainees($id,$session_id){
-        $session = TrainingSession::find($id);
+        $session = TrainingSession::find($session_id);
         return view('Epm.Trainees.upload-trainees',compact('session'));
     }
     public function upload_trainees(Request $request,$id,$session_id){
