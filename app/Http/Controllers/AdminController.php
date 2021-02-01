@@ -1037,6 +1037,12 @@ $admin_user = Auth::user();
         return view('Epm.Trainees.upload-trainees',compact('session'));
     }
     public function upload_trainees(Request $request,$id,$session_id){
+        $messages = [
+            'trainees.required'=>'Please Select trainees Excel File to Upload',
+        ];
+        $this->validate($request,[
+            'trainees'=>'required',
+        ],$messages);
         $trainees_excel = Excel::toArray(new TraineesImport(), $request->file('trainees'));
         $trainees_raw = [];
         foreach ($trainees_excel as $trainee_excel){

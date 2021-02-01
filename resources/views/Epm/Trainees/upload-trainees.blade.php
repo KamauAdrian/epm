@@ -23,6 +23,7 @@
                                     <div class="form-group">
                                         <label for="">Select Trainees Exel File</label>
                                         <input type="file" class="form-control" name="trainees">
+                                        <span class="text-danger">{{$errors->first('trainees')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
