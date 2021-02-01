@@ -50,7 +50,7 @@ Route::group(['middleware'=>'super_admin'],function (){
     Route::get('/trainers/new/team/members/{id}',[App\Http\Controllers\SuperAdminController::class, 'trainers_team_new']);//json array of trainers
     //mentors
     //sessions and classes
-    Route::get('/confirm/session/{id}',[App\Http\Controllers\SuperAdminController::class, 'confirm_session']);
+    Route::get('/adm/{id}/confirm/session/session_id={session_id}',[App\Http\Controllers\SuperAdminController::class, 'confirm_session']);
     Route::get('/adm/{id}/list/classes',[App\Http\Controllers\SuperAdminController::class, 'view_classes']);
     Route::get('/adm/{id}/view/class/class_id={class_id}',[App\Http\Controllers\SuperAdminController::class, 'view_class']);
     Route::get('/adm/{id}/create/class',[App\Http\Controllers\SuperAdminController::class, 'create_class']);
@@ -164,7 +164,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/session/{session_id}/add/trainers',[App\Http\Controllers\AdminController::class, 'session_add_trainers']);
     Route::post('/adm/{id}/session/{session_id}/save/trainers',[App\Http\Controllers\AdminController::class, 'session_save_trainers']);
     Route::get('/adm/{id}/session/{session_id}/add/trainees',[App\Http\Controllers\AdminController::class, 'session_add_trainees']);
+    Route::get('/adm/{id}/session/{session_id}/upload/trainees',[App\Http\Controllers\AdminController::class, 'session_upload_trainees']);
     Route::post('/adm/{id}/session/{session_id}/save/trainees',[App\Http\Controllers\AdminController::class, 'session_save_trainees']);
+    Route::post('/adm/{id}/session/{session_id}/save/uploaded/trainees',[App\Http\Controllers\AdminController::class, 'upload_trainees']);
     //teams
     Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\AdminController::class, 'team_cms_list']);
     Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\AdminController::class, 'team_trainers_list']);

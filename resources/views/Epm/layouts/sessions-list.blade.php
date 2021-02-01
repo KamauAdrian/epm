@@ -71,7 +71,7 @@ $auth_admin = auth()->user();
                                     </button>
                                     <ul class = "dropdown-menu" role = "menu">
                                         <li><a href = "{{url('/view-session',$session->id)}}">View Session</a></li>
-                                        <li><a href = "{{url('/confirm/session',$session->id)}}">Approve Session</a></li>
+                                        <li><a href = "{{url('/adm/'.$auth_admin->id.'/confirm/session/session_id='.$session->id)}}">Approve Session</a></li>
                                         <li><a href = "#!">Delete Session</a></li>
                                     </ul>
                                 </div>

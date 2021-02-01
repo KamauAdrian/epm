@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CenterManager;
+use App\Imports\TraineesImport;
 use App\Mail\CreatePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\WelcomeMail;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use PhpParser\Node\Expr\New_;
 use function PHPUnit\Framework\never;
 
@@ -599,7 +601,10 @@ class AdminController extends Controller
     }
     public function session_allocations($id){
         $today = date('Y-m-d');
-        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->where('date',$today)->get();
+//        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get()->groupBy('date');
+        $sessions = TrainingSession::orderBy('created_at','desc')->get()->groupBy('date');
+//        dd($sessions);
+//        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->where('date',$today)->get();
         return view('Epm.Trainers.training-sessions-allocations',compact('sessions'));
     }
     public function reports_by_trainers_attendance($id){
@@ -998,11 +1003,11 @@ $admin_user = Auth::user();
         return response()->json($new_trainers_ids);
     }
 
-    public function session_add_trainers($id,$session_id){
+    public function session_add_trainers($id){
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            $session = DB::table('training_sessions')->where('id',$session_id)->first();
-            return view('Epm.SuAdmins.Sessions.add-trainers',compact('session'));
+            $session = DB::table('training_sessions')->where('id',$id)->first();
+            return view('Epm.Sessions.add-trainers',compact('session'));
         }
     }
 
@@ -1015,11 +1020,46 @@ $admin_user = Auth::user();
         }
     }
 
-    public function session_add_trainees($id){
-        $session = TrainingSession::find($id);
+    public function session_add_trainees($id,$session_id){
+        $session = TrainingSession::find($session_id);
        return view('Epm.Trainees.add-trainees',compact('session'));
     }
 
+    public function session_upload_trainees($id,$session_id){
+        $session = TrainingSession::find($id);
+        return view('Epm.Trainees.upload-trainees',compact('session'));
+    }
+    public function upload_trainees(Request $request,$id,$session_id){
+        $trainees_excel = Excel::toArray(new TraineesImport(), $request->file('trainees'));
+        $trainees_raw = [];
+        foreach ($trainees_excel as $trainee_excel){
+            $trainees_raw[] = $trainee_excel;
+        }
+        $trainees = array_slice($trainees_raw[0],1);
+        $saved = '';
+        foreach ($trainees as $trainee){
+            $session_trainee = new Trainee();
+            $session_trainee->name =$trainee[0];
+            $session_trainee->gender=$trainee[1];
+            $session_trainee->county = $trainee[2];
+            $session_trainee->location = $trainee[3];
+            $session_trainee->category = $trainee[4];
+            $session_trainee->level_of_computer_literacy = $trainee[5];
+            $session_trainee->level_of_education = $trainee[6];
+            $session_trainee->field_of_study = $trainee[7];
+            $session_trainee->email = $trainee[8];
+            $session_trainee->phone_number = $trainee[9];
+            $session_trainee->id_number = $trainee[10];
+            $session_trainee->age = $trainee[11];
+            $session_trainee->interests = $trainee[12];
+            $session_trainee->session_id = $session_id;
+            $saved_trainee = $session_trainee->save();
+            if ($saved_trainee){
+                $session = TrainingSession::find($session_id)->trainees()->attach($session_trainee->id);
+            }
+        }
+       return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Trainees Successfully uploaded');
+    }
     public function session_save_trainees(Request $request,$id,$session_id){
         $this->validate($request,[
             'name'=>'required',

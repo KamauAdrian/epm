@@ -474,14 +474,19 @@ class SuperAdminController extends Controller
 
     }
 
-    public function confirm_session($id)
+    public function confirm_session($id,$session_id)
     {
-        $admin_user = Auth::user();
-        $status = [
-            'status'=>'Approved'
-        ];
-        $trainingSessionConfirm = DB::table('training_sessions')->where('id',$id)->update($status);
-        return redirect()->back()->with('success','Successfully approved session');
+
+        $admin_user = User::find($id);
+        if ($admin_user->role->name == 'Su Admin' || $admin_user->role->name == 'Project Manager'){
+            $status = [
+                'status'=>'Approved'
+            ];
+            $trainingSessionConfirm = DB::table('training_sessions')->where('id',$session_id)->update($status);
+            return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Successfully approved session');
+        }
+
+
     }
 
 //    public function new_session_trainers($id){

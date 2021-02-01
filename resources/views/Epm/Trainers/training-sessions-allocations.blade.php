@@ -29,6 +29,10 @@
             @endif
         </center>
                     <?php
+                    foreach ($sessions as $key=>$session){
+                        $sessions_per_day[] = $sessions[$key];
+                    }
+//                    dd($sessions_per_day);
                     $today = date('Y-m-d');
                     $tomorrow = date('Y-m-d',strtotime("+1 day",strtotime($today)));
                     $day_one_sessions = \App\Models\TrainingSession::where('date',$today)->get();
@@ -56,6 +60,64 @@
                     </tr>
                 </thead>
                 <tbody>
+{{--                @if($sessions)--}}
+{{--                    <?php--}}
+{{--                    $sessions_per_day = null;--}}
+{{--                    foreach ($sessions as $session){--}}
+{{--                        $sessions_per_day[] = $session;--}}
+{{--                    }--}}
+{{--//                    dd($sessions,$sessions_per_day);--}}
+{{--//                    for ($i=0;$i<count($sessions);$i++){--}}
+{{--//                        foreach ($sessions[$i] as $key=>$session){--}}
+{{--//                            $sessions_per_day[] = $sessions[$key];--}}
+{{--//                        }--}}
+{{--//                    }--}}
+{{--                    ?>--}}
+{{--                    @for($i=0;$i<count($sessions);$i++)--}}
+{{--                        <?php $sessions_sessions = []; ?>--}}
+{{--                        @foreach($sessions_per_day[$i] as $session_per_day)--}}
+{{--                            <?php--}}
+{{--                            $sessions_sessions[] = $session_per_day;--}}
+{{--//                            $new_sessions_per_day = array_slice($session_per_day,1);--}}
+{{--                            ?>--}}
+{{--                            <tr>--}}
+{{--                                @if($sessions_per_day)--}}
+{{--                                    <td rowspan="{{count($sessions_per_day)}}">date</td>--}}
+{{--                                    <td rowspan="{{count($sessions_per_day)}}">Health<br /> Break  5 <br /> minutes</td>--}}
+{{--                                    <td>{{$sessions_per_day[0]->start_time}} - {{$sessions_per_day[0]->end_time}}</td>--}}
+{{--                                    <td>{{$sessions_per_day[0]->name}}</td>--}}
+{{--                                    <td>--}}
+{{--                                        @foreach($sessions_per_day[0]->trainers as $trainer)--}}
+{{--                                            {{$trainer->name}}<br />--}}
+{{--                                        @endforeach--}}
+{{--                                    </td>--}}
+{{--                                @endif--}}
+{{--                            </tr>--}}
+{{--                                @foreach($session as $new_session_per_day)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>{{$new_session_per_day->start_time}} - {{$new_session_per_day->end_time}}</td>--}}
+{{--                                        <td>{{$new_session_per_day->name}}</td>--}}
+{{--                                        <?php--}}
+{{--                                        $trainers = $new_session_per_day->trainers;--}}
+{{--                                        ?>--}}
+{{--                                        <td>--}}
+{{--                                            @foreach($trainers as $trainer)--}}
+{{--                                                {{$trainer->name}}<br />--}}
+{{--                                            @endforeach--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                        @endforeach--}}
+{{--                        <?php--}}
+{{--                        dd($sessions_sessions);--}}
+{{--                            ?>--}}
+{{--                    @endfor--}}
+{{--                @endif--}}
+
+
+
+
+
                 @if($day_one_sessions)
                     <tr>
                         @if($sessions_today)

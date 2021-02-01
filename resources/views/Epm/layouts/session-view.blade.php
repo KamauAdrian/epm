@@ -38,10 +38,30 @@ $auth_admin = auth()->user();
 
     <div class="col-md-2">
         <h6><span class="text-small" style="font-size: 14px">Status</span></h6>
-        <p style="font-size: 12px"><span class="badge badge-pill badge-light-dark">{{$trainingSession->status}}</span></p>
+        @if($trainingSession->status == 'Approved')
+            <p style="font-size: 12px"><span class="badge badge-pill badge-light-dark">{{$trainingSession->status}}</span></p>
+        @elseif($trainingSession->status != 'Approved')
+            <div class="btn-group">
+                <button type = "button" class = "btn btn-outline-info dropdown-toggle mb-2" data-toggle="dropdown">
+                    <span class="badge badge-pill badge-light-dark">{{$trainingSession->status}}</span>
+                    <span class = "caret"></span>
+                </button>
+                @if($auth_admin->role->name == 'Su Admin')
+                <ul class = "dropdown-menu" role = "menu">
+                    <li><a href = "{{url('/adm/'.$auth_admin->id.'/confirm/session/session_id='.$trainingSession->id)}}">Approve Session</a></li>
+{{--                    <li><a href = "#!">Delete Session</a></li>--}}
+                </ul>
+                @endif
+            </div>
+        @endif
         @if($trainingSession->type)
             <h6><span class="text-small" style="font-size: 14px">Session Type</span></h6>
             <p style="font-size: 12px">{{$trainingSession->type}}</p>
+            @if($trainingSession->type == 'Public')
+                <button type = "button" class = "btn btn-outline-info mb-2">
+                    Click to Copy Session Invite Link
+                </button>
+            @endif
         @endif
     </div>
 
@@ -79,7 +99,7 @@ $auth_admin = auth()->user();
             <div class="media">
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="#!" title="Upload Trainees Excel file">
+                        <a href="{{url('/adm/'.$auth_admin->id.'/session/'.$trainingSession->id.'/upload/trainees')}}" title="Upload Trainees Excel file">
                             <button type="button" class="btn btn-lg btn-outline-info" style="font-size: 14px; width: 150px;">
                                 <span><i class="fa fa-upload"></i></span><br> <p class="align-self-center">Upload <br> Trainees</p>
                             </button>
