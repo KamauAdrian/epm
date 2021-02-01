@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 @endsection
 @section('js')
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>

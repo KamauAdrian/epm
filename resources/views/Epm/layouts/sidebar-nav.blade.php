@@ -86,6 +86,14 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     @endif
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Trainees</span></a>
+            <ul class="pcoded-submenu">
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/list/all/trainees')}}">View Trainees</a></li>
+            </ul>
+        </li>
+    @endif
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/cms')}}">Team CMs</a></li>

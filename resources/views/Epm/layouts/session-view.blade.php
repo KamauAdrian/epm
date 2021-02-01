@@ -207,7 +207,7 @@ $auth_admin = auth()->user();
         <div class="card-body">
             <h6 class="text-small">Trainees on the Session</h6>
             <div class="table-responsive">
-                <table class="table table-center mb-0 ">
+                <table id="traineesList" class="table table-center mb-0 ">
                     <thead>
                     <tr>
                         <th>Name</th>

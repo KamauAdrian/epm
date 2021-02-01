@@ -60,6 +60,13 @@ class AdminController extends Controller
         return view('Epm.list-admins',compact('admins','role'));
     }
 
+    public function trainees_list($id)
+    {
+        $auth_admin = Auth::user();
+        $trainees = Trainee::orderBy('id','desc')->get();
+        return view('Epm.Trainees.trainees',compact('trainees'));
+    }
+
     public function add_admin($id,$role){
         if ($role == 'Project Manager'){
             return view('Epm.PMs.add-pm');

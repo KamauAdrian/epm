@@ -94,6 +94,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/add/admin/role_name={role}',[App\Http\Controllers\AdminController::class, 'add_admin']);
     Route::get('/list/all/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'list']);
     Route::get('/list/all/admins/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adms_list']);
+    Route::get('/adm/{id}/list/all/trainees',[App\Http\Controllers\AdminController::class, 'trainees_list']);
     //logged in admin profile
     Route::get('/adm/{id}/profile/public/role_id={role_id}/view',[App\Http\Controllers\AdminController::class, 'view_logged_in_adm_profile']);
     //admin profile
