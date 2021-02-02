@@ -36,12 +36,14 @@
                     $today = date('Y-m-d');
                     $tomorrow = date('Y-m-d',strtotime("+1 day",strtotime($today)));
                     $day_one_sessions = \App\Models\TrainingSession::where('date',$today)->get();
+//                    dd($day_one_sessions);
                     $day_two_sessions = \App\Models\TrainingSession::where('date',$tomorrow)->get();
                     $sessions_today = [];
                     $sessions_tomorrow = [];
                     foreach ($day_one_sessions as $day_one_session){
                         $sessions_today[]=$day_one_session;
                     }
+//                    dd($day_one_sessions,$sessions_today);
                     //                dd($sessions_today[1]->trainers);
                     foreach ($day_two_sessions as $day_two_session){
                         $sessions_tomorrow[]=$day_two_session;
@@ -60,122 +62,50 @@
                     </tr>
                 </thead>
                 <tbody>
-{{--                @if($sessions)--}}
-{{--                    <?php--}}
-{{--                    $sessions_per_day = null;--}}
-{{--                    foreach ($sessions as $session){--}}
-{{--                        $sessions_per_day[] = $session;--}}
-{{--                    }--}}
-{{--//                    dd($sessions,$sessions_per_day);--}}
-{{--//                    for ($i=0;$i<count($sessions);$i++){--}}
-{{--//                        foreach ($sessions[$i] as $key=>$session){--}}
-{{--//                            $sessions_per_day[] = $sessions[$key];--}}
-{{--//                        }--}}
-{{--//                    }--}}
-{{--                    ?>--}}
-{{--                    @for($i=0;$i<count($sessions);$i++)--}}
-{{--                        <?php $sessions_sessions = []; ?>--}}
-{{--                        @foreach($sessions_per_day[$i] as $session_per_day)--}}
-{{--                            <?php--}}
-{{--                            $sessions_sessions[] = $session_per_day;--}}
-{{--//                            $new_sessions_per_day = array_slice($session_per_day,1);--}}
-{{--                            ?>--}}
-{{--                            <tr>--}}
-{{--                                @if($sessions_per_day)--}}
-{{--                                    <td rowspan="{{count($sessions_per_day)}}">date</td>--}}
-{{--                                    <td rowspan="{{count($sessions_per_day)}}">Health<br /> Break  5 <br /> minutes</td>--}}
-{{--                                    <td>{{$sessions_per_day[0]->start_time}} - {{$sessions_per_day[0]->end_time}}</td>--}}
-{{--                                    <td>{{$sessions_per_day[0]->name}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        @foreach($sessions_per_day[0]->trainers as $trainer)--}}
-{{--                                            {{$trainer->name}}<br />--}}
-{{--                                        @endforeach--}}
-{{--                                    </td>--}}
-{{--                                @endif--}}
-{{--                            </tr>--}}
-{{--                                @foreach($session as $new_session_per_day)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{$new_session_per_day->start_time}} - {{$new_session_per_day->end_time}}</td>--}}
-{{--                                        <td>{{$new_session_per_day->name}}</td>--}}
-{{--                                        <?php--}}
-{{--                                        $trainers = $new_session_per_day->trainers;--}}
-{{--                                        ?>--}}
-{{--                                        <td>--}}
-{{--                                            @foreach($trainers as $trainer)--}}
-{{--                                                {{$trainer->name}}<br />--}}
-{{--                                            @endforeach--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-{{--                        @endforeach--}}
-{{--                        <?php--}}
-{{--                        dd($sessions_sessions);--}}
-{{--                            ?>--}}
-{{--                    @endfor--}}
-{{--                @endif--}}
-
-
-
-
-
-                @if($day_one_sessions)
-                    <tr>
-                        @if($sessions_today)
-                            <td rowspan="{{count($sessions_today)}}">{{$today}}</td>
-                            <td rowspan="{{count($sessions_today)}}">Health<br /> Break  5 <br /> minutes</td>
-                            <td>{{$sessions_today[0]->start_time}} - {{$sessions_today[0]->end_time}}</td>
-                            <td>{{$sessions_today[0]->name}}</td>
-                            <td>
-                                @foreach($sessions_today[0]->trainers as $trainer)
-                                    {{$trainer->name}}<br />
-                                @endforeach
-                            </td>
+                @if($sessions)
+                    @for($i=0;$i<count($sessions);$i++)
+                        <?php
+                        $sessions_all = [];
+                        foreach ($sessions as $session){
+                            $sessions_all[] = $session;
+                        }
+                        $Sessions_per_day_raw = $sessions_all[$i];
+                        $sessions_per_day_array = [];
+                        foreach ($sessions_all[$i] as $session_per_day){
+                            $sessions_per_day_array[] = $session_per_day;
+                        }
+                        $sessions_per_day_new = array_slice($sessions_per_day_array,1);
+//                        dd($sessions_all[0],array_slice($sessions_per_day_array,1));
+                        ?>
+                        @if($sessions_per_day_array)
+                            <tr>
+                                <td rowspan="{{count($sessions_per_day_array)}}">
+                                    <?php $format_date = date('l dS M Y', strtotime($sessions_per_day_array[0]->date)); ?>
+                                    {{$format_date}}
+                                </td>
+                                <td rowspan="{{count($sessions_per_day_array)}}">Health<br /> Break  5 <br /> minutes</td>
+                                <td>{{$sessions_per_day_array[0]->start_time}} - {{$sessions_per_day_array[0]->end_time}}</td>
+                                <td>{{$sessions_per_day_array[0]->name}}</td>
+                                <td>Adrian</td>
+                            </tr>
+                            @foreach($sessions_per_day_new as $item)
+                                <tr>
+                                    <td>{{$item->start_time}} - {{$item->end_time}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>
+                                        <?php
+                                        $trainers = $item->trainers;
+                                        ?>
+                                        @foreach($trainers as $trainer)
+                                            {{$trainer->name}}<br />
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endif
-                    </tr>
-                    @foreach($new_sessions_today as $new_session_today)
-                        <tr>
-                            <td>{{$new_session_today->start_time}} - {{$new_session_today->end_time}}</td>
-                            <td>{{$new_session_today->name}}</td>
-                            <?php
-                            $trainers = $new_session_today->trainers;
-                            ?>
-                            <td>
-                                @foreach($trainers as $trainer)
-                                    {{$trainer->name}}<br />
-                                @endforeach
-                            </td>
-                        </tr>
-                    @endforeach
+                    @endfor
                 @endif
-                @if($day_two_sessions)
-                    <tr>
-                        @if($sessions_tomorrow)
-                            <td rowspan="{{count($sessions_tomorrow)}}">{{$tomorrow}}</td>
-                            <td rowspan="{{count($sessions_tomorrow)}}">Health<br /> Break  5 <br /> minutes</td>
-                            <td>{{$sessions_tomorrow[0]->start_time}} - {{$sessions_tomorrow[0]->end_time}}</td>
-                            <td>{{$sessions_tomorrow[0]->name}}</td>
-                            <td>
-                                @foreach($sessions_tomorrow[0]->trainers as $trainer)
-                                    {{$trainer->name}}<br />
-                                @endforeach
-                            </td>
-                        @endif
-                    </tr>
-                    @foreach($new_sessions_tomorrow as $new_session_tomorrow)
-                        <tr>
-                            <td>{{$new_session_tomorrow->start_time}} - {{$new_session_tomorrow->end_time}}</td>
-                            <td>{{$new_session_tomorrow->name}}</td>
-                            <?php
-                            $trainers = $new_session_tomorrow->trainers;
-                            ?>
-                            <td>
-                                @foreach($trainers as $trainer)
-                                    {{$trainer->name}}<br />
-                                @endforeach
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
+
                 </tbody>
             </table>
         </div>

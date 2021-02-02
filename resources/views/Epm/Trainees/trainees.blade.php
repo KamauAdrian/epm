@@ -3,6 +3,8 @@
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/plugins/dataTables.bootstrap4.min.css')}}">
+{{--    <link rel="stylesheet" href="{{url('assets/css/plugins/jquery.dataTables.min.css')}}">--}}
+{{--    <link rel="stylesheet" href="{{url('assets/css/plugins/buttons.dataTables.min.css')}}">--}}
 @endsection
 
 @section('content')
@@ -85,9 +87,15 @@
 @endsection
 
 @section('js')
+    <script>
+        $(document).ready(function (){
+            $('#traineesList').DataTable();
+        });
+    </script>
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
-    <script>
-        $('#traineesList').DataTable();
-    </script>
+{{--    <script src="{{url('assets/js/plugins/dataTables.buttons.min.js')}}"></script>--}}
+{{--    <script src="{{url('assets/js/plugins/buttons.html5.min.js')}}"></script>--}}
+{{--    <script src="{{url('assets/js/plugins/buttons.print.min.js')}}"></script>--}}
+
 @endsection
