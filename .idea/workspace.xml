@@ -24,14 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/TraineesTemplateExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TraineesTemplateExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/TraineesImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/TraineesImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_24_101055_create_training_sessions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_24_101055_create_training_sessions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/training-sessions-allocations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/training-sessions-allocations.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/trainees-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/trainees-add.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +269,7 @@
       <workItem from="1612157051066" duration="37000" />
       <workItem from="1612157147404" duration="6627000" />
       <workItem from="1612167926840" duration="17174000" />
-      <workItem from="1612240080089" duration="16276000" />
+      <workItem from="1612240080089" duration="16977000" />
     </task>
     <servers />
   </component>

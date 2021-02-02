@@ -1071,7 +1071,7 @@ $admin_user = Auth::user();
             $session_trainee->field_of_study = $trainee[8];
             $session_trainee->interests = $trainee[9];
             $session_trainee->session_id = $session->id;
-            $trainee->category = $session->category;
+            $session_trainee->category = $session->category;
             if ($session->mode == 'Physical'){
                 $session_trainee->county = $session->county;
                 $session_trainee->location = $session->location;
