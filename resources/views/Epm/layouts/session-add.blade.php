@@ -32,23 +32,55 @@ $auth_admin = auth()->user();
                 <span class="text-danger">{{$errors->first('end_time')}}</span>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="form-group">
-                <label>INSTITUTION</label>
-                <input type="text" name="institution" class="form-control" placeholder="Institution" value="{{old('institution')}}">
-                <span class="text-danger">{{$errors->first('institution')}}</span>
+                <label>SESSION MODE</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 ml-4">
+                    <div class="form-group">
+                        <input type="radio" name="mode" onclick="sessionModePhysical()" value="Physical"> Physical
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="mode" onclick="sessionModeVirtual()" value="Virtual"> Virtual
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">{{$errors->first('mode')}}</span>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label>TOWN</label>
-                <input type="text" id="location" name="location" class="form-control" value="{{old('location')}}">
-                <input type="hidden" name="location_lat_long" id="location_lat_long">
-                <span class="text-danger">{{$errors->first('location')}}</span>
+        <div class="col-sm-12" id="sessionMode" style="display: none">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" id="county">
+                        <label>County</label>
+                        <county name="county" v-model="selectedCounty" :options="counties"
+                                placeholder="Search"
+                                :searchable="true" :close-on-select="true">
+                        </county>
+                        <input type="hidden" name="county" :value="selectedCounty">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>TOWN/LOCATION</label>
+                        <input type="text" id="location" name="location" class="form-control" value="{{old('location')}}">
+                        <input type="hidden" name="location_lat_long" id="location_lat_long">
+                        <span class="text-danger">{{$errors->first('location')}}</span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>INSTITUTION</label>
+                        <input type="text" name="institution" class="form-control" placeholder="Institution" value="{{old('institution')}}">
+                        <span class="text-danger">{{$errors->first('institution')}}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="form-group" id="session_type">
+            <div class="form-group" id="session_type" style="display: none">
                 <label>SESSION TYPE</label>
                 <multiselect :options="types" v-model="selectedType"
                              placeholder="Select Session Type"
@@ -102,16 +134,20 @@ $auth_admin = auth()->user();
                 <span class="text-danger">{{$errors->first('about')}}</span>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <a href="#!">
-                    <button type="button" class="btn btn-outline-info">Generate Google Meet Link</button>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group float-right">
-                <button type="submit" class="btn btn-outline-primary">Add Session</button>
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" id="sessionLink" style="display: none">
+                        <a href="#!">
+                            <button type="button" id="sessionGoogleMeetLink" onclick="generateSessionLink()" class="btn btn-outline-info">Generate Google Meet Link</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-primary float-right">Add Session</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

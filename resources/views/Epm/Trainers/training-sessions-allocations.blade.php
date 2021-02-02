@@ -29,22 +29,15 @@
             @endif
         </center>
                     <?php
-                    foreach ($sessions as $key=>$session){
-                        $sessions_per_day[] = $sessions[$key];
-                    }
-//                    dd($sessions_per_day);
                     $today = date('Y-m-d');
                     $tomorrow = date('Y-m-d',strtotime("+1 day",strtotime($today)));
                     $day_one_sessions = \App\Models\TrainingSession::where('date',$today)->get();
-//                    dd($day_one_sessions);
                     $day_two_sessions = \App\Models\TrainingSession::where('date',$tomorrow)->get();
                     $sessions_today = [];
                     $sessions_tomorrow = [];
                     foreach ($day_one_sessions as $day_one_session){
                         $sessions_today[]=$day_one_session;
                     }
-//                    dd($day_one_sessions,$sessions_today);
-                    //                dd($sessions_today[1]->trainers);
                     foreach ($day_two_sessions as $day_two_session){
                         $sessions_tomorrow[]=$day_two_session;
                     }
@@ -116,7 +109,7 @@
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready( function () {
-            $('#competenceTableList').DataTable();
+            $('#sessionsTableList').DataTable();
         } );
     </script>
     <script type="text/javascript">
@@ -128,11 +121,4 @@
             })
         });
     </script>
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9yYsUxZxbbnwhBcyRnWhorWhNPuQYPus&libraries=places&callback=activatePlacesSearch"></script>
-    {{--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF1htWBhqk0WQmip2LhO3leVvRzUg3T-o&libraries=places"></script>--}}
-    <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
 @endsection

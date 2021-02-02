@@ -28,6 +28,40 @@
     <script src="{{url('assets/dist/axios.js')}}"></script>
     {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
+        function sessionModePhysical(){
+            document.getElementById('sessionMode').style.display='block';
+            document.getElementById('session_type').style.display='none';
+            document.getElementById('sessionLink').style.display='none';
+        }
+        function sessionModeVirtual(){
+            document.getElementById('sessionMode').style.display='none';
+            document.getElementById('session_type').style.display='block';
+            document.getElementById('sessionLink').style.display='block';
+        }
+
+        function generateSessionLink(){
+            document.getElementById('sessionGoogleMeetLink').disabled= true;
+        }
+
+        new Vue({
+            components: {
+                county: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedCounty: null,
+                    counties: [
+                        'Baringo','Bomet','Bungoma','Busia','Elgeyo Marakwet','Embu','Garissa','Homa Bay', 'Kajiado',
+                        'Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale', 'Laikipia',
+                        'Lamu','Machakos','Makueni','Mandera','Meru','Migori','Marsabit','Muranga','Nairobi','Nakuru','Nandi',
+                        'Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita Taveta','Tana River','Tharaka Nithi',
+                        'Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'
+                    ],
+                }
+            },
+            methods:{
+            },
+        }).$mount('#county')
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,

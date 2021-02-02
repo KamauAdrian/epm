@@ -946,16 +946,14 @@ $admin_user = Auth::user();
     {
         $messages = [
             'name.required'=>'Hey Session Name Please',
-            'type.required'=>'Session Type Field Required',
+            'mode.required'=>'Please Select The Session Mode',
         ];
         $this->validate($request,[
             'name'=>'required',
             'date'=>'required',
+            'mode'=>'required',
             'start_time'=>'required',
             'end_time'=>'required',
-            'institution'=>'required',
-            'location'=>'required',
-            'type'=>'required',
             'category'=>'required',
             'about'=>'required',
         ],$messages);
@@ -965,9 +963,11 @@ $admin_user = Auth::user();
         $session->start_time = $request->start_time;
         $session->end_time = $request->end_time;
         $session->institution = $request->institution;
+        $session->county = $request->county;
         $session->location = $request->location;
         $session->location_lat_long = $request->location_lat_long;
         $session->category = $request->category;
+        $session->mode = $request->mode;
         $classes = null;
         $session->type = $request->type;
         $session->about = $request->about;
@@ -1051,6 +1051,7 @@ $admin_user = Auth::user();
             'trainees'=>'required',
         ],$messages);
         $trainees_excel = Excel::toArray(new TraineesImport(), $request->file('trainees'));
+        $session = TrainingSession::find($session_id);
         $trainees_raw = [];
         foreach ($trainees_excel as $trainee_excel){
             $trainees_raw[] = $trainee_excel;
@@ -1061,18 +1062,21 @@ $admin_user = Auth::user();
             $session_trainee = new Trainee();
             $session_trainee->name =$trainee[0];
             $session_trainee->gender=$trainee[1];
-            $session_trainee->county = $trainee[2];
-            $session_trainee->location = $trainee[3];
-            $session_trainee->category = $trainee[4];
-            $session_trainee->level_of_computer_literacy = $trainee[5];
-            $session_trainee->level_of_education = $trainee[6];
-            $session_trainee->field_of_study = $trainee[7];
-            $session_trainee->email = $trainee[8];
-            $session_trainee->phone_number = $trainee[9];
-            $session_trainee->id_number = $trainee[10];
-            $session_trainee->age = $trainee[11];
-            $session_trainee->interests = $trainee[12];
-            $session_trainee->session_id = $session_id;
+            $session_trainee->email = $trainee[2];
+            $session_trainee->phone_number = $trainee[3];
+            $session_trainee->id_number = $trainee[4];
+            $session_trainee->age = $trainee[5];
+            $session_trainee->level_of_computer_literacy = $trainee[6];
+            $session_trainee->level_of_education = $trainee[7];
+            $session_trainee->field_of_study = $trainee[8];
+            $session_trainee->interests = $trainee[9];
+            $session_trainee->session_id = $session->id;
+            $trainee->category = $session->category;
+            if ($session->mode == 'Physical'){
+                $session_trainee->county = $session->county;
+                $session_trainee->location = $session->location;
+                $session_trainee->location_lat_long = $session->location_lat_long;
+            }
             $saved_trainee = $session_trainee->save();
             if ($saved_trainee){
                 $session = TrainingSession::find($session_id)->trainees()->attach($session_trainee->id);
@@ -1088,27 +1092,27 @@ $admin_user = Auth::user();
             'phone_number'=>'required',
             'age'=>'required',
             'id_number'=>'required',
-            'county'=>'required',
-            'location'=>'required',
         ]);
+        $session  = TrainingSession::find($session_id);
         $trainee = New Trainee();
         $trainee->name = $request->name;
         $trainee->gender = $request->gender;
-        $trainee->county = $request->county;
-        $trainee->location = $request->location;
-        $trainee->location_lat_long = $request->location_lat_long;
-        $trainee->category = $request->category;
-        $trainee->level_of_computer_literacy = $request->level_of_computer_literacy;
-        $trainee->level_of_education = $request->level_of_education;
-        $trainee->field_of_study = $request->field_of_study;
         $trainee->email = $request->email;
         $trainee->phone_number = $request->phone_number;
         $trainee->id_number = $request->id_number;
         $trainee->age = $request->age;
+        $trainee->level_of_computer_literacy = $request->level_of_computer_literacy;
+        $trainee->level_of_education = $request->level_of_education;
+        $trainee->field_of_study = $request->field_of_study;
         $trainee->interests = $request->interests;
+        $trainee->category = $session->category;
+        if ($session->mode == 'Physical'){
+            $trainee->county = $session->county;
+            $trainee->location = $session->location;
+            $trainee->location_lat_long = $session->location_lat_long;
+        }
         $trainee->save();
         if ($trainee->save()){
-            $session  = TrainingSession::find($session_id);
             $session->trainees()->attach($trainee->id);
         }
         return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Trainee successfully added to session');

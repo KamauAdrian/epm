@@ -19,12 +19,15 @@ class CreateTrainingSessionsTable extends Migration
             $table->string('date');//session date
             $table->string('start_time');//session start time
             $table->string('end_time');//session end time
-            $table->string('institution');//institution
-            $table->string('town');//town
+            $table->string('mode');// virtual or Physical
+            $table->string('institution')->nullable();//institution
+            $table->string('county')->nullable();//county
+            $table->string('location')->nullable();//town/location
+            $table->string('location_lat_long')->nullable();//geo coordinates
             $table->string('about');//short session description
             $table->string('status')->default('Pending');//ie active or pending or complete default pending
-            $table->string('type');
-            $table->string('category');
+            $table->string('type')->nullable();//if virtual(public or private)
+            $table->string('category');//session training category(data management, transcription ..etc)
             $table->string('google_meet_link')->nullable();//Google meet link
             $table->timestamps();
         });

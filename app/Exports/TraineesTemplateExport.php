@@ -24,16 +24,13 @@ class TraineesTemplateExport implements FromArray, WithHeadings
         return [
             'Full Name',
             'Gender',
-            'County',
-            'Location',
-            'Category',
-            'Level of Computer Literacy',
-            'Level of Education',
-            'Field of Study',
             'Email',
             'Phone Number',
             'ID Number',
             'Age',
+            'Level of Computer Literacy',
+            'Level of Education',
+            'Field of Study',
             'Interests',
         ];
     }

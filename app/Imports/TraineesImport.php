@@ -15,6 +15,6 @@ class TraineesImport implements ToModel
     public function model(array $row)
     {
 
-        return new Trainee([]);
+        return new Trainee();
     }
 }
