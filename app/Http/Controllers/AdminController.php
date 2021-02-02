@@ -1081,7 +1081,7 @@ $admin_user = Auth::user();
             }
             $saved_trainee = $session_trainee->save();
             if ($saved_trainee){
-                $session = TrainingSession::find($session_id)->trainees()->attach($session_trainee->id);
+               $session->trainees()->attach($session_trainee->id);
             }
         }
        return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Trainees Successfully uploaded');
