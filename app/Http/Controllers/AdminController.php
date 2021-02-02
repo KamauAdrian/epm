@@ -1044,6 +1044,7 @@ $admin_user = Auth::user();
     }
 
     public function upload_trainees(Request $request,$id,$session_id){
+
         $messages = [
             'trainees.required'=>'Please Select trainees Excel File to Upload',
         ];
@@ -1051,14 +1052,15 @@ $admin_user = Auth::user();
             'trainees'=>'required',
         ],$messages);
         $trainees_excel = Excel::toArray(new TraineesImport(), $request->file('trainees'));
-        $session = TrainingSession::find($session_id);
         $trainees_raw = [];
         foreach ($trainees_excel as $trainee_excel){
             $trainees_raw[] = $trainee_excel;
         }
         $trainees = array_slice($trainees_raw[0],1);
         $saved = '';
+        $session = null;
         foreach ($trainees as $trainee){
+            $session = DB::table('training_sessions')->where('id',$session_id)->first();
             $session_trainee = new Trainee();
             $session_trainee->name =$trainee[0];
             $session_trainee->gender=$trainee[1];
