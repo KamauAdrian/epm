@@ -11,10 +11,19 @@
     $cm_role = \App\Models\Role::where('name','Center Manager')->first();
     $trainer_role = \App\Models\Role::where('name','Trainer')->first();
     $mentor_role = \App\Models\Role::where('name','Mentor')->first();
-    $pms = \App\Models\User::where('role_id',$pm_role->id)->get();
-    $cms = \App\Models\User::where('role_id',$cm_role->id)->get();
-    $trainers = \App\Models\User::where('role_id',$trainer_role->id)->get();
-    $mentors = \App\Models\User::where('role_id',$mentor_role->id)->get();
+    if ($pm_role){
+        $pms = \App\Models\User::where('role_id',$pm_role->id)->get();
+    }
+    if ($cm_role){
+        $cms = \App\Models\User::where('role_id',$cm_role->id)->get();
+    }
+
+    if ($trainer_role){
+        $trainers = \App\Models\User::where('role_id',$trainer_role->id)->get();
+    }
+    if ($mentor_role){
+        $mentors = \App\Models\User::where('role_id',$mentor_role->id)->get();
+    }
     $trainees = \App\Models\Trainee::all();
 
     ?>
@@ -37,7 +46,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="p-4 border rounded">
-                                    <h1 class="display-4 d-inline-block font-weight-normal">{{count($pms)}}</h1>
+                                    @if($pms)
+                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($pms)}}</h1>
+                                    @endif
                                     <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
 {{--                                    <p class="text-uppercase">TRAINEES</p>--}}
                                     <div class="rounded bg-light p-3">
@@ -62,7 +73,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="p-4 border rounded">
-                                    <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainers)}}</h1>
+                                    @if($trainers)
+                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainers)}}</h1>
+                                    @endif
                                     <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
 {{--                                    <p class="text-uppercase">TRAINEES</p>--}}
                                     <div class="rounded bg-light p-3">
