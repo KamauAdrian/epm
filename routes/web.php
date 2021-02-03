@@ -39,7 +39,6 @@ Route::group(['middleware'=>'super_admin'],function (){
 //    Route::get('/adm-dashboard',[App\Http\Controllers\SuperAdminController::class, 'index']);
     Route::get('/register/su-admin',[App\Http\Controllers\SuperAdminController::class, 'su_admin_register_su_admin']);
     Route::post('/adm-register-su-admin',[App\Http\Controllers\SuperAdminController::class, 'adm_save_su_admin']);
-    Route::post('/adm/save/pm',[App\Http\Controllers\SuperAdminController::class, 'pm_save']);
     Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
     //shared responsibility
     //cms
@@ -97,6 +96,8 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/get/mentors/records',[App\Http\Controllers\AdminController::class, 'dashboard_mentors']);
     Route::get('/adm/get/sessions/records',[App\Http\Controllers\AdminController::class, 'dashboard_sessions']);
     Route::get('/adm/get/trainees/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainees']);
+    //save admins
+    Route::post('/adm/save/pm',[App\Http\Controllers\SuperAdminController::class, 'pm_save']);
     //list admins
     Route::get('/adm/{id}/add/admin/role_name={role}',[App\Http\Controllers\AdminController::class, 'add_admin']);
     Route::get('/list/all/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'list']);
