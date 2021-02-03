@@ -271,7 +271,8 @@
       <workItem from="1612157147404" duration="6627000" />
       <workItem from="1612167926840" duration="17174000" />
       <workItem from="1612240080089" duration="30924000" />
-      <workItem from="1612283537107" duration="601000" />
+      <workItem from="1612283537107" duration="670000" />
+      <workItem from="1612324520142" duration="698000" />
     </task>
     <servers />
   </component>
@@ -360,17 +361,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php</url>
-          <line>243</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php</url>
           <line>33</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php</url>
-          <line>727</line>
+          <line>490</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

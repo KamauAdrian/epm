@@ -24,6 +24,7 @@
     if ($mentor_role){
         $mentors = \App\Models\User::where('role_id',$mentor_role->id)->get();
     }
+    $sessions = \App\Models\TrainingSession::all();
     $trainees = \App\Models\Trainee::all();
 
     ?>
@@ -55,7 +56,7 @@
                                         <div class="media align-items-center">
                                             <i class="feather icon-alert-circle h2 mb-0"></i>
                                             <div class="media-body ml-3">
-                                                Friday was the day with the most Trainees registered
+                                                Operations is the Department with the most PMOs
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +83,34 @@
                                         <div class="media align-items-center">
                                             <i class="feather icon-alert-circle h2 mb-0"></i>
                                             <div class="media-body ml-3">
-                                                Friday was the day with the most Trainees registered
+                                                Digital Marketing is the category with the most Trainers
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-between mb-4">
+                            <div class="col-auto">
+                                <h2 class="font-weight-normal mb-0">Sessions</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="sessionsOverview"></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-4 border rounded">
+                                    @if($sessions)
+                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($sessions)}}</h1>
+                                    @endif
+                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
+                                    {{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+                                    <div class="rounded bg-light p-3">
+                                        <div class="media align-items-center">
+                                            <i class="feather icon-alert-circle h2 mb-0"></i>
+                                            <div class="media-body ml-3">
+                                                Operations is the Category with the most Sessions Trained
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +137,7 @@
                                         <div class="media align-items-center">
                                             <i class="feather icon-alert-circle h2 mb-0"></i>
                                             <div class="media-body ml-3">
-                                                Friday was the day with the most Trainees registered
+                                                February was the month with the most Trainees registered
                                             </div>
                                         </div>
                                     </div>
@@ -121,195 +149,6 @@
             </div>
         </div>
     </div>
-{{--    <div class="col-lg-8">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-sm-6">--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-body text-center">--}}
-{{--                        <div id="opentask-taskchart1"></div>--}}
-{{--                        <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-sm-6">--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-body text-center">--}}
-{{--                        <div id="opentask-taskchart2"></div>--}}
-{{--                        <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="card">--}}
-{{--            <div class="card-body">--}}
-{{--                <h2 class="font-weight-normal mb-4">Tasks by Team</h2>--}}
-{{--                <div class="row align-items-center">--}}
-{{--                    <div class="col-md-4">--}}
-{{--                        <div id="taskfull-dashboard-chart1" class="my-2"></div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-md-8">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-blue f-10 m-r-10"></i>Engineering <span class="float-right h6 mb-0 text-body">11</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>Creative <span class="float-right h6 mb-0 text-body">7</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>Finance <span class="float-right h6 mb-0 text-body">4</span></p>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>Marketing <span class="float-right h6 mb-0 text-body">6</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Product design <span class="float-right h6 mb-0 text-body">28</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>User research <span class="float-right h6 mb-0 text-body">9</span></p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <hr class="my-4">--}}
-{{--                <div class="row align-items-center justify-content-between mb-4">--}}
-{{--                    <div class="col-auto">--}}
-{{--                        <h2 class="font-weight-normal mb-0">Weekly Variation</h2>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-6">--}}
-{{--                        <div class="row justify-content-end d-none d-sm-flex">--}}
-{{--                            <div class="col-auto">--}}
-{{--                                <span class=""><i class="fas fa-circle text-danger f-10 m-r-5"></i>Overdue</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-auto">--}}
-{{--                                <span class=""><i class="fas fa-circle text-warning f-10 m-r-5"></i>Open</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-sm-6 mb-3">--}}
-{{--                        <h6 class="text-body text-uppercase">Creative</h6>--}}
-{{--                        <div class="progress my-2">--}}
-{{--                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>--}}
-{{--                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"></div>--}}
-{{--                        </div>--}}
-{{--                        <p class="text-success d-inline-block mb-0">1.9%<i class="mr-2 ml-1 feather icon-arrow-up"></i></p>--}}
-{{--                        <p class="d-inline-block">Last 7 days</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-6 mb-3">--}}
-{{--                        <h6 class="text-body text-uppercase">Engineering</h6>--}}
-{{--                        <div class="progress my-2">--}}
-{{--                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>--}}
-{{--                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"></div>--}}
-{{--                        </div>--}}
-{{--                        <p class="text-success d-inline-block mb-0">1.9%<i class="mr-2 ml-1 feather icon-arrow-up"></i></p>--}}
-{{--                        <p class="d-inline-block">Last 7 days</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-6 mb-3">--}}
-{{--                        <h6 class="text-body text-uppercase">Finance</h6>--}}
-{{--                        <div class="progress my-2">--}}
-{{--                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>--}}
-{{--                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"></div>--}}
-{{--                        </div>--}}
-{{--                        <p class="text-success d-inline-block mb-0">1.9%<i class="mr-2 ml-1 feather icon-arrow-up"></i></p>--}}
-{{--                        <p class="d-inline-block">Last 7 days</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-6 mb-3">--}}
-{{--                        <h6 class="text-body text-uppercase">Marketing</h6>--}}
-{{--                        <div class="progress my-2">--}}
-{{--                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>--}}
-{{--                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"></div>--}}
-{{--                        </div>--}}
-{{--                        <p class="text-danger d-inline-block mb-0">9.3%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                        <p class="d-inline-block">Last 7 days</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-6 mb-3">--}}
-{{--                        <h6 class="text-body text-uppercase">product design</h6>--}}
-{{--                        <div class="progress my-2">--}}
-{{--                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>--}}
-{{--                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"></div>--}}
-{{--                        </div>--}}
-{{--                        <p class="text-success d-inline-block mb-0">1.9%<i class="mr-2 ml-1 feather icon-arrow-up"></i></p>--}}
-{{--                        <p class="d-inline-block">Last 7 days</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-6 mb-3">--}}
-{{--                        <h6 class="text-body text-uppercase">uwer research</h6>--}}
-{{--                        <div class="progress my-2">--}}
-{{--                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>--}}
-{{--                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"></div>--}}
-{{--                        </div>--}}
-{{--                        <p class="text-danger d-inline-block mb-0">9.3%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                        <p class="d-inline-block">Last 7 days</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <hr class="my-4">--}}
-{{--                <div class="text-center">--}}
-{{--                    <a href="#!" class="text-body">See all</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-4">--}}
-{{--        <div class="card">--}}
-{{--            <div class="card-body">--}}
-{{--                <h3 class="font-weight-normal">Tasks by Project</h3>--}}
-{{--                <div id="taskfull-dashboard-chart2" class="mb-4 mt-5"></div>--}}
-{{--                <div>--}}
-{{--                    <p class="mb-3"><i class="fas fa-circle text-c-blue f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">11</span></p>--}}
-{{--                    <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
-{{--                    <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 3 pending tasks <span class="float-right h6 mb-0 text-body">4</span></p>--}}
-{{--                    <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>New order received <span class="float-right h6 mb-0 text-body">6</span></p>--}}
-{{--                    <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">28</span></p>--}}
-{{--                    <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 4 pending tasks <span class="float-right h6 mb-0 text-body">9</span></p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <h3 class="mb-4">MY Activity</h3>--}}
-{{--        <div class="media align-items-center mb-4">--}}
-{{--            <img src="assets/images/user/avatar-2.jpg" alt="images" class="img-fluid avtar avtar-xs">--}}
-{{--            <div class="media-body ml-3 align-self-center">--}}
-{{--                <h6 class="mb-0 d-inline-block">Luke S. </h6>--}}
-{{--                <p class="mb-0 d-inline-block"> 3 min ago</p>--}}
-{{--                <p class="mt-1 mb-0">Created task <span class="text-primary">Nulla vitae elit libero a pharetra.</span></p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="media align-items-center mb-4">--}}
-{{--            <img src="assets/images/user/avatar-3.jpg" alt="images" class="img-fluid avtar avtar-xs">--}}
-{{--            <div class="media-body ml-3 align-self-center">--}}
-{{--                <h6 class="mb-0 d-inline-block">Luke S. </h6>--}}
-{{--                <p class="mb-0 d-inline-block"> 5 min ago</p>--}}
-{{--                <p class="mt-1 mb-0">Completed task <span class="text-primary">Cantapibus dolor at ace</span></p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="media align-items-center mb-4">--}}
-{{--            <img src="assets/images/user/avatar-1.jpg" alt="images" class="img-fluid avtar avtar-xs">--}}
-{{--            <div class="media-body ml-3 align-self-center">--}}
-{{--                <h6 class="mb-0 d-inline-block">Luke S. </h6>--}}
-{{--                <p class="mb-0 d-inline-block"> 6 min ago</p>--}}
-{{--                <p class="mt-1 mb-0">Invite <span class="text-primary">Ashoka T.</span> to <span class="text-primary">Revamp Design System</span></p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="media align-items-center mb-4">--}}
-{{--            <img src="assets/images/user/avatar-2.jpg" alt="images" class="img-fluid avtar avtar-xs">--}}
-{{--            <div class="media-body ml-3 align-self-center">--}}
-{{--                <h6 class="mb-0 d-inline-block">Luke S. </h6>--}}
-{{--                <p class="mb-0 d-inline-block"> 8 min ago</p>--}}
-{{--                <p class="mt-1 mb-0">Created task <span class="text-primary">Nulla vitae elit libero a pharetra.</span></p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="media align-items-center mb-4">--}}
-{{--            <img src="assets/images/user/avatar-3.jpg" alt="images" class="img-fluid avtar avtar-xs">--}}
-{{--            <div class="media-body ml-3 align-self-center">--}}
-{{--                <h6 class="mb-0 d-inline-block">Luke S. </h6>--}}
-{{--                <p class="mb-0 d-inline-block"> 10 min ago</p>--}}
-{{--                <p class="mt-1 mb-0">Completed task <span class="text-primary">Cantapibus dolor at ace</span></p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="media align-items-center mb-4">--}}
-{{--            <img src="assets/images/user/avatar-1.jpg" alt="images" class="img-fluid avtar avtar-xs">--}}
-{{--            <div class="media-body ml-3 align-self-center">--}}
-{{--                <h6 class="mb-0 d-inline-block">Luke S. </h6>--}}
-{{--                <p class="mb-0 d-inline-block"> 12 min ago</p>--}}
-{{--                <p class="mt-1 mb-0">Invite <span class="text-primary">Ashoka T.</span> to <span class="text-primary">Revamp Design System</span></p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <hr>--}}
-{{--        <div class="text-center">--}}
-{{--            <a href="#!" class="text-body">See all</a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 @endsection
 @section('js')
     <!-- Required Js -->
@@ -318,135 +157,6 @@
     <script src="{{url('assets/js/plugins/moment.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/daterangepicker.js')}}"></script>
     <script>
-        $(function() {
-            $(function() {
-                var start = moment().subtract(29, 'days');
-                var end = moment();
-
-                function cb(start, end) {
-                    $('#dashboardtaskreportrange2 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                }
-                $('#dashboardtaskreportrange2').daterangepicker({
-                    startDate: start,
-                    endDate: end,
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                    }
-                }, cb);
-                cb(start, end);
-            });
-        });
-        $(function() {
-            var options = {
-                chart: {
-                    height: 220,
-                    type: 'bar',
-                    stacked: true,
-                    toolbar: {
-                        show: false,
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '30%',
-                        endingShape: 'rounded'
-                    },
-                },
-                colors: ['#2DCA73', '#d7dfe9'],
-                series: [{
-                    name: 'PRODUCT A',
-                    data: [10, 12, 15, 10, 8]
-                }, {
-                    name: 'PRODUCT B',
-                    data: [18, 16, 13, 18, 20]
-                }],
-                dataLabels: {
-                    enabled: false,
-                },
-                xaxis: {
-                    categories: ['Content Writing', 'Data Management', 'Wed', 'Thu', 'Fri'],
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false,
-                    }
-                },
-                grid: {
-                    show: false,
-                },
-                yaxis: {
-                    show: false,
-                },
-                legend: {
-                    show: false,
-                },
-                fill: {
-                    opacity: 1
-                },
-            }
-            var chart = new ApexCharts(document.querySelector("#dashboardtastbar6"), options);
-            chart.render();
-        });
-        $(function() {
-            var options = {
-                chart: {
-                    height: 220,
-                    type: 'bar',
-                    stacked: true,
-                    toolbar: {
-                        show: false,
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '30%',
-                        endingShape: 'rounded'
-                    },
-                },
-                colors: ['#FFB800', '#d7dfe9'],
-                series: [{
-                    name: 'PRODUCT A',
-                    data: [8, 10, 12, 15, 10]
-                }, {
-                    name: 'PRODUCT B',
-                    data: [20, 18, 16, 13, 18]
-                }],
-                dataLabels: {
-                    enabled: false,
-                },
-                xaxis: {
-                    categories: ['MON', 'Tue', 'Wed', 'Thu', 'Fri'],
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false,
-                    }
-                },
-                grid: {
-                    show: false,
-                },
-                yaxis: {
-                    show: false,
-                },
-                legend: {
-                    show: false,
-                },
-                fill: {
-                    opacity: 1
-                },
-            }
-            var chart = new ApexCharts(document.querySelector("#dashboardtastbar5"), options);
-            chart.render();
-        });
         // $(function() {
         //     var options = {
         //         chart: {
@@ -535,6 +245,7 @@
             var chart = new ApexCharts(document.querySelector("#pmsOverview"), options);
             chart.render();
         });
+
         $(function() {
             var options = {
                 chart: {
@@ -636,6 +347,59 @@
                 },
             }
             var chart = new ApexCharts(document.querySelector("#trainersOverview"), options);
+            chart.render();
+        });
+        $(function() {
+            var options = {
+                chart: {
+                    height: 300,
+                    type: 'bar',
+                    stacked: false,
+                    toolbar: {
+                        show: false,
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        vertical: true,
+                        columnWidth: '50%',
+                        endingShape: 'rounded'
+                    },
+                },
+                colors: ['#FFB800'],
+                series: [{
+                    name: 'Sessions',
+                    data: [10, 13, 9, 15, 19]
+                }],
+                dataLabels: {
+                    enabled: false,
+                },
+                title:{
+                    text: 'Sessions Overview'
+                },
+                xaxis: {
+                    categories: ['Data Management', 'Digital Marketing', 'Transcription', 'Content Writing', 'Virtual Assistant'],
+                    axisBorder: {
+                        show: false,
+                    },
+                    axisTicks: {
+                        show: false,
+                    }
+                },
+                grid: {
+                    show: true,
+                },
+                yaxis: {
+                    show: true,
+                },
+                legend: {
+                    show: false,
+                },
+                fill: {
+                    opacity: 1
+                },
+            }
+            var chart = new ApexCharts(document.querySelector("#sessionsOverview"), options);
             chart.render();
         });
         $(function() {
