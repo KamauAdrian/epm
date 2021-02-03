@@ -24,6 +24,7 @@
     if ($mentor_role){
         $mentors = \App\Models\User::where('role_id',$mentor_role->id)->get();
     }
+    $centers = \App\Models\Center::all();
     $sessions = \App\Models\TrainingSession::all();
     $trainees = \App\Models\Trainee::all();
 
@@ -36,9 +37,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
+{{--                        //project managers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+                            <div class="row">
                             <div class="col-sm-12 mb-4 align-items-center justify-content-between">
-                                <h2 class="font-weight-normal mb-0">Project Managers</h2>
+                                <h2 class="font-weight-normal mb-0">PMOs</h2>
                             </div>
                             <div class="col-sm-6">
                                 <div id="pmsOverview"></div>
@@ -61,8 +64,66 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
+                        @endif
+{{--                            //Centers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')
+                            <div class="row">
+                            <div class="col-sm-12 mb-4 align-items-center justify-content-between">
+                                <h2 class="font-weight-normal mb-0">Center Managers</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="cmsOverview"></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-4 border rounded">
+                                    @if($cms)
+                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($cms)}}</h1>
+                                    @endif
+                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
+                                    {{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+                                    <div class="rounded bg-light p-3">
+                                        <div class="media align-items-center">
+                                            <i class="feather icon-alert-circle h2 mb-0"></i>
+                                            <div class="media-body ml-3">
+                                                Operations is the Department with the most PMOs
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+{{--                            //center Managers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')
+                            <div class="row">
+                            <div class="col-sm-12 mb-4 align-items-center justify-content-between">
+                                <h2 class="font-weight-normal mb-0">Centers</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="centersOverview"></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-4 border rounded">
+                                    @if($centers)
+                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($centers)}}</h1>
+                                    @endif
+                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
+                                    {{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+                                    <div class="rounded bg-light p-3">
+                                        <div class="media align-items-center">
+                                            <i class="feather icon-alert-circle h2 mb-0"></i>
+                                            <div class="media-body ml-3">
+                                                Operations is the Department with the most PMOs
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+{{--                            //Trainers--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')
+                            <div class="row">
                             <div class="col-sm-12 align-items-center justify-content-between mb-4">
                                 <h2 class="font-weight-normal mb-0">Trainers</h2>
                             </div>
@@ -87,7 +148,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        @endif
+{{--                            //sessions--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')
+                            <div class="row">
                             <div class="col-sm-12 align-items-center justify-content-between mb-4">
                                 <h2 class="font-weight-normal mb-0">Sessions</h2>
                             </div>
@@ -112,7 +176,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        @endif
+{{--                            //Trainees--}}
+                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')
+                            <div class="row">
                             <div class="col-sm-12 align-items-center justify-content-between mb-4">
                                 <h2 class="font-weight-normal mb-0">Trainees</h2>
                             </div>
@@ -137,6 +204,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -210,7 +279,58 @@
                 }])
             })
         });
-
+        $(function() {
+            var options = {
+                chart: {
+                    height: 300,
+                    type: 'bar',
+                    stacked: false,
+                    toolbar: {
+                        show: false,
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        vertical: true,
+                        columnWidth: '30%',
+                        endingShape: 'rounded'
+                    },
+                },
+                colors: ['#FFB800'],
+                series: [],
+                dataLabels: {
+                    enabled: false,
+                },
+                xaxis: {
+                    axisBorder: {
+                        show: false,
+                    },
+                    axisTicks: {
+                        show: false,
+                    }
+                },
+                grid: {
+                    show: true,
+                },
+                yaxis: {
+                    show: false,
+                },
+                legend: {
+                    show: false,
+                },
+                fill: {
+                    opacity: 1
+                },
+            }
+            var chart = new ApexCharts(document.querySelector("#centersOverview"), options);
+            chart.render();
+            axios.get('/adm/get/centers/records/').then(function(response) {
+                chart.updateSeries([{
+                    name: 'Center Managers',
+                    data: response.data
+                }])
+            })
+        });
         $(function() {
             var options = {
                 chart: {
@@ -224,23 +344,19 @@
                 plotOptions: {
                     bar: {
                         vertical: true,
-                        columnWidth: '50%',
+                        columnWidth: '30%',
                         endingShape: 'rounded'
                     },
                 },
-                colors: ['#FFB800', '#d7dfe9'],
-                series: [{
-                    name: 'Male',
-                    data: [100, 130, 103, 125, 90]
-                }, {
-                    name: 'Female',
-                    data: [99, 132, 70, 89, 105]
-                }],
+                colors: ['#FFB800'],
+                series: [],
                 dataLabels: {
                     enabled: false,
                 },
+                noData: {
+                  text: 'Loading ...'
+                },
                 xaxis: {
-                    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                     axisBorder: {
                         show: false,
                     },
@@ -252,7 +368,7 @@
                     show: true,
                 },
                 yaxis: {
-                    show: true,
+                    show: false,
                 },
                 legend: {
                     show: true,
@@ -263,12 +379,9 @@
             }
             var chart = new ApexCharts(document.querySelector("#cmsOverview"), options);
             chart.render();
-            var start = moment().subtract(29, 'days');
-            console.log('last 29 days '+start);
-            var end = moment();
-            axios.get('/adm/get/cms/records/'+start).then(function(response) {
+            axios.get('/adm/get/cms/records/').then(function(response) {
                 chart.updateSeries([{
-                    name: 'PMOs',
+                    name: 'Center Managers',
                     data: response.data
                 }])
             })

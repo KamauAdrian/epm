@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-6 d-flex align-items-center mb-4">
             @if($role->name == 'Project Manager')
-                <h1 class="d-inline-block mb-0 font-weight-normal">Project Managers</h1>
+                <h1 class="d-inline-block mb-0 font-weight-normal">PMOs</h1>
             @elseif($role->name == 'Center Manager')
                 <h1 class="d-inline-block mb-0 font-weight-normal">Center Managers</h1>
             @elseif($role->name == 'Trainer')

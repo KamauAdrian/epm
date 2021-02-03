@@ -91,6 +91,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/main/dashboard',[App\Http\Controllers\AdminController::class, 'index']);
     Route::get('/adm/get/admins/records',[App\Http\Controllers\AdminController::class, 'dashboard_actors']);
     Route::get('/adm/get/pms/records',[App\Http\Controllers\AdminController::class, 'dashboard_pms']);
+    Route::get('/adm/get/centers/records',[App\Http\Controllers\AdminController::class, 'dashboard_centers']);
     Route::get('/adm/get/cms/records',[App\Http\Controllers\AdminController::class, 'dashboard_cms']);
     Route::get('/adm/get/trainers/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainers']);
     Route::get('/adm/get/mentors/records',[App\Http\Controllers\AdminController::class, 'dashboard_mentors']);

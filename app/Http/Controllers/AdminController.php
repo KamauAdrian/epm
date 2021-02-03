@@ -71,13 +71,24 @@ class AdminController extends Controller
         }
         return response()->json($result);
     }
+    public function dashboard_centers(){
+        $centers = Center::all();
+        $result = [];
+        foreach ($centers as $center){
+            $cms = Center::find($center->id)->centerManagers;
+            $result[] = ['x'=>$center->name,'y'=>count($cms)];
+        }
+        return response()->json($result);
+    }
     public function dashboard_cms(){
         $role = DB::table('roles')->where('name','Center Manager')->first();
         $result = [];
         if ($role){
-            $cms = DB::table('users')->where('role_id',$role->id)->get()->groupBy('category');
+            $cms = DB::table('users')->where('role_id',$role->id)->get()->groupBy(function($val) {
+                return Carbon::parse($val->created_at)->format('M');
+            });
             foreach ($cms as $key=>$cm){
-                $result[] = ['x'=>$key,'y'=>count($cms)];
+                $result[] = ['x'=>$key,'y'=>count($cm)];
             }
         }
         return response()->json($result);
