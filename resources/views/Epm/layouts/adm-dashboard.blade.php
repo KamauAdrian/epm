@@ -41,7 +41,7 @@
                         @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                             <div class="row">
                             <div class="col-sm-12 mb-4 align-items-center justify-content-between">
-                                <h2 class="font-weight-normal mb-0">PMOs</h2>
+                                <h2 class="font-weight-normal mb-0">PMO</h2>
                             </div>
                             <div class="col-sm-6">
                                 <div id="pmsOverview"></div>
