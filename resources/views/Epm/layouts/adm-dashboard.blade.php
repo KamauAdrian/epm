@@ -370,7 +370,7 @@
                     show: true,
                 },
                 yaxis: {
-                    show: true,
+                    show: false,
                 },
                 legend: {
                     show: false,

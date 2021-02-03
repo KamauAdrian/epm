@@ -172,6 +172,7 @@ class SuperAdminController extends Controller
 
     public function pm_save(Request $request)
     {
+        dd($request->all());
         $messages = [
             'name.regex'=>'Name can not contain numbers and or special characters'
         ];
