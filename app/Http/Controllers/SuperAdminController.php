@@ -172,7 +172,6 @@ class SuperAdminController extends Controller
 
     public function pm_save(Request $request)
     {
-        dd($request->all());
         $messages = [
             'name.regex'=>'Name can not contain numbers and or special characters'
         ];
@@ -189,8 +188,7 @@ class SuperAdminController extends Controller
                 'image'=>['image|mimes:png,jpg,jpeg|max:1000'],
             ],$messages
         );
-//TODO: create/add a new Project Manager (add duplicate records ie pm also user)
-        //create the project manager as admin user(add to users table)
+//TODO: create/add a new Project Manager
         $pm_user = new User();
         $pm_user->name = request('name');
         $pm_user->email = request('email');
@@ -240,7 +238,7 @@ class SuperAdminController extends Controller
 //        after success assign Project Manager role to new Pm, save the new PM
         $pm_user_saved = $pm_user->save();
 //finally redirect su admin to Project Managers page with a list of other projects managers previously created
-        if ($pm_user->save()){
+        if ($pm_user_saved){
             //create a data array to pass to the mailable class to send email invite
             $data = [
                 'user_id'=>$pm_user->id,
@@ -251,11 +249,7 @@ class SuperAdminController extends Controller
 //            call the mailable class and send the email
             Mail::to($email)->send(new CreatePassword($data));
             //alert su admin success created pm user
-            $request->session()->flash('message','Project Manager Added Successfully');
-            return redirect('/list/all/admins/role_id='.$pm_user->role_id)->with('success',$request->session()->get('message'));
-        }else{
-            $request->session()->flash('message','An error occurred while creating Project Manager please try again later');
-            return redirect('/list-pms')->with('error',$request->session()->get('message'));
+            return redirect('/list/all/admins/role_id='.$pm_user->role_id)->with('success','Project Manager Added Successfully');
         }
     }
 
