@@ -62,7 +62,7 @@
                         foreach ($sessions as $session){
                             $sessions_all[] = $session;
                         }
-                        $Sessions_per_day_raw = $sessions_all[$i];
+//                        $Sessions_per_day_raw = $sessions_all[$i];
                         $sessions_per_day_array = [];
                         foreach ($sessions_all[$i] as $session_per_day){
                             $sessions_per_day_array[] = $session_per_day;

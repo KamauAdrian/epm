@@ -16,13 +16,13 @@ use App\Models\ReportActivity;
 use App\Models\ReportQuestion;
 use App\Models\ReportReport;
 use App\Models\ReportTemplate;
-use App\Models\ReportType;
 use App\Models\Role;
 use App\Models\TeamCenterManager;
 use App\Models\Trainee;
 use App\Models\Trainer;
 use App\Models\TrainingSession;
 use App\Models\User;
+use Carbon\Carbon;
 use Faker\Calculator\Iban;
 use Faker\Provider\Image;
 use Illuminate\Http\Request;
@@ -51,6 +51,66 @@ class AdminController extends Controller
     public function index()
     {
         return view('Epm.layouts.adm-dashboard');
+    }
+    public function dashboard_actors(){
+        $result = [];
+        $roles = DB::table('roles')->get();
+        foreach ($roles as $role){
+            $result[] = ['x'=>$role->name,'y'=>count(User::where('role_id',$role->id)->get())];
+        }
+        return response()->json($result);
+    }
+    public function dashboard_pms(){
+        $role = DB::table('roles')->where('name','Project Manager')->first();
+        $result = [];
+        if ($role){
+            $pms = DB::table('users')->where('role_id',$role->id)->get()->groupBy('department');
+            foreach ($pms as $key=>$pm){
+                $result[] = ['x'=>$key,'y'=>count($pm)];
+            }
+        }
+        return response()->json($result);
+    }
+    public function dashboard_cms(){
+        $role = DB::table('roles')->where('name','Center Manager')->first();
+        $result = [];
+        if ($role){
+            $cms = DB::table('users')->where('role_id',$role->id)->get()->groupBy('category');
+            foreach ($cms as $key=>$cm){
+                $result[] = ['x'=>$key,'y'=>count($cms)];
+            }
+        }
+        return response()->json($result);
+    }
+    public function dashboard_trainers(){
+        $role = DB::table('roles')->where('name','Trainer')->first();
+        $result = [];
+        if ($role){
+            $trainers = DB::table('users')->where('role_id',$role->id)->get()->groupBy('speciality');
+            foreach ($trainers as $key=>$trainer){
+                $result[] = ['x'=>$key,'y'=>count($trainer)];
+            }
+        }
+        return response()->json($result);
+    }
+
+    public function dashboard_sessions(){
+        $result = [];
+        $sessions = DB::table('training_sessions')->get()->groupBy('category');
+        foreach ($sessions as $key=>$session){
+            $result[] = ['x'=>$key,'y'=>count($session)];
+        }
+        return response()->json($result);
+    }
+    public function dashboard_trainees(){
+        $trainees = Trainee::all()->groupBy(function($val) {
+            return Carbon::parse($val->created_at)->format('M Y');
+        });
+        $result = [];
+        foreach ($trainees as $key=>$trainee){
+            $result[] = ['x'=>$key,'y'=>count($trainee)];
+        }
+        return response()->json($result);
     }
 
     public function adms_list($role_id)

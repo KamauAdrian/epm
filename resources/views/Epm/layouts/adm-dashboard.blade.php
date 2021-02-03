@@ -36,12 +36,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row align-items-center justify-content-between mb-4">
-                            <div class="col-auto">
+                        <div class="row">
+                            <div class="col-sm-12 mb-4 align-items-center justify-content-between">
                                 <h2 class="font-weight-normal mb-0">Project Managers</h2>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6">
                                 <div id="pmsOverview"></div>
                             </div>
@@ -63,12 +61,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row align-items-center justify-content-between mb-4">
-                            <div class="col-auto">
+
+                        <div class="row">
+                            <div class="col-sm-12 align-items-center justify-content-between mb-4">
                                 <h2 class="font-weight-normal mb-0">Trainers</h2>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6">
                                 <div id="trainersOverview"></div>
                             </div>
@@ -90,12 +87,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row align-items-center justify-content-between mb-4">
-                            <div class="col-auto">
+                        <div class="row">
+                            <div class="col-sm-12 align-items-center justify-content-between mb-4">
                                 <h2 class="font-weight-normal mb-0">Sessions</h2>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6">
                                 <div id="sessionsOverview"></div>
                             </div>
@@ -117,12 +112,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row align-items-center justify-content-between mb-4">
-                            <div class="col-auto">
+                        <div class="row">
+                            <div class="col-sm-12 align-items-center justify-content-between mb-4">
                                 <h2 class="font-weight-normal mb-0">Trainees</h2>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6">
                                 <div id="traineesOverview"></div>
                             </div>
@@ -157,38 +150,6 @@
     <script src="{{url('assets/js/plugins/moment.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/daterangepicker.js')}}"></script>
     <script>
-        // $(function() {
-        //     var options = {
-        //         chart: {
-        //             height: 220,
-        //             type: 'bar',
-        //         },
-        //         series: [],
-        //         dataLabels: {
-        //             enabled: false,
-        //         },
-        //         title:{
-        //             text: 'Project Managers Overview'
-        //         },
-        //         noData:{
-        //             text: 'Loading ...'
-        //         },
-        //     }
-        //     var chart = new ApexCharts(document.querySelector("#pmsOverview"), options);
-        //     chart.render();
-        //     var url = 'http://my-json-server.typicode.com/apexcharts/apexcharts.js/yearly';
-        //
-        //     axios({
-        //         method: 'GET',
-        //         url: url,
-        //     }).then(function(response) {
-        //         chart.updateSeries([{
-        //             name: 'Sales',
-        //             data: response.data
-        //         }])
-        //     })
-        // });
-
         $(function() {
             var options = {
                 chart: {
@@ -196,32 +157,27 @@
                     type: 'bar',
                     stacked: false,
                     toolbar: {
-                        show: false,
+                        show: false
                     }
                 },
                 plotOptions: {
                     bar: {
                         vertical: true,
-                        columnWidth: '50%',
+                        columnWidth: '30%',
                         endingShape: 'rounded'
                     },
                 },
                 colors: ['#FFB800'],
-                series: [{
-                    name: 'PMOs',
-                    data: [10, 13, 9, 15, 19,10,8,14]
-                }],
+                series: [],
                 dataLabels: {
                     enabled: false,
                 },
                 title:{
-                    text: 'Project Managers Overview'
+                    text: 'Overview'
                 },
-                xaxis: {
-                    categories: [
-                        'Training', 'M & E', 'Ajira Youth Empowerment', 'Centers (AYECs)', 'Operations','Mentorship',
-                        'Ajira Clubs','Project Management Office (PMO)'
-                    ],
+                noData:{
+                    text: 'Loading ...'
+                },xaxis: {
                     axisBorder: {
                         show: false,
                     },
@@ -233,17 +189,26 @@
                     show: true,
                 },
                 yaxis: {
-                    show: true,
+                    axisBorder:{
+                        show: false,
+                    },
+                    show: false,
                 },
                 legend: {
                     show: false,
                 },
                 fill: {
                     opacity: 1
-                },
+                }
             }
             var chart = new ApexCharts(document.querySelector("#pmsOverview"), options);
             chart.render();
+            axios.get('/adm/get/pms/records').then(function(response) {
+                chart.updateSeries([{
+                    name: 'PMOs',
+                    data: response.data
+                }])
+            })
         });
 
         $(function() {
@@ -298,6 +263,15 @@
             }
             var chart = new ApexCharts(document.querySelector("#cmsOverview"), options);
             chart.render();
+            var start = moment().subtract(29, 'days');
+            console.log('last 29 days '+start);
+            var end = moment();
+            axios.get('/adm/get/cms/records/'+start).then(function(response) {
+                chart.updateSeries([{
+                    name: 'PMOs',
+                    data: response.data
+                }])
+            })
         });
         $(function() {
             var options = {
@@ -312,20 +286,22 @@
                 plotOptions: {
                     bar: {
                         vertical: true,
-                        columnWidth: '50%',
+                        columnWidth: '30%',
                         endingShape: 'rounded'
                     },
                 },
-                colors: ['#FFB800', '#d7dfe9'],
-                series: [ {
-                    name: 'Trainers',
-                    data: [99, 132, 70, 89, 105]
-                }],
+                colors: ['#FFB800'],
+                series: [],
                 dataLabels: {
                     enabled: false,
                 },
+                title:{
+                    text: 'Overview'
+                },
+                noData: {
+                    text: 'Loading ...'
+                },
                 xaxis: {
-                    categories: ['Data Management', 'Digital Marketing', 'Transcription', 'Content Writing', 'Virtual Assistant'],
                     axisBorder: {
                         show: false,
                     },
@@ -337,10 +313,10 @@
                     show: true,
                 },
                 yaxis: {
-                    show: true,
+                    show: false,
                 },
                 legend: {
-                    show: true,
+                    show: false,
                 },
                 fill: {
                     opacity: 1
@@ -348,6 +324,12 @@
             }
             var chart = new ApexCharts(document.querySelector("#trainersOverview"), options);
             chart.render();
+            axios.get('/adm/get/trainers/records').then(function(response) {
+                chart.updateSeries([{
+                    name: 'Trainers',
+                    data: response.data
+                }])
+            })
         });
         $(function() {
             var options = {
@@ -362,24 +344,22 @@
                 plotOptions: {
                     bar: {
                         vertical: true,
-                        columnWidth: '50%',
+                        columnWidth: '30%',
                         endingShape: 'rounded'
                     },
                 },
                 colors: ['#FFB800'],
-                series: [{
-                    name: 'Sessions',
-                    data: [10, 13, 9, 15, 19]
-                }],
+                series: [],
                 dataLabels: {
                     enabled: false,
                 },
                 title:{
-                    text: 'Sessions Overview'
+                    text: 'Overview'
                 },
-                xaxis: {
-                    categories: ['Data Management', 'Digital Marketing', 'Transcription', 'Content Writing', 'Virtual Assistant'],
-                    axisBorder: {
+                noData: {
+                  text: 'Loading ...'
+                },
+                xaxis: {axisBorder: {
                         show: false,
                     },
                     axisTicks: {
@@ -401,6 +381,12 @@
             }
             var chart = new ApexCharts(document.querySelector("#sessionsOverview"), options);
             chart.render();
+            axios.get('/adm/get/sessions/records').then(function(response) {
+                chart.updateSeries([{
+                    name: 'Sessions',
+                    data: response.data
+                }])
+            })
         });
         $(function() {
             var options = {
@@ -415,20 +401,22 @@
                 plotOptions: {
                     bar: {
                         vertical: true,
-                        columnWidth: '50%',
+                        columnWidth: '30%',
                         endingShape: 'rounded'
                     },
                 },
                 colors: ['#FFB800'],
-                series: [ {
-                    name: 'Trainees',
-                    data: [99, 132, 70, 89, 105]
-                }],
+                series: [],
                 dataLabels: {
                     enabled: false,
                 },
+                title:{
+                    text: 'Overview'
+                },
+                noData: {
+                    text: 'Loading ...'
+                },
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'March', 'April', 'March'],
                     axisBorder: {
                         show: false,
                     },
@@ -440,7 +428,7 @@
                     show: true,
                 },
                 yaxis: {
-                    show: true,
+                    show: false,
                 },
                 legend: {
                     show: true,
@@ -451,168 +439,12 @@
             }
             var chart = new ApexCharts(document.querySelector("#traineesOverview"), options);
             chart.render();
-        });
-        $(function() {
-            var options = {
-                chart: {
-                    height: 200,
-                    type: 'donut',
-                    sparkline: {
-                        enabled: true
-                    },
-                },
-                series: [44, 55, 41, 17, 15],
-                colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffa21d", "#ff5252"],
-                legend: {
-                    show: false,
-                },
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '85%',
-                            labels: {
-                                show: true,
-                                name: {
-                                    show: true
-                                },
-                                value: {
-                                    show: true
-                                }
-                            }
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-            }
-            var chart = new ApexCharts(document.querySelector("#taskfull-dashboard-chart2"), options);
-            chart.render();
-        });
-        $(function() {
-            var options = {
-                chart: {
-                    height: 200,
-                    type: 'donut',
-                    sparkline: {
-                        enabled: true
-                    },
-                },
-                series: [44, 55, 41, 17, 15],
-                colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffa21d", "#ff5252"],
-                legend: {
-                    show: false,
-                },
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '85%',
-                            labels: {
-                                show: true,
-                                name: {
-                                    show: true
-                                },
-                                value: {
-                                    show: true
-                                }
-                            }
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-            }
-            var chart = new ApexCharts(document.querySelector("#taskfull-dashboard-chart1"), options);
-            chart.render();
-        });
-        $(function() {
-            var options = {
-                chart: {
-                    type: 'radialBar',
-                    offsetY: -20,
-                    sparkline: {
-                        enabled: true
-                    },
-                },
-                plotOptions: {
-                    radialBar: {
-                        startAngle: -90,
-                        endAngle: 90,
-                        track: {
-                            background: "#D7DFE9",
-                            strokeWidth: '97%',
-                            margin: 5, // margin is in pixels
-                            shadow: {
-                                enabled: true,
-                                top: 2,
-                                left: 0,
-                                color: '#999',
-                                opacity: 1,
-                                blur: 2
-                            }
-                        },
-                        dataLabels: {
-                            value: {
-                                offsetY: -40,
-                                fontSize: '22px'
-                            }
-                        }
-                    }
-                },
-                colors: ['#FFB800'],
-                fill: {
-                    type: 'solid',
-                },
-                series: [65],
-                labels: ['open tasks'],
-            }
-            var chart = new ApexCharts(document.querySelector("#opentask-taskchart1"), options);
-            chart.render();
-        });
-        $(function() {
-            var options = {
-                chart: {
-                    type: 'radialBar',
-                    offsetY: -20,
-                    sparkline: {
-                        enabled: true
-                    },
-                },
-                plotOptions: {
-                    radialBar: {
-                        startAngle: -90,
-                        endAngle: 90,
-                        track: {
-                            background: "#D7DFE9",
-                            strokeWidth: '97%',
-                            margin: 5, // margin is in pixels
-                            shadow: {
-                                enabled: true,
-                                top: 2,
-                                left: 0,
-                                color: '#999',
-                                opacity: 1,
-                                blur: 2
-                            }
-                        },
-                        dataLabels: {
-                            value: {
-                                offsetY: -40,
-                                fontSize: '22px'
-                            }
-                        }
-                    }
-                },
-                colors: ['#ff0b37'],
-                fill: {
-                    type: 'solid',
-                },
-                series: [65],
-                labels: ['overdue tasks'],
-            }
-            var chart = new ApexCharts(document.querySelector("#opentask-taskchart2"), options);
-            chart.render();
+            axios.get('/adm/get/trainees/records').then(function(response) {
+                chart.updateSeries([{
+                    name: 'Trainees',
+                    data: response.data
+                }])
+            })
         });
         $(function() {
             var start = moment().subtract(29, 'days');

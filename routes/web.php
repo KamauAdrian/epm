@@ -39,7 +39,7 @@ Route::group(['middleware'=>'super_admin'],function (){
 //    Route::get('/adm-dashboard',[App\Http\Controllers\SuperAdminController::class, 'index']);
     Route::get('/register/su-admin',[App\Http\Controllers\SuperAdminController::class, 'su_admin_register_su_admin']);
     Route::post('/adm-register-su-admin',[App\Http\Controllers\SuperAdminController::class, 'adm_save_su_admin']);
-    Route::post('/save-pm',[App\Http\Controllers\SuperAdminController::class, 'pm_save']);
+    Route::post('/adm/save/pm',[App\Http\Controllers\SuperAdminController::class, 'pm_save']);
     Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
     //shared responsibility
     //cms
@@ -90,6 +90,13 @@ Route::post('/update/password/{id}',[App\Http\Controllers\AdminController::class
 Route::group(['middleware'=>'admin'],function (){
     // index dashboard
     Route::get('/adm/main/dashboard',[App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/adm/get/admins/records',[App\Http\Controllers\AdminController::class, 'dashboard_actors']);
+    Route::get('/adm/get/pms/records',[App\Http\Controllers\AdminController::class, 'dashboard_pms']);
+    Route::get('/adm/get/cms/records',[App\Http\Controllers\AdminController::class, 'dashboard_cms']);
+    Route::get('/adm/get/trainers/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainers']);
+    Route::get('/adm/get/mentors/records',[App\Http\Controllers\AdminController::class, 'dashboard_mentors']);
+    Route::get('/adm/get/sessions/records',[App\Http\Controllers\AdminController::class, 'dashboard_sessions']);
+    Route::get('/adm/get/trainees/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainees']);
     //list admins
     Route::get('/adm/{id}/add/admin/role_name={role}',[App\Http\Controllers\AdminController::class, 'add_admin']);
     Route::get('/list/all/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'list']);
