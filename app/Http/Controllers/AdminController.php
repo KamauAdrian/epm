@@ -128,7 +128,7 @@ class AdminController extends Controller
     {
         $auth_admin = Auth::user();
         $role = DB::table('roles')->where('id',$role_id)->first();
-        $admins = User::orderBy('id','desc')->where('role_id',$role_id)->get();
+        $admins = User::orderBy('name')->where('role_id',$role_id)->get();
         return view('Epm.list-admins',compact('admins','role'));
     }
 
