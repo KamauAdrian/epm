@@ -31,6 +31,14 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
+    @if($auth_admin->role->name == 'Trainer')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">View PMO</a></li>
+            </ul>
+        </li>
+    @endif
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-sitemap"></i></span><span class="pcoded-mtext">Centers</span></a>
@@ -158,7 +166,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template')}}">Templates</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/templates')}}">Templates</a></li>
                 @if($pm_role)
                     <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/target_group_id='.$pm_role->id)}}">PMs</a></li>
                 @endif

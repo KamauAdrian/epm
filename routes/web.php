@@ -112,19 +112,25 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/update/adm/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adm_profile_update']);
     Route::post('/delete/admin/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adm_delete']);
     //reports
-    Route::get('/adm/{id}/view/reports/template',[App\Http\Controllers\AdminController::class, 'reports_templates']);
+    Route::get('/adm/{id}/view/reports/templates',[App\Http\Controllers\AdminController::class, 'reports_templates']);
     Route::get('/adm/{id}/create/new/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create']);
+    Route::get('/adm/{id}/create/new/pmo/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create_pmo']);
+    Route::get('/adm/{id}/create/new/cm/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create_cm']);
+    Route::get('/adm/{id}/create/new/trainer/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create_trainer']);
     Route::get('/actors',[App\Http\Controllers\AdminController::class, 'report_actors']);//json array of trainers
+    Route::get('/pmos',[App\Http\Controllers\AdminController::class, 'report_actors_pmos']);//json array of trainers
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
+    Route::post('/adm/{id}/generate/pmo/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate_pmos']);
     Route::get('/adm/{id}/view/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_view']);
     Route::get('/adm/{id}/edit/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_edit']);
     Route::post('/adm/{id}/update/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_update']);
     Route::get('/adm/{id}/view/reports/template_id={report_id}',[App\Http\Controllers\AdminController::class, 'reports']);
-    Route::get('/adm/{id}/view/reports/template_id={template_id}/report_id={report_id}',[App\Http\Controllers\AdminController::class, 'view_report']);
+    Route::get('/adm/{id}/view/reports/template_id={template_id}/target_group_id={target_group_id}/key={key}',[App\Http\Controllers\AdminController::class, 'view_reports_by_key']);
+    Route::get('/adm/{id}/view/reports/template_id={template_id}/report_id={report_id}',[App\Http\Controllers\AdminController::class, 'view_report_by_key']);
     Route::get('/adm/{id}/submit/report/{report_id}',[App\Http\Controllers\AdminController::class, 'submit_report']);
     Route::post('/adm/{id}/save/report/{report_id}',[App\Http\Controllers\AdminController::class, 'save_report']);
     Route::get('/adm/{id}/view/reports/target_group_id={target_group_id}',[App\Http\Controllers\AdminController::class, 'reports_by_role']);
-    Route::get('/adm/{id}/view/reports/template_id={template_id}/report_target_group_id={report_id}',[App\Http\Controllers\AdminController::class, 'reports_by_role_list']);
+    Route::get('/adm/{id}/view/reports/template_id={template_id}/report_target_group_id={report_target_group_id}',[App\Http\Controllers\AdminController::class, 'reports_by_role_list']);
     //trainers reports
     Route::get('/adm/{id}/view/trainer/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers']);
     Route::get('/adm/{id}/view/training/sessions/allocations',[App\Http\Controllers\AdminController::class, 'session_allocations']);
@@ -158,6 +164,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/update/center/{id}',[App\Http\Controllers\AdminController::class, 'update_center']);
     Route::post('/adm/delete/center/{id}',[App\Http\Controllers\AdminController::class, 'delete_center']);
     //trainers
+    Route::get('/adm/{id}/request/upload/trainers',[App\Http\Controllers\AdminController::class, 'request_upload_trainers']);
+    Route::get('/download/trainers/excel/template',[App\Http\Controllers\AdminController::class, 'download_trainers_excel_template']);
+    Route::post('/adm/{id}/upload/trainers',[App\Http\Controllers\AdminController::class, 'upload_trainers']);
     Route::get('/trainers',[App\Http\Controllers\AdminController::class, 'trainers']);//json array of trainers
     Route::post('/save-trainer',[App\Http\Controllers\AdminController::class, 'trainer_save']);
     Route::get('/adm/{id}/asses/trainer/competence',[App\Http\Controllers\TrainerController::class, 'asses_trainer']);

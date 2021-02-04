@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TraineesTemplateExport;
+use App\Exports\TrainersTemplateExport;
 use App\Http\Middleware\CenterManager;
 use App\Imports\TraineesImport;
+use App\Imports\TrainersImport;
 use App\Mail\CreatePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\WelcomeMail;
@@ -485,10 +487,30 @@ class AdminController extends Controller
         return response()->json($result);
     }
 
+    public function report_actors_pmos(){
+        $result = [];
+        $role = DB::table('roles')->where('name','Project Manager')->first();
+        if ($role){
+            $pmos = DB::table('users')->where('role_id',$role->id)->get();
+            if (!empty($pmos)){
+                foreach ($pmos as $pmo){
+                    $result[]=$pmo;
+                }
+            }
+        }
+        return response()->json($result);
+    }
+
     public function report_template_create($id){
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
             return view('Epm.Reports.template-create');
+        }
+    }
+    public function report_template_create_pmo($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin'){
+            return view('Epm.Reports.template-create-pmo');
         }
     }
 
@@ -549,6 +571,29 @@ class AdminController extends Controller
         }
     }
 
+    public function report_template_generate_pmos(Request $request,$id){
+        dd($request->all());
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
+            //validate the request
+//            $this->validate($request,[
+//                'name'=>'required',
+//                'required_fields'=>'required',
+//                'questions'=>'required',
+//                'target_groups'=>'required',
+//            ]);
+            //create a new report template(add questions to a report)
+            $report_template = new ReportTemplate();
+            $report_template->name = $request->name;
+            $pms = $request->target_groups;
+            //option one for required fields
+            $report_questions = $request->questions;
+            $questions = [];
+            $template_generated = $report_template->save();
+//            return redirect('/adm/'.$id.'/view/reports/template')->with('success','Report Template Created successfully');
+        }
+    }
+
     public function report_template_view($id,$template_id){
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
@@ -571,6 +616,23 @@ class AdminController extends Controller
         $template = ReportTemplate::find($report_id);
         return view('Epm.Reports.reports',compact('reports','template'));
 
+    }
+    public function view_reports_by_key($id,$template_id,$target_group_id,$key){
+        //get all reports submitted using report_id
+        $admin = Auth::user();
+        $role = Role::find($target_group_id);
+        if ($admin->id == $id) {
+            $reports_raw = DB::table('reports')
+                ->where('report_template_id',$template_id)
+                ->where('report_target_group_id',$target_group_id)->get()
+                ->groupBy(function ($val){return Carbon::parse($val->created_at)->format('M Y W');});
+            $reports = $reports_raw[$key];
+//            $report = DB::table('reports')->where('id', $report_id)->first();
+            $template = ReportTemplate::find($template_id);
+            $key_name = $key;
+            return view('Epm.Reports.reports-by-key-list', compact('reports', 'template','role','key_name'));
+//            return view('Epm.Reports.view-report', compact('report', 'template'));
+        }
     }
     public function view_report($id,$template_id,$report_id){
         //get all reports submitted using report_id
@@ -666,7 +728,10 @@ class AdminController extends Controller
         $role = Role::find($report_target_group_id);
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            $reports = DB::table('reports')->where('report_template_id',$template_id)->where('report_target_group_id',$report_target_group_id)->get();
+            $reports = DB::table('reports')
+                ->where('report_template_id',$template_id)
+                ->where('report_target_group_id',$report_target_group_id)->get()
+                ->groupBy(function ($val){return Carbon::parse($val->created_at)->format('M Y W');});
             $template = ReportTemplate::find($template_id);
             return view('Epm.Reports.reports-by-role-list',compact('reports','template','role'));
         }
@@ -886,6 +951,62 @@ $admin_user = Auth::user();
         return redirect('/list/all/admins/role_id='.$cm_user->role_id)->with('success',$request->session()->get('success_message'));
     }
 
+    }
+
+    public function request_upload_trainers($id){
+        return view('Epm.Trainers.upload-trainers');
+    }
+    public function download_trainers_excel_template()
+    {
+        return Excel::download(new TrainersTemplateExport(), 'trainers.xlsx');
+    }
+
+    public function upload_trainers(Request $request,$id){
+        $messages = [
+            'trainers.required'=>'Please Select trainers Excel File to Upload',
+        ];
+        $this->validate($request,[
+            'trainers'=>'required',
+        ],$messages);
+        $trainers_excel = Excel::toArray(new TrainersImport(), $request->file('trainers'));
+        $trainers_raw = [];
+        foreach ($trainers_excel as $trainer_excel){
+            $trainers_raw[] = $trainer_excel;
+        }
+        $trainers = array_slice($trainers_raw[0],1);
+        $role = new Role();
+        $new_trainer_role = '';
+        $role->name = 'Trainer';
+        //check if role already created
+        $exists_role = DB::table('roles')->where('name',$role->name)->first();
+        if ($exists_role){
+            $new_trainer_role = $exists_role->id;
+        }else{
+            $role->save();
+            $new_trainer_role= $role->id;
+        }
+        foreach ($trainers as $trainer){
+            $new_trainer = new User();
+            $new_trainer->name =$trainer[0];
+            $new_trainer->employee_number = $trainer[1];
+            $new_trainer->email = $trainer[2];
+            $new_trainer->phone = $trainer[3];
+            $new_trainer->gender=$trainer[4];
+            $new_trainer->county=$trainer[5];
+            $new_trainer->is_admin=1;
+            $new_trainer->role_id=$new_trainer_role;
+            $saved_trainer = $new_trainer->save();
+            if ($saved_trainer){
+                $data = [
+                    'user_id'=>$new_trainer->id,
+                    'name'=>$new_trainer->name,
+                    'email'=>$new_trainer->email,
+                    'phone'=>$new_trainer->phone,
+                ];
+                Mail::to($new_trainer->email)->send(new CreatePassword($data));
+            }
+        }
+        return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers uploaded Successfully');
     }
 
     public function trainer_save(Request $request)

@@ -24,7 +24,19 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/add-pm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/add-pm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/reports-by-role-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/reports-by-role-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/templates.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/templates.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-physical-training-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-virtual-training-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/add-trainer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/add-trainer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/Reports/role-reports-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/Reports/role-reports-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +183,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EPM" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/Epm/Trainers" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
@@ -179,19 +191,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/assets" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Mentors" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Sessions" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/PMs" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Epm" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Mentors" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
+      <recent name="$PROJECT_DIR$/public/assets" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Mentors" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Sessions" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/PMs" />
     </key>
   </component>
   <component name="RunManager">
@@ -274,7 +286,7 @@
       <workItem from="1612283537107" duration="670000" />
       <workItem from="1612324520142" duration="18764000" />
       <workItem from="1612357298241" duration="3501000" />
-      <workItem from="1612411399582" duration="331000" />
+      <workItem from="1612411399582" duration="43423000" />
     </task>
     <servers />
   </component>
@@ -335,10 +347,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1610344476754" />
-    <state x="347" y="159" key="run.anything.popup" timestamp="1611895779267">
+    <state x="347" y="159" key="run.anything.popup" timestamp="1612416546314">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1611895779267" />
+    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1612416546314" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1612173104308">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

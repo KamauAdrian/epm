@@ -58,31 +58,32 @@ $auth_admin = auth()->user();
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-center mb-0 ">
+                        <table id="reportsList" class="table table-center mb-0">
                                 <thead>
-                                <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>Reports</th> <th>Total Reports</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                             @if($reports)
                                 <tbody>
-                                @foreach($reports as $report)
+                                @foreach($reports as $key=>$report)
                                     <?php
-                                    $format_date = date('l dS M Y',strtotime($report->date_of_report));
-                                    $report_admin = \App\Models\User::find($report->user_id);
+                                        $group = explode(' ',$key);
+                                        $week = $group[0].' '.$group[1].' Week '.$group[2];
                                     ?>
                                     <tr>
                                         <td>
                                             <div class="media">
                                                 <div class="media-body ml-3 align-self-center">
-                                                    <h5 class="mb-1">{{$report->name}}</h5>
-                                                    <p class="mb-0">{{$report_admin->email}}</p>
+                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$template->id.'/target_group_id='.$role->id.'/key='.$key)}}">
+                                                        <h5 class="mb-1">{{$week}}</h5>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{$format_date}}</td>
+                                        <td>{{count($report)}}</td>
                                         @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                             <td class="text-right">
                                                 <div class="float-right">
-                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$template->id.'/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report">
+                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$template->id.'/target_group_id='.$role->id.'/key='.$key)}}" class="btn btn-sm btn-outline-info" title="View Report">
                                                         <span><i class="fa fa-list"></i></span>
                                                     </a>
                                                     <a href="#!" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
@@ -91,7 +92,7 @@ $auth_admin = auth()->user();
                                         @else
                                             <td class="text-right">
                                                 <div class="float-right">
-                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$template->id.'/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
+                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$template->id.'/target_group_id='.$role->id.'/key='.$key)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
                                                 </div>
                                             </td>
                                         @endif

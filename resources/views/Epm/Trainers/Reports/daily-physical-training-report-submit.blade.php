@@ -65,8 +65,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
-                                        <span class="text-danger">{{$errors->first('date')}}</span>
+                                        <?php $date = date('Y-m-d'); ?>
+                                        <input type="date" name="date" class="form-control" value="{{$date}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

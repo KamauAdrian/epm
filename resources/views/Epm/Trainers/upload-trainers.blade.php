@@ -14,26 +14,26 @@
                 <div class="auth-side-form">
                     <div class="auth-content">
                         <div class="text-center">
-                            <h1 class="f-w-400">Upload Trainees to Session</h1>
+                            <h1 class="f-w-400">Upload Trainers</h1>
                         </div>
-                        <form action="{{url('/adm/'.$auth_admin->id.'/session/'.$session->id.'/save/uploaded/trainees')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/upload/trainers')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="">Select Trainees Excel File</label>
-                                        <input type="file" class="form-control" name="trainees">
-                                        <span class="text-danger">{{$errors->first('trainees')}}</span>
+                                        <label for="">Select Trainers Excel File</label>
+                                        <input type="file" class="form-control" name="trainers">
+                                        <span class="text-danger">{{$errors->first('trainers')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <a href="{{url('/download/trainees/excel/template')}}" class="text-success">
-                                        Download excel Template
+                                    <a href="{{url('/download/trainers/excel/template')}}" class="text-success">
+                                        Download Trainers Excel Template
                                     </a>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="submit" value="Upload" class="float-right btn btn-outline-info">
+                                        <input type="submit" value="Upload Trainers" class="float-right btn btn-outline-info">
                                     </div>
                                 </div>
                             </div>

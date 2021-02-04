@@ -65,8 +65,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
-                                        <span class="text-danger">{{$errors->first('date')}}</span>
+                                        <?php
+                                        $date = date('Y-m-d');
+                                        ?>
+                                        <input type="date" name="date" class="form-control" value="{{$date}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -78,24 +80,24 @@
                                     <div class="form-group">
                                         <label>Online Work Category trained </label>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Data Management"
+                                            <input type="radio" class="form-check-input" value="Data Entry/Management"
                                                    id="checkCategory1" name="training_category"
-                                                   <?php if ($auth_admin->speciality == 'Data Management'){ ?> checked="checked"
+                                                   <?php if ($auth_admin->speciality == 'Data Entry/Management'){ ?> checked="checked"
                                             <?php } ?>
                                             >
-                                            <label for="checkCategory1" class="form-check-label">Data Management</label>
+                                            <label for="checkCategory1" class="form-check-label">Data Entry/Management</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Digital Marketing"
-                                                   id="checkCategory2" name="training_category"
-                                                   <?php if ($auth_admin->speciality == 'Digital Marketing'){ ?> checked="checked"
+                                            <input type="radio" class="form-check-input" value="Virtual Assistant"
+                                                   id="checkCategory5" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Virtual Assistant'){ ?> checked="checked"
                                             <?php } ?>
                                             >
-                                            <label for="checkCategory2" class="form-check-label">Digital Marketing</label>
+                                            <label for="checkCategory5" class="form-check-label">Virtual Assistant</label>
                                         </div>
                                     </div>
                                 </div>
@@ -114,27 +116,28 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Content Writing"
-                                                   id="checkCategory4" name="training_category"
-                                                   <?php if ($auth_admin->speciality == 'Content Writing'){ ?> checked="checked"
+                                            <input type="radio" class="form-check-input" value="Digital Marketing/Ecommerce"
+                                                   id="checkCategory2" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Digital Marketing/Ecommerce'){ ?> checked="checked"
                                             <?php } ?>
                                             >
-                                            <label for="checkCategory4" class="form-check-label">Content Writing</label>
+                                            <label for="checkCategory2" class="form-check-label">Digital Marketing/Ecommerce</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Virtual Assistant"
-                                                   id="checkCategory5" name="training_category"
-                                                   <?php if ($auth_admin->speciality == 'Virtual Assistant'){ ?> checked="checked"
+                                            <input type="radio" class="form-check-input" value="Content Writing and Translation"
+                                                   id="checkCategory4" name="training_category"
+                                                   <?php if ($auth_admin->speciality == 'Content Writing and Translation'){ ?> checked="checked"
                                             <?php } ?>
                                             >
-                                            <label for="checkCategory5" class="form-check-label">Virtual Assistant</label>
+                                            <label for="checkCategory4" class="form-check-label">Content Writing and Translation</label>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>How many trainees attended morning session?</label>

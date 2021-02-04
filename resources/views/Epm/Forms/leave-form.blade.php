@@ -61,7 +61,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Date of Leave Application</label>
-                                                <input type="date" name="application_date" class="form-control" value="{{old('application_date')}}" required>
+                                                <?php $application_date = date('Y-m-d'); ?>
+                                                <input type="date" name="application_date" class="form-control" value="{{$application_date}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

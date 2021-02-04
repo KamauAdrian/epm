@@ -85,8 +85,8 @@
                     return {
                         selectedCategory: null,
                         categories: [
-                            'Data Management','Digital Marketing','Transcription',
-                            'Writing and Translation','Virtual Assistant'
+                            'Data Entry/Management','Virtual Assistant','Transcription',
+                            'Digital Marketing/Ecommerce','Content Writing and Translation'
                         ],
                     }
                 },

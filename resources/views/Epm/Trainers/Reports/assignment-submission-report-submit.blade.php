@@ -52,52 +52,19 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
-                                        <span class="text-danger">{{$errors->first('date')}}</span>
+                                        <?php $date = date('Y-m-d'); ?>
+                                        <input type="date" name="date" class="form-control" value="{{$date}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Training Job Category</label>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Data Management"
+                                            <input type="radio" class="form-check-input" value="Data Entry/Management"
                                                    id="checkCategory1" name="speciality"
-                                                   <?php if ($trainer->speciality=='Data Management'){?>
+                                                   <?php if ($trainer->speciality=='Data Entry/Management'){?>
                                                    checked="checked"<?php } ?>>
-                                            <label for="checkCategory1" class="form-check-label">Data Management</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Digital Marketing"
-                                                   id="checkCategory2" name="speciality"
-                                                   <?php if ($trainer->speciality=='Digital Marketing'){?>
-                                                   checked="checked"<?php } ?>>
-                                            <label for="checkCategory2" class="form-check-label">Digital Marketing</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Transcription"
-                                                   id="checkCategory3" name="speciality"
-                                                   <?php if ($trainer->speciality=='Transcription'){?>
-                                                   checked="checked"<?php } ?>>
-                                            <label for="checkCategory3" class="form-check-label">Transcription</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input" value="Content Writing"
-                                                   id="checkCategory4" name="speciality"
-                                                   <?php if ($trainer->speciality=='Content Writing'){?>
-                                                   checked="checked"<?php } ?>>
-                                            <label for="checkCategory4" class="form-check-label">Content Writing</label>
+                                            <label for="checkCategory1" class="form-check-label">Data Entry/Management</label>
                                         </div>
                                     </div>
                                 </div>
@@ -105,10 +72,47 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Virtual Assistant"
-                                                   id="checkCategory5" name="speciality"
-                                                   <?php if ($trainer->speciality=='Virtual Assistant'){?>
-                                                   checked="checked"<?php } ?>>
+                                                   id="checkCategory5" name="training_category"
+                                                   <?php if ($trainer->speciality == 'Virtual Assistant'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
                                             <label for="checkCategory5" class="form-check-label">Virtual Assistant</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" value="Transcription"
+                                                   id="checkCategory3" name="training_category"
+                                                   <?php if ($trainer->speciality == 'Transcription'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
+                                            <label for="checkCategory3" class="form-check-label">Transcription</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" value="Digital Marketing/Ecommerce"
+                                                   id="checkCategory2" name="training_category"
+                                                   <?php if ($trainer->speciality == 'Digital Marketing/Ecommerce'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
+                                            <label for="checkCategory2" class="form-check-label">Digital Marketing/Ecommerce</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" value="Content Writing and Translation"
+                                                   id="checkCategory4" name="training_category"
+                                                   <?php if ($trainer->speciality == 'Content Writing and Translation'){ ?> checked="checked"
+                                            <?php } ?>
+                                            >
+                                            <label for="checkCategory4" class="form-check-label">Content Writing and Translation</label>
                                         </div>
                                     </div>
                                 </div>
