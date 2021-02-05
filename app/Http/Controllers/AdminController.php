@@ -658,6 +658,8 @@ class AdminController extends Controller
 
         $appraisals= PmoPerformanceAppraisalReport::where('id',$appraisals_ids)->get();
 
+        dd($appraisals);
+
 
             return view('Epm.PMs.list-pmo-performance-appraisals',compact('appraisals'));
     }
