@@ -86,14 +86,14 @@
                                         }
 
                                         ?>
-                                        @if($pmo_status ==1)
+                                        @if($appraisal_supervise)
                                             <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>
                                         @else
-                                            <a href="#!">
-                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">Supervise PMO</button>
-                                            </a>
+                                        <a href="#!">
+                                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">Supervise PMO</button>
+                                        </a>
                                         @endif
                                     </td>
                                 </tr>
