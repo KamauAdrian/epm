@@ -86,33 +86,43 @@
                                         <td>1</td>
                                         <td>Program 1 Management- <br /> Operationalization of <br />AYECs. –40%</td>
                                         <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td><input type="text" name="self_comment[]" required></td>
+                                        <td>
+                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>Leadership – Support <br /> to Ajira Program Assistant <br /> Managers & Centre <br /> Managers. –
                                             30%</td>
                                         <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td><input type="text" name="self_comment[]"  required></td>
+                                        <td>
+                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>Networking, Linkages <br /> & Partnerships in <br /> AYECs. – 20%</td>
                                         <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td><input type="text" name="self_comment[]"  required></td>
+                                        <td>
+                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>Reporting, Monitoring <br /> & Evaluation. –
                                             10%</td>
                                         <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td><input type="text" name="self_comment[]" required></td>
+                                        <td>
+                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>TOTALS</td>
                                         <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td><input type="text" name="self_comment[]"  required></td>
+                                        <td>
+                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</td>
