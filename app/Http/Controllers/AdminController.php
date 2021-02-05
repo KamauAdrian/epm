@@ -609,7 +609,7 @@ class AdminController extends Controller
             $appraisals = PmoPerformanceAppraisalReport::all();
             return view('Epm.SuAdmins.performance-appraisals-list',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
-            $appraisals = PmoPerformanceAppraisal::where('pmo_id',$id)->get();
+            $appraisals = PmoPerformanceAppraisalReport::where('pmo_id',$id)->get();
             return view('Epm.PMs.performance-appraisals-list',compact('appraisals'));
         }
 

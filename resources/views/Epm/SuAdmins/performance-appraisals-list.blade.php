@@ -83,7 +83,7 @@
                                     <td class="text-right">
                                         <a href="#!">
 {{--                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">--}}
-                                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">view Appraisal</button>
+                                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
                                         </a>
                                     </td>
                                 </tr>
