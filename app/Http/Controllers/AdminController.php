@@ -661,6 +661,7 @@ class AdminController extends Controller
     }
     public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
         $appraisal = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('id',$appraisal_id)->first();
+
         if ($appraisal){
             $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
          return view('Epm.PMs.performance-appraisal-submit-supervisor',compact('pmo'));
@@ -756,7 +757,7 @@ class AdminController extends Controller
                 $report->save();
             }
         }
-        return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Updated Successfully');
+        return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance Appraisal Updated Successfully');
     }
 
     public function report_template_generate_pmos(Request $request,$id){

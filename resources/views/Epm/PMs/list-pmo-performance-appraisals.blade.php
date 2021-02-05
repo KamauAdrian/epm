@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <?php use App\Models\PmoPerformanceAppraisal;$auth_admin = auth()->user();
+    <?php use App\Models\PmoPerformanceAppraisal;use App\Models\PmoPerformanceAppraisalReport;$auth_admin = auth()->user();
     $appraisal_fill = \App\Models\PmoPerformanceAppraisalReport::where('pmo_id',$auth_admin->id)->first();
     ?>
     {{--    @include('Epm.layouts.Reports.templates')--}}
@@ -61,8 +61,10 @@
                                         {{$appraisal->supervisor}}
                                     </td>
                                     <?php
-                                    $pmo_status = $appraisal->pmo_status;
-                                    $supervisor_status = $appraisal->supervisor_status;
+                                    $report = PmoPerformanceAppraisal::where('pmo_id',$appraisal->pmo_id)->first();
+                                    $pmo_status = $report->pmo_status;
+                                    $supervisor_status = $report->supervisor_status;
+//                                    dd($appraisal,$pmo_status,$supervisor_status);
                                     ?>
                                     <td>
                                         @if($pmo_status ==1)
@@ -87,7 +89,7 @@
                                         }
 
                                         ?>
-                                        @if($pmo_status ==1)
+                                        @if($pmo_status ==1 && $supervisor_status==0)
                                             <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>

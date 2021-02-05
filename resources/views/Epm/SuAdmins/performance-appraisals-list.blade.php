@@ -73,6 +73,7 @@
                                     <?php
                                     $pmo_status = $appraisal->pmo_status;
                                     $supervisor_status = $appraisal->supervisor_status;
+                                    dd($appraisal,$pmo_status,$supervisor_status);
                                     ?>
                                     <td>
                                         @if($pmo_status ==1)
