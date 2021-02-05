@@ -61,7 +61,7 @@
                                     </td>
                                     <td>
                                         <?php
-                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisalReport::find(5)->supervisors;
+                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisalReport::find($appraisal->id)->supervisors;
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->name;
