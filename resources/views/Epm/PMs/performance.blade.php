@@ -134,7 +134,7 @@
                                             <td colspan="6">Individual’s overall comments:</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6"><input type="text" name="individual_comment" style="border: none;" required></td>
+                                            <td colspan="6"><input type="text" name="self_overall_comment" style="border: none;" required></td>
                                         </tr>
                                         <tr>
                                             <td>Signature:</td>
@@ -143,7 +143,7 @@
                                             </td>
                                             <td >Date</td>
                                             <td colspan="2">
-                                                <input type="date" name="date" style="border: none;" required>
+                                                <input type="date" name="self_sign_date" style="border: none;" required>
                                             </td>
                                         </tr>
                                         <tr>
@@ -169,7 +169,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="6">
-                                                <input type="text" style="border: none" placeholder="">
+                                                <input type="text" name="supervisor_overall_comment" style="border: none" placeholder="">
                                             </td>
                                         </tr>
                                         <tr>
@@ -179,7 +179,7 @@
                                             </td>
                                             <td >Date</td>
                                             <td colspan="2">
-                                                <input type="date" name="date" style="border: none;" required>
+                                                <input type="date" name="supervisor_sign_date" style="border: none;" required>
                                             </td>
                                         </tr>
                                         </tbody>

@@ -12,6 +12,11 @@ use App\Mail\ForgotPassword;
 use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\EmployeeLeaveApplication;
+use App\Models\PmoAppraisalSelfScore;
+use App\Models\PmoAppraisalSupervisorScore;
+use App\Models\PmoPerformanceAppraisal;
+use App\Models\PmoPerformanceAppraisalReport;
+use App\Models\PmoPerformanceAppraisalScore;
 use App\Models\ProjectManager;
 use App\Models\Report;
 use App\Models\ReportActivity;
@@ -34,6 +39,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpParser\Node\Expr\New_;
+use function GuzzleHttp\Promise\all;
 use function PHPUnit\Framework\never;
 
 class AdminController extends Controller
@@ -571,19 +577,162 @@ class AdminController extends Controller
         }
     }
 
-    public function pmo_performance_appraisal_submit(){
-
-        return view('Epm.PMs.performance');
+    public function adm_create_performance_appraisal($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin'){
+            return view('Epm.SuAdmins.performance-appraisals-assign');
+        }
 
     }
-    public function pmo_performance_appraisal_save(Request $request){
-        dd($request->all());
-        return view('Epm.PMs.performance');
+    public function adm_save_performance_appraisal(Request $request,$id){
 
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin'){
+            $this->validate($request,[
+                'pmo'=>'required',
+                'supervisor'=>'required',
+            ]);
+            $appraisal = new PmoPerformanceAppraisalReport();
+            $appraisal->pmo = $request->pmo;
+            $appraisal->pmo_id = $request->pmo_id;
+            $appraisal->supervisor = $request->supervisor;
+            $appraisal->supervisor_id = $request->supervisor_id;
+            $appraisal->save();
+            return redirect('/adm/'.$id.'/view/performance/appraisals');
+        }
+
+    }
+
+    public function performance_appraisals_all($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin'){
+            $appraisals = PmoPerformanceAppraisalReport::all();
+            return view('Epm.SuAdmins.performance-appraisals-list',compact('appraisals'));
+        }elseif ($admin->role->name == 'Project Manager'){
+            $appraisals = PmoPerformanceAppraisal::where('pmo_id',$id)->get();
+            return view('Epm.PMs.performance-appraisals-list',compact('appraisals'));
+        }
+
+    }
+
+    public function performance_appraisal($id,$appraisal_id){
+        $appraisal = PmoPerformanceAppraisal::find($appraisal_id);
+        return view('Epm.PMs.performance-appraisals-view',compact('appraisal'));
+
+    }
+
+    public function performance_appraisal_submit(){
+
+        return view('Epm.PMs.performance-appraisal-submit-pmo');
+
+    }
+    public function supervisor_view_performance_appraisal($id){
+//            return view('Epm.PMs.performance-appraisals-supervise');
+    }
+    public function supervisor_view_pending_performance_appraisal($id){
+        $appraisals = PmoPerformanceAppraisalReport::where('supervisor_id',$id)->get();
+//        dd($appraisals);
+            return view('Epm.PMs.list-pmo-performance-appraisals',compact('appraisals'));
+    }
+    public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
+        $appraisal = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('supervisor_id',$id)->first();
+        if ($appraisal){
+            $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
+         return view('Epm.PMs.performance-appraisal-submit-supervisor',compact('pmo'));
+        }
+    }
+
+
+
+    public function pmo_performance_appraisal_save(Request $request,$id){
+//        dd($request->all());
+
+        $appraisal  = new PmoPerformanceAppraisal();
+        $pmo = User::find($id);
+        $appraisal->name = $pmo->name;
+        $appraisal->pmo_id = $pmo->id;
+        $appraisal->title = $request->title;
+        $appraisal->employee_number = $pmo->employee_number;
+        $appraisal->department = $pmo->department;
+        $appraisal->self_overall_comment = $request->self_overall_comment;
+        $appraisal->self_sign_date = $request->self_sign_date;
+        $appraisal->self_signature = $request->self_signature;
+        $appraisal->pmo_status = 1;
+//        $appraisal->report_id = '';
+        $appraisal_saved = $appraisal->save();
+        $self_scores = [];
+        foreach ($request->self_score as $score_self){
+            $self_scores[] = $score_self;
+        }
+        $self_comments = [];
+        foreach ($request->self_comment as $comment_self){
+            $self_comments[] = $comment_self;
+        }
+        if ($appraisal_saved){
+            $appraisal->id;
+            $scores = [];
+            foreach ($self_scores as $self_score){
+                $scores[] = ['self_score'=>$self_score,'appraisal_id'=>$appraisal->id];
+            }
+            foreach ($self_comments as $key=>$self_comment){
+                $scores[$key] += ['self_comment'=>$self_comment];
+            }
+//            dd($scores);
+            foreach ($scores as $key=>$score){
+//                dd($score);
+                $report = new PmoAppraisalSelfScore();
+                $report->self_score = $score['self_score'];
+                $report->self_comment = $score['self_comment'];
+                $report->appraisal_id = $score['appraisal_id'];
+                $report->save();
+            }
+        }
+        return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Submitted Successfully');
+    }
+
+    public function supervisor_performance_appraisal_save(Request $request,$id,$appraisal_id,$pmo_id){
+//        dd($request->all());
+        $appraisal  = PmoPerformanceAppraisal::find($appraisal_id);
+        $supervisor = User::find($id);
+        $data = [
+            'supervisor_id'=>$supervisor->id,
+            'supervisor_overall_comment'=>$request->self_overall_comment,
+            'supervisor_sign_date'=>$request->supervisor_sign_date,
+            'supervisor_signature'=>$request->supervisor_signature,
+            'improvement_areas'=>$request->improvement_areas,
+            'supervisor_status'=>1,
+        ];
+        $appraisal_updated = DB::table('pmo_performance_appraisals')->update($data);
+        $supervisor_scores = [];
+        foreach ($request->supervisor_score as $score_super){
+            $supervisor_scores[] = $score_super;
+        }
+        $supervisor_comments = [];
+        foreach ($request->supervisor_comment as $comment_super){
+            $supervisor_comments[] = $comment_super;
+        }
+        if ($appraisal_updated){
+            $scores = [];
+            foreach ($supervisor_scores as $supervisor_score){
+                $scores[] = ['supervisor_score'=>$supervisor_score,'appraisal_id'=>$appraisal_id];
+            }
+            foreach ($supervisor_comments as $key=>$supervisor_comment){
+                $scores[$key] += ['supervisor_comment'=>$supervisor_comment];
+            }
+            foreach ($scores as $key=>$score){
+//                dd($score);
+                $report = new PmoAppraisalSupervisorScore();
+                $report->supervisor_score = $score['supervisor_score'];
+                $report->supervisor_comment = $score['supervisor_comment'];
+                $report->appraisal_id = $score['appraisal_id'];
+                $report->save();
+            }
+        }
+        return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Updated Successfully');
     }
 
     public function report_template_generate_pmos(Request $request,$id){
-        dd($request->all());
+//        dd($request->all());
         $name = $request->name;
         $pmo_id = $request->pmo;
         $question_type = $request->pmo;

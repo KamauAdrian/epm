@@ -1,6 +1,6 @@
 <!--sidebar nav -->
 <?php
-    $auth_admin = auth()->user();
+use App\Models\PmoPerformanceAppraisal;$auth_admin = auth()->user();
 $pm_role = \App\Models\Role::where('name','Project Manager')->first();
 $cm_role = \App\Models\Role::where('name','Center Manager')->first();
 $trainer_role = \App\Models\Role::where('name','Trainer')->first();
@@ -167,6 +167,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/templates')}}">Templates</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">Performance Appraisals</a></li>
                 @if($pm_role)
                     <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/target_group_id='.$pm_role->id)}}">PMs</a></li>
                 @endif
@@ -184,7 +185,23 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal')}}">Performance Appraisal</a></li>
+                <?php
+                $appraisal_fill = \App\Models\PmoPerformanceAppraisalReport::where('pmo_id',$auth_admin->id)->first();
+                $appraisal_supervise = \App\Models\PmoPerformanceAppraisalReport::where('supervisor_id',$auth_admin->id)->first();
+                $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
+                ?>
+                    <li>
+                        <a href="#!">Appraisals</a>
+                        <ul class="pcoded-submenu">
+                            @if($appraisal_fill)
+                                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">My Appraisals</a></li>
+                            @endif
+                            @if($appraisal_supervise)
+                                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/pending/pmo/performance/supervision/appraisals')}}">Supervise PMO</a></li>
+{{--                                <li><a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">Supervise PMO</a></li>--}}
+                            @endif
+                        </ul>
+                    </li>
                 <li><a href="#!">Centers</a></li>
             </ul>
         </li>

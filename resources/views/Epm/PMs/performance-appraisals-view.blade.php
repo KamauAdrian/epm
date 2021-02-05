@@ -1,0 +1,228 @@
+@extends('Epm.layouts.master')
+
+@section('styles')
+    <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+@endsection
+
+@section('content')
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12" style="padding-left: 100px; padding-right: 100px">
+                <div class="text-center">
+                    <h1 class="f-w-400">YEAR 2020 PERFORMANCE APPRAISAL</h1>
+                </div>
+
+                <?php
+                $auth_admin = auth()->user();
+                $self_scores = [];
+                $supervisor_scores = [];
+                foreach ($appraisal->selfScores as $score_raw_self){
+                    $self_scores[] = $score_raw_self;
+                }
+                foreach ($appraisal->supervisorScores as $score_raw_supervisor){
+                    $supervisor_scores[] = $score_raw_supervisor;
+                }
+                ?>
+                <center>
+                    @if(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @elseif(session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                </center>
+                {{--                <form action="{{url('/adm/'.$auth_admin->id.'/save/report/'.$report->id)}}" method="post">--}}
+                <form action="#!" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->name}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" name="title" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->title}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employee Number</label>
+                                <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$appraisal->employee_number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Department</label>
+                                <input type="text" name="departmment" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$appraisal->department}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="6"><h3>Note: (Refer to KPI’s Document when filling this Appraisal)</h3></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Measure - <br>
+                                            Key Performance Indicator</th>
+                                        <th>Self Score (%)</th>
+                                        <th>Your comment</th>
+                                        <th>Supervisor Score (%)</th>
+                                        <th>Supervisor  comment</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Program 1 Management- <br /> Operationalization of AYECs. – <br />40%</td>
+                                        <td><input type="text" name="self_score[]" value="{{$self_scores[0]->self_score}}" readonly></td>
+                                        <td><input type="text" name="self_comment[]" value="{{$self_scores[0]->self_comment}}"  readonly></td>
+                                        <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[0]->supervisor_score}}" readonly></td>
+                                        <td><input type="text" name="supervisor_comment[]"  value="{{$supervisor_scores[0]->supervisor_comment}}" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Leadership – Support <br /> to Ajira Program Assistant <br /> Managers & Centre <br /> Managers. –
+                                            30%</td>
+                                        <td><input type="text" name="self_score[]"  value="{{$self_scores[1]->self_score}}" readonly></td>
+                                        <td><input type="text" name="self_comment[]"  value="{{$self_scores[2]->self_comment}}" readonly></td>
+                                        <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[1]->supervisor_score}}" readonly></td>
+                                        <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[1]->supervisor_comment}}" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Networking, Linkages & Partnerships in AYECs. – 20%</td>
+                                        <td><input type="text" name="self_score[]" value="{{$self_scores[2]->self_score}}" readonly></td>
+                                        <td><input type="text" name="self_comment[]" value="{{$self_scores[2]->self_comment}}" readonly></td>
+                                        <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[2]->supervisor_score}}" readonly></td>
+                                        <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[2]->supervisor_comment}}"readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Reporting, Monitoring <br /> & Evaluation. –
+                                            10%</td>
+                                        <td><input type="text" name="self_score[]" value="{{$self_scores[3]->self_score}}" readonly></td>
+                                        <td><input type="text" name="self_comment[]" value="{{$self_scores[3]->self_comment}}" readonly></td>
+                                        <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[3]->supervisor_score}}" readonly></td>
+                                        <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[3]->supervisor_comment}}" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>TOTALS</td>
+                                        <td><input type="text" name="self_score[]" value="{{$self_scores[4]->self_score}}" readonly></td>
+                                        <td><input type="text" name="self_comment[]" value="{{$self_scores[4]->self_comment}}" readonly></td>
+                                        <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[4]->supervisor_score}}" readonly></td>
+                                        <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[4]->supervisor_comment}}" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="5">Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">Individual’s overall comments:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <textarea name="" id="" cols="100%" rows="3" readonly>
+                                                {{$appraisal->self_overall_comment}}
+                                            </textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Signature:</td>
+                                        <td colspan="2">
+                                                    <input type="text" name="" value="{{$appraisal->self_signature}}" readonly>
+                                        </td>
+                                        <td >Date</td>
+                                        <td colspan="2">
+                                            <input type="date" name="self_sign_date" value="{{$appraisal->self_sign_date}}" style="border: none;" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            Your signature indicates that this Performance Review has been discussed with you and that you are in agreement with the rating awarded.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">Areas that Need Improvement/ Development (to be filled by Supervisor)</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <textarea name="" id="" cols="100%" rows="5" readonly>
+                                                {{$appraisal->improvement_areas}}
+                                            </textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">Supervisor’s overall comments:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <textarea name="" id="" cols="100%" rows="5" readonly>
+                                                {{$appraisal->supervisor_overall_comment}}
+                                            </textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Signature:</td>
+                                        <td colspan="2">
+                                                <input type="text" name="" value="{{$appraisal->supervisor_signature}}" readonly>
+                                        </td>
+                                        <td >Date</td>
+                                        <td colspan="2">
+                                            <input type="date" name="supervisor_sign_date" value="{{$appraisal->supervisor_sign_date}}" style="border: none;" readonly>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('js')
+    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
+    <script src="{{url('assets/dist/vue.js')}}"></script>
+    <script src="{{url('assets/dist/axios.js')}}"></script>
+    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
+    <script>
+        var i = 0;
+        $(document).on("click", "#addActivity", function(){
+            i++
+            console.log(i);
+            var activity = $('.addNewActivity');
+            console.log(activity);
+            activity.last().after('<tr class="addNewActivity">'+activity.first().html()+'</tr>');
+        });
+
+        $(document).on("click", "#addNewQuestion", function(){
+            var question = $('.addReportQuestion');
+            question.last().after('<div class="col-sm-12 addReportQuestion">'+question.first().html()+'</div><br />');
+        });
+    </script>
+    <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
+@endsection
+
+
+
+
+
+
+
