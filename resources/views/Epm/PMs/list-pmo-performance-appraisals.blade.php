@@ -64,7 +64,6 @@
                                     $report = PmoPerformanceAppraisal::where('pmo_id',$appraisal->pmo_id)->first();
                                     $pmo_status = $report->pmo_status;
                                     $supervisor_status = $report->supervisor_status;
-//                                    dd($appraisal,$pmo_status,$supervisor_status);
                                     ?>
                                     <td>
                                         @if($pmo_status ==1)
@@ -93,10 +92,14 @@
                                             <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>
-                                        @else
-                                        <a href="#!">
-                                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">Supervise PMO</button>
+                                        @elseif($pmo_status ==1 && $supervisor_status==1)
+                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
+                                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">View Appraisal</button>
                                         </a>
+                                        @else
+                                            <a href="#!">
+                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">Supervise PMO</button>
+                                            </a>
                                         @endif
                                     </td>
                                 </tr>
