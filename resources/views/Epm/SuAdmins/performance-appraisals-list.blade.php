@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table" id="reportTemplates">
+                    <table class="table" id="appraisalsTable">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -95,4 +95,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $('#myDataTable').appraisalsTable();
+    </script>
 @endsection

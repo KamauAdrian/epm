@@ -19,6 +19,8 @@ class CreatePmoPerformanceAppraisalReportsTable extends Migration
             $table->integer('pmo_id')->unsigned();
             $table->string('supervisor');
             $table->integer('supervisor_id')->unsigned();
+            $table->string('pmo_status')->nullable()->default(0);
+            $table->string('supervisor_status')->nullable()->default(0);
             $table->timestamps();
         });
     }

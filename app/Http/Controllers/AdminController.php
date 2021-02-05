@@ -660,6 +660,7 @@ class AdminController extends Controller
         $appraisal->pmo_status = 1;
 //        $appraisal->report_id = '';
         $appraisal_saved = $appraisal->save();
+        $pmo_report_submitted =
         $self_scores = [];
         foreach ($request->self_score as $score_self){
             $self_scores[] = $score_self;
