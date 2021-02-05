@@ -17,6 +17,7 @@ use App\Models\PmoAppraisalSupervisorScore;
 use App\Models\PmoPerformanceAppraisal;
 use App\Models\PmoPerformanceAppraisalReport;
 use App\Models\PmoPerformanceAppraisalScore;
+use App\Models\PmoSupervisor;
 use App\Models\ProjectManager;
 use App\Models\Report;
 use App\Models\ReportActivity;
@@ -587,17 +588,38 @@ class AdminController extends Controller
     public function adm_save_performance_appraisal(Request $request,$id){
 
         $admin = User::find($id);
+//        dd($request->all());
         if ($admin->role->name == 'Su Admin'){
+            $messages = [
+                'supervisor_ids.required'=>'Please Select PMO Supervisor',
+            ];
             $this->validate($request,[
                 'pmo'=>'required',
-                'supervisor'=>'required',
-            ]);
+                'supervisor_ids'=>'required',
+            ],$messages);
+//            dd($request->all());
             $appraisal = new PmoPerformanceAppraisalReport();
+            $supervisors = [];
+            foreach ($request->supervisor_ids as $supervisor_id){
+                $supervisors[] = ['supervisor_id'=>$supervisor_id];
+            }
+            foreach ($request->supervisor_names as $key=>$supervisor_name){
+                $supervisors[$key] += ['name'=>$supervisor_name];
+            }
             $appraisal->pmo = $request->pmo;
             $appraisal->pmo_id = $request->pmo_id;
-            $appraisal->supervisor = $request->supervisor;
-            $appraisal->supervisor_id = $request->supervisor_id;
-            $appraisal->save();
+            $appraisal->pmo_status = 0;
+            $appraisal->supervisor_status = 0;
+            $saved = $appraisal->save();
+            if ($saved){
+                foreach ($supervisors as $supervisor){
+                    $new_supervisor = new PmoSupervisor();
+                    $new_supervisor->name = $supervisor['name'];
+                    $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
+                    $new_supervisor->appraisal_form_id = $appraisal->id;
+                    $new_supervisor->save();
+                }
+            }
             return redirect('/adm/'.$id.'/view/performance/appraisals');
         }
 

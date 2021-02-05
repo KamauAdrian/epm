@@ -60,6 +60,9 @@
                                         {{$appraisal->pmo}}
                                     </td>
                                     <td>
+                                        <?php
+                                        $supervisors = '';
+                                        ?>
                                         {{$appraisal->supervisor}}
                                     </td>
                                     <?php

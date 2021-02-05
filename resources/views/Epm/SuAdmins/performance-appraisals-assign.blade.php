@@ -48,10 +48,10 @@
                                         <multiselect :options="pmos" v-model="selectedPmo"
                                                      placeholder="Search" label="name" track-by="id"
                                                      :searchable="true" :close-on-select="true"
-                                                     multiple>
+                                                     >
                                         </multiselect>
-                                        <input type="hidden" name="pmo_id" v-for="pmo in selectedPmo"  :value="pmo.id">
-                                        <input type="hidden" name="pmo" v-for="pmo in selectedPmo"  :value="pmo.name">
+                                        <input type="hidden" name="pmo_id" v-for="pmo in selectedPmo"  :value="selectedPmo.id">
+                                        <input type="hidden" name="pmo" v-for="pmo in selectedPmo"  :value="selectedPmo.name">
                                         <span class="text-danger">{{$errors->first('pmo')}}</span>
                                     </div>
                                 </div>
@@ -63,9 +63,9 @@
                                                      :searchable="true" :close-on-select="true"
                                                      multiple>
                                         </multiselect>
-                                        <input type="hidden" name="supervisor_id" v-for="supervisor in selectedSupervisor"  :value="supervisor.id">
-                                        <input type="hidden" name="supervisor" v-for="supervisor in selectedSupervisor"  :value="supervisor.name">
-                                        <span class="text-danger">{{$errors->first('supervisor')}}</span>
+                                        <input type="hidden" name="supervisor_ids[]" v-for="supervisor in selectedSupervisor"  :value="supervisor.id">
+                                        <input type="hidden" name="supervisor_names[]" v-for="supervisor in selectedSupervisor"  :value="supervisor.name">
+                                        <span class="text-danger">{{$errors->first('supervisor_ids')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
