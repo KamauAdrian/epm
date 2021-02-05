@@ -91,8 +91,13 @@
                                         <td>Program 1 Management- <br /> Operationalization of AYECs. – <br />40%</td>
                                         <td><input type="text" name="self_score[]" value="{{$self_scores[0]->self_score}}" readonly></td>
                                         <td><input type="text" name="self_comment[]" value="{{$self_scores[0]->self_comment}}"  readonly></td>
-                                        <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[0]->supervisor_score}}" readonly></td>
-                                        <td><input type="text" name="supervisor_comment[]"  value="{{$supervisor_scores[0]->supervisor_comment}}" readonly></td>
+                                        @if($$supervisor_scores)
+                                            <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[0]->supervisor_score}}" readonly></td>
+                                            <td><input type="text" name="supervisor_comment[]"  value="{{$supervisor_scores[0]->supervisor_comment}}" readonly></td>
+                                        @else
+                                            <td><input type="text" name="supervisor_score[]" readonly></td>
+                                            <td><input type="text" name="supervisor_comment[]" readonly></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -100,16 +105,26 @@
                                             30%</td>
                                         <td><input type="text" name="self_score[]"  value="{{$self_scores[1]->self_score}}" readonly></td>
                                         <td><input type="text" name="self_comment[]"  value="{{$self_scores[2]->self_comment}}" readonly></td>
+                                        @if($$supervisor_scores)
                                         <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[1]->supervisor_score}}" readonly></td>
                                         <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[1]->supervisor_comment}}" readonly></td>
+                                        @else
+                                            <td><input type="text" name="supervisor_score[]" readonly></td>
+                                            <td><input type="text" name="supervisor_comment[]" readonly></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>Networking, Linkages & Partnerships in AYECs. – 20%</td>
                                         <td><input type="text" name="self_score[]" value="{{$self_scores[2]->self_score}}" readonly></td>
                                         <td><input type="text" name="self_comment[]" value="{{$self_scores[2]->self_comment}}" readonly></td>
+                                        @if($$supervisor_scores)
                                         <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[2]->supervisor_score}}" readonly></td>
                                         <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[2]->supervisor_comment}}"readonly></td>
+                                        @else
+                                            <td><input type="text" name="supervisor_score[]" readonly></td>
+                                            <td><input type="text" name="supervisor_comment[]" readonly></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -117,16 +132,26 @@
                                             10%</td>
                                         <td><input type="text" name="self_score[]" value="{{$self_scores[3]->self_score}}" readonly></td>
                                         <td><input type="text" name="self_comment[]" value="{{$self_scores[3]->self_comment}}" readonly></td>
+                                        @if($$supervisor_scores)
                                         <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[3]->supervisor_score}}" readonly></td>
                                         <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[3]->supervisor_comment}}" readonly></td>
+                                        @else
+                                            <td><input type="text" name="supervisor_score[]" readonly></td>
+                                            <td><input type="text" name="supervisor_comment[]" readonly></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>TOTALS</td>
                                         <td><input type="text" name="self_score[]" value="{{$self_scores[4]->self_score}}" readonly></td>
                                         <td><input type="text" name="self_comment[]" value="{{$self_scores[4]->self_comment}}" readonly></td>
+                                        @if($$supervisor_scores)
                                         <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[4]->supervisor_score}}" readonly></td>
                                         <td><input type="text" name="supervisor_comment[]" value="{{$supervisor_scores[4]->supervisor_comment}}" readonly></td>
+                                        @else
+                                            <td><input type="text" name="supervisor_score[]" readonly></td>
+                                            <td><input type="text" name="supervisor_comment[]" readonly></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td></td>
