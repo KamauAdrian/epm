@@ -80,13 +80,14 @@
                                     </td>
                                     <td class="text-right">
                                         <?php
-                                        $appraisal_supervise = \App\Models\PmoPerformanceAppraisalReport::where('supervisor_id',$auth_admin->id)->first();
+                                        $appraisal_supervise = \App\Models\PmoPerformanceAppraisalReport::where('id',$appraisal->id)->first();
+//                                        dd($appraisal_supervise);
                                         if ($appraisal_supervise){
                                             $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
                                         }
 
                                         ?>
-                                        @if($appraisal_supervise)
+                                        @if($pmo_status ==1)
                                             <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>

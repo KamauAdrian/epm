@@ -655,10 +655,7 @@ class AdminController extends Controller
 
         $appraisals_ids = PmoSupervisor::where('supervisor_id',$id)->pluck('appraisal_form_id');
 
-
         $appraisals= PmoPerformanceAppraisalReport::where('id',$appraisals_ids)->get();
-
-
 
             return view('Epm.PMs.list-pmo-performance-appraisals',compact('appraisals'));
     }
