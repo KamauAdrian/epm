@@ -120,7 +120,10 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/actors',[App\Http\Controllers\AdminController::class, 'report_actors']);//json array of trainers
     Route::get('/pmos',[App\Http\Controllers\AdminController::class, 'report_actors_pmos']);//json array of trainers
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
-    Route::post('/adm/{id}/generate/pmo/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate_pmos']);
+    Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
+    Route::get('/adm/{id}/view/performance/appraisal',[App\Http\Controllers\AdminController::class, 'pmo_performance_appraisal']);
+    Route::get('/adm/{id}/submit/performance/appraisal',[App\Http\Controllers\AdminController::class, 'pmo_performance_appraisal_submit']);
+    Route::post('/adm/{id}/save/performance/appraisal',[App\Http\Controllers\AdminController::class, 'pmo_performance_appraisal_save']);
     Route::get('/adm/{id}/view/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_view']);
     Route::get('/adm/{id}/edit/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_edit']);
     Route::post('/adm/{id}/update/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_update']);

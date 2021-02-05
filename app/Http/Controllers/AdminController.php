@@ -571,8 +571,23 @@ class AdminController extends Controller
         }
     }
 
+    public function pmo_performance_appraisal_submit(){
+
+        return view('Epm.PMs.performance');
+
+    }
+    public function pmo_performance_appraisal_save(Request $request){
+        dd($request->all());
+        return view('Epm.PMs.performance');
+
+    }
+
     public function report_template_generate_pmos(Request $request,$id){
         dd($request->all());
+        $name = $request->name;
+        $pmo_id = $request->pmo;
+        $question_type = $request->pmo;
+
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
             //validate the request

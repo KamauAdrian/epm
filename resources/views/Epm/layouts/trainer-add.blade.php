@@ -55,7 +55,7 @@
                         placeholder="Select Gender"
                         :searchable="true" :close-on-select="true">
                 </gender>
-                <input type="hidden"name="gender" :value="selectedGender">
+                <input type="hidden" name="gender" :value="selectedGender">
             </div>
         </div>
         <div class="col-sm-12">

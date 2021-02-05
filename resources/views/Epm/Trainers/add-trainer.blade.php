@@ -101,7 +101,6 @@
             if (yes.checked==true){
                 supplies.style.display='block';
             }
-
         }
         function hideInputSupplies(){
             var no = document.getElementById('office_not_supplied');

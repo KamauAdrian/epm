@@ -162,7 +162,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     <li class="nav-item">
         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Projects</span></a>
     </li>
-    @if($auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Su Admin')
+    @if($auth_admin->role->name == 'Su Admin')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
@@ -177,6 +177,14 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                     <li><a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/reports')}}">Trainers</a></li>
                 @endif
                 <li><a href="#!">Teams</a></li>
+                <li><a href="#!">Centers</a></li>
+            </ul>
+        </li>
+    @elseif($auth_admin->role->name == 'Project Manager')
+        <li class="nav-item pcoded-hasmenu">
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
+            <ul class="pcoded-submenu">
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal')}}">Performance Appraisal</a></li>
                 <li><a href="#!">Centers</a></li>
             </ul>
         </li>
