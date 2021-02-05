@@ -33,7 +33,7 @@
                     @endif
                 </center>
                 {{--                <form action="{{url('/adm/'.$auth_admin->id.'/save/report/'.$report->id)}}" method="post">--}}
-                <form action="{{url('adm/'.$auth_admin->id.'/save/my/performance/appraisal')}}" method="post">
+                <form action="{{url('adm/'.$auth_admin->id.'/save/my/performance/appraisal/appraisal_id='.$appraisal->id)}}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">

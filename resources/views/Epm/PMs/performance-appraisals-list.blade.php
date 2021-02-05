@@ -57,7 +57,9 @@
                                             {{$appraisal->pmo}}
                                         </td>
                                         <td>
-                                            <?php $s_name = \App\Models\User::find($appraisal->supervisor_id);  ?>
+                                            <?php $s_name = \App\Models\User::find($appraisal->supervisor_id);
+                                            ?>
+
                                             {{$appraisal->supervisor}}
                                         </td>
                                         <?php
@@ -79,12 +81,15 @@
                                             @endif
                                         </td>
                                         <td class="text-right">
+                                            <?php
+                                            $report = \App\Models\PmoPerformanceAppraisal::where('pmo_status',1)->where('pmo_id',$auth_admin->id)->first();
+                                            ?>
                                             @if($appraisal->pmo_status==1)
-                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">
-                                                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">view Appraisal</button>
+                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
+                                                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
                                                     </a>
                                             @elseif($appraisal->pmo_status==0)
-                                                    <a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal')}}">
+                                                    <a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal/appraisal_id='.$appraisal->id)}}">
                                                         <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Appraisal</button>
                                                     </a>
                                             @endif

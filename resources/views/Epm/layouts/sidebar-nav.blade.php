@@ -187,7 +187,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <ul class="pcoded-submenu">
                 <?php
                 $appraisal_fill = \App\Models\PmoPerformanceAppraisalReport::where('pmo_id',$auth_admin->id)->first();
-                $appraisal_supervise = \App\Models\PmoPerformanceAppraisalReport::where('supervisor_id',$auth_admin->id)->first();
+                $appraisal_supervise = \App\Models\PmoSupervisor::where('supervisor_id',$auth_admin->id)->first();
                 if ($appraisal_supervise){
                     $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
                 }

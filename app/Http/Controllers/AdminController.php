@@ -643,9 +643,9 @@ class AdminController extends Controller
 
     }
 
-    public function performance_appraisal_submit(){
-
-        return view('Epm.PMs.performance-appraisal-submit-pmo');
+    public function performance_appraisal_submit($id,$appraisal_id){
+        $appraisal = PmoPerformanceAppraisalReport::find($appraisal_id);
+        return view('Epm.PMs.performance-appraisal-submit-pmo',compact('appraisal'));
 
     }
     public function supervisor_view_performance_appraisal($id){
@@ -664,11 +664,8 @@ class AdminController extends Controller
         }
     }
 
-
-
-    public function pmo_performance_appraisal_save(Request $request,$id){
+    public function pmo_performance_appraisal_save(Request $request,$id,$appraisal_id){
 //        dd($request->all());
-
         $appraisal  = new PmoPerformanceAppraisal();
         $pmo = User::find($id);
         $appraisal->name = $pmo->name;
@@ -692,6 +689,11 @@ class AdminController extends Controller
             $self_comments[] = $comment_self;
         }
         if ($appraisal_saved){
+            $report = PmoPerformanceAppraisalReport::find($appraisal_id);
+            $data = [
+                'pmo_status'=>1,
+            ];
+            DB::table('pmo_performance_appraisal_reports')->where('id',$report->id)->update($data);
             $appraisal->id;
             $scores = [];
             foreach ($self_scores as $self_score){
