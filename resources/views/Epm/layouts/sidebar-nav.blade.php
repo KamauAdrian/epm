@@ -188,7 +188,9 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <?php
                 $appraisal_fill = \App\Models\PmoPerformanceAppraisalReport::where('pmo_id',$auth_admin->id)->first();
                 $appraisal_supervise = \App\Models\PmoPerformanceAppraisalReport::where('supervisor_id',$auth_admin->id)->first();
-                $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
+                if ($appraisal_supervise){
+                    $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
+                }
                 ?>
                     <li>
                         <a href="#!">Appraisals</a>
