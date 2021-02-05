@@ -660,7 +660,7 @@ class AdminController extends Controller
             return view('Epm.PMs.list-pmo-performance-appraisals',compact('appraisals'));
     }
     public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
-        $appraisal = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('supervisor_id',$id)->first();
+        $appraisal = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('id',$appraisal_id)->first();
         if ($appraisal){
             $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
          return view('Epm.PMs.performance-appraisal-submit-supervisor',compact('pmo'));
