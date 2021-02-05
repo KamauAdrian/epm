@@ -54,11 +54,11 @@
                                 @foreach($appraisals as $appraisal)
                                     <tr>
                                         <td>
-                                            {{$appraisal->self_sign_date}}
+                                            {{$appraisal->pmo_name}}
                                         </td>
                                         <td>
                                             <?php $s_name = \App\Models\User::find($appraisal->supervisor_id);  ?>
-                                            {{$s_name->name}}
+                                            {{$appraisal->supervisor_name}}
                                         </td>
                                         <?php
                                         $pmo_status = $appraisal->pmo_status;
