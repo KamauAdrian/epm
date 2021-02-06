@@ -629,6 +629,7 @@ class AdminController extends Controller
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
             $appraisals = PmoPerformanceAppraisalReport::all();
+//            dd($appraisals);
             return view('Epm.SuAdmins.performance-appraisals-list',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
             $appraisals = PmoPerformanceAppraisalReport::where('pmo_id',$id)->get();
@@ -681,6 +682,7 @@ class AdminController extends Controller
         $appraisal->self_sign_date = $request->self_sign_date;
         $appraisal->self_signature = $request->self_signature;
         $appraisal->pmo_status = 1;
+        $appraisal->appraisal_report_id = $appraisal_id;
 //        $appraisal->report_id = '';
         $appraisal_saved = $appraisal->save();
         $pmo_report_submitted =

@@ -72,9 +72,10 @@
                                     </td>
                                     <?php
 //                                    dd($appraisal);
-                                    $report = \App\Models\PmoPerformanceAppraisal::where('pmo_id',$appraisal->pmo_id)->first();
-                                    $pmo_status = $report->pmo_status;
-                                    $supervisor_status = $report->supervisor_status;
+//
+//                                    dd($report);
+                                    $pmo_status = $appraisal->pmo_status;
+                                    $supervisor_status = $appraisal->supervisor_status;
 //                                    dd($appraisal,$pmo_status,$supervisor_status);
                                     ?>
                                     <td>
@@ -93,9 +94,16 @@
                                     </td>
                                     <td class="text-right">
 {{--                                        <a href="#!">--}}
-                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
-                                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
-                                        </a>
+                                        @if($pmo_status ==1)
+                                            <?php
+                                            $report = \App\Models\PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal->id)->first();
+                                            ?>
+                                        @if($report)
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
+                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
+                                            </a>
+                                        @endif
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
