@@ -65,7 +65,7 @@
                                         <?php
                                         $supervisors_raw = \App\Models\PmoSupervisor::where('appraisal_form_id',$appraisal->appraisal_report_id)->get();
 //                                        $supervisors_raw = $appraisal->supervisors;
-                                        dd($appraisal,$supervisors_raw);
+//                                        dd($appraisal,$supervisors_raw);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->name;
