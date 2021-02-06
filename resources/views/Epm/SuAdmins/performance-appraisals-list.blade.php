@@ -97,9 +97,10 @@
                                         @if($pmo_status ==1)
                                             <?php
                                             $report = \App\Models\PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal->id)->first();
+//                                            dd($report);
                                             ?>
                                             @if($report)
-                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
+                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">
                                                     <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
                                                 </a>
                                             @endif
