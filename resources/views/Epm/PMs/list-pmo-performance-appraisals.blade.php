@@ -63,7 +63,7 @@
                                     </td>
                                     <td>
                                         <?php
-                                        $supervisors_raw = \App\Models\PmoSupervisor::where('supervisor_id',$appraisal->appraisal_report_id)->get();
+                                        $supervisors_raw = \App\Models\PmoSupervisor::where('appraisal_form_id',$appraisal->appraisal_report_id)->get();
 //                                        $supervisors_raw = $appraisal->supervisors;
                                         dd($appraisal,$supervisors_raw);
                                         $supervisors = [];
