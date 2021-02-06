@@ -105,8 +105,8 @@
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="#!">
-                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">View Appraisal</button>
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/template/appraisal_id='.$appraisal->id)}}">
+                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
                                             </a>
                                         @endif
                                     </td>

@@ -125,6 +125,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/add/pmo/performance/appraisal',[App\Http\Controllers\AdminController::class, 'adm_save_performance_appraisal']);
     Route::get('/adm/{id}/view/performance/appraisals',[App\Http\Controllers\AdminController::class, 'performance_appraisals_all']);
     Route::get('/adm/{id}/view/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'performance_appraisal']);
+    Route::get('/adm/{id}/view/performance/appraisal/template/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'performance_appraisal_template']);
     Route::get('/adm/{id}/submit/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'performance_appraisal_submit']);
     Route::get('/adm/{id}/view/my/performance/appraisals',[App\Http\Controllers\AdminController::class, 'performance_appraisals_all']);
     Route::post('/adm/{id}/save/my/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'pmo_performance_appraisal_save']);

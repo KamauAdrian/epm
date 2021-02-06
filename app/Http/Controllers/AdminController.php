@@ -673,6 +673,10 @@ class AdminController extends Controller
         return view('Epm.PMs.performance-appraisals-view',compact('appraisal'));
 
     }
+    public function performance_appraisal_template($id,$appraisal_id){
+        $report = PmoPerformanceAppraisalReport::where('id',$appraisal_id)->first();
+        return view('Epm.PMs.appraisal-template',compact('report'));
+    }
 
     public function performance_appraisal_submit($id,$appraisal_id){
         $appraisal = PmoPerformanceAppraisalReport::find($appraisal_id);
