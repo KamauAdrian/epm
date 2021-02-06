@@ -53,8 +53,9 @@
                             <tbody>
                             @foreach($reports as $report)
                                 <?php
+
                                 $appraisal = PmoPerformanceAppraisalReport::find($report->appraisal_form_id);
-//                                dd($appraisal);
+                                dd($appraisal,$report);
                                 ?>
                                 <tr>
 

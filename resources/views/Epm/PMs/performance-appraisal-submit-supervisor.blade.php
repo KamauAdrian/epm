@@ -51,7 +51,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$pmo->name}}" readonly>
+                                <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$pmo->pmo}}" readonly>
                             </div>
                         </div>
                         <div class="col-sm-6">

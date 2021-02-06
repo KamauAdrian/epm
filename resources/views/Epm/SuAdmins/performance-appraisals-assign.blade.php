@@ -75,19 +75,19 @@
                                         <label>Appraisal Questions</label>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_one" placeholder="Add Question one">
+                                        <input type="text" class="form-control" name="question_one" placeholder="Add Question One">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_two" placeholder="Add Question two">
+                                        <input type="text" class="form-control" name="question_two" placeholder="Add Question Two">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_three" placeholder="Add Question three">
+                                        <input type="text" class="form-control" name="question_three" placeholder="Add Question Three">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_four" placeholder="Add Question four">
+                                        <input type="text" class="form-control" name="question_four" placeholder="Add Question Four">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_five" placeholder="Add Question five">
+                                        <input type="text" class="form-control" name="question_five" placeholder="Add Question Five">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
