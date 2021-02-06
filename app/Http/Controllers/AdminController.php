@@ -730,7 +730,6 @@ class AdminController extends Controller
 //        dd($appraisal);
         $supervisor = User::find($id);
         $data = [
-            'supervisor_id'=>$supervisor->id,
             'supervisor_overall_comment'=>$request->self_overall_comment,
             'supervisor_sign_date'=>$request->supervisor_sign_date,
             'supervisor_signature'=>$request->supervisor_signature,
@@ -753,7 +752,7 @@ class AdminController extends Controller
             DB::table('pmo_performance_appraisal_reports')->where('id',$appraisal_id)->update($data);
             $scores = [];
             foreach ($supervisor_scores as $supervisor_score){
-                $scores[] = ['supervisor_score'=>$supervisor_score,'appraisal_id'=>$appraisal_id];
+                $scores[] = ['supervisor_score'=>$supervisor_score,'appraisal_id'=>$appraisal->id];
             }
             foreach ($supervisor_comments as $key=>$supervisor_comment){
                 $scores[$key] += ['supervisor_comment'=>$supervisor_comment];

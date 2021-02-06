@@ -19,9 +19,11 @@
                 foreach ($appraisal->selfScores as $score_raw_self){
                     $self_scores[] = $score_raw_self;
                 }
+//                dd($self_scores);
                 foreach ($appraisal->supervisorScores as $score_raw_supervisor){
                     $supervisor_scores[] = $score_raw_supervisor;
                 }
+//                dd($supervisor_scores);
                 ?>
                 <center>
                     @if(session()->has('success'))
