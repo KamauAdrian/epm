@@ -63,8 +63,8 @@
                                     </td>
                                     <td>
                                         <?php
-//                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisal::find($appraisal->id)->supervisors;
-                                        $supervisors_raw = $appraisal->supervisors;
+                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisalReport::find($appraisal->appraisal_report_id)->supervisors;
+//                                        $supervisors_raw = $appraisal->supervisors;
                                         dd($appraisal,$supervisors_raw);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
