@@ -55,7 +55,7 @@
                                 <?php
 
                                 $appraisal = PmoPerformanceAppraisalReport::find($report->id);
-                                dd($appraisal,$report);
+//                                dd($appraisal,$report);
                                 ?>
                                 <tr>
 
