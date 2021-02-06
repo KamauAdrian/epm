@@ -54,7 +54,7 @@
                             @foreach($reports as $report)
                                 <?php
                                 $appraisal = PmoPerformanceAppraisal::where('appraisal_report_id',$report->appraisal_form_id)->first();
-                                dd($appraisal,$report);
+//                                dd($appraisal,$report);
                                 ?>
                                 <tr>
 
@@ -64,7 +64,7 @@
                                     <td>
                                         <?php
 //                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisal::find($appraisal->id)->supervisors;
-                                        $supervisors_raw = $appraisal->id->supervisors;
+                                        $supervisors_raw = $appraisal->supervisors;
                                         dd($appraisal,$supervisors_raw);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
