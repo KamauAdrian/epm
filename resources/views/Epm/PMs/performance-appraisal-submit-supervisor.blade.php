@@ -14,6 +14,7 @@
 
                 <?php
                 $auth_admin = auth()->user();
+//                dd($pmo);
                 ?>
                 <center>
                     @if(session()->has('success'))
@@ -35,8 +36,9 @@
                 {{--                <form action="{{url('/adm/'.$auth_admin->id.'/save/report/'.$report->id)}}" method="post">--}}
                 <form action="{{url('adm/'.$auth_admin->id.'/save/pmo/performance/appraisal/appraisal_id='.$pmo->id.'/'.$pmo->pmo_id)}}" method="post">
                     <?php
-
-                    $appraisal_report = \App\Models\PmoPerformanceAppraisal::find($pmo->id);
+//                    dd($pmo->id,$pmo->pmo_id);
+                        $appraisal = \App\Models\PmoPerformanceAppraisal::where('appraisal_report_id',$pmo->id)->first();
+                    $appraisal_report = \App\Models\PmoPerformanceAppraisal::find($appraisal->id);
                     $scores=[];
                     foreach ($appraisal_report->selfScores as $score){
                        $scores[] =$score;

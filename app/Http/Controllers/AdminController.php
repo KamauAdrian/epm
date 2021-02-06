@@ -632,14 +632,16 @@ class AdminController extends Controller
 //            dd($appraisals);
             return view('Epm.SuAdmins.performance-appraisals-list',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
+
             $appraisals = PmoPerformanceAppraisalReport::where('pmo_id',$id)->get();
+//            dd($appraisals);
             return view('Epm.PMs.performance-appraisals-list',compact('appraisals'));
         }
 
     }
 
     public function performance_appraisal($id,$appraisal_id){
-        $appraisal = PmoPerformanceAppraisal::find($appraisal_id);
+        $appraisal = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal_id)->first();
         return view('Epm.PMs.performance-appraisals-view',compact('appraisal'));
 
     }
@@ -656,18 +658,17 @@ class AdminController extends Controller
 
 //        $appraisals_ids = PmoSupervisor::where('supervisor_id',$id)->pluck('appraisal_form_id');
 
-        $appraisals= PmoPerformanceAppraisalReport::where('supervisor_id',$id)->get();
+        $reports= PmoSupervisor::where('supervisor_id',$id)->get();
 //        dd($appraisals);
-
-            return view('Epm.PMs.list-pmo-performance-appraisals',compact('appraisals'));
+            return view('Epm.PMs.list-pmo-performance-appraisals',compact('reports'));
     }
     public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
-        $appraisal = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('id',$appraisal_id)->first();
+//        dd($appraisal_id,$pmo_id);
 
-        if ($appraisal){
-            $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
+        $pmo = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('id',$appraisal_id)->first();
+//            $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
          return view('Epm.PMs.performance-appraisal-submit-supervisor',compact('pmo'));
-        }
+
     }
 
     public function pmo_performance_appraisal_save(Request $request,$id,$appraisal_id){
@@ -723,8 +724,10 @@ class AdminController extends Controller
     }
 
     public function supervisor_performance_appraisal_save(Request $request,$id,$appraisal_id,$pmo_id){
-//        dd($request->all());
-        $appraisal  = PmoPerformanceAppraisal::find($appraisal_id);
+        $appraisal_report = PmoPerformanceAppraisalReport::find($appraisal_id);
+//        dd($appraisal_report);
+        $appraisal  = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal_report->id)->first();
+//        dd($appraisal);
         $supervisor = User::find($id);
         $data = [
             'supervisor_id'=>$supervisor->id,
@@ -734,7 +737,7 @@ class AdminController extends Controller
             'improvement_areas'=>$request->improvement_areas,
             'supervisor_status'=>1,
         ];
-        $appraisal_updated = DB::table('pmo_performance_appraisals')->update($data);
+        $appraisal_updated = DB::table('pmo_performance_appraisals')->where('id',$appraisal->id)->update($data);
         $supervisor_scores = [];
         foreach ($request->supervisor_score as $score_super){
             $supervisor_scores[] = $score_super;
@@ -744,6 +747,10 @@ class AdminController extends Controller
             $supervisor_comments[] = $comment_super;
         }
         if ($appraisal_updated){
+            $data = [
+                'supervisor_status'=>1,
+            ];
+            DB::table('pmo_performance_appraisal_reports')->where('id',$appraisal_id)->update($data);
             $scores = [];
             foreach ($supervisor_scores as $supervisor_score){
                 $scores[] = ['supervisor_score'=>$supervisor_score,'appraisal_id'=>$appraisal_id];

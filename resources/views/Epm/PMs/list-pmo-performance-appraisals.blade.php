@@ -49,10 +49,15 @@
                         </tr>
                         </thead>
 
-                        @if($appraisals)
+                        @if($reports)
                             <tbody>
-                            @foreach($appraisals as $appraisal)
+                            @foreach($reports as $report)
+                                <?php
+                                $appraisal = PmoPerformanceAppraisalReport::find($report->appraisal_form_id);
+//                                dd($appraisal);
+                                ?>
                                 <tr>
+
                                     <td>
                                         {{$appraisal->pmo}}
                                     </td>
@@ -88,11 +93,11 @@
                                     </td>
                                     <td class="text-right">
                                         @if($pmo_status ==1 && $supervisor_status==0)
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal->id.'/pmo='.$appraisal->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>
                                         @elseif($pmo_status ==1 && $supervisor_status==1)
-                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
+                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">
                                             <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">View Appraisal</button>
                                         </a>
                                         @else
