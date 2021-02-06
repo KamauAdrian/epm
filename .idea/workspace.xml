@@ -22,7 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="" />
+    <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -276,7 +278,7 @@
       <workItem from="1612554079577" duration="1636000" />
       <workItem from="1612581570389" duration="20317000" />
       <workItem from="1612604452836" duration="2707000" />
-      <workItem from="1612607871247" duration="973000" />
+      <workItem from="1612607871247" duration="1344000" />
     </task>
     <servers />
   </component>
