@@ -14,6 +14,7 @@
 
                 <?php
                 $auth_admin = auth()->user();
+//                dd($appraisal);
                 ?>
                 <center>
                     @if(session()->has('success'))
@@ -82,48 +83,56 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Program 1 Management- <br /> Operationalization of <br />AYECs. –40%</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Leadership – Support <br /> to Ajira Program Assistant <br /> Managers & Centre <br /> Managers. –
-                                            30%</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Networking, Linkages <br /> & Partnerships in <br /> AYECs. – 20%</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Reporting, Monitoring <br /> & Evaluation. –
-                                            10%</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>TOTALS</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
+                                    @if($appraisal->question_one)
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{$appraisal->question_one}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($appraisal->question_two)
+                                        <tr>
+                                            <td>2</td>
+                                            <td>{{$appraisal->question_two}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($appraisal->question_three)
+                                        <tr>
+                                            <td>3</td>
+                                            <td>{{$appraisal->question_three}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($appraisal->question_four)
+                                        <tr>
+                                            <td>4</td>
+                                            <td>{{$appraisal->question_four}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($appraisal->question_five)
+                                        <tr>
+                                            <td>5</td>
+                                            <td>{{$appraisal->question_five}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td colspan="4">Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</td>
                                     </tr>
@@ -133,14 +142,13 @@
                                     <tr>
                                         <td colspan="4">
                                             <textarea name="self_overall_comment" id="" cols="100%" rows="5">
-
                                             </textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Initials:</td>
                                         <td>
-                                            <input type="text" name="initials" required>
+                                            <input type="text" name="self_signature" required>
                                         </td>
                                         <td >Date</td>
                                         <td>

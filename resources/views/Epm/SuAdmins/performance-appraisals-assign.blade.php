@@ -71,6 +71,26 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Appraisal Questions</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="question_one" placeholder="Add Question one">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="question_two" placeholder="Add Question two">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="question_three" placeholder="Add Question three">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="question_four" placeholder="Add Question four">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="question_five" placeholder="Add Question five">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
                                     <div class="form-group float-right">
                                         <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Create Appraisal</button>
                                     </div>

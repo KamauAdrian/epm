@@ -33,12 +33,14 @@
                         </div>
                     @endif
                 </center>
-                {{--                <form action="{{url('/adm/'.$auth_admin->id.'/save/report/'.$report->id)}}" method="post">--}}
                 <form action="{{url('adm/'.$auth_admin->id.'/save/pmo/performance/appraisal/appraisal_id='.$pmo->id.'/'.$pmo->pmo_id)}}" method="post">
                     <?php
 //                    dd($pmo->id,$pmo->pmo_id);
                         $appraisal = \App\Models\PmoPerformanceAppraisal::where('appraisal_report_id',$pmo->id)->first();
+//                        dd($appraisal);
                     $appraisal_report = \App\Models\PmoPerformanceAppraisal::find($appraisal->id);
+                    $report = \App\Models\PmoPerformanceAppraisalReport::where('id',$appraisal->appraisal_report_id)->first();
+//                    dd($report);
                     $scores=[];
                     foreach ($appraisal_report->selfScores as $score){
                        $scores[] =$score;
@@ -67,7 +69,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Department</label>
-                                <input type="text" name="departmment" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$pmo->department}}" readonly>
+                                <input type="text" name="department" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$pmo->department}}" readonly>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -88,51 +90,58 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Program 1 Management- <br /> Operationalization of AYECs. – <br />40%</td>
-                                        <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[0]->self_score}}" readonly></td>
-                                        <td><input type="text" name="self_comment[]" value="{{$scores[0]->self_comment}}" readonly></td>
-                                        <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
-                                        <td>
-                                            <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Leadership – Support <br /> to Ajira Program Assistant <br /> Managers & Centre <br /> Managers. –
-                                            30%</td>
-                                        <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[1]->self_score}}" readonly></td>
-                                        <td><input type="text" name="self_comment[]" value="{{$scores[1]->self_comment}}" readonly></td>
-                                        <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
-                                        <td>
-                                            <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Networking, Linkages & Partnerships in AYECs. – 20%</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[2]->self_score}}" readonly></td>
-                                        <td><input type="text" name="self_comment[]" value="{{$scores[2]->self_comment}}" readonly></td>
-                                        <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Reporting, Monitoring <br /> & Evaluation. –
-                                            10%</td>
-                                        <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[3]->self_score}}" readonly></td>
-                                        <td><input type="text" name="self_comment[]" value="{{$scores[3]->self_comment}}" readonly></td>
-                                        <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
-                                        <td>
-                                            <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
-                                        </td>
-                                    </tr>
+                                    @if($report->question_one)
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{$report->question_one}}</td>
+                                            <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[0]->self_score}}" readonly></td>
+                                            <td><input type="text" name="self_comment[]" value="{{$scores[0]->self_comment}}" readonly></td>
+                                            <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($report->question_two)
+                                        <tr>
+                                            <td>2</td>
+                                            <td>{{$report->question_two}}</td>
+                                            <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[1]->self_score}}" readonly></td>
+                                            <td><input type="text" name="self_comment[]" value="{{$scores[1]->self_comment}}" readonly></td>
+                                            <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($report->question_three)
+                                        <tr>
+                                            <td>3</td>
+                                            <td>{{$report->question_three}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[2]->self_score}}" readonly></td>
+                                            <td><input type="text" name="self_comment[]" value="{{$scores[2]->self_comment}}" readonly></td>
+                                            <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($report->question_four)
+                                        <tr>
+                                            <td>4</td>
+                                            <td>{{$report->question_four}}</td>
+                                            <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[3]->self_score}}" readonly></td>
+                                            <td><input type="text" name="self_comment[]" value="{{$scores[3]->self_comment}}" readonly></td>
+                                            <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($report->question_five)
                                     <tr>
                                         <td>5</td>
-                                        <td>TOTALS</td>
+                                        <td>{{$report->question_five}}</td>
                                         <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[4]->self_score}}" readonly></td>
                                         <td><input type="text" name="self_comment[]" value="{{$scores[4]->self_comment}}" readonly></td>
                                         <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
@@ -140,6 +149,7 @@
                                             <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
                                         </td>
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td></td>
                                         <td colspan="5">Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</td>

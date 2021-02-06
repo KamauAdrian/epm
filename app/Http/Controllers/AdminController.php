@@ -588,6 +588,7 @@ class AdminController extends Controller
 
     }
     public function adm_save_performance_appraisal(Request $request,$id){
+//        dd($request->all());
         $admin = User::find($id);
 //        dd($request->all());
         if ($admin->role->name == 'Su Admin'){
@@ -615,6 +616,11 @@ class AdminController extends Controller
             $appraisal->pmo_id = $request->pmo_id;
             $appraisal->pmo_status = 0;
             $appraisal->supervisor_status = 0;
+            $appraisal->question_one = $request->question_one;
+            $appraisal->question_two = $request->question_two;
+            $appraisal->question_three = $request->question_three;
+            $appraisal->question_four = $request->question_four;
+            $appraisal->question_five = $request->question_five;
             $saved = $appraisal->save();
             if ($saved){
                 $email = $appraisal->pmo_email;
@@ -642,7 +648,7 @@ class AdminController extends Controller
                     }
                 }
             }
-            return redirect('/adm/'.$id.'/view/performance/appraisals');
+            return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance Appraisal Report Created Successfully');
         }
 
     }
@@ -670,6 +676,7 @@ class AdminController extends Controller
 
     public function performance_appraisal_submit($id,$appraisal_id){
         $appraisal = PmoPerformanceAppraisalReport::find($appraisal_id);
+//        dd($appraisal);
         return view('Epm.PMs.performance-appraisal-submit-pmo',compact('appraisal'));
 
     }
@@ -752,7 +759,7 @@ class AdminController extends Controller
 //        dd($appraisal);
         $supervisor = User::find($id);
         $data = [
-            'supervisor_overall_comment'=>$request->self_overall_comment,
+            'supervisor_overall_comment'=>$request->supervisor_overall_comment,
             'supervisor_sign_date'=>$request->supervisor_sign_date,
             'supervisor_signature'=>$request->supervisor_signature,
             'improvement_areas'=>$request->improvement_areas,
