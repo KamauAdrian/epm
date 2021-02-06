@@ -54,7 +54,7 @@
                             @foreach($reports as $report)
                                 <?php
 
-                                $appraisal = PmoPerformanceAppraisal::where('appraisal_report_id',$report->appraisal_form_id)->first();
+                                $appraisal = PmoPerformanceAppraisalReport::find($report->appraisal_form_id);
 //                                dd($appraisal,$report);
                                 ?>
                                 <tr>
