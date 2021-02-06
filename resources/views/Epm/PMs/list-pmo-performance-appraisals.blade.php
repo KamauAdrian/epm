@@ -99,7 +99,7 @@
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>
                                         @elseif($pmo_status ==1 && $supervisor_status==1)
-                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">
+                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->appraisal_report_id)}}">
                                             <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">View Appraisal</button>
                                         </a>
                                         @else
