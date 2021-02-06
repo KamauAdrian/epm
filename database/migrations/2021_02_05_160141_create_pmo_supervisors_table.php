@@ -16,6 +16,7 @@ class CreatePmoSupervisorsTable extends Migration
         Schema::create('pmo_supervisors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->nullable();
             $table->integer('supervisor_id')->unsigned();
             $table->integer('appraisal_form_id')->unsigned();
             $table->timestamps();

@@ -9,6 +9,8 @@ use App\Imports\TraineesImport;
 use App\Imports\TrainersImport;
 use App\Mail\CreatePassword;
 use App\Mail\ForgotPassword;
+use App\Mail\PmoAppraisalNotification;
+use App\Mail\PmoAppraisalSuperviseNotification;
 use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\EmployeeLeaveApplication;
@@ -586,7 +588,6 @@ class AdminController extends Controller
 
     }
     public function adm_save_performance_appraisal(Request $request,$id){
-
         $admin = User::find($id);
 //        dd($request->all());
         if ($admin->role->name == 'Su Admin'){
@@ -606,18 +607,39 @@ class AdminController extends Controller
             foreach ($request->supervisor_names as $key=>$supervisor_name){
                 $supervisors[$key] += ['name'=>$supervisor_name];
             }
+            foreach ($request->supervisor_emails as $key=>$supervisor_email){
+                $supervisors[$key] += ['email'=>$supervisor_email];
+            }
             $appraisal->pmo = $request->pmo;
+            $appraisal->pmo_email = $request->pmo_email;
             $appraisal->pmo_id = $request->pmo_id;
             $appraisal->pmo_status = 0;
             $appraisal->supervisor_status = 0;
             $saved = $appraisal->save();
             if ($saved){
+                $email = $appraisal->pmo_email;
+                $data = [
+                    'user_id'=>$appraisal->id,
+                    'name'=>$appraisal->name,
+                    'email'=>$appraisal->email,
+                ];
+                Mail::to($email)->send(new PmoAppraisalNotification($data));
                 foreach ($supervisors as $supervisor){
                     $new_supervisor = new PmoSupervisor();
                     $new_supervisor->name = $supervisor['name'];
+                    $new_supervisor->email = $supervisor['email'];
                     $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
                     $new_supervisor->appraisal_form_id = $appraisal->id;
-                    $new_supervisor->save();
+                    $supervisor_saved = $new_supervisor->save();
+                    if ($supervisor_saved){
+                        $email = $new_supervisor->email;
+                        $data = [
+                            'user_id'=>$new_supervisor->id,
+                            'name'=>$new_supervisor->name,
+                            'email'=>$new_supervisor->email,
+                        ];
+                        Mail::to($email)->send(new PmoAppraisalSuperviseNotification($data));
+                    }
                 }
             }
             return redirect('/adm/'.$id.'/view/performance/appraisals');

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class PmoAppraisalNotification extends Mailable
+class PmoAppraisalSuperviseNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,7 +16,7 @@ class PmoAppraisalNotification extends Mailable
      *
      * @return void
      */
-    public $data;
+    public  $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -29,7 +29,7 @@ class PmoAppraisalNotification extends Mailable
      */
     public function build()
     {
-        $subject = 'Request to submit Performance Appraisal';
-        return $this->view('Emails.pmo-performance-appraisal-notification')->subject($subject);
+        $subject = 'Request to Supervise PMO Performance';
+        return $this->view('Emails.supervisor-performance-appraisal-notification');
     }
 }

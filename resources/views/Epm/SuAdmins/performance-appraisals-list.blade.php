@@ -98,11 +98,15 @@
                                             <?php
                                             $report = \App\Models\PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal->id)->first();
                                             ?>
-                                        @if($report)
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
-                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
+                                            @if($report)
+                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
+                                                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
+                                                </a>
+                                            @endif
+                                        @else
+                                            <a href="#!">
+                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">View Appraisal</button>
                                             </a>
-                                        @endif
                                         @endif
                                     </td>
                                 </tr>

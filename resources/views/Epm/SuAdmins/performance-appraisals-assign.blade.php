@@ -52,6 +52,7 @@
                                         </multiselect>
                                         <input type="hidden" name="pmo_id" v-for="pmo in selectedPmo"  :value="selectedPmo.id">
                                         <input type="hidden" name="pmo" v-for="pmo in selectedPmo"  :value="selectedPmo.name">
+                                        <input type="hidden" name="pmo_email" v-for="pmo in selectedPmo"  :value="selectedPmo.email">
                                         <span class="text-danger">{{$errors->first('pmo')}}</span>
                                     </div>
                                 </div>
@@ -65,6 +66,7 @@
                                         </multiselect>
                                         <input type="hidden" name="supervisor_ids[]" v-for="supervisor in selectedSupervisor"  :value="supervisor.id">
                                         <input type="hidden" name="supervisor_names[]" v-for="supervisor in selectedSupervisor"  :value="supervisor.name">
+                                        <input type="hidden" name="supervisor_emails[]" v-for="supervisor in selectedSupervisor"  :value="supervisor.email">
                                         <span class="text-danger">{{$errors->first('supervisor_ids')}}</span>
                                     </div>
                                 </div>
