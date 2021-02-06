@@ -65,7 +65,7 @@
                                         <?php
 //                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisal::find($appraisal->id)->supervisors;
                                         $supervisors_raw = $appraisal->supervisors;
-                                        dd($supervisors_raw);
+                                        dd($appraisal,$supervisors_raw);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->name;
