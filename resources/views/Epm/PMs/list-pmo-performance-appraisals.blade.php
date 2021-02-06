@@ -54,8 +54,8 @@
                             @foreach($reports as $report)
                                 <?php
 
-                                $appraisal = PmoPerformanceAppraisalReport::find($report->id);
-                                dd($appraisal,$report);
+                                $appraisal = PmoPerformanceAppraisalReport::find($report->appraisal_form_id);
+//                                dd($appraisal,$report);
                                 ?>
                                 <tr>
 

@@ -699,7 +699,7 @@ class AdminController extends Controller
 //        dd($appraisal_id,$pmo_id);
 
         $pmo = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('id',$appraisal_id)->first();
-//        dd($pmo);
+        dd($pmo);
 //            $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
          return view('Epm.PMs.performance-appraisal-submit-supervisor',compact('pmo'));
 
