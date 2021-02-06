@@ -209,7 +209,6 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group float-right mt-2">
-                                {{--                <button type="button" class="btn btn-outline-primary btn-block mb-3">Submit Report</button>--}}
                                 <button type="submit" class="btn btn-outline-primary btn-block mb-3">Submit Report</button>
                             </div>
                         </div>

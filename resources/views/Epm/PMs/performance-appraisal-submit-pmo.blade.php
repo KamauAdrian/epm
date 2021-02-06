@@ -141,7 +141,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5">
+                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" required>
                                             </textarea>
                                         </td>
                                     </tr>

@@ -691,9 +691,9 @@ class AdminController extends Controller
 
 //        $appraisals_ids = PmoSupervisor::where('supervisor_id',$id)->pluck('appraisal_form_id');
 
-        $reports= PmoSupervisor::where('supervisor_id',$id)->get();
+        $reports_to_supervise= PmoSupervisor::where('supervisor_id',$id)->get();
 //        dd($appraisals);
-            return view('Epm.PMs.list-pmo-performance-appraisals',compact('reports'));
+            return view('Epm.PMs.list-pmo-performance-appraisals',compact('reports_to_supervise'));
     }
     public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
 //        dd($appraisal_id,$pmo_id);

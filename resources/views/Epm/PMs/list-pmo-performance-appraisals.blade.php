@@ -49,23 +49,22 @@
                         </tr>
                         </thead>
 
-                        @if($reports)
+                        @if($reports_to_supervise)
                             <tbody>
-                            @foreach($reports as $report)
+                            @foreach($reports_to_supervise as $report_to_supervise)
                                 <?php
-                                $appraisal = PmoPerformanceAppraisal::where('appraisal_report_id',$report->appraisal_form_id)->first();
-//                                dd($appraisal,$report);
+                                $report = PmoPerformanceAppraisalReport::where('id',$report_to_supervise->appraisal_form_id)->first();
+//                                dd($report);
                                 ?>
                                 <tr>
-
                                     <td>
-                                        {{$appraisal->name}}
+                                        {{$report->pmo}}
                                     </td>
                                     <td>
                                         <?php
-                                        $supervisors_raw = \App\Models\PmoSupervisor::where('appraisal_form_id',$appraisal->appraisal_report_id)->get();
-//                                        $supervisors_raw = $appraisal->supervisors;
-//                                        dd($appraisal);
+                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisalReport::find($report->id)->supervisors;
+//
+//                                        dd($supervisors_raw);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->name;
@@ -75,9 +74,10 @@
                                         {{$names}}
                                     </td>
                                     <?php
-                                    $report = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal->id)->first();
-                                    $pmo_status = $appraisal->pmo_status;
-                                    $supervisor_status = $appraisal->supervisor_status;
+                                    $pmo_submitted_report = PmoPerformanceAppraisal::where('appraisal_report_id',$report->id)->first();
+                                    $pmo_status = $report->pmo_status;
+                                    $supervisor_status = $report->supervisor_status;
+//                                    dd($pmo_submitted_report,$pmo_status,$supervisor_status);
                                     ?>
                                     <td>
                                         @if($pmo_status ==1)
@@ -95,11 +95,11 @@
                                     </td>
                                     <td class="text-right">
                                         @if($pmo_status ==1 && $supervisor_status==0)
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal->appraisal_report_id.'/pmo='.$appraisal->pmo_id)}}">
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$report->id.'/pmo='.$report->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>
                                         @elseif($pmo_status ==1 && $supervisor_status==1)
-                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->appraisal_report_id)}}">
+                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$report->id)}}">
                                             <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info disabled">View Appraisal</button>
                                         </a>
                                         @else
