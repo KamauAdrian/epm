@@ -57,13 +57,20 @@
                                         {{$appraisal->pmo}}
                                     </td>
                                     <td>
-                                        <?php $s_name = \App\Models\User::find($appraisal->supervisor_id);  ?>
-                                        {{$appraisal->supervisor}}
+                                        <?php
+                                        $supervisors_raw = \App\Models\PmoPerformanceAppraisalReport::find($appraisal->id)->supervisors;
+                                        $supervisors = [];
+                                        foreach ($supervisors_raw as $supervisor){
+                                            $supervisors[]=$supervisor->name;
+                                        }
+                                        $names = implode(',',$supervisors);
+                                        ?>
+                                        {{$names}}
                                     </td>
                                     <?php
-                                    $report = PmoPerformanceAppraisal::where('pmo_id',$appraisal->pmo_id)->first();
-                                    $pmo_status = $report->pmo_status;
-                                    $supervisor_status = $report->supervisor_status;
+                                    $report = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal->id)->first();
+                                    $pmo_status = $appraisal->pmo_status;
+                                    $supervisor_status = $appraisal->supervisor_status;
                                     ?>
                                     <td>
                                         @if($pmo_status ==1)
@@ -80,14 +87,6 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        <?php
-                                        $appraisal_supervise = \App\Models\PmoPerformanceAppraisalReport::where('id',$appraisal->id)->first();
-//                                        dd($appraisal_supervise);
-                                        if ($appraisal_supervise){
-                                            $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
-                                        }
-
-                                        ?>
                                         @if($pmo_status ==1 && $supervisor_status==0)
                                             <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>

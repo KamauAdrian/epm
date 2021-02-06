@@ -25,9 +25,8 @@
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/performance-appraisal-submit-pmo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/performance-appraisal-submit-pmo.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/performance-appraisals-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/performance-appraisals-view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/performance-appraisals-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/performance-appraisals-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/performance-appraisals-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/performance-appraisals-list.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +279,7 @@
       <workItem from="1612411399582" duration="43595000" />
       <workItem from="1612496469085" duration="53187000" />
       <workItem from="1612554079577" duration="1636000" />
-      <workItem from="1612581570389" duration="3247000" />
+      <workItem from="1612581570389" duration="4339000" />
     </task>
     <servers />
   </component>

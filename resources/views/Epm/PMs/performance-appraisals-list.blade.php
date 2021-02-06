@@ -57,11 +57,17 @@
                                             {{$appraisal->pmo}}
                                         </td>
                                         <td>
-                                            <?php $s_name = \App\Models\User::find($appraisal->supervisor_id);
+                                            <?php
+                                            $supervisors_raw = \App\Models\PmoPerformanceAppraisalReport::find($appraisal->id)->supervisors;
+                                            $supervisors = [];
+                                            foreach ($supervisors_raw as $supervisor){
+                                                $supervisors[]=$supervisor->name;
+                                            }
+                                            $names = implode(',',$supervisors);
                                             ?>
-
-                                            {{$appraisal->supervisor}}
+                                            {{$names}}
                                         </td>
+
                                         <?php
                                         $pmo_status = $appraisal->pmo_status;
                                         $supervisor_status = $appraisal->supervisor_status;
