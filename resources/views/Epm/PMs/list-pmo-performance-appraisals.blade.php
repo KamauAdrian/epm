@@ -65,7 +65,7 @@
                                         <?php
                                         $supervisors_raw = \App\Models\PmoSupervisor::where('appraisal_form_id',$appraisal->appraisal_report_id)->get();
 //                                        $supervisors_raw = $appraisal->supervisors;
-//                                        dd($appraisal,$supervisors_raw);
+                                        dd($appraisal);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->name;
@@ -95,7 +95,7 @@
                                     </td>
                                     <td class="text-right">
                                         @if($pmo_status ==1 && $supervisor_status==0)
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal->id.'/pmo='.$appraisal->pmo_id)}}">
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal->appraisal_report_id.'/pmo='.$appraisal->pmo_id)}}">
                                                 <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Supervise PMO</button>
                                             </a>
                                         @elseif($pmo_status ==1 && $supervisor_status==1)
