@@ -7,7 +7,7 @@
 @section('form-text','Get Started With Your Account')
 
 @section('form')
-    <form method="post" action="{{url('/su-admin-register')}}" class="my-5">
+    <form method="post" action="{{url('/su-admin-save')}}" class="my-5">
         @csrf
         <div class="row">
             <div class="col-md-12">

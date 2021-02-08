@@ -186,16 +186,16 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <?php
-                $appraisal_fill = \App\Models\PmoPerformanceAppraisalReport::where('pmo_id',$auth_admin->id)->first();
-                $appraisal_supervise = \App\Models\PmoSupervisor::where('supervisor_id',$auth_admin->id)->first();
-                if ($appraisal_supervise){
-                    $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
-                }
+                $appraisal_submit = \App\Models\Appraisal::where('pmo_id',$auth_admin->id)->get();
+                $appraisal_supervise = \App\Models\AppraisalSupervisor::where('supervisor_id',$auth_admin->id)->get();
+//                if ($appraisal_supervise){
+//                    $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
+//                }
                 ?>
                     <li>
                         <a href="#!">Appraisals</a>
                         <ul class="pcoded-submenu">
-                            @if($appraisal_fill)
+                            @if($appraisal_submit)
                                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">My Appraisals</a></li>
                             @endif
                             @if($appraisal_supervise)

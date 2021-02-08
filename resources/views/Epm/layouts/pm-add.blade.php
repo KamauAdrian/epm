@@ -1,4 +1,8 @@
-<form class="my-5" method="post" action="{{url('/adm/save/pm')}}" enctype="multipart/form-data">
+<?php
+$auth_admin = auth()->user();
+?>
+
+<form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/pm')}}" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-sm-6">

@@ -32,7 +32,10 @@
 @endsection
 
 @section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script type="text/javascript">
+        $('#CentersList').DataTable();
         $(function () {
             $(".deleteCenter").click(function () {
                 var url = $(this).attr('data-url');

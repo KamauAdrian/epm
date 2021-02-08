@@ -80,10 +80,10 @@
                                                         <a href="#!" class="btn btn-sm btn-outline-info" title="View">
                                                             <span><i class="fa fa-list"></i></span>
                                                         </a>
-                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="Edit">
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/edit/class/class_id='.$class->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
                                                             <span><i class="fa fa-pencil-alt"></i></span>
                                                         </a>
-                                                        <a href="#!" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <a href="#!" data-url="{{url('/adm/'.$auth_admin->id.'/delete/class/class_id='.$class->id)}}" class="btn btn-sm btn-outline-danger deleteClass" data-toggle="modal" data-target="#deleteClass" title="Delete">
                                                             <span><i class="fa fa-trash"></i></span>
                                                         </a>
                                                     </div>
@@ -104,6 +104,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="deleteClass" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
+                                    <h5 class="text-danger">Are you sure you want to delete this Class?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <form id="deleteAdminForm" action="" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-success">Yes Delete</button>
+                                        <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                     <a href="{{url('/adm/'.$auth_admin->id.'/create/class')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Create New Class</a>
@@ -120,5 +143,12 @@
         $(document).ready( function () {
             $('#sessionClasses').DataTable();
         } );
+        $(function () {
+            $(".deleteClass").click(function () {
+                var url = $(this).attr('data-url');
+                console.log('this is the url'+ url);
+                $("#deleteAdminForm").attr("action", url);
+            })
+        });
     </script>
 @endsection

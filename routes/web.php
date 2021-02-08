@@ -31,30 +31,34 @@ Route::group(['middleware'=>'guest'],function (){
 
 Route::group(['middleware'=>'super_admin_register'],function (){
     Route::get('/su-admin/register',[App\Http\Controllers\SuperAdminController::class, 'su_admin_register']);
-    Route::post('/su-admin-register',[App\Http\Controllers\SuperAdminController::class, 'su_admin_save']);
+    Route::post('/su-admin-save',[App\Http\Controllers\SuperAdminController::class, 'su_admin_save']);
 });
 //super admin routes
 Route::group(['middleware'=>'super_admin'],function (){
     //super admin user only
 //    Route::get('/adm-dashboard',[App\Http\Controllers\SuperAdminController::class, 'index']);
     Route::get('/register/su-admin',[App\Http\Controllers\SuperAdminController::class, 'su_admin_register_su_admin']);
-    Route::post('/adm-register-su-admin',[App\Http\Controllers\SuperAdminController::class, 'adm_save_su_admin']);
+    Route::post('/save/su-admin',[App\Http\Controllers\SuperAdminController::class, 'adm_save_su_admin']);
     Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
     //shared responsibility
     //cms
-    Route::get('/list-cms',[App\Http\Controllers\SuperAdminController::class, 'cms_list']);
+//    Route::get('/list-cms',[App\Http\Controllers\SuperAdminController::class, 'cms_list']);
     Route::get('/cms',[App\Http\Controllers\SuperAdminController::class, 'cms']);//json array of cms
     Route::get('/cms/new/{id}',[App\Http\Controllers\SuperAdminController::class, 'cms_new']);//json array of cms
     //trainers
     Route::get('/trainers/new/team/members/{id}',[App\Http\Controllers\SuperAdminController::class, 'trainers_team_new']);//json array of trainers
     //mentors
-    //sessions and classes
-    Route::get('/adm/{id}/confirm/session/session_id={session_id}',[App\Http\Controllers\SuperAdminController::class, 'confirm_session']);
-    Route::get('/adm/{id}/list/classes',[App\Http\Controllers\SuperAdminController::class, 'view_classes']);
-    Route::get('/adm/{id}/view/class/class_id={class_id}',[App\Http\Controllers\SuperAdminController::class, 'view_class']);
-    Route::get('/adm/{id}/create/class',[App\Http\Controllers\SuperAdminController::class, 'create_class']);
-    Route::post('/adm/{id}/save/class',[App\Http\Controllers\SuperAdminController::class, 'save_class']);
-    Route::get('/session/classes',[App\Http\Controllers\AdminController::class, 'session_classes']);//json array of trainers
+    //Classes
+    Route::get('/adm/{id}/list/classes',[App\Http\Controllers\ClassController::class, 'index']);
+    Route::get('/adm/{id}/create/class',[App\Http\Controllers\ClassController::class, 'create']);
+    Route::post('/adm/{id}/save/class',[App\Http\Controllers\ClassController::class, 'store']);
+    Route::get('/adm/{id}/view/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'show']);
+    Route::get('/adm/{id}/edit/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'edit']);
+    Route::post('/adm/{id}/update/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'update']);
+    Route::post('/adm/{id}/delete/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'destroy']);
+    Route::get('/session/classes',[App\Http\Controllers\ClassController::class, 'classes']);//json array of classes
+
+
     //emobilis Hqs
     Route::get('/emobilis/hq/hqs',[App\Http\Controllers\SuperAdminController::class, 'emobilis_hqs']);
     //    reports
@@ -63,15 +67,18 @@ Route::group(['middleware'=>'super_admin'],function (){
     Route::get('/reports/trainers',[App\Http\Controllers\SuperAdminController::class, 'reports_trainers']);
     Route::get('/reports/pms',[App\Http\Controllers\SuperAdminController::class, 'reports_pms']);
     //teams
+    //teams (Center Managers)
+    Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\TeamCenterManager::class, 'index']);
+    Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\AdminController::class, 'team_trainers_list']);
     Route::get('/add-team-trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_add']);
     Route::post('/adm/{id}/save/team/trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_save']);
     Route::get('/adm/{id}/add/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_add']);
     Route::post('/adm/{id}/save/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_save']);
     Route::get('/cms/teams',[App\Http\Controllers\SuperAdminController::class, 'team_cms']);
-    Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\SuperAdminController::class, 'team_cms_add']);
-    Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\SuperAdminController::class, 'team_cms_save']);
-    Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_cms_members_add']);
-    Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_cms_members_save']);
+    Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\TeamCenterManager::class, 'create']);
+    Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\TeamCenterManager::class, 'store']);
+    Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManager::class, 'add_members']);
+    Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManager::class, 'store_members']);
     //ajira clubs
     Route::get('/ajira-clubs',[App\Http\Controllers\SuperAdminController::class, 'ajira_clubs']);
 
@@ -98,12 +105,12 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/get/sessions/records',[App\Http\Controllers\AdminController::class, 'dashboard_sessions']);
     Route::get('/adm/get/trainees/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainees']);
     //save admins
-    Route::post('/adm/save/pm',[App\Http\Controllers\SuperAdminController::class, 'pm_save']);
+    Route::post('/adm/{id}/save/pm',[App\Http\Controllers\ProjectManagerController::class, 'store']);
     //list admins
     Route::get('/adm/{id}/add/admin/role_name={role}',[App\Http\Controllers\AdminController::class, 'add_admin']);
     Route::get('/list/all/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'list']);
     Route::get('/list/all/admins/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adms_list']);
-    Route::get('/adm/{id}/list/all/trainees',[App\Http\Controllers\AdminController::class, 'trainees_list']);
+    Route::get('/adm/{id}/list/all/trainees',[App\Http\Controllers\TraineeController::class, 'index']);
     //logged in admin profile
     Route::get('/adm/{id}/profile/public/role_id={role_id}/view',[App\Http\Controllers\AdminController::class, 'view_logged_in_adm_profile']);
     //admin profile
@@ -121,18 +128,19 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/pmos',[App\Http\Controllers\AdminController::class, 'report_actors_pmos']);//json array of trainers
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
-    Route::get('/adm/{id}/create/new/performance/appraisal',[App\Http\Controllers\AdminController::class, 'adm_create_performance_appraisal']);
-    Route::post('/adm/{id}/add/pmo/performance/appraisal',[App\Http\Controllers\AdminController::class, 'adm_save_performance_appraisal']);
-    Route::get('/adm/{id}/view/performance/appraisals',[App\Http\Controllers\AdminController::class, 'performance_appraisals_all']);
-    Route::get('/adm/{id}/view/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'performance_appraisal']);
-    Route::get('/adm/{id}/view/performance/appraisal/template/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'performance_appraisal_template']);
-    Route::get('/adm/{id}/submit/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'performance_appraisal_submit']);
+    // Performance Appraisals
+    Route::get('/adm/{id}/view/performance/appraisals',[App\Http\Controllers\AppraisalController::class, 'index']);
+    Route::get('/adm/{id}/create/new/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'create']);
+    Route::post('/adm/{id}/add/pmo/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'store']);
+    Route::get('/adm/{id}/view/performance/appraisal/template/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'show']);
+    Route::get('/adm/{id}/view/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'appraisal']);
+    Route::get('/adm/{id}/submit/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'submit']);
     Route::get('/adm/{id}/view/my/performance/appraisals',[App\Http\Controllers\AdminController::class, 'performance_appraisals_all']);
-    Route::post('/adm/{id}/save/my/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AdminController::class, 'pmo_performance_appraisal_save']);
-    Route::get('/adm/{id}/list/pending/pmo/performance/supervision/appraisals',[App\Http\Controllers\AdminController::class, 'supervisor_view_pending_performance_appraisal']);
+    Route::post('/adm/{id}/save/my/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'pmo_save_appraisal']);
+    Route::get('/adm/{id}/list/pending/pmo/performance/supervision/appraisals',[App\Http\Controllers\AppraisalController::class, 'supervisions']);
     Route::get('/adm/{id}/view/pmo/performance/appraisals',[App\Http\Controllers\AdminController::class, 'supervisor_view_performance_appraisal']);
-    Route::get('/adm/{id}/supervise/pmo/performance/id={appraisal_id}/pmo={pmo_id}',[App\Http\Controllers\AdminController::class, 'supervisor_submit_performance_appraisal']);
-    Route::post('/adm/{id}/save/pmo/performance/appraisal/appraisal_id={appraisal_id}/{pmo_id}',[App\Http\Controllers\AdminController::class, 'supervisor_performance_appraisal_save']);
+    Route::get('/adm/{id}/supervise/pmo/performance/appraisal_id={appraisal_id}/{pmo_id}',[App\Http\Controllers\AppraisalController::class, 'supervise']);
+    Route::post('/adm/{id}/save/pmo/performance/appraisal/appraisal_id={appraisal_id}/{pmo_id}',[App\Http\Controllers\AppraisalController::class, 'supervision_save']);
     Route::get('/adm/{id}/view/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_view']);
     Route::get('/adm/{id}/edit/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_edit']);
     Route::post('/adm/{id}/update/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_update']);
@@ -167,14 +175,14 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/submit/assignment/report',[App\Http\Controllers\TrainerController::class, 'assignment_submission_report_submit']);
     Route::post('/adm/{id}/save/assignment/report',[App\Http\Controllers\TrainerController::class, 'assignment_submission_report_save']);
 
-    //centers list
-    Route::get('/adm/{id}/list/centers',[App\Http\Controllers\AdminController::class, 'centers_list']);
-    Route::get('/adm/{id}/view/center/{center_id}',[App\Http\Controllers\AdminController::class, 'view_center']);
-    Route::get('/adm/{id}/add/center',[App\Http\Controllers\AdminController::class, 'center_add']);
-    Route::post('/adm/save/center',[App\Http\Controllers\AdminController::class, 'center_save']);
-    Route::get('/adm/edit/center/{id}',[App\Http\Controllers\AdminController::class, 'edit_center']);
-    Route::post('/adm/update/center/{id}',[App\Http\Controllers\AdminController::class, 'update_center']);
-    Route::post('/adm/delete/center/{id}',[App\Http\Controllers\AdminController::class, 'delete_center']);
+    //centers
+    Route::get('/adm/{id}/list/centers',[App\Http\Controllers\CenterController::class, 'index']);
+    Route::get('/adm/{id}/view/center/{center_id}',[App\Http\Controllers\CenterController::class, 'show']);
+    Route::get('/adm/{id}/add/center',[App\Http\Controllers\CenterController::class, 'create']);
+    Route::post('/adm/{id}/save/center',[App\Http\Controllers\CenterController::class, 'store']);
+    Route::get('/adm/{id}/edit/center/{center_id}',[App\Http\Controllers\CenterController::class, 'edit']);
+    Route::post('/adm/{id}/update/center/{center_id}',[App\Http\Controllers\CenterController::class, 'update']);
+    Route::post('/adm/{id}/delete/center/{center_id}',[App\Http\Controllers\CenterController::class, 'destroy']);
     //trainers
     Route::get('/adm/{id}/request/upload/trainers',[App\Http\Controllers\AdminController::class, 'request_upload_trainers']);
     Route::get('/download/trainers/excel/template',[App\Http\Controllers\AdminController::class, 'download_trainers_excel_template']);
@@ -186,22 +194,26 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/competence/reports',[App\Http\Controllers\TrainerController::class, 'trainer_competence_reports']);
     Route::get('/adm/{id}/view/trainer/competence/reports',[App\Http\Controllers\TrainerController::class, 'adm_view_trainer_competence_reports']);
     Route::get('/adm/{id}/view/competence/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'trainer_competence_report']);
-    //sessions
-    Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\AdminController::class, 'sessions_list']);
-    Route::get('/adm/{id}/view/session/{session_id}',[App\Http\Controllers\AdminController::class, 'view_session']);
-    Route::get('/adm/{id}/add/session',[App\Http\Controllers\AdminController::class, 'session_add']);
-    Route::post('/adm/{id}/save/session',[App\Http\Controllers\AdminController::class, 'session_save']);
-    Route::get('/new/session/trainers/{id}',[App\Http\Controllers\AdminController::class, 'new_session_trainers']);//json array of trainers not in the session
-    Route::get('/adm/{id}/session/{session_id}/add/trainers',[App\Http\Controllers\AdminController::class, 'session_add_trainers']);
-    Route::post('/adm/{id}/session/{session_id}/save/trainers',[App\Http\Controllers\AdminController::class, 'session_save_trainers']);
-    Route::get('/adm/{id}/session/{session_id}/add/trainees',[App\Http\Controllers\AdminController::class, 'session_add_trainees']);
-    Route::get('/adm/{id}/session/{session_id}/upload/trainees',[App\Http\Controllers\AdminController::class, 'session_upload_trainees']);
-    Route::get('/download/trainees/excel/template',[App\Http\Controllers\AdminController::class, 'download_trainees_excel_template']);
-    Route::post('/adm/{id}/session/{session_id}/save/trainees',[App\Http\Controllers\AdminController::class, 'session_save_trainees']);
-    Route::post('/adm/{id}/session/{session_id}/save/uploaded/trainees',[App\Http\Controllers\AdminController::class, 'upload_trainees']);
-    //teams
-    Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\AdminController::class, 'team_cms_list']);
-    Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\AdminController::class, 'team_trainers_list']);
+    //Sessions
+    Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\SessionController::class, 'index']);
+    Route::get('/adm/{id}/add/session',[App\Http\Controllers\SessionController::class, 'create']);
+    Route::post('/adm/{id}/save/session',[App\Http\Controllers\SessionController::class, 'store']);
+    Route::get('/adm/{id}/view/session/{session_id}',[App\Http\Controllers\SessionController::class, 'show']);
+    Route::get('/adm/{id}/confirm/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'session_approve']);
+    Route::get('/adm/{id}/edit/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'edit']);
+    Route::get('/adm/{id}/update/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'update']);
+    Route::get('/adm/{id}/delete/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'destroy']);
+    //Session (Trainers)
+    Route::get('/new/session/trainers/{id}',[App\Http\Controllers\SessionController::class, 'new_session_trainers']);//json array of trainers not in the session
+    Route::get('/adm/{id}/session/{session_id}/add/trainers',[App\Http\Controllers\SessionController::class, 'create_trainers']);
+    Route::post('/adm/{id}/session/{session_id}/save/trainers',[App\Http\Controllers\SessionController::class, 'store_trainers']);
+    //Session (Trainees)
+    Route::get('/adm/{id}/session/{session_id}/add/trainees',[App\Http\Controllers\SessionController::class, 'create_trainees']);
+    Route::post('/adm/{id}/session/{session_id}/save/trainees',[App\Http\Controllers\SessionController::class, 'store_trainees']);
+    Route::get('/adm/{id}/session/{session_id}/upload/trainees',[App\Http\Controllers\SessionController::class, 'upload_trainees']);
+    Route::get('/download/trainees/excel/template',[App\Http\Controllers\SessionController::class, 'download_excel_template']);
+    Route::post('/adm/{id}/session/{session_id}/save/uploaded/trainees',[App\Http\Controllers\SessionController::class, 'store_uploaded_trainees']);
+
     //center managers
     Route::post('/save-cm',[App\Http\Controllers\AdminController::class, 'cm_save']);
     //mentors

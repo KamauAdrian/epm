@@ -16,16 +16,16 @@
                 $auth_admin = auth()->user();
                 $self_scores = [];
                 $supervisor_scores = [];
-//                $report = \App\Models\PmoPerformanceAppraisalReport::where('id',$appraisal->appraisal_report_id)->first();
-//                dd($appraisal);
+                //                $report = \App\Models\PmoPerformanceAppraisalReport::where('id',$appraisal->appraisal_report_id)->first();
+                //                dd($appraisal);
                 foreach ($appraisal->selfScores as $score_raw_self){
                     $self_scores[] = $score_raw_self;
                 }
-//                dd($self_scores);
+                //                dd($self_scores);
                 foreach ($appraisal->supervisorScores as $score_raw_supervisor){
                     $supervisor_scores[] = $score_raw_supervisor;
                 }
-//                dd($supervisor_scores);
+                //                dd($supervisor_scores);
                 ?>
                 <center>
                     @if(session()->has('success'))
@@ -223,7 +223,7 @@
                                     <tr>
                                         <td>Signature:</td>
                                         <td colspan="2">
-                                                    <input type="text" name="" value="{{$appraisal->pmo_signature}}" readonly>
+                                            <input type="text" name="" value="{{$appraisal->pmo_signature}}" readonly>
                                         </td>
                                         <td >Date</td>
                                         <td colspan="2">
@@ -258,7 +258,7 @@
                                     <tr>
                                         <td>Signature:</td>
                                         <td colspan="2">
-                                                <input type="text" name="" value="{{$appraisal->supervisor_signature}}" readonly>
+                                            <input type="text" name="" value="{{$appraisal->supervisor_signature}}" readonly>
                                         </td>
                                         <td >Date</td>
                                         <td colspan="2">

@@ -1,11 +1,13 @@
-
+<?php
+$auth_admin = auth()->user();
+?>
 <div class="col-sm-12">
     <div class="row">
         <div class="col-sm-12 mb-4 text-center">
             <h1 class="d-inline-block font-weight-normal mb-0">Edit {{$center->name}} Profile</h1>
         </div>
     </div>
-    <form action="{{url('/adm/update/center',$center->id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{url('/adm/'.$auth_admin->id.'/update/center',$center->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-3">

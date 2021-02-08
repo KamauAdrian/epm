@@ -22,13 +22,26 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Class Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S">
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}">
+                                        <span class="text-danger">{{$errors->first('name')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="classCategory">
+                                        <label>Category</label>
+                                        <category v-model="selectedCategory" :options="categories"
+                                                  placeholder="Search"
+                                                  :searchable="true" :close-on-select="true">
+                                        </category>
+                                        <input type="hidden" name="category" :value="selectedCategory">
+                                        <span class="text-danger">{{$errors->first('category')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Class Description</label>
-                                        <textarea name="description" class="form-control" placeholder="Short Team Description" cols="30" rows="5"></textarea>
+                                        <textarea name="description" class="form-control" placeholder="Short Team Description" cols="30" rows="5">{{old('description')}}</textarea>
+                                        <span class="text-danger">{{$errors->first('description')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -51,4 +64,23 @@
     <script src="{{url('assets/dist/axios.js')}}"></script>
     {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
+    <script>
+        new Vue({
+            el: '#classCategory',
+            components: {
+                category: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedCategory: null,
+                    categories: [
+                        'Data Entry/Management','Virtual Assistant','Transcription',
+                        'Digital Marketing/Ecommerce','Content Writing and Translation'
+                    ],
+                }
+            },
+            methods:{
+            },
+        })
+    </script>
 @endsection

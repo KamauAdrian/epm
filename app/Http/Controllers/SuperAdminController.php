@@ -170,88 +170,6 @@ class SuperAdminController extends Controller
         return view('Epm.SuAdmins.PMs.add-pm');
     }
 
-    public function pm_save(Request $request)
-    {
-        $messages = [
-            'name.regex'=>'Name can not contain numbers and or special characters'
-        ];
-        $this->validate($request,
-            [
-//                'name' => ['required', 'string', 'max:255','regex:/^([A-Za-z]+) ?([A-Za-z]+)? ?([A-Za-z]+)? ?([A-Za-z]+)?$/'],
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
-                'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
-                'gender' => ['required'],
-                'employee_number' => ['required','unique:users'],
-                'county' => ['required'],
-                'department' => ['required'],
-                'image'=>['image|mimes:png,jpg,jpeg|max:1000'],
-            ],$messages
-        );
-//TODO: create/add a new Project Manager
-        $pm_user = new User();
-        $pm_user->name = request('name');
-        $pm_user->email = request('email');
-        $email = $pm_user->email;
-        $pm_user->phone = '';
-        $pm_user->gender = request('gender');
-        $pm_user->employee_number = request('employee_number');
-        $pm_user->county = request('county');
-        $phone = request('phone');
-        $country_code = substr($phone,0,4);
-        if ($country_code == +254){
-            $minus_code = substr($phone,4,strlen($phone));
-            $new_phone = '0'.$minus_code;
-            $pm_user->phone = $new_phone;
-        }else{
-            $pm_user->phone = $phone;
-        }
-        $pm_user->bio = $request->bio;
-        $pm_user->department = $request->department;
-        $pm_user->creator_id = Auth::id();
-        $pm_user->is_admin = 1;
-//        $pm_user->password =Hash::make(request('password'));
-        if ($request->hasFile('image')){
-            $image = $request->file('image');
-            if ($image->isValid()){
-                $fileName = $image->getClientOriginalName();
-                $image->move('ProjectManagers/images',$fileName);
-                $pm_user->image = $fileName;
-            }
-        }
-        $pm_user->role_id = '';
-//        TODO: assign project Manager role to the new PM
-// first create the role
-        $role = new Role();
-        $role->name = 'Project Manager';
-//        check if role exists in the db
-        $existing_record = DB::table('roles')->where('name',$role->name)->first();
-//        if yes get the role id and assign it to the new PM
-        if ($existing_record){
-            $pm_user->role_id = $existing_record->id;
-        }
-        else{
-//        if no record found save the new role, get its id and assign it to the new PM
-            $role->save();
-            $pm_user->role_id = $role->id;
-        }
-//        after success assign Project Manager role to new Pm, save the new PM
-        $pm_user_saved = $pm_user->save();
-//finally redirect su admin to Project Managers page with a list of other projects managers previously created
-        if ($pm_user_saved){
-            //create a data array to pass to the mailable class to send email invite
-            $data = [
-                'user_id'=>$pm_user->id,
-                'name' => $pm_user->name,
-                'email' => $pm_user->email,
-                'phone' => $pm_user->phone,
-            ];
-//            call the mailable class and send the email
-            Mail::to($email)->send(new CreatePassword($data));
-            //alert su admin success created pm user
-            return redirect('/list/all/admins/role_id='.$pm_user->role_id)->with('success','Project Manager Added Successfully');
-        }
-    }
 
     public function delete_pm($id)
     {
@@ -428,12 +346,6 @@ class SuperAdminController extends Controller
      * Sessions
      **/
 
-    public function view_classes($id){
-        $admin = User::find($id);
-        $classes = DB::table('session_classes')->orderBy('created_at','desc')->get();
-//        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){}
-            return view('Epm.Classes.classes',compact('classes'));
-    }
     public function view_class($id,$class_id){
         $admin = User::find($id);
 //        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){{}
@@ -441,48 +353,7 @@ class SuperAdminController extends Controller
 
     }
 
-    public function create_class($id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            return view('Epm.Classes.create-class');
-        }
-    }
 
-    public function save_class(Request $request,$id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager') {
-            $this->validate($request, [
-                'name' => ['required'],
-                'description' => ['required'],
-            ]);
-
-            $data = [
-                'name' => $request->name,
-                'description' => $request->description,
-            ];
-            $new_class = new SessionClass();
-            $new_class->name = $data['name'];
-            $new_class->description = $data['description'];
-            $new_class->save();
-            return redirect('/adm/' . $id . '/list/classes');
-        }
-
-    }
-
-    public function confirm_session($id,$session_id)
-    {
-
-        $admin_user = User::find($id);
-        if ($admin_user->role->name == 'Su Admin' || $admin_user->role->name == 'Project Manager'){
-            $status = [
-                'status'=>'Approved'
-            ];
-            $trainingSessionConfirm = DB::table('training_sessions')->where('id',$session_id)->update($status);
-            return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Successfully approved session');
-        }
-
-
-    }
 
 //    public function new_session_trainers($id){
 //        $added_trainers_ids = json_decode(DB::table('trainer_training_session')->where('training_session_id',$id)->get());
@@ -569,52 +440,6 @@ class SuperAdminController extends Controller
        return response()->json($teams);
     }
 
-    public function team_cms_add(){
-        $cms = '';
-        $role = DB::table('roles')->where('name','Center Manager')->first();
-        if ($role){
-            $cms = DB::table('users')->where('role_id',$role->id)->get();
-        }
-        return view('Epm.Teams.add-team-cms',compact('cms'));
-    }
-
-    public function team_cms_save(Request $request, $id){
-        $admin = Auth::user();
-        $cms_team = new TeamCenterManager();
-        $cms_team->name = $request->name;
-        $cms_team->description = $request->about;
-        $team_leaders = $request->input('team_leader_ids');
-        $cms_team->creator_id = Auth::id();
-        $new_team_created = $cms_team->save();
-
-        if ($new_team_created && $team_leaders!=null){
-            $saved_cms_team = TeamCenterManager::find($cms_team->id);
-            $team_leaders_ids = [];
-            foreach ($team_leaders as $team_leader){
-                $team_leaders_ids[] = [
-                    'team_leader_id'=>$team_leader,
-                    'team_id'=>$saved_cms_team->id,
-                ];
-            }
-            DB::table('team_cms_leaders')->insert($team_leaders_ids);
-            $saved_cms_team->centerManagers()->attach($team_leaders);
-        }
-        return redirect('/adm/'.$admin->id.'/list/team/cms');
-    }
-
-    public function team_cms_members_add($id,$team_id){
-        $team = DB::table('team_center_managers')->where('id',$team_id)->first();
-        return view('Epm.Teams.add-team-cm-member',compact('team'));
-    }
-
-    public function team_cms_members_save(Request $request,$id,$team_id){
-        dd($request->all());
-        $admin = User::find($id);
-        $cm_team_member_s_id = $request->input('cm_team_member_s_id');
-          $team_cm =   TeamCenterManager::find($team_id);
-          $team_cm->centerManagers()->attach($cm_team_member_s_id);
-        return redirect('/adm/'.$admin->id.'/list/team/cms')->with('success','Center Manager(s) Successfully added to team');
-    }
 
     /**
      * Ajira Clubs

@@ -143,13 +143,6 @@ class AdminController extends Controller
         return view('Epm.list-admins',compact('admins','role'));
     }
 
-    public function trainees_list($id)
-    {
-        $auth_admin = Auth::user();
-        $trainees = Trainee::orderBy('id','desc')->get();
-        return view('Epm.Trainees.trainees',compact('trainees'));
-    }
-
     public function add_admin($id,$role){
         if ($role == 'Project Manager'){
             return view('Epm.PMs.add-pm');
@@ -249,8 +242,9 @@ class AdminController extends Controller
 
     public function adm_delete($id,$role_id)
     {
-        $admin_user_id = Auth::id();
-        $admin_user = DB::table('users')->where('id',$admin_user_id)->first();
+//        dd('deleting',$role_id);
+//        $admin_user_id = Auth::id();
+//        $admin_user = DB::table('users')->where('id',$admin_user_id)->first();
         DB::table('users')->where('id',$id)->delete();
         return redirect('/list/all/admins/role_id='.$role_id)->with('success','Admin deleted Successfully');
     }
@@ -579,228 +573,19 @@ class AdminController extends Controller
             return redirect('/adm/'.$id.'/view/reports/template')->with('success','Report Template Created successfully');
         }
     }
-
-    public function adm_create_performance_appraisal($id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin'){
-            return view('Epm.SuAdmins.performance-appraisals-assign');
-        }
-
-    }
-    public function adm_save_performance_appraisal(Request $request,$id){
-//        dd($request->all());
-        $admin = User::find($id);
-//        dd($request->all());
-        if ($admin->role->name == 'Su Admin'){
-            $messages = [
-                'supervisor_ids.required'=>'Please Select PMO Supervisor',
-            ];
-            $this->validate($request,[
-                'pmo'=>'required',
-                'supervisor_ids'=>'required',
-            ],$messages);
-//            dd($request->all());
-            $appraisal = new PmoPerformanceAppraisalReport();
-            $supervisors = [];
-            foreach ($request->supervisor_ids as $supervisor_id){
-                $supervisors[] = ['supervisor_id'=>$supervisor_id];
-            }
-            foreach ($request->supervisor_names as $key=>$supervisor_name){
-                $supervisors[$key] += ['name'=>$supervisor_name];
-            }
-            foreach ($request->supervisor_emails as $key=>$supervisor_email){
-                $supervisors[$key] += ['email'=>$supervisor_email];
-            }
-            $appraisal->pmo = $request->pmo;
-            $appraisal->pmo_email = $request->pmo_email;
-            $appraisal->pmo_id = $request->pmo_id;
-            $appraisal->pmo_status = 0;
-            $appraisal->supervisor_status = 0;
-            $appraisal->question_one = $request->question_one;
-            $appraisal->question_two = $request->question_two;
-            $appraisal->question_three = $request->question_three;
-            $appraisal->question_four = $request->question_four;
-            $appraisal->question_five = $request->question_five;
-            $saved = $appraisal->save();
-            if ($saved){
-                $email = $appraisal->pmo_email;
-                $data = [
-                    'user_id'=>$appraisal->id,
-                    'name'=>$appraisal->name,
-                    'email'=>$appraisal->email,
-                ];
-                Mail::to($email)->send(new PmoAppraisalNotification($data));
-                foreach ($supervisors as $supervisor){
-                    $new_supervisor = new PmoSupervisor();
-                    $new_supervisor->name = $supervisor['name'];
-                    $new_supervisor->email = $supervisor['email'];
-                    $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
-                    $new_supervisor->appraisal_form_id = $appraisal->id;
-                    $supervisor_saved = $new_supervisor->save();
-                    if ($supervisor_saved){
-                        $email = $new_supervisor->email;
-                        $data = [
-                            'user_id'=>$new_supervisor->id,
-                            'name'=>$new_supervisor->name,
-                            'email'=>$new_supervisor->email,
-                        ];
-                        Mail::to($email)->send(new PmoAppraisalSuperviseNotification($data));
-                    }
-                }
-            }
-            return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance Appraisal Report Created Successfully');
-        }
-
-    }
-
-    public function performance_appraisals_all($id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin'){
-            $appraisals = PmoPerformanceAppraisalReport::all();
-//            dd($appraisals);
-            return view('Epm.SuAdmins.performance-appraisals-list',compact('appraisals'));
-        }elseif ($admin->role->name == 'Project Manager'){
-
-            $appraisals = PmoPerformanceAppraisalReport::where('pmo_id',$id)->get();
-//            dd($appraisals);
-            return view('Epm.PMs.performance-appraisals-list',compact('appraisals'));
-        }
-
-    }
-
-    public function performance_appraisal($id,$appraisal_id){
-        $appraisal = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal_id)->first();
-        return view('Epm.PMs.performance-appraisals-view',compact('appraisal'));
-
-    }
-    public function performance_appraisal_template($id,$appraisal_id){
-        $report = PmoPerformanceAppraisalReport::where('id',$appraisal_id)->first();
-        return view('Epm.PMs.appraisal-template',compact('report'));
-    }
-
-    public function performance_appraisal_submit($id,$appraisal_id){
-        $appraisal = PmoPerformanceAppraisalReport::find($appraisal_id);
-//        dd($appraisal);
-        return view('Epm.PMs.performance-appraisal-submit-pmo',compact('appraisal'));
-
-    }
     public function supervisor_view_performance_appraisal($id){
 //            return view('Epm.PMs.performance-appraisals-supervise');
     }
-    public function supervisor_view_pending_performance_appraisal($id){
 
-//        $appraisals_ids = PmoSupervisor::where('supervisor_id',$id)->pluck('appraisal_form_id');
-
-        $reports_to_supervise= PmoSupervisor::where('supervisor_id',$id)->get();
-//        dd($appraisals);
-            return view('Epm.PMs.list-pmo-performance-appraisals',compact('reports_to_supervise'));
-    }
     public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
-//        dd($appraisal_id,$pmo_id);
 
-        $pmo = PmoPerformanceAppraisalReport::where('pmo_id',$pmo_id)->where('id',$appraisal_id)->first();
-//        dd($pmo);
-//            $pmo = PmoPerformanceAppraisal::where('pmo_id',$pmo_id)->first();
-         return view('Epm.PMs.performance-appraisal-submit-supervisor',compact('pmo'));
 
     }
 
-    public function pmo_performance_appraisal_save(Request $request,$id,$appraisal_id){
-//        dd($request->all());
-        $appraisal  = new PmoPerformanceAppraisal();
-        $pmo = User::find($id);
-        $appraisal->name = $pmo->name;
-        $appraisal->pmo_id = $pmo->id;
-        $appraisal->title = $request->title;
-        $appraisal->employee_number = $pmo->employee_number;
-        $appraisal->department = $pmo->department;
-        $appraisal->self_overall_comment = $request->self_overall_comment;
-        $appraisal->self_sign_date = $request->self_sign_date;
-        $appraisal->self_signature = $request->self_signature;
-        $appraisal->pmo_status = 1;
-        $appraisal->appraisal_report_id = $appraisal_id;
-//        $appraisal->report_id = '';
-        $appraisal_saved = $appraisal->save();
-        $pmo_report_submitted =
-        $self_scores = [];
-        foreach ($request->self_score as $score_self){
-            $self_scores[] = $score_self;
-        }
-        $self_comments = [];
-        foreach ($request->self_comment as $comment_self){
-            $self_comments[] = $comment_self;
-        }
-        if ($appraisal_saved){
-            $report = PmoPerformanceAppraisalReport::find($appraisal_id);
-            $data = [
-                'pmo_status'=>1,
-            ];
-            DB::table('pmo_performance_appraisal_reports')->where('id',$report->id)->update($data);
-            $appraisal->id;
-            $scores = [];
-            foreach ($self_scores as $self_score){
-                $scores[] = ['self_score'=>$self_score,'appraisal_id'=>$appraisal->id];
-            }
-            foreach ($self_comments as $key=>$self_comment){
-                $scores[$key] += ['self_comment'=>$self_comment];
-            }
-//            dd($scores);
-            foreach ($scores as $key=>$score){
-//                dd($score);
-                $report = new PmoAppraisalSelfScore();
-                $report->self_score = $score['self_score'];
-                $report->self_comment = $score['self_comment'];
-                $report->appraisal_id = $score['appraisal_id'];
-                $report->save();
-            }
-        }
-        return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Submitted Successfully');
-    }
+
 
     public function supervisor_performance_appraisal_save(Request $request,$id,$appraisal_id,$pmo_id){
-        $appraisal_report = PmoPerformanceAppraisalReport::find($appraisal_id);
-//        dd($appraisal_report);
-        $appraisal  = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal_report->id)->first();
-//        dd($appraisal);
-        $supervisor = User::find($id);
-        $data = [
-            'supervisor_overall_comment'=>$request->supervisor_overall_comment,
-            'supervisor_sign_date'=>$request->supervisor_sign_date,
-            'supervisor_signature'=>$request->supervisor_signature,
-            'improvement_areas'=>$request->improvement_areas,
-            'supervisor_status'=>1,
-        ];
-        $appraisal_updated = DB::table('pmo_performance_appraisals')->where('id',$appraisal->id)->update($data);
-        $supervisor_scores = [];
-        foreach ($request->supervisor_score as $score_super){
-            $supervisor_scores[] = $score_super;
-        }
-        $supervisor_comments = [];
-        foreach ($request->supervisor_comment as $comment_super){
-            $supervisor_comments[] = $comment_super;
-        }
-        if ($appraisal_updated){
-            $data = [
-                'supervisor_status'=>1,
-            ];
-            DB::table('pmo_performance_appraisal_reports')->where('id',$appraisal_id)->update($data);
-            $scores = [];
-            foreach ($supervisor_scores as $supervisor_score){
-                $scores[] = ['supervisor_score'=>$supervisor_score,'appraisal_id'=>$appraisal->id];
-            }
-            foreach ($supervisor_comments as $key=>$supervisor_comment){
-                $scores[$key] += ['supervisor_comment'=>$supervisor_comment];
-            }
-            foreach ($scores as $key=>$score){
-//                dd($score);
-                $report = new PmoAppraisalSupervisorScore();
-                $report->supervisor_score = $score['supervisor_score'];
-                $report->supervisor_comment = $score['supervisor_comment'];
-                $report->appraisal_id = $score['appraisal_id'];
-                $report->save();
-            }
-        }
-        return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance Appraisal Updated Successfully');
+
     }
 
     public function report_template_generate_pmos(Request $request,$id){
@@ -1020,88 +805,7 @@ class AdminController extends Controller
     }
 
 //centers
-    public function center_add(){
-        return view('Epm.Centers.add-center');
-    }
 
-    public function center_save(Request $request){
-        $this->validate($request,
-            [
-                'name' => ['required', 'string', 'max:255'],
-                'county' => ['required'],
-                'location' => ['required'],
-            ]
-        );
-        $center = new Center();
-        $center->name = request('name');
-        $center->county = request('county');
-        $center->location = request('location');
-        $center->location_lat_long = request('location_lat_long');
-        $center_saved = $center->save();
-        if ($center_saved) {
-            $request->session()->flash('message', 'Center Added Successfully');
-            return redirect('/adm/list/centers')->with('success', $request->session()->get('message'));
-        }else{
-            $request->session()->flash('message', 'An error occurred when trying to create Center please try again later');
-            return redirect('/adm/list/centers')->with('error', $request->session()->get('message'));
-        }
-    }
-
-    public function centers_list(){
-        $centers = Center::orderBy('created_at','desc')->get();
-        return view('Epm.Centers.centers',compact('centers'));
-    }
-
-    public function view_center($id,$center_id){
-        $center = DB::table('centers')->where('id',$center_id)->first();
-        return view('Epm.Centers.view-center',compact('center'));
-    }
-
-    public function edit_center($id){
-        $center = DB::table('centers')->where('id',$id)->first();
-        return view('Epm.Centers.edit-center',compact('center'));
-    }
-
-    public function update_center(Request $request,$id){
-        $data = [];
-        if ($request->hasFile('image')){
-            $fileName = '';
-            $image = $request->file('image');
-            if ($image->isValid()){
-                $fileName = $image->getClientOriginalName();
-                $image->move('Centers/images',$fileName);
-            }
-            $data = [
-                'name'=>$request->name,
-                'county'=>$request->county,
-                'location'=>$request->location,
-                'location_lat_long'=>$request->location_lat_long,
-                'image'=>$fileName,
-                'description'=>$request->description,
-            ];
-        }else{
-            $data = [
-                'name'=>$request->name,
-                'county'=>$request->county,
-                'location'=>$request->location,
-                'location_lat_long'=>$request->location_lat_long,
-                'description'=>$request->description,
-            ];
-        }
-        $updated = DB::table('centers')->where('id',$id)->update($data);
-        return redirect('/adm/view/center/'.$id)->with('success','Center Updated Successfully');
-    }
-
-    public function delete_center(Request $request,$id){
-        $data = [
-            'center_id'=>null,
-        ];
-        $cms_in_center = DB::table('users')->where('center_id',$id)->update($data);
-
-        DB::table('centers')->where('id',$id)->delete();
-
-        return redirect('/adm/list/centers')->with('success','Center Deleted Successfully');
-    }
 
 
     public function cm_save(Request $request)
@@ -1333,220 +1037,12 @@ $admin_user = Auth::user();
     }
 
     //sessions
-    public function session_add($id)
-    {
-        $trainers = '';
-        $classes = DB::table('session_classes')->get();
-        $role = DB::table('roles')->where('name','Trainer')->first();
-        if ($role){
-            $trainers = DB::table('users')->where('role_id',$role->id)->get();
-        }
-        return view('Epm.Sessions.add-session',compact('trainers','classes'));
-    }
 
     public function session_classes(){
-        $result = [];
-            $classes = DB::table('session_classes')->orderBy('created_at','desc')->get();
-            if (!empty($classes)){
-                foreach ($classes as $class){
-                    $result[]=$class;
-                }
-            }
-            return response()->json($result);
 
     }
 
-    public function sessions_list()
-    {
-//        $sessions = TrainingSession::orderBy('created_at','desc')->get();
-        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get();
-        return view('Epm.Sessions.sessions',compact('sessions'));
-    }
 
-    public function view_session($id,$session_id)
-    {
-//        $data = new ExcelReader();
-        $trainingSession = TrainingSession::find($session_id);
-        return view('Epm.Sessions.view-session',compact('trainingSession'));
-    }
-
-    public function session_save(Request $request,$id)
-    {
-        $messages = [
-            'name.required'=>'Hey Session Name Please',
-            'mode.required'=>'Please Select The Session Mode',
-        ];
-        $this->validate($request,[
-            'name'=>'required',
-            'date'=>'required',
-            'mode'=>'required',
-            'start_time'=>'required',
-            'end_time'=>'required',
-            'category'=>'required',
-            'about'=>'required',
-        ],$messages);
-        $session = new TrainingSession();
-        $session->name = $request->name;
-        $session->date = $request->date;
-        $session->start_time = $request->start_time;
-        $session->end_time = $request->end_time;
-        $session->institution = $request->institution;
-        $session->county = $request->county;
-        $session->location = $request->location;
-        $session->location_lat_long = $request->location_lat_long;
-        $session->category = $request->category;
-        $session->mode = $request->mode;
-        $classes = null;
-        $session->type = $request->type;
-        $session->about = $request->about;
-        $trainers_list = null;
-        if ($request->input('trainers')){
-            $trainers_list = $request->input('trainers');
-        }
-        if ($request->input('s_classes')){
-            $classes = $request->input('s_classes');
-        }
-        $saved = $session->save();
-        if ($saved){
-            $saved_session = TrainingSession::find($session->id);
-            if ($trainers_list!=null){
-                $saved_session->trainers()->attach($trainers_list);
-            }
-            if ($classes!=null){
-                $saved_session->classes()->attach($classes);
-            }
-        }
-        return redirect('/adm/'.$id.'/list/sessions')->with('success','New Session successfully created');
-
-    }
-    // create an array of trainers not added to a particular session
-    public function new_session_trainers($id){
-        $added_trainers_ids = json_decode(DB::table('trainer_training_session')->where('training_session_id',$id)->pluck('trainer_id'));
-        $role = DB::table('roles')->where('name','Trainer')->first();
-        $trainers_ids = '';
-        if ($role){
-            $trainers_ids = json_decode(DB::table('users')->where('role_id',$role->id)->pluck('id'));
-        }
-        $new_trainers_ids = [];
-        foreach ($trainers_ids as $trainer_id){
-            if (!in_array($trainer_id,$added_trainers_ids)){
-                $trainers = DB::table('users')->where('role_id',$role->id)->where('id',$trainer_id)->get();
-                foreach ($trainers as $trainer){
-                    $new_trainers_ids[] = $trainer;
-                }
-            }
-        }
-        return response()->json($new_trainers_ids);
-    }
-
-    public function session_add_trainers($id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            $session = DB::table('training_sessions')->where('id',$id)->first();
-            return view('Epm.Sessions.add-trainers',compact('session'));
-        }
-    }
-
-    public function session_save_trainers(Request $request,$id,$session_id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            $session_trainers = $request->new_session_trainers_ids;
-            TrainingSession::find($session_id)->trainers()->attach($session_trainers);
-            return redirect('/adm/'.$admin->id.'/view/session/'.$session_id)->with('success','Trainer Successfully added to Session');
-        }
-    }
-
-    public function session_add_trainees($id,$session_id){
-        $session = TrainingSession::find($session_id);
-       return view('Epm.Trainees.add-trainees',compact('session'));
-    }
-
-    public function session_upload_trainees($id,$session_id){
-        $session = TrainingSession::find($session_id);
-        return view('Epm.Trainees.upload-trainees',compact('session'));
-    }
-
-    public function download_trainees_excel_template()
-    {
-        return Excel::download(new TraineesTemplateExport(), 'trainees.xlsx');
-    }
-
-    public function upload_trainees(Request $request,$id,$session_id){
-
-        $messages = [
-            'trainees.required'=>'Please Select trainees Excel File to Upload',
-        ];
-        $this->validate($request,[
-            'trainees'=>'required',
-        ],$messages);
-        $trainees_excel = Excel::toArray(new TraineesImport(), $request->file('trainees'));
-        $trainees_raw = [];
-        foreach ($trainees_excel as $trainee_excel){
-            $trainees_raw[] = $trainee_excel;
-        }
-        $trainees = array_slice($trainees_raw[0],1);
-        $saved = '';
-        $session = null;
-        foreach ($trainees as $trainee){
-            $session = DB::table('training_sessions')->where('id',$session_id)->first();
-            $session_trainee = new Trainee();
-            $session_trainee->name =$trainee[0];
-            $session_trainee->gender=$trainee[1];
-            $session_trainee->email = $trainee[2];
-            $session_trainee->phone_number = $trainee[3];
-            $session_trainee->id_number = $trainee[4];
-            $session_trainee->age = $trainee[5];
-            $session_trainee->level_of_computer_literacy = $trainee[6];
-            $session_trainee->level_of_education = $trainee[7];
-            $session_trainee->field_of_study = $trainee[8];
-            $session_trainee->interests = $trainee[9];
-            $session_trainee->session_id = $session->id;
-            $session_trainee->category = $session->category;
-            if ($session->mode == 'Physical'){
-                $session_trainee->county = $session->county;
-                $session_trainee->location = $session->location;
-                $session_trainee->location_lat_long = $session->location_lat_long;
-            }
-            $saved_trainee = $session_trainee->save();
-            if ($saved_trainee){
-               $session->trainees()->attach($session_trainee->id);
-            }
-        }
-       return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Trainees Successfully uploaded');
-    }
-    public function session_save_trainees(Request $request,$id,$session_id){
-        $this->validate($request,[
-            'name'=>'required',
-            'gender'=>'required',
-            'email'=>'required',
-            'phone_number'=>'required',
-            'age'=>'required',
-            'id_number'=>'required',
-        ]);
-        $session  = TrainingSession::find($session_id);
-        $trainee = New Trainee();
-        $trainee->name = $request->name;
-        $trainee->gender = $request->gender;
-        $trainee->email = $request->email;
-        $trainee->phone_number = $request->phone_number;
-        $trainee->id_number = $request->id_number;
-        $trainee->age = $request->age;
-        $trainee->level_of_computer_literacy = $request->level_of_computer_literacy;
-        $trainee->level_of_education = $request->level_of_education;
-        $trainee->field_of_study = $request->field_of_study;
-        $trainee->interests = $request->interests;
-        $trainee->category = $session->category;
-        if ($session->mode == 'Physical'){
-            $trainee->county = $session->county;
-            $trainee->location = $session->location;
-            $trainee->location_lat_long = $session->location_lat_long;
-        }
-        $trainee->save();
-        if ($trainee->save()){
-            $session->trainees()->attach($trainee->id);
-        }
-        return redirect('/adm/'.$id.'/view/session/'.$session_id)->with('success','Trainee successfully added to session');
-    }
 
     public function mentor_save(Request $request)
     {
@@ -1609,14 +1105,6 @@ $admin_user = Auth::user();
     /**
      * Teams
      */
-    public function team_cms_list(){
-        $teams = DB::table('team_center_managers')->orderBy('created_at','desc')->get();
-        $members = '';
-        foreach ($teams as $team){
-            $members = TeamCenterManager::find($team->id);
-        }
-        return view('Epm.Teams.cms',compact('teams','members'));
-    }
 
     public function team_trainers_list(){
         $teams = DB::table('team_trainers')->orderBy('created_at','desc')->get();

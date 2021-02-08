@@ -1,3 +1,7 @@
+<?php
+$auth_admin = auth()->user();
+?>
+
 <center>
     @if(session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,7 +22,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-center mb-0 ">
+            <table id="CentersList" class="table table-center mb-0 ">
                 <thead>
                 <tr>
                     <th>Centers</th>
@@ -44,13 +48,13 @@
                             @if(auth()->user()->role->name == 'Su Admin' || auth()->user()->role->name == 'Project Manager')
                                 <td class="text-right">
                                     <div class="float-right">
-                                            <a href="{{url('/adm/view/center',$center->id)}}" class="btn btn-sm btn-outline-info" title="View">
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/center',$center->id)}}" class="btn btn-sm btn-outline-info" title="View">
                                                 <span><i class="fa fa-list"></i></span>
                                             </a>
-                                            <a href="{{url('/adm/edit/center',$center->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/edit/center',$center->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
                                                 <span><i class="fa fa-pencil-alt"></i></span>
                                             </a>
-                                            <a href="#!" data-url="{{url('/adm/delete/center',$center->id)}}" class="btn btn-sm btn-outline-danger deleteCenter" data-toggle="modal" data-target="#deleteCenter" title="Delete">
+                                            <a href="#!" data-url="{{url('/adm/'.$auth_admin->id.'/delete/center',$center->id)}}" class="btn btn-sm btn-outline-danger deleteCenter" data-toggle="modal" data-target="#deleteCenter" title="Delete">
                                                 <span><i class="fa fa-trash"></i></span>
                                             </a>
                                     </div>

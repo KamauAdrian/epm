@@ -4,21 +4,14 @@
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
 @endsection
 
-@section('sidebar-nav')
-    @include('Epm.SuAdmins.layouts.sidebar-nav')
-@endsection
-
-@section('header-nav')
-    @include('Epm.SuAdmins.layouts.header-nav')
-@endsection
-
 @section('form-desc')
-    Add New Trainer(s) To {{$session->name}}
+    Add New Trainers To {{$session->name}}
 @endsection
 
 @section('form')
     @include('Epm.layouts.session-add-trainers')
 @endsection
+
 @section('js')
     <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
     <script src="{{url('assets/dist/vue.js')}}"></script>

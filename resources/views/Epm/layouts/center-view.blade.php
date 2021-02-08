@@ -1,4 +1,7 @@
 @inject('centerDetails','App\Models\Center')
+<?php
+$auth_admin = auth()->user();
+?>
 <div class="col-sm-12">
     <center>
         @if(session()->has('success'))
@@ -20,7 +23,7 @@
     <div class="row">
         <div class="col-sm-12 mb-4">
             <h1 class="d-inline-block font-weight-normal mb-0">{{$center->name}} Profile</h1>
-            <a href="{{url('/adm/edit/center',$center->id)}}">
+            <a href="{{url('/adm/'.$auth_admin->id.'/edit/center',$center->id)}}">
                 <button class="btn btn-outline-info float-right">Edit Profile</button>
             </a>
         </div>

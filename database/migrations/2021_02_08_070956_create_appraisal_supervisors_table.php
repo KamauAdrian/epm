@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSessionClassesTable extends Migration
+class CreateAppraisalSupervisorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSessionClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('session_classes', function (Blueprint $table) {
+        Schema::create('appraisal_supervisors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('category')->nullable();
-            $table->string('description');
+            $table->string('supervisor');
+            $table->string('supervisor_email');
+            $table->integer('supervisor_id')->unsigned();
+            $table->integer('appraisal_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateSessionClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('session_classes');
+        Schema::dropIfExists('appraisal_supervisors');
     }
 }

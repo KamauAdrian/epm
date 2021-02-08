@@ -1,13 +1,5 @@
 @extends('Epm.layouts.master')
 
-@section('sidebar-nav')
-    @include('Epm.SuAdmins.layouts.sidebar-nav')
-@endsection
-
-@section('header-nav')
-    @include('Epm.SuAdmins.layouts.header-nav')
-@endsection
-
 @section('content')
     <!-- [ Dashboard ] start -->
     <div class="col-md-12">
@@ -18,7 +10,7 @@
                             <div class="text-center">
                                 <h1 class="f-w-400">Create Super User Admin</h1>
                             </div>
-                            <form method="post" action="{{url('/adm-register-su-admin')}}" class="my-5">
+                            <form method="post" action="{{url('/save/su-admin')}}" class="my-5">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12">

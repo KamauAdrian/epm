@@ -10,9 +10,6 @@
 @section('js')
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
-    <script>
-        $('#myDataTable').DataTable();
-    </script>
     <script type="text/javascript">
         $(function () {
             $(".deleteAdmin").click(function () {
@@ -22,4 +19,8 @@
             })
         });
     </script>
+    <script>
+        $('#myDataTable').DataTable();
+    </script>
+
 @endsection

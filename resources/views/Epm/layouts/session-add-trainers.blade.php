@@ -20,7 +20,7 @@ $auth_admin = auth()->user();
     <div class="form-group">
         <div class="row justify-content-between">
             <div class="col-auto text-right">
-                <button type="submit" class="btn btn-primary btn-block mb-3">Add Trainer(s)</button>
+                <button type="submit" class="btn btn-primary btn-block mb-3">Add Trainers</button>
             </div>
         </div>
     </div>

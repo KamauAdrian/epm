@@ -11,6 +11,7 @@ use App\Models\TrainerDailyVirtualTrainingReport;
 use App\Models\TrainerReport;
 use App\Models\TrainerSkillCompetence;
 use App\Models\TrainerTrainingTaskRole;
+use App\Models\TrainingSession;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,6 @@ use Illuminate\Support\Facades\DB;
 
 class TrainerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function asses_trainer($id){
         $admin = User::find($id);
         $trainers = '';
