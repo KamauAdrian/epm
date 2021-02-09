@@ -46,7 +46,7 @@ class AppraisalController extends Controller
     public function supervisions($id){
         $appraisals_to_supervise= AppraisalSupervisor::where('supervisor_id',$id)->get();
 //        dd($appraisals_to_supervise);
-        return view('Epm.PMs.list-pmo-performance-appraisals',compact('appraisals_to_supervise'));
+        return view('Epm.PMs.list-performance-appraisals-to-supervise',compact('appraisals_to_supervise'));
     }
 
     public function supervise($id,$appraisal_id,$pmo_id){
