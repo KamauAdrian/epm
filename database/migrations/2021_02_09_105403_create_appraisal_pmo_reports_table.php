@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppraisalReportPmosTable extends Migration
+class CreateAppraisalPmoReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAppraisalReportPmosTable extends Migration
      */
     public function up()
     {
-        Schema::create('appraisal_report_pmos', function (Blueprint $table) {
+        Schema::create('appraisal_pmo_reports', function (Blueprint $table) {
             $table->id();
             $table->integer('appraisal_id')->unsigned();
             $table->string('self_score');
@@ -29,6 +29,6 @@ class CreateAppraisalReportPmosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appraisal_report_pmos');
+        Schema::dropIfExists('appraisal_pmo_reports');
     }
 }
