@@ -15,6 +15,7 @@
                 <?php
                 $auth_admin = auth()->user();
                 $supervisor = \App\Models\AppraisalSupervisor::where('appraisal_id',$appraisal->id)->first();
+                dd($supervisor);
                 $self_scores = [];
                 $supervisor_scores = [];
                 foreach ($appraisal->selfScores as $score_raw_self){
