@@ -14,18 +14,16 @@
 
                 <?php
                 $auth_admin = auth()->user();
+
+                $supervisor = \App\Models\AppraisalSupervisor::where('appraisal_id',$appraisal->id)->first();
                 $self_scores = [];
                 $supervisor_scores = [];
-                //                $report = \App\Models\PmoPerformanceAppraisalReport::where('id',$appraisal->appraisal_report_id)->first();
-                //                dd($appraisal);
                 foreach ($appraisal->selfScores as $score_raw_self){
                     $self_scores[] = $score_raw_self;
                 }
-                //                dd($self_scores);
                 foreach ($appraisal->supervisorScores as $score_raw_supervisor){
                     $supervisor_scores[] = $score_raw_supervisor;
                 }
-                //                dd($supervisor_scores);
                 ?>
                 <center>
                     @if(session()->has('success'))
@@ -95,16 +93,12 @@
                                             <td>{{$appraisal->question_one}}</td>
                                             <td><input type="text" name="self_score[]" value="{{$self_scores[0]->self_score}}" readonly></td>
                                             <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                {{$self_scores[0]->self_comment}}
-                                            </textarea>
+                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[0]->self_comment}}</textarea>
                                             </td>
                                             @if($supervisor_scores)
                                                 <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[0]->supervisor_score}}" readonly></td>
                                                 <td>
-                                                <textarea name="" id="" cols="30" rows="5" readonly>
-                                                    {{$supervisor_scores[0]->supervisor_comment}}
-                                                </textarea>
+                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[0]->supervisor_comment}}</textarea>
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -118,16 +112,12 @@
                                             <td>{{$appraisal->question_two}}</td>
                                             <td><input type="text" name="self_score[]"  value="{{$self_scores[1]->self_score}}" readonly></td>
                                             <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                {{$self_scores[1]->self_comment}}
-                                            </textarea>
+                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[1]->self_comment}}</textarea>
                                             </td>
                                             @if($supervisor_scores)
                                                 <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[1]->supervisor_score}}" readonly></td>
                                                 <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                    {{$supervisor_scores[1]->supervisor_comment}}
-                                                </textarea>
+                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[1]->supervisor_comment}}</textarea>
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -141,16 +131,12 @@
                                             <td>{{$appraisal->question_three}}</td>
                                             <td><input type="text" name="self_score[]" value="{{$self_scores[2]->self_score}}" readonly></td>
                                             <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                {{$self_scores[2]->self_comment}}
-                                            </textarea>>
+                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[2]->self_comment}}</textarea>>
                                             </td>
                                             @if($supervisor_scores)
                                                 <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[2]->supervisor_score}}" readonly></td>
                                                 <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                    {{$supervisor_scores[2]->supervisor_comment}}
-                                            </textarea>
+                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[2]->supervisor_comment}}</textarea>
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -164,16 +150,12 @@
                                             <td>{{$appraisal->question_four}}</td>
                                             <td><input type="text" name="self_score[]" value="{{$self_scores[3]->self_score}}" readonly></td>
                                             <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                {{$self_scores[3]->self_comment}}
-                                            </textarea>
+                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[3]->self_comment}}</textarea>
                                             </td>
                                             @if($supervisor_scores)
                                                 <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[3]->supervisor_score}}" readonly></td>
                                                 <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                    {{$supervisor_scores[3]->supervisor_comment}}
-                                            </textarea>
+                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[3]->supervisor_comment}}</textarea>
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -187,16 +169,12 @@
                                             <td>{{$appraisal->question_five}}</td>
                                             <td><input type="text" name="self_score[]" value="{{$self_scores[4]->self_score}}" readonly></td>
                                             <td>
-                                        <textarea name="" id="" cols="30" rows="5" readonly>
-                                                {{$self_scores[4]->self_comment}}
-                                            </textarea>
+                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[4]->self_comment}}</textarea>
                                             </td>
                                             @if($supervisor_scores)
                                                 <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[4]->supervisor_score}}" readonly></td>
                                                 <td>
-                                            <textarea name="" id="" cols="30" rows="5" readonly>
-                                                    {{$supervisor_scores[4]->supervisor_comment}}
-                                            </textarea>
+                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[4]->supervisor_comment}}</textarea>
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -215,9 +193,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <textarea name="" id="" cols="100%" rows="3" readonly>
-                                                {{$appraisal->pmo_overall_comment}}
-                                            </textarea>
+                                            <textarea name="" id="" cols="100%" rows="3" readonly>{{$appraisal->pmo_overall_comment}}</textarea>
                                         </td>
                                     </tr>
                                     <tr>
@@ -240,9 +216,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <textarea name="" id="" cols="100%" rows="5" readonly>
-                                                {{$appraisal->improvement_areas}}
-                                            </textarea>
+                                            <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->improvement_areas}}</textarea>
                                         </td>
                                     </tr>
                                     <tr>
@@ -250,19 +224,17 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <textarea name="" id="" cols="100%" rows="5" readonly>
-                                                {{$appraisal->supervisor_overall_comment}}
-                                            </textarea>
+                                            <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->supervisor_overall_comment}}</textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Signature:</td>
                                         <td colspan="2">
-                                            <input type="text" name="" value="{{$appraisal->supervisor_signature}}" readonly>
+                                            <input type="text" name="" value="{{$supervisor->supervisor_signature}}" readonly>
                                         </td>
                                         <td >Date</td>
                                         <td colspan="2">
-                                            <input type="date" name="supervisor_sign_date" value="{{$appraisal->supervisor_sign_date}}" style="border: none;" readonly>
+                                            <input type="date" name="supervisor_sign_date" value="{{$supervisor->supervisor_sign_date}}" style="border: none;" readonly>
                                         </td>
                                     </tr>
                                     </tbody>

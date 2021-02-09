@@ -188,9 +188,6 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <?php
                 $appraisal_submit = \App\Models\Appraisal::where('pmo_id',$auth_admin->id)->get();
                 $appraisal_supervise = \App\Models\AppraisalSupervisor::where('supervisor_id',$auth_admin->id)->get();
-//                if ($appraisal_supervise){
-//                    $pmo = PmoPerformanceAppraisal::where('pmo_id',$appraisal_supervise->pmo_id)->first();
-//                }
                 ?>
                     <li>
                         <a href="#!">Appraisals</a>
@@ -200,7 +197,6 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                             @endif
                             @if($appraisal_supervise)
                                 <li><a href="{{url('/adm/'.$auth_admin->id.'/list/pending/pmo/performance/supervision/appraisals')}}">Supervise PMO</a></li>
-{{--                                <li><a href="{{url('/adm/'.$auth_admin->id.'/supervise/pmo/performance/id='.$appraisal_supervise->id.'/pmo='.$appraisal_supervise->pmo_id)}}">Supervise PMO</a></li>--}}
                             @endif
                         </ul>
                     </li>

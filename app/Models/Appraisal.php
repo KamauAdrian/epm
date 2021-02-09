@@ -9,10 +9,13 @@ class Appraisal extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'pmo_employee_number',
+        'pmo_department',
         'pmo_title',
         'pmo_overall_comment',
         'pmo_sign_date',
-        'pmo_signature'
+        'pmo_signature',
+        'pmo_status',
     ];
 
     public function selfScores(){

@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="p-4 border rounded">
-                                    @if($pms)
+                                    @if($pm_role)
                                         <h1 class="display-4 d-inline-block font-weight-normal">{{count($pms)}}</h1>
                                     @endif
                                     <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="p-4 border rounded">
-                                    @if($cms)
+                                    @if($cm_role)
                                         <h1 class="display-4 d-inline-block font-weight-normal">{{count($cms)}}</h1>
                                     @endif
                                     <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="p-4 border rounded">
-                                    @if($trainers)
+                                    @if($trainer_role)
                                         <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainers)}}</h1>
                                     @endif
                                     <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
@@ -300,6 +300,9 @@
                 series: [],
                 dataLabels: {
                     enabled: false,
+                },
+                noData: {
+                    text: 'Loading ...'
                 },
                 xaxis: {
                     axisBorder: {

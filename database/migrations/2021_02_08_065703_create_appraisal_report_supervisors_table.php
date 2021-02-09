@@ -19,7 +19,6 @@ class CreateAppraisalReportSupervisorsTable extends Migration
             $table->string('supervisor_score')->nullable();
             $table->text('supervisor_comment')->nullable();
             $table->integer('supervisor_id')->unsigned();
-            $table->integer('supervisor_status')->default(0);
             $table->timestamps();
         });
     }

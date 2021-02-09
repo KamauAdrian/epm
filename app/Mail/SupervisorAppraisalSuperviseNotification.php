@@ -31,7 +31,7 @@ class SupervisorAppraisalSuperviseNotification extends Mailable
      */
     public function build()
     {
-        $subject = ''
-        return $this->view('view.name');
+        $subject = '';
+        return $this->view('Emails.Appraisals.supervisor-request-supervise-pmo');
     }
 }

@@ -19,6 +19,11 @@ class CreateAppraisalSupervisorsTable extends Migration
             $table->string('supervisor_email');
             $table->integer('supervisor_id')->unsigned();
             $table->integer('appraisal_id')->unsigned();
+            $table->text('supervisor_overall_comment')->nullable();
+            $table->string('supervisor_sign_date')->nullable();
+            $table->string('supervisor_signature')->nullable();
+            $table->text('improvement_areas')->nullable();
+            $table->string('supervisor_status')->default(0);
             $table->timestamps();
         });
     }

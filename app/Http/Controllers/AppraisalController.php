@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\PmoAppraisalNotification;
 use App\Mail\PmoAppraisalSuperviseNotification;
 use App\Mail\SupervisorAppraisalNotification;
+use App\Mail\SupervisorAppraisalSuperviseNotification;
 use App\Models\Appraisal;
 use App\Models\AppraisalReportPmo;
 use App\Models\AppraisalReportSupervisor;
@@ -51,11 +52,8 @@ class AppraisalController extends Controller
     }
 
     public function supervision_save(Request $request,$id,$appraisal_id){
-        $appraisal_report = PmoPerformanceAppraisalReport::find($appraisal_id);
-//        dd($appraisal_report);
-        $appraisal  = PmoPerformanceAppraisal::where('appraisal_report_id',$appraisal_report->id)->first();
-//        dd($appraisal);
-        $supervisor = User::find($id);
+
+        $appraisal = Appraisal::find($appraisal_id);
         $data = [
             'supervisor_overall_comment'=>$request->supervisor_overall_comment,
             'supervisor_sign_date'=>$request->supervisor_sign_date,
@@ -63,7 +61,9 @@ class AppraisalController extends Controller
             'improvement_areas'=>$request->improvement_areas,
             'supervisor_status'=>1,
         ];
-        $appraisal_updated = DB::table('pmo_performance_appraisals')->where('id',$appraisal->id)->update($data);
+        $supervisor = AppraisalSupervisor::where('supervisor_id',$id)->where('appraisal_id',$appraisal->id)->first();
+        $update_supervisor = AppraisalSupervisor::find($supervisor->id)->update($data);
+
         $supervisor_scores = [];
         foreach ($request->supervisor_score as $score_super){
             $supervisor_scores[] = $score_super;
@@ -72,25 +72,26 @@ class AppraisalController extends Controller
         foreach ($request->supervisor_comment as $comment_super){
             $supervisor_comments[] = $comment_super;
         }
-        if ($appraisal_updated){
+
+        if ($update_supervisor) {
             $data = [
-                'supervisor_status'=>1,
+                'supervisor_status' => 1,
             ];
-            DB::table('pmo_performance_appraisal_reports')->where('id',$appraisal_id)->update($data);
+            DB::table('pmo_performance_appraisal_reports')->where('id', $appraisal_id)->update($data);
             $scores = [];
-            foreach ($supervisor_scores as $supervisor_score){
-                $scores[] = ['supervisor_score'=>$supervisor_score,'appraisal_id'=>$appraisal->id];
+            foreach ($supervisor_scores as $supervisor_score) {
+                $scores[] = ['supervisor_score' => $supervisor_score, 'appraisal_id' => $appraisal->id];
             }
-            foreach ($supervisor_comments as $key=>$supervisor_comment){
-                $scores[$key] += ['supervisor_comment'=>$supervisor_comment];
+            foreach ($supervisor_comments as $key => $supervisor_comment) {
+                $scores[$key] += ['supervisor_comment' => $supervisor_comment];
             }
-            foreach ($scores as $key=>$score){
-//                dd($score);
-                $report = new PmoAppraisalSupervisorScore();
-                $report->supervisor_score = $score['supervisor_score'];
-                $report->supervisor_comment = $score['supervisor_comment'];
-                $report->appraisal_id = $score['appraisal_id'];
-                $report->save();
+            foreach ($scores as $key => $score) {
+                $supervisor_report = new AppraisalReportSupervisor();
+                $supervisor_report->supervisor_score = $score['supervisor_score'];
+                $supervisor_report->supervisor_comment = $score['supervisor_comment'];
+                $supervisor_report->appraisal_id = $score['appraisal_id'];
+                $supervisor_report->supervisor_id = $id;
+                $supervisor_report->save();
             }
         }
         return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance AppraisalController Updated Successfully');
@@ -206,7 +207,6 @@ class AppraisalController extends Controller
      * Store a newly submitted appraisal.
      */
     public function pmo_save_appraisal(Request $request,$id,$appraisal_id){
-//        dd($request->all());
         $pmo = User::find($id);
         $appraisal  = Appraisal::find($appraisal_id);
         $appraisal_update = [
@@ -218,6 +218,7 @@ class AppraisalController extends Controller
             'pmo_signature'=>$request->self_signature,
             'pmo_status'=>1,
         ];
+//        dd($appraisal_update);
         $appraisal_updated = $appraisal->update($appraisal_update);
         $self_scores = [];
         foreach ($request->self_score as $score_self){
@@ -241,6 +242,15 @@ class AppraisalController extends Controller
                 $report->self_comment = $score['self_comment'];
                 $report->appraisal_id = $score['appraisal_id'];
                 $report->save();
+            }
+            $supervisors = AppraisalSupervisor::where('appraisal_id',$appraisal_id)->get();
+            foreach ($supervisors as $supervisor){
+                $data = [
+                    'name'=>$supervisor->supervisor,
+                    'pmo'=>$pmo->name,
+                    'pmo_email'=>$pmo->email,
+                ];
+                Mail::to($supervisor->supervisor_email)->send(new SupervisorAppraisalSuperviseNotification($data));
             }
             return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance AppraisalController Submitted Successfully');
         }

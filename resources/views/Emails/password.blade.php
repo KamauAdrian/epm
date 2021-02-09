@@ -11,17 +11,22 @@
 <?php
 $id = $data['user_id'];
 ?>
-<h2>
-    Hi {{$data['name']}},Following are your account details: <br>
-</h2>
-<h3>Email: </h3>
-<p>
-    {{$data['email']}}
+<h3>
+    Hi {{$data['name']}},
+</h3>
+<p>Welcome to eMobilis Portal!</p>
+<p>The Mission of eMobilis is to create opportunities for
+    African Youth by Training them on digital, software and
+    other technologies that prepare them for the Future of
+    Work by equipping them with marketable; industry
+    driven skills.
 </p>
-<h3>Phone: </h3><p>{{$data['phone']}}</p>
-
-<h4>
-    <a href="{{url('/account/activate',$id)}}"> Click here to activate your account</a>
-</h4>
+<p>
+    Below are your Account Details:
+</p>
+<p>Email: {{$data['email']}} <br /> Phone: {{$data['phone']}}</p>
+<p>
+    <a href="{{url('/account/activate',$id)}}">Click here to active your Account and set a Password.</a>
+</p>
 </body>
 </html>

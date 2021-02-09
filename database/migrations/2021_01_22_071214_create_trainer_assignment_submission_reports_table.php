@@ -21,7 +21,6 @@ class CreateTrainerAssignmentSubmissionReportsTable extends Migration
             $table->string('employee_number');
             $table->date('date');
             $table->integer('trainer_id')->unsigned();
-            $table->string('employee_number');
             $table->string('speciality');
             $table->string('assignment');
             $table->timestamps();

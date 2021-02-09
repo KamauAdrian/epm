@@ -41,7 +41,6 @@
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$auth_admin->name}}" required>
-                                {{--                                <input type="hidden" name="appraisal_report_id" class="form-control" value="{{$appraisal->id}}">--}}
                                 <span class="text-danger">{{$errors->first('name')}}</span>
                             </div>
                         </div>
@@ -49,7 +48,6 @@
                             <div class="form-group">
                                 <label>Title</label>
                                 <input type="text" name="title" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{old('title')}}" required>
-                                {{--                                        <input type="hidden" name="report_template_id" class="form-control" value="{{$report->id}}">--}}
                                 <span class="text-danger">{{$errors->first('name')}}</span>
                             </div>
                         </div>
@@ -141,8 +139,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" required>
-                                            </textarea>
+                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" required></textarea>
                                         </td>
                                     </tr>
                                     <tr>
