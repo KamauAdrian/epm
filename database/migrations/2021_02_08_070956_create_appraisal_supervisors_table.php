@@ -23,7 +23,7 @@ class CreateAppraisalSupervisorsTable extends Migration
             $table->string('supervisor_sign_date')->nullable();
             $table->string('supervisor_signature')->nullable();
             $table->text('improvement_areas')->nullable();
-            $table->string('supervisor_status')->default(0);
+            $table->integer('supervisor_status')->default(0);
             $table->timestamps();
         });
     }

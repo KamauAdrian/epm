@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <?php use App\Models\PmoPerformanceAppraisal;use App\Models\PmoPerformanceAppraisalReport;$auth_admin = auth()->user();
-    $appraisal_fill = \App\Models\PmoPerformanceAppraisalReport::where('pmo_id',$auth_admin->id)->first();
+    <?php
+    $auth_admin = auth()->user();
     ?>
     {{--    @include('Epm.layouts.Reports.templates')--}}
     <div class="col-md-12">

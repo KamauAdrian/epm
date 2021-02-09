@@ -1160,7 +1160,6 @@ $admin_user = Auth::user();
      */
     public function destroy($id,$admin_id,$role_id)
     {
-                dd(User::find($admin_id));
         $deleted = User::find($admin_id)->delete();
         if ($deleted){
             return redirect('/list/all/admins/role_id='.$role_id)->with('success','Admin deleted Successfully');
