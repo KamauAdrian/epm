@@ -5,10 +5,7 @@
 @endsection
 
 @section('content')
-    <?php
-    $auth_admin = auth()->user();
-    ?>
-    {{--    @include('Epm.layouts.Reports.templates')--}}
+    <?php $auth_admin = auth()->user(); ?>
     <div class="col-md-12">
         <div class="row">
             <div class="col-sm-6 d-flex align-items-center mb-4">
@@ -62,17 +59,13 @@
                                     <td>
                                         <?php
                                         $supervisors_raw = \App\Models\AppraisalSupervisor::where('appraisal_id',$appraisal->id)->get();
-                                        //                                        dd($supervisors_raw);
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->supervisor;
-                                        }
-                                        //                                        $names = implode(',',$supervisors);
                                         ?>
                                         @foreach($supervisors as $supervisor)
                                             <?php
                                             $supervisor_status = \App\Models\AppraisalSupervisorReport::where('appraisal_id',$appraisal->id)->where('supervisor_id',$auth_admin->id)->first();
-//                                            dd($supervisor_status);
                                             ?>
                                             @if($supervisor_status)
                                                 <p class="mb-3">

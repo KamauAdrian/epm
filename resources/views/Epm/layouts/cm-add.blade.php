@@ -1,4 +1,7 @@
-<form class="my-5" method="post" action="{{url('/save-cm')}}">
+<?php
+$auth_admin = auth()->user();
+?>
+<form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/cm')}}">
     @csrf
     <div class="row">
         <div class="col-sm-6">

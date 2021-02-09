@@ -42,6 +42,11 @@
                             <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-upload mr-2"></i>Upload {{$role->name}}s</button>
                         </a>
                     @endif
+                    @if($role->name == 'Center Manager')
+                        <a href="{{url('/adm/'.$auth_admin->id.'/request/upload/cms')}}">
+                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-upload mr-2"></i>Upload {{$role->name}}s</button>
+                        </a>
+                    @endif
                 @endif
                 @if($auth_admin->role->name == 'Project Manager')
                     <a href="{{url('/'.$url)}}">

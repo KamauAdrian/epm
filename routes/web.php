@@ -39,8 +39,9 @@ Route::group(['middleware'=>'super_admin'],function (){
 //    Route::get('/adm-dashboard',[App\Http\Controllers\SuperAdminController::class, 'index']);
     Route::get('/register/su-admin',[App\Http\Controllers\SuperAdminController::class, 'su_admin_register_su_admin']);
     Route::post('/save/su-admin',[App\Http\Controllers\SuperAdminController::class, 'adm_save_su_admin']);
-    Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
+});
     //shared responsibility
+Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
     //cms
 //    Route::get('/list-cms',[App\Http\Controllers\SuperAdminController::class, 'cms_list']);
     Route::get('/cms',[App\Http\Controllers\SuperAdminController::class, 'cms']);//json array of cms
@@ -82,7 +83,6 @@ Route::group(['middleware'=>'super_admin'],function (){
     //ajira clubs
     Route::get('/ajira-clubs',[App\Http\Controllers\SuperAdminController::class, 'ajira_clubs']);
 
-});
 //guests confirm invitation
 Route::get('/account/activate/{id}',[App\Http\Controllers\AdminController::class, 'activate_account'])->middleware('create.password');
 Route::post('/update/account/{id}',[App\Http\Controllers\AdminController::class, 'update_account']);
@@ -183,12 +183,18 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/edit/center/{center_id}',[App\Http\Controllers\CenterController::class, 'edit']);
     Route::post('/adm/{id}/update/center/{center_id}',[App\Http\Controllers\CenterController::class, 'update']);
     Route::post('/adm/{id}/delete/center/{center_id}',[App\Http\Controllers\CenterController::class, 'destroy']);
+    //center Managers
+    Route::post('/adm/{id}/save/cm',[App\Http\Controllers\CenterManagerController::class, 'store']);
+    Route::get('/adm/{id}/request/upload/cms',[App\Http\Controllers\CenterManagerController::class, 'request_upload_cms']);
+    Route::get('/download/cms/excel/template',[App\Http\Controllers\CenterManagerController::class, 'download_cms_excel_template']);
+    Route::post('/adm/{id}/upload/cms',[App\Http\Controllers\CenterManagerController::class, 'upload_cms']);
+
     //trainers
-    Route::get('/adm/{id}/request/upload/trainers',[App\Http\Controllers\AdminController::class, 'request_upload_trainers']);
-    Route::get('/download/trainers/excel/template',[App\Http\Controllers\AdminController::class, 'download_trainers_excel_template']);
-    Route::post('/adm/{id}/upload/trainers',[App\Http\Controllers\AdminController::class, 'upload_trainers']);
-    Route::get('/trainers',[App\Http\Controllers\AdminController::class, 'trainers']);//json array of trainers
-    Route::post('/save-trainer',[App\Http\Controllers\AdminController::class, 'trainer_save']);
+    Route::get('/adm/{id}/request/upload/trainers',[App\Http\Controllers\TrainerController::class, 'request_upload_trainers']);
+    Route::get('/download/trainers/excel/template',[App\Http\Controllers\TrainerController::class, 'download_trainers_excel_template']);
+    Route::post('/adm/{id}/upload/trainers',[App\Http\Controllers\TrainerController::class, 'upload_trainers']);
+    Route::get('/trainers',[App\Http\Controllers\TrainerController::class, 'trainers']);//json array of trainers
+    Route::post('/save-trainer',[App\Http\Controllers\TrainerController::class, 'store']);
     Route::get('/adm/{id}/asses/trainer/competence',[App\Http\Controllers\TrainerController::class, 'asses_trainer']);
     Route::post('/adm/{id}/save/trainer/competence/assessment',[App\Http\Controllers\TrainerController::class, 'save_trainer_assessment']);
     Route::get('/adm/{id}/view/competence/reports',[App\Http\Controllers\TrainerController::class, 'trainer_competence_reports']);
@@ -214,8 +220,6 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/download/trainees/excel/template',[App\Http\Controllers\SessionController::class, 'download_excel_template']);
     Route::post('/adm/{id}/session/{session_id}/save/uploaded/trainees',[App\Http\Controllers\SessionController::class, 'store_uploaded_trainees']);
 
-    //center managers
-    Route::post('/save-cm',[App\Http\Controllers\AdminController::class, 'cm_save']);
     //mentors
     Route::post('/save-mentor',[App\Http\Controllers\AdminController::class, 'mentor_save']);
 

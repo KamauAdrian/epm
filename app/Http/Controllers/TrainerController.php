@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TrainerAssignmentSubmission;
+use App\Exports\TrainersTemplateExport;
+use App\Imports\TrainersImport;
+use App\Mail\CreatePassword;
+use App\Models\Role;
 use App\Models\TrainerAssignmentSubmissionReport;
-use App\Models\TrainerDailyAttendanceForm;
 use App\Models\TrainerDailyAttendanceReport;
 use App\Models\TrainerDailyPhysicalTrainingReport;
 use App\Models\TrainerDailyVirtualTrainingReport;
@@ -16,9 +18,95 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrainerController extends Controller
 {
+
+    /**
+     * Show the form for uploading Trainers.
+     */
+    public function request_upload_trainers($id){
+        return view('Epm.Trainers.upload-trainers');
+    }
+
+    /**
+     * Direct link download Trainers excel template.
+     */
+    public function download_trainers_excel_template()
+    {
+        return Excel::download(new TrainersTemplateExport(), 'trainers.xlsx');
+    }
+
+    /**
+     * Store/save uploaded Trainer users to db.
+     */
+    public function upload_trainers(Request $request,$id){
+        $messages = [
+            'trainers.required'=>'Please Select trainers Excel File to Upload',
+        ];
+        $this->validate($request,[
+            'trainers'=>'required',
+        ],$messages);
+        $trainers_excel = Excel::toArray(new TrainersImport(), $request->file('trainers'));
+        $trainers_raw = [];
+        foreach ($trainers_excel as $trainer_excel){
+            $trainers_raw[] = $trainer_excel;
+        }
+        $trainers = array_slice($trainers_raw[0],1);
+        $role = new Role();
+        $new_trainer_role = '';
+        $role->name = 'Trainer';
+        //check if role already created
+        $exists_role = DB::table('roles')->where('name',$role->name)->first();
+        if ($exists_role){
+            $new_trainer_role = $exists_role->id;
+        }else{
+            $role->save();
+            $new_trainer_role= $role->id;
+        }
+        foreach ($trainers as $trainer){
+            $new_trainer = new User();
+            $new_trainer->name =$trainer[0];
+            $new_trainer->employee_number = $trainer[1];
+            $new_trainer->email = $trainer[2];
+            $new_trainer->phone = $trainer[3];
+            $new_trainer->gender=$trainer[4];
+            $new_trainer->county=$trainer[5];
+            $new_trainer->is_admin=1;
+            $new_trainer->role_id=$new_trainer_role;
+            $saved_trainer = $new_trainer->save();
+            if ($saved_trainer){
+                $data = [
+                    'user_id'=>$new_trainer->id,
+                    'name'=>$new_trainer->name,
+                    'email'=>$new_trainer->email,
+                    'phone'=>$new_trainer->phone,
+                ];
+                Mail::to($new_trainer->email)->send(new CreatePassword($data));
+            }
+        }
+        return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers uploaded Successfully');
+    }
+
+    /**
+     * Return a json array of Trainers.
+     */
+    public function trainers(){
+        $role = DB::table('roles')->where('name','Trainer')->first();
+        $result = [];
+        if ($role){
+            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+            if (!empty($trainers)){
+                foreach ($trainers as $trainer){
+                    $result[]=$trainer;
+                }
+            }
+            return response()->json($result);
+        }
+    }
+
     public function asses_trainer($id){
         $admin = User::find($id);
         $trainers = '';
@@ -292,7 +380,6 @@ class TrainerController extends Controller
 
     }
 
-
     public function daily_physical_report_save(Request $request,$id)
     {
 //        dd($request->all());
@@ -405,9 +492,77 @@ class TrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+{
+    $this->validate($request,
+        [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255', 'unique:users','regex:/\w+\.?\w+@\w+\.\w{2,3}(\.\w{2,3})?$/'],
+            'phone' => ['required','regex:/^(\+254|0)\d{9}$/','unique:users'],
+            'gender' => ['required'],
+            'employee_number' => ['required','unique:users'],
+            'county' => ['required'],
+            'location' => ['required'],
+            'start_date' => ['required'],
+        ]
+    );
+//        dd($request->all());
+    $admin_user = Auth::user();
+    //create trainer as admin user
+    $trainer_adm_user = new User();
+    $trainer_adm_user->name = request('name');
+    $trainer_adm_user->email = request('email');
+    $email = $trainer_adm_user->email;//used to send account activation email
+    $trainer_adm_user->phone = request('phone');
+    $trainer_adm_user->gender = request('gender');
+    $trainer_adm_user->employee_number = request('employee_number');
+    $trainer_adm_user->county = request('county');
+    $trainer_adm_user->location = request('location');
+    $trainer_adm_user->location_lat_long = request('event-location');
+    $trainer_adm_user->start_date = request('start_date');
+    $trainer_adm_user->is_admin = 1;
+    $trainer_adm_user->role_id = '';
+    $trainer_adm_user->speciality = $request->speciality;
+    $trainer_adm_user->office_supplies = $request->office_supplies;
+    $trainer_adm_user->laptop_type = $request->laptop_type;
+    $trainer_adm_user->laptop_serial_number = $request->laptop_serial_number;
+    $trainer_adm_user->bio = $request->bio;
+    //before saving a user create a new role(Trainer) save the role and assign user to role_id
+    $role = new Role();
+    $role->name = 'Trainer';
+    //check if role already created
+    $exists_role = DB::table('roles')->where('name',$role->name)->first();
+    if ($exists_role){
+        $trainer_adm_user->role_id = $exists_role->id;
+    }else{
+        $role->save();
+        $trainer_adm_user->role_id = $role->id;
     }
+    if ($request->hasFile('image')){
+        $image = $request->file('image');
+        if ($image->isValid()){
+            $fileName = $image->getClientOriginalName();
+            $image->move('Trainers/images',$fileName);
+            $trainer_adm_user->image = $fileName;
+        }
+    }
+    //save trainer admin user
+    $trainer_adm_user_saved = $trainer_adm_user->save();
+    if ($trainer_adm_user_saved){
+        $data = [
+            'user_id'=>$trainer_adm_user->id,
+            'name'=>$trainer_adm_user->name,
+            'email'=>$trainer_adm_user->email,
+            'phone'=>$trainer_adm_user->phone,
+        ];
+        Mail::to($email)->send(new CreatePassword($data));
+    }
+
+//redirect to trainers list as per role
+    $request->session()->flash('success_message','Trainer created Successfully');
+    if ($trainer_adm_user_saved){
+        return redirect('/list/all/admins/role_id='.$trainer_adm_user->role_id)->with('success',$request->session()->get('success_message'));
+    }
+}
 
     /**
      * Display the specified resource.
