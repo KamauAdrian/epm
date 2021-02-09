@@ -14,9 +14,15 @@
         $(function () {
             $(".deleteAdmin").click(function () {
                 var url = $(this).attr('data-url');
+                $("#form-delete-user").attr("action",url);
+                $("#btn-delete-user").attr("data-data",url);
+                $("#deleteAdminUser").modal('show');
                 console.log('this is the url'+ url);
-                $("#deleteAdminForm").attr("action", url);
-            })
+            });
+            // $("#btn-delete-user").on('click',function(){
+            //     var url =$(this).attr('data-data');
+            //     window.location=url;
+            // });
         });
     </script>
     <script>

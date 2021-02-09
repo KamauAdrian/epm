@@ -240,15 +240,6 @@ class AdminController extends Controller
         }
     }
 
-    public function adm_delete($id,$role_id)
-    {
-//        dd('deleting',$role_id);
-//        $admin_user_id = Auth::id();
-//        $admin_user = DB::table('users')->where('id',$admin_user_id)->first();
-        DB::table('users')->where('id',$id)->delete();
-        return redirect('/list/all/admins/role_id='.$role_id)->with('success','Admin deleted Successfully');
-    }
-
     //log in all admins
     public function admin_login(Request $request)
     {
@@ -1167,8 +1158,12 @@ $admin_user = Auth::user();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$admin_id,$role_id)
     {
-        //
+                dd(User::find($admin_id));
+        $deleted = User::find($admin_id)->delete();
+        if ($deleted){
+            return redirect('/list/all/admins/role_id='.$role_id)->with('success','Admin deleted Successfully');
+        }
     }
 }

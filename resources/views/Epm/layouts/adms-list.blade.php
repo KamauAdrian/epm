@@ -166,10 +166,14 @@
                                                         <span><i class="fa fa-list"></i></span>
                                                     </a>
                                                     <a href="{{url('/adm/edit/adm/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
-                                                        <span><i class="fa fa-pencil-alt"></i></span></a>
-                                                    <a href="#!" data-url="{{url('/delete/admin/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-danger deleteAdmin" data-toggle="modal" data-target="#deleteAdmin" title="Delete">
-                                                        <span><i class="fa fa-trash"></i></span>
+                                                        <span><i class="fa fa-pencil-alt"></i></span>
                                                     </a>
+                                                    <div  data-url="{{url('/adm/'.$auth_admin->id.'/delete/admin/'.$admin->id.'/profile/role_id='.$role->id)}}" data-data="{{$admin->id}}" class="btn btn-sm btn-outline-danger deleteAdmin" data-toggle="modal"  title="Delete">
+                                                        <span><i class="fa fa-trash"></i></span>
+                                                    </div>
+{{--                                                    <a href="#!" data-url="{{url('/delete/admin/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-danger deleteAdmin" data-toggle="modal" data-target="#deleteAdmin" title="Delete">--}}
+{{--                                                        <span><i class="fa fa-trash"></i></span>--}}
+{{--                                                    </a>--}}
                                                 </div>
                                             </td>
                                         @endif
@@ -182,7 +186,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="deleteAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="deleteAdminUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -196,12 +200,21 @@
                             <h5 class="text-danger">Are you sure you want to delete this Admin?</h5>
                         </div>
                         <div class="modal-footer">
-                            <form id="deleteAdminForm" action="" method="post">
+                            <form action="" id="form-delete-user" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-success">Yes Delete</button>
+                                <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">
+                                    Yes Delete
+                                </button>
                                 <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
                             </form>
                         </div>
+{{--                        <div class="modal-footer">--}}
+{{--                            <form id="deleteAdminForm" action="" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <button type="submit" class="btn btn-outline-success">Yes Delete</button>--}}
+{{--                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

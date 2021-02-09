@@ -117,7 +117,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/view/adm/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'view_adm_profile']);
     Route::get('/adm/edit/adm/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'edit_adm_profile']);
     Route::post('/update/adm/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adm_profile_update']);
-    Route::post('/delete/admin/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adm_delete']);
+    Route::post('adm/{id}/delete/admin/{admin_id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'destroy']);
     //reports
     Route::get('/adm/{id}/view/reports/templates',[App\Http\Controllers\AdminController::class, 'reports_templates']);
     Route::get('/adm/{id}/create/new/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create']);

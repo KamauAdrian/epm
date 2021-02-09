@@ -24,20 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AppraisalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AppraisalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/SupervisorAppraisalSuperviseNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/SupervisorAppraisalSuperviseNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Appraisal.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Appraisal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/AppraisalSupervisor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/AppraisalSupervisor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_071214_create_trainer_assignment_submission_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_071214_create_trainer_assignment_submission_reports_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_08_065703_create_appraisal_report_supervisors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_08_065703_create_appraisal_report_supervisors_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_08_070956_create_appraisal_supervisors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_08_070956_create_appraisal_supervisors_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/password.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/pmo-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/pmo-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/view-appraisal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/view-appraisal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/list-admins.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/list-admins.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +288,7 @@
       <workItem from="1612677564640" duration="4092000" />
       <workItem from="1612756428991" duration="29613000" />
       <workItem from="1612800466478" duration="621000" />
-      <workItem from="1612846938151" duration="6952000" />
+      <workItem from="1612846938151" duration="8520000" />
     </task>
     <servers />
   </component>
