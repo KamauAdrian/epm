@@ -70,7 +70,7 @@
                                         ?>
                                         @foreach($supervisors as $supervisor)
                                             <?php
-                                            $supervisor_status = \App\Models\AppraisalReportSupervisor::where('appraisal_id',$appraisal->id)->first();
+                                            $supervisor_status = \App\Models\AppraisalSupervisorReport::where('appraisal_id',$appraisal->id)->first();
                                             ?>
                                             @if($supervisor_status)
                                                 <p class="mb-3">

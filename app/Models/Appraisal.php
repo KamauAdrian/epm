@@ -19,10 +19,10 @@ class Appraisal extends Model
     ];
 
     public function selfScores(){
-        return $this->hasMany('App\Models\AppraisalReportPmo','appraisal_id');
+        return $this->hasMany('App\Models\AppraisalPmoReport','appraisal_id');
     }
     public function supervisorScores(){
-        return $this->hasMany('App\Models\AppraisalReportSupervisor','appraisal_id');
+        return $this->hasMany('App\Models\AppraisalSupervisorReport','appraisal_id');
     }
 
 //    public function supervisors(){
