@@ -30,6 +30,7 @@ class AppraisalController extends Controller
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
             $appraisals = Appraisal::all();
+            dd($appraisals);
             return view('Epm.Appraisals.index',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
             $appraisals = Appraisal::where('pmo_id',$admin->id)->get();
