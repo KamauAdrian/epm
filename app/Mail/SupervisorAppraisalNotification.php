@@ -31,7 +31,7 @@ class SupervisorAppraisalNotification extends Mailable
      */
     public function build()
     {
-        $subject = 'Request to Supervise PMO Performance';
+        $subject = 'Performance Appraisal Supervise Request';
         return $this->view('Emails.Appraisals.supervisor-notification')->subject($subject);
     }
 }

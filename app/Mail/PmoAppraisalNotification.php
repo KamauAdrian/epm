@@ -30,8 +30,7 @@ class PmoAppraisalNotification extends Mailable
      */
     public function build()
     {
-        $subject = 'Request to submit Performance Appraisal';
+        $subject = 'Performance Appraisal Submit Request';
         return $this->view('Emails.Appraisals.pmo-notification')->subject($subject);
-
     }
 }

@@ -24,22 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoAppraisalImprovementArea.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoAppraisalSelfScore.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoAppraisalSupervisorScore.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoPerformanceAppraisal.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoPerformanceAppraisalReport.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoPerformanceAppraisalScore.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PmoSupervisor.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_05_064124_create_pmo_performance_appraisals_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_05_072835_create_pmo_performance_appraisal_scores_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_05_093343_create_pmo_performance_appraisal_reports_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_05_130418_create_pmo_appraisal_self_scores_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_05_130428_create_pmo_appraisal_supervisor_scores_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_05_160141_create_pmo_supervisors_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_08_070956_create_appraisal_supervisors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_08_070956_create_appraisal_supervisors_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/PMs/list-pmo-performance-appraisals.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/PmoAppraisalNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/PmoAppraisalNotification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/SupervisorAppraisalNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/SupervisorAppraisalNotification.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +286,7 @@
       <workItem from="1612677564640" duration="4092000" />
       <workItem from="1612756428991" duration="29613000" />
       <workItem from="1612800466478" duration="621000" />
-      <workItem from="1612846938151" duration="9307000" />
+      <workItem from="1612846938151" duration="10426000" />
     </task>
     <servers />
   </component>
