@@ -24,8 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/PmoAppraisalNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/PmoAppraisalNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/SupervisorAppraisalNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/SupervisorAppraisalNotification.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +284,7 @@
       <workItem from="1612677564640" duration="4092000" />
       <workItem from="1612756428991" duration="29613000" />
       <workItem from="1612800466478" duration="621000" />
-      <workItem from="1612846938151" duration="10426000" />
+      <workItem from="1612846938151" duration="11841000" />
     </task>
     <servers />
   </component>
