@@ -7,9 +7,11 @@ use App\Mail\PmoAppraisalSuperviseNotification;
 use App\Mail\SupervisorAppraisalNotification;
 use App\Mail\SupervisorAppraisalSuperviseNotification;
 use App\Models\Appraisal;
+use App\Models\AppraisalPmoReport;
 use App\Models\AppraisalReportPmo;
 use App\Models\AppraisalReportSupervisor;
 use App\Models\AppraisalSupervisor;
+use App\Models\AppraisalSupervisorReport;
 use App\Models\PmoAppraisalSelfScore;
 use App\Models\PmoAppraisalSupervisorScore;
 use App\Models\PmoPerformanceAppraisal;
@@ -87,7 +89,7 @@ class AppraisalController extends Controller
                 $scores[$key] += ['supervisor_comment' => $supervisor_comment];
             }
             foreach ($scores as $key => $score) {
-                $supervisor_report = new AppraisalReportSupervisor();
+                $supervisor_report = new AppraisalSupervisorReport();
                 $supervisor_report->supervisor_score = $score['supervisor_score'];
                 $supervisor_report->supervisor_comment = $score['supervisor_comment'];
                 $supervisor_report->appraisal_id = $score['appraisal_id'];
@@ -238,7 +240,7 @@ class AppraisalController extends Controller
                 $scores[$key] += ['self_comment' => $self_comment];
             }
             foreach ($scores as $key => $score) {
-                $report = new AppraisalReportPmo();
+                $report = new AppraisalPmoReport();
                 $report->self_score = $score['self_score'];
                 $report->self_comment = $score['self_comment'];
                 $report->appraisal_id = $score['appraisal_id'];
