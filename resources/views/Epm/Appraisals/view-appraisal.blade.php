@@ -14,7 +14,6 @@
 
                 <?php
                 $auth_admin = auth()->user();
-
                 $supervisor = \App\Models\AppraisalSupervisor::where('appraisal_id',$appraisal->id)->first();
                 $self_scores = [];
                 $supervisor_scores = [];
@@ -215,27 +214,51 @@
                                         <td colspan="6">Areas that Need Improvement/ Development (to be filled by Supervisor)</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">
-                                            <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->improvement_areas}}</textarea>
-                                        </td>
+                                        @if($supervisor->improvement_areas)
+                                            <td colspan="6">
+                                                <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->improvement_areas}}</textarea>
+                                            </td>
+                                        @else
+                                            <td colspan="6">
+                                                <textarea name="" id="" cols="100%" rows="5" readonly></textarea>
+                                            </td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td colspan="6">Supervisor’s overall comments:</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">
-                                            <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->supervisor_overall_comment}}</textarea>
-                                        </td>
+                                        @if($supervisor->supervisor_overall_comment)
+                                            <td colspan="6">
+                                                <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->supervisor_overall_comment}}</textarea>
+                                            </td>
+                                        @else
+                                            <td colspan="6">
+                                                <textarea name="" id="" cols="100%" rows="5" readonly></textarea>
+                                            </td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>Signature:</td>
-                                        <td colspan="2">
-                                            <input type="text" name="" value="{{$supervisor->supervisor_signature}}" readonly>
-                                        </td>
+                                        @if($supervisor->supervisor_signature)
+                                            <td colspan="2">
+                                                <input type="text" name="" value="{{$supervisor->supervisor_signature}}" readonly>
+                                            </td>
+                                        @else
+                                            <td colspan="2">
+                                                <input type="text" name="" value="" readonly>
+                                            </td>
+                                        @endif
                                         <td >Date</td>
-                                        <td colspan="2">
-                                            <input type="date" name="supervisor_sign_date" value="{{$supervisor->supervisor_sign_date}}" style="border: none;" readonly>
-                                        </td>
+                                        @if($supervisor->supervisor_sign_date)
+                                            <td colspan="2">
+                                                <input type="date" name="supervisor_sign_date" value="{{$supervisor->supervisor_sign_date}}" style="border: none;" readonly>
+                                            </td>
+                                        @else
+                                            <td colspan="2">
+                                                <input type="date" name="supervisor_sign_date" value="" style="border: none;" readonly>
+                                            </td>
+                                        @endif
                                     </tr>
                                     </tbody>
                                 </table>
