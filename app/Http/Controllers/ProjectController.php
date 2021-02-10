@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -11,9 +14,13 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+
+        $admin = User::find($id);
+//        $projects = $admin->projects; gets all project collaborations
+        $projects = Project::where('creator_id',$id)->get();
+        return view('Epm.Projects.index',compact('projects'));
     }
 
     /**
@@ -32,9 +39,23 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        $this->validate($request,[
+            'collaborators'=>'required',
+        ]);
+        $collaborators = $request->input('collaborators');
+        $project = $request->all();
+        $new_project = new Project();
+        $new_project->name = $project['name'];
+        $new_project->creator_id = $id;
+        $new_project->due_date = $project['due_date'];
+        $new_project->description = $project['description'];
+        $project_saved = $new_project->save();
+        if ($project_saved){
+            Project::find($new_project->id)->collaborators()->attach($collaborators);
+        }
+        return redirect('/adm/'.$id.'/list/projects');
     }
 
     /**
@@ -43,9 +64,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$project_id)
     {
-        //
+        $admin = User::find($id);
+        $project = Project::find($project_id);
+        return view('Epm.Projects.read',compact('project'));
     }
 
     /**

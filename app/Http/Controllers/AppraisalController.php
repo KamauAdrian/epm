@@ -31,12 +31,21 @@ class AppraisalController extends Controller
     {
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
-            $appraisals = Appraisal::all();
+            $appraisals = Appraisal::where('status',0)->get();
 //            dd($appraisals);
             return view('Epm.Appraisals.index',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
             $appraisals = Appraisal::where('pmo_id',$admin->id)->get();
             return view('Epm.Appraisals.index',compact('appraisals'));
+        }
+    }
+
+    public function archive($id,$appraisal_id){
+        $admin = User::find($id);
+        $data = ['status'=>1,];
+        $appraisal = Appraisal::find($appraisal_id)->update($data);
+        if ($appraisal){
+            return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Appraisal Archived Successfully');
         }
     }
 

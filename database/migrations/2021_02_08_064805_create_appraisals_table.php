@@ -30,6 +30,7 @@ class CreateAppraisalsTable extends Migration
             $table->string('pmo_sign_date')->nullable();
             $table->string('pmo_signature')->nullable();
             $table->integer('pmo_status')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

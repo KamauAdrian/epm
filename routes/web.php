@@ -134,14 +134,16 @@ Route::group(['middleware'=>'admin'],function (){
 
     //projects
     Route::get('/adm/{id}/list/projects',[App\Http\Controllers\ProjectController::class, 'index']);
-    Route::get('/adm/{id}/create/project',[App\Http\Controllers\ProjectController::class, 'create']);
-    Route::post('/adm/{id}/save/project',[App\Http\Controllers\ProjectController::class, 'store']);
-    Route::post('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
+    Route::get('/adm/{id}/create/new/project',[App\Http\Controllers\ProjectController::class, 'create']);
+    Route::post('/adm/{id}/save/new/project',[App\Http\Controllers\ProjectController::class, 'store']);
+    Route::get('/adm/{id}/view/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'show']);
+    Route::get('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
 
 
     // Performance Appraisals
     Route::get('/adm/{id}/view/performance/appraisals',[App\Http\Controllers\AppraisalController::class, 'index']);
+    Route::get('/adm/{id}/archive/performance/appraisals/{appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'archive']);
     Route::get('/adm/{id}/create/new/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'create']);
     Route::post('/adm/{id}/add/pmo/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'store']);
     Route::get('/adm/{id}/view/performance/appraisal/template/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'show']);

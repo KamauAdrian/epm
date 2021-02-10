@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectsTable extends Migration
+class CreateProjectCollaboratorPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('project_collaborator', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('due_date');
-            $table->string('description')->nullable();
-            $table->integer('creator_id')->unsigned();
+            $table->integer('collaborator_id')->unsigned();//(user id as pmo)
+            $table->integer('project_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('project_collaborator');
     }
 }

@@ -16,7 +16,7 @@
                         <?php
                         $auth_admin = auth()->user();
                         ?>
-                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/class')}}">
+                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/new/project')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
@@ -31,10 +31,17 @@
                                         <label>Select Collaborators</label>
                                         <multiselect v-model="selectedPmo" :options="pmos"
                                                   placeholder="Search" trackBy="id" label="name"
-                                                  :searchable="true" :close-on-select="true">
+                                                  :searchable="true" :close-on-select="true" multiple>
                                         </multiselect>
-                                        <input type="hidden" name="pmo[]" :value="selectedPmo">
-                                        <span class="text-danger">{{$errors->first('pmo')}}</span>
+                                        <input type="hidden" name="collaborators[]" v-for="pmo in selectedPmo" :value="pmo.id">
+                                        <span class="text-danger">{{$errors->first('collaborators')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Project Due Date</label>
+                                        <input type="date" name="due_date" class="form-control" value="{{old('due_date')}}">
+                                        <span class="text-danger">{{$errors->first('due_date')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

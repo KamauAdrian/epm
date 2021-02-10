@@ -65,6 +65,9 @@ class User extends Authenticatable
     public function teamCenterManagers(){
         return $this->belongsToMany('App\Models\TeamCenterManager');
     }
+    public function projects(){
+        return $this->belongsToMany('\App\Models\Project','project_collaborator','collaborator_id','project_id');
+    }
     public static function updateUser($id,$data){
     DB::table('users')->where('id',$id)->update($data);
     }

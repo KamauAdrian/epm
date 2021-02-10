@@ -16,6 +16,7 @@ class Appraisal extends Model
         'pmo_sign_date',
         'pmo_signature',
         'pmo_status',
+        'status',
     ];
 
     public function selfScores(){

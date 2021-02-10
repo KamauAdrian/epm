@@ -46,12 +46,17 @@
                         </thead>
 
                         @if($appraisals_to_supervise)
+                            <?php
+                            $appraisals = [];
+                            foreach ($appraisals_to_supervise as $appraisal_to_supervise){
+                                $appraisal_active = \App\Models\Appraisal::where('id',$appraisal_to_supervise->appraisal_id)->where('status',0)->first();
+                                if ($appraisal_active){
+                                    $appraisals[]= $appraisal_active;
+                                }
+                            }
+                            ?>
                             <tbody>
-                            @foreach($appraisals_to_supervise as $appraisal_to_supervise)
-                                <?php
-                                $appraisal = \App\Models\Appraisal::find($appraisal_to_supervise->appraisal_id);
-//                                dd($appraisal);
-                                ?>
+                            @foreach($appraisals as $appraisal)
                                 <tr>
                                     <td>
                                         {{$appraisal->pmo}}
@@ -62,6 +67,7 @@
                                         $supervisors = [];
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->supervisor;
+                                        }
                                         ?>
                                         @foreach($supervisors as $supervisor)
                                             <?php

@@ -49,7 +49,7 @@
                             <th>Name</th>
                             <th>Supervisors - Status</th>
                             <th>PMO Status</th>
-                            <th class="text-right">Action</th>
+                            <th class="text-right">Actions</th>
                         </tr>
                         </thead>
 
@@ -96,22 +96,39 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        {{--                                        <a href="#!">--}}
-                                        @if($pmo_status ==1)
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">
-                                                <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
-                                            </a>
-                                        @else
-                                            @if($auth_admin->role->name == 'Project Manager')
-                                                <a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal/appraisal_id='.$appraisal->id)}}">
-                                                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Appraisal</button>
-                                                </a>
-                                            @else
-                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/template/appraisal_id='.$appraisal->id)}}">
-                                                    <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">View Appraisal</button>
-                                                </a>
-                                            @endif
-                                        @endif
+                                        <div class="btn-group">
+                                            <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                                                <span class="badge badge-pill badge-light-dark">Action</span>
+                                                <span class = "caret"></span>
+                                            </button>
+                                            <ul class = "dropdown-menu" role = "menu">
+                                                <li>
+                                                    @if($pmo_status ==1)
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">
+                                                            View Appraisal
+                                                        </a>
+                                                    @else
+                                                        @if($auth_admin->role->name == 'Project Manager')
+                                                            <a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal/appraisal_id='.$appraisal->id)}}">
+                                                                Submit Appraisal
+                                                            </a>
+                                                        @else
+                                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/template/appraisal_id='.$appraisal->id)}}">
+                                                                View Appraisal
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </li>
+                                                @if($appraisal->status==0)
+                                                    <li>
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/archive/performance/appraisals/'.$appraisal->id)}}">
+                                                            Archive Appraisal
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            </ul>
+                                        </div>
+
                                     </td>
                                 </tr>
                             @endforeach
