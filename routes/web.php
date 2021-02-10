@@ -134,11 +134,15 @@ Route::group(['middleware'=>'admin'],function (){
 
     //projects
     Route::get('/adm/{id}/list/projects',[App\Http\Controllers\ProjectController::class, 'index']);
+    Route::get('/list/collaborators/{id}',[App\Http\Controllers\ProjectController::class, 'assignee']);
     Route::get('/adm/{id}/create/new/project',[App\Http\Controllers\ProjectController::class, 'create']);
     Route::post('/adm/{id}/save/new/project',[App\Http\Controllers\ProjectController::class, 'store']);
     Route::get('/adm/{id}/view/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'show']);
     Route::get('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
+    //Projects -> Boards
+    Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
+
 
 
     // Performance Appraisals

@@ -61,16 +61,18 @@
                                    </td>
                                    <td>{{date('l dS M Y',strtotime($project->due_date))}}</td>
                                    <td class="text-right">
-                                       <div class="float-right">
-                                           <a href="{{url('/adm/'.$auth_admin->id.'/view/project/'.$project->id)}}" class="btn btn-sm btn-outline-info" title="View">
-                                               <span><i class="fa fa-list"></i></span>
-                                           </a>
-                                           <a href="{{url('/adm/'.$auth_admin->id.'/edit/project/'.$project->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
-                                               <span><i class="fa fa-pencil-alt"></i></span>
-                                           </a>
-                                           <a  data-url="{{url('/adm/'.$auth_admin->id.'/delete/project/'.$project->id)}}" class="btn btn-sm btn-outline-danger deleteProject" data-toggle="modal"  title="Delete">
-                                               <span class="text-danger"><i class="fa fa-trash"></i></span>
-                                           </a>
+                                       <div class="btn-group float-right">
+                                           <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                                               <span class="badge badge-pill badge-light-dark">Action</span>
+                                               <span class = "caret"></span>
+                                           </button>
+                                           <ul class = "dropdown-menu" role = "menu">
+                                               <li>
+                                                   <a href="{{url('/adm/'.$auth_admin->id.'/view/project/'.$project->id)}}">
+                                                       View Project
+                                                   </a>
+                                               </li>
+                                           </ul>
                                        </div>
                                    </td>
                                </tr>

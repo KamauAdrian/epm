@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CreatePassword;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
@@ -54,8 +56,19 @@ class ProjectController extends Controller
         $project_saved = $new_project->save();
         if ($project_saved){
             Project::find($new_project->id)->collaborators()->attach($collaborators);
+            foreach ($collaborators as $collaborator){
+                //get collaborator email and send notification
+                $user = User::find($collaborator);
+
+                //send mail to user as project collaborator
+//                $data = [
+//
+//                ];
+//                Mail::to($user->email)->send(new CreatePassword($data));
+
+            }
         }
-        return redirect('/adm/'.$id.'/list/projects');
+        return redirect('/adm/'.$id.'/list/projects')->with('success','Project Created Successfully');
     }
 
     /**
@@ -103,5 +116,10 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function assignee($id){
+        $collaborators = Project::find($id)->collaborators;
+        return response()->json($collaborators);
     }
 }

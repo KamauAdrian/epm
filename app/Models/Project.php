@@ -13,4 +13,8 @@ class Project extends Model
         return $this->belongsToMany('\App\Models\User','project_collaborator','project_id','collaborator_id');
     }
 
+    public function boards(){
+        return $this->hasMany('App\Models\Board','project_id');
+    }
+
 }
