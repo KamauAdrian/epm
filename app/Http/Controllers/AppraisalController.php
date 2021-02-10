@@ -166,7 +166,6 @@ class AppraisalController extends Controller
                     'name'=>$appraisal->pmo,
                     'email'=>$appraisal->pmo_email,
                 ];
-                Mail::to($pmo_email)->send(new PmoAppraisalNotification($data));
                 foreach ($supervisors as $supervisor){
                     $new_supervisor = new AppraisalSupervisor();
                     $new_supervisor->supervisor = $supervisor['name'];
@@ -184,6 +183,7 @@ class AppraisalController extends Controller
                         Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($data));
                     }
                 }
+                Mail::to($pmo_email)->send(new PmoAppraisalNotification($data));
             }
             return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance AppraisalController Report Created Successfully');
         }
