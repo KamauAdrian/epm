@@ -85,10 +85,11 @@ class TrainerController extends Controller
                     'phone'=>$new_trainer->phone,
                 ];
                 try {
+
                     Mail::to($new_trainer->email)->send(new CreatePassword($data));
                 }
                 catch(\Exception $e){
-                    return $e;
+                    dd($e);
                 }
 
             }
