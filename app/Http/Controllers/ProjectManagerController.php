@@ -25,6 +25,20 @@ class ProjectManagerController extends Controller
         return view('Epm.PMs.pm-dashboard',compact('user'));
     }
 
+    public function pmo(){
+        $role = DB::table('roles')->where('name','Project Manager')->first();
+        $result = [];
+        if ($role){
+            $pmos = DB::table('users')->where('role_id',$role->id)->get();
+            if (!empty($pmos)){
+                foreach ($pmos as $pmo){
+                    $result[]=$pmo;
+                }
+            }
+            return response()->json($result);
+        }
+    }
+
     public function pms()
     {
         $admin_user = Auth::user();

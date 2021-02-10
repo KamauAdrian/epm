@@ -15,7 +15,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/CreatePassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/CreatePassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectManagerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Emails/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Emails/password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/password.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +281,7 @@
       <workItem from="1612756428991" duration="29613000" />
       <workItem from="1612800466478" duration="621000" />
       <workItem from="1612846938151" duration="11890000" />
-      <workItem from="1612929999772" duration="4939000" />
+      <workItem from="1612929999772" duration="8282000" />
     </task>
     <servers />
   </component>
@@ -367,6 +371,16 @@
           <url>file://$PROJECT_DIR$/resources/views/Epm/layouts/trainer-add.blade.php</url>
           <line>32</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
+          <line>152</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
+          <line>171</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

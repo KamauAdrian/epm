@@ -128,6 +128,18 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/pmos',[App\Http\Controllers\AdminController::class, 'report_actors_pmos']);//json array of trainers
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
+
+    // Project mangers
+    Route::get('/list/all/pmo',[App\Http\Controllers\ProjectManagerController::class, 'pmo']);//json array of trainers
+
+    //projects
+    Route::get('/adm/{id}/list/projects',[App\Http\Controllers\ProjectController::class, 'index']);
+    Route::get('/adm/{id}/create/project',[App\Http\Controllers\ProjectController::class, 'create']);
+    Route::post('/adm/{id}/save/project',[App\Http\Controllers\ProjectController::class, 'store']);
+    Route::post('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
+    Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
+
+
     // Performance Appraisals
     Route::get('/adm/{id}/view/performance/appraisals',[App\Http\Controllers\AppraisalController::class, 'index']);
     Route::get('/adm/{id}/create/new/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'create']);
@@ -138,9 +150,10 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/my/performance/appraisals',[App\Http\Controllers\AdminController::class, 'performance_appraisals_all']);
     Route::post('/adm/{id}/save/my/performance/appraisal/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'pmo_save_appraisal']);
     Route::get('/adm/{id}/list/pending/pmo/performance/supervision/appraisals',[App\Http\Controllers\AppraisalController::class, 'supervisions']);
-    Route::get('/adm/{id}/view/pmo/performance/appraisals',[App\Http\Controllers\AdminController::class, 'supervisor_view_performance_appraisal']);
     Route::get('/adm/{id}/supervise/pmo/performance/appraisal_id={appraisal_id}/{pmo_id}',[App\Http\Controllers\AppraisalController::class, 'supervise']);
     Route::post('/adm/{id}/save/pmo/performance/appraisal/appraisal_id={appraisal_id}/{pmo_id}',[App\Http\Controllers\AppraisalController::class, 'supervision_save']);
+
+
     Route::get('/adm/{id}/view/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_view']);
     Route::get('/adm/{id}/edit/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_edit']);
     Route::post('/adm/{id}/update/report/template/{template_id}',[App\Http\Controllers\AdminController::class, 'report_template_update']);
@@ -151,7 +164,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/save/report/{report_id}',[App\Http\Controllers\AdminController::class, 'save_report']);
     Route::get('/adm/{id}/view/reports/target_group_id={target_group_id}',[App\Http\Controllers\AdminController::class, 'reports_by_role']);
     Route::get('/adm/{id}/view/reports/template_id={template_id}/report_target_group_id={report_target_group_id}',[App\Http\Controllers\AdminController::class, 'reports_by_role_list']);
-    //trainers reports
+    ///trainers reports
     Route::get('/adm/{id}/view/trainer/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers']);
     Route::get('/adm/{id}/view/training/sessions/allocations',[App\Http\Controllers\AdminController::class, 'session_allocations']);
     Route::get('/adm/{id}/view/trainer/daily/attendance/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_attendance']);

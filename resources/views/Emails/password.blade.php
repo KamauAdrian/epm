@@ -1,3 +1,7 @@
+{{--@extends('Emails.master')--}}
+
+{{--@section('name')<h3>Hi {{$data['name']}},</h3>@endsection--}}
+
 <!doctype html>
 <html lang="en">
 <head>

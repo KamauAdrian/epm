@@ -564,20 +564,6 @@ class AdminController extends Controller
             return redirect('/adm/'.$id.'/view/reports/template')->with('success','Report Template Created successfully');
         }
     }
-    public function supervisor_view_performance_appraisal($id){
-//            return view('Epm.PMs.performance-appraisals-supervise');
-    }
-
-    public function supervisor_submit_performance_appraisal($id,$appraisal_id,$pmo_id){
-
-
-    }
-
-
-
-    public function supervisor_performance_appraisal_save(Request $request,$id,$appraisal_id,$pmo_id){
-
-    }
 
     public function report_template_generate_pmos(Request $request,$id){
 //        dd($request->all());
