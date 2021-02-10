@@ -6,17 +6,16 @@
 
 @section('content')
     <?php $auth_admin = auth()->user(); ?>
-    <div class="col-md-12">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-sm-6 d-flex align-items-center mb-4">
                     <h1 class="d-inline-block mb-0 font-weight-normal">{{$project->name}}</h1>
                 </div>
                 <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
-                    <p>Due {{date('l dS M Y',strtotime($project->due_date))}}</p>
-{{--                    <a href="#!">--}}
-{{--                        <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Export List</button>--}}
-{{--                    </a>--}}
+{{--                    <p>Due {{date('l dS M Y',strtotime($project->due_date))}}</p>--}}
+                    <a href="#!">
+                        <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Add Collaborators</button>
+                    </a>
                 </div>
             </div>
         <div class="row">
@@ -49,7 +48,7 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h5 style="font-size: 14px;">{{$board->name}}</h5>
-                                                        <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post" style="display: block;" id="form-add-board">
+                                                        <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" class="form-add-board" method="post" style="display: block;">
                                                             @csrf
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
@@ -58,7 +57,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <div project_id="{{$board->id}}" class="form-group" id="assignee">
+                                                                <div board_id="{{$board->project_id}}" class="form-group assignee">
                                                                     <label>Assignee</label>
                                                                     <multiselect v-model="selectedPmo" :options="pmos"
                                                                                  placeholder="Search" trackBy="id" label="name"
@@ -70,7 +69,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label>Due Date</label>
-                                                                    <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Project One">
+                                                                    <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Task One">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group float-right">
@@ -143,7 +142,7 @@
             methods:{
                 getAssignees(){
                     axios
-                        .get('/list/collaborators/'+this.$el.attributes.project_id.value)
+                        .get('/list/collaborators/'+this.$el.attributes.board_id.value)
                         .then(response => {
                             this.pmos = response.data;
                             console.log('this.$el.attributes.project_id.value');
@@ -155,7 +154,7 @@
                         .finally(() => this.loading = true)
                 },
             },
-        }).$mount('#assignee')
+        }).$mount('.assignee')
 
         $(document).ready(function (){
             $('#tableProjects').DataTable();
