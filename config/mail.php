@@ -13,8 +13,8 @@ return [
     |
     */
 
-//    'default' => env('MAIL_MAILER', 'smtp'),
-    'driver' => 'smtp',
+    'default' => env('MAIL_MAILER', 'smtp'),
+//    'driver' => 'smtp',
 
     /*
     |--------------------------------------------------------------------------
