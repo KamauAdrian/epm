@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Board;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -34,7 +35,12 @@ class BoardController extends Controller
      */
     public function store(Request $request,$id,$project_id)
     {
-        dd($request->all(),$id,$project_id);
+        $board = $request->all();
+        $new_board = new Board();
+        $new_board->name = $board['name'];
+        $new_board->project_id = $project_id;
+        $new_board->save();
+        return redirect('adm/'.$id.'/view/project/'.$project_id)->with('success','New Board Created Successfully');
     }
 
     /**

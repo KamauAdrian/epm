@@ -41,11 +41,51 @@
                     <table class="table">
                         <tbody>
                         <tr>
-{{--                            <td>Board one </td>--}}
-{{--                            <td>Board one </td>--}}
-{{--                            <td>Board one </td>--}}
-{{--                            <td>Board one </td>--}}
-{{--                            <td>Board one </td>--}}
+                            @if($boards)
+                                @foreach($boards as $board)
+                                    <td>
+
+                                            <div class="row">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 style="font-size: 14px;">{{$board->name}}</h5>
+                                                        <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post" style="display: block;" id="form-add-board">
+                                                            @csrf
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <input style="width: auto" type="text" class="form-control" name="name" placeholder="Project One">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div project_id="{{$board->id}}" class="form-group" id="assignee">
+                                                                    <label>Assignee</label>
+                                                                    <multiselect v-model="selectedPmo" :options="pmos"
+                                                                                 placeholder="Search" trackBy="id" label="name"
+                                                                                 :searchable="true" :close-on-select="true" multiple>
+                                                                    </multiselect>
+                                                                    <input type="hidden" name="assignee[]" v-for="pm in selectedPmo" :value="pm.id">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Due Date</label>
+                                                                    <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Project One">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group float-right">
+                                                                <input class="btn btn-outline-primary" type="submit" value="Add Task">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                add task
+                                            </div>
+                                    </td>
+                                @endforeach
+                            @endif
                             <td>
                                 <div class="row">
                                     <div class="card">
@@ -56,22 +96,6 @@
                                                     <div class="form-group">
                                                         <label>Name</label>
                                                         <input style="width: auto" type="text" class="form-control" name="name" placeholder="Project One">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div project_id="{{$project->id}}" class="form-group" id="assignee">
-                                                        <label>Assignee</label>
-                                                        <multiselect v-model="selectedPmo" :options="pmos"
-                                                                     placeholder="Search" trackBy="id" label="name"
-                                                                     :searchable="true" :close-on-select="true" multiple>
-                                                        </multiselect>
-                                                        <input type="hidden" name="assignee[]" v-for="pm in selectedPmo" :value="pm.id">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Due Date</label>
-                                                        <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Project One">
                                                     </div>
                                                 </div>
                                                 <div class="form-group float-right">
@@ -89,7 +113,6 @@
                         </tbody>
                     </table>
                 </div>
-            {{$project->id}}
         </div>
     </div>
 @endsection

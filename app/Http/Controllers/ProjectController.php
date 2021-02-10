@@ -81,7 +81,8 @@ class ProjectController extends Controller
     {
         $admin = User::find($id);
         $project = Project::find($project_id);
-        return view('Epm.Projects.read',compact('project'));
+        $boards = $project->boards;
+        return view('Epm.Projects.read',compact('project','boards'));
     }
 
     /**
