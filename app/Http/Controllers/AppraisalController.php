@@ -151,6 +151,7 @@ class AppraisalController extends Controller
             $appraisal->pmo_email = $request->pmo_email;
             $appraisal->pmo_id = $request->pmo_id;
             $appraisal->pmo_status = 0;
+            $appraisal->status = 0;
             $appraisal->question_one = $request->question_one;
             $appraisal->question_two = $request->question_two;
             $appraisal->question_three = $request->question_three;
