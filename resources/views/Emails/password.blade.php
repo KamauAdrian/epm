@@ -2,6 +2,26 @@
 
 @section('name')<h3>Hi {{$data['name']}},</h3>@endsection
 
+@section('title')
+    <p>Welcome to eMobilis Portal!</p>
+@endsection
+
+@section('content')
+    <p>The Mission of eMobilis is to create opportunities for  African
+    Youth by Training them on digital, software and other technologies that prepare them
+    for the Future of Work by equipping them with marketable; industry driven skills.
+    </p>
+@endsection
+
+@section('account-details')
+    <p>Below are your Account Details:</p>
+    <p>{{$data['email']}}</p>
+    <p>{{$data['phone']}}</p>
+@endsection
+
+@section('link-desc') <p>Click Here To Activate Your Account and Set a Password</p> @endsection
+
+
 {{--<!doctype html>--}}
 {{--<html lang="en">--}}
 {{--<head>--}}

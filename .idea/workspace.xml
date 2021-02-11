@@ -279,7 +279,7 @@
       <workItem from="1612846938151" duration="11890000" />
       <workItem from="1612929999772" duration="32480000" />
       <workItem from="1612975786167" duration="4498000" />
-      <workItem from="1613015537717" duration="25558000" />
+      <workItem from="1613015537717" duration="25991000" />
     </task>
     <servers />
   </component>
@@ -397,32 +397,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>272</line>
+          <line>264</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>273</line>
+          <line>265</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>275</line>
+          <line>267</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>283</line>
+          <line>275</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>284</line>
+          <line>281</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>295</line>
+          <line>292</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

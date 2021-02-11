@@ -213,7 +213,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     <tbody>
                                                                                                     <tr>
                                                                                                         <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                            <div><div style="font-family: inherit; text-align: center">Welcome to eMobilis Portal!</div><div></div></div>
+                                                                                                            <div><div style="font-family: inherit; text-align: center">@yield('title')</div><div></div></div>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     </tbody>
@@ -223,8 +223,8 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     <tr>
                                                                                                         <td style="padding:0px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
                                                                                                             <div>
-                                                                                                                <div style="font-family: inherit; text-align: center">The Mission of eMobilis is to create opportunities for  African Youth by Training them on digital, software and other technologies that prepare them for the Future of Work by equipping them with marketable; industry driven skills.</div>
-                                                                                                                <div style="font-family: inherit; text-align: left">Below are your Account Details:</div>
+                                                                                                                <div style="font-family: inherit; text-align: center">@yield('content')</div>
+                                                                                                                <div style="font-family: inherit; text-align: left">@yield('account-details')</div>
                                                                                                             </div>
                                                                                                         </td>
                                                                                                     </tr>
@@ -238,7 +238,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                                 <tbody>
                                                                                                                 <tr>
                                                                                                                     <td align="center" bgcolor="#333333" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                        <a href="" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Click Here To Activate Your Account and Set a Password</a>
+                                                                                                                        <a href="@yield('link')" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">@yield('link-desc')</a>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
@@ -272,28 +272,36 @@ body {font-family: 'Chivo', sans-serif;}
 {{--                                                                            </tbody>--}}
 {{--                                                                        </table>--}}
 
-                                                                        <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
-                                                                            <div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">Sender_Name</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">Sender_Address</span>, <span class="Unsubscribe--senderCity">Sender_City</span>, <span class="Unsubscribe--senderState">Sender_State</span> <span class="Unsubscribe--senderZip">Sender_Zip</span></p></div>
-                                                                            <p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="unsubscribe" target="_blank" style="">Unsubscribe</a> - <a href="unsubscribe_preferences" target="_blank" class="Unsubscribe--unsubscribePreferences" style="">Unsubscribe Preferences</a></p>
-                                                                        </div>
+{{--                                                                        <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">--}}
+{{--                                                                            <div class="Unsubscribe--addressLine">--}}
+{{--                                                                                <p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">eMobilis</p>--}}
+{{--                                                                                <p style="font-size:12px; line-height:20px;">--}}
+{{--                                                                                    <span class="Unsubscribe--senderAddress">ajira@emobilis.org</span>, --}}
+{{--                                                                                    <span class="Unsubscribe--senderCity">Sender_City</span>, --}}
+{{--                                                                                    <span class="Unsubscribe--senderState">Sender_State</span>, --}}
+{{--                                                                                    <span class="Unsubscribe--senderZip">Sender_Zip</span>--}}
+{{--                                                                                </p>--}}
+{{--                                                                            </div>--}}
+{{--                                                                            <p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="unsubscribe" target="_blank" style="">Unsubscribe</a> - <a href="unsubscribe_preferences" target="_blank" class="Unsubscribe--unsubscribePreferences" style="">Unsubscribe Preferences</a></p>--}}
+{{--                                                                        </div>--}}
 
-                                                                        <table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="d93b6db5-0e1f-4374-99f9-62212c9cf0f1">
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td align="center" bgcolor="" class="outer-td" style="padding:0px 0px 20px 0px;">
-                                                                                    <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
-                                                                                        <tbody>
-                                                                                        <tr>
-                                                                                            <td align="center" bgcolor="#f5f8fd" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                <a href="https://sendgrid.com/" style="background-color:#f5f8fd; border:1px solid #f5f8fd; border-color:#f5f8fd; border-radius:25px; border-width:1px; color:#a8b9d5; display:inline-block; font-size:10px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:5px 18px 5px 18px; text-align:center; text-decoration:none; border-style:solid; font-family:helvetica,sans-serif;" target="_blank">♥ POWERED BY TWILIO SENDGRID</a>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
+{{--                                                                        <table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="d93b6db5-0e1f-4374-99f9-62212c9cf0f1">--}}
+{{--                                                                            <tbody>--}}
+{{--                                                                            <tr>--}}
+{{--                                                                                <td align="center" bgcolor="" class="outer-td" style="padding:0px 0px 20px 0px;">--}}
+{{--                                                                                    <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">--}}
+{{--                                                                                        <tbody>--}}
+{{--                                                                                        <tr>--}}
+{{--                                                                                            <td align="center" bgcolor="#f5f8fd" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">--}}
+{{--                                                                                                <a href="https://sendgrid.com/" style="background-color:#f5f8fd; border:1px solid #f5f8fd; border-color:#f5f8fd; border-radius:25px; border-width:1px; color:#a8b9d5; display:inline-block; font-size:10px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:5px 18px 5px 18px; text-align:center; text-decoration:none; border-style:solid; font-family:helvetica,sans-serif;" target="_blank">♥ POWERED BY TWILIO SENDGRID</a>--}}
+{{--                                                                                            </td>--}}
+{{--                                                                                        </tr>--}}
+{{--                                                                                        </tbody>--}}
+{{--                                                                                    </table>--}}
+{{--                                                                                </td>--}}
+{{--                                                                            </tr>--}}
+{{--                                                                            </tbody>--}}
+{{--                                                                        </table>--}}
 
                                                                     </td>
                                                                 </tr>
