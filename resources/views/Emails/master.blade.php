@@ -247,22 +247,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     </tr>
                                                                                                     </tbody>
                                                                                                 </table>
-                                                                                                <table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="2edb1546-1598-49eb-995c-baf7d429f31c">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td style="padding:0px 0px 30px 0px;" role="module-content" bgcolor=""></td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                                <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="3923e4a3-acc3-4c88-bb58-8e5cd32f0162">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-                                                                                                            <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;" width="328" alt="" data-proportionally-constrained="true" data-responsive="false" src="http://cdn.mcauto-images-production.sendgrid.net/954c252fedab403f/29732853-09af-4375-968b-06ac6d8b1616/328x366.png" height="366">
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
+
                                                                                                 <table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="2edb1546-1598-49eb-995c-baf7d429f31c.1">
                                                                                                     <tbody>
                                                                                                     <tr>
