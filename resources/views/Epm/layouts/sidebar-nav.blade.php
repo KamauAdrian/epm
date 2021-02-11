@@ -156,7 +156,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span><span class="pcoded-mtext">Ajira Clubs</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/ajira-clubs')}}">View Clubs</a></li>
+                <li><a href="#!">View Clubs</a></li>
             </ul>
         </li>
     @endif
