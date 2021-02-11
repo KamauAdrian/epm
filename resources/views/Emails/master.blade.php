@@ -149,7 +149,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                         <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="9bb94d6b-a9d9-4d66-b867-f52241c7c7c5">
                                                                                                             <tbody>
                                                                                                                 <tr>
-                                                                                                                    <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="left">
+                                                                                                                    <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
                                                                                                                         <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;" width="117" alt="" data-proportionally-constrained="true" data-responsive="false" src="{{url('assets/images/epm-logo.jpeg')}}" height="26">
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -238,7 +238,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                                 <tbody>
                                                                                                                 <tr>
                                                                                                                     <td align="center" bgcolor="#333333" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                        <a href="@yield('link')" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">@yield('link-desc')</a>
+                                                                                                                        @yield('link-desc')
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>

@@ -13,9 +13,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/master.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -279,7 +277,7 @@
       <workItem from="1612846938151" duration="11890000" />
       <workItem from="1612929999772" duration="32480000" />
       <workItem from="1612975786167" duration="4498000" />
-      <workItem from="1613015537717" duration="25991000" />
+      <workItem from="1613015537717" duration="26543000" />
     </task>
     <servers />
   </component>
@@ -412,17 +410,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>275</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>281</line>
+          <line>284</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
-          <line>292</line>
+          <line>295</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -444,6 +437,11 @@
           <url>file://$PROJECT_DIR$/resources/views/Emails/master-master.blade.php</url>
           <line>234</line>
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
+          <line>276</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
