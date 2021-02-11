@@ -10,7 +10,7 @@
     <p>The Mission of eMobilis is to create opportunities for  African
     Youth by Training them on digital, software and other technologies that prepare them
     for the Future of Work by equipping them with marketable; industry driven skills.
-    </p>
+    </p><br>
 @endsection
 
 @section('account-details')
@@ -19,7 +19,7 @@
     <p>Phone Number: {{$data['phone']}}</p>
 @endsection
 
-@section('link-desc') <p>Click Here To Activate Your Account and Set a Password</p> @endsection
+@section('link')<a href="{{url('/account/activate',$data['user_id'])}}" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Click Here To Activate Your Account and Set a Password</a>@endsection
 
 
 {{--<!doctype html>--}}
