@@ -32,6 +32,6 @@ class CreatePassword extends Mailable
     {
         $subject = 'Activate Account';
 //        return $this->view('Emails.master')->subject($subject);
-        return $this->view('Emails.master')->subject($subject);
+        return $this->view('Emails.password')->subject($subject);
     }
 }
