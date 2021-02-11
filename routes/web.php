@@ -216,7 +216,7 @@ Route::group(['middleware'=>'admin'],function (){
     //trainers
     Route::get('/adm/{id}/request/upload/trainers',[App\Http\Controllers\TrainerController::class, 'request_upload_trainers']);
     Route::get('/download/trainers/excel/template',[App\Http\Controllers\TrainerController::class, 'download_trainers_excel_template']);
-    Route::post('/adm/{id}/upload/trainers',[App\Http\Controllers\TrainerController::class, 'upload_trainers']);
+    Route::post('/adm/{id}/upload/new/trainers',[App\Http\Controllers\TrainerController::class, 'upload_trainers']);
     Route::get('/trainers',[App\Http\Controllers\TrainerController::class, 'trainers']);//json array of trainers
     Route::post('/save-trainer',[App\Http\Controllers\TrainerController::class, 'store']);
     Route::get('/adm/{id}/asses/trainer/competence',[App\Http\Controllers\TrainerController::class, 'asses_trainer']);

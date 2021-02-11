@@ -16,7 +16,7 @@
                         <div class="text-center">
                             <h1 class="f-w-400">Upload Trainers</h1>
                         </div>
-                        <form action="{{url('/adm/'.$auth_admin->id.'/upload/trainers')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/upload/new/trainers')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
