@@ -224,7 +224,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                         <td style="padding:0px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
                                                                                                             <div>
                                                                                                                 <div style="font-family: inherit; text-align: center">The Mission of eMobilis is to create opportunities for  African Youth by Training them on digital, software and other technologies that prepare them for the Future of Work by equipping them with marketable; industry driven skills.</div>
-                                                                                                                <div style="font-family: inherit; text-align: center">Below are your Account Details:</div>
+                                                                                                                <div style="font-family: inherit; text-align: left">Below are your Account Details:</div>
                                                                                                             </div>
                                                                                                         </td>
                                                                                                     </tr>
@@ -238,20 +238,12 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                                 <tbody>
                                                                                                                 <tr>
                                                                                                                     <td align="center" bgcolor="#333333" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                        <a href="" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">I'm Ready To Upgrade!</a>
+                                                                                                                        <a href="" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Click Here To Activate Your Account and Set a Password</a>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                         </td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-
-                                                                                                <table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="2edb1546-1598-49eb-995c-baf7d429f31c.1">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td style="padding:0px 0px 30px 0px;" role="module-content" bgcolor=""></td>
                                                                                                     </tr>
                                                                                                     </tbody>
                                                                                                 </table>
