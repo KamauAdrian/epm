@@ -160,26 +160,26 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                             </tbody>
                                                                                         </table>
 
-                                                                                        <table class="column" width="265" style="width:265px; border-spacing:0; border-collapse:collapse; margin:0px 0px 0px 10px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="">
-                                                                                            <tbody>
-                                                                                            <tr>
-                                                                                                <td style="padding:0px;margin:0px;border-spacing:0;">
-                                                                                                    <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b0d9194c-17b6-4db0-8250-0a56573ea469" data-mc-module-version="2019-10-22">
-                                                                                                        <tbody>
-                                                                                                            <tr>
-                                                                                                                <td style="padding:0px 0px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                                    <div>
-                                                                                                                        <div style="font-family: inherit; text-align: inherit"><span style="font-size: 10px">@yield('name')</span></div>
-                                                                                                                        <div></div>
-                                                                                                                    </div>
-                                                                                                                </td>
-                                                                                                            </tr>
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            </tbody>
-                                                                                        </table>
+{{--                                                                                        <table class="column" width="265" style="width:265px; border-spacing:0; border-collapse:collapse; margin:0px 0px 0px 10px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="">--}}
+{{--                                                                                            <tbody>--}}
+{{--                                                                                            <tr>--}}
+{{--                                                                                                <td style="padding:0px;margin:0px;border-spacing:0;">--}}
+{{--                                                                                                    <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b0d9194c-17b6-4db0-8250-0a56573ea469" data-mc-module-version="2019-10-22">--}}
+{{--                                                                                                        <tbody>--}}
+{{--                                                                                                            <tr>--}}
+{{--                                                                                                                <td style="padding:0px 0px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">--}}
+{{--                                                                                                                    <div>--}}
+{{--                                                                                                                        <div style="font-family: inherit; text-align: inherit"><span style="font-size: 10px">@yield('name')</span></div>--}}
+{{--                                                                                                                        <div></div>--}}
+{{--                                                                                                                    </div>--}}
+{{--                                                                                                                </td>--}}
+{{--                                                                                                            </tr>--}}
+{{--                                                                                                        </tbody>--}}
+{{--                                                                                                    </table>--}}
+{{--                                                                                                </td>--}}
+{{--                                                                                            </tr>--}}
+{{--                                                                                            </tbody>--}}
+{{--                                                                                        </table>--}}
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -224,30 +224,29 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                         <td style="padding:0px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
                                                                                                             <div>
                                                                                                                 <div style="font-family: inherit; text-align: left">@yield('content')</div>
-
-                                                                                                                <div style="font-family: inherit; text-align: left">@yield('account-details')</div>
+                                                                                                                <div></div>
                                                                                                             </div>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     </tbody>
                                                                                                 </table>
-                                                                                                <table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="4bcb53df-57db-48a5-9aa3-4060ac494a64">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td align="center" bgcolor="" class="outer-td" style="padding:0px 0px 0px 0px;">
-                                                                                                            <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
-                                                                                                                <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td align="center" bgcolor="#333333" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                        @yield('link')
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                </tbody>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
+{{--                                                                                                <table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="4bcb53df-57db-48a5-9aa3-4060ac494a64">--}}
+{{--                                                                                                    <tbody>--}}
+{{--                                                                                                    <tr>--}}
+{{--                                                                                                        <td align="center" bgcolor="" class="outer-td" style="padding:0px 0px 0px 0px;">--}}
+{{--                                                                                                            <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">--}}
+{{--                                                                                                                <tbody>--}}
+{{--                                                                                                                <tr>--}}
+{{--                                                                                                                    <td align="center" bgcolor="#333333" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">--}}
+{{--                                                                                                                        @yield('link')--}}
+{{--                                                                                                                    </td>--}}
+{{--                                                                                                                </tr>--}}
+{{--                                                                                                                </tbody>--}}
+{{--                                                                                                            </table>--}}
+{{--                                                                                                        </td>--}}
+{{--                                                                                                    </tr>--}}
+{{--                                                                                                    </tbody>--}}
+{{--                                                                                                </table>--}}
                                                                                             </td>
                                                                                         </tr>
                                                                                         </tbody>
