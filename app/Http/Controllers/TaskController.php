@@ -68,9 +68,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$task_id)
     {
-        //
+        $task = Task::find($task_id);
+        return view('Epm.Tasks.show',compact('task'));
     }
 
     /**

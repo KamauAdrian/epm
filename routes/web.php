@@ -129,7 +129,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
     Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
 
-    // Project mangers
+    // Project managers
     Route::get('/list/all/pmo',[App\Http\Controllers\ProjectManagerController::class, 'pmo']);//json array of trainers
 
     //projects
@@ -144,6 +144,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
     //Projects -> Tasks
     Route::post('/adm/{id}/create/new/task/board_id={board_id}',[App\Http\Controllers\TaskController::class, 'store']);
+    Route::get('/adm/{id}/view/task/task_id={task_id}',[App\Http\Controllers\TaskController::class, 'show']);
 
 
 

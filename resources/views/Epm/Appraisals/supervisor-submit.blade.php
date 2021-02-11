@@ -35,8 +35,8 @@
                 <form action="{{url('adm/'.$auth_admin->id.'/save/pmo/performance/appraisal/appraisal_id='.$appraisal->id.'/'.$appraisal->pmo_id)}}" method="post">
                     <?php
                     $scores=[];
-                    foreach ($appraisal->selfScores as $score){
-                        $scores[] =$score;
+                    foreach ($appraisal->selfScores as $selfScore){
+                        $scores[] =$selfScore;
                     }
                     ?>
                     @csrf
