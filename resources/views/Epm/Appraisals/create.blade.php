@@ -75,19 +75,19 @@
                                         <label>Appraisal Questions</label>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_one" placeholder="Add Question One">
+                                        <textarea class="form-control" cols="auto" rows="5" name="question_one" placeholder="Add Question One"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_two" placeholder="Add Question Two">
+                                        <textarea class="form-control" cols="auto" rows="5" name="question_two" placeholder="Add Question Two"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_three" placeholder="Add Question Three">
+                                        <textarea class="form-control" cols="auto" rows="5" name="question_three" placeholder="Add Question Three"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_four" placeholder="Add Question Four">
+                                        <textarea class="form-control" cols="auto" rows="5" name="question_four" placeholder="Add Question Four"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="question_five" placeholder="Add Question Five">
+                                        <textarea class="form-control" cols="auto" rows="5" name="question_five" placeholder="Add Question Five"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

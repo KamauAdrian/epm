@@ -142,6 +142,8 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
     //Projects -> Boards
     Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
+    //Projects -> Tasks
+    Route::post('/adm/{id}/create/new/task/board_id={board_id}',[App\Http\Controllers\TaskController::class, 'store']);
 
 
 

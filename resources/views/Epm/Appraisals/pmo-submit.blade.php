@@ -180,18 +180,15 @@
     <script src="{{url('assets/dist/axios.js')}}"></script>
     {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
-        var i = 0;
-        $(document).on("click", "#addActivity", function(){
-            i++
-            console.log(i);
-            var activity = $('.addNewActivity');
-            console.log(activity);
-            activity.last().after('<tr class="addNewActivity">'+activity.first().html()+'</tr>');
-        });
-
-        $(document).on("click", "#addNewQuestion", function(){
-            var question = $('.addReportQuestion');
-            question.last().after('<div class="col-sm-12 addReportQuestion">'+question.first().html()+'</div><br />');
+        $('form input:not([type="submit"])').keydown(function(e) {
+            if (e.keyCode == 13) {
+                var inputs = $(this).parents("form").eq(0).find(":input");
+                if (inputs[inputs.index(this) + 1] != null) {
+                    inputs[inputs.index(this) + 1].focus();
+                }
+                e.preventDefault();
+                return false;
+            }
         });
     </script>
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>

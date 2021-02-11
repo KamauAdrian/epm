@@ -68,6 +68,9 @@ class User extends Authenticatable
     public function projects(){
         return $this->belongsToMany('\App\Models\Project','project_collaborator','collaborator_id','project_id');
     }
+    public function tasks(){
+        return $this->belongsToMany('App\Model\Task','assignee_task','assignee_id','task_id');
+    }
     public static function updateUser($id,$data){
     DB::table('users')->where('id',$id)->update($data);
     }
