@@ -94,7 +94,7 @@ class AppraisalController extends Controller
             $data = [
                 'supervisor_status' => 1,
             ];
-            DB::table('pmo_performance_appraisal_reports')->where('id', $appraisal_id)->update($data);
+            AppraisalSupervisor::where('appraisal_id',$appraisal->id)->update($data);
             $scores = [];
             foreach ($supervisor_scores as $supervisor_score) {
                 $scores[] = ['supervisor_score' => $supervisor_score, 'appraisal_id' => $appraisal->id];
