@@ -200,10 +200,10 @@
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
-        var assigned = <?php echo json_encode($assignees_ids); ?>
-        for(var i=0; i<assigned.length; i++){
-            alert(assigned[i]);
-        }
+        {{--var assigned = <?php echo json_encode($assignees_ids); ?>--}}
+        {{--for(var i=0; i<assigned.length; i++){--}}
+        {{--    alert(assigned[i]);--}}
+        {{--}--}}
         function addNewBoard(){
             var boardForm = document.getElementById('add-new-board');
             if (boardForm.style.display='none'){
