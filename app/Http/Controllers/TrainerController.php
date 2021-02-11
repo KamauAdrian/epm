@@ -76,27 +76,30 @@ class TrainerController extends Controller
             $new_trainer->county=$trainer[5];
             $new_trainer->is_admin=1;
             $new_trainer->role_id=$new_trainer_role;
-            $saved_trainer = $new_trainer->save();
-            if ($saved_trainer){
-                $data = [
-                    'user_id'=>$new_trainer->id,
-                    'name'=>$new_trainer->name,
-                    'email'=>$new_trainer->email,
-                    'phone'=>$new_trainer->phone,
-                ];
-                try {
-
-                    Mail::to($new_trainer->email)->send(new CreatePassword($data));
-                }
-                catch(\Exception $e){
-                    if ($e){
-                        return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Email invites not sent to new trainers');
+            try {
+                $new_trainer->save();
+            }catch (\Exception $e){
+                if (!$e){
+                    $data = [
+                        'user_id'=>$new_trainer->id,
+                        'name'=>$new_trainer->name,
+                        'email'=>$new_trainer->email,
+                        'phone'=>$new_trainer->phone,
+                    ];
+                    try {
+                        Mail::to($new_trainer->email)->send(new CreatePassword($data));
                     }
-                }
+                    catch(\Exception $e){
+                        if ($e){
+                            return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Email invites not sent to new trainers');
+                        }
+                    }
 
+                }else{
+                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Trainers Not Uploaded Make Sure Excel File Does Not Contain Duplicate Entries');
+                }
             }
         }
-        return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers uploaded Successfully');
     }
 
     /**

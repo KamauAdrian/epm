@@ -43,6 +43,7 @@
                     <thead>
                         <tr>
                             <th>Project</th>
+                            <th>Date Opened</th>
                             <th>Collaborators</th>
                             <th>Due Date</th>
                             <th class="text-right">Actions</th>
@@ -54,6 +55,7 @@
                                <tr>
                                    <td>{{$project->name}}</td>
                                    <?php $collaborators = \App\Models\Project::find($project->id)->collaborators; ?>
+                                   <td>{{date('l dS M Y',strtotime($project->created_at))}}</td>
                                    <td>
                                        @foreach($collaborators as $collaborator)
                                            {{$collaborator->name}}<br />
@@ -78,6 +80,15 @@
                                </tr>
                            @endforeach
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Project</th>
+                            <th>Date Opened</th>
+                            <th>Collaborators</th>
+                            <th>Due Date</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                        </tfoot>
                     @endif
                 </table>
             </div>
