@@ -43,40 +43,43 @@ class TrainerController extends Controller
      * Store/save uploaded Trainer users to db.
      */
     public function upload_trainers(Request $request,$id){
-        $messages = [
-            'trainers.required'=>'Please Select trainers Excel File to Upload',
-        ];
-        $this->validate($request,[
-            'trainers'=>'required',
-        ],$messages);
-        $trainers_excel = Excel::toArray(new TrainersImport(), $request->file('trainers'));
-        $trainers_raw = [];
-        foreach ($trainers_excel as $trainer_excel){
-            $trainers_raw[] = $trainer_excel;
-        }
-        $trainers = array_slice($trainers_raw[0],1);
-        $role = new Role();
-        $new_trainer_role = '';
-        $role->name = 'Trainer';
-        //check if role already created
-        $exists_role = DB::table('roles')->where('name',$role->name)->first();
-        if ($exists_role){
-            $new_trainer_role = $exists_role->id;
-        }else{
-            $role->save();
-            $new_trainer_role= $role->id;
-        }
-        foreach ($trainers as $trainer){
-            $new_trainer = new User();
-            $new_trainer->name =$trainer[0];
-            $new_trainer->employee_number = $trainer[1];
-            $new_trainer->email = $trainer[2];
-            $new_trainer->phone = $trainer[3];
-            $new_trainer->gender=$trainer[4];
-            $new_trainer->county=$trainer[5];
-            $new_trainer->is_admin=1;
-            $new_trainer->role_id=$new_trainer_role;
-            $saved_trainer = $new_trainer->save();
+        $admin = User::find($id);
+
+        if ($admin->role->name == 'Su Admin'){
+            $messages = [
+                'trainers.required'=>'Please Select trainers Excel File to Upload',
+            ];
+            $this->validate($request,[
+                'trainers'=>'required',
+            ],$messages);
+            $trainers_excel = Excel::toArray(new TrainersImport(), $request->file('trainers'));
+            $trainers_raw = [];
+            foreach ($trainers_excel as $trainer_excel){
+                $trainers_raw[] = $trainer_excel;
+            }
+            $trainers = array_slice($trainers_raw[0],1);
+            $role = new Role();
+            $new_trainer_role = '';
+            $role->name = 'Trainer';
+            //check if role already created
+            $exists_role = DB::table('roles')->where('name',$role->name)->first();
+            if ($exists_role){
+                $new_trainer_role = $exists_role->id;
+            }else{
+                $role->save();
+                $new_trainer_role= $role->id;
+            }
+            foreach ($trainers as $trainer){
+                $new_trainer = new User();
+                $new_trainer->name =$trainer[0];
+                $new_trainer->employee_number = $trainer[1];
+                $new_trainer->email = $trainer[2];
+                $new_trainer->phone = $trainer[3];
+                $new_trainer->gender=$trainer[4];
+                $new_trainer->county=$trainer[5];
+                $new_trainer->is_admin=1;
+                $new_trainer->role_id=$new_trainer_role;
+                $saved_trainer = $new_trainer->save();
 //            try {
 //
 //            }catch (\Exception $eu){}
@@ -96,6 +99,7 @@ class TrainerController extends Controller
                         }
                     }
                 }
+            }
         }
     }
 
