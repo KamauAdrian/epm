@@ -14,9 +14,9 @@
 @endsection
 
 @section('account-details')
-    <p>Below are your Account Details:</p>
-    <p>{{$data['email']}}</p>
-    <p>{{$data['phone']}}</p>
+    <p>Below are your Account Details:</p><br />
+    <p>Email: {{$data['email']}}</p>
+    <p>Phone Number: {{$data['phone']}}</p>
 @endsection
 
 @section('link-desc') <p>Click Here To Activate Your Account and Set a Password</p> @endsection

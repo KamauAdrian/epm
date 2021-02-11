@@ -223,7 +223,8 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     <tr>
                                                                                                         <td style="padding:0px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
                                                                                                             <div>
-                                                                                                                <div style="font-family: inherit; text-align: center">@yield('content')</div>
+                                                                                                                <div style="font-family: inherit; text-align: left">@yield('content')</div>
+
                                                                                                                 <div style="font-family: inherit; text-align: left">@yield('account-details')</div>
                                                                                                             </div>
                                                                                                         </td>
@@ -238,7 +239,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                                 <tbody>
                                                                                                                 <tr>
                                                                                                                     <td align="center" bgcolor="#333333" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                        @yield('link-desc')
+                                                                                                                        @yield('link')
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
