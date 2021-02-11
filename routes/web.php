@@ -150,6 +150,7 @@ Route::group(['middleware'=>'admin'],function (){
     // Performance Appraisals
     Route::get('/adm/{id}/view/performance/appraisals',[App\Http\Controllers\AppraisalController::class, 'index']);
     Route::get('/adm/{id}/archive/performance/appraisals/{appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'archive']);
+    Route::get('/adm/{id}/list/archived/performance/appraisals',[App\Http\Controllers\AppraisalController::class, 'index_archived']);
     Route::get('/adm/{id}/create/new/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'create']);
     Route::post('/adm/{id}/add/pmo/performance/appraisal',[App\Http\Controllers\AppraisalController::class, 'store']);
     Route::get('/adm/{id}/view/performance/appraisal/template/appraisal_id={appraisal_id}',[App\Http\Controllers\AppraisalController::class, 'show']);

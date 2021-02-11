@@ -49,6 +49,11 @@ class AppraisalController extends Controller
         }
     }
 
+    public function index_archived($id){
+        $appraisals = Appraisal::where('status',1)->get();
+        return view('Epm.Appraisals.archived',compact('appraisals'));
+    }
+
     /**
      * Display a listing of the appraisals to supervise.
      */

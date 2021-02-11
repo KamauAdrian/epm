@@ -31,6 +31,7 @@ class CreatePassword extends Mailable
     public function build()
     {
         $subject = 'Activate Account';
+//        return $this->view('Emails.master')->subject($subject);
         return $this->view('Emails.password')->subject($subject);
     }
 }

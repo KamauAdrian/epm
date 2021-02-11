@@ -15,11 +15,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/supervisor-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/supervisor-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AppraisalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AppraisalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/CreatePassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/CreatePassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -285,7 +284,7 @@
       <workItem from="1612846938151" duration="11890000" />
       <workItem from="1612929999772" duration="32480000" />
       <workItem from="1612975786167" duration="4498000" />
-      <workItem from="1613015537717" duration="7259000" />
+      <workItem from="1613015537717" duration="14047000" />
     </task>
     <servers />
   </component>

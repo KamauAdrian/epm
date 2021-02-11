@@ -48,13 +48,15 @@ class TaskController extends Controller
         $new_task->due_date = $task['due_date'];
         $new_task->creator_id = $admin->id;
         $new_task->board_id = $board_id;
-        $assignees = $task['assignees'];
         $new_task_saved = $new_task->save();
-        if ($new_task_saved){
+        if ($new_task_saved && $request->assignees){
+            $assignees = $task['assignees'];
             Task::find($new_task->id)->assignees()->attach($assignees);
-            foreach ($assignees as $assignee){
-                $user = User::find($assignee);
-                //send email notification on task assigment
+            if ($assignees){
+                foreach ($assignees as $assignee){
+                    $user = User::find($assignee);
+                    //send email notification on task assigment
+                }
             }
         }
         return redirect('/adm/'.$id.'/view/project/'.$board->project_id)->with('success','Task Created Successfully');

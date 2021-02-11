@@ -42,25 +42,77 @@
         <div class="row">
                 <div class="table-responsive">
                     <table class="table">
-                        <tbody>
+                        <tbody style="overflow: scroll;">
                         <tr>
                             @if($boards)
                                 @foreach($boards as $board)
                                     <td>
                                         <div class="row">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 style="font-size: 14px;">{{$board->name}}</h5>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
-                                                            @foreach($tasks as $task)
-                                                                {{$task->name}}<br />
-                                                            @endforeach
-                                                        </div>
+                                            <h5 style="font-size: 14px;">{{$board->name}}</h5>
+                                        </div>
+                                        <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
+                                        @foreach($tasks as $task)
+                                            <div class="row">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <form action="#!">
+                                                            <?php
+                                                            $assignees = \App\Models\Task::find($task->id)->assignees;
+                                                            $assignees_ids = [];
+                                                            $assignees_names = [];
+                                                            foreach ($assignees as $assignee){
+                                                                $assignees_ids[] = $assignee->id;
+                                                                $assignees_names[] = $assignee->name;
+                                                            }
+
+                                                            if (count($assignees_names)>1){
+                                                                $names = implode(',',$assignees_names);
+                                                            }else{
+                                                                $names = $assignees_names;
+                                                            }
+                                                            ?>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Task Name</label>
+                                                                    <input style="width: auto" type="text" class="form-control" name="name" value="{{$task->name}}" placeholder="Project One" readonly>
+                                                                </div>
+                                                            </div>
+{{--                                                            <div class="col-md-12">--}}
+{{--                                                                <div class="form-group">--}}
+{{--                                                                    <label>Task Assignees</label>--}}
+{{--                                                                    <input style="width: auto" type="text" class="form-control" name="name" value="{{$names}}" placeholder="Project One" readonly>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-12">--}}
+{{--                                                                <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">--}}
+{{--                                                                    <label>Assignee</label>--}}
+{{--                                                                    <multiselect v-model="selectedPmo" :options="pmos"--}}
+{{--                                                                                 placeholder="Search" track-by="id" label="name"--}}
+{{--                                                                                 :searchable="true" :close-on-select="true" multiple>--}}
+{{--                                                                    </multiselect>--}}
+{{--                                                                    <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Task Due Date</label>
+                                                                    <input style="width: auto" type="date" class="form-control" value="{{$task->due_date}}" name="due_date" readonly>
+                                                                </div>
+                                                            </div>
+{{--                                                            <div class="form-group float-right">--}}
+{{--                                                                <input class="btn btn-outline-primary" type="submit" value="Add Task">--}}
+{{--                                                            </div>--}}
+                                                        </form>
                                                     </div>
-                                                    <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" style="display: none;" id="form-add-new-task-{{$board->id}}" method="post">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <div class="row">
+                                            <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
+                                                <div class="card-body">
+                                                    <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" method="post">
                                                         @csrf
+                                                        <label>Add A New Task To {{$board->name}}</label>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>Name</label>
@@ -92,7 +144,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <a href="#!"><p onclick="addNewTask({{$board->id}})" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Task</p></a>
+                                            <a href="#!"><p onclick="addNewTask({{$board->id}})" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Add Task</p></a>
                                         </div>
                                     </td>
                                 @endforeach
@@ -117,7 +169,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <a href="#!"><p onclick="addNewBoard()" class="text-normal"><span><i class="fa fa-plus"></i></span> Add a new Board</p></a>
+                                    <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Board</p></a>
                                 </div>
                             </td>
                         </tr>
@@ -137,7 +189,8 @@
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
-
+        var assigned = <?php echo json_encode($assignees_ids); ?>
+            console.log(assigned);
         function addNewBoard(){
             var boardForm = document.getElementById('add-new-board');
             if (boardForm.style.display='none'){
@@ -146,7 +199,7 @@
         }
 
         function addNewTask(id){
-            var taskForm = document.getElementById('form-add-new-task-'+id);
+            var taskForm = document.getElementById('card-add-new-task-'+id);
             if (taskForm.style.display='none'){
                 taskForm.style.display='block';
             }
