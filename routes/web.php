@@ -96,6 +96,7 @@ Route::post('/update/password/{id}',[App\Http\Controllers\AdminController::class
 Route::group(['middleware'=>'admin'],function (){
     // index dashboard
     Route::get('/adm/main/dashboard',[App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/adm/pmo/dashboard',[App\Http\Controllers\AdminController::class, 'index_pmo']);
     Route::get('/adm/get/admins/records',[App\Http\Controllers\AdminController::class, 'dashboard_actors']);
     Route::get('/adm/get/pms/records',[App\Http\Controllers\AdminController::class, 'dashboard_pms']);
     Route::get('/adm/get/centers/records',[App\Http\Controllers\AdminController::class, 'dashboard_centers']);

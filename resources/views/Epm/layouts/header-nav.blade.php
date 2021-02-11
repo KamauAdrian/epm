@@ -27,8 +27,11 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <div class="dropdown-menu profile-notification ">
                     <ul class="pro-body">
 {{--                        //Dashboard--}}
-                        <li><a href="{{url('/adm/main/dashboard')}}" class="dropdown-item"><i class="fas fa-circle"></i> Dashboard</a></li>
-
+                        @if($auth_admin->role->name=='Project Manager')
+                            <li><a href="{{url('/adm/pmo/dashboard')}}" class="dropdown-item"><i class="fas fa-circle"></i> Dashboard</a></li>
+                        @else
+                            <li><a href="{{url('/adm/main/dashboard')}}" class="dropdown-item"><i class="fas fa-circle"></i> Dashboard</a></li>
+                        @endif
 {{--                        //Emobilis HQs--}}
                         @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                             <li><a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>Emobilis HQ</a></li>

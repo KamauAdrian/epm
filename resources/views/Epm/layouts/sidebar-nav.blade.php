@@ -10,14 +10,15 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     <li class="nav-item pcoded-menu-caption">
         <label>Dashboard</label>
     </li>
-    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
-        <li class="nav-item"><a href="{{url('adm/main/dashboard')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-tachometer-alt"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
+    @if($auth_admin->role->name == 'Su Admin')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Emobilis HQ</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="#!">HQs</a></li>
             </ul>
         </li>
+    @elseif($auth_admin->role->name == 'Project Manager')
+        <li class="nav-item"><a href="{{url('adm/pmo/dashboard')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-tachometer-alt"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
     @endif
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
