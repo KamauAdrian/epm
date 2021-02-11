@@ -39,13 +39,14 @@
                         <div class="table-responsive">
                             <table id="reportsTableList" class="table table-center mb-0 ">
                                 <thead>
-                                <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>Reports</th> <th>Date</th> <th>Training Job Category</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                                 @if($reports)
                                     <tbody>
                                     @foreach($reports as $report)
                                         <?php
-                                        $format_date = date('l dS M Y',strtotime($report->date))
+                                        $format_date = date('l dS M Y',strtotime($report->date));
+//                                        dd($report);
                                         ?>
                                         <tr>
                                             <td>
@@ -57,10 +58,10 @@
                                                 </div>
                                             </td>
                                             <td>{{$format_date}}</td>
+                                            <td>{{$report->speciality}}</td>
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fa fa-list"></i></span></a>
                                                         <a href="#!" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
                                                     </div>
                                                 </td>

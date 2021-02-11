@@ -61,7 +61,7 @@
                                         <label>Training Job Category</label>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" value="Data Entry/Management"
-                                                   id="checkCategory1" name="speciality"
+                                                   id="checkCategory1" name="training_category"
                                                    <?php if ($trainer->speciality=='Data Entry/Management'){?>
                                                    checked="checked"<?php } ?>>
                                             <label for="checkCategory1" class="form-check-label">Data Entry/Management</label>
