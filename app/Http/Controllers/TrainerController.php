@@ -76,12 +76,11 @@ class TrainerController extends Controller
             $new_trainer->county=$trainer[5];
             $new_trainer->is_admin=1;
             $new_trainer->role_id=$new_trainer_role;
-            try {
-                $new_trainer->save();
-            }catch (\Exception $eu){
-                if ($eu){
-                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Trainers Not Uploaded Make Sure Excel File Does Not Contain Duplicate Entries');
-                }else{
+            $saved_trainer = $new_trainer->save();
+//            try {
+//
+//            }catch (\Exception $eu){}
+                if ($saved_trainer){
                     $data = [
                         'user_id'=>$new_trainer->id,
                         'name'=>$new_trainer->name,
@@ -97,7 +96,6 @@ class TrainerController extends Controller
                         }
                     }
                 }
-            }
         }
     }
 
