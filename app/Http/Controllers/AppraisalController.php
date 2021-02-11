@@ -35,7 +35,7 @@ class AppraisalController extends Controller
 //            dd($appraisals);
             return view('Epm.Appraisals.index',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
-            $appraisals = Appraisal::where('pmo_id',$admin->id)->get();
+            $appraisals = Appraisal::where('pmo_id',$admin->id)->where('status',0)->get();
             return view('Epm.Appraisals.index',compact('appraisals'));
         }
     }
