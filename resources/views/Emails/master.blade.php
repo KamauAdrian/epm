@@ -213,16 +213,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     <tbody>
                                                                                                     <tr>
                                                                                                         <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                            <div><div style="font-family: inherit; text-align: center">Only 2 days left...</div><div></div></div>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                                <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="8c54c8a5-caee-4b33-b6b0-e8aaed51c545" data-mc-module-version="2019-10-22">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td style="padding:18px 10px 18px 10px; line-height:32px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                            <div><div style="font-family: inherit; text-align: center"><span style="color: #79a6ff; font-size: 50px">Your trial is almost over!</span></div><div></div></div>
+                                                                                                            <div><div style="font-family: inherit; text-align: center">Welcome to eMobilis Portal!</div><div></div></div>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     </tbody>
@@ -231,8 +222,10 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     <tbody>
                                                                                                     <tr>
                                                                                                         <td style="padding:0px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                            <div><div style="font-family: inherit; text-align: center">Upgrade to continue enjoying music and videos on demand.</div>
-                                                                                                                <div style="font-family: inherit; text-align: center">Any time. Any place.&nbsp;</div><div></div></div>
+                                                                                                            <div>
+                                                                                                                <div style="font-family: inherit; text-align: center">The Mission of eMobilis is to create opportunities for  African Youth by Training them on digital, software and other technologies that prepare them for the Future of Work by equipping them with marketable; industry driven skills.</div>
+                                                                                                                <div style="font-family: inherit; text-align: center">Below are your Account Details:</div>
+                                                                                                            </div>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     </tbody>
@@ -277,34 +270,6 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     </tr>
                                                                                                     </tbody>
                                                                                                 </table>
-                                                                                                <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="6cf92250-86a4-41d8-865a-ae5fb2569556.1.1" data-mc-module-version="2019-10-22">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td style="padding:0px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                            <div>
-                                                                                                                <div style="font-family: inherit; text-align: center">Need more time to decide? Extend your trial for 3 days.&nbsp;</div><div></div>
-                                                                                                            </div>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                                <table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="4bcb53df-57db-48a5-9aa3-4060ac494a64.1">
-                                                                                                    <tbody>
-                                                                                                    <tr>
-                                                                                                        <td align="center" bgcolor="" class="outer-td" style="padding:0px 0px 0px 0px;">
-                                                                                                            <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
-                                                                                                                <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td align="center" bgcolor="#79a6ff" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                        <a href="" style="background-color:#79a6ff; border:1px solid #79a6ff; border-color:#79a6ff; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 60px 12px 60px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Extend My Trial</a>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                </tbody>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
                                                                                             </td>
                                                                                         </tr>
                                                                                         </tbody>
@@ -314,65 +279,21 @@ body {font-family: 'Chivo', sans-serif;}
                                                                             </tbody>
                                                                         </table>
 
-                                                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="0afefc1a-f10c-40df-9c38-62839d740a0c" data-mc-module-version="2019-10-22">
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td style="padding:40px 30px 18px 30px; line-height:32px; text-align:inherit; background-color:#000000;" height="100%" valign="top" bgcolor="#000000" role="module-content">
-                                                                                    <div>
-                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ff8c85; font-size: 32px">Check out the</span></div>
-                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ff8c85; font-size: 32px">the playlist of the week!&nbsp;</span></div>
-                                                                                        <div></div>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
 
-                                                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="6cf92250-86a4-41d8-865a-ae5fb2569556.1.2" data-mc-module-version="2019-10-22">
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td style="padding:0px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#000000;" height="100%" valign="top" bgcolor="#000000" role="module-content">
-                                                                                    <div>
-                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ffffff">Viral hits, trending tracks, and new releases from your favorite artists.&nbsp;</span></div>
-                                                                                        <div></div>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-
-                                                                        <table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="4bcb53df-57db-48a5-9aa3-4060ac494a64.1.1">
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td align="center" bgcolor="#000000" class="outer-td" style="padding:0px 0px 40px 0px;">
-                                                                                    <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
-                                                                                        <tbody>
-                                                                                        <tr>
-                                                                                            <td align="center" bgcolor="#91eabc" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                <a href="" style="background-color:#91eabc; border:1px solid #91eabc; border-color:#91eabc; border-radius:0px; border-width:1px; color:#000000; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 60px 12px 60px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Let's Hear It</a>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-
-                                                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="ba2cc448-1854-4e31-b50f-551e3101d5b2" data-mc-module-version="2019-10-22">
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td style="padding:40px 30px 40px 30px; line-height:22px; text-align:inherit; background-color:#79a6ff;" height="100%" valign="top" bgcolor="#79a6ff" role="module-content">
-                                                                                    <div>
-                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ffffff">Need help choosing a plan? Questions about accounts or billing?</span></div>
-                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ffffff">We're here to help. Our customer services reps are available 24/7.</span></div>
-                                                                                        <div style="font-family: inherit; text-align: center"><br></div>
-                                                                                        <div style="font-family: inherit; text-align: center"><a href="http://"><span style="color: #ffffff"><u><strong>Contact Us&nbsp;</strong></u></span></a></div><div></div>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
+{{--                                                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="ba2cc448-1854-4e31-b50f-551e3101d5b2" data-mc-module-version="2019-10-22">--}}
+{{--                                                                            <tbody>--}}
+{{--                                                                            <tr>--}}
+{{--                                                                                <td style="padding:40px 30px 40px 30px; line-height:22px; text-align:inherit; background-color:#79a6ff;" height="100%" valign="top" bgcolor="#79a6ff" role="module-content">--}}
+{{--                                                                                    <div>--}}
+{{--                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ffffff">Need help choosing a plan? Questions about accounts or billing?</span></div>--}}
+{{--                                                                                        <div style="font-family: inherit; text-align: center"><span style="color: #ffffff">We're here to help. Our customer services reps are available 24/7.</span></div>--}}
+{{--                                                                                        <div style="font-family: inherit; text-align: center"><br></div>--}}
+{{--                                                                                        <div style="font-family: inherit; text-align: center"><a href="http://"><span style="color: #ffffff"><u><strong>Contact Us&nbsp;</strong></u></span></a></div><div></div>--}}
+{{--                                                                                    </div>--}}
+{{--                                                                                </td>--}}
+{{--                                                                            </tr>--}}
+{{--                                                                            </tbody>--}}
+{{--                                                                        </table>--}}
 
                                                                         <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
                                                                             <div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">Sender_Name</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">Sender_Address</span>, <span class="Unsubscribe--senderCity">Sender_City</span>, <span class="Unsubscribe--senderState">Sender_State</span> <span class="Unsubscribe--senderZip">Sender_Zip</span></p></div>
