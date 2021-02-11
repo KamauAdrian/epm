@@ -122,16 +122,17 @@
                                                         @endif
                                                     @endif
                                                 </li>
-                                                @if($appraisal->status==0)
-                                                    <li>
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/archive/performance/appraisals/'.$appraisal->id)}}">
-                                                            Archive Appraisal
-                                                        </a>
-                                                    </li>
+                                                @if($auth_admin->role->name == 'Su Admin')
+                                                    @if($appraisal->status==0)
+                                                        <li>
+                                                            <a href="{{url('/adm/'.$auth_admin->id.'/archive/performance/appraisals/'.$appraisal->id)}}">
+                                                                Archive Appraisal
+                                                            </a>
+                                                        </li>
+                                                    @endif
                                                 @endif
                                             </ul>
                                         </div>
-
                                     </td>
                                 </tr>
                             @endforeach
