@@ -78,8 +78,10 @@ class TrainerController extends Controller
             $new_trainer->role_id=$new_trainer_role;
             try {
                 $new_trainer->save();
-            }catch (\Exception $e){
-                if (!$e){
+            }catch (\Exception $eu){
+                if ($eu){
+                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Trainers Not Uploaded Make Sure Excel File Does Not Contain Duplicate Entries');
+                }else{
                     $data = [
                         'user_id'=>$new_trainer->id,
                         'name'=>$new_trainer->name,
@@ -89,14 +91,11 @@ class TrainerController extends Controller
                     try {
                         Mail::to($new_trainer->email)->send(new CreatePassword($data));
                     }
-                    catch(\Exception $e){
-                        if ($e){
+                    catch(\Exception $em){
+                        if ($em){
                             return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Email invites not sent to new trainers');
                         }
                     }
-
-                }else{
-                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Trainers Not Uploaded Make Sure Excel File Does Not Contain Duplicate Entries');
                 }
             }
         }
