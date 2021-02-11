@@ -90,14 +90,16 @@ class TrainerController extends Controller
                         'email'=>$new_trainer->email,
                         'phone'=>$new_trainer->phone,
                     ];
-                    try {
-                        Mail::to($new_trainer->email)->send(new CreatePassword($data));
-                    }
-                    catch(\Exception $em){
-                        if ($em){
-                            return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Email invites not sent to new trainers');
-                        }
-                    }
+//                    try {
+//
+//                    }
+//                    catch(\Exception $em){
+//                        if ($em){
+//                            return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Email invites not sent to new trainers');
+//                        }
+//                    }
+
+                    Mail::to($new_trainer->email)->send(new CreatePassword($data));
                 }
             }
         }
