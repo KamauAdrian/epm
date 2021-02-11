@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-center mb-0 ">
+                            <table id="reportsTableList" class="table table-center mb-0 ">
                                 <thead>
                                 <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
@@ -83,4 +83,13 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('#reportsTableList').DataTable();
+        } );
+    </script>
 @endsection

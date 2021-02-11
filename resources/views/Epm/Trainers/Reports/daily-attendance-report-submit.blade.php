@@ -64,8 +64,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date</label>
-                                            <input type="date" name="date" class="form-control" value="{{old('date')}}" required>
-                                            <span class="text-danger">{{$errors->first('date')}}</span>
+                                            <input type="date" name="date" class="form-control" value="{{date('y-m-d')}}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
