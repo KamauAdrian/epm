@@ -187,8 +187,7 @@ class AppraisalController extends Controller
                         ];
 
                         $supervisor_email = $pmo_supervisor['email'];
-                        $res=Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
-                        dd($res);
+                        Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
                     }
                 }
             }
