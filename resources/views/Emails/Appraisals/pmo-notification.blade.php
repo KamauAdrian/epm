@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        Please log in to your account and submit your performance appraisal
+        Please log in to your account and submit your performance appraisal.
     </p><br>
 
 @endsection

@@ -11,7 +11,7 @@
         .table-responsive .table {
             min-width: 600px;
         }
-        .table{
+        .supervisor{
             color: #2AA504;
         }
         /*.formFixedTop{*/
@@ -122,10 +122,10 @@
                                                 {!! nl2br(e($self_scores[0]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! $supervisor_scores[0]->supervisor_score !!}
                                                 </td>
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! nl2br(e($supervisor_scores[0]->supervisor_comment)) !!}
                                                 </td>
                                             @else
@@ -145,10 +145,10 @@
                                                 {!! nl2br(e($self_scores[1]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! $supervisor_scores[1]->supervisor_score !!}
                                                 </td>
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! nl2br(e($supervisor_scores[1]->supervisor_comment)) !!}
                                                 </td>
                                             @else
@@ -168,10 +168,10 @@
                                                 {!! nl2br(e($self_scores[2]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! $supervisor_scores[2]->supervisor_score !!}
                                                 </td>
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! nl2br(e($supervisor_scores[2]->supervisor_comment)) !!}
                                                 </td>
                                             @else
@@ -191,10 +191,10 @@
                                                 {!! nl2br(e($self_scores[3]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! $supervisor_scores[3]->supervisor_score !!}
                                                 </td>
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! nl2br(e($supervisor_scores[3]->supervisor_comment)) !!}
                                                 </td>
                                             @else
@@ -214,10 +214,10 @@
                                                 {!! nl2br(e($self_scores[4]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! $supervisor_scores[4]->supervisor_score !!}
                                                 </td>
-                                                <td>
+                                                <td class="supervisor">
                                                     {!! nl2br(e($supervisor_scores[4]->supervisor_comment)) !!}
                                                 </td>
                                             @else

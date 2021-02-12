@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        Your performance appraisal have been supervised successfully please log in to your account to view appraisal
+        Your performance appraisal has been supervised successfully. Please log in to your account to view the appraisal.
     </p><br>
 
 @endsection
