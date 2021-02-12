@@ -184,6 +184,7 @@ class AppraisalController extends Controller
                             'user_id'=>$new_supervisor->id,
                             'name'=>$new_supervisor->supervisor,
                             'email'=>$new_supervisor->supervisor_email,
+                            'pmo_name'=>$appraisal->pmo,
                         ];
 
                         $supervisor_email = $pmo_supervisor['email'];

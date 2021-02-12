@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        Please log in to your account and submit Supervisor performance appraisal
+       Please log in to your account and submit Supervisor performance appraisal for  {{$data['pmo_name']}}
     </p><br>
 
 @endsection
