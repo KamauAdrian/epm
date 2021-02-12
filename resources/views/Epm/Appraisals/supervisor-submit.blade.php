@@ -98,7 +98,9 @@
                                             <td>1</td>
                                             <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
                                             <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[0]->self_score}}" readonly></td>
-                                            <td><input type="text" name="self_comment[]" value="{{$scores[0]->self_comment}}" readonly></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[0]->self_comment}}</textarea>
+                                            </td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
                                             <td>
                                                 <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -110,7 +112,9 @@
                                             <td>2</td>
                                             <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
                                             <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[1]->self_score}}" readonly></td>
-                                            <td><input type="text" name="self_comment[]" value="{{$scores[1]->self_comment}}" readonly></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[1]->self_comment}}</textarea>
+                                            </td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
                                             <td>
                                                 <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -122,7 +126,9 @@
                                             <td>3</td>
                                             <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[2]->self_score}}" readonly></td>
-                                            <td><input type="text" name="self_comment[]" value="{{$scores[2]->self_comment}}" readonly></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[2]->self_comment}}</textarea>
+                                            </td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -134,7 +140,9 @@
                                             <td>4</td>
                                             <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[3]->self_score}}" readonly></td>
-                                            <td><input type="text" name="self_comment[]" value="{{$scores[3]->self_comment}}" readonly></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[3]->self_comment}}</textarea>
+                                            </td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -146,7 +154,9 @@
                                             <td>5</td>
                                             <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[4]->self_score}}" readonly></td>
-                                            <td><input type="text" name="self_comment[]" value="{{$scores[4]->self_comment}}" readonly></td>
+                                            <td>
+                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[4]->self_comment}}</textarea>
+                                            </td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
