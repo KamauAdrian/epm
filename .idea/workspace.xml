@@ -19,6 +19,7 @@
       <change beforePath="$PROJECT_DIR$/resources/views/Emails/Appraisals/pmo-notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Appraisals/pmo-notification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Emails/Appraisals/supervisor-notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Appraisals/supervisor-notification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/view-appraisal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/view-appraisal.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/create-password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/create-password.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +287,7 @@
       <workItem from="1613015537717" duration="28974000" />
       <workItem from="1613047105753" duration="7418000" />
       <workItem from="1613103333308" duration="19585000" />
-      <workItem from="1613134629403" duration="7437000" />
+      <workItem from="1613134629403" duration="8025000" />
     </task>
     <servers />
   </component>

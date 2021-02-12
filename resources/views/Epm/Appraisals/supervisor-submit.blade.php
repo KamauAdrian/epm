@@ -11,9 +11,10 @@
         .table-responsive .table {
             min-width: 600px;
         }
-        .table{
+        .supervisor{
             color: #2AA504;
         }
+
     </style>
 @endsection
 
