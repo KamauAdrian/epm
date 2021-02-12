@@ -21,8 +21,14 @@ class ProjectController extends Controller
 
         $admin = User::find($id);
 //        $projects = $admin->projects; gets all project collaborations
-        $projects = Project::where('creator_id',$id)->get();
-        return view('Epm.Projects.index',compact('projects'));
+        if ($admin->role->name == 'Su Admin'){
+            $projects = Project::all();
+            return view('Epm.Projects.index',compact('projects'));
+        }elseif ($admin->role->name == 'Project Manager'){
+            $projects = Project::where('creator_id',$id)->get();
+            return view('Epm.Projects.index',compact('projects'));
+        }
+
     }
 
     /**
