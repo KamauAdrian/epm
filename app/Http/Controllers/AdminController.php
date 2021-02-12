@@ -495,7 +495,7 @@ class AdminController extends Controller
         $result = [];
         $role = DB::table('roles')->where('name','Project Manager')->first();
         if ($role){
-            $pmos = DB::table('users')->where('role_id',$role->id)->get();
+            $pmos = DB::table('users')->where('role_id',$role->id)->orderBy('name')->get();
             if (!empty($pmos)){
                 foreach ($pmos as $pmo){
                     $result[]=$pmo;

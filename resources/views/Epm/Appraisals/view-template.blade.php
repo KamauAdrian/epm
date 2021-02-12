@@ -2,6 +2,20 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <style>
+        .table-cont {
+            max-width: 100%;
+            max-height: 280px;
+            overflow: auto;
+        }
+        .table-cont .table {
+            min-width: 600px;
+        }
+        .table-cont .table thead tr th {
+            position: sticky; top: 0;
+            background: #1a202c;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -206,6 +220,9 @@
     <script src="{{url('assets/dist/axios.js')}}"></script>
     {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
+        // $(document).ready(function(){
+        //     $('.table-responsive').doubleScroll();
+        // });
         var i = 0;
         $(document).on("click", "#addActivity", function(){
             i++
