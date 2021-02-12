@@ -26,7 +26,7 @@ class CreatePassword
             return $next($request);
         }elseif($user && $user->password!=null){
             Auth::logout();
-            return redirect('/')->with('success','Account Already Activated');
+            return redirect('/')->with('success','Account Already Active Please Login or Request Forgot Password');
         }else{
             return redirect('/')->with('error','Sorry User Not Recognized');
         }
