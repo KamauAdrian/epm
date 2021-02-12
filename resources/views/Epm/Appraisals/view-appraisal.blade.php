@@ -112,14 +112,18 @@
                                         <tr>
                                             <td>1</td>
                                             <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
-                                            <td><input type="text" name="self_score[]" value="{{$self_scores[0]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[0]->self_comment}}</textarea>
+                                                {!! $self_scores[0]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($self_scores[0]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[0]->supervisor_score}}" readonly></td>
                                                 <td>
-                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[0]->supervisor_comment}}</textarea>
+                                                    {!! $supervisor_scores[0]->supervisor_score !!}
+                                                </td>
+                                                <td>
+                                                    {!! nl2br(e($supervisor_scores[0]->supervisor_comment)) !!}
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -131,14 +135,18 @@
                                         <tr>
                                             <td>2</td>
                                             <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  value="{{$self_scores[1]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[1]->self_comment}}</textarea>
+                                                {!! $self_scores[1]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($self_scores[1]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td><input type="text" name="supervisor_score[]"  value="{{$supervisor_scores[1]->supervisor_score}}" readonly></td>
                                                 <td>
-                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[1]->supervisor_comment}}</textarea>
+                                                    {!! $supervisor_scores[1]->supervisor_score !!}
+                                                </td>
+                                                <td>
+                                                    {!! nl2br(e($supervisor_scores[1]->supervisor_comment)) !!}
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -150,14 +158,18 @@
                                         <tr>
                                             <td>3</td>
                                             <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
-                                            <td><input type="text" name="self_score[]" value="{{$self_scores[2]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[2]->self_comment}}</textarea>>
+                                                {!! $self_scores[2]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($self_scores[2]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[2]->supervisor_score}}" readonly></td>
                                                 <td>
-                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[2]->supervisor_comment}}</textarea>
+                                                    {!! $supervisor_scores[2]->supervisor_score !!}
+                                                </td>
+                                                <td>
+                                                    {!! nl2br(e($supervisor_scores[2]->supervisor_comment)) !!}
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -169,14 +181,18 @@
                                         <tr>
                                             <td>4</td>
                                             <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
-                                            <td><input type="text" name="self_score[]" value="{{$self_scores[3]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[3]->self_comment}}</textarea>
+                                                {!! $self_scores[3]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($self_scores[3]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[3]->supervisor_score}}" readonly></td>
                                                 <td>
-                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[3]->supervisor_comment}}</textarea>
+                                                    {!! $supervisor_scores[3]->supervisor_score !!}
+                                                </td>
+                                                <td>
+                                                    {!! nl2br(e($supervisor_scores[3]->supervisor_comment)) !!}
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>
@@ -188,14 +204,18 @@
                                         <tr>
                                             <td>5</td>
                                             <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
-                                            <td><input type="text" name="self_score[]" value="{{$self_scores[4]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="" id="" cols="30" rows="5" readonly>{{$self_scores[4]->self_comment}}</textarea>
+                                                {!! $self_scores[4]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($self_scores[4]->self_comment)) !!}
                                             </td>
                                             @if($supervisor_scores)
-                                                <td><input type="text" name="supervisor_score[]" value="{{$supervisor_scores[4]->supervisor_score}}" readonly></td>
                                                 <td>
-                                                    <textarea name="" id="" cols="30" rows="5" readonly>{{$supervisor_scores[4]->supervisor_comment}}</textarea>
+                                                    {!! $supervisor_scores[4]->supervisor_score !!}
+                                                </td>
+                                                <td>
+                                                    {!! nl2br(e($supervisor_scores[4]->supervisor_comment)) !!}
                                                 </td>
                                             @else
                                                 <td><input type="text" name="supervisor_score[]" readonly></td>

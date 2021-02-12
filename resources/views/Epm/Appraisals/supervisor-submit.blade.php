@@ -113,9 +113,11 @@
                                         <tr>
                                             <td>2</td>
                                             <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
-                                            <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[1]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[1]->self_comment}}</textarea>
+                                                {!! $scores[1]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($scores[1]->self_comment)) !!}
                                             </td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
                                             <td>
@@ -127,9 +129,11 @@
                                         <tr>
                                             <td>3</td>
                                             <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[2]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[2]->self_comment}}</textarea>
+                                                {!! $scores[2]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($scores[2]->self_comment)) !!}
                                             </td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
                                             <td>
@@ -141,9 +145,11 @@
                                         <tr>
                                             <td>4</td>
                                             <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[3]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[3]->self_comment}}</textarea>
+                                                {!! $scores[3]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($scores[3]->self_comment)) !!}
                                             </td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
                                             <td>
@@ -155,9 +161,11 @@
                                         <tr>
                                             <td>5</td>
                                             <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[4]->self_score}}" readonly></td>
                                             <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly>{{$scores[4]->self_comment}}</textarea>
+                                                {!! $scores[4]->self_score !!}
+                                            </td>
+                                            <td>
+                                                {!! nl2br(e($scores[4]->self_comment)) !!}
                                             </td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
                                             <td>
