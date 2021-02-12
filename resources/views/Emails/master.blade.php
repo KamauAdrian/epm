@@ -213,7 +213,7 @@ body {font-family: 'Chivo', sans-serif;}
                                                                                                     <tbody>
                                                                                                     <tr>
                                                                                                         <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
-                                                                                                            <div><div style="font-family: inherit; text-align: center">@yield('title')</div><div></div></div>
+                                                                                                            <div><div style="font-family: inherit; text-align: center">@yield('title','Hi There')</div><div></div></div>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     </tbody>

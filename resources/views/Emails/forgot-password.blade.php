@@ -1,28 +1,23 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<?php
-$id = $data['user_id'];
-$token = '';
-$split_token = explode('/',$data['session_verification']);
-if (count($split_token)>1){
-    $token = $split_token[0];
-}else{
-    $token = $data['session_verification'];
-}
-?>
-<h2>
-    Hi {{$data['name']}}, <br>
-</h2>
-<h4>
-    <a href="{{url('/'.$token.'/'.$id)}}"> Click here to reset your password</a>
-</h4>
-</body>
-</html>
+@extends('Emails.master')
+
+@section('title','Hi '.$data['name'])
+
+@section('content')
+    <?php
+    $id = $data['user_id'];
+    $token = '';
+    $split_token = explode('/',$data['session_verification']);
+    if (count($split_token)>1){
+        $token = $split_token[0];
+    }else{
+        $token = $data['session_verification'];
+    }
+    ?>
+    <p>Follow The Instruction Below To Reset a Password For Your Account
+    </p><br>
+    <a href="{{url('/'.$token.'/'.$id)}}" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Reset Password</a>
+    <h4>
+        <a href=""> Click here to reset your password</a>
+    </h4>
+@endsection
+
