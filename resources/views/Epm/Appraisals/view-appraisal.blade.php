@@ -98,13 +98,13 @@
                                         <th colspan="6"><h3>Note: (Refer to KPI’s Document when filling this Appraisal)</h3></th>
                                     </tr>
                                     <tr>
-                                        <th><b>Item</b></th>
-                                        <th><b>Measure - <br>
-                                                Key Performance Indicator</b></th>
-                                        <th><b>Self Score (%)</b></th>
-                                        <th><b>Your comment</b></th>
-                                        <th><b>Supervisor Score (%)</b></th>
-                                        <th><b>Supervisor  comment</b></th>
+                                        <th><h6>Item</h6></th>
+                                        <th><h6>Measure - <br>
+                                                Key Performance Indicator</h6></th>
+                                        <th><h6>Self Score (%)</h6></th>
+                                        <th><h6>Your comment</h6></th>
+                                        <th><h6>Supervisor Score (%)</h6></th>
+                                        <th><h6>Supervisor  comment</h6></th>
                                     </tr>
                                     </thead>
                                     <tbody>
