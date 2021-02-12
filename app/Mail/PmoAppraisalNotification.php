@@ -16,7 +16,7 @@ class PmoAppraisalNotification extends Mailable
      *
      * @return void
      */
-    public $pmo;
+    public $data;
 
     public function __construct($pmo)
     {
