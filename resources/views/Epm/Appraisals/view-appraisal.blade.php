@@ -245,7 +245,7 @@
                                         <td colspan="6">{!! nl2br(e($appraisal->pmo_overall_comment)) !!}</td>
                                     </tr>
                                     <tr>
-                                        <td><h6>Signature:</h6></td>
+                                        <td><h6>Initials:</h6></td>
                                         <td colspan="2">{!! $appraisal->pmo_signature !!}</td>
                                         <td><h6>Date</h6></td>
                                         <td colspan="2">
@@ -292,7 +292,7 @@
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td><h6>Signature:</h6></td>
+                                        <td><h6>Initials:</h6></td>
                                         @if($supervisor->supervisor_signature)
                                             <td colspan="2">
                                                 {!! $supervisor->supervisor_signature !!}
