@@ -180,15 +180,15 @@ class AppraisalController extends Controller
                     $new_supervisor->appraisal_id = $appraisal->id;
                     $supervisor_saved = $new_supervisor->save();
                     if ($supervisor_saved){
-                        $supervisor_email = $new_supervisor->supervisor_email;
                         $pmo_supervisor = [
                             'user_id'=>$new_supervisor->id,
                             'name'=>$new_supervisor->supervisor,
                             'email'=>$new_supervisor->supervisor_email,
                         ];
 
-                        dd($pmo_supervisor);
-                        Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
+                        $supervisor_email = $pmo_supervisor['email'];
+                        $res=Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
+                        dd($res);
                     }
                 }
             }
