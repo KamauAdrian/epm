@@ -20,12 +20,15 @@ class CreatePassword
     public function handle(Request $request, Closure $next)
     {
         $id = $request->route('id');
-        $user = DB::table('users')->where('id',$id)->first();
-        if($user->password==null){
+//        $user = DB::table('users')->where('id',$id)->first();
+        $user = User::find($id);
+        if($user && $user->password==null){
             return $next($request);
-        }else{
+        }elseif($user && $user->password!=null){
             Auth::logout();
             return redirect('/');
+        }else{
+            return redirect('/')->with('error','Sorry User Not Recognized');
         }
 
     }
