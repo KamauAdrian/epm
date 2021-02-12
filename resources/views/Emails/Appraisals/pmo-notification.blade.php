@@ -1,30 +1,12 @@
+@extends('Emails.master')
 
+@section('title','Hi '.$data['name'])
 
+@section('content')
 
+    <p>
+        Please log in to your account and submit your performance appraisal
+    </p><br>
 
+@endsection
 
-
-
-
-
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h2>
-    Hi {{$data['name']}},
-</h2>
-<p>
-    Please log in to your account<br />
-    and submit your performance appraisal <br>
-</p>
-
-</body>
-</html>

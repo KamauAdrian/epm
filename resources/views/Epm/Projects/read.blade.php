@@ -2,6 +2,16 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <style>
+        .table-responsive{
+            max-height: 100vh;
+            max-width: 100%;
+            overflow: auto;
+        }
+        a .card :hover{
+            background-color: #edf2f7;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -53,69 +63,71 @@
                                         <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
                                         @foreach($tasks as $task)
                                             <div class="row">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="float-right">
-                                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/task/task_id='.$task->id)}}">
-                                                                        <button type="button" class="btn d-block btn-outline-info mb-4">View Task</button>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <form action="#!">
+                                                <a href="#!">
+                                                    <div class="card rounded" style="color: #7E858E">
+                                                        <div class="card-body">
+                                                            <div class="row">
                                                                 <?php
-                                                                $assignees = \App\Models\Task::find($task->id)->assignees;
-                                                                $assignees_ids = [];
-                                                                $assignees_names = [];
-                                                                foreach ($assignees as $assignee){
-                                                                    $assignees_ids[] = $assignee->id;
-                                                                    $assignees_names[] = $assignee->name;
-                                                                }
-
-                                                                if (count($assignees_names)>1){
-                                                                    $names = implode(',',$assignees_names);
-                                                                }else{
-                                                                    $names = $assignees_names;
+                                                                $single_task = \App\Models\Task::find($task->id);
+                                                                dd($single_task->assignees);
+                                                                $avatar_icon_name = '';
+                                                                if ($assignees){
+                                                                    foreach ($assignees as $assignee){
+                                                                        $split_name = explode(' ',$assignee->name);
+                                                                        if (count($split_name)>1){
+                                                                            $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                                                                        }else{
+                                                                            $avatar_icon_name = substr($assignee->name,0,1);
+                                                                        }
+                                                                    }
                                                                 }
                                                                 ?>
                                                                 <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label>Task Name</label>
-                                                                        <input style="width: auto" type="text" class="form-control" name="name" value="{{$task->name}}" placeholder="Project One" readonly>
-                                                                    </div>
+                                                                    {{$task->name}}
                                                                 </div>
-                                                                {{--                                                            <div class="col-md-12">--}}
-                                                                {{--                                                                <div class="form-group">--}}
-                                                                {{--                                                                    <label>Task Assignees</label>--}}
-                                                                {{--                                                                    <input style="width: auto" type="text" class="form-control" name="name" value="{{$names}}" placeholder="Project One" readonly>--}}
-                                                                {{--                                                                </div>--}}
-                                                                {{--                                                            </div>--}}
-                                                                {{--                                                            <div class="col-md-12">--}}
-                                                                {{--                                                                <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">--}}
-                                                                {{--                                                                    <label>Assignee</label>--}}
-                                                                {{--                                                                    <multiselect v-model="selectedPmo" :options="pmos"--}}
-                                                                {{--                                                                                 placeholder="Search" track-by="id" label="name"--}}
-                                                                {{--                                                                                 :searchable="true" :close-on-select="true" multiple>--}}
-                                                                {{--                                                                    </multiselect>--}}
-                                                                {{--                                                                    <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">--}}
-                                                                {{--                                                                </div>--}}
-                                                                {{--                                                            </div>--}}
                                                                 <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label>Task Due Date</label>
-                                                                        <input style="width: auto" type="date" class="form-control" value="{{$task->due_date}}" name="due_date" readonly>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <span class="avtar" >{{$avatar_icon_name}}</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            {{$task->due_date}}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                {{--                                                            <div class="form-group float-right">--}}
-                                                                {{--                                                                <input class="btn btn-outline-primary" type="submit" value="Add Task">--}}
-                                                                {{--                                                            </div>--}}
-                                                            </form>
+                                                                {{--                                                            <form action="#!">--}}
+                                                                {{--                                                                <?php--}}
+                                                                {{--                                                                $assignees = \App\Models\Task::find($task->id)->assignees;--}}
+                                                                {{--                                                                $assignees_ids = [];--}}
+                                                                {{--                                                                $assignees_names = [];--}}
+                                                                {{--                                                                foreach ($assignees as $assignee){--}}
+                                                                {{--                                                                    $assignees_ids[] = $assignee->id;--}}
+                                                                {{--                                                                    $assignees_names[] = $assignee->name;--}}
+                                                                {{--                                                                }--}}
+
+                                                                {{--                                                                if (count($assignees_names)>1){--}}
+                                                                {{--                                                                    $names = implode(',',$assignees_names);--}}
+                                                                {{--                                                                }else{--}}
+                                                                {{--                                                                    $names = $assignees_names;--}}
+                                                                {{--                                                                }--}}
+                                                                {{--                                                                ?>--}}
+                                                                {{--                                                                <div class="col-md-12">--}}
+                                                                {{--                                                                    <div class="form-group">--}}
+                                                                {{--                                                                        <label>Task Name</label>--}}
+                                                                {{--                                                                        <input style="width: auto" type="text" class="form-control" name="name" value="{{$task->name}}" placeholder="Project One" readonly>--}}
+                                                                {{--                                                                    </div>--}}
+                                                                {{--                                                                </div>--}}
+                                                                {{--                                                                <div class="col-md-12">--}}
+                                                                {{--                                                                    <div class="form-group">--}}
+                                                                {{--                                                                        <label>Task Due Date</label>--}}
+                                                                {{--                                                                        <input style="width: auto" type="date" class="form-control" value="{{$task->due_date}}" name="due_date" readonly>--}}
+                                                                {{--                                                                    </div>--}}
+                                                                {{--                                                                </div>--}}
+                                                                {{--                                                            </form>--}}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
                                         @endforeach
                                         <div class="row">
