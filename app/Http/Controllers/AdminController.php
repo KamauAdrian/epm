@@ -325,9 +325,10 @@ class AdminController extends Controller
     }
 
     public function reset_password($token,$id){
+
         $admin_user = DB::table('users')->where('id',$id)->first();
         $genuine_request = DB::table('password_resets')->where('email',$admin_user->email)->orderBy('created_at','desc')->first();
-        if ($genuine_request) {
+        if ($admin_user && $genuine_request) {
             date_default_timezone_set("Africa/Nairobi");
             $date_time_now = strtotime(date('Y-m-d H:i:s'));
             $date_time_request = strtotime($genuine_request->created_at);
@@ -346,7 +347,7 @@ class AdminController extends Controller
                 return redirect('/')->with('error', 'Sorry Reset Password Page Expired Please Send New Forgot Password Request');
             }
         }else{
-            return redirect('/');
+            return redirect('/')->with('error','Sorry User Not Recognized');
         }
     }
 
