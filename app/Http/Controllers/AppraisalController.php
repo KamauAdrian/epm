@@ -186,6 +186,8 @@ class AppraisalController extends Controller
                             'name'=>$new_supervisor->supervisor,
                             'email'=>$new_supervisor->supervisor_email,
                         ];
+
+                        dd($pmo_supervisor);
                         Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
                     }
                 }
