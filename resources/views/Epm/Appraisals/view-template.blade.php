@@ -91,60 +91,50 @@
                                         <tr>
                                             <td>1</td>
                                             <td>{!! nl2br(e($template->question_one)) !!}</td>
-                                            <td><input type="text" placeholder="" readonly></td>
-                                            <td><input type="text"  readonly></td>
-                                            <td><input type="text" name="supervisor_score[]" placeholder="" readonly></td>
-                                            <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea>
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endif
                                     @if($template->question_two)
                                         <tr>
                                             <td>2</td>
                                             <td>{!! nl2br(e($template->question_two)) !!}</td>
-                                            <td><input type="text" readonly></td>
-                                            <td><input type="text"  readonly></td>
-                                            <td><input type="text" name="supervisor_score[]" placeholder="" readonly></td>
-                                            <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea>
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endif
                                     @if($template->question_three)
                                         <tr>
                                             <td>3</td>
                                             <td>{!! nl2br(e($template->question_three)) !!}</td>
-                                            <td><input type="text"  readonly></td>
-                                            <td><input type="text"  readonly></td>
-                                            <td><input type="text" name="supervisor_score[]"  placeholder="" readonly></td>
-                                            <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea>
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endif
                                     @if($template->question_four)
                                         <tr>
                                             <td>4</td>
                                             <td>{!! nl2br(e($template->question_four)) !!}</td>
-                                            <td><input type="text" readonly></td>
-                                            <td><input type="text" readonly></td>
-                                            <td><input type="text" name="supervisor_score[]"  placeholder="" readonly></td>
-                                            <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea>
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endif
                                     @if($template->question_five)
                                         <tr>
                                             <td>5</td>
                                             <td>{!! nl2br(e($template->question_five)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  readonly></td>
-                                            <td><input type="text" name="self_comment[]" readonly></td>
-                                            <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
-                                            <td>
-                                                <textarea name="supervisor_comment[]" id="" cols="30" rows="5" required></textarea>
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endif
                                     <tr>
@@ -155,19 +145,13 @@
                                         <td colspan="6">Individual’s overall comments:</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">
-                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" readonly></textarea>
-                                        </td>
+                                        <td colspan="6"></td>
                                     </tr>
                                     <tr>
                                         <td>Initials:</td>
-                                        <td colspan="2">
-                                            <input type="text" name="self_signature" readonly>
-                                        </td>
+                                        <td colspan="2"></td>
                                         <td >Date</td>
-                                        <td colspan="2">
-                                            <input type="date" name="self_sign_date" readonly>
-                                        </td>
+                                        <td colspan="2"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
@@ -178,27 +162,19 @@
                                         <td colspan="6">Areas that Need Improvement/ Development (to be filled by Supervisor)</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">
-                                            <textarea name="improvement_areas" cols="100%" rows="5" readonly></textarea>
-                                        </td>
+                                        <td colspan="6"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">Supervisor’s overall comments:</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">
-                                            <textarea name="supervisor_overall_comment" id="" cols="100%" rows="5" readonly></textarea>
-                                        </td>
+                                        <td colspan="6"></td>
                                     </tr>
                                     <tr>
                                         <td>Initials:</td>
-                                        <td colspan="2">
-                                            <input type="text" name="supervisor_signature" readonly>
-                                        </td>
+                                        <td colspan="2"></td>
                                         <td >Date</td>
-                                        <td colspan="2">
-                                            <input type="date" name="supervisor_sign_date" readonly>
-                                        </td>
+                                        <td colspan="2"></td>
                                     </tr>
                                     </tbody>
                                 </table>

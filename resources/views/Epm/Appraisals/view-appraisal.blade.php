@@ -126,8 +126,8 @@
                                                     {!! nl2br(e($supervisor_scores[0]->supervisor_comment)) !!}
                                                 </td>
                                             @else
-                                                <td><input type="text" name="supervisor_score[]" readonly></td>
-                                                <td><textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea></td>
+                                                <td></td>
+                                                <td></td>
                                             @endif
                                         </tr>
                                     @endif
@@ -149,8 +149,8 @@
                                                     {!! nl2br(e($supervisor_scores[1]->supervisor_comment)) !!}
                                                 </td>
                                             @else
-                                                <td><input type="text" name="supervisor_score[]" readonly></td>
-                                                <td><textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea></td>
+                                                <td></td>
+                                                <td></td>
                                             @endif
                                         </tr>
                                     @endif
@@ -172,8 +172,8 @@
                                                     {!! nl2br(e($supervisor_scores[2]->supervisor_comment)) !!}
                                                 </td>
                                             @else
-                                                <td><input type="text" name="supervisor_score[]" readonly></td>
-                                                <td><textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea></td>
+                                                <td></td>
+                                                <td></td>
                                             @endif
                                         </tr>
                                     @endif
@@ -195,8 +195,8 @@
                                                     {!! nl2br(e($supervisor_scores[3]->supervisor_comment)) !!}
                                                 </td>
                                             @else
-                                                <td><input type="text" name="supervisor_score[]" readonly></td>
-                                                <td><textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea></td>
+                                                <td></td>
+                                                <td></td>
                                             @endif
                                         </tr>
                                     @endif
@@ -218,10 +218,8 @@
                                                     {!! nl2br(e($supervisor_scores[4]->supervisor_comment)) !!}
                                                 </td>
                                             @else
-                                                <td><input type="text" name="supervisor_score[]" readonly></td>
-                                                <td>
-                                                    <textarea name="supervisor_comment[]" id="" cols="30" rows="5" readonly></textarea>
-                                                </td>
+                                                <td></td>
+                                                <td></td>
                                             @endif
                                         </tr>
                                     @endif
@@ -233,18 +231,14 @@
                                         <td colspan="6">Individual’s overall comments:</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">
-                                            <textarea name="" id="" cols="100%" rows="3" readonly>{{$appraisal->pmo_overall_comment}}</textarea>
-                                        </td>
+                                        <td colspan="6">{!! nl2br(e($appraisal->pmo_overall_comment)) !!}</td>
                                     </tr>
                                     <tr>
                                         <td>Signature:</td>
-                                        <td colspan="2">
-                                            <input type="text" name="" value="{{$appraisal->pmo_signature}}" readonly>
-                                        </td>
+                                        <td colspan="2">{!! $appraisal->pmo_signature !!}</td>
                                         <td >Date</td>
                                         <td colspan="2">
-                                            <input type="date" name="self_sign_date" value="{{$appraisal->pmo_sign_date}}" style="border: none;" readonly>
+                                            {!! $appraisal->pmo_sign_date !!}
                                         </td>
                                     </tr>
                                     <tr>
@@ -258,12 +252,10 @@
                                     <tr>
                                         @if($supervisor->improvement_areas)
                                             <td colspan="6">
-                                                <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->improvement_areas}}</textarea>
+                                                {!! nl2br(e($supervisor->improvement_areas)) !!}
                                             </td>
                                         @else
-                                            <td colspan="6">
-                                                <textarea name="" id="" cols="100%" rows="5" readonly></textarea>
-                                            </td>
+                                            <td colspan="6"></td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -272,34 +264,28 @@
                                     <tr>
                                         @if($supervisor->supervisor_overall_comment)
                                             <td colspan="6">
-                                                <textarea name="" id="" cols="100%" rows="5" readonly>{{$supervisor->supervisor_overall_comment}}</textarea>
+                                                {!! nl2br(e($supervisor->supervisor_overall_comment)) !!}
                                             </td>
                                         @else
-                                            <td colspan="6">
-                                                <textarea name="" id="" cols="100%" rows="5" readonly></textarea>
-                                            </td>
+                                            <td colspan="6"></td>
                                         @endif
                                     </tr>
                                     <tr>
                                         <td>Signature:</td>
                                         @if($supervisor->supervisor_signature)
                                             <td colspan="2">
-                                                <input type="text" name="" value="{{$supervisor->supervisor_signature}}" readonly>
+                                                {!! $supervisor->supervisor_signature !!}
                                             </td>
                                         @else
-                                            <td colspan="2">
-                                                <input type="text" name="" value="" readonly>
-                                            </td>
+                                            <td colspan="2"></td>
                                         @endif
                                         <td >Date</td>
                                         @if($supervisor->supervisor_sign_date)
                                             <td colspan="2">
-                                                <input type="date" name="supervisor_sign_date" value="{{$supervisor->supervisor_sign_date}}" style="border: none;" readonly>
+                                                {!! $supervisor->supervisor_sign_date !!}
                                             </td>
                                         @else
-                                            <td colspan="2">
-                                                <input type="date" name="supervisor_sign_date" value="" style="border: none;" readonly>
-                                            </td>
+                                            <td colspan="2"></td>
                                         @endif
                                     </tr>
                                     </tbody>
