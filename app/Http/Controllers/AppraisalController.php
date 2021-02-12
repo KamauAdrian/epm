@@ -130,7 +130,6 @@ class AppraisalController extends Controller
      */
     public function store(Request $request,$id)
     {
-//                dd($request->all());
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
             $messages = [
@@ -190,7 +189,7 @@ class AppraisalController extends Controller
                 }
                 Mail::to($pmo_email)->send(new PmoAppraisalNotification($data));
             }
-            return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance AppraisalController Report Created Successfully');
+            return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance Appraisal Report Created Successfully');
         }
     }
 

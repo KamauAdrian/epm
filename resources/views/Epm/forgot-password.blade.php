@@ -10,7 +10,7 @@
             <input type="email" name="email" class="form-control" placeholder="Enter your Email Address">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block mb-4">Request New Password</button>
+            <button type="submit" class="btn btn-outline-info mb-4">Request New Password</button>
         </div>
     </form>
 @endsection

@@ -80,7 +80,7 @@
                                     @if($template->question_one)
                                         <tr>
                                             <td>1</td>
-                                            <td>{{$template->question_one}}</td>
+                                            <td>{!! nl2br(e($template->question_one)) !!}</td>
                                             <td><input type="text" placeholder="" readonly></td>
                                             <td><input type="text"  readonly></td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" readonly></td>
@@ -92,7 +92,7 @@
                                     @if($template->question_two)
                                         <tr>
                                             <td>2</td>
-                                            <td>{{$template->question_two}}</td>
+                                            <td>{!! nl2br(e($template->question_two)) !!}</td>
                                             <td><input type="text" readonly></td>
                                             <td><input type="text"  readonly></td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" readonly></td>
@@ -104,7 +104,7 @@
                                     @if($template->question_three)
                                         <tr>
                                             <td>3</td>
-                                            <td>{{$template->question_three}}</td>
+                                            <td>{!! nl2br(e($template->question_three)) !!}</td>
                                             <td><input type="text"  readonly></td>
                                             <td><input type="text"  readonly></td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" readonly></td>
@@ -116,7 +116,7 @@
                                     @if($template->question_four)
                                         <tr>
                                             <td>4</td>
-                                            <td>{{$template->question_four}}</td>
+                                            <td>{!! nl2br(e($template->question_four)) !!}</td>
                                             <td><input type="text" readonly></td>
                                             <td><input type="text" readonly></td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" readonly></td>
@@ -128,7 +128,7 @@
                                     @if($template->question_five)
                                         <tr>
                                             <td>5</td>
-                                            <td>{{$template->question_five}}</td>
+                                            <td>{!! nl2br(e($template->question_five)) !!}</td>
                                             <td><input type="text" name="self_score[]"  readonly></td>
                                             <td><input type="text" name="self_comment[]" readonly></td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>

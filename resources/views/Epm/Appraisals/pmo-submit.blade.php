@@ -84,7 +84,7 @@
                                     @if($appraisal->question_one)
                                         <tr>
                                             <td>1</td>
-                                            <td>{{$appraisal->question_one}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_one))!!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -94,7 +94,7 @@
                                     @if($appraisal->question_two)
                                         <tr>
                                             <td>2</td>
-                                            <td>{{$appraisal->question_two}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -104,7 +104,7 @@
                                     @if($appraisal->question_three)
                                         <tr>
                                             <td>3</td>
-                                            <td>{{$appraisal->question_three}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -114,7 +114,7 @@
                                     @if($appraisal->question_four)
                                         <tr>
                                             <td>4</td>
-                                            <td>{{$appraisal->question_four}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
@@ -124,7 +124,7 @@
                                     @if($appraisal->question_five)
                                         <tr>
                                             <td>5</td>
-                                            <td>{{$appraisal->question_five}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>

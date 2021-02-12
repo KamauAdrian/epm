@@ -86,7 +86,7 @@
                                     @if($appraisal->question_one)
                                         <tr>
                                             <td>1</td>
-                                            <td>{{$appraisal->question_one}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
                                             <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[0]->self_score}}" readonly></td>
                                             <td><input type="text" name="self_comment[]" value="{{$scores[0]->self_comment}}" readonly></td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
@@ -98,7 +98,7 @@
                                     @if($appraisal->question_two)
                                         <tr>
                                             <td>2</td>
-                                            <td>{{$appraisal->question_two}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
                                             <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[1]->self_score}}" readonly></td>
                                             <td><input type="text" name="self_comment[]" value="{{$scores[1]->self_comment}}" readonly></td>
                                             <td><input type="text" name="supervisor_score[]" placeholder="" required></td>
@@ -110,7 +110,7 @@
                                     @if($appraisal->question_three)
                                         <tr>
                                             <td>3</td>
-                                            <td>{{$appraisal->question_three}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[2]->self_score}}" readonly></td>
                                             <td><input type="text" name="self_comment[]" value="{{$scores[2]->self_comment}}" readonly></td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
@@ -122,7 +122,7 @@
                                     @if($appraisal->question_four)
                                         <tr>
                                             <td>4</td>
-                                            <td>{{$appraisal->question_four}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[3]->self_score}}" readonly></td>
                                             <td><input type="text" name="self_comment[]" value="{{$scores[3]->self_comment}}" readonly></td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
@@ -134,7 +134,7 @@
                                     @if($appraisal->question_five)
                                         <tr>
                                             <td>5</td>
-                                            <td>{{$appraisal->question_five}}</td>
+                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
                                             <td><input type="text" name="self_score[]"  placeholder="" value="{{$scores[4]->self_score}}" readonly></td>
                                             <td><input type="text" name="self_comment[]" value="{{$scores[4]->self_comment}}" readonly></td>
                                             <td><input type="text" name="supervisor_score[]"  placeholder="" required></td>
