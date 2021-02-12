@@ -225,29 +225,43 @@
                                     @endif
                                     <tr>
                                         <td></td>
-                                        <td colspan="5">Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</td>
+                                        <td colspan="5">
+                                            <h6>
+                                                Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.
+                                            </h6>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Individual’s overall comments:</td>
+                                        <td colspan="6">
+                                            <h6>
+                                                Individual’s overall comments:
+                                            </h6>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">{!! nl2br(e($appraisal->pmo_overall_comment)) !!}</td>
                                     </tr>
                                     <tr>
-                                        <td>Signature:</td>
+                                        <td><h6>Signature:</h6></td>
                                         <td colspan="2">{!! $appraisal->pmo_signature !!}</td>
-                                        <td >Date</td>
+                                        <td><h6>Date</h6></td>
                                         <td colspan="2">
                                             {!! $appraisal->pmo_sign_date !!}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            Your signature indicates that this Performance Review has been discussed with you and that you are in agreement with the rating awarded.
+                                            <h6>
+                                                Your signature indicates that this Performance Review has been discussed with you and that you are in agreement with the rating awarded.
+                                            </h6>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Areas that Need Improvement/ Development (to be filled by Supervisor)</td>
+                                        <td colspan="6">
+                                            <h6>
+                                                Areas that Need Improvement/ Development (to be filled by Supervisor)
+                                            </h6>
+                                        </td>
                                     </tr>
                                     <tr>
                                         @if($supervisor->improvement_areas)
@@ -259,7 +273,11 @@
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Supervisor’s overall comments:</td>
+                                        <td colspan="6">
+                                            <h6>
+                                                Supervisor’s overall comments:
+                                            </h6>
+                                        </td>
                                     </tr>
                                     <tr>
                                         @if($supervisor->supervisor_overall_comment)
@@ -271,7 +289,7 @@
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>Signature:</td>
+                                        <td><h6>Signature:</h6></td>
                                         @if($supervisor->supervisor_signature)
                                             <td colspan="2">
                                                 {!! $supervisor->supervisor_signature !!}
@@ -279,7 +297,7 @@
                                         @else
                                             <td colspan="2"></td>
                                         @endif
-                                        <td >Date</td>
+                                        <td><h6>Date</h6></td>
                                         @if($supervisor->supervisor_sign_date)
                                             <td colspan="2">
                                                 {!! $supervisor->supervisor_sign_date !!}

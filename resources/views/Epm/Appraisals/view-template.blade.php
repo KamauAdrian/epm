@@ -173,7 +173,7 @@
                                     <tr>
                                         <td>Initials:</td>
                                         <td colspan="2"></td>
-                                        <td >Date</td>
+                                        <td><h6>Date</h6></td>
                                         <td colspan="2"></td>
                                     </tr>
                                     </tbody>

@@ -272,7 +272,7 @@ class AppraisalController extends Controller
                 ];
                 Mail::to($supervisor->supervisor_email)->send(new SupervisorAppraisalSuperviseNotification($data));
             }
-            return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance AppraisalController Submitted Successfully');
+            return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Submitted Successfully');
         }
     }
 
