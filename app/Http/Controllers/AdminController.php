@@ -343,7 +343,7 @@ class AdminController extends Controller
             if ($token == $confirm_token && $time_diff <= 300) {
                 return view('Epm.reset-password', compact('admin_user'));
             } else {
-                return redirect('/')->with('error', 'Sorry reset Password Page expired please try again later');
+                return redirect('/')->with('error', 'Sorry Reset Password Page Expired Please Send New Forgot Password Request');
             }
         }else{
             return redirect('/');
