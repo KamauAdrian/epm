@@ -89,7 +89,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-6">
 {{--                                                                            <span class="avtar" >{{$avatar_icon_name}}</span>--}}
-                                                                            <span class="avtar" >{{$task->name}}</span>
+                                                                            {{$task->name}}
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             {{$task->due_date}}
