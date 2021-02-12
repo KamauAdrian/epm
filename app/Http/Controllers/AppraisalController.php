@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PmoAppraisalNotification;
+use App\Mail\PmoAppraisalSupervisedNotification;
 use App\Mail\PmoAppraisalSuperviseNotification;
 use App\Mail\SupervisorAppraisalNotification;
 use App\Mail\SupervisorAppraisalSuperviseNotification;
@@ -109,7 +110,13 @@ class AppraisalController extends Controller
                 $supervisor_report->supervisor_comment = $score['supervisor_comment'];
                 $supervisor_report->appraisal_id = $score['appraisal_id'];
                 $supervisor_report->supervisor_id = $id;
-                $supervisor_report->save();
+                $supervisor_report_saved = $supervisor_report->save();
+                if ($supervisor_report_saved){
+                    $pmo_supervised = [
+                      'name'=>$appraisal->pmo,
+                    ];
+                    Mail::to($appraisal->pmo_email)->send(new PmoAppraisalSupervisedNotification($pmo_supervised));
+                }
             }
         }
         return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance Appraisal Updated Successfully');
