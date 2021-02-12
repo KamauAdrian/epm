@@ -9,7 +9,7 @@
             <label>Email Address</label>
             <input type="email" name="email" class="form-control" placeholder="Enter your Email Address">
         </div>
-        <div class="form-group">
+        <div class="form-group text-center" >
             <button type="submit" class="btn btn-outline-info mb-4">Request New Password</button>
         </div>
     </form>
