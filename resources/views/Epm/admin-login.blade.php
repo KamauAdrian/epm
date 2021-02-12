@@ -28,7 +28,7 @@
         <input type="password" name="password" class="form-control">
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
+        <button type="submit" class="btn btn-outline-info btn-block mb-4">Log in</button>
     </div>
     <div class="form-group">
         <div class="row">
