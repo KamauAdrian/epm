@@ -14,7 +14,7 @@
             <span class="text-danger">{{$errors->first('password_confirmation')}}</span>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-outline-info mb-4">Activate Account</button>
+            <button type="submit" class="btn btn-outline-info btn-block mb-4">Activate Account</button>
         </div>
     </form>
 @endsection
