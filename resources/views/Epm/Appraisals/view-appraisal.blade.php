@@ -2,16 +2,26 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <style>
+        .table-responsive {
+            max-width: 100%;
+            max-height: 100vh;
+            overflow: auto !important;
+        }
+        .table-responsive .table {
+            min-width: 600px;
+        }
+        /*.formFixedTop{*/
+        /*    position: sticky;*/
+        /*    top: 0;*/
+        /*}*/
+    </style>
 @endsection
 
 @section('content')
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12" style="padding-left: 100px; padding-right: 100px">
-                <div class="text-center">
-                    <h1 class="f-w-400">YEAR 2020 PERFORMANCE APPRAISAL</h1>
-                </div>
-
                 <?php
                 $auth_admin = auth()->user();
                 $supervisor = \App\Models\AppraisalSupervisor::where('appraisal_id',$appraisal->id)->first();
@@ -44,30 +54,42 @@
                 <form action="#!" method="post">
                     @csrf
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->pmo}}" readonly>
+                        <div class="col-md-12 formFixedTop">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="text-center">
+                                            <h1 class="f-w-400">YEAR 2020 PERFORMANCE APPRAISAL</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->pmo}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="title" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->pmo_title}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Employee Number</label>
+                                        <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$appraisal->pmo_employee_number}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <input type="text" name="departmment" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$appraisal->pmo_department}}" readonly>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Title</label>
-                                <input type="text" name="title" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->pmo_title}}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Employee Number</label>
-                                <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$appraisal->pmo_employee_number}}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Department</label>
-                                <input type="text" name="departmment" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$appraisal->pmo_department}}" readonly>
-                            </div>
-                        </div>
+
                         <div class="col-sm-12">
                             <div class="table-responsive">
                                 <table class="table table-bordered">

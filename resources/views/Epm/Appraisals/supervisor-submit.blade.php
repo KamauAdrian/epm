@@ -2,6 +2,16 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <style>
+        .table-responsive {
+            max-width: 100%;
+            max-height: 100vh;
+            overflow: auto !important;
+        }
+        .table-responsive .table {
+            min-width: 600px;
+        }
+    </style>
 @endsection
 
 @section('content')

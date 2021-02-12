@@ -3,17 +3,13 @@
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
     <style>
-        .table-cont {
+        .table-responsive {
             max-width: 100%;
-            max-height: 280px;
-            overflow: auto;
+            max-height: 100vh;
+            overflow: auto !important;
         }
-        .table-cont .table {
+        .table-responsive .table {
             min-width: 600px;
-        }
-        .table-cont .table thead tr th {
-            position: sticky; top: 0;
-            background: #1a202c;
         }
     </style>
 @endsection
