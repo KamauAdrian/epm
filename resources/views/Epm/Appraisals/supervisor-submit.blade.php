@@ -97,7 +97,9 @@
                                         <tr>
                                             <td>1</td>
                                             <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
-                                            <td><input type="text" name="self_score[]" placeholder="" value="{{$scores[0]->self_score}}" readonly></td>
+                                            <td>
+                                                {!! $scores[0]->self_score !!}
+                                            </td>
                                             <td>
                                                 {!! nl2br(e($scores[0]->self_comment)) !!}
                                             </td>
