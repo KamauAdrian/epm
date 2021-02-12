@@ -182,17 +182,17 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" readonly>{{$appraisal->pmo_overall_comment}}</textarea>
+                                            {!! nl2br(e($appraisal->pmo_overall_comment)) !!}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Initials:</td>
                                         <td colspan="2">
-                                            <input type="text" name="self_signature" value="{{$appraisal->pmo_signature}}" readonly>
+                                            {!! $appraisal->pmo_signature !!}
                                         </td>
                                         <td >Date</td>
                                         <td colspan="2">
-                                            <input type="date" name="self_sign_date" value="{{$appraisal->pmo_sign_date}}" readonly>
+                                            {!! $appraisal->pmo_sign_date !!}
                                         </td>
                                     </tr>
                                     <tr>

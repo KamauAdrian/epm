@@ -112,7 +112,7 @@ class AppraisalController extends Controller
                 $supervisor_report->save();
             }
         }
-        return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance AppraisalController Updated Successfully');
+        return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance Appraisal Updated Successfully');
     }
 
     /**
