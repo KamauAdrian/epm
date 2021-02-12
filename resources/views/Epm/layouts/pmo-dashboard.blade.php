@@ -5,11 +5,14 @@
 @endsection
 
 @section('content')
+    <?php
+    $auth_admin = auth()->user();
+    ?>
     <div class="pcoded-content container">
         <!-- [ Main Content ] start -->
         <div class="row">
             <div class="col-sm-6">
-                <h2 class="font-weight-normal">Hi Ashoka, Welcome back!</h2>
+                <h2 class="font-weight-normal">Hi {{$auth_admin->name}}, Welcome back!</h2>
                 <p>Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit donec sed odio dui.</p>
                 <div id="dashboarddatepicker1" class="form-control d-inline-block w-auto mb-4">
                     <i class="feather icon-calendar"></i>&nbsp;
