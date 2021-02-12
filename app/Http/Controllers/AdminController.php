@@ -348,7 +348,6 @@ class AdminController extends Controller
         }else{
             return redirect('/');
         }
-
     }
 
     public function update_password(Request $request,$id){
