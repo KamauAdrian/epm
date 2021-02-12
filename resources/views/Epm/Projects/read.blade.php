@@ -71,16 +71,16 @@
                                                                 $single_task = \App\Models\Task::find($task->id);
 //                                                                dd($single_task->assignees);
                                                                 $avatar_icon_name = '';
-                                                                if ($assignees){
-                                                                    foreach ($assignees as $assignee){
-                                                                        $split_name = explode(' ',$assignee->name);
-                                                                        if (count($split_name)>1){
-                                                                            $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
-                                                                        }else{
-                                                                            $avatar_icon_name = substr($assignee->name,0,1);
-                                                                        }
-                                                                    }
-                                                                }
+//                                                                if ($assignees){
+//                                                                    foreach ($assignees as $assignee){
+//                                                                        $split_name = explode(' ',$assignee->name);
+//                                                                        if (count($split_name)>1){
+//                                                                            $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+//                                                                        }else{
+//                                                                            $avatar_icon_name = substr($assignee->name,0,1);
+//                                                                        }
+//                                                                    }
+//                                                                }
                                                                 ?>
                                                                 <div class="col-md-12">
                                                                     {{$task->name}}
