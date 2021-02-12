@@ -21,6 +21,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Exception;
 
 class AppraisalController extends Controller
 {
@@ -170,24 +171,40 @@ class AppraisalController extends Controller
                     'name'=>$appraisal->pmo,
                     'email'=>$appraisal->pmo_email,
                 ];
-                foreach ($supervisors as $supervisor){
-                    $new_supervisor = new AppraisalSupervisor();
-                    $new_supervisor->supervisor = $supervisor['name'];
-                    $new_supervisor->supervisor_email = $supervisor['email'];
-                    $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
-                    $new_supervisor->appraisal_id = $appraisal->id;
-                    $supervisor_saved = $new_supervisor->save();
-                    if ($supervisor_saved){
-                        $supervisor_email = $new_supervisor->supervisor_email;
-                        $data = [
-                            'user_id'=>$new_supervisor->id,
-                            'name'=>$new_supervisor->supervisor,
-                            'email'=>$new_supervisor->supervisor_email,
-                        ];
-                        Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($data));
+                try {
+                   if (Mail::to($pmo_email)->send(new PmoAppraisalNotification($data))==false){
+                       throw new \Exception();
+                   }
+                    foreach ($supervisors as $supervisor){
+                        $new_supervisor = new AppraisalSupervisor();
+                        $new_supervisor->supervisor = $supervisor['name'];
+                        $new_supervisor->supervisor_email = $supervisor['email'];
+                        $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
+                        $new_supervisor->appraisal_id = $appraisal->id;
+                        $supervisor_saved = $new_supervisor->save();
+                        if ($supervisor_saved){
+                            $supervisor_email = $new_supervisor->supervisor_email;
+                            $data = [
+                                'user_id'=>$new_supervisor->id,
+                                'name'=>$new_supervisor->supervisor,
+                                'email'=>$new_supervisor->supervisor_email,
+                            ];
+                            if (Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($data))==false){
+                                throw new \Exception();
+                            }
+                        }
                     }
+                }catch (\Exception $e){
+                    foreach ($supervisors as $supervisor){
+                        $new_supervisor = new AppraisalSupervisor();
+                        $new_supervisor->supervisor = $supervisor['name'];
+                        $new_supervisor->supervisor_email = $supervisor['email'];
+                        $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
+                        $new_supervisor->appraisal_id = $appraisal->id;
+                        $new_supervisor->save();
+                    }
+                    return redirect('/adm/'.$id.'/view/performance/appraisals');
                 }
-                Mail::to($pmo_email)->send(new PmoAppraisalNotification($data));
             }
             return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance Appraisal Report Created Successfully');
         }
