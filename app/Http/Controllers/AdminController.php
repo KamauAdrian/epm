@@ -327,24 +327,26 @@ class AdminController extends Controller
     public function reset_password($token,$id){
 
         $admin_user = DB::table('users')->where('id',$id)->first();
-        $genuine_request = DB::table('password_resets')->where('email',$admin_user->email)->orderBy('created_at','desc')->first();
-        if ($admin_user && $genuine_request) {
-            date_default_timezone_set("Africa/Nairobi");
-            $date_time_now = strtotime(date('Y-m-d H:i:s'));
-            $date_time_request = strtotime($genuine_request->created_at);
-            $time_diff = $date_time_now - $date_time_request;
-            $split_token = explode('/', $genuine_request->token);
-            $confirm_token = '';
-            if (count($split_token) > 1) {
-                $confirm_token = $split_token[0];
-            } else {
-                $confirm_token = $genuine_request->token;
-            }
+        if ($admin_user) {
+            $genuine_request = DB::table('password_resets')->where('email',$admin_user->email)->orderBy('created_at','desc')->first();
+            if ($genuine_request){
+                date_default_timezone_set("Africa/Nairobi");
+                $date_time_now = strtotime(date('Y-m-d H:i:s'));
+                $date_time_request = strtotime($genuine_request->created_at);
+                $time_diff = $date_time_now - $date_time_request;
+                $split_token = explode('/', $genuine_request->token);
+                $confirm_token = '';
+                if (count($split_token) > 1) {
+                    $confirm_token = $split_token[0];
+                } else {
+                    $confirm_token = $genuine_request->token;
+                }
 //        dd($genuine_request->token,$confirm_token,$time_diff,$date_time_now,$date_time_request);
-            if ($token == $confirm_token && $time_diff <= 300) {
-                return view('Epm.reset-password', compact('admin_user'));
-            } else {
-                return redirect('/')->with('error', 'Sorry Reset Password Page Expired Please Send New Forgot Password Request');
+                if ($token == $confirm_token && $time_diff <= 300) {
+                    return view('Epm.reset-password', compact('admin_user'));
+                } else {
+                    return redirect('/')->with('error', 'Sorry Reset Password Page Expired Please Send New Forgot Password Request');
+                }
             }
         }else{
             return redirect('/')->with('error','Sorry User Not Recognized');
