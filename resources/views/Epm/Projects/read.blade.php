@@ -140,7 +140,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>Name</label>
-                                                                <input style="width: auto" type="text" class="form-control" name="name" placeholder="Project One" required>
+                                                                <input style="width: auto" type="text" class="form-control" name="name" placeholder="Task One" required>
                                                                 <span class="text-danger">{{$errors->first('name')}}</span>
                                                             </div>
                                                         </div>
@@ -182,7 +182,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="Project One">
+                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="Project One" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group float-right">
