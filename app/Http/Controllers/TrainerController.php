@@ -79,11 +79,9 @@ class TrainerController extends Controller
                 $new_trainer->county=$trainer[5];
                 $new_trainer->is_admin=1;
                 $new_trainer->role_id=$new_trainer_role;
-//                $saved_trainer = $new_trainer->save();
             try {
-
                 if ($new_trainer->save()==false){
-                    throw new \Exception('An error occurred when uploading trainers');
+                    throw new \Exception();
                 }else{
                     $data = [
                         'user_id'=>$new_trainer->id,
@@ -91,14 +89,13 @@ class TrainerController extends Controller
                         'email'=>$new_trainer->email,
                         'phone'=>$new_trainer->phone,
                     ];
-                    if (User::sendNewUserEmail($new_trainer->email,$data)==false){
-                        throw new \Exception();
-                    }
+                    //send Email invite
+                    User::sendNewUserEmail($new_trainer->email,$data);
                 }
 
             }catch (\Exception $eu){
                 if ($eu){
-                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error',$eu->getMessage());
+                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Trainers Not Uploaded Please Confirm no Duplicate Entries in Your Excel File');
                 }
                 return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers Successfully Uploaded');
             }
