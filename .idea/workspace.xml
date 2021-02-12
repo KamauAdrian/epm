@@ -15,8 +15,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-assignment-submission-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-assignment-submission-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +282,8 @@
       <workItem from="1612929999772" duration="32480000" />
       <workItem from="1612975786167" duration="4498000" />
       <workItem from="1613015537717" duration="28974000" />
-      <workItem from="1613047105753" duration="5046000" />
+      <workItem from="1613047105753" duration="7418000" />
+      <workItem from="1613103333308" duration="4089000" />
     </task>
     <servers />
   </component>
@@ -318,10 +319,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1610542790890" />
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1612876862828">
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613104950125">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1612876862828" />
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1613104950125" />
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606914575160">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -79,28 +79,30 @@ class TrainerController extends Controller
                 $new_trainer->county=$trainer[5];
                 $new_trainer->is_admin=1;
                 $new_trainer->role_id=$new_trainer_role;
-                $saved_trainer = $new_trainer->save();
-//            try {
-//
-//            }catch (\Exception $eu){}
-                if ($saved_trainer){
+//                $saved_trainer = $new_trainer->save();
+            try {
+
+                if ($new_trainer->save()==false){
+                    throw new \Exception('An error occurred when uploading trainers');
+                }else{
                     $data = [
                         'user_id'=>$new_trainer->id,
                         'name'=>$new_trainer->name,
                         'email'=>$new_trainer->email,
                         'phone'=>$new_trainer->phone,
                     ];
-//                    try {
-//
-//                    }
-//                    catch(\Exception $em){
-//                        if ($em){
-//                            return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Email invites not sent to new trainers');
-//                        }
-//                    }
-
-                    Mail::to($new_trainer->email)->send(new CreatePassword($data));
+                    if (User::sendNewUserEmail($new_trainer->email,$data)==false){
+                        throw new \Exception();
+                    }
                 }
+
+            }catch (\Exception $eu){
+                if ($eu){
+                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error',$eu->getMessage());
+                }
+                return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers Successfully Uploaded');
+            }
+
             }
         }
     }

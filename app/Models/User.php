@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Mail\CreatePassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -73,5 +75,9 @@ class User extends Authenticatable
     }
     public static function updateUser($id,$data){
     DB::table('users')->where('id',$id)->update($data);
+    }
+
+    public static function SendNewUserEmail($email,$data){
+        Mail::to($email)->send(new CreatePassword($data));
     }
 }
