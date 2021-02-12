@@ -195,15 +195,7 @@ class AppraisalController extends Controller
                         }
                     }
                 }catch (\Exception $e){
-                    foreach ($supervisors as $supervisor){
-                        $new_supervisor = new AppraisalSupervisor();
-                        $new_supervisor->supervisor = $supervisor['name'];
-                        $new_supervisor->supervisor_email = $supervisor['email'];
-                        $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
-                        $new_supervisor->appraisal_id = $appraisal->id;
-                        $new_supervisor->save();
-                    }
-                    return redirect('/adm/'.$id.'/view/performance/appraisals');
+                    return redirect('/adm/'.$id.'/view/performance/appraisals')->with('error','An unexpected error occurred please try again');
                 }
             }
             return redirect('/adm/'.$id.'/view/performance/appraisals')->with('success','PMO Performance Appraisal Report Created Successfully');
