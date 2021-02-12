@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="col text-right">
-                <a href="{{url('/forgot/password')}}" style="color: #7E858E">Forgot Password?</a>
+                <a href="{{url('/forgot/password')}}" style="color: #7E858E;">Forgot Password?</a>
             </div>
         </div>
     </div>
