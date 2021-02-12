@@ -86,13 +86,13 @@
                                         <th colspan="6"><h3>Note: (Refer to KPI’s Document when filling this Appraisal)</h3></th>
                                     </tr>
                                     <tr>
-                                        <th>Item</th>
-                                        <th>Measure - <br>
-                                            Key Performance Indicator</th>
-                                        <th>Self Score (%)</th>
-                                        <th>Your comment</th>
-                                        <th>Supervisor Score (%)</th>
-                                        <th>Supervisor  comment</th>
+                                        <th><h6>Item</h6></th>
+                                        <th><h6>Measure - <br>
+                                                Key Performance Indicator</h6></th>
+                                        <th><h6>Self Score (%)</h6></th>
+                                        <th><h6>Your comment</h6></th>
+                                        <th><h6>Supervisor Score (%)</h6></th>
+                                        <th><h6>Supervisor  comment</h6></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -178,10 +178,10 @@
                                     @endif
                                     <tr>
                                         <td></td>
-                                        <td colspan="5">Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</td>
+                                        <td colspan="5"><h6>Please provide supporting documentation (attachments and/or links) in line with the listed KPIs for your appraisal.</h6></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Individual’s overall comments:</td>
+                                        <td colspan="6"><h6>Individual’s overall comments:</h6></td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
@@ -189,22 +189,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Initials:</td>
+                                        <td><h6>Initials:</h6></td>
                                         <td colspan="2">
                                             {!! $appraisal->pmo_signature !!}
                                         </td>
-                                        <td >Date</td>
+                                        <td ><h6>Date</h6></td>
                                         <td colspan="2">
                                             {!! $appraisal->pmo_sign_date !!}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            Your signature indicates that this Performance Review has been discussed with you and that you are in agreement with the rating awarded.
+                                            <h6>Your signature indicates that this Performance Review has been discussed with you and that you are in agreement with the rating awarded.</h6>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Areas that Need Improvement/ Development (to be filled by Supervisor)</td>
+                                        <td colspan="6"><h6>Areas that Need Improvement/ Development (to be filled by Supervisor)</h6></td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
@@ -212,7 +212,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Supervisor’s overall comments:</td>
+                                        <td colspan="6"><h6>Supervisor’s overall comments:</h6></td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
@@ -220,11 +220,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Initials:</td>
+                                        <td><h6>Initials:</h6></td>
                                         <td colspan="2">
                                             <input type="text" name="supervisor_signature" required>
                                         </td>
-                                        <td >Date</td>
+                                        <td><h6>Date</h6></td>
                                         <td colspan="2">
                                             <input type="date" name="supervisor_sign_date" value="{{date('Y-m-d')}}" readonly>
                                         </td>
@@ -235,7 +235,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group float-right mt-2">
-                                <button type="submit" class="btn btn-outline-primary btn-block mb-3">Submit Report</button>
+                                <button type="submit" class="btn btn-outline-info btn-block mb-3">Submit Report</button>
                             </div>
                         </div>
 
