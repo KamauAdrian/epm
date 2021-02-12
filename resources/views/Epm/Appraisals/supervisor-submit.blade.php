@@ -11,6 +11,9 @@
         .table-responsive .table {
             min-width: 600px;
         }
+        .table{
+            color: #2AA504;
+        }
     </style>
 @endsection
 
