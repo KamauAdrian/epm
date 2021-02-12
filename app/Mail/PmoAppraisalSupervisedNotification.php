@@ -31,6 +31,6 @@ class PmoAppraisalSupervisedNotification extends Mailable
     public function build()
     {
         $subject = 'Performance Appraisal Supervised';
-        return $this->view('Emails.pmo-appraisal-supervised')->subject($subject);
+        return $this->view('Emails.Appraisals.pmo-appraisal-supervised')->subject($subject);
     }
 }
