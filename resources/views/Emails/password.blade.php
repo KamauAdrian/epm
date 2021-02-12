@@ -13,7 +13,8 @@
     <p>Below are your Account Details:</p><br />
     <p>Email: {{$data['email']}}</p>
     <p>Phone Number: {{$data['phone']}}</p><br />
-    <a href="{{url('/account/activate',$data['user_id'])}}" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Click Here To Activate Your Account</a>
+{{--    <a href="{{url('/account/activate',$data['user_id'])}}" style="background-color:#333333; border:1px solid #333333; border-color:#333333; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 30px 12px 30px; text-align:center; text-decoration:none; border-style:solid;" target="_blank">Click Here To Activate Your Account</a>--}}
+    <a href="{{url('/account/activate',$data['user_id'])}}" class="btn btn-outline-info" target="_blank">Click Here To Activate Your Account</a>
 @endsection
 
 
