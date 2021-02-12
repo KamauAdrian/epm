@@ -69,7 +69,7 @@
                                                             <div class="row">
                                                                 <?php
                                                                 $single_task = \App\Models\Task::find($task->id);
-                                                                dd($single_task->assignees);
+//                                                                dd($single_task->assignees);
                                                                 $avatar_icon_name = '';
                                                                 if ($assignees){
                                                                     foreach ($assignees as $assignee){
@@ -88,7 +88,8 @@
                                                                 <div class="col-md-12">
                                                                     <div class="row">
                                                                         <div class="col-md-6">
-                                                                            <span class="avtar" >{{$avatar_icon_name}}</span>
+{{--                                                                            <span class="avtar" >{{$avatar_icon_name}}</span>--}}
+                                                                            <span class="avtar" >{{$task->name}}</span>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             {{$task->due_date}}

@@ -169,7 +169,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-    @if($auth_admin->role->name == 'Project Manager')
+    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Projects</span></a>
             <ul class="pcoded-submenu">
