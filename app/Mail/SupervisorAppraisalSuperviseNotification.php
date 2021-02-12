@@ -17,9 +17,9 @@ class SupervisorAppraisalSuperviseNotification extends Mailable
      * @return void
      */
 
-    public $data;
+    public $supervisor_supervise;
 
-    public function __construct($data)
+    public function __construct($supervisor_supervise)
     {
         $this->data = $data;
     }

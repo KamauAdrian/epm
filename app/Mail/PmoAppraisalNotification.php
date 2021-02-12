@@ -16,11 +16,11 @@ class PmoAppraisalNotification extends Mailable
      *
      * @return void
      */
-    public $data;
+    public $pmo;
 
-    public function __construct($data)
+    public function __construct($pmo)
     {
-        $this->data = $data;
+        $this->data = $pmo;
     }
 
     /**

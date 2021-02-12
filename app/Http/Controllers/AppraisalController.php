@@ -166,13 +166,13 @@ class AppraisalController extends Controller
             $saved = $appraisal->save();
             if ($saved){
                 $pmo_email = $appraisal->pmo_email;
-                $data = [
+                $pmo = [
                     'user_id'=>$appraisal->id,
                     'name'=>$appraisal->pmo,
                     'email'=>$appraisal->pmo_email,
                 ];
                 try {
-                   if (Mail::to($pmo_email)->send(new PmoAppraisalNotification($data))==false){
+                   if (Mail::to($pmo_email)->send(new PmoAppraisalNotification($pmo))==false){
                        throw new \Exception();
                    }
                     foreach ($supervisors as $supervisor){
@@ -184,12 +184,12 @@ class AppraisalController extends Controller
                         $supervisor_saved = $new_supervisor->save();
                         if ($supervisor_saved){
                             $supervisor_email = $new_supervisor->supervisor_email;
-                            $data = [
+                            $pmo_supervisor = [
                                 'user_id'=>$new_supervisor->id,
                                 'name'=>$new_supervisor->supervisor,
                                 'email'=>$new_supervisor->supervisor_email,
                             ];
-                            if (Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($data))==false){
+                            if (Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor))==false){
                                 throw new \Exception();
                             }
                         }
