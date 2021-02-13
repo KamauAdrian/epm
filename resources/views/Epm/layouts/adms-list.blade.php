@@ -223,6 +223,7 @@
                     </div>
                 </div>
             </div>
+
             @if($auth_admin->role->name == 'Su Admin')
                 @if($role->name == 'Project Manager')
                     <a href="{{url('/'.$url)}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add PMO</a>

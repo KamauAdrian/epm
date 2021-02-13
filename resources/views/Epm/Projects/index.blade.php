@@ -38,6 +38,8 @@
                     </div>
                 @endif
             </center>
+        </div>
+            <div class="row">
             <div class="table-responsive">
                 <table class="table" id="tableProjects">
                     <thead>
@@ -53,7 +55,7 @@
                         <tbody>
                            @foreach($projects as $project)
                                <tr>
-                                   <td>{{$project->name}}</td>
+                                   <td><a href="{{url('/adm/'.$auth_admin->id.'/view/project/'.$project->id)}}">{{$project->name}}</a></td>
                                    <?php $collaborators = \App\Models\Project::find($project->id)->collaborators; ?>
                                    <td>{{date('l dS M Y',strtotime($project->created_at))}}</td>
                                    <td>

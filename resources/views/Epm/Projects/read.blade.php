@@ -8,8 +8,11 @@
             max-width: 100%;
             overflow: auto;
         }
-        a .card :hover{
+        .card :hover{
             background-color: #edf2f7;
+        }
+        .card .card-text{
+            word-wrap: break-word;
         }
     </style>
 @endsection
@@ -62,74 +65,34 @@
                                         </div>
                                         <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
                                         @foreach($tasks as $task)
-                                            <div class="row">
-                                                <a href="#!">
-                                                    <div class="card rounded" style="color: #7E858E">
+                                                    <div class="card" style="color: #7E858E; max-width: 20rem;">
                                                         <div class="card-body">
-                                                            <div class="row">
                                                                 <?php
-                                                                $single_task = \App\Models\Task::find($task->id);
+                                                                $assignees = \App\Models\Task::find($task->id)->assignees;
 //                                                                dd($single_task->assignees);
                                                                 $avatar_icon_name = '';
-//                                                                if ($assignees){
-//                                                                    foreach ($assignees as $assignee){
-//                                                                        $split_name = explode(' ',$assignee->name);
-//                                                                        if (count($split_name)>1){
-//                                                                            $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
-//                                                                        }else{
-//                                                                            $avatar_icon_name = substr($assignee->name,0,1);
-//                                                                        }
-//                                                                    }
-//                                                                }
+                                                                if ($assignees){
+                                                                    foreach ($assignees as $assignee){
+                                                                        $split_name = explode(' ',$assignee->name);
+                                                                        if (count($split_name)>1){
+                                                                            $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                                                                        }else{
+                                                                            $avatar_icon_name = substr($assignee->name,0,1);
+                                                                        }
+                                                                    }
+                                                                }
                                                                 ?>
-                                                                <div class="col-md-12">
-                                                                    {{$task->name}}
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="row">
-                                                                        <div class="col-md-6">
+                                                                    <p class="card-text">
+                                                                        {{$task->name}}
+                                                                    </p>
 {{--                                                                            <span class="avtar" >{{$avatar_icon_name}}</span>--}}
-                                                                            {{$task->name}}
-                                                                        </div>
-                                                                        <div class="col-md-6">
+                                                                            @if($assignees)
+                                                                                <span class="avtar bg-blue-1" >{{$avatar_icon_name}}</span>
+                                                                            @endif
                                                                             {{$task->due_date}}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                {{--                                                            <form action="#!">--}}
-                                                                {{--                                                                <?php--}}
-                                                                {{--                                                                $assignees = \App\Models\Task::find($task->id)->assignees;--}}
-                                                                {{--                                                                $assignees_ids = [];--}}
-                                                                {{--                                                                $assignees_names = [];--}}
-                                                                {{--                                                                foreach ($assignees as $assignee){--}}
-                                                                {{--                                                                    $assignees_ids[] = $assignee->id;--}}
-                                                                {{--                                                                    $assignees_names[] = $assignee->name;--}}
-                                                                {{--                                                                }--}}
-
-                                                                {{--                                                                if (count($assignees_names)>1){--}}
-                                                                {{--                                                                    $names = implode(',',$assignees_names);--}}
-                                                                {{--                                                                }else{--}}
-                                                                {{--                                                                    $names = $assignees_names;--}}
-                                                                {{--                                                                }--}}
-                                                                {{--                                                                ?>--}}
-                                                                {{--                                                                <div class="col-md-12">--}}
-                                                                {{--                                                                    <div class="form-group">--}}
-                                                                {{--                                                                        <label>Task Name</label>--}}
-                                                                {{--                                                                        <input style="width: auto" type="text" class="form-control" name="name" value="{{$task->name}}" placeholder="Project One" readonly>--}}
-                                                                {{--                                                                    </div>--}}
-                                                                {{--                                                                </div>--}}
-                                                                {{--                                                                <div class="col-md-12">--}}
-                                                                {{--                                                                    <div class="form-group">--}}
-                                                                {{--                                                                        <label>Task Due Date</label>--}}
-                                                                {{--                                                                        <input style="width: auto" type="date" class="form-control" value="{{$task->due_date}}" name="due_date" readonly>--}}
-                                                                {{--                                                                    </div>--}}
-                                                                {{--                                                                </div>--}}
-                                                                {{--                                                            </form>--}}
-                                                            </div>
+                                                                <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-data="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
                                                         </div>
                                                     </div>
-                                                </a>
-                                            </div>
                                         @endforeach
                                         <div class="row">
                                             <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
@@ -182,7 +145,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="Project One" required>
+                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group float-right">
@@ -200,6 +163,37 @@
                         </tbody>
                     </table>
                 </div>
+            <div class="modal fade" id="modalTaskDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="modal_task_id" data-id="">
+
+                                id found on parent element
+
+
+{{--                            {{$user->name}}--}}
+                            {{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
+                            <h5 class="text-danger">Are you sure you want to delete this Admin?</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="" id="form-delete-user" method="post">
+                                @csrf
+                                <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">
+                                    Yes Delete
+                                </button>
+                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -217,6 +211,15 @@
         {{--for(var i=0; i<assigned.length; i++){--}}
         {{--    alert(assigned[i]);--}}
         {{--}--}}
+        $(function () {
+            $(".openModalTask").click(function () {
+                var id = $(this).attr('data-data');
+                <?php \App\Models\User::find([$(this).attr('data-data')]) ?>
+                $("#modal_task_id").attr("data-id",id);
+                $("#modalTaskDetailed").modal('show');
+                // console.log('this is the id'+ id);
+            });
+        });
         function addNewBoard(){
             var boardForm = document.getElementById('add-new-board');
             if (boardForm.style.display='none'){
@@ -264,6 +267,7 @@
         $(document).ready(function (){
             $('#tableProjects').DataTable();
         });
-
+        $('#myDataTable').DataTable();
     </script>
 @endsection
+

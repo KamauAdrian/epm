@@ -22,7 +22,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Project Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}">
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}" required>
                                         <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
                                 </div>
