@@ -14,11 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Tasks/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Tasks/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +163,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
@@ -174,19 +171,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/Emails" />
-      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
-      <recent name="$PROJECT_DIR$/public/assets" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Mentors" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
       <recent name="$PROJECT_DIR$/resources/views/Epm" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/resources/views/Emails" />
+      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
+      <recent name="$PROJECT_DIR$/public/assets" />
     </key>
   </component>
   <component name="RunManager">
@@ -290,7 +287,7 @@
       <workItem from="1613143074293" duration="1062000" />
       <workItem from="1613154194620" duration="3846000" />
       <workItem from="1613182570983" duration="9050000" />
-      <workItem from="1613361589687" duration="2789000" />
+      <workItem from="1613361589687" duration="17541000" />
     </task>
     <servers />
   </component>
@@ -334,11 +331,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1606914575160" />
-    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1613044170587">
+    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1613364599481">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="464" y="121" key="FileChooserDialogImpl/0.0.1360.728/0.0.1360.728@0.0.1360.728" timestamp="1608364782150" />
-    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1613044170587" />
+    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1613364599481" />
     <state x="462" y="86" width="431" height="551" key="NewPhpClassDialog" timestamp="1612166310247">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

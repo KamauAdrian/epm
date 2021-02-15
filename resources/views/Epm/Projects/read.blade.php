@@ -2,6 +2,8 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+{{--    <link href="{{url('quill-1.3.6/docs/assets/css/styles.css')}}" rel="stylesheet">--}}
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
         .table-responsive{
             max-height: 100vh;
@@ -11,9 +13,13 @@
         .card :hover{
             background-color: #edf2f7;
         }
-        .card .card-text{
-            word-wrap: break-word;
+        .card{
+            color: #7E858E;
+            max-width: 20rem;
+            min-width: 20rem;
+            word-break: break-all;
         }
+
     </style>
 @endsection
 
@@ -56,145 +62,175 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tbody style="overflow: scroll;">
-                        <tr>
                             @if($boards)
-                                @foreach($boards as $board)
-                                    <td>
-                                        <div class="row">
-                                            <h5 style="font-size: 14px;">{{$board->name}}</h5>
-                                        </div>
-                                        <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
-                                        @foreach($tasks as $task)
-                                                    <div class="card" style="color: #7E858E; max-width: 20rem;">
+                                <tr>
+                                    @foreach($boards as $board)
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5 style="font-size: 14px;">{{$board->name}}</h5>
+                                                </div>
+                                                <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
+                                                @foreach($tasks as $task)
+                                                    <?php
+                                                    $assignees = \App\Models\Task::find($task->id)->assignees;
+                                                    //                                                                dd($single_task->assignees);
+                                                    $avatar_icon_name = null;
+                                                    if ($assignees){
+                                                        foreach ($assignees as $assignee){
+                                                            $split_name = explode(' ',$assignee->name);
+                                                            if (count($split_name)>1){
+                                                                $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                                                            }else{
+                                                                $avatar_icon_name = substr($assignee->name,0,1);
+                                                            }
+                                                        }
+                                                    }
+                                                    ?>
+                                                <div class="col-md-12">
+                                                    <div class="card">
                                                         <div class="card-body">
-                                                                <?php
-                                                                $assignees = \App\Models\Task::find($task->id)->assignees;
-//                                                                dd($single_task->assignees);
-                                                                $avatar_icon_name = '';
-                                                                if ($assignees){
-                                                                    foreach ($assignees as $assignee){
-                                                                        $split_name = explode(' ',$assignee->name);
-                                                                        if (count($split_name)>1){
-                                                                            $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
-                                                                        }else{
-                                                                            $avatar_icon_name = substr($assignee->name,0,1);
-                                                                        }
-                                                                    }
-                                                                }
-                                                                ?>
-                                                                    <p class="card-text">
-                                                                        {{$task->name}}
-                                                                    </p>
-{{--                                                                            <span class="avtar" >{{$avatar_icon_name}}</span>--}}
-                                                                            @if($assignees)
-                                                                                <span class="avtar bg-blue-1" >{{$avatar_icon_name}}</span>
-                                                                            @endif
-                                                                            {{$task->due_date}}
-                                                                <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
-{{--                                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/task/task_id='.$task->id)}}" class="stretched-link openModalTask"></a>--}}
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <p class="d-inline-block mb-0 font-weight-normal">{{$task->name}}</p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    @if($avatar_icon_name)
+                                                                        <button class="btn btn-icon" >{{$avatar_icon_name}}</button>
+                                                                    @endif
+                                                                        <a href="#!" title="Assign new Collaborators" class="btn btn-icon">
+                                                                            <i class="feather icon-plus"></i>
+                                                                        </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    @if($task->due_date)
+                                                                        {{$task->due_date}}
+                                                                    @else
+                                                                        <span><i class="fa fa-calendar"></i></span> No Due Date
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
                                                         </div>
                                                     </div>
-                                        @endforeach
-                                        <div class="row">
-                                            <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="row">
+                                                <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
+                                                    <div class="card-body">
+                                                        <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" method="post">
+                                                            @csrf
+                                                            <label>Add A New Task To {{$board->name}}</label>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <input style="width: auto" type="text" class="form-control" name="name" placeholder="Task One" required>
+                                                                    <span class="text-danger">{{$errors->first('name')}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">
+                                                                    <label>Assignee</label>
+                                                                    <multiselect v-model="selectedPmo" :options="pmos"
+                                                                                 placeholder="Search" track-by="id" label="name"
+                                                                                 :searchable="true" :close-on-select="true" multiple>
+                                                                    </multiselect>
+                                                                    <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Due Date</label>
+                                                                    <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Task One">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group float-right">
+                                                                <input class="btn btn-outline-primary" type="submit" value="Add Task">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <a href="#!"><p onclick="addNewTask({{$board->id}})" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Add Task</p></a>
+                                            </div>
+                                        </td>
+                                    @endforeach
+                                    <td>
+                                        <div class="row" style="display: none;" id="add-new-board">
+                                            <div class="card">
                                                 <div class="card-body">
-                                                    <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" method="post">
+                                                    <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post">
                                                         @csrf
-                                                        <label>Add A New Task To {{$board->name}}</label>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>Name</label>
-                                                                <input style="width: auto" type="text" class="form-control" name="name" placeholder="Task One" required>
-                                                                <span class="text-danger">{{$errors->first('name')}}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">
-                                                                <label>Assignee</label>
-                                                                <multiselect v-model="selectedPmo" :options="pmos"
-                                                                             placeholder="Search" track-by="id" label="name"
-                                                                             :searchable="true" :close-on-select="true" multiple>
-                                                                </multiselect>
-                                                                <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label>Due Date</label>
-                                                                <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Task One">
+                                                                <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-group float-right">
-                                                            <input class="btn btn-outline-primary" type="submit" value="Add Task">
+                                                            <input class="btn btn-outline-primary" type="submit" value="Create Board">
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <a href="#!"><p onclick="addNewTask({{$board->id}})" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Add Task</p></a>
+                                            <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Board</p></a>
                                         </div>
                                     </td>
-                                @endforeach
+                                </tr>
                             @endif
-                            <td>
-                                <div class="row" style="display: none;" id="add-new-board">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post">
-                                                @csrf
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group float-right">
-                                                    <input class="btn btn-outline-primary" type="submit" value="Create Board">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Board</p></a>
-                                </div>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
-{{--            <div class="modal fade" id="modalTaskDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">--}}
-{{--                <div class="modal-dialog modal-dialog-centered" role="document">--}}
-{{--                    <div class="modal-content">--}}
-{{--                        <div class="modal-header">--}}
-{{--                            --}}{{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
-{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                                <span aria-hidden="true">&times;</span>--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-body">--}}
-{{--                            <input type="hidden" id="modal_task_id" data-id="">--}}
+            <div class="modal fade" id="modalTaskDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn btn-outline-info"><span><i class="fa fa-check"></i></span> Mark Complete</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="task-details">
 
-{{--                                id found on parent element--}}
+                            </div>
+                            <div class="task-comments">
+                                    comments here
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-12">
+                                <form id="form-comments">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="hidden" name="about">
+                                                <input type="hidden" name="user_id" id="modal-footer-user-id" value="">
+                                                <input type="hidden" name="task_id" id="modal-footer-task-id" value="">
+                                                <input type="hidden" name="csrf_token" id="modal-footer-csrf-token" value="{{csrf_token()}}">
+                                                <div id="editor">
 
-
-{{--                            {{$user->name}}--}}
-{{--                            --}}{{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
-{{--                            <h5 class="text-danger">Are you sure you want to delete this Admin?</h5>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-footer">--}}
-{{--                            <form action="" id="form-delete-user" method="post">--}}
-{{--                                @csrf--}}
-{{--                                <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">--}}
-{{--                                    Yes Delete--}}
-{{--                                </button>--}}
-{{--                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button class="btn btn-outline-info float-right btn-task-comment" type="submit">
+                                                    Comment
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -203,19 +239,18 @@
     <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
     <script src="{{url('assets/dist/vue.js')}}"></script>
     <script src="{{url('assets/dist/axios.js')}}"></script>
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+{{--    <script src="{{url('quill-1.3.6/quill.js')}}"></script>--}}
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
-        {{--var assigned = <?php echo json_encode($assignees_ids); ?>--}}
-        {{--for(var i=0; i<assigned.length; i++){--}}
-        {{--    alert(assigned[i]);--}}
-        {{--}--}}
         $(document).ready(function(){
             $('.openModalTask').click(function(){
                 var userId = $(this).data('user_id');
                 var taskId = $(this).data('task_id');
+                var modalUserId = document.getElementById('modal-footer-user-id');
+                var modalTaskId = document.getElementById('modal-footer-task-id');
                 // AJAX request
                 $.ajax({
                     url: '/adm/'+userId+'/view/task/task_id='+taskId,
@@ -226,24 +261,126 @@
                     },
                     success: function(response){
                         // Add response in Modal body
-                        // $('.modal-body').html(response);
+                        $('#modalTaskDetailed .modal-body .task-details').html(response);
+                        //pass user id and task id to modal footer
+                        modalUserId.value = userId;
+                        modalTaskId.value = taskId;
+                        console.log(modalUserId.value)
                         // Display Modal
                         $("#modalTaskDetailed").modal('show');
                     }
                 });
             });
         });
-        $(function () {
-            $(".openModalTask").click(function () {
-                var id = $(this).attr('data-data');
-//                <?php //\App\Models\User::find([$(this).attr('data-data')]) ?>
-                $("#modal_task_id").attr("data-id",id);
 
-                $("#modalTaskDetailed").modal('show');
-
-                // console.log('this is the id'+ id);
-            });
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: true
+            },
+            placeholder: 'Ask a Question or Post an Update...',
+            theme: 'snow'
         });
+        var form = document.getElementById('form-comments');
+        console.log(form);
+        form.onsubmit = function(event) {
+            // Populate hidden form on submit
+            event.preventDefault();
+            var about = document.querySelector('input[name=about]');
+            var user_id = document.querySelector('input[name=user_id]').value;
+            var task_id = document.querySelector('input[name=task_id]').value;
+            var _token   = document.querySelector('input[name=csrf_token]').value;
+            about.value = JSON.stringify(quill.getContents());
+            console.log(about,user_id,task_id);
+            $.ajax({
+                url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
+                type: 'post',
+                data: {
+                    id: user_id,
+                    task_id: task_id,
+                    _token: _token,
+                },
+                success: function(response){
+                    if (response){
+                        quill.root.innerHTML('');
+                    }
+                }
+            });
+
+            // No back end to actually submit to!
+            // alert('Open the console to see the submit data!');
+            return false;
+        };
+        // $('.btn-task-comment').click(function(event){
+        //     event.preventDefault();
+        //     var about = document.querySelector('input[name=about]');
+        //     var user_id = document.querySelector('input[name=user_id]').value;
+        //     var task_id = document.querySelector('input[name=task_id]').value;
+        //     var _token   = document.querySelector('input[name=csrf_token]').value;
+        //     console.log(about,user_id,task_id);
+        //     about.value = JSON.stringify(quill.getContents());
+        //     $.ajax({
+        //         url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
+        //         type: 'post',
+        //         data: {
+        //             id: user_id,
+        //             task_id: task_id,
+        //             _token: _token,
+        //         },
+        //         success: function(response){
+        //             if (response){
+        //                 quill.root.innerHTML('');
+        //             }
+        //         }
+        //     });
+        //
+        //     // No back end to actually submit to!
+        //     // alert('Open the console to see the submit data!');
+        //     return false;
+        // });
+        // var Delta = Quill.import('delta');
+        // var quill = new Quill('#editor', {
+        //     modules: {
+        //         toolbar: true
+        //     },
+        //     placeholder: 'Ask a Question or Post an Update...',
+        //     theme: 'snow'
+        // });
+        //
+        // // Store accumulated changes
+        // var change = new Delta();
+        // quill.on('text-change', function(delta) {
+        //     change = change.compose(delta);
+        // });
+        //
+        // // Save periodically
+        // setInterval(function() {
+        //     if (change.length() > 0) {
+        //         console.log('Saving changes', change);
+        //         // Send partial changes
+        //         // $.post('/your-endpoint', {
+        //         //     partial: JSON.stringify(change)
+        //         // });
+        //         /*
+        //         Send partial changes
+        //         $.post('/your-endpoint', {
+        //           partial: JSON.stringify(change)
+        //         });
+        //
+        //         Send entire document
+        //         $.post('/your-endpoint', {
+        //           doc: JSON.stringify(quill.getContents())
+        //         });
+        //         */
+        //         change = new Delta();
+        //     }
+        // }, 5*1000);
+        //
+        // // Check for unsaved data
+        // window.onbeforeunload = function() {
+        //     if (change.length() > 0) {
+        //         return 'There are unsaved changes. Are you sure you want to leave?';
+        //     }
+        // }
         function addNewBoard(){
             var boardForm = document.getElementById('add-new-board');
             if (boardForm.style.display='none'){

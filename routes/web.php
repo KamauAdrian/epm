@@ -146,6 +146,7 @@ Route::group(['middleware'=>'admin'],function (){
     //Projects -> Tasks
     Route::post('/adm/{id}/create/new/task/board_id={board_id}',[App\Http\Controllers\TaskController::class, 'store']);
     Route::get('/adm/{id}/view/task/task_id={task_id}',[App\Http\Controllers\TaskController::class, 'show']);
+    Route::post('/adm/{id}/add/task/comment/task_id={task_id}',[App\Http\Controllers\TaskCommentController::class, 'store']);
 
 
 
