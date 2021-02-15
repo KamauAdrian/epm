@@ -16,4 +16,8 @@ class Task extends Model
     public function board(){
         return $this->belongsTo('App\Models\Board','board_id');
     }
+
+    public function subtasks(){
+        return $this->hasMany('App\Models\SubTask','task_id');
+    }
 }

@@ -68,7 +68,7 @@
                                             @else
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
+                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fas fa-eye"></i></span></a>
                                                     </div>
                                                 </td>
                                             @endif

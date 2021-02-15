@@ -12,13 +12,13 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-6 d-flex align-items-center mb-4">
-                <h1 class="d-inline-block mb-0 font-weight-normal">Classes</h1>
+                <h1 class="d-inline-block mb-0 font-weight-normal">Cohorts</h1>
                 {{--                <h6 class="d-inline-block mb-0 ml-4"><i class="feather icon-download"></i> Download list</h6>--}}
             </div>
             <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
                 @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                     <a href="{{url('/adm/'.$auth_admin->id.'/create/class')}}">
-                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i>Create New Class</button>
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i>Create New Cohort</button>
                     </a>
                 @endif
                 <a href="#!">
@@ -57,7 +57,7 @@
                             <table id="sessionClasses" class="table table-center mb-0 ">
                                 <thead>
                                 <tr>
-                                    <th>Classes</th>
+                                    <th>Cohorts</th>
                                     <th>Description</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
@@ -129,7 +129,7 @@
                     </div>
 
             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
-                    <a href="{{url('/adm/'.$auth_admin->id.'/create/class')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Create New Class</a>
+                    <a href="{{url('/adm/'.$auth_admin->id.'/create/class')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Create New Cohort</a>
                 @endif
             </div>
         </div>

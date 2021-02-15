@@ -8,7 +8,7 @@
         @csrf
         <div class="form-group">
             <label>Email Address</label>
-            <input type="password" class="form-control" value="{{$admin->email}}">
+            <input type="text" class="form-control" value="{{$admin->email}}" readonly>
         </div>
             <div class="form-group">
                 <label>Create Password</label>

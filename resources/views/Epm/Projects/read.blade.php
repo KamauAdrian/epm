@@ -90,7 +90,8 @@
                                                                                 <span class="avtar bg-blue-1" >{{$avatar_icon_name}}</span>
                                                                             @endif
                                                                             {{$task->due_date}}
-                                                                <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-data="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
+                                                                <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
+{{--                                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/task/task_id='.$task->id)}}" class="stretched-link openModalTask"></a>--}}
                                                         </div>
                                                     </div>
                                         @endforeach
@@ -163,37 +164,37 @@
                         </tbody>
                     </table>
                 </div>
-            <div class="modal fade" id="modalTaskDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" id="modal_task_id" data-id="">
+{{--            <div class="modal fade" id="modalTaskDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">--}}
+{{--                <div class="modal-dialog modal-dialog-centered" role="document">--}}
+{{--                    <div class="modal-content">--}}
+{{--                        <div class="modal-header">--}}
+{{--                            --}}{{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-body">--}}
+{{--                            <input type="hidden" id="modal_task_id" data-id="">--}}
 
-                                id found on parent element
+{{--                                id found on parent element--}}
 
 
 {{--                            {{$user->name}}--}}
-                            {{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
-                            <h5 class="text-danger">Are you sure you want to delete this Admin?</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <form action="" id="form-delete-user" method="post">
-                                @csrf
-                                <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">
-                                    Yes Delete
-                                </button>
-                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--                            --}}{{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
+{{--                            <h5 class="text-danger">Are you sure you want to delete this Admin?</h5>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <form action="" id="form-delete-user" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">--}}
+{{--                                    Yes Delete--}}
+{{--                                </button>--}}
+{{--                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </div>
 @endsection
@@ -211,12 +212,35 @@
         {{--for(var i=0; i<assigned.length; i++){--}}
         {{--    alert(assigned[i]);--}}
         {{--}--}}
+        $(document).ready(function(){
+            $('.openModalTask').click(function(){
+                var userId = $(this).data('user_id');
+                var taskId = $(this).data('task_id');
+                // AJAX request
+                $.ajax({
+                    url: '/adm/'+userId+'/view/task/task_id='+taskId,
+                    type: 'get',
+                    data: {
+                        id: userId,
+                        task_id: taskId,
+                    },
+                    success: function(response){
+                        // Add response in Modal body
+                        // $('.modal-body').html(response);
+                        // Display Modal
+                        $("#modalTaskDetailed").modal('show');
+                    }
+                });
+            });
+        });
         $(function () {
             $(".openModalTask").click(function () {
                 var id = $(this).attr('data-data');
-                <?php \App\Models\User::find([$(this).attr('data-data')]) ?>
+//                <?php //\App\Models\User::find([$(this).attr('data-data')]) ?>
                 $("#modal_task_id").attr("data-id",id);
+
                 $("#modalTaskDetailed").modal('show');
+
                 // console.log('this is the id'+ id);
             });
         });
