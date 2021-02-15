@@ -20,4 +20,8 @@ class Task extends Model
     public function subtasks(){
         return $this->hasMany('App\Models\SubTask','task_id');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Models\TaskComment','task_id');
+    }
 }

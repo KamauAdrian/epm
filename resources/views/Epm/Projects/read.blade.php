@@ -198,8 +198,16 @@
                             <div class="task-details">
 
                             </div>
-                            <div class="task-comments">
-                                    Comments Here
+                            <div class="col-md-12">
+                               <div class="row">
+                                   <div class="table-responsive">
+                                       <table class="table table-borderless">
+                                           <div class="task-comments">
+
+                                           </div>
+                                       </table>
+                                   </div>
+                               </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -208,7 +216,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="hidden" name="about">
+{{--                                                <input type="hidden" name="about">--}}
                                                 <input type="hidden" name="user_id" id="modal-footer-user-id" value="">
                                                 <input type="hidden" name="task_id" id="modal-footer-task-id" value="">
                                                 <input type="hidden" name="csrf_token" id="modal-footer-csrf-token" value="{{csrf_token()}}">
@@ -263,13 +271,29 @@
                         id: userId,
                         task_id: taskId,
                     },
-                    success: function(response){
+                    success: function([response_comments,response]){
                         // Add response in Modal body
                         $('#modalTaskDetailed .modal-body .task-details').html(response);
+                        console.log('this are the comments '+response_comments);
+                        // if (response_comments){}
+                        console.log(response_comments.length);
+                            for ($i=0;$i<response_comments.length;$i++){
+                                var taskComment = response_comments[$i];
+                                console.log(taskComment);
+                                $('#modalTaskDetailed .modal-body .task-comments').html(
+                                    "<div class='col-md-12'>"+
+                                    "<tr>" +
+                                    "<td>"+taskComment.from+"</td>" +
+                                    "<td>"+taskComment.comment+"</td>" +
+                                    "</tr>"+
+                                    "</div>"
+                                );
+                            }
+
+
                         //pass user id and task id to modal footer
                         modalUserId.value = userId;
                         modalTaskId.value = taskId;
-                        console.log(modalUserId.value)
                         // Display Modal
                         $("#modalTaskDetailed").modal('show');
                     }
@@ -279,7 +303,7 @@
 
         var quill = new Quill('#editor', {
             modules: {
-                toolbar: true
+                toolbar: true,
             },
             placeholder: 'Ask a Question or Post an Update...',
             theme: 'snow'
@@ -289,12 +313,12 @@
         form.onsubmit = function(event) {
             // Populate hidden form on submit
             event.preventDefault();
-            var about = document.querySelector('input[name=about]');
+            // var about = document.querySelector('input[name=about]');
             var user_id = document.querySelector('input[name=user_id]').value;
             var task_id = document.querySelector('input[name=task_id]').value;
             var _token   = document.querySelector('input[name=csrf_token]').value;
-            about.value = JSON.stringify(quill.getContents());
-            console.log(about,user_id,task_id);
+            var about_content = quill.root.innerHTML;
+            console.log(user_id,task_id);
             $.ajax({
                 url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
                 type: 'post',
@@ -302,10 +326,12 @@
                     id: user_id,
                     task_id: task_id,
                     _token: _token,
+                    comment: about_content,
                 },
                 success: function(response){
                     if (response){
-                        quill.root.innerHTML('');
+                        quill.root.innerHTML='';
+                        alert(response);
                     }
                 }
             });

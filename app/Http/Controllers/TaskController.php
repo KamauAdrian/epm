@@ -76,6 +76,7 @@ class TaskController extends Controller
         $project = Project::find($board->project_id);
         $project_boards = $project->boards;
         $assignees = $task->assignees;
+        $comments = $task->comments;
         $avtar_icon_name = '';
         if($assignees){
             foreach ($assignees as $assignee){
@@ -140,8 +141,31 @@ class TaskController extends Controller
 
         $response .= '</div>';
 
+        $response_comments = $comments;
 
-        return $response;
+//        $response_comments = 'well done';
+
+//        $response_comment = '<div class="col-md-12">';
+//        $response_comment .= '<div class="row">';
+//        $response_comment .= '<div class="table-responsive">
+//                                <table class="table table-borderless">';
+//
+//        if ($comments){
+//            $response_comment .= '<div class="col-md-12">';
+//            foreach ($comments as $comment){
+//                $response_comment .= '<tr><td>'.$comment->message.'</td></tr>';
+//            }
+//            $response_comment .= '</div>';
+//        }
+//
+//        $response_comment .='    </table>
+//                            </div>';
+//
+//        $response_comment .= '</div>';
+//        $response_comment .= '</div>';
+
+
+        return [$response_comments,$response];
     }
 
     /**

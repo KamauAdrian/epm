@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TaskComment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskCommentController extends Controller
@@ -34,12 +36,18 @@ class TaskCommentController extends Controller
      */
     public function store(Request $request,$id,$task_id)
     {
-        dd($request->all());
-
-        if (auth()->user()->id = $id){
-            $response = 'done';
-        }
-
+        $comment = $request->all();
+        $collaborator = User::find($id);
+        $new_comment = new TaskComment();
+        $new_comment->from = $collaborator->email;
+        $new_comment->collaborator_id = $comment['id'];
+        $new_comment->task_id = $comment['task_id'];
+        $new_comment->comment = $comment['comment'];
+       $new_comment_saved =  $new_comment->save();
+       $response = null;
+       if ($new_comment_saved){
+           $response = 'comment saved';
+       }
         return $response;
     }
 

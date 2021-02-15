@@ -15,6 +15,10 @@ class CreateTaskCommentsTable extends Migration
     {
         Schema::create('task_comments', function (Blueprint $table) {
             $table->id();
+            $table->text('comment');
+            $table->string('from');
+            $table->integer('collaborator_id')->unsigned();
+            $table->integer('task_id')->unsigned();
             $table->timestamps();
         });
     }

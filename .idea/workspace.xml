@@ -14,7 +14,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskCommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskCommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TaskComment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TaskComment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_15_101957_create_task_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_15_101957_create_task_comments_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -287,7 +292,8 @@
       <workItem from="1613143074293" duration="1062000" />
       <workItem from="1613154194620" duration="3846000" />
       <workItem from="1613182570983" duration="9050000" />
-      <workItem from="1613361589687" duration="17541000" />
+      <workItem from="1613361589687" duration="30725000" />
+      <workItem from="1613393748451" duration="6284000" />
     </task>
     <servers />
   </component>
@@ -344,6 +350,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="76" y="0" width="975" height="728" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1611901572819" />
+    <state x="498" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613380405643">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="498" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1613380405643" />
     <state x="0" y="0" width="1009" height="686" key="dock-window-1" timestamp="1611811041579">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -352,14 +362,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1610344476754" />
-    <state x="347" y="159" key="run.anything.popup" timestamp="1612416546314">
+    <state x="347" y="159" key="run.anything.popup" timestamp="1613388415894">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1612416546314" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613140303486">
+    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613388415894" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613392692503">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613140303486" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613392692503" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
