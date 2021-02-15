@@ -199,7 +199,7 @@
 
                             </div>
                             <div class="task-comments">
-                                    comments here
+                                    Comments Here
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -212,9 +212,13 @@
                                                 <input type="hidden" name="user_id" id="modal-footer-user-id" value="">
                                                 <input type="hidden" name="task_id" id="modal-footer-task-id" value="">
                                                 <input type="hidden" name="csrf_token" id="modal-footer-csrf-token" value="{{csrf_token()}}">
+
                                                 <div id="editor">
 
                                                 </div>
+
+{{--                                                <textarea name="comment" id="" cols="90" rows="5"></textarea>--}}
+
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -308,7 +312,7 @@
 
             // No back end to actually submit to!
             // alert('Open the console to see the submit data!');
-            return false;
+            return true;
         };
         // $('.btn-task-comment').click(function(event){
         //     event.preventDefault();

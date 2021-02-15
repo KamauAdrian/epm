@@ -104,12 +104,21 @@ class TaskController extends Controller
 
         $response .= '<div class="col-md-12"><tr><div class="row">';
         $response .= '<div class="col-md-3"><td>Assignee:</td></div>';
-        $response .= '<div class="col-md-9"><td><button type="button" class="btn btn-icon">'.$avtar_icon_name.'</button>
-                        <a href="#!" title="Assign new Collaborator">
+        if ($avtar_icon_name) {
+            $response .= '<div class="col-md-9"><td><button type="button" class="btn btn-icon">' . $avtar_icon_name . '</button>';
+
+            $response .= '<a href="#!" title="Assign new Collaborator">
                             <button type="button" class="btn btn-icon"><i class="feather icon-plus"></i></button>
                         </a>
                         </td></div>';
-        $response .= '</div></tr></div>';
+            $response .= '</div></tr></div>';
+        }else{
+            $response .= '<div class="col-md-9"><td><a href="#!" title="Assign new Collaborator">
+                            <button type="button" class="btn btn-icon"><i class="feather icon-plus"></i></button>
+                        </a>
+                        </td></div>';
+            $response .= '</div></tr></div>';
+        }
 
         $response .= '<div class="col-md-12"><tr><div class="row">';
         $response .= '<div class="col-md-3"><td>Due Date:</td></div>';

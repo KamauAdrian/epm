@@ -35,6 +35,7 @@ class TaskCommentController extends Controller
     public function store(Request $request,$id,$task_id)
     {
         dd($request->all());
+
         if (auth()->user()->id = $id){
             $response = 'done';
         }
