@@ -1,9 +1,6 @@
 @extends('Epm.layouts.master')
 
 @section('styles')
-    <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
-{{--    <link href="{{url('quill-1.3.6/docs/assets/css/styles.css')}}" rel="stylesheet">--}}
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
         .table-responsive{
             max-height: 100vh;
@@ -222,31 +219,6 @@
                                     <div class="col-md-12">
                                         <form action="#!">
                                             <div class="row task-details">
-{{--                                                    <div class="col-md-12">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <h6 class="text-center">Task Name</h6>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-md-3">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <p>Assignee</p>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-md-9">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <p>Assigneesssssss</p>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-md-3">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <p>Due Date</p>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-md-9">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <p>date</p>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
                                             </div>
                                         </form>
                                     </div>
@@ -318,14 +290,6 @@
 @endsection
 
 @section('js')
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
-    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
-{{--    <script src="{{url('quill-1.3.6/quill.js')}}"></script>--}}
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         $(document).ready(function(){
             $('.openModalTask').click(function(event){

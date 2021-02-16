@@ -33,25 +33,6 @@
         <h2 class="font-weight-normal">Hi {{$auth_admin->name}}, Welcome back!</h2>
     </div>
     <div class="col-md-12">
-        <center>
-            @if(session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @elseif(session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-        </center>
-    </div>
-    <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

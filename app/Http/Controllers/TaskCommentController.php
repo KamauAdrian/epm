@@ -42,8 +42,6 @@ class TaskCommentController extends Controller
         $comment = $request->all();
         $collaborator = User::find($id);
         $new_comment = new TaskComment();
-        $new_comment->from = $collaborator->email;
-        $new_comment->collaborator_name = $collaborator->name;
         $new_comment->collaborator_id = $comment['id'];
         $new_comment->task_id = $task->id;
         $new_comment->comment = $comment['comment'];

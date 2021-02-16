@@ -23,6 +23,9 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/plugins/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    {{--    <link href="{{url('quill-1.3.6/docs/assets/css/styles.css')}}" rel="stylesheet">--}}
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     @yield('styles')
     <script src="{{url('assets/js/vendor-all.min.js')}}"></script>
 </head>
@@ -58,6 +61,27 @@
 <div class="pcoded-main-container">
     <div class="pcoded-content container">
         <div class="row">
+            <div class="col-md-12">
+                <center>
+                    @if(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @elseif(session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                </center>
+            </div>
+        </div>
+        <div class="row">
             @yield('content')
         </div>
     </div>
@@ -67,6 +91,14 @@
 <!-- Required Js -->
 <script src="{{url('assets/js/plugins/bootstrap.min.js')}}"></script>
 <script src="{{url('assets/js/pcoded.min.js')}}"></script>
+<script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
+<script src="{{url('assets/dist/vue.js')}}"></script>
+<script src="{{url('assets/dist/axios.js')}}"></script>
+<style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
+<script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
+{{--    <script src="{{url('quill-1.3.6/quill.js')}}"></script>--}}
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 @yield('js')
 <script src="{{url('assets/js/pages/front.js')}}"></script>
 </body>
