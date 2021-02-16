@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\CreatePassword;
 use App\Models\Project;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -97,9 +98,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$project_id)
     {
-        //
+        $project = Project::find($project_id);
+        return view('Epm.Projects.edit',compact('project'));
     }
 
     /**
@@ -128,5 +130,26 @@ class ProjectController extends Controller
     public function assignee($id){
         $collaborators = Project::find($id)->collaborators;
         return response()->json($collaborators);
+    }
+
+    public function invite_collaborators($project_id){
+        $existing_collaborators = json_decode(DB::table('project_collaborator')->where('project_id',$project_id)->pluck('collaborator_id'));
+//        dd($existing_collaborators);
+        $role = DB::table('roles')->where('name', 'Project Manager')->first();
+        $collaborators_ids = null;
+        if ($role){
+            $collaborators_ids = json_decode(DB::table('users')->where('role_id',$role->id)->pluck('id'));
+        }
+        $new_collaborators = [];
+        foreach ($collaborators_ids as $collaborators_id){
+            if (!in_array($collaborators_id,$existing_collaborators)){
+                $collaborators = DB::table('users')->where('role_id',$role->id)->where('id',$collaborators_id)->get();
+                foreach ($collaborators as $collaborator){
+                    $new_collaborators[] = $collaborator;
+                }
+            }
+        }
+//        return response()->json($trainers_new_member_ids);
+        return response()->json($new_collaborators);
     }
 }

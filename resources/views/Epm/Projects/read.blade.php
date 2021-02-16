@@ -10,14 +10,32 @@
             max-width: 100%;
             overflow: auto;
         }
+        .table-comments{
+            max-height: 100vh;
+            max-width: 100%;
+            overflow: auto;
+        }
         .card :hover{
             background-color: #edf2f7;
         }
-        .card{
+        .card {
+           width: 25rem;
+            word-wrap: break-word
+        }
+        .card-text {
+            word-wrap: break-word;
+        }
+        .add-attachment{
+            border: 1px dashed #7E858E;
+            padding: 20px;
+            border-radius: 2%;
             color: #7E858E;
-            max-width: 20rem;
-            min-width: 20rem;
-            word-break: break-all;
+        }
+        .modal .modal-footer{
+            position: sticky;
+            bottom: 0;
+            background-color: #FBFBFB;
+            z-index: 1;
         }
 
     </style>
@@ -32,7 +50,7 @@
                 </div>
                 <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
 {{--                    <p>Due {{date('l dS M Y',strtotime($project->due_date))}}</p>--}}
-                    <a href="#!">
+                    <a href="{{url('/adm/'.$auth_admin->id.'/edit/project/'.$project->id)}}">
                         <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Invite Teammates</button>
                     </a>
                 </div>
@@ -65,7 +83,7 @@
                             @if($boards)
                                 <tr>
                                     @foreach($boards as $board)
-                                        <td>
+                                        <td style="white-space: normal">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h5 style="font-size: 14px;">{{$board->name}}</h5>
@@ -88,13 +106,23 @@
                                                     }
                                                     ?>
                                                 <div class="col-md-12">
-                                                    <div class="card">
+                                                    <div  class="card">
                                                         <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <p class="d-inline-block mb-0 font-weight-normal">{{$task->name}}</p>
+
+                                                            <div class="">
+                                                                <div class="card-text">{{$task->name}}</div>
+                                                            </div>
+                                                            <div class="mt-4">
+
+                                                                <div class="">
+                                                                    @if($task->due_date)
+                                                                        {{$task->due_date}}
+                                                                    @else
+                                                                        <div class=""><i class="fa fa-calendar"></i> No Due Date</div>
+                                                                    @endif
                                                                 </div>
-                                                                <div class="col-md-6">
+
+                                                                <div class="mt-2">
                                                                     @if($avatar_icon_name)
                                                                         <button class="btn btn-icon" >{{$avatar_icon_name}}</button>
                                                                     @endif
@@ -102,13 +130,7 @@
                                                                             <i class="feather icon-plus"></i>
                                                                         </a>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    @if($task->due_date)
-                                                                        {{$task->due_date}}
-                                                                    @else
-                                                                        <span><i class="fa fa-calendar"></i></span> No Due Date
-                                                                    @endif
-                                                                </div>
+
                                                             </div>
                                                             <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
                                                         </div>
@@ -195,19 +217,71 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="task-details">
-
-                            </div>
                             <div class="col-md-12">
-                               <div class="row">
-                                   <div class="table-responsive">
-                                       <table class="table table-borderless">
-                                           <div class="task-comments">
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <form action="#!">
+                                            <div class="row task-details">
+{{--                                                    <div class="col-md-12">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <h6 class="text-center">Task Name</h6>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-3">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <p>Assignee</p>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-9">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <p>Assigneesssssss</p>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-3">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <p>Due Date</p>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-9">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <p>date</p>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row mt-4 mb-4">
+                                    <h6>Attachments</h6>
+                                    <div class="col-md-12 task-attachments">
+                                        <div class="attachment mt-4">
+                                            <div class="col-auto">
+                                                <a href="#!" class="add-attachment">
+                                                    <span><i class="fa fa-plus"></i></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                           </div>
-                                       </table>
-                                   </div>
-                               </div>
+                                <div class="row mt-4">
+                                    <h6>Links</h6>
+                                    <div class="col-md-12 task-attachments">
+                                        <div class="attachment mt-4">
+                                            <div class="col-auto">
+                                                <a href="#!" class="add-attachment">
+                                                    <span><i class="fa fa-plus"></i></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <h6>Comments & Progress Notes</h6>
+                                    <div class="col-md-12 task-comments">
+{{--                                        //comments dynamically pulled via ajax request--}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -220,13 +294,9 @@
                                                 <input type="hidden" name="user_id" id="modal-footer-user-id" value="">
                                                 <input type="hidden" name="task_id" id="modal-footer-task-id" value="">
                                                 <input type="hidden" name="csrf_token" id="modal-footer-csrf-token" value="{{csrf_token()}}">
-
                                                 <div id="editor">
 
                                                 </div>
-
-{{--                                                <textarea name="comment" id="" cols="90" rows="5"></textarea>--}}
-
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -258,7 +328,11 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         $(document).ready(function(){
-            $('.openModalTask').click(function(){
+            $('.openModalTask').click(function(event){
+                event.preventDefault();
+                $('.task-comments').empty();
+                // console.log($('.task-comments').innerHTML.length);
+
                 var userId = $(this).data('user_id');
                 var taskId = $(this).data('task_id');
                 var modalUserId = document.getElementById('modal-footer-user-id');
@@ -271,27 +345,53 @@
                         id: userId,
                         task_id: taskId,
                     },
-                    success: function([response_comments,response]){
+                    success: function([response_comments,response,assignees]){
                         // Add response in Modal body
-                        $('#modalTaskDetailed .modal-body .task-details').html(response);
-                        console.log('this are the comments '+response_comments);
-                        // if (response_comments){}
+                        console.log(assignees);
+
+                        let task_assignees = "";
+                        assignees.forEach(function (assignee){
+                            task_assignees+= '<button type="button" class="btn btn-icon m-2">'+assignee+'</button>'+
+                            '<button type="button" class="btn btn-icon">+</button>'
+                        });
+
+                        if(assignees.length<1)
+                        {
+                            task_assignees="<div>No One assigned yet</div>";
+                        }
+                        var due_date = response.due_date;
+                        if (response.due_date==null){
+                            due_date = 'No Due Date';
+                        }
+
+                        $('#modalTaskDetailed .modal-body .task-details').html(
+                            '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response.task_name+'</h6></div></div>'+
+                            '<div class="col-md-3"><div class="form-group"><p>Assignee: </p></div></div>'+
+                            '<div class="col-md-9"><div class="form-group">'+task_assignees+'</div></div>'+
+                            '<div class="col-md-3"><div class="form-group"><p>Due Date</p></div></div>'+
+                            '<div class="col-md-9"><div class="form-group"><p>'+due_date+'</p></div></div>'
+                        );
+
+
+
+                        console.log(task_assignees);
                         console.log(response_comments.length);
-                            for ($i=0;$i<response_comments.length;$i++){
-                                var taskComment = response_comments[$i];
-                                console.log(taskComment);
-                                $('#modalTaskDetailed .modal-body .task-comments').html(
-                                    "<div class='col-md-12'>"+
-                                    "<tr>" +
-                                    "<td>"+taskComment.from+"</td>" +
-                                    "<td>"+taskComment.comment+"</td>" +
-                                    "</tr>"+
-                                    "</div>"
-                                );
-                            }
-
-
-                        //pass user id and task id to modal footer
+                        response_comments.forEach(function (response_comment){
+                            // console.log(response_comment);
+                            var date_time = response_comment.created_at;
+                            var commentTaskSection =
+                                '<div class="comment mt-4"><div>'+
+                                '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
+                                '<span> '+response_comment.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response_comment.date_time+'</span>' +
+                                '</span><br>'+
+                                '</div>'+
+                                '<div class="mt-2 ml-2">'+response_comment.comment+'</div></div>';
+                            var comments = $('.task-comments');
+                            // console.log(comments);
+                            // comments.innerHTML='';
+                            comments.append(commentTaskSection);
+                        });
+                        // pass user id and task id to modal footer
                         modalUserId.value = userId;
                         modalTaskId.value = taskId;
                         // Display Modal
@@ -309,7 +409,7 @@
             theme: 'snow'
         });
         var form = document.getElementById('form-comments');
-        console.log(form);
+        // console.log(form);
         form.onsubmit = function(event) {
             // Populate hidden form on submit
             event.preventDefault();
@@ -319,6 +419,7 @@
             var _token   = document.querySelector('input[name=csrf_token]').value;
             var about_content = quill.root.innerHTML;
             console.log(user_id,task_id);
+
             $.ajax({
                 url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
                 type: 'post',
@@ -329,9 +430,27 @@
                     comment: about_content,
                 },
                 success: function(response){
-                    if (response){
-                        quill.root.innerHTML='';
-                        alert(response);
+                    quill.root.innerHTML='';
+                    if ($('.task-comments').is(':empty')){
+                        var firstComment = '<div class="comment mt-4">'+
+                            '<div>'+
+                            '<button type="button" class="btn btn-icon">PR</button>' +
+                            '<span> '+response.collaborator_name+'<span style="font-size: 10px;color:mediumvioletred"> just now</span>' +
+                            '</span><br>'+
+                            '</div>'+
+                            '<div class="mt-2 ml-2">'+response.comment+'</div></div>';
+                        var commentSection = $('.task-comments');
+                        commentSection.append(firstComment);
+                    }else {
+                        var newComment = $('.comment');
+                        newComment.last().after('<div class="comment mt-4">'+
+                            '<div>'+
+                            '<button type="button" class="btn btn-icon">'+response.avtar_name+'</button>' +
+                            '<span> '+response.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response.date_time+'</span>' +
+                            '</span><br>'+
+                            '</div>'+
+                            '<div class="mt-2 ml-2">'+response.comment+'</div></div>'
+                        );
                     }
                 }
             });

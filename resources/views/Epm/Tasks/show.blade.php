@@ -43,10 +43,13 @@
                         @csrf
                         <table class="table table-borderless">
                             <?php
+//                            $task = \App\Models\Task::find($task->id);
                             $board = \App\Models\Task::find($task->id)->board;
                             $project = \App\Models\Project::find($board->project_id);
                             $project_boards = $project->boards;
                             $assignees = \App\Models\Task::find($task->id)->assignees;
+                            $comments = $task->comments;
+//                            dd($comments);
                             $avtar_icon_name = '';
                             if($assignees){
                                 foreach ($assignees as $assignee){
@@ -126,6 +129,26 @@
                             </tr>
                         </table>
                     </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td colspan="2">Comments</td>
+                        </tr>
+                        </thead>
+                        @if($comments)
+                            <tbody>
+                            @foreach($comments as $comment)
+                                <tr>
+                                    <td>{{$comment->comment}}</td> <td>{{$comment->from}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        @endif
+                    </table>
                 </div>
             </div>
             <div class="row">

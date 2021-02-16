@@ -6,6 +6,7 @@ use App\Models\Board;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -75,97 +76,44 @@ class TaskController extends Controller
         $board = $task->board;
         $project = Project::find($board->project_id);
         $project_boards = $project->boards;
-        $assignees = $task->assignees;
+        $task_assignees = $task->assignees;
         $comments = $task->comments;
-        $avtar_icon_name = '';
-        if($assignees){
-            foreach ($assignees as $assignee){
-                $split_name = explode(' ',$assignee->name);
+        $assignees = [];
+        if($task_assignees){
+            foreach ($task_assignees as $task_assignee){
+                $split_name = explode(' ',$task_assignee->name);
                 if (count($split_name)>1){
-                    $avtar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                    $assignees[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
                 }else{
-                    $avtar_icon_name = substr($assignee->name,0,1);
+                    $assignees[] = substr($task_assignee->name,0,1);
                 }
             }
         }
-
-        $response = '<div class="col-md-12">';
-        $response .= '<div class="row">';
-
-        $response .= '<div class="col-md-12 d-flex align-items-center mb-4">';
-        $response .= '<h1 class="d-inline-block mb-0 font-weight-normal">'.$task->name.'</h1>';
-        $response .= '</div>';
-
-        $response .= '</div>';
-
-
-        $response .= '<div class="row">
-                        <div class="table-responsive">
-                                <table class="table table-borderless">';
-
-        $response .= '<div class="col-md-12"><tr><div class="row">';
-        $response .= '<div class="col-md-3"><td>Assignee:</td></div>';
-        if ($avtar_icon_name) {
-            $response .= '<div class="col-md-9"><td><button type="button" class="btn btn-icon">' . $avtar_icon_name . '</button>';
-
-            $response .= '<a href="#!" title="Assign new Collaborator">
-                            <button type="button" class="btn btn-icon"><i class="feather icon-plus"></i></button>
-                        </a>
-                        </td></div>';
-            $response .= '</div></tr></div>';
-        }else{
-            $response .= '<div class="col-md-9"><td><a href="#!" title="Assign new Collaborator">
-                            <button type="button" class="btn btn-icon"><i class="feather icon-plus"></i></button>
-                        </a>
-                        </td></div>';
-            $response .= '</div></tr></div>';
+        $response = [
+            'task_name'=>$task->name,
+            'project_name'=>$project->name,
+            'due_date'=>$task->due_date,
+        ];
+        $response_comments = [];
+        foreach ($comments as $comment){
+            $comment_admin = User::find($comment->collaborator_id);
+            $split_name = explode(' ',$comment_admin->name);
+            $avtar_icon_name = null;
+            if (count($split_name)>1){
+                $avtar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+            }else{
+                $avtar_icon_name = substr($comment_admin->name,0,1);
+            }
+            $response_comments[] = [
+                'name'=>$comment_admin->name,
+                'comment'=>$comment->comment,
+                'avtar_name'=>$avtar_icon_name,
+                'date_time'=>Carbon::parse($comment->created_at)->diffForHumans(),
+            ];
         }
-
-        $response .= '<div class="col-md-12"><tr><div class="row">';
-        $response .= '<div class="col-md-3"><td>Due Date:</td></div>';
-        if ($task->due_date) {
-            $response .= '<div class="col-md-9"><td>' . $task->due_date . '</td></div>';
-        }else{
-            $response .= '<div class="col-md-9"><td> <span><i class="fa fa-calendar"></i></span> No Due Date</td></div>';
-        }
-        $response .= '</div></tr></div>';
-
-        $response .= '<div class="col-md-12"><tr><div class="row">';
-        $response .= '<div class="col-md-3"><td>Project:</td></div>';
-        $response .= '<div class="col-md-9"><td>'.$project->name. '</td></div>';
-        $response .= '</div></tr></div>';
-
-        $response .='            </table>
-                        </div>
-                    </div>';
-
-        $response .= '</div>';
-
-        $response_comments = $comments;
-
-//        $response_comments = 'well done';
-
-//        $response_comment = '<div class="col-md-12">';
-//        $response_comment .= '<div class="row">';
-//        $response_comment .= '<div class="table-responsive">
-//                                <table class="table table-borderless">';
-//
-//        if ($comments){
-//            $response_comment .= '<div class="col-md-12">';
-//            foreach ($comments as $comment){
-//                $response_comment .= '<tr><td>'.$comment->message.'</td></tr>';
-//            }
-//            $response_comment .= '</div>';
-//        }
-//
-//        $response_comment .='    </table>
-//                            </div>';
-//
-//        $response_comment .= '</div>';
-//        $response_comment .= '</div>';
-
-
-        return [$response_comments,$response];
+        return [$response_comments,$response,$assignees];
+//        return $response;
+//        return view('Epm.Tasks.show',compact('task'));
     }
 
     /**

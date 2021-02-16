@@ -39,6 +39,7 @@ Route::group(['middleware'=>'super_admin'],function (){
 //    Route::get('/adm-dashboard',[App\Http\Controllers\SuperAdminController::class, 'index']);
     Route::get('/register/su-admin',[App\Http\Controllers\SuperAdminController::class, 'su_admin_register_su_admin']);
     Route::post('/save/su-admin',[App\Http\Controllers\SuperAdminController::class, 'adm_save_su_admin']);
+    Route::get('/login/as/{id}',[App\Http\Controllers\SuperAdminController::class, 'login_as']);
 });
     //shared responsibility
 Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
@@ -139,6 +140,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/create/new/project',[App\Http\Controllers\ProjectController::class, 'create']);
     Route::post('/adm/{id}/save/new/project',[App\Http\Controllers\ProjectController::class, 'store']);
     Route::get('/adm/{id}/view/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'show']);
+    Route::get('/new/collaborators/project_id={project_id}',[App\Http\Controllers\ProjectController::class, 'invite_collaborators']);//json array of new collaborators not in project
     Route::get('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
     //Projects -> Boards
@@ -147,6 +149,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/create/new/task/board_id={board_id}',[App\Http\Controllers\TaskController::class, 'store']);
     Route::get('/adm/{id}/view/task/task_id={task_id}',[App\Http\Controllers\TaskController::class, 'show']);
     Route::post('/adm/{id}/add/task/comment/task_id={task_id}',[App\Http\Controllers\TaskCommentController::class, 'store']);
+    Route::get('/adm/{id}/assign/task/task_id={task_id}/new/collaborator',[App\Http\Controllers\TaskCommentController::class, 'store']);
 
 
 

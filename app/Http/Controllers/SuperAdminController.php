@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use phpDocumentor\Reflection\Types\Null_;
 use phpDocumentor\Reflection\Types\True_;
 
@@ -39,6 +40,25 @@ class SuperAdminController extends Controller
 
     public function su_admin_register_su_admin(){
         return view('Epm.SuAdmins.adm-register-su-admin');
+    }
+
+    public function login_as($id){
+
+
+        $user= User::find($id);
+        if($user)
+        {
+            if($user->role_id ==1)
+            {
+                return redirect()->back()->with('error',"Cannot login as User {$user->name}");
+            }
+
+            Auth::login($user);
+            return redirect("/")->with('success',"Successfully logged in as {$user->name}");
+        }
+        else{
+            return redirect()->back()->with('error',"User {$id} not found");
+        }
     }
 
     public function su_admin_save(Request $request)
