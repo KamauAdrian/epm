@@ -233,7 +233,7 @@
 
                                         </div>
 
-                                            <div class="ml-3 attachment"> <a href="#!" class="add-attachment attach"> <span><i class="fa fa-plus"></i></span> </a> </div>
+                                            <div  id="add-attachment"  style="margin-top:20px;width:auto" class=" ml-3 attachment"> <a href="#!" class=" attach stretched-linkz"> <span><i class="fa fa-plus"></i></span> </a> </div>
 
 
 
@@ -489,7 +489,7 @@
 
                 $("#modalTaskDetailed").modal('show');
             });
-            $('.add-attachment').click(function(event){
+            $('#add-attachment').click(function(event){
                 $("#modalTaskDetailed").modal('hide');
                 $("#modalAddAttachment").modal('show');
             });
@@ -573,7 +573,7 @@
                     atchmts.html("");
 
                    /// console.log(attachmentsArray);
-                    var i,j,temparray,chunk = 3;
+                    var i,j,temparray,chunk = 2;
                     for (i=0,j=attachments.length; i<j; i+=chunk) {
                         temparray = attachments.slice(i,i+chunk);
                         var rowDiv='<div style="height: 50px" class="row">';
@@ -581,7 +581,7 @@
                         for(x=0;x<temparray.length;x++)
                         {
                             var attachment=temparray[x];
-                            childDiv+='<div class="col-md-4 attachment"><a href="#!" class="attach"> '+attachment.name+'</a></div>';
+                            childDiv+='<div class="col-md-6  attachment"><div class="card" style="width:auto"><a href="#!" class="attach"> '+attachment.name+'<div style="float:right"><span class="btn btn-icon"><i class="fa fa-download"></i></span><span class="btn btn-icon ml-2"><i class="fa fa-times"></i></span></div></a></div></div>';
 
                         }
 

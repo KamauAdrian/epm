@@ -49,11 +49,13 @@ class TaskAttachmentController extends Controller
         $file = $request->file('attachment');
         if ($file->isValid()){
             $fileName = $file->getClientOriginalName();
-            $file->move('Tasks/Attachments',$fileName);
+            $path=$file->move('Tasks/Attachments',$fileName);
+            $file_path=url('/')."/".$path->getPathName();
         }
         $attachment = new TaskAttachment();
         $attachment->name = $fileName;
         $attachment->task_id = $task->id;
+        $attachment->url = $file_path;
         if ($attachment->save()){
             $response["result_code"]=0;
             $response["message"] = "Attachment Uploaded Successfully";
