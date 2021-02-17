@@ -46,7 +46,6 @@ class TaskCommentController extends Controller
         $new_comment->task_id = $task->id;
         $new_comment->comment = $comment['comment'];
        $new_comment_saved =  $new_comment->save();
-
        $response = null;
        if ($new_comment_saved){
            $name = User::find($new_comment->collaborator_id);
@@ -58,7 +57,7 @@ class TaskCommentController extends Controller
                $avtar_icon_name = substr($name->name,0,1);
            }
            $response = [
-               'name'=>$new_comment->collaborator_name,
+               'name'=>$name->name,
                'avtar_name'=>$avtar_icon_name,
                'comment'=>$new_comment->comment,
                'date_time'=>Carbon::parse($new_comment->created_at)->diffForHumans(),

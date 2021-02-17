@@ -338,11 +338,11 @@
 
 
 
-                        console.log(task_assignees);
-                        console.log(response_comments.length);
+                        // console.log(task_assignees);
+                        // console.log(response_comments.length);
                         response_comments.forEach(function (response_comment){
                             // console.log(response_comment);
-                            var date_time = response_comment.created_at;
+                            // var date_time = response_comment.created_at;
                             var commentTaskSection =
                                 '<div class="comment mt-4"><div>'+
                                 '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
