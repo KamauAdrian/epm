@@ -9,6 +9,12 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+      'name',
+        'due_date',
+        'description'
+    ];
+
     public function assignees(){
         return $this->belongsToMany('App\Models\User','assignee_task','task_id','assignee_id');
     }
@@ -23,5 +29,11 @@ class Task extends Model
 
     public function comments(){
         return $this->hasMany('App\Models\TaskComment','task_id');
+    }
+    public function attachments(){
+        return $this->hasMany('App\Models\TaskAttachment','task_id');
+    }
+    public function links(){
+        return $this->hasMany('App\Models\TaskLink','task_id');
     }
 }

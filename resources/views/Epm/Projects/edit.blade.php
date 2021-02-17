@@ -22,11 +22,11 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Project Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$project->name}}" readonly>
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$project->name}}">
                                     </div>
                                 </div>
                                 @if($project->collaborators)
-                                    <p>{{count($project->collaborators)}}</p>
+{{--                                    //collaborators already in project--}}
                                 @endif
                                 <div class="col-sm-12">
                                     <div class="form-group" id="collaborators" project_id="{{$project->id}}">
@@ -36,7 +36,6 @@
                                                      :searchable="true" :close-on-select="true" multiple>
                                         </multiselect>
                                         <input type="hidden" name="collaborators[]" v-for="pmo in selectedPmo" :value="pmo.id">
-                                        <span class="text-danger">{{$errors->first('collaborators')}}</span>
                                     </div>
                                 </div>
                                 @if($project->due_date)

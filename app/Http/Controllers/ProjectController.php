@@ -111,9 +111,22 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$project_id)
     {
-        //
+        $admin = User::find($id);
+        $existing_project = Project::find($project_id);
+        $project = $request->all();
+        $data = [
+          'name'=>$project['name'],
+          'due_date'=>$project['due_date'],
+          'description'=>$project['description'],
+        ];
+        $collaborators = $project['collaborators'];
+        $updated_project = $existing_project->update($data);
+        if ($updated_project){
+            $existing_project->collaborators()->attach($collaborators);
+        }
+     return redirect('/adm/'.$id.'/view/project/'.$project_id)->with('success','Project Updated Successfully');
     }
 
     /**
@@ -127,7 +140,7 @@ class ProjectController extends Controller
         //
     }
 
-    public function assignee($id){
+    public function collaborators($id){
         $collaborators = Project::find($id)->collaborators;
         return response()->json($collaborators);
     }
@@ -143,7 +156,7 @@ class ProjectController extends Controller
         $new_collaborators = [];
         foreach ($collaborators_ids as $collaborators_id){
             if (!in_array($collaborators_id,$existing_collaborators)){
-                $collaborators = DB::table('users')->where('role_id',$role->id)->where('id',$collaborators_id)->get();
+                $collaborators = DB::table('users')->orderBy('name')->where('role_id',$role->id)->where('id',$collaborators_id)->get();
                 foreach ($collaborators as $collaborator){
                     $new_collaborators[] = $collaborator;
                 }

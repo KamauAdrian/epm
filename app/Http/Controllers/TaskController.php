@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -78,6 +79,7 @@ class TaskController extends Controller
         $project_boards = $project->boards;
         $task_assignees = $task->assignees;
         $comments = $task->comments;
+        $attachments = $task->attachments;
         $assignees = [];
         if($task_assignees){
             foreach ($task_assignees as $task_assignee){
@@ -89,11 +91,6 @@ class TaskController extends Controller
                 }
             }
         }
-        $response = [
-            'task_name'=>$task->name,
-            'project_name'=>$project->name,
-            'due_date'=>$task->due_date,
-        ];
         $response_comments = [];
         foreach ($comments as $comment){
             $comment_admin = User::find($comment->collaborator_id);
@@ -111,7 +108,7 @@ class TaskController extends Controller
                 'date_time'=>Carbon::parse($comment->created_at)->diffForHumans(),
             ];
         }
-        return [$response_comments,$response,$assignees];
+        return [$response_comments,$task,$assignees,$attachments];
 //        return $response;
 //        return view('Epm.Tasks.show',compact('task'));
     }
@@ -134,10 +131,31 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id,$board_id)
+    public function update_assignees(Request $request, $id,$task_id)
     {
-        //
+        $task = Task::find($task_id);
+        $assignees = $request->assignees;
+
+        if ($task->assignees){
+            $task->assignees()->detach($task->assignees);
+            $task->assignees()->attach($assignees);
+        }
+        dd(count($task->assignees),$assignees);
     }
+
+    public function update_due_date(Request $request, $id,$task_id)
+    {
+        $task = Task::find($task_id);
+        $due_date = [
+            'due_date'=>$request->due_date,
+        ];
+        $response = null;
+        if ($task->update($due_date)){
+            $response = 'Task Due Date Updated Successfully';
+        }
+        return $response;
+    }
+
 
     /**
      * Remove the specified resource from storage.

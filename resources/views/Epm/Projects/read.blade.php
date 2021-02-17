@@ -12,7 +12,7 @@
             max-width: 100%;
             overflow: auto;
         }
-        .card :hover{
+        .card .tasks :hover{
             background-color: #edf2f7;
         }
         .card {
@@ -22,10 +22,10 @@
         .card-text {
             word-wrap: break-word;
         }
-        .add-attachment{
+        .attach{
             border: 1px dashed #7E858E;
-            padding: 20px;
             border-radius: 2%;
+            padding: 10px;
             color: #7E858E;
         }
         .modal .modal-footer{
@@ -33,6 +33,9 @@
             bottom: 0;
             background-color: #FBFBFB;
             z-index: 1;
+        }
+        .modalTop{
+            background-color: #7E858E;
         }
 
     </style>
@@ -54,23 +57,6 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <center>
-                        @if(session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @elseif(session()->has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-                    </center>
                 </div>
             </div>
         <div class="row">
@@ -90,27 +76,25 @@
                                                     <?php
                                                     $assignees = \App\Models\Task::find($task->id)->assignees;
                                                     //                                                                dd($single_task->assignees);
-                                                    $avatar_icon_name = null;
+                                                    $avatar_icon_name = [];
                                                     if ($assignees){
                                                         foreach ($assignees as $assignee){
                                                             $split_name = explode(' ',$assignee->name);
                                                             if (count($split_name)>1){
-                                                                $avatar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                                                                $avatar_icon_name[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
                                                             }else{
-                                                                $avatar_icon_name = substr($assignee->name,0,1);
+                                                                $avatar_icon_name[] = substr($assignee->name,0,1);
                                                             }
                                                         }
                                                     }
                                                     ?>
                                                 <div class="col-md-12">
-                                                    <div  class="card">
+                                                    <div  class="card tasks">
                                                         <div class="card-body">
-
                                                             <div class="">
                                                                 <div class="card-text">{{$task->name}}</div>
                                                             </div>
                                                             <div class="mt-4">
-
                                                                 <div class="">
                                                                     @if($task->due_date)
                                                                         {{$task->due_date}}
@@ -118,16 +102,16 @@
                                                                         <div class=""><i class="fa fa-calendar"></i> No Due Date</div>
                                                                     @endif
                                                                 </div>
-
                                                                 <div class="mt-2">
                                                                     @if($avatar_icon_name)
-                                                                        <button class="btn btn-icon" >{{$avatar_icon_name}}</button>
+                                                                        @foreach($avatar_icon_name as $name)
+                                                                            <button class="btn btn-icon" >{{$name}}</button>
+                                                                        @endforeach
                                                                     @endif
                                                                         <a href="#!" title="Assign new Collaborators" class="btn btn-icon">
                                                                             <i class="feather icon-plus"></i>
                                                                         </a>
                                                                 </div>
-
                                                             </div>
                                                             <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
                                                         </div>
@@ -139,33 +123,41 @@
                                                 <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
                                                     <div class="card-body">
                                                         <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" method="post">
-                                                            @csrf
-                                                            <label>Add A New Task To {{$board->name}}</label>
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <input style="width: auto" type="text" class="form-control" name="name" placeholder="Task One" required>
-                                                                    <span class="text-danger">{{$errors->first('name')}}</span>
+                                                            <div class="row">
+                                                                @csrf
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Add A New Task To {{$board->name}}</label>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">
-                                                                    <label>Assignee</label>
-                                                                    <multiselect v-model="selectedPmo" :options="pmos"
-                                                                                 placeholder="Search" track-by="id" label="name"
-                                                                                 :searchable="true" :close-on-select="true" multiple>
-                                                                    </multiselect>
-                                                                    <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Name</label>
+                                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="Task One" required>
+                                                                        <span class="text-danger">{{$errors->first('name')}}</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label>Due Date</label>
-                                                                    <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Task One">
+                                                                <div class="col-md-12">
+                                                                    <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">
+                                                                        <label>Assignee</label>
+                                                                        <multiselect v-model="selectedPmo" :options="pmos"
+                                                                                     placeholder="Search" track-by="id" label="name"
+                                                                                     :searchable="true" :close-on-select="true" multiple>
+                                                                        </multiselect>
+                                                                        <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group float-right">
-                                                                <input class="btn btn-outline-primary" type="submit" value="Add Task">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Due Date</label>
+                                                                        <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Task One">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-mdd-12">
+                                                                    <div class="form-group float-right">
+                                                                        <input class="btn btn-outline-primary" type="submit" value="Add Task">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -208,40 +200,62 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn btn-outline-info"><span><i class="fa fa-check"></i></span> Mark Complete</button>
+                            <button type="button" id="btn-mark-task-complete" class="btn btn-outline-info"><span><i class="fa fa-check"></i></span> Mark Complete </button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="col-md-12">
+                                <div class="row mt-4" style="display: none;">
+                                    <div class="col-md-12">
+                                        <div id="modal-modal-task-task-id"></div>
+                                        <div id="modal-modal-task-user-id"></div>
+                                    </div>
+                                </div>
                                 <div class="row mt-4">
                                     <div class="col-md-12">
                                         <form action="#!">
                                             <div class="row task-details">
+
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row mt-4 mb-4">
+                                <div class="row mt-4">
                                     <h6>Attachments</h6>
-                                    <div class="col-md-12 task-attachments">
-                                        <div class="attachment mt-4">
-                                            <div class="col-auto">
-                                                <a href="#!" class="add-attachment">
-                                                    <span><i class="fa fa-plus"></i></span>
-                                                </a>
-                                            </div>
+                                    <div class="col-md-12">
+                                        <div class="  mt-4">
+                                        <div class="container task-attachments">
+
+
+
+
                                         </div>
+
+                                            <div class="ml-3 attachment"> <a href="#!" class="add-attachment attach"> <span><i class="fa fa-plus"></i></span> </a> </div>
+
+
+
+                                        </div>
+
                                     </div>
                                 </div>
-
                                 <div class="row mt-4">
                                     <h6>Links</h6>
-                                    <div class="col-md-12 task-attachments">
-                                        <div class="attachment mt-4">
-                                            <div class="col-auto">
-                                                <a href="#!" class="add-attachment">
+                                    <div class="col-md-12">
+                                        <div class="task-links">
+                                            <ul class="list-unstyled">
+                                            <li><a href="">1. Link 1</a></li>
+                                            <li><a href="">1. Link 1</a></li>
+                                            <li><a href="">1. Link 1</a></li>
+                                            </ul>
+
+
+                                        </div>
+                                        <div class="row link mt-4">
+                                            <div class="ml-3 col-md-3">
+                                                <a href="#!" class="add-link attach">
                                                     <span><i class="fa fa-plus"></i></span>
                                                 </a>
                                             </div>
@@ -285,8 +299,182 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="modal fade modalTop" id="modalRemoveAssignee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="text-danger">Remove Collaborator From task</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="" id="form-delete-user" method="post">
+                                @csrf
+                                <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">
+                                    Yes Remove
+                                </button>
+                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="modal fade modalTop" id="modalUpdateAssignee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-update-assignees">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="hidden" name="user_id" id="modal-task-assignee-edit-user-id" value="{{$auth_admin->id}}">
+                                            <input type="hidden" id="modal-modal-assignee-task-id" name="task_id" value="">
+                                        <div project_id="{{$project->id}}" class="form-group" id="collaborators">
+                                            <label>Assignee</label>
+                                            <multiselect v-model="selectedPmo" :options="pmos"
+                                                         placeholder="Search" track-by="id" label="name"
+                                                         :searchable="true" :close-on-select="true" multiple>
+                                            </multiselect>
+                                            <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button id="btn-assign-task" type="submit" class="btn btn-outline-success float-right">
+                                                Assign Task
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="modal fade modalTop" id="modalUpdateDueDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-update-due-date">
+                                <div class="row mt-4" style="display: none;">
+                                    <div class="col-md-12">
+                                        <div ></div>
+                                        <div ></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input id="modal-modal-date-user-id" type="hidden" name="user_id" value="{{$auth_admin->id}}">
+                                        <input  id="modal-modal-date-task-id" type="hidden" name="task_id" value="">
+                                        <div class="form-group">
+                                            <label>Update Task Due Date</label>
+                                            <input type="date" class="form-control" name="due_date" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Update">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="modal fade modalTop" id="modalAddAttachment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-add-attachment" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group text-center">
+                                            <h6></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="hidden" name="user_id" value="{{$auth_admin->id}}">
+                                        <input type="hidden" id="modal-modal-attachment-task-id" name="task_id" value="">
+                                        <div class="form-group">
+                                            <label>Add an Attachment</label>
+                                            <input type="file" class="form-control" name="attachment" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Upload">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="modal fade modalTop" id="modalAddLink" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-add-link">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group text-center">
+                                            <h6></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="hidden" name="user_id" value="{{$auth_admin->id}}">
+                                        <input type="hidden"  id="modal-modal-link-task-id" name="task_id" value="">
+                                        <div class="form-group">
+                                            <label>Add a Link</label>
+                                            <input type="text" class="form-control" name="link" placeholder="Paste Your Link Here" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Add">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                     </div>
+                </div>
+            </div>
 @endsection
 
 @section('js')
@@ -294,75 +482,163 @@
         $(document).ready(function(){
             $('.openModalTask').click(function(event){
                 event.preventDefault();
-                $('.task-comments').empty();
-                // console.log($('.task-comments').innerHTML.length);
 
-                var userId = $(this).data('user_id');
-                var taskId = $(this).data('task_id');
-                var modalUserId = document.getElementById('modal-footer-user-id');
-                var modalTaskId = document.getElementById('modal-footer-task-id');
-                // AJAX request
-                $.ajax({
-                    url: '/adm/'+userId+'/view/task/task_id='+taskId,
-                    type: 'get',
-                    data: {
-                        id: userId,
-                        task_id: taskId,
-                    },
-                    success: function([response_comments,response,assignees]){
-                        // Add response in Modal body
-                        console.log(assignees);
+                var taskId=$(this).attr("data-task_id");
+                console.log("ZeId"+taskId);
+                $("#modal-modal-task-task-id").text(taskId);
 
-                        let task_assignees = "";
-                        assignees.forEach(function (assignee){
-                            task_assignees+= '<button type="button" class="btn btn-icon m-2">'+assignee+'</button>'+
-                            '<button type="button" class="btn btn-icon">+</button>'
-                        });
-
-                        if(assignees.length<1)
-                        {
-                            task_assignees="<div>No One assigned yet</div>";
-                        }
-                        var due_date = response.due_date;
-                        if (response.due_date==null){
-                            due_date = 'No Due Date';
-                        }
-
-                        $('#modalTaskDetailed .modal-body .task-details').html(
-                            '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response.task_name+'</h6></div></div>'+
-                            '<div class="col-md-3"><div class="form-group"><p>Assignee: </p></div></div>'+
-                            '<div class="col-md-9"><div class="form-group">'+task_assignees+'</div></div>'+
-                            '<div class="col-md-3"><div class="form-group"><p>Due Date</p></div></div>'+
-                            '<div class="col-md-9"><div class="form-group"><p>'+due_date+'</p></div></div>'
-                        );
-
-
-
-                        // console.log(task_assignees);
-                        // console.log(response_comments.length);
-                        response_comments.forEach(function (response_comment){
-                            // console.log(response_comment);
-                            // var date_time = response_comment.created_at;
-                            var commentTaskSection =
-                                '<div class="comment mt-4"><div>'+
-                                '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
-                                '<span> '+response_comment.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response_comment.date_time+'</span>' +
-                                '</span><br>'+
-                                '</div>'+
-                                '<div class="mt-2 ml-2">'+response_comment.comment+'</div></div>';
-                            var comments = $('.task-comments');
-                            // console.log(comments);
-                            // comments.innerHTML='';
-                            comments.append(commentTaskSection);
-                        });
-                        // pass user id and task id to modal footer
-                        modalUserId.value = userId;
-                        modalTaskId.value = taskId;
-                        // Display Modal
-                        $("#modalTaskDetailed").modal('show');
-                    }
-                });
+                $("#modalTaskDetailed").modal('show');
             });
+            $('.add-attachment').click(function(event){
+                $("#modalTaskDetailed").modal('hide');
+                $("#modalAddAttachment").modal('show');
+            });
+            $('.add-link').click(function(event){
+                $("#modalTaskDetailed").modal('hide');
+                $("#modalAddLink").modal('show');
+            });
+            // $('#btn-mark-task-complete').click(function (){
+            //     console.log(document.getElementById('btn-mark-task-complete'));
+            //     if ($(this).innerText == " Mark Complete ") {
+            //         $(this).innerText = "Completed";
+            //     } else {
+            //         $(this).innerText = "Mark Complete";
+            //     };
+            // });
+
+        });
+
+        function openModalRemoveAssignee(){
+            $("#modalRemoveAssignee").modal('show');
+        }
+
+        function openModalUpdateAssignee(){
+            $("#modalTaskDetailed").modal('hide');
+            $("#modalUpdateAssignee").modal('show');
+        }
+        $('#modalUpdateAssignee').on('hidden.bs.modal', function () {
+            // do something…
+            $("#modalTaskDetailed").modal('show');
+        })
+
+        function openModalUpdateDueDate(){
+          //  var userId = "{{Auth::user()->id}}";
+           // var taskId = document.getElementById('modal-modal-date-task-id');
+           // taskId.append(document.getElementById('modal-modal-task-task-id').innerText);
+            $("#modalTaskDetailed").modal('hide');
+            $("#modalUpdateDueDate").modal('show');
+        }
+
+        $('#modalUpdateDueDate').on('hidden.bs.modal', function () {
+            // do something…
+            $("#modalTaskDetailed").modal('show');
+        });
+        $('#modalAddAttachment').on('hidden.bs.modal', function () {
+            // do something…
+            $("#modalTaskDetailed").modal('show');
+        });
+
+        $('#modalTaskDetailed').on('show.bs.modal', function () {
+
+            $('.task-comments').empty();
+
+            var userId ="{{Auth::user()->id}}";
+            var taskId = document.getElementById('modal-modal-task-task-id').innerText;
+            console.log(taskId);
+            $("#modal-modal-date-task-id").val(taskId);
+            $("#modal-modal-assignee-task-id").val(taskId);
+            $("#modal-modal-attachment-task-id").val(taskId);
+            $("#modal-modal-link-task-id").val(taskId);
+
+            var modalUserId = document.getElementById('modal-footer-user-id');
+            var modalTaskId = document.getElementById('modal-footer-task-id');
+            // AJAX request
+            $.ajax({
+                url: '/adm/'+userId+'/view/task/task_id='+taskId,
+                type: 'get',
+                data: {
+                    id: userId,
+                    task_id: taskId,
+                },
+                success: function([response_comments,task,assignees,attachments]){
+                    // Add response in Modal body
+                    console.log(assignees);
+
+                    var task_assignees = "";
+                    assignees.forEach(function (assignee){
+                        task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
+                    });
+                    var task_attachment = "";
+                    var atchmts = $('.task-attachments');
+                    atchmts.html("");
+
+                   /// console.log(attachmentsArray);
+                    var i,j,temparray,chunk = 3;
+                    for (i=0,j=attachments.length; i<j; i+=chunk) {
+                        temparray = attachments.slice(i,i+chunk);
+                        var rowDiv='<div style="height: 50px" class="row">';
+                        var childDiv="";
+                        for(x=0;x<temparray.length;x++)
+                        {
+                            var attachment=temparray[x];
+                            childDiv+='<div class="col-md-4 attachment"><a href="#!" class="attach"> '+attachment.name+'</a></div>';
+
+                        }
+
+                        rowDiv+=childDiv+ '</div>';
+                        atchmts.append(rowDiv);
+                        console.log(rowDiv);
+                    }
+
+                    // $('.task-attachments').last().after();
+                   // atchmts.append('<div class=" attachment"> <a href="#!" class="add-attachment attach"> <span><i class="fa fa-plus"></i></span> </a> </div>');
+
+
+                    var due_date = task.due_date;
+                    if (task.due_date==null){
+                        due_date = 'No Due Date';
+                    }
+                    var description = task.description;
+
+                    $('#modalTaskDetailed .modal-body .task-details').html(
+                        '<div class="col-md-12" style="display: none;" id="modal-task-id">'+task.id+'</div>'+
+                        '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+task.name+'</h6></div></div>'+
+                        '<div class="col-md-3"><div class="form-group"><p>Task Assignees: </p></div></div>'+
+                        '<div class="col-md-9"><div class="form-group">'+task_assignees+'<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
+                        '<div class="col-md-3"><div class="form-group"><p>Task Due Date</p></div></div>'+
+                        '<div class="col-md-9"><div class="form-group"><p onclick="openModalUpdateDueDate()"><span><i class="fa fa-calendar"></i></span> '+due_date+'</p></div></div>'
+                    );
+
+                    // console.log(task_assignees);
+                    // console.log(response_comments.length);
+                    response_comments.forEach(function (response_comment){
+                        // console.log(response_comment);
+                        // var date_time = response_comment.created_at;
+                        var commentTaskSection =
+                            '<div class="comment mt-4"><div>'+
+                            '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
+                            '<span> '+response_comment.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response_comment.date_time+'</span>' +
+                            '</span><br>'+
+                            '</div>'+
+                            '<div class="mt-2 ml-2">'+response_comment.comment+'</div></div>';
+                        var comments = $('.task-comments');
+                        // console.log(comments);
+                        // comments.innerHTML='';
+                        comments.append(commentTaskSection);
+                    });
+                    // pass user id and task id to modal footer
+                    modalUserId.value = userId;
+                    modalTaskId.value = taskId;
+                    // Display Modal
+                    $("#modalTaskDetailed").modal('show');
+                }
+            });
+        });
+
+
+        $('#modalAddLink').on('hidden.bs.modal', function () {
+            // do something…
+            $("#modalTaskDetailed").modal('show');
         });
 
         var quill = new Quill('#editor', {
@@ -372,9 +648,12 @@
             placeholder: 'Ask a Question or Post an Update...',
             theme: 'snow'
         });
-        var form = document.getElementById('form-comments');
-        // console.log(form);
-        form.onsubmit = function(event) {
+        var formComments = document.getElementById('form-comments');
+        var formUpdateAssignees = document.getElementById('form-update-assignees');
+        var formUpdateDueDate = document.getElementById('form-update-due-date');
+        var formAddAttachment = document.getElementById('form-add-attachment');
+        var formAddLink = document.getElementById('form-add-link');
+        formComments.onsubmit = function(event) {
             // Populate hidden form on submit
             event.preventDefault();
             // var about = document.querySelector('input[name=about]');
@@ -382,8 +661,6 @@
             var task_id = document.querySelector('input[name=task_id]').value;
             var _token   = document.querySelector('input[name=csrf_token]').value;
             var about_content = quill.root.innerHTML;
-            console.log(user_id,task_id);
-
             $.ajax({
                 url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
                 type: 'post',
@@ -398,8 +675,8 @@
                     if ($('.task-comments').is(':empty')){
                         var firstComment = '<div class="comment mt-4">'+
                             '<div>'+
-                            '<button type="button" class="btn btn-icon">PR</button>' +
-                            '<span> '+response.collaborator_name+'<span style="font-size: 10px;color:mediumvioletred"> just now</span>' +
+                            '<button type="button" class="btn btn-icon">'+response.avtar_name+'</button>' +
+                            '<span> '+response.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response.date_time+'</span>' +
                             '</span><br>'+
                             '</div>'+
                             '<div class="mt-2 ml-2">'+response.comment+'</div></div>';
@@ -416,6 +693,107 @@
                             '<div class="mt-2 ml-2">'+response.comment+'</div></div>'
                         );
                     }
+                    $('#modalTaskDetailed').animate({
+                        scrollTop: $('#modalTaskDetailed')[0].scrollHeight
+                    }, "slow");
+
+                }
+            });
+
+            // No back end to actually submit to!
+            // alert('Open the console to see the submit data!');
+            return true;
+        };
+        formUpdateAssignees.onsubmit = function(event) {
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            })
+            event.preventDefault();
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            var task_id = $("#modal-modal-assignee-task-id").val();
+            var formData = $("#form-update-assignees").serializeArray();
+            $.ajax({
+                url: '/adm/'+user_id+'/assign/task/'+task_id+'/new/collaborator',
+                type: 'post',
+                data:formData,
+                success: function(response){
+                    $("#modalUpdateAssignee").modal('hide');
+                }
+            });
+
+            // No back end to actually submit to!
+            // alert('Open the console to see the submit data!');
+            return true;
+        };
+        formUpdateDueDate.onsubmit = function(event) {
+            // Populate hidden form on submit
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            })
+            event.preventDefault();
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            var task_id = $("#modal-modal-date-task-id").val();
+            var formData = $("#form-update-due-date").serializeArray();
+            $.ajax({
+                url: '/adm/'+user_id+'/update/task/'+task_id+'/due_date',
+                type: 'post',
+                data: formData,
+                success: function(response){
+                    // $("#modalTaskDetailed").modal('hide');
+                    $("#modalUpdateDueDate").modal('hide');
+                }
+            });
+
+            // No back end to actually submit to!
+            // alert('Open the console to see the submit data!');
+            return true;
+        };
+        formAddAttachment.onsubmit = function(event) {
+            // Populate hidden form on submit
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            })
+            event.preventDefault();
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            var task_id = $("#modal-modal-attachment-task-id").val();
+            var formData = new FormData(document.getElementById("form-add-attachment"));
+            $.ajax({
+                url: '/adm/'+user_id+'/add/task/'+task_id+'/attachment',
+                type: 'post',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(response){
+                    if (response){
+                        // $("#modalTaskDetailed").modal('hide');
+                        $("#modalAddAttachment").modal('hide');
+                    }
+                }
+            });
+
+            // No back end to actually submit to!
+            // alert('Open the console to see the submit data!');
+            return true;
+        };
+        formAddLink.onsubmit = function(event) {
+            // Populate hidden form on submit
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            })
+            event.preventDefault();
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            var task_id = $("#modal-modal-link-task-id").val();
+            var formData = $("#form-add-link").serializeArray();
+            $.ajax({
+                url: '/adm/'+user_id+'/add/task/'+task_id+'/link',
+                type: 'post',
+                data: formData,
+                success: function(response){
+                    if (response){
+                        // $("#modalTaskDetailed").modal('hide');
+                        $("#modalAddLink").modal('hide');
+                    }
+
                 }
             });
 
@@ -450,50 +828,7 @@
         //     // alert('Open the console to see the submit data!');
         //     return false;
         // });
-        // var Delta = Quill.import('delta');
-        // var quill = new Quill('#editor', {
-        //     modules: {
-        //         toolbar: true
-        //     },
-        //     placeholder: 'Ask a Question or Post an Update...',
-        //     theme: 'snow'
-        // });
-        //
-        // // Store accumulated changes
-        // var change = new Delta();
-        // quill.on('text-change', function(delta) {
-        //     change = change.compose(delta);
-        // });
-        //
-        // // Save periodically
-        // setInterval(function() {
-        //     if (change.length() > 0) {
-        //         console.log('Saving changes', change);
-        //         // Send partial changes
-        //         // $.post('/your-endpoint', {
-        //         //     partial: JSON.stringify(change)
-        //         // });
-        //         /*
-        //         Send partial changes
-        //         $.post('/your-endpoint', {
-        //           partial: JSON.stringify(change)
-        //         });
-        //
-        //         Send entire document
-        //         $.post('/your-endpoint', {
-        //           doc: JSON.stringify(quill.getContents())
-        //         });
-        //         */
-        //         change = new Delta();
-        //     }
-        // }, 5*1000);
-        //
-        // // Check for unsaved data
-        // window.onbeforeunload = function() {
-        //     if (change.length() > 0) {
-        //         return 'There are unsaved changes. Are you sure you want to leave?';
-        //     }
-        // }
+
         function addNewBoard(){
             var boardForm = document.getElementById('add-new-board');
             if (boardForm.style.display='none'){
@@ -538,10 +873,85 @@
                 },
             }).$mount('#assignee_'+id)
         }
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data() {
+                return {
+                    selectedPmo: null,
+                    pmos: [],
+                }
+            },
+            mounted () {
+                this.getAssignees()
+            },
+            methods:{
+                getAssignees(){
+                    axios
+                        .get('/list/collaborators/'+this.$el.attributes.project_id.value)
+                        .then(response => {
+                            this.pmos = response.data;
+                            console.log(this.$el.attributes.project_id.value);
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true)
+                },
+            },
+        }).$mount('#collaborators')
         $(document).ready(function (){
             $('#tableProjects').DataTable();
         });
         $('#myDataTable').DataTable();
+
+        // var Delta = Quill.import('delta');
+        // var taskDesc = new Quill('#task-description-add', {
+        //     modules: {
+        //         toolbar: true
+        //     },
+        //     placeholder: 'Add a Short Task Description',
+        //     theme: 'snow'
+        // });
+        //
+        // // Store accumulated changes
+        // var change = new Delta();
+        // taskDesc.on('text-change', function(delta) {
+        //     change = change.compose(delta);
+        // });
+        // //
+        // // // Save periodically
+        // setInterval(function() {
+        //     if (change.length() > 0) {
+        //         console.log('Saving changes', change);
+        //         // Send partial changes
+        //         // $.post('/your-endpoint', {
+        //         //     partial: JSON.stringify(change)
+        //         // });
+        //         /*
+        //         Send partial changes
+        //         $.post('/your-endpoint', {
+        //           partial: JSON.stringify(change)
+        //         });
+        //
+        //         Send entire document
+        //         $.post('/your-endpoint', {
+        //           doc: JSON.stringify(quill.getContents())
+        //         });
+        //         */
+        //         change = new Delta();
+        //     }
+        // }, 5*1000);
+        // //
+        // // // Check for unsaved data
+        // window.onbeforeunload = function() {
+        //     if (change.length() > 0) {
+        //         return 'There are unsaved changes. Are you sure you want to leave?';
+        //     }
+        // }
     </script>
 @endsection
 

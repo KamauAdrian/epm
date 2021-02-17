@@ -3,23 +3,6 @@
 $auth_admin = auth()->user();
 ?>
 <div class="col-sm-12">
-    <center>
-        @if(session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @elseif(session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-    </center>
     <div class="row">
         <div class="col-sm-12 mb-4">
             <h1 class="d-inline-block font-weight-normal mb-0">{{$center->name}} Profile</h1>

@@ -11,6 +11,7 @@
     <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
+    <meta name="_token" content="{{ csrf_token() }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"> -->
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
@@ -101,5 +102,14 @@
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 @yield('js')
 <script src="{{url('assets/js/pages/front.js')}}"></script>
+<script>
+    $.ajaxSetup(
+        {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+
+        });
+</script>
 </body>
 </html>

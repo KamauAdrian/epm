@@ -136,7 +136,7 @@ Route::group(['middleware'=>'admin'],function (){
 
     //projects
     Route::get('/adm/{id}/list/projects',[App\Http\Controllers\ProjectController::class, 'index']);
-    Route::get('/list/collaborators/{id}',[App\Http\Controllers\ProjectController::class, 'assignee']);
+    Route::get('/list/collaborators/{id}',[App\Http\Controllers\ProjectController::class, 'collaborators']);//json array of collaborators added to project
     Route::get('/adm/{id}/create/new/project',[App\Http\Controllers\ProjectController::class, 'create']);
     Route::post('/adm/{id}/save/new/project',[App\Http\Controllers\ProjectController::class, 'store']);
     Route::get('/adm/{id}/view/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'show']);
@@ -149,7 +149,12 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/create/new/task/board_id={board_id}',[App\Http\Controllers\TaskController::class, 'store']);
     Route::get('/adm/{id}/view/task/task_id={task_id}',[App\Http\Controllers\TaskController::class, 'show']);
     Route::post('/adm/{id}/add/task/comment/task_id={task_id}',[App\Http\Controllers\TaskCommentController::class, 'store']);
-    Route::get('/adm/{id}/assign/task/task_id={task_id}/new/collaborator',[App\Http\Controllers\TaskCommentController::class, 'store']);
+    Route::post('/adm/{id}/assign/task/{task_id}/new/collaborator',[App\Http\Controllers\TaskController::class, 'update_assignees']);
+    Route::post('/adm/{id}/update/task/{task_id}/due_date',[App\Http\Controllers\TaskController::class, 'update_due_date']);
+    //projects -> Tasks (Attachments)
+    Route::post('/adm/{id}/add/task/{task_id}/attachment',[App\Http\Controllers\TaskAttachmentController::class, 'store']);
+    //projects -> Tasks (links)
+    Route::post('/adm/{id}/add/task/{task_id}/link',[App\Http\Controllers\TaskLinkController::class, 'store']);
 
 
 
