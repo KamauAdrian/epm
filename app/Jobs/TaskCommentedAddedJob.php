@@ -37,8 +37,8 @@ class TaskCommentedAddedJob implements ShouldQueue
         //send email
         $email=$this->params['email'];
 
-        $collaborator=$this->params['collaborator'];
+        $comment_update=$this->params['comment_update'];
 
-        Mail::to($email)->send(new TaskCommentAdded($collaborator));
+        Mail::to($email)->send(new TaskCommentAdded($comment_update));
     }
 }
