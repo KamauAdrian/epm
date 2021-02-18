@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProjectCreatedJob;
 use App\Mail\CreatePassword;
 use App\Mail\ProjectCollaborationInvite;
 use App\Models\Project;
@@ -114,7 +115,11 @@ class ProjectController extends Controller
                 ];
                 //send mail to user as project collaborator
 
-                Mail::to($email)->send(new ProjectCollaborationInvite($collaborator));
+               //dispatch email job
+                $params=[];
+                $params['email']=$email;
+                $params['collaborator']=$collaborator;
+                dispatch(new ProjectCreatedJob($params));
 
             }
 //            dd('Project Saved',$saved_project);

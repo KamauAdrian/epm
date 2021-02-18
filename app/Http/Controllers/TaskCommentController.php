@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TaskCommentAdded;
 use App\Models\Task;
 use App\Models\TaskComment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TaskCommentController extends Controller
 {
@@ -55,6 +57,13 @@ class TaskCommentController extends Controller
                $avtar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
            }else{
                $avtar_icon_name = substr($name->name,0,1);
+           }
+           $collaborators = $task->project->collaborators;
+           foreach($collaborators as $task_collaborator){
+               $comment_update = [
+                   'name'=>$task_collaborator->name
+               ];
+               Mail::to($task_collaborator->email)->send(new TaskCommentAdded($comment_update));
            }
            $response = [
                'name'=>$name->name,

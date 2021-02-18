@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TaskAttachmentAdded;
+use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskAttachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TaskAttachmentController extends Controller
 {
@@ -59,6 +62,14 @@ class TaskAttachmentController extends Controller
         $attachment->task_id = $task->id;
         $attachment->url = $file_path;
         if ($attachment->save()){
+            $collaborators = $task->project->collaborators;
+            foreach ($collaborators as $collaborator){
+                $new_attachment= [
+                    'name'=>$collaborator->name,
+                ];
+
+                Mail::to($collaborator->email)->send(new TaskAttachmentAdded($new_attachment));
+            }
             $response["result_code"]=0;
             $response["message"] = "Attachment Uploaded Successfully";
             $response["data"] = $attachment;

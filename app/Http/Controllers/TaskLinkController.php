@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TaskLinkAdded;
+use App\Models\Task;
 use App\Models\TaskAttachment;
 use App\Models\TaskLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TaskLinkController extends Controller
 {
@@ -37,14 +40,24 @@ class TaskLinkController extends Controller
      */
     public function store(Request $request,$id,$task_id)
     {
-        $new_task_link = new TaskLink();
-        $new_task_link->name = $request['link'];
-        $new_task_link->task_id = $request['task_id'];
-        $response = null;
-        if ($new_task_link->save()){
-            $response = 'Task Link Saved Successfully';
+        $task = Task::find($task_id);
+        if ($task){
+            $new_task_link = new TaskLink();
+            $new_task_link->name = $request['link'];
+            $new_task_link->task_id = $request['task_id'];
+            $response = null;
+            if ($new_task_link->save()){
+                $collaborators = $task->project->collaborators;
+                foreach ($collaborators as $collaborator){
+                    $new_link = [
+                        'name'=>$collaborator->name
+                    ];
+                    Mail::to($collaborator->email)->send(new TaskLinkAdded($new_link));
+                }
+                $response = 'Task Link Saved Successfully';
+            }
+            return $response;
         }
-        return $response;
 
     }
 

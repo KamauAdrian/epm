@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProjectCreatedJob;
+use App\Jobs\TaskCompletedJob;
+use App\Mail\TaskCompleted;
 use App\Models\Board;
 use App\Models\Project;
 use App\Models\Task;
@@ -51,7 +54,8 @@ class TaskController extends Controller
         $new_task->name = $task['name'];
         $new_task->due_date = $task['due_date'];
         $new_task->creator_id = $admin->id;
-        $new_task->board_id = $board_id;
+        $new_task->board_id = $board->id;
+        $new_task->project_id = $board->project_id;
         $new_task_saved = $new_task->save();
         if ($new_task_saved && $request->assignees){
             $assignees = $task['assignees'];
@@ -171,23 +175,32 @@ class TaskController extends Controller
     public function mark_complete($id,$task_id)
     {
         $response = null;
-        if (Task::find($task_id)){
-            $task = Task::find($task_id);
+        $task = Task::find($task_id);
+        if ($task){
             $status = $task->status;
-            $data = '';
+            $collaborators = $task->project->collaborators;
             if ($status==0){
                 $data = [
                     'status'=>1
                 ];
+                $task->update($data);
+                foreach ($collaborators as $collaborator){
+                    //dispatch send Task completed emails
+                    $params=[];
+                    $params['email']=$collaborator->email;
+                    $params['collaborator']=$collaborator;
+                    dispatch(new TaskCompletedJob($params));
+                }
             }else{
                 $data = [
                     'status'=>0
                 ];
+                $task->update($data);
+                foreach ($collaborators as $collaborator){
+                    //dispatch send Task completed emails
+                }
             }
 
-            if ($task->update($data)){
-                $response = $task;
-            }
         }
         return $response;
     }
