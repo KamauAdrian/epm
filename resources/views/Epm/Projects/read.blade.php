@@ -548,9 +548,6 @@
             $("#modal-modal-assignee-task-id").val(taskId);
             $("#modal-modal-attachment-task-id").val(taskId);
             $("#modal-modal-link-task-id").val(taskId);
-
-            var modalUserId = document.getElementById('modal-footer-user-id');
-            var modalTaskId = document.getElementById('modal-footer-task-id');
             // AJAX request
             $.ajax({
                 url: '/adm/'+userId+'/view/task/task_id='+taskId,
@@ -639,9 +636,6 @@
                         // comments.innerHTML='';
                         comments.append(commentTaskSection);
                     });
-                    // pass user id and task id to modal footer
-                    modalUserId.value = userId;
-                    modalTaskId.value = taskId;
                     // Display Modal
                     $("#modalTaskDetailed").modal('show');
 
