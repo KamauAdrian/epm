@@ -67,13 +67,14 @@ class TaskCommentController extends Controller
            if ($collaborators){
                foreach($collaborators as $task_collaborator){
                    $comment_update = [
-                       'name'=>$task_collaborator->name
+                       'name'=>$task_collaborator->name,
+                       'task'=>$task->name,
+                       'comment_creator'=>$collaborator->name,
                    ];
+
                    $params=[];
                    $params['email']=$task_collaborator->email;
-                   $params['task']=$task->name;
-                   $params['collaborator']=$collaborator->name;
-                   $params['name']=$task_collaborator->name;
+                   $params['comment_update']=$comment_update;
                    dispatch(new TaskCommentedAddedJob($params));
 //                   TaskCommentedAddedJob::dispatch($params);
                }
