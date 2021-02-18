@@ -284,7 +284,7 @@
                                             <div class="form-group">
 {{--                                                <input type="hidden" name="about">--}}
                                                 <input type="hidden" name="user_id" id="modal-footer-user-id" value="">
-                                                <input type="hidden" name="task_id" id="modal-footer-task-id" value="">
+                                                <input type="hidden" name="task_id" id="modal-modal-comments-task-id" value="">
                                                 <input type="hidden" name="csrf_token" id="modal-footer-csrf-token" value="{{csrf_token()}}">
                                                 <div id="editor">
 
@@ -381,7 +381,7 @@
                             <form action="" id="form-update-due-date">
                                 <div class="row mt-4" style="display: none;">
                                     <div class="col-md-12">
-                                        <div ></div>
+                                        <div></div>
                                         <div ></div>
                                     </div>
                                 </div>
@@ -543,6 +543,7 @@
             var userId ="{{Auth::user()->id}}";
             var taskId = document.getElementById('modal-modal-task-task-id').innerText;
             console.log(taskId);
+            $("#modal-modal-comments-task-id").val(taskId);
             $("#modal-modal-date-task-id").val(taskId);
             $("#modal-modal-assignee-task-id").val(taskId);
             $("#modal-modal-attachment-task-id").val(taskId);
@@ -717,12 +718,14 @@
         var formAddLink = document.getElementById('form-add-link');
         formComments.onsubmit = function(event) {
             // Populate hidden form on submit
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            })
             event.preventDefault();
             // var about = document.querySelector('input[name=about]');
-            var user_id = {{auth()->user()->id}};
-            var task_id = $("#modal-modal-task-task-id").innerText;
+            var user_id = {{\Illuminate\Support\Facades\Auth::user()->id}};
+            var task_id = $("#modal-modal-comments-task-id").val();
             console.log('wololo this is what i found '+task_id);
-            var _token   = document.querySelector('input[name=csrf_token]').value;
             var about_content = quill.root.innerHTML;
             $.ajax({
                 url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
@@ -730,7 +733,6 @@
                 data: {
                     id: user_id,
                     task_id: task_id,
-                    _token: _token,
                     comment: about_content,
                 },
                 success: function(response){
