@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\CreatePassword;
+use App\Mail\ProjectCollaborationInvite;
 use App\Models\Project;
 use App\Models\Role;
 use App\Models\User;
@@ -53,7 +54,7 @@ class ProjectController extends Controller
         $this->validate($request,[
             'collaborators'=>'required',
         ]);
-        $collaborators = $request->input('collaborators');
+        $collaborators_ids = $request->input('collaborators');
         $project = $request->all();
         $new_project = new Project();
         $new_project->name = $project['name'];
@@ -62,16 +63,12 @@ class ProjectController extends Controller
         $new_project->description = $project['description'];
         $project_saved = $new_project->save();
         if ($project_saved){
-            Project::find($new_project->id)->collaborators()->attach($collaborators);
-            foreach ($collaborators as $collaborator){
+            Project::find($new_project->id)->collaborators()->attach($collaborators_ids);
+            foreach ($collaborators_ids as $collaborator_id){
                 //get collaborator email and send notification
-                $user = User::find($collaborator);
-
+                $collaborator = User::find($collaborator_id);
                 //send mail to user as project collaborator
-//                $data = [
-//
-//                ];
-//                Mail::to($user->email)->send(new CreatePassword($data));
+                Mail::to($collaborator->email)->send(new ProjectCollaborationInvite($collaborator));
 
             }
         }

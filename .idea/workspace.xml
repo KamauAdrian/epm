@@ -15,9 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskLinkController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskLinkController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,7 +292,7 @@
       <workItem from="1613449310134" duration="36975000" />
       <workItem from="1613487971482" duration="277000" />
       <workItem from="1613536185092" duration="49067000" />
-      <workItem from="1613621358150" duration="31715000" />
+      <workItem from="1613621358150" duration="32500000" />
     </task>
     <servers />
   </component>
@@ -318,10 +316,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="141" y="6" width="1084" height="722" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1606293559656" />
-    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612765097210">
+    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613653449982">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1612765097210" />
+    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1613653449982" />
     <state x="274" y="0" width="798" height="726" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1612767883769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
