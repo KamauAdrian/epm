@@ -72,10 +72,18 @@ class ProjectController extends Controller
 
                 $user = User::find($collaborator_id);
                 $email = $user->email;
+                $initials=null;
+                $split_name = explode(' ',$saved_project->owner->name);
+                if (count($split_name)>1){
+                    $initials[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                }else{
+                    $initials[] = substr($saved_project->owner->name,0,1);
+                }
                 $collaborator = [
                     'name'=>$user->name,
                     'project_name'=>$saved_project->name,
                     'creator_name'=>$saved_project->owner->name,
+                    'creator_initials'=>$initials,
                 ];
                 //send mail to user as project collaborator
 
