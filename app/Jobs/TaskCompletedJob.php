@@ -37,9 +37,9 @@ class TaskCompletedJob implements ShouldQueue
         //send email
         $email=$this->params['email'];
 
-        $update_task=$this->params['update_task'];
+        $updated_task=$this->params['updated_task'];
 
-        Mail::to($email)->send(new TaskCompleted($update_task));
+        Mail::to($email)->send(new TaskCompleted($updated_task));
     }
 
 }
