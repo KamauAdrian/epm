@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\ProjectCollaborationInvite;
+use App\Mail\TaskAttachmentAdded;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,6 +38,6 @@ class TaskAttachmentAddedJob implements ShouldQueue
         $email=$this->params['email'];
         $new_attachment=$this->params['new_attachment'];
 
-        Mail::to($email)->send(new ProjectCollaborationInvite($new_attachment));
+        Mail::to($email)->send(new TaskAttachmentAdded($new_attachment));
     }
 }

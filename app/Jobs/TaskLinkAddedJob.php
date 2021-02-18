@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\ProjectCollaborationInvite;
+use App\Mail\TaskLinkAdded;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,6 +38,6 @@ class TaskLinkAddedJob implements ShouldQueue
         $email=$this->params['email'];
         $new_link=$this->params['new_link'];
 
-        Mail::to($email)->send(new ProjectCollaborationInvite($new_link));
+        Mail::to($email)->send(new TaskLinkAdded($new_link));
     }
 }

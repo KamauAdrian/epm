@@ -20,8 +20,10 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskLinkController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskLinkController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/TaskAttachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TaskAttachment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/TaskLink.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TaskLink.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/attachments-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/attachments-update.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/comments-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/comments-update.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/links-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/links-update.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/status-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/status-update.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +302,7 @@
       <workItem from="1613536185092" duration="49067000" />
       <workItem from="1613621358150" duration="43857000" />
       <workItem from="1613671212502" duration="3023000" />
-      <workItem from="1613674437110" duration="4809000" />
+      <workItem from="1613674437110" duration="5171000" />
     </task>
     <servers />
   </component>
