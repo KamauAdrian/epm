@@ -559,6 +559,7 @@
                     task_id: taskId,
                 },
                 success: function([response_task,response_assignees,response_attachments,response_links,response_comments]){
+                    $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
                     if (response_task.status!=0){
                         $(".btn-mark-task-complete").text('Completed');
                     }else{
@@ -672,29 +673,26 @@
                         // return true;
                     });
 
-                    {{--$('#btn-mark-task-complete').click(function (event){--}}
-                    {{--    var taskId = $('#modal-modal-task-task-id').text();--}}
-                    {{--    var btnTaskComplete = $('#btn-mark-task-complete');--}}
-
-                    {{--    $.ajaxSetup({--}}
-                    {{--        header:$('meta[name="_token"]').attr('content')--}}
-                    {{--    })--}}
-                    {{--    event.preventDefault();--}}
-                    {{--    var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";--}}
-                    {{--    $.ajax({--}}
-                    {{--        url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',--}}
-                    {{--        type: 'post',--}}
-                    {{--        success: function(response){--}}
-
-                    {{--            // $("#modalUpdateAssignee").modal('hide');--}}
-                    {{--        }--}}
-                    {{--    });--}}
-
-                    {{--    // No back end to actually submit to!--}}
-                    {{--    // alert('Open the console to see the submit data!');--}}
-                    {{--    return true;--}}
-
-                    {{--});--}}
+                    $('#statusTask'+taskId).click(function (event){
+                        $.ajaxSetup({
+                            header:$('meta[name="_token"]').attr('content')
+                        })
+                        event.preventDefault();
+                        var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+                        $.ajax({
+                            url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',
+                            type: 'post',
+                            success: function(response){
+                                // $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
+                                if (response.status!=0){
+                                    $(".btn-mark-task-complete").text('Completed');
+                                }else{
+                                    $(".btn-mark-task-complete").text('Mark Complete');
+                                }
+                            }
+                        });
+                        return true;
+                    });
                 }
             });
 

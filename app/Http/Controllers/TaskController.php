@@ -172,13 +172,21 @@ class TaskController extends Controller
     {
         $response = null;
         if (Task::find($task_id)){
-
             $task = Task::find($task_id);
-            $data = [
-                'status'=>1
-            ];
+            $status = $task->status;
+            $data = '';
+            if ($status==0){
+                $data = [
+                    'status'=>1
+                ];
+            }else{
+                $data = [
+                    'status'=>0
+                ];
+            }
+
             if ($task->update($data)){
-                $response = 'Task Competed Successfully';
+                $response = $task;
             }
         }
         return $response;
