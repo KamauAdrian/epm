@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\TaskAttachmentAddedJob;
 use App\Jobs\TaskLinkAddedJob;
 use App\Mail\TaskAttachmentAdded;
 use App\Models\Project;
@@ -75,7 +76,7 @@ class TaskAttachmentController extends Controller
                 $params=[];
                 $params['email']=$collaborator->email;
                 $params['new_attachment']=$new_attachment;
-                dispatch(new TaskAttachmentAdded($params));
+                dispatch(new TaskAttachmentAddedJob($params));
 //                Mail::to($collaborator->email)->send(new TaskAttachmentAdded($new_attachment));
             }
             $response["result_code"]=0;
