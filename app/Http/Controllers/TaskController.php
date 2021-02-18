@@ -210,8 +210,8 @@ class TaskController extends Controller
                     $params['email']=$collaborator->email;
                     $params['message']=$message;
                     $params['collaborator']=$collaborator;
-                    dispatch(new TaskCompletedJob($params));
-                    //TaskCompletedJob::dispatch($params);
+//                    dispatch(new TaskCompletedJob($params));
+                    TaskCompletedJob::dispatch($params);
 
                 }
             }

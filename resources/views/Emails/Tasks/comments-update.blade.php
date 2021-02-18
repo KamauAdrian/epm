@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        {{$data['collaborator']->name}} Just commented on task {{$data['task']->name}}. Please login to your account to view the Comments
+        {{$data['collaborator']}} Just commented on task {{$data['task']}}. Please login to your account to view the Comments
     </p>
 
 @endsection
