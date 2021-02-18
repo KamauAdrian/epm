@@ -200,7 +200,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" id="btn-mark-task-complete" class="btn btn-outline-info"><span><i class="fa fa-check"></i></span> Mark Complete </button>
+                            <button type="button" id="" class="btn btn-outline-info btn-mark-task-complete"><span><i class="fa fa-check"></i></span> </button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -226,38 +226,44 @@
                                     <h6>Attachments</h6>
                                     <div class="col-md-12">
                                         <div class="  mt-4">
-                                        <div class="container task-attachments">
-
-
-
+                                        <div class="container task-attachments" style="overflow: auto;">
 
                                         </div>
-
-                                            <div  id="add-attachment"  style="margin-top:20px;width:auto" class=" ml-3 attachment"> <a href="#!" class=" attach stretched-linkz"> <span><i class="fa fa-plus"></i></span> </a> </div>
-
-
-
+                                            <div class="container mt-4">
+                                                <div style="height: 50px" class="row">
+                                                    <div class="col-sm-12  attachment">
+                                                        <div class="card text-center" style="width:auto" id="add-attachment">
+                                                            <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="row mt-4">
                                     <h6>Links</h6>
                                     <div class="col-md-12">
-                                        <div class="task-links">
-                                            <ul class="list-unstyled">
-                                            <li><a href="">1. Link 1</a></li>
-                                            <li><a href="">1. Link 1</a></li>
-                                            <li><a href="">1. Link 1</a></li>
-                                            </ul>
+                                        <div class="  mt-4">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-sm-12  attachment">
+                                                        <ol class="list-unstyled task-links">
 
-
-                                        </div>
-                                        <div class="row link mt-4">
-                                            <div class="ml-3 col-md-3">
-                                                <a href="#!" class="add-link attach">
-                                                    <span><i class="fa fa-plus"></i></span>
-                                                </a>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container mt-2">
+                                                <div style="height: 50px" class="row">
+                                                    <div class="col-md-12  attachment">
+                                                        <div class="card text-center" style="width:auto" id="add-link">
+                                                            <a href="#!" class="attach">
+                                                                <span><i class="fa fa-plus"></i></span> Add a Link
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -482,9 +488,7 @@
         $(document).ready(function(){
             $('.openModalTask').click(function(event){
                 event.preventDefault();
-
                 var taskId=$(this).attr("data-task_id");
-                console.log("ZeId"+taskId);
                 $("#modal-modal-task-task-id").text(taskId);
 
                 $("#modalTaskDetailed").modal('show');
@@ -493,18 +497,10 @@
                 $("#modalTaskDetailed").modal('hide');
                 $("#modalAddAttachment").modal('show');
             });
-            $('.add-link').click(function(event){
+            $('#add-link').click(function(event){
                 $("#modalTaskDetailed").modal('hide');
                 $("#modalAddLink").modal('show');
             });
-            // $('#btn-mark-task-complete').click(function (){
-            //     console.log(document.getElementById('btn-mark-task-complete'));
-            //     if ($(this).innerText == " Mark Complete ") {
-            //         $(this).innerText = "Completed";
-            //     } else {
-            //         $(this).innerText = "Mark Complete";
-            //     };
-            // });
 
         });
 
@@ -541,6 +537,8 @@
         $('#modalTaskDetailed').on('show.bs.modal', function () {
 
             $('.task-comments').empty();
+            $('.task-attachments').empty();
+            $('.task-links').empty();
 
             var userId ="{{Auth::user()->id}}";
             var taskId = document.getElementById('modal-modal-task-task-id').innerText;
@@ -560,49 +558,63 @@
                     id: userId,
                     task_id: taskId,
                 },
-                success: function([response_comments,task,assignees,attachments]){
+                success: function([response_task,response_assignees,response_attachments,response_links,response_comments]){
+                    if (response_task.status!=0){
+                        $(".btn-mark-task-complete").text('Completed');
+                    }else{
+                        $(".btn-mark-task-complete").text('Mark Complete');
+                    }
                     // Add response in Modal body
-                    console.log(assignees);
-
                     var task_assignees = "";
-                    assignees.forEach(function (assignee){
-                        task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
-                    });
-                    var task_attachment = "";
-                    var atchmts = $('.task-attachments');
-                    atchmts.html("");
-
-                   /// console.log(attachmentsArray);
-                    var i,j,temparray,chunk = 2;
-                    for (i=0,j=attachments.length; i<j; i+=chunk) {
-                        temparray = attachments.slice(i,i+chunk);
-                        var rowDiv='<div style="height: 50px" class="row">';
-                        var childDiv="";
-                        for(x=0;x<temparray.length;x++)
-                        {
-                            var attachment=temparray[x];
-                            childDiv+='<div class="col-md-6  attachment"><div class="card" style="width:auto"><a href="#!" class="attach"> '+attachment.name+'<div style="float:right"><span class="btn btn-icon"><i class="fa fa-download"></i></span><span class="btn btn-icon ml-2"><i class="fa fa-times"></i></span></div></a></div></div>';
-
-                        }
-
-                        rowDiv+=childDiv+ '</div>';
-                        atchmts.append(rowDiv);
-                        console.log(rowDiv);
+                    if (response_assignees){
+                        response_assignees.forEach(function (assignee){
+                            console.log(assignee);
+                            task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
+                        });
+                    }else {
+                        //do something else
+                        task_assignees+= '<p class="">No Assignee</p>'
                     }
 
-                    // $('.task-attachments').last().after();
+
+                    //attachments section
+                    var attachmentsContainer = $('.task-attachments');
+                    attachmentsContainer.empty();
+                    var rowAttachmentDiv = '';
+                    var i,j,temparray,chunk = 2;
+                    for (i=0,j=response_attachments.length; i<j; i+=chunk) {
+                        temparray = response_attachments.slice(i, i + chunk);
+                        rowAttachmentDiv = '<div style="height: 50px" class="row mt-2 mb-2">';
+                        var childAttachmentDiv="";
+                        for (x = 0; x < temparray.length; x++) {
+                            var attachment = temparray[x];
+                            childAttachmentDiv += '<div id="attachment-'+attachment.id+'" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" class="attachment-download" data-url="'+attachment.url+'"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon"><i class="fa fa-download attachment-download" data-url="'+attachment.url+'"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="'+attachment.id+'"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
+                        }
+                        rowAttachmentDiv +=childAttachmentDiv + '</div>';
+                        attachmentsContainer.append(rowAttachmentDiv);
+                    }
                    // atchmts.append('<div class=" attachment"> <a href="#!" class="add-attachment attach"> <span><i class="fa fa-plus"></i></span> </a> </div>');
 
 
-                    var due_date = task.due_date;
-                    if (task.due_date==null){
+                    // links section
+                    var linksContainer = $('.task-links');
+                    var linksDiv = '';
+                    for (var y = 0; y < response_links.length; y++) {
+                        var link = response_links[y];
+                        linksDiv += '<li class="attachment"> <div class="card attach" style="width:auto;"> <div class="" style=" width: 90%; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> <a target="_blank" href="'+link.name+'" style=""> ' + link.name + '</a> </div> <div class="text-right"> <span class="btn btn-icon ml-2"><i class="fa fa-times"></i></span> </div> </div> </li>';
+                    }
+                    linksContainer.append(linksDiv);
+
+
+                    var due_date = response_task.due_date;
+                    if (response_task.due_date==null){
                         due_date = 'No Due Date';
                     }
-                    var description = task.description;
+                    var description = response_task.description;
 
                     $('#modalTaskDetailed .modal-body .task-details').html(
-                        '<div class="col-md-12" style="display: none;" id="modal-task-id">'+task.id+'</div>'+
-                        '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+task.name+'</h6></div></div>'+
+                        '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
+                        '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response_task.name+'</h6></div></div>'+
                         '<div class="col-md-3"><div class="form-group"><p>Task Assignees: </p></div></div>'+
                         '<div class="col-md-9"><div class="form-group">'+task_assignees+'<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
                         '<div class="col-md-3"><div class="form-group"><p>Task Due Date</p></div></div>'+
@@ -631,8 +643,61 @@
                     modalTaskId.value = taskId;
                     // Display Modal
                     $("#modalTaskDetailed").modal('show');
+
+                    $('.attachment-download').click(function(event){
+
+                        var url = $(this).attr('data-url');
+                        console.log(url);
+                        window.location=url;
+                        // No back end to actually submit to!
+                        // alert('Open the console to see the submit data!');
+                        return true;
+                    });
+                    $('.attachment-delete').click(function(event){
+                        var attachmentId = $(this).attr('data-id');
+                        $.ajaxSetup({
+                            header:$('meta[name="_token"]').attr('content')
+                        })
+                        event.preventDefault();
+                        var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+                        console.log("attach id"+attachmentId);
+                        $.ajax({
+                            url: '/adm/'+user_id+'/delete/task/attachment/'+attachmentId,
+                            type: 'post',
+                            success: function(response){
+                                $("#attachment-"+attachmentId).hide();
+                                $("#modalTaskDetailed").modal('show');
+                            }
+                        });
+                        // return true;
+                    });
+
+                    {{--$('#btn-mark-task-complete').click(function (event){--}}
+                    {{--    var taskId = $('#modal-modal-task-task-id').text();--}}
+                    {{--    var btnTaskComplete = $('#btn-mark-task-complete');--}}
+
+                    {{--    $.ajaxSetup({--}}
+                    {{--        header:$('meta[name="_token"]').attr('content')--}}
+                    {{--    })--}}
+                    {{--    event.preventDefault();--}}
+                    {{--    var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";--}}
+                    {{--    $.ajax({--}}
+                    {{--        url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',--}}
+                    {{--        type: 'post',--}}
+                    {{--        success: function(response){--}}
+
+                    {{--            // $("#modalUpdateAssignee").modal('hide');--}}
+                    {{--        }--}}
+                    {{--    });--}}
+
+                    {{--    // No back end to actually submit to!--}}
+                    {{--    // alert('Open the console to see the submit data!');--}}
+                    {{--    return true;--}}
+
+                    {{--});--}}
                 }
             });
+
         });
 
 

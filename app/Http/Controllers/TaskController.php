@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\TaskAttachment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -73,42 +74,53 @@ class TaskController extends Controller
      */
     public function show($id,$task_id)
     {
+        $response_task = null;
+        $response_assignees = null;
+        $response_attachments = null;
+        $response_links = null;
+        $response_comments = null;
         $task = Task::find($task_id);
-        $board = $task->board;
-        $project = Project::find($board->project_id);
-        $project_boards = $project->boards;
-        $task_assignees = $task->assignees;
-        $comments = $task->comments;
-        $attachments = $task->attachments;
-        $assignees = [];
-        if($task_assignees){
-            foreach ($task_assignees as $task_assignee){
-                $split_name = explode(' ',$task_assignee->name);
-                if (count($split_name)>1){
-                    $assignees[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
-                }else{
-                    $assignees[] = substr($task_assignee->name,0,1);
+        if ($task){
+            $response_task = $task;
+            $board = $task->board;
+            $project = Project::find($board->project_id);
+            $project_boards = $project->boards;
+            $comments = $task->comments;
+            if ($task->attachments){
+                $response_attachments = $task->attachments;
+            }
+            if ($task->links){
+                $response_links = $task->links;
+            }
+            if($task->assignees){
+                foreach ($task->assignees as $task_assignee){
+                    $split_name = explode(' ',$task_assignee->name);
+                    if (count($split_name)>1){
+                        $response_assignees[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                    }else{
+                        $response_assignees[] = substr($task_assignee->name,0,1);
+                    }
                 }
             }
-        }
-        $response_comments = [];
-        foreach ($comments as $comment){
-            $comment_admin = User::find($comment->collaborator_id);
-            $split_name = explode(' ',$comment_admin->name);
-            $avtar_icon_name = null;
-            if (count($split_name)>1){
-                $avtar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
-            }else{
-                $avtar_icon_name = substr($comment_admin->name,0,1);
+            foreach ($comments as $comment){
+                $comment_admin = User::find($comment->collaborator_id);
+                $split_name = explode(' ',$comment_admin->name);
+                $avtar_icon_name = null;
+                if (count($split_name)>1){
+                    $avtar_icon_name = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                }else{
+                    $avtar_icon_name = substr($comment_admin->name,0,1);
+                }
+                $response_comments[] = [
+                    'name'=>$comment_admin->name,
+                    'comment'=>$comment->comment,
+                    'avtar_name'=>$avtar_icon_name,
+                    'date_time'=>Carbon::parse($comment->created_at)->diffForHumans(),
+                ];
             }
-            $response_comments[] = [
-                'name'=>$comment_admin->name,
-                'comment'=>$comment->comment,
-                'avtar_name'=>$avtar_icon_name,
-                'date_time'=>Carbon::parse($comment->created_at)->diffForHumans(),
-            ];
         }
-        return [$response_comments,$task,$assignees,$attachments];
+
+        return [$response_task,$response_assignees,$response_attachments,$response_links,$response_comments];
 //        return $response;
 //        return view('Epm.Tasks.show',compact('task'));
     }
@@ -156,6 +168,22 @@ class TaskController extends Controller
         return $response;
     }
 
+    public function mark_complete($id,$task_id)
+    {
+        $response = null;
+        if (Task::find($task_id)){
+
+            $task = Task::find($task_id);
+            $data = [
+                'status'=>1
+            ];
+            if ($task->update($data)){
+                $response = 'Task Competed Successfully';
+            }
+        }
+        return $response;
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -165,6 +193,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
     }
 }

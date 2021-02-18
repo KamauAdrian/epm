@@ -12,7 +12,8 @@ class Task extends Model
     protected $fillable = [
       'name',
         'due_date',
-        'description'
+        'description',
+        'status'
     ];
 
     public function assignees(){

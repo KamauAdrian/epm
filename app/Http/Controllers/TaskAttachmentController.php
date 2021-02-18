@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\TaskAttachment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskAttachmentController extends Controller
 {
@@ -46,6 +47,7 @@ class TaskAttachmentController extends Controller
             return $response;
         }
         $fileName = '';
+        $file_path = '';
         $file = $request->file('attachment');
         if ($file->isValid()){
             $fileName = $file->getClientOriginalName();
@@ -106,8 +108,19 @@ class TaskAttachmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$attachment_id)
     {
-        //
+        $response = '';
+        if (TaskAttachment::find($attachment_id)){
+            $attachment = TaskAttachment::find($attachment_id);
+           $task = $attachment->task;
+           $deleted = DB::table('task_attachments')->where('id',$attachment->id)->where('task_id',$task->id)->delete();
+           if ($deleted){
+               $response = 'Attachment Deleted';
+           }
+
+        }
+
+        return $response;
     }
 }
