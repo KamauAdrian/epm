@@ -66,19 +66,19 @@ class ProjectController extends Controller
 
             $saved_project = Project::find($new_project->id);
             $saved_project->collaborators()->attach($collaborators_ids);
-
+            $collaborator = null;
+            $initials=null;
+            $split_name = explode(' ',$saved_project->owner->name);
+            if (count($split_name)>1){
+                $initials = substr($split_name[0],0,1).substr(end($split_name),0,1);
+            }else{
+                $initials = substr($saved_project->owner->name,0,1);
+            }
             foreach ($collaborators_ids as $collaborator_id){
                 //get collaborator email and send notification
 
                 $user = User::find($collaborator_id);
                 $email = $user->email;
-                $initials=null;
-                $split_name = explode(' ',$saved_project->owner->name);
-                if (count($split_name)>1){
-                    $initials[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
-                }else{
-                    $initials[] = substr($saved_project->owner->name,0,1);
-                }
                 $collaborator = [
                     'name'=>$user->name,
                     'project_name'=>$saved_project->name,
