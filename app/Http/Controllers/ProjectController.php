@@ -69,7 +69,6 @@ class ProjectController extends Controller
 
             foreach ($collaborators_ids as $collaborator_id){
                 //get collaborator email and send notification
-                dd($saved_project->owner);
 
                 $user = User::find($collaborator_id);
                 $email = $user->email;
