@@ -155,9 +155,10 @@ Route::group(['middleware'=>'admin'],function (){
     //projects -> Tasks (Attachments)
     Route::post('/adm/{id}/add/task/{task_id}/attachment',[App\Http\Controllers\TaskAttachmentController::class, 'store']);
     Route::post('/adm/{id}/delete/task/attachment/{attachment_id}',[App\Http\Controllers\TaskAttachmentController::class, 'destroy']);
+    Route::post('/adm/{id}/delete/task/attachment/{attachment_id}',[App\Http\Controllers\TaskAttachmentController::class, 'destroy']);
     //projects -> Tasks (links)
     Route::post('/adm/{id}/add/task/{task_id}/link',[App\Http\Controllers\TaskLinkController::class, 'store']);
-
+    Route::post('/adm/{id}/delete/task/link/{link_id}',[App\Http\Controllers\TaskLinkController::class, 'destroy']);
 
 
     // Performance Appraisals

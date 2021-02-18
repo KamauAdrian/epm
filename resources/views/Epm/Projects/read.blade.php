@@ -586,7 +586,7 @@
                         var childAttachmentDiv="";
                         for (x = 0; x < temparray.length; x++) {
                             var attachment = temparray[x];
-                            childAttachmentDiv += '<div id="attachment-'+attachment.id+'" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" class="attachment-download" data-url="'+attachment.url+'"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon"><i class="fa fa-download attachment-download" data-url="'+attachment.url+'"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="'+attachment.id+'"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
+                            childAttachmentDiv += '<div id="attachment-'+attachment.id+'" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" class="attachment-download" data-url="'+attachment.url+'"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon attachment-download" data-url="'+attachment.url+'"><i class="fa fa-download"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="'+attachment.id+'"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
                         }
                         rowAttachmentDiv +=childAttachmentDiv + '</div>';
                         attachmentsContainer.append(rowAttachmentDiv);
@@ -599,7 +599,7 @@
                     var linksDiv = '';
                     for (var y = 0; y < response_links.length; y++) {
                         var link = response_links[y];
-                        linksDiv += '<li class="attachment"> <div class="card attach" style="width:auto;"> <div class="" style=" width: 90%; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> <a target="_blank" href="'+link.name+'" style=""> ' + link.name + '</a> </div> <div class="text-right"> <span class="btn btn-icon ml-2"><i class="fa fa-times"></i></span> </div> </div> </li>';
+                        linksDiv += '<li class="attachment" id="link-'+link.id+'"> <div class="card attach" style="width:auto;"> <div class="" style=" width: 90%; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> <a target="_blank" href="'+link.name+'" style=""> ' + link.name + '</a> </div> <div class="text-right"> <span class="btn btn-icon ml-2 link-delete" data-id="'+link.id+'"><i class="fa fa-times"></i></span> </div> </div> </li>';
                     }
                     linksContainer.append(linksDiv);
 
@@ -661,7 +661,25 @@
                             type: 'post',
                             success: function(response){
                                 $("#attachment-"+attachmentId).hide();
-                                $("#modalTaskDetailed").modal('show');
+                                // $("#modalTaskDetailed").modal('show');
+                            }
+                        });
+                        // return true;
+                    });
+                    $('.link-delete').click(function(event){
+                        var linkId = $(this).attr('data-id');
+                        $.ajaxSetup({
+                            header:$('meta[name="_token"]').attr('content')
+                        })
+                        event.preventDefault();
+                        var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+                        console.log("link id equals"+linkId);
+                        $.ajax({
+                            url: '/adm/'+user_id+'/delete/task/link/'+linkId,
+                            type: 'post',
+                            success: function(response){
+                                $("#link-"+linkId).hide();
+                                // $("#modalTaskDetailed").modal('show');
                             }
                         });
                         // return true;

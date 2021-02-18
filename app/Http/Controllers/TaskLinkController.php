@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TaskAttachment;
 use App\Models\TaskLink;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskLinkController extends Controller
 {
@@ -86,8 +88,19 @@ class TaskLinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$link_id)
     {
-        //
+        $response = '';
+        if (TaskLink::find($link_id)){
+            $link = TaskLink::find($link_id);
+            $task = $link->task;
+            $deleted = DB::table('task_links')->where('id',$link->id)->where('task_id',$task->id)->delete();
+            if ($deleted){
+                $response = 'Link Deleted Successfully';
+            }
+
+        }
+
+        return $response;
     }
 }
