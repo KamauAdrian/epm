@@ -16,7 +16,6 @@
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskCommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskCommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/status-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/status-update.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,7 +293,7 @@
       <workItem from="1613487971482" duration="277000" />
       <workItem from="1613536185092" duration="49067000" />
       <workItem from="1613621358150" duration="43857000" />
-      <workItem from="1613671212502" duration="658000" />
+      <workItem from="1613671212502" duration="1351000" />
     </task>
     <servers />
   </component>
@@ -330,10 +329,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1610542790890" />
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613663322384">
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613672464479">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1613663322384" />
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1613672464479" />
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606914575160">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

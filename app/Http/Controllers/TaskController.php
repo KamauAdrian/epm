@@ -185,7 +185,7 @@ class TaskController extends Controller
                 ];
                 $task->update($data);
 
-                $message="Task <b>{$task->name}</b> has been marked as In-Complete";
+                $message="Task <b>{$task->name}</b> has been marked as Complete";
 
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
@@ -203,7 +203,7 @@ class TaskController extends Controller
                 ];
                 $task->update($data);
 
-                $message="Task <b>{$task->name}</b> has been marked as Complete";
+                $message="Task <b>{$task->name}</b> has been marked as In-Complete";
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
                     $params=[];

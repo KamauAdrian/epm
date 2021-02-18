@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProjectCreatedJob;
+use App\Jobs\TaskCommentedAddedJob;
 use App\Mail\TaskCommentAdded;
 use App\Models\Task;
 use App\Models\TaskComment;
@@ -63,7 +65,10 @@ class TaskCommentController extends Controller
                $comment_update = [
                    'name'=>$task_collaborator->name
                ];
-               Mail::to($task_collaborator->email)->send(new TaskCommentAdded($comment_update));
+               $params=[];
+               $params['email']=$task_collaborator->email;
+               $params['collaborator']=$task_collaborator;
+               dispatch(new TaskCommentedAddedJob($params));
            }
            $response = [
                'name'=>$name->name,
