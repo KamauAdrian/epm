@@ -136,6 +136,8 @@ Route::group(['middleware'=>'admin'],function (){
 
     //projects
     Route::get('/adm/{id}/list/projects',[App\Http\Controllers\ProjectController::class, 'index']);
+    Route::get('/adm/{id}/list/my/projects',[App\Http\Controllers\ProjectController::class, 'index_my_projects']);
+    Route::get('/adm/{id}/list/project/collaborations',[App\Http\Controllers\ProjectController::class, 'index_project_collaborations']);
     Route::get('/list/collaborators/{id}',[App\Http\Controllers\ProjectController::class, 'collaborators']);//json array of collaborators added to project
     Route::get('/adm/{id}/create/new/project',[App\Http\Controllers\ProjectController::class, 'create']);
     Route::post('/adm/{id}/save/new/project',[App\Http\Controllers\ProjectController::class, 'store']);

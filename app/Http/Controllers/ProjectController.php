@@ -23,15 +23,42 @@ class ProjectController extends Controller
 
         $admin = User::find($id);
 //        $projects = $admin->projects; gets all project collaborations
-        if ($admin->role->name == 'Su Admin'){
+        if ($admin){
             $projects = Project::all();
             return view('Epm.Projects.index',compact('projects'));
-        }elseif ($admin->role->name == 'Project Manager'){
-            $projects = Project::where('creator_id',$id)->get();
-            return view('Epm.Projects.index',compact('projects'));
+        }
+        else{
+            //response user not exist
         }
 
     }
+
+    public function index_my_projects($id)
+    {
+        $admin = User::find($id);
+        if ($admin){
+            $projects = Project::where('creator_id',$admin->id)->get();
+            return view('Epm.Projects.index',compact('projects'));
+        }
+        else{
+            //response user not exist
+        }
+
+    }
+
+    public function index_project_collaborations($id)
+    {
+        $admin = User::find($id);
+        if ($admin){
+            $projects = $admin->projects; //gets all project collaborations
+            return view('Epm.Projects.index',compact('projects'));
+        }
+        else{
+            //response user not exist
+        }
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
