@@ -721,6 +721,7 @@
             // var about = document.querySelector('input[name=about]');
             var user_id = {{auth()->user()->id}};
             var task_id = $("#modal-modal-task-task-id").innerText;
+            console.log('wololo this is what i found '+task_id);
             var _token   = document.querySelector('input[name=csrf_token]').value;
             var about_content = quill.root.innerHTML;
             $.ajax({
