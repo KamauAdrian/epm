@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-       Boom me added you to my project collaborate now now
+       Test Email You have been selected to collaborate in a project .....
     </p>
 
 @endsection
