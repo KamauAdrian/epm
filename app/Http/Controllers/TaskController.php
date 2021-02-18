@@ -174,7 +174,7 @@ class TaskController extends Controller
 
     public function mark_complete($id,$task_id)
     {
-        $response = null;
+        $response = [];
         $task = Task::find($task_id);
         if ($task){
             $status = $task->status;
@@ -184,24 +184,45 @@ class TaskController extends Controller
                     'status'=>1
                 ];
                 $task->update($data);
+
+                $message="Task <b>{$task->name}</b> has been marked as In-Complete";
+
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
                     $params=[];
                     $params['email']=$collaborator->email;
+                    $params['message']=$message;
                     $params['collaborator']=$collaborator;
                     dispatch(new TaskCompletedJob($params));
+                   // TaskCompletedJob::dispatch($params);
+
                 }
             }else{
                 $data = [
                     'status'=>0
                 ];
                 $task->update($data);
+
+                $message="Task <b>{$task->name}</b> has been marked as Complete";
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
+                    $params=[];
+                    $params['email']=$collaborator->email;
+                    $params['message']=$message;
+                    $params['collaborator']=$collaborator;
+                    dispatch(new TaskCompletedJob($params));
+                    //TaskCompletedJob::dispatch($params);
+
                 }
             }
 
         }
+
+        $response["result_code"]=0;
+        $response["message"]="Status Updated Successfully";
+        $response["data"]=$task;
+
+
         return $response;
     }
 

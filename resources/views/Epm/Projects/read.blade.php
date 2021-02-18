@@ -696,7 +696,7 @@
                             type: 'post',
                             success: function(response){
                                 // $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
-                                if (response.status!=0){
+                                if (response.data.status !=0){
                                     $(".btn-mark-task-complete").text('Completed');
                                 }else{
                                     $(".btn-mark-task-complete").text('Mark Complete');
