@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        Status Changed
+        {{$data['message']}}
     </p>
 
 @endsection

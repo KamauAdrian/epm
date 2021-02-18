@@ -59,6 +59,7 @@ class TaskCommentController extends Controller
                $avtar_icon_name = substr($name->name,0,1);
            }
            $collaborators = $task->project->collaborators;
+           dd($collaborators,$task->id);
            foreach($collaborators as $task_collaborator){
                $comment_update = [
                    'name'=>$task_collaborator->name
