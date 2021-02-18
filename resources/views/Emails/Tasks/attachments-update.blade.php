@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        Attachment Update
+        {{$data['attachment_creator']}} Just added a new attachment to task <b>{{$data['task']}}</b>. Please login to your account to view the attachment.
     </p>
 
 @endsection

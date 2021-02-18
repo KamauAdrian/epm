@@ -15,4 +15,7 @@ class TaskAttachment extends Model
     public function task(){
         return $this->belongsTo('App\Models\Task','task_id');
     }
+    public function owner(){
+        return $this->belongsTo('App\Models\User','creator_id');
+    }
 }

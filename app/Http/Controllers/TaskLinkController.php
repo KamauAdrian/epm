@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\TaskCompletedJob;
+use App\Jobs\TaskLinkAddedJob;
 use App\Mail\TaskLinkAdded;
 use App\Models\Task;
 use App\Models\TaskAttachment;
 use App\Models\TaskLink;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -45,16 +48,26 @@ class TaskLinkController extends Controller
             $new_task_link = new TaskLink();
             $new_task_link->name = $request['link'];
             $new_task_link->task_id = $request['task_id'];
+            $new_task_link->creator_id = $request['user_id'];
             $response = null;
             if ($new_task_link->save()){
                 $collaborators = $task->project->collaborators;
                 foreach ($collaborators as $collaborator){
                     $new_link = [
-                        'name'=>$collaborator->name
+                        'name'=>$collaborator->name,
+                        'link_creator'=>$new_task_link->owner->name,
+                        'task'=>$task->name,
                     ];
-                    Mail::to($collaborator->email)->send(new TaskLinkAdded($new_link));
+                    $params=[];
+                    $params['email']=$collaborator->email;
+                    $params['new_link']=$new_link;
+                    dispatch(new TaskLinkAddedJob($params));
+//                    TaskCompletedJob::dispatch($params);
+//                    Mail::to($collaborator->email)->send(new TaskLinkAdded($new_link));
                 }
-                $response = 'Task Link Saved Successfully';
+                $response["result_code"]=0;
+                $response["message"]="Task Link Saved Successfully";
+                $response["data"]=$task;
             }
             return $response;
         }

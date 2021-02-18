@@ -5,7 +5,7 @@
 @section('content')
 
     <p>
-        Links Update
+        {{$data['link_creator']}} Just added a new link to task <b>{{$data['task']}}</b>. Please login to your account to view the link.
     </p>
 
 @endsection

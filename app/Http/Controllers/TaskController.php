@@ -184,10 +184,7 @@ class TaskController extends Controller
                     'status'=>1
                 ];
                 $task->update($data);
-
                 $message="Complete";
-
-
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
                     $updated_task = [

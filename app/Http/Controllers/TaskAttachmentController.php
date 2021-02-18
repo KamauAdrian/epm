@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\TaskLinkAddedJob;
 use App\Mail\TaskAttachmentAdded;
 use App\Models\Project;
 use App\Models\Task;
@@ -60,15 +61,22 @@ class TaskAttachmentController extends Controller
         $attachment = new TaskAttachment();
         $attachment->name = $fileName;
         $attachment->task_id = $task->id;
+        $attachment->creator_id = $request['user_id'];
         $attachment->url = $file_path;
         if ($attachment->save()){
             $collaborators = $task->project->collaborators;
             foreach ($collaborators as $collaborator){
-                $new_attachment= [
-                    'name'=>$collaborator->name,
-                ];
 
-                Mail::to($collaborator->email)->send(new TaskAttachmentAdded($new_attachment));
+                $new_attachment = [
+                    'name'=>$collaborator->name,
+                    'attachment_creator'=>$attachment->owner->name,
+                    'task'=>$task->name,
+                ];
+                $params=[];
+                $params['email']=$collaborator->email;
+                $params['new_attachment']=$new_attachment;
+                dispatch(new TaskAttachmentAdded($params));
+//                Mail::to($collaborator->email)->send(new TaskAttachmentAdded($new_attachment));
             }
             $response["result_code"]=0;
             $response["message"] = "Attachment Uploaded Successfully";
