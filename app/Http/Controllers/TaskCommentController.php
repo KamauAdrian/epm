@@ -71,7 +71,9 @@ class TaskCommentController extends Controller
                    ];
                    $params=[];
                    $params['email']=$task_collaborator->email;
-                   $params['collaborator']=$task_collaborator;
+                   $params['task']=$task;
+                   $params['collaborator']=$collaborator;
+                   $params['collaborating']=$task_collaborator;
                    dispatch(new TaskCommentedAddedJob($params));
                }
            }
