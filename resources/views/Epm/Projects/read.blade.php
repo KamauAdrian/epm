@@ -569,7 +569,6 @@
                     var task_assignees = "";
                     if (response_assignees){
                         response_assignees.forEach(function (assignee){
-                            console.log(assignee);
                             task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
                         });
                     }else {
@@ -720,7 +719,7 @@
             // Populate hidden form on submit
             event.preventDefault();
             // var about = document.querySelector('input[name=about]');
-            var user_id = document.querySelector('input[name=user_id]').value;
+            var user_id = {{auth()->user()->id}};
             var task_id = document.querySelector('input[name=task_id]').value;
             var _token   = document.querySelector('input[name=csrf_token]').value;
             var about_content = quill.root.innerHTML;
