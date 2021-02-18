@@ -187,12 +187,16 @@ class TaskController extends Controller
 
                 $message="Task <b>{$task->name}</b> has been marked as Complete";
 
+
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
+                    $updated_task = [
+                        'name'=>$collaborator->name,
+                        'message'=>$message
+                    ];
                     $params=[];
                     $params['email']=$collaborator->email;
-                    $params['message']=$message;
-                    $params['collaborator']=$collaborator;
+                    $params['updated_task']=$updated_task;
                     dispatch(new TaskCompletedJob($params));
                    // TaskCompletedJob::dispatch($params);
 
@@ -207,12 +211,15 @@ class TaskController extends Controller
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
                     $params=[];
+                    $updated_task = [
+                        'name'=>$collaborator->name,
+                        'message'=>$message
+                    ];
                     $params['email']=$collaborator->email;
-                    $params['message']=$message;
-                    $params['collaborator']=$collaborator;
-//                    dispatch(new TaskCompletedJob($params));
-                    TaskCompletedJob::dispatch($params);
-
+                    $params['updated_task']=$updated_task;
+                    dispatch(new TaskCompletedJob($params));
+//                    TaskCompletedJob::dispatch($params);
+//
                 }
             }
 

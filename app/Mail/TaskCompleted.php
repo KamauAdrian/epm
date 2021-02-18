@@ -18,9 +18,9 @@ class TaskCompleted extends Mailable
      */
     public $data;
 
-    public function __construct($params)
+    public function __construct($update_task)
     {
-        $this->data = $params;
+        $this->data = $update_task;
     }
 
     /**
