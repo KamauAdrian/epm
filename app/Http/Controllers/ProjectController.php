@@ -63,14 +63,27 @@ class ProjectController extends Controller
         $new_project->description = $project['description'];
         $project_saved = $new_project->save();
         if ($project_saved){
-            Project::find($new_project->id)->collaborators()->attach($collaborators_ids);
+
+            $saved_project = Project::find($new_project->id);
+            $saved_project->collaborators()->attach($collaborators_ids);
+
             foreach ($collaborators_ids as $collaborator_id){
                 //get collaborator email and send notification
-                $collaborator = User::find($collaborator_id);
+                dd($saved_project->owner);
+
+                $user = User::find($collaborator_id);
+                $email = $user->email;
+                $collaborator = [
+                    'name'=>$user->name,
+                    'project_name'=>$saved_project->name,
+                    'creator_name'=>$saved_project->owner->name,
+                ];
                 //send mail to user as project collaborator
-                Mail::to($collaborator->email)->send(new ProjectCollaborationInvite($collaborator));
+
+                Mail::to($email)->send(new ProjectCollaborationInvite($collaborator));
 
             }
+            dd('Project Saved',$saved_project);
         }
         return redirect('/adm/'.$id.'/list/projects')->with('success','Project Created Successfully');
     }

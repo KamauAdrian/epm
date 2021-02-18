@@ -31,6 +31,7 @@ class ProjectCollaborationInvite extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $subject = 'Project Collaboration';
+        return $this->view('Emails.Projects.project-invite')->subject($subject);
     }
 }
