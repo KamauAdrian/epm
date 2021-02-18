@@ -90,7 +90,7 @@ class ProjectController extends Controller
                 Mail::to($email)->send(new ProjectCollaborationInvite($collaborator));
 
             }
-            dd('Project Saved',$saved_project);
+//            dd('Project Saved',$saved_project);
         }
         return redirect('/adm/'.$id.'/list/projects')->with('success','Project Created Successfully');
     }
