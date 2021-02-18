@@ -5,7 +5,8 @@
 @section('content')
 
     <p>
-        {{$data['message']}}
+        Task <b>{{$data['task']}}</b> has been marked as {{$data['message']}}
+
     </p>
 
 @endsection
