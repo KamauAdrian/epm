@@ -61,14 +61,16 @@ class TaskCommentController extends Controller
                $avtar_icon_name = substr($name->name,0,1);
            }
            $collaborators = $task->project->collaborators;
-           foreach($collaborators as $task_collaborator){
-               $comment_update = [
-                   'name'=>$task_collaborator->name
-               ];
-               $params=[];
-               $params['email']=$task_collaborator->email;
-               $params['collaborator']=$task_collaborator;
-               dispatch(new TaskCommentedAddedJob($params));
+           if ($collaborators){
+               foreach($collaborators as $task_collaborator){
+                   $comment_update = [
+                       'name'=>$task_collaborator->name
+                   ];
+                   $params=[];
+                   $params['email']=$task_collaborator->email;
+                   $params['collaborator']=$task_collaborator;
+                   dispatch(new TaskCommentedAddedJob($params));
+               }
            }
            $response = [
                'name'=>$name->name,
