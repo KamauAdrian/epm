@@ -720,7 +720,7 @@
             event.preventDefault();
             // var about = document.querySelector('input[name=about]');
             var user_id = {{auth()->user()->id}};
-            var task_id = document.querySelector('input[name=task_id]').value;
+            var task_id = $("#modal-modal-task-task-id").innerText;
             var _token   = document.querySelector('input[name=csrf_token]').value;
             var about_content = quill.root.innerHTML;
             $.ajax({
