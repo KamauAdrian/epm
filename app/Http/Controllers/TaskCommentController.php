@@ -60,6 +60,9 @@ class TaskCommentController extends Controller
            }else{
                $avtar_icon_name = substr($name->name,0,1);
            }
+
+
+
            $collaborators = $task->project->collaborators;
            if ($collaborators){
                foreach($collaborators as $task_collaborator){
