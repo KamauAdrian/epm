@@ -64,9 +64,10 @@
                                                        </a>
                                                    </li>
                                                    <li>
-                                                       <a href="{{url('/adm/'.$auth_admin->id.'/delete/project/'.$project->id)}}">
-                                                           Delete Work Stream
-                                                       </a>
+{{--                                                       please note done--}}
+{{--                                                       <a href="#!" class="deleteWorkStream" data-url="{{url('/adm/'.$auth_admin->id.'/delete/project/'.$project->id)}}">--}}
+{{--                                                           Delete Work Stream--}}
+{{--                                                       </a>--}}
                                                    </li>
                                                @endif
                                            </ul>
@@ -87,6 +88,31 @@
                     @endif
                 </table>
             </div>
+                <div class="modal fade" id="ModalDeleteWorkStream" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
+                                <h5 class="text-danger">Are you sure you want to delete this Work Stream?</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <form action="" id="form-delete-work-stream" method="post">
+                                    @csrf
+                                    <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">
+                                        Yes Delete
+                                    </button>
+                                    <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 @endsection
@@ -100,6 +126,12 @@
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
+        $(".deleteWorkStream").click(function () {
+            var url = $(this).attr('data-url');
+            $("#form-delete-work-stream").attr("action",url);
+            $("#ModalDeleteWorkStream").modal('show');
+            console.log('this is the url'+ url);
+        });
         $(document).ready(function (){
             $('#tableProjects').DataTable(
                 {
