@@ -181,7 +181,7 @@ class ProjectController extends Controller
             $existing_project->collaborators()->attach($collaborators);
         }
 
-     return redirect('/adm/'.$id.'/view/project/'.$project_id)->with('success','Project Updated Successfully');
+     return redirect('/adm/'.$id.'/view/project/'.$project_id)->with('success','Work Stream Updated Successfully');
     }
 
     /**
