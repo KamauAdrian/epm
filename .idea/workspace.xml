@@ -15,15 +15,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskAttachmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskAttachmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskLinkController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskLinkController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TaskAttachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TaskAttachment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TaskLink.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TaskLink.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/attachments-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/attachments-update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/comments-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/comments-update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/links-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/links-update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Emails/Tasks/status-update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Emails/Tasks/status-update.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AppraisalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AppraisalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/pmo-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/pmo-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/supervisor-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/supervisor-submit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Appraisals/view-appraisal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Appraisals/view-appraisal.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,19 +176,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/resources/views/Emails" />
-      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
-      <recent name="$PROJECT_DIR$/public/assets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
       <recent name="$PROJECT_DIR$/resources/views/Epm" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/resources/views/Emails" />
+      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
+      <recent name="$PROJECT_DIR$/public/assets" />
     </key>
   </component>
   <component name="RunManager">
@@ -302,7 +299,8 @@
       <workItem from="1613536185092" duration="49067000" />
       <workItem from="1613621358150" duration="43857000" />
       <workItem from="1613671212502" duration="3023000" />
-      <workItem from="1613674437110" duration="5171000" />
+      <workItem from="1613674437110" duration="5678000" />
+      <workItem from="1613707116809" duration="16903000" />
     </task>
     <servers />
   </component>
@@ -359,10 +357,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="76" y="0" width="975" height="728" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1613461479775" />
-    <state x="498" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613380405643">
+    <state x="498" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613680023016">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="498" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1613380405643" />
+    <state x="498" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1613680023016" />
     <state x="0" y="0" width="1009" height="686" key="dock-window-1" timestamp="1611811041579">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -375,10 +373,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613458066626" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613679204096">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613718276952">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613679204096" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613718276952" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

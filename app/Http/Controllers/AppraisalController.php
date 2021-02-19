@@ -119,7 +119,12 @@ class AppraisalController extends Controller
                 }
             }
         }
-        return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance Appraisal Updated Successfully');
+        $response["redirect_url"] = "/adm/{$id}/list/pending/pmo/performance/supervision/appraisals";
+        $response["status"] = 0;
+        $response["data"] = $appraisal;
+        $response["message"] = "Performance Appraisal Updated Successfully";
+        return $response;
+//        return redirect('adm/'.$id.'/list/pending/pmo/performance/supervision/appraisals')->with('success','Performance Appraisal Updated Successfully');
     }
 
     /**
@@ -279,8 +284,14 @@ class AppraisalController extends Controller
                 ];
                 Mail::to($supervisor->supervisor_email)->send(new SupervisorAppraisalSuperviseNotification($data));
             }
-            return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Submitted Successfully');
+
+//            return redirect('adm/'.$id.'/view/performance/appraisals')->with('success','Performance Appraisal Submitted Successfully');
         }
+        $response["redirect_url"] = "/adm/{$id}/view/performance/appraisals";
+        $response["status"] = 0;
+        $response["data"] = $appraisal;
+        $response["message"] = "Performance Appraisal Submitted Successfully";
+        return $response;
     }
 
 

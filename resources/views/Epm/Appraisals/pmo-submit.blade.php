@@ -26,38 +26,22 @@
                 $auth_admin = auth()->user();
                 //                dd($appraisal);
                 ?>
-                <center>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                </center>
                 {{--                <form action="{{url('/adm/'.$auth_admin->id.'/save/report/'.$report->id)}}" method="post">--}}
-                <form action="{{url('adm/'.$auth_admin->id.'/save/my/performance/appraisal/appraisal_id='.$appraisal->id)}}" method="post">
+                <form id="form-submit-appraisal">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$auth_admin->name}}" required>
+                                <input type="hidden" id="form_appraisal_id"   value="{{$appraisal->id}}">
                                 <span class="text-danger">{{$errors->first('name')}}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{old('title')}}" required>
+                                <input type="text" id="pmo-title" name="title" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{old('title')}}" required>
                                 <span class="text-danger">{{$errors->first('name')}}</span>
                             </div>
                         </div>
@@ -92,52 +76,67 @@
                                     </thead>
                                     <tbody>
                                     @if($appraisal->question_one)
-                                        <tr>
+                                        <tr id="appraisal_report_q1">
                                             <td>1</td>
                                             <td>{!! nl2br(e($appraisal->question_one))!!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td><input type="text" id="self_score_q1" name="self_score[]"  placeholder="" required></td>
                                             <td>
-                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                                <div id="self_comment_q1" style="width: 100%">
+
+                                                </div>
+{{--                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>--}}
                                             </td>
                                         </tr>
                                     @endif
                                     @if($appraisal->question_two)
-                                        <tr>
+                                        <tr id="appraisal_report_q2">
                                             <td>2</td>
                                             <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td><input id="self_score_q2" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
-                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                                <div id="self_comment_q2" style="width: 100%">
+
+                                                </div>
+{{--                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>--}}
                                             </td>
                                         </tr>
                                     @endif
                                     @if($appraisal->question_three)
-                                        <tr>
+                                        <tr id="appraisal_report_q3">
                                             <td>3</td>
                                             <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td><input id="self_score_q3" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
-                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                                <div id="self_comment_q3" style="width: 100%">
+
+                                                </div>
+{{--                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>--}}
                                             </td>
                                         </tr>
                                     @endif
                                     @if($appraisal->question_four)
-                                        <tr>
+                                        <tr id="appraisal_report_q4">
                                             <td>4</td>
                                             <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td><input id="self_score_q4" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
-                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                                <div id="self_comment_q4" style="width: 100%">
+
+                                                </div>
+{{--                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>--}}
                                             </td>
                                         </tr>
                                     @endif
                                     @if($appraisal->question_five)
-                                        <tr>
+                                        <tr id="appraisal_report_q5">
                                             <td>5</td>
                                             <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
-                                            <td><input type="text" name="self_score[]"  placeholder="" required></td>
+                                            <td><input id="self_score_q5" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
-                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>
+                                                <div id="self_comment_q5" style="width: 100%">
+
+                                                </div>
+{{--                                                <textarea name="self_comment[]" id="" cols="30" rows="5" required></textarea>--}}
                                             </td>
                                         </tr>
                                     @endif
@@ -149,17 +148,20 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" required></textarea>
+                                            <div id="self_overall_comment" style="width: 100%">
+
+                                            </div>
+{{--                                            <textarea name="self_overall_comment" id="" cols="100%" rows="5" required></textarea>--}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Initials:</td>
                                         <td>
-                                            <input type="text" name="self_signature" required>
+                                            <input type="text" id="pmo_self_signature" name="self_signature" required>
                                         </td>
                                         <td >Date</td>
                                         <td>
-                                            <input type="date" name="self_sign_date" value="{{date('Y-m-d')}}" readonly>
+                                            <input type="date" id="pmo_self_sign_date" name="self_sign_date" value="{{date('Y-m-d')}}" readonly>
                                         </td>
                                     </tr>
                                     <tr>
@@ -185,11 +187,133 @@
     </div>
 @endsection
 @section('js')
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
+        // var appraisalTemplate = $('#appraisal_template');
+        var appraisal_report_q1 = $('#appraisal_report_q1');
+        if (appraisal_report_q1){
+            var quiz1 = new Quill("#self_comment_q1", {
+                modules: {
+                    toolbar: true
+                },
+                placeholder: "Your Comment",
+                theme: "snow"
+            });
+        }
+        var appraisal_report_q2 = $('#appraisal_report_q2');
+        if (appraisal_report_q2){
+            var quiz2 = new Quill("#self_comment_q2", {
+                modules: {
+                    toolbar: true
+                },
+                placeholder: 'Your Comment',
+                theme: 'snow'
+            });
+        }
+        var appraisal_report_q3 = $('#appraisal_report_q3');
+        if (appraisal_report_q3){
+            var quiz3 = new Quill("#self_comment_q3", {
+                modules: {
+                    toolbar: true
+                },
+                placeholder: 'Your Comment',
+                theme: 'snow'
+            });
+        }
+        var appraisal_report_q4 = $('#appraisal_report_q4');
+        if (appraisal_report_q4){
+            var quiz4 = new Quill("#self_comment_q4", {
+                modules: {
+                    toolbar: true
+                },
+                placeholder: 'Your Comment',
+                theme: 'snow'
+            });
+        }
+        var appraisal_report_q5 = $('#appraisal_report_q5');
+        if (appraisal_report_q5){
+            var quiz5 = new Quill("#self_comment_q5", {
+                modules: {
+                    toolbar: true
+                },
+                placeholder: 'Your Comment',
+                theme: 'snow'
+            });
+        }
+        var self_overall_comment = new Quill("#self_overall_comment", {
+            modules: {
+                toolbar: true
+            },
+            placeholder: 'Your Comment',
+            theme: 'snow'
+        });
+        var formSubmitAppraisal = document.getElementById('form-submit-appraisal');
+        formSubmitAppraisal.onsubmit = function(event) {
+            // Populate hidden form on submit
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            })
+            event.preventDefault();
+            // var about = document.querySelector('input[name=about]');
+            // window.location = urlHome;
+            if (appraisal_report_q1.html()) {
+                var comment_q1 =  quiz1.root.innerHTML
+                var score_q1 =  $("#self_score_q1").val();
+            }
+            if (appraisal_report_q2.html()){
+                var comment_q2 = quiz2.root.innerHTML;
+                var score_q2 =  $("#self_score_q2").val();
+            }
+            if (appraisal_report_q3.html()) {
+                var comment_q3 = quiz3.root.innerHTML;
+                var score_q3 =  $("#self_score_q3").val();
+            }
+            if (appraisal_report_q4.html()) {
+                var comment_q4 = quiz4.root.innerHTML;
+                var score_q4 =  $("#self_score_q4").val();
+            }
+            if (appraisal_report_q5.html()) {
+                var comment_q5 = quiz5.root.innerHTML;
+                var score_q5 =  $("#self_score_q5").val();
+            }
+            var title = $("#pmo-title").val();
+            var self_signature = $("#pmo_self_signature").val();
+            var self_sign_date = $("#pmo_self_sign_date").val();
+            var self_overall_comment = self_overall_comment.root.innerHTML;
+            var user_admin_id = {{auth()->user()->id}};
+            var appraisalId = $("#form_appraisal_id").val();
+            // var formData = $("#form-submit-appraisal").serializeArray();
+            $.ajax({
+                url: '/adm/'+user_admin_id+'/save/my/performance/appraisal/appraisal_id='+appraisalId,
+                type: 'post',
+                data: {
+                    title: title,
+                    self_overall_comment: self_overall_comment,
+                    self_sign_date: self_sign_date,
+                    self_signature: self_signature,
+                    self_comment: {
+                        quest_one: comment_q1,
+                        quest_two: comment_q2,
+                        quest_three: comment_q3,
+                        quest_four: comment_q4,
+                        quest_five: comment_q5,
+                    },
+                    self_score: {
+                        quest_one: score_q1,
+                        quest_two: score_q2,
+                        quest_three: score_q3,
+                        quest_four: score_q4,
+                        quest_five: score_q5,
+                    },
+                },
+                success: function(response){
+                    window.location = response.redirect_url;
+                }
+            });
+
+            // No back end to actually submit to!
+            // alert('Open the console to see the submit data!');
+            return true;
+        };
         $('form input:not([type="submit"])').keydown(function(e) {
             if (e.keyCode == 13) {
                 var inputs = $(this).parents("form").eq(0).find(":input");

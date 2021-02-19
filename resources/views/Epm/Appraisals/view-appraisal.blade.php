@@ -114,19 +114,19 @@
                                     @if($appraisal->question_one)
                                         <tr>
                                             <td>1</td>
-                                            <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
+                                            <td>{!! $appraisal->question_one !!}</td>
                                             <td>
                                                 {!! $self_scores[0]->self_score !!}
                                             </td>
                                             <td>
-                                                {!! nl2br(e($self_scores[0]->self_comment)) !!}
+                                                {!! $self_scores[0]->self_comment !!}
                                             </td>
                                             @if($supervisor_scores)
                                                 <td class="supervisor">
                                                     {!! $supervisor_scores[0]->supervisor_score !!}
                                                 </td>
                                                 <td class="supervisor">
-                                                    {!! nl2br(e($supervisor_scores[0]->supervisor_comment)) !!}
+                                                    {!! $supervisor_scores[0]->supervisor_comment !!}
                                                 </td>
                                             @else
                                                 <td></td>
@@ -137,19 +137,19 @@
                                     @if($appraisal->question_two)
                                         <tr>
                                             <td>2</td>
-                                            <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
+                                            <td>{!! $appraisal->question_two !!}</td>
                                             <td>
                                                 {!! $self_scores[1]->self_score !!}
                                             </td>
                                             <td>
-                                                {!! nl2br(e($self_scores[1]->self_comment)) !!}
+                                                {!! $self_scores[1]->self_comment !!}
                                             </td>
                                             @if($supervisor_scores)
                                                 <td class="supervisor">
                                                     {!! $supervisor_scores[1]->supervisor_score !!}
                                                 </td>
                                                 <td class="supervisor">
-                                                    {!! nl2br(e($supervisor_scores[1]->supervisor_comment)) !!}
+                                                    {!! $supervisor_scores[1]->supervisor_comment !!}
                                                 </td>
                                             @else
                                                 <td></td>
@@ -160,19 +160,19 @@
                                     @if($appraisal->question_three)
                                         <tr>
                                             <td>3</td>
-                                            <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
+                                            <td>{!! $appraisal->question_three !!}</td>
                                             <td>
                                                 {!! $self_scores[2]->self_score !!}
                                             </td>
                                             <td>
-                                                {!! nl2br(e($self_scores[2]->self_comment)) !!}
+                                                {!! $self_scores[2]->self_comment !!}
                                             </td>
                                             @if($supervisor_scores)
                                                 <td class="supervisor">
                                                     {!! $supervisor_scores[2]->supervisor_score !!}
                                                 </td>
                                                 <td class="supervisor">
-                                                    {!! nl2br(e($supervisor_scores[2]->supervisor_comment)) !!}
+                                                    {!! $supervisor_scores[2]->supervisor_comment !!}
                                                 </td>
                                             @else
                                                 <td></td>
@@ -183,19 +183,19 @@
                                     @if($appraisal->question_four)
                                         <tr>
                                             <td>4</td>
-                                            <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
+                                            <td>{!! $appraisal->question_four !!}</td>
                                             <td>
                                                 {!! $self_scores[3]->self_score !!}
                                             </td>
                                             <td>
-                                                {!! nl2br(e($self_scores[3]->self_comment)) !!}
+                                                {!! $self_scores[3]->self_comment !!}
                                             </td>
                                             @if($supervisor_scores)
                                                 <td class="supervisor">
                                                     {!! $supervisor_scores[3]->supervisor_score !!}
                                                 </td>
                                                 <td class="supervisor">
-                                                    {!! nl2br(e($supervisor_scores[3]->supervisor_comment)) !!}
+                                                    {!! $supervisor_scores[3]->supervisor_comment !!}
                                                 </td>
                                             @else
                                                 <td></td>
@@ -206,19 +206,21 @@
                                     @if($appraisal->question_five)
                                         <tr>
                                             <td>5</td>
-                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
+{{--                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>--}}
+                                            <td>{!! $appraisal->question_five !!}</td>
                                             <td>
                                                 {!! $self_scores[4]->self_score !!}
                                             </td>
                                             <td>
-                                                {!! nl2br(e($self_scores[4]->self_comment)) !!}
+{{--                                                {!! nl2br(e($self_scores[4]->self_comment)) !!}--}}
+                                                {!! $self_scores[4]->self_comment !!}
                                             </td>
                                             @if($supervisor_scores)
                                                 <td class="supervisor">
                                                     {!! $supervisor_scores[4]->supervisor_score !!}
                                                 </td>
                                                 <td class="supervisor">
-                                                    {!! nl2br(e($supervisor_scores[4]->supervisor_comment)) !!}
+                                                    {!! $supervisor_scores[4]->supervisor_comment !!}
                                                 </td>
                                             @else
                                                 <td></td>
@@ -242,7 +244,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">{!! nl2br(e($appraisal->pmo_overall_comment)) !!}</td>
+                                        <td colspan="6">{!! $appraisal->pmo_overall_comment !!}</td>
                                     </tr>
                                     <tr>
                                         <td><h6>Initials:</h6></td>
@@ -268,8 +270,8 @@
                                     </tr>
                                     <tr>
                                         @if($supervisor->improvement_areas)
-                                            <td colspan="6">
-                                                {!! nl2br(e($supervisor->improvement_areas)) !!}
+                                            <td colspan="6" class="supervisor">
+                                                {!! $supervisor->improvement_areas !!}
                                             </td>
                                         @else
                                             <td colspan="6"></td>
@@ -284,8 +286,8 @@
                                     </tr>
                                     <tr>
                                         @if($supervisor->supervisor_overall_comment)
-                                            <td colspan="6">
-                                                {!! nl2br(e($supervisor->supervisor_overall_comment)) !!}
+                                            <td colspan="6" class="supervisor">
+                                                {!! $supervisor->supervisor_overall_comment !!}
                                             </td>
                                         @else
                                             <td colspan="6"></td>
@@ -294,7 +296,7 @@
                                     <tr>
                                         <td><h6>Initials:</h6></td>
                                         @if($supervisor->supervisor_signature)
-                                            <td colspan="2">
+                                            <td colspan="2" class="supervisor">
                                                 {!! $supervisor->supervisor_signature !!}
                                             </td>
                                         @else
@@ -302,7 +304,7 @@
                                         @endif
                                         <td><h6>Date</h6></td>
                                         @if($supervisor->supervisor_sign_date)
-                                            <td colspan="2">
+                                            <td colspan="2" class="supervisor">
                                                 {!! $supervisor->supervisor_sign_date !!}
                                             </td>
                                         @else

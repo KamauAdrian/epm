@@ -27859,7 +27859,7 @@ pre[class*=language-]:before {
 .table td,
 .table th {
     border-top: 1px solid #D7DFE9;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 .table thead th {
