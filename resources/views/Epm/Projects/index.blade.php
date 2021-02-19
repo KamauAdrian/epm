@@ -25,8 +25,8 @@
                 <table class="table" id="tableProjects">
                     <thead>
                         <tr>
-                            <th>Project</th>
-                            <th>Date Opened</th>
+                            <th>Work Streams</th>
+                            <th>Date Created</th>
                             <th>Collaborators</th>
                             <th>Due Date</th>
                             <th class="text-right">Actions</th>
@@ -78,8 +78,8 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th>Project</th>
-                            <th>Date Opened</th>
+                            <th>Work Streams</th>
+                            <th>Date Created</th>
                             <th>Collaborators</th>
                             <th>Due Date</th>
                             <th class="text-right">Actions</th>

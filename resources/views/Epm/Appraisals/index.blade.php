@@ -94,7 +94,7 @@
                                                     @else
                                                         @if($auth_admin->role->name == 'Project Manager')
                                                             <a href="{{url('/adm/'.$auth_admin->id.'/submit/performance/appraisal/appraisal_id='.$appraisal->id)}}">
-                                                                Submit Appraisal
+                                                                Fill Appraisal
                                                             </a>
                                                         @else
                                                             <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/template/appraisal_id='.$appraisal->id)}}">
