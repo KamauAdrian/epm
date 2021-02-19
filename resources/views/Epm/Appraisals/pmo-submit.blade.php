@@ -239,7 +239,7 @@
                 theme: 'snow'
             });
         }
-        var self_overall_comment = new Quill("#self_overall_comment", {
+        var self_overall_comments = new Quill("#self_overall_comment", {
             modules: {
                 toolbar: true
             },
@@ -278,7 +278,7 @@
             var title = $("#pmo-title").val();
             var self_signature = $("#pmo_self_signature").val();
             var self_sign_date = $("#pmo_self_sign_date").val();
-            var self_overall_comment = self_overall_comment.root.innerHTML;
+            var overall_comment = self_overall_comments.root.innerHTML;
             var user_admin_id = {{auth()->user()->id}};
             var appraisalId = $("#form_appraisal_id").val();
             // var formData = $("#form-submit-appraisal").serializeArray();
@@ -287,7 +287,7 @@
                 type: 'post',
                 data: {
                     title: title,
-                    self_overall_comment: self_overall_comment,
+                    self_overall_comment: overall_comment,
                     self_sign_date: self_sign_date,
                     self_signature: self_signature,
                     self_comment: {
