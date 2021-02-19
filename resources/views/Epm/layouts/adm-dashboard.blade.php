@@ -520,7 +520,7 @@
                 },
                 plotOptions: {
                     radialBar: {
-                        startAngle: -180,
+                        startAngle: -90,
                         endAngle: 90,
                         track: {
                             background: "#D7DFE9",
