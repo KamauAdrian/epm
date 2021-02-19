@@ -9,11 +9,11 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-sm-6 d-flex align-items-center mb-4">
-                <h1 class="d-inline-block mb-0 font-weight-normal">Projects</h1>
+                <h1 class="d-inline-block mb-0 font-weight-normal">Work Streams</h1>
             </div>
             <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
                     <a href="{{url('/adm/'.$auth_admin->id.'/create/new/project')}}">
-                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i>Create a New Project</button>
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i>Create a New Work Stream</button>
                     </a>
 {{--                <a href="#!">--}}
 {{--                    <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Export List</button>--}}

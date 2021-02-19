@@ -176,19 +176,19 @@
                                                         @csrf
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label>Name</label>
+                                                                <label>Activity Name</label>
                                                                 <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-group float-right">
-                                                            <input class="btn btn-outline-primary" type="submit" value="Create Board">
+                                                            <input class="btn btn-outline-primary" type="submit" value="Create Activity">
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Board</p></a>
+                                            <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Activity</p></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -222,12 +222,17 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row mt-4">
+                                <div class="row mt-4" id="modalTaskDetailedComments">
+                                    <h6>Comments & Progress Notes</h6>
+                                    <div class="col-md-12 task-comments">
+                                        {{--                                        //comments dynamically pulled via ajax request--}}
+                                    </div>
+                                </div>
+                                <div class="row mt-4" id="modalTaskDetailedAttachments">
                                     <h6>Attachments</h6>
                                     <div class="col-md-12">
                                         <div class="  mt-4">
                                         <div class="container task-attachments" style="overflow: auto;">
-
                                         </div>
                                             <div class="container mt-4">
                                                 <div style="height: 50px" class="row">
@@ -241,7 +246,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-4">
+                                <div class="row mt-4" id="modalTaskDetailedLinks">
                                     <h6>Links</h6>
                                     <div class="col-md-12">
                                         <div class="  mt-4">
@@ -266,12 +271,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <h6>Comments & Progress Notes</h6>
-                                    <div class="col-md-12 task-comments">
-{{--                                        //comments dynamically pulled via ajax request--}}
                                     </div>
                                 </div>
                             </div>
@@ -532,6 +531,9 @@
         $('#modalAddAttachment').on('hidden.bs.modal', function () {
             // do something…
             $("#modalTaskDetailed").modal('show');
+            $('#modalTaskDetailed').animate({
+                scrollTop: $('#modalTaskDetailedAttachments')[0].scrollHeight
+            }, "slow");
         });
 
         $('#modalTaskDetailed').on('show.bs.modal', function () {
@@ -714,6 +716,9 @@
         $('#modalAddLink').on('hidden.bs.modal', function () {
             // do something…
             $("#modalTaskDetailed").modal('show');
+            $('#modalTaskDetailed').animate({
+                scrollTop: $('#modalTaskDetailedLinks')[0].scrollHeight
+            }, "slow");
         });
 
         var quill = new Quill('#editor', {
@@ -771,7 +776,7 @@
                         );
                     }
                     $('#modalTaskDetailed').animate({
-                        scrollTop: $('#modalTaskDetailed')[0].scrollHeight
+                        scrollTop: $('#modalTaskDetailedComments')[0].scrollHeight
                     }, "slow");
 
                 }

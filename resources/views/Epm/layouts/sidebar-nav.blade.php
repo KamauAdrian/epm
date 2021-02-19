@@ -164,16 +164,16 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     @endif
     @if($auth_admin->role->name == 'Su Admin')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Projects</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Work Streams</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/projects')}}">View Projects</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/projects')}}">View Work Streams</a></li>
             </ul>
         </li>
         @elseif($auth_admin->role->name == 'Project Manager')
             <li class="nav-item pcoded-hasmenu">
-                <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Projects</span></a>
+                <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">Work Streams</span></a>
                 <ul class="pcoded-submenu">
-                    <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/projects')}}">My Projects</a></li>
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/projects')}}">My Work Streams</a></li>
                     <li><a href="{{url('/adm/'.$auth_admin->id.'/list/project/collaborations')}}">Collaborations</a></li>
                 </ul>
             </li>

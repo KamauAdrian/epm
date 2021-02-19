@@ -11,7 +11,7 @@
                 <div class="auth-side-form">
                     <div class="auth-content">
                         <div class="text-center">
-                            <h1 class="f-w-400">Create a New Project</h1>
+                            <h1 class="f-w-400">Create a New Work Stream</h1>
                         </div>
                         <?php
                         $auth_admin = auth()->user();
@@ -21,16 +21,16 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Project Name</label>
+                                        <label>Name</label>
                                         <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}" required>
                                         <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group" id="collaborators">
-                                        <label>Select Collaborators</label>
+                                        <label>Collaborators</label>
                                         <multiselect v-model="selectedPmo" :options="pmos"
-                                                  placeholder="Search" trackBy="id" label="name"
+                                                  placeholder="Select Collaborators" trackBy="id" label="name"
                                                   :searchable="true" :close-on-select="true" multiple>
                                         </multiselect>
                                         <input type="hidden" name="collaborators[]" v-for="pmo in selectedPmo" :value="pmo.id">
@@ -39,21 +39,21 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Project Due Date</label>
+                                        <label>Due Date</label>
                                         <input type="date" name="due_date" class="form-control" value="{{old('due_date')}}">
                                         <span class="text-danger">{{$errors->first('due_date')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Project Description</label>
+                                        <label>Description</label>
                                         <textarea name="description" class="form-control" placeholder="Short Team Description" cols="30" rows="5">{{old('description')}}</textarea>
                                         <span class="text-danger">{{$errors->first('description')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group float-right">
-                                        <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Create Project</button>
+                                        <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Create Work Stream</button>
                                     </div>
                                 </div>
                             </div>
