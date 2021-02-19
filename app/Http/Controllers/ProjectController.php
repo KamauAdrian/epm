@@ -166,16 +166,21 @@ class ProjectController extends Controller
         $admin = User::find($id);
         $existing_project = Project::find($project_id);
         $project = $request->all();
+
         $data = [
           'name'=>$project['name'],
           'due_date'=>$project['due_date'],
           'description'=>$project['description'],
         ];
-        $collaborators = $project['collaborators'];
+        $collaborators = '';
+        if ($request->collaborators){
+            $collaborators = $project['collaborators'];
+        }
         $updated_project = $existing_project->update($data);
-        if ($updated_project){
+        if ($updated_project && $collaborators!=''){
             $existing_project->collaborators()->attach($collaborators);
         }
+
      return redirect('/adm/'.$id.'/view/project/'.$project_id)->with('success','Project Updated Successfully');
     }
 
