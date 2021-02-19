@@ -41,8 +41,17 @@
                             <tbody>
                             @foreach($appraisals as $appraisal)
                                 <tr>
+                                    <?php
+                                    $pmo_status = $appraisal->pmo_status;
+                                    ?>
                                     <td>
-                                        {{$appraisal->pmo}}
+                                        @if($pmo_status==1)
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">{{$appraisal->pmo}}</a>
+                                        @else
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/template/appraisal_id='.$appraisal->id)}}">
+                                                {{$appraisal->pmo}}
+                                            </a>
+                                        @endif
                                     </td>
                                     <td>
                                         <?php
@@ -69,9 +78,6 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                    <?php
-                                    $pmo_status = $appraisal->pmo_status;
-                                    ?>
                                     <td>
                                         @if($pmo_status ==1)
                                             Submitted
