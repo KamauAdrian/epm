@@ -190,9 +190,20 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$project_id)
     {
-        //
+        $admin = User::find($id);
+
+        if ($admin){
+            $project = Project::find($project_id);
+            if ($project){
+                $project->delete();
+                $response["message"] = "Project {$project->name} Deleted Successfully";
+                $response["response_code"] = 0;
+                $response["response_data"] = $admin;
+                return redirect('/adm/'.$id.'/list/projects')->with('success',"Project {$project->name} Deleted Successfully");
+            }
+        }
     }
 
     public function collaborators($id){

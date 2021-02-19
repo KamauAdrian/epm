@@ -15,14 +15,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_09_133427_create_projects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_09_133427_create_projects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_10_122453_create_boards_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_10_122453_create_boards_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_11_041909_create_assignee_task_pivot_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_11_041909_create_assignee_task_pivot_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/su-admin-register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/SuAdmins/su-admin-register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/admin-login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/admin-login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/sample.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/sample.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,7 +299,7 @@
       <workItem from="1613671212502" duration="3023000" />
       <workItem from="1613674437110" duration="5678000" />
       <workItem from="1613707116809" duration="27387000" />
-      <workItem from="1613743883814" duration="8748000" />
+      <workItem from="1613743883814" duration="11044000" />
     </task>
     <servers />
   </component>

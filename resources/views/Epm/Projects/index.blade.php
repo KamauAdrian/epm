@@ -65,9 +65,9 @@
                                                    </li>
                                                    <li>
 {{--                                                       please note done--}}
-{{--                                                       <a href="#!" class="deleteWorkStream" data-url="{{url('/adm/'.$auth_admin->id.'/delete/project/'.$project->id)}}">--}}
-{{--                                                           Delete Work Stream--}}
-{{--                                                       </a>--}}
+                                                       <a href="#!" class="deleteWorkStream" data-url="{{url('/adm/'.$auth_admin->id.'/delete/project/'.$project->id)}}">
+                                                           Delete Work Stream
+                                                       </a>
                                                    </li>
                                                @endif
                                            </ul>

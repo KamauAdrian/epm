@@ -20,9 +20,6 @@ class CreateProjectsTable extends Migration
             $table->string('description')->nullable();
             $table->integer('creator_id')->unsigned();
             $table->timestamps();
-            $table->foreign('creator_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
         });
     }
 
