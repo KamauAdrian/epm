@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>full name</label>
+                    <label>Full Name</label>
                     <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}">
                     <span class="text-danger">{{$errors->first('name')}}</span>
                 </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Email address</label>
+                    <label>Email Address</label>
                     <input type="email" name="email" class="form-control" placeholder="Ex. luke@jacademy.org" value="{{old('email')}}">
                     <span class="text-danger">{{$errors->first('email')}}</span>
                 </div>
@@ -58,14 +58,8 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="row justify-content-between">
-                <div class="col-auto">
-                    <p><small>By signing up, I agree to the Treva Privacy Policy and Terms of Service.</small></p>
-                </div>
-                <div class="col-auto text-right">
-                    <button type="submit" class="btn btn-primary btn-block mb-3">Sign up</button>
-                </div>
-            </div>
+                    <button type="submit" class="btn btn-outline-info btn-block mb-3">Sign up</button>
+
         </div>
     </form>
 @endsection

@@ -32,12 +32,12 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <div class="col">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="chklog1">
-                    <label class="custom-control-label" for="chklog1">Remember me</label>
-                </div>
-            </div>
+{{--            <div class="col">--}}
+{{--                <div class="custom-control custom-checkbox">--}}
+{{--                    <input type="checkbox" class="custom-control-input" id="chklog1">--}}
+{{--                    <label class="custom-control-label" for="chklog1">Remember me</label>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="col text-right">
                 <a href="{{url('/forgot/password')}}" style="color: #7E858E;">Forgot Password?</a>
             </div>

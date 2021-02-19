@@ -20,9 +20,13 @@ class CreateTasksTable extends Migration
             $table->text('description');
             $table->integer('status')->default(0);
             $table->integer('creator_id')->unsigned();
-            $table->integer('project_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
             $table->integer('board_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('project_id')
+                ->references('id')->on('projects')
+                ->onDelete('cascade');
 
 
         });

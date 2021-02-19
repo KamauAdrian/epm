@@ -1,27 +1,106 @@
-'<div class="col-sm-6  attachment">
-    <div class="card attach" style="width:auto">
-        <div>
-            <div style="float: left">
-                <a href="#!" class=""> ' + attachment.name + '</a>
+<div class="col-md-12">
+    <div class="row">
+        //pmo
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">PMO</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div>
+                                    <span style="font-size:30px">
+                                        <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style="float:right">
-                <span class="btn btn-icon"><i class="fa fa-download attachment-download" data-url="'+attachment.url+'"></i></span>
-                <span class="btn btn-icon ml-2"><i class="fa fa-times"></i></span>
+        </div>
+        //center Manger
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Center Managers</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div style="font-size:30px">
+                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($cms)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        //trainers
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Trainers</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div style="font-size:30px">
+                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($trainers)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        //Work Streams (pms)
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Work Streams</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div style="font-size:30px">
+                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        //Centers
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Centers</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div style="font-size:30px">
+                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($centers)}}</span> <i class="fa fa-building ml-4"></i></p>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        //Trainees
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Trainees</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div style="font-size:30px">
+                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($trainees)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>'
-
-
-<ul style="height: 50px" class="row mt-2">
-    <li class="attachment">
-        <div class="card attach" style="width:auto;">
-            <div style="float: left">
-                <a href="#!" class="attach" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> ' + link.name + '</a>
-            </div>
-            <div style="float:right">
-                    <span class="btn btn-icon ml-2"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </li>
-</ul>
+</div>
