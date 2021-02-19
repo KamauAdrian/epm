@@ -11,7 +11,7 @@
                 <div class="auth-side-form">
                     <div class="auth-content">
                         <div class="text-center">
-                            <h1 class="f-w-400">Edit Project</h1>
+                            <h1 class="f-w-400">Edit Work Stream</h1>
                         </div>
                         <?php
                         $auth_admin = auth()->user();
@@ -21,7 +21,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Project Name</label>
+                                        <label>Name</label>
                                         <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$project->name}}">
                                     </div>
                                 </div>
@@ -41,14 +41,14 @@
                                 @if($project->due_date)
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Project Due Date</label>
+                                            <label>Due Date</label>
                                             <input type="date" name="due_date" class="form-control" value="{{$project->due_date}}">
                                         </div>
                                     </div>
                                 @else
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Add Project Due Date</label>
+                                            <label>Add Due Date</label>
                                             <input type="date" name="due_date" class="form-control">
                                         </div>
                                     </div>
@@ -56,21 +56,21 @@
                                 @if($project->description)
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Project Description</label>
+                                            <label>Description</label>
                                             <textarea name="description" class="form-control" placeholder="Short Team Description" cols="30" rows="5">{{$project->description}}</textarea>
                                         </div>
                                     </div>
                                 @else
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Add Project Description</label>
+                                            <label>Add Description</label>
                                             <textarea name="description" class="form-control" placeholder="Short Team Description" cols="30" rows="5">{{$project->description}}</textarea>
                                         </div>
                                     </div>
                                 @endif
                                 <div class="col-sm-12">
                                     <div class="form-group float-right">
-                                        <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Update Project</button>
+                                        <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Update Work Stream</button>
                                     </div>
                                 </div>
                             </div>

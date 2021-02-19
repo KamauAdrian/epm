@@ -54,9 +54,21 @@
                                            <ul class = "dropdown-menu" role = "menu">
                                                <li>
                                                    <a href="{{url('/adm/'.$auth_admin->id.'/view/project/'.$project->id)}}">
-                                                       View Project
+                                                       View Work Stream
                                                    </a>
                                                </li>
+                                               @if($auth_admin->id == $project->owner->id || $auth_admin->role->name=="Su Admin")
+                                                   <li>
+                                                       <a href="{{url('/adm/'.$auth_admin->id.'/edit/project/'.$project->id)}}">
+                                                           Edit Work Stream
+                                                       </a>
+                                                   </li>
+                                                   <li>
+                                                       <a href="{{url('/adm/'.$auth_admin->id.'/delete/project/'.$project->id)}}">
+                                                           Delete Work Stream
+                                                       </a>
+                                                   </li>
+                                               @endif
                                            </ul>
                                        </div>
                                    </td>
@@ -89,7 +101,11 @@
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready(function (){
-            $('#tableProjects').DataTable();
+            $('#tableProjects').DataTable(
+                {
+                    "order": [],
+                }
+            );
         });
 
     </script>

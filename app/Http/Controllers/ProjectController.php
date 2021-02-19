@@ -25,7 +25,7 @@ class ProjectController extends Controller
         $admin = User::find($id);
 //        $projects = $admin->projects; gets all project collaborations
         if ($admin){
-            $projects = Project::all();
+            $projects = Project::orderBy('created_at','desc')->get();
             return view('Epm.Projects.index',compact('projects'));
         }
         else{
@@ -38,7 +38,7 @@ class ProjectController extends Controller
     {
         $admin = User::find($id);
         if ($admin){
-            $projects = Project::where('creator_id',$admin->id)->get();
+            $projects = Project::orderBy('created_at','desc')->where('creator_id',$admin->id)->get();
             return view('Epm.Projects.index',compact('projects'));
         }
         else{
@@ -150,6 +150,7 @@ class ProjectController extends Controller
     public function edit($id,$project_id)
     {
         $project = Project::find($project_id);
+
         return view('Epm.Projects.edit',compact('project'));
     }
 

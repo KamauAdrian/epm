@@ -145,6 +145,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/new/collaborators/project_id={project_id}',[App\Http\Controllers\ProjectController::class, 'invite_collaborators']);//json array of new collaborators not in project
     Route::get('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
+    Route::post('/adm/{id}/delete/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'destroy']);
     //Projects -> Boards
     Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
     //Projects -> Tasks
