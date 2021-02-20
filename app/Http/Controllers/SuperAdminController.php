@@ -43,8 +43,6 @@ class SuperAdminController extends Controller
     }
 
     public function login_as($id){
-
-
         $user= User::find($id);
         if($user)
         {
@@ -57,7 +55,7 @@ class SuperAdminController extends Controller
             return redirect("/")->with('success',"Successfully logged in as {$user->name}");
         }
         else{
-            return redirect()->back()->with('error',"User {$id} not found");
+            return redirect('/')->with('error',"User {$id} not found");
         }
     }
 

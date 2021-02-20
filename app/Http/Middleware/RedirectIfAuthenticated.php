@@ -22,7 +22,15 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                $admin = Auth::user();
+                if ($admin->role->name == 'Su Admin'){
                     return redirect('/adm/main/dashboard');
+                }elseif ($admin->role->name =='Project Manager'){
+                    return redirect('/adm/pmo/dashboard');
+                }else{
+                    return redirect('/adm/main/dashboard');
+                }
+
             }
             return $next($request);
         }
