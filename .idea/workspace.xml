@@ -15,17 +15,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BoardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BoardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_09_133427_create_projects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_09_133427_create_projects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_11_041909_create_assignee_task_pivot_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_11_041909_create_assignee_task_pivot_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_15_043456_create_sub_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_15_043456_create_sub_tasks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_15_101957_create_task_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_15_101957_create_task_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_17_113709_create_task_attachments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_17_113709_create_task_attachments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_17_115911_create_task_links_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_17_115911_create_task_links_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/sample.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/sample.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +298,8 @@
       <workItem from="1613674437110" duration="5678000" />
       <workItem from="1613707116809" duration="27387000" />
       <workItem from="1613743883814" duration="11363000" />
-      <workItem from="1613792753676" duration="4126000" />
+      <workItem from="1613792753676" duration="5280000" />
+      <workItem from="1613800056945" duration="1035000" />
     </task>
     <servers />
   </component>
