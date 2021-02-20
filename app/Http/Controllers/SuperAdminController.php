@@ -43,19 +43,24 @@ class SuperAdminController extends Controller
     }
 
     public function login_as($id){
-        $user= User::find($id);
-        if($user)
-        {
-            if($user->role_id ==1)
+        $current_logged_in_admin = Auth::user();
+        if ($current_logged_in_admin->role_id == 1){
+            $user= User::find($id);
+            if($user)
             {
-                return redirect()->back()->with('error',"Cannot login as User {$user->name}");
+                if($user->role_id ==1)
+                {
+                    $response["message"]="Cannot login as {$user->name}";
+//                    return $response;
+                    return redirect('/')->with('error',"Cannot login as User {$user->name}");
+                }
+//                Auth::logout($current_logged_in_admin);
+                Auth::login($user);
+                return redirect("/")->with('success',"Successfully logged in as {$user->name}");
             }
-
-            Auth::login($user);
-            return redirect("/")->with('success',"Successfully logged in as {$user->name}");
-        }
-        else{
-            return redirect('/')->with('error',"User {$id} not found");
+            else{
+                return redirect('/')->with('error',"User {$id} not found");
+            }
         }
     }
 
