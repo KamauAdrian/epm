@@ -79,9 +79,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request,$id)
     {
+        $messages = [
+            'collaborators.required'=>'Please Select At Least One Work Stream Collaborator'
+        ];
         $this->validate($request,[
             'collaborators'=>'required',
-        ]);
+        ],$messages);
         $collaborators_ids = $request->input('collaborators');
         $project = $request->all();
         $new_project = new Project();

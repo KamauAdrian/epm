@@ -40,7 +40,7 @@ class BoardController extends Controller
         $new_board->name = $board['name'];
         $new_board->project_id = $project_id;
         $new_board->save();
-        return redirect('adm/'.$id.'/view/project/'.$project_id)->with('success','New Board Created Successfully');
+        return redirect('adm/'.$id.'/view/project/'.$project_id)->with('success','New Activity Created Successfully');
     }
 
     /**

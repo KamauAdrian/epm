@@ -569,7 +569,8 @@
                     var task_assignees = "";
                     if (response_assignees){
                         response_assignees.forEach(function (assignee){
-                            task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
+                            task_assignees+= '<p style="font-size: 12px"><span class="badge badge-pill badge-light-dark">'+assignee+'</span></p>'
+                            // task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
                         });
                     }else {
                         //do something else
@@ -611,7 +612,7 @@
                         due_date = 'No Due Date';
                     }
                     var description = response_task.description;
-
+console.log(response_task);
                     $('#modalTaskDetailed .modal-body .task-details').html(
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
                         '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response_task.name+'</h6></div></div>'+

@@ -16,8 +16,11 @@ class CreateTaskLinksTable extends Migration
         Schema::create('task_links', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->integer('task_id')->unsigned();
+            $table->bigInteger('task_id')->unsigned();
             $table->timestamps();
+            $table->foreign('task_id')
+                ->references('id')->on('tasks')
+                ->onDelete('cascade');
         });
     }
 

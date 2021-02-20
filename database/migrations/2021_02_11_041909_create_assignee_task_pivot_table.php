@@ -20,9 +20,9 @@ class CreateAssigneeTaskPivotTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('task_id')
-                ->references('id')->on('tasks')
-                ->onDelete('cascade');
+//            $table->foreign('task_id')
+//                ->references('id')->on('tasks')
+//                ->onDelete('cascade');
         });
     }
 

@@ -16,7 +16,7 @@ class CreateSubTasksTable extends Migration
         Schema::create('sub_tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('due_date');
+            $table->date('due_date')->nullable();
             $table->integer('task_id')->unsigned();
             $table->timestamps();
         });

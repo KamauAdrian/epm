@@ -100,9 +100,9 @@ class TaskController extends Controller
                 foreach ($task->assignees as $task_assignee){
                     $split_name = explode(' ',$task_assignee->name);
                     if (count($split_name)>1){
-                        $response_assignees[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                        $response_assignees[] = $split_name[0];
                     }else{
-                        $response_assignees[] = substr($task_assignee->name,0,1);
+                        $response_assignees[]=$task_assignee->name;
                     }
                 }
             }
@@ -149,14 +149,21 @@ class TaskController extends Controller
      */
     public function update_assignees(Request $request, $id,$task_id)
     {
+//        dd($request->all());
         $task = Task::find($task_id);
-        $assignees = $request->assignees;
+        if ($task){
+            $assignees = $request->assignees;
 
-        if ($task->assignees){
-            $task->assignees()->detach($task->assignees);
-            $task->assignees()->attach($assignees);
+            if ($task->assignees){
+                $task->assignees()->detach($task->assignees);
+                $task->assignees()->attach($assignees);
+                $response["status_code"]= 0;
+                $response["response_message"]= "Assignees Updated Successfully";
+                $response["response_data"]= $task;
+            }
         }
-        dd(count($task->assignees),$assignees);
+        return  $response;
+//        dd(count($task->assignees),$assignees);
     }
 
     public function update_due_date(Request $request, $id,$task_id)
