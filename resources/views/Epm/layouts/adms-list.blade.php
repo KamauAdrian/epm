@@ -68,7 +68,7 @@
                         <table id="myDataTable" class="table table-center mb-0">
                             @if($role->name == 'Project Manager')
                                 <thead>
-                                <tr> <th>Project Manager</th> <th>Active Projects</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>PMO</th> <th>Active Projects</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                             @elseif($role->name == 'Center Manager')
                                 <thead>
