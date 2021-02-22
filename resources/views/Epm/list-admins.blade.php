@@ -24,7 +24,9 @@
         });
     </script>
     <script>
-        $('#myDataTable').DataTable();
+        $('#myDataTable').DataTable({
+            "order": [],
+        });
     </script>
 
 @endsection
