@@ -21,6 +21,8 @@ class CreateTeamTrainersTable extends Migration
             $table->integer('team_leader_id')->unsigned()->nullable();
             $table->integer('creator_id')->unsigned();
             $table->timestamps();
+
+
         });
     }
 

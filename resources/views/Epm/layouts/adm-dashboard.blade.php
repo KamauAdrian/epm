@@ -27,10 +27,19 @@
     $centers = \App\Models\Center::all();
     $sessions = \App\Models\TrainingSession::all();
     $trainees = \App\Models\Trainee::all();
+    $projects = \App\Models\Project::all();
 
     ?>
     <div class="col-md-12">
-        <h2 class="font-weight-normal">Hi {{$auth_admin->name}}, Welcome back!</h2>
+        <h2 class="font-weight-normal text-center">Hi {{$auth_admin->name}}, Welcome to eMobilis Portal</h2>
+    </div>
+    <div class="col-md-12">
+        <p>Our Mission</p>
+        <p>The mission of eMobilis is to create opportunities for African youth by training them on digital, software and other technologies that prepare them for the future of work by equipping them with marketable, industry driven skills.</p>
+    </div>
+    <div class="col-md-12">
+        <p>Our Vision</p>
+        <p>Our vision is to empower local youth to tap into the myriad opportunities that the mobile, technology and software development industry offers so that they can innovate, create and improve their situation in life through use of digital tools.</p>
     </div>
 {{--    ///////// rem copied data to sample page--}}
     <div class="col-md-12">
@@ -104,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-{{--            //Work Streams (check for pms for now)--}}
+{{--            //Work Streams--}}
 
                 <div class="col-md-4">
                     <div class="card" style="width: 18rem;">
@@ -114,9 +123,9 @@
                         <div class="card-body">
                             <div class="row">
                                 <div style="font-size:30px">
-                                    @if($pm_role)
+                                    @if($projects)
                                     <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($projects)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
                                     </span>
                                     @else
                                         <span>
@@ -185,32 +194,34 @@
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body text-center">
-                                <div id="opentask-taskchart1"></div>
-                                <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>
+                                <div id="openTasks"></div>
+{{--                                <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
+                                <h5 class="text-info">Open Tasks</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body text-center">
-                                <div id="opentask-taskchart2"></div>
-                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>
+                                <div id="overDueTasks"></div>
+{{--                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
+                                <h5 class="text-danger">Overdue Tasks</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body text-center">
-                                <div id="opentask-taskchart3"></div>
-                                <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>
+                                <div id="completeTasks"></div>
+                                <h5 class="text-success">Complete Tasks</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body text-center">
-                                <div id="opentask-taskchart4"></div>
-                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>
+                                <div id="inCompleteTasks"></div>
+                                <h5 class="text-primary">Incomplete Tasks</h5>
                             </div>
                         </div>
                     </div>
@@ -219,27 +230,31 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="font-weight-normal">Tasks by Project</h3>
-                        <div id="taskfull-dashboard-chart2" class="mb-4 mt-5"></div>
-                        <div>
-                            <p class="mb-3"><i class="fas fa-circle text-c-blue f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">11</span></p>
-                            <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>
-                            <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 3 pending tasks <span class="float-right h6 mb-0 text-body">4</span></p>
-                            <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>New order received <span class="float-right h6 mb-0 text-body">6</span></p>
-                            <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">28</span></p>
-                            <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 4 pending tasks <span class="float-right h6 mb-0 text-body">9</span></p>
-                        </div>
+                        <h3 class="font-weight-normal">Tasks by Work Streams</h3>
+                        <div id="workStreamsTaskOverview" class="mb-4 mt-5"></div>
+                        @if($projects)
+                            <div>
+                                @foreach($projects as $project)
+                                    <p class="mb-3">{{$project->name}} <span class="float-right h6 mb-0 text-body">{{count($project->tasks)}}</span></p>
+                                @endforeach
+{{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
+{{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 3 pending tasks <span class="float-right h6 mb-0 text-body">4</span></p>--}}
+{{--                                <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>New order received <span class="float-right h6 mb-0 text-body">6</span></p>--}}
+{{--                                <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">28</span></p>--}}
+{{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 4 pending tasks <span class="float-right h6 mb-0 text-body">9</span></p>--}}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+{{--    <div class="col-md-12">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-body">--}}
 {{--                        //project managers--}}
 {{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')--}}
 {{--                            <div class="row">--}}
@@ -283,7 +298,7 @@
 {{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($cms)}}</h1>--}}
 {{--                                    @endif--}}
 {{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
 {{--                                    <div class="rounded bg-light p-3">--}}
 {{--                                        <div class="media align-items-center">--}}
 {{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
@@ -311,7 +326,7 @@
 {{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($centers)}}</h1>--}}
 {{--                                    @endif--}}
 {{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
 {{--                                    <div class="rounded bg-light p-3">--}}
 {{--                                        <div class="media align-items-center">--}}
 {{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
@@ -325,33 +340,33 @@
 {{--                        </div>--}}
 {{--                        @endif--}}
 {{--                            //Trainers--}}
-                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')
-                            <div class="row">
-                            <div class="col-sm-12 align-items-center justify-content-between mb-4">
-                                <h2 class="font-weight-normal mb-0">Trainers</h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="trainersOverview"></div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="p-4 border rounded">
-                                    @if($trainer_role)
-                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainers)}}</h1>
-                                    @endif
-                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>
+{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')--}}
+{{--                            <div class="row">--}}
+{{--                            <div class="col-sm-12 align-items-center justify-content-between mb-4">--}}
+{{--                                <h2 class="font-weight-normal mb-0">Trainers</h2>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-6">--}}
+{{--                                <div id="trainersOverview"></div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-6">--}}
+{{--                                <div class="p-4 border rounded">--}}
+{{--                                    @if($trainer_role)--}}
+{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainers)}}</h1>--}}
+{{--                                    @endif--}}
+{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
 {{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-                                    <div class="rounded bg-light p-3">
-                                        <div class="media align-items-center">
-                                            <i class="feather icon-alert-circle h2 mb-0"></i>
-                                            <div class="media-body ml-3">
-                                                Digital Marketing is the category with the most Trainers
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+{{--                                    <div class="rounded bg-light p-3">--}}
+{{--                                        <div class="media align-items-center">--}}
+{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
+{{--                                            <div class="media-body ml-3">--}}
+{{--                                                Digital Marketing is the category with the most Trainers--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        @endif--}}
 {{--                            //sessions--}}
 {{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')--}}
 {{--                            <div class="row">--}}
@@ -367,7 +382,7 @@
 {{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($sessions)}}</h1>--}}
 {{--                                    @endif--}}
 {{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
 {{--                                    <div class="rounded bg-light p-3">--}}
 {{--                                        <div class="media align-items-center">--}}
 {{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
@@ -395,7 +410,7 @@
 {{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainees)}}</h1>--}}
 {{--                                    @endif--}}
 {{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
+{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
 {{--                                    <div class="rounded bg-light p-3">--}}
 {{--                                        <div class="media align-items-center">--}}
 {{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
@@ -408,9 +423,45 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--//best performer--}}
+    <div class="col-md-12">
+        <div class="row">
+{{--            @foreach($best_performers as $best_performer)--}}
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Award Title</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <figure class="figure"><img src="{{url('assets/images/user.png')}}" alt="" style="height: 150px;width: 150px;"></figure>
+                            <p>Best Performer name</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+{{--            @endforeach--}}
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+{{--            @foreach($announcements as $announcement)--}}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="#!"><h5>Announcement Title</h5></a>
+                        </div>
+                        <div class="card-body">
+                            <figure class="figure"><img src="{{url('assets/images/user.png')}}" alt="" style="height: 150px;width: 150px;"></figure>
+                            <p>Short Desc Date</p>
+                        </div>
+                    </div>
+                </div>
+{{--            @endforeach--}}
         </div>
     </div>
 @endsection
@@ -455,15 +506,19 @@
                         }
                     }
                 },
-                colors: ['#FFB800'],
+                colors: ['#00ACC1'],
                 fill: {
                     type: 'solid',
                 },
-                series: [65],
+                series: [],
                 labels: ['Open'],
             }
-            var chart = new ApexCharts(document.querySelector("#opentask-taskchart1"), options);
+            var chart = new ApexCharts(document.querySelector("#openTasks"), options);
             chart.render();
+            axios.get('/adm/get/open/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
         });
         $(function() {
             var options = {
@@ -499,15 +554,19 @@
                         }
                     }
                 },
-                colors: ['#FF0000'],
+                colors: ['#FF0B37'],
                 fill: {
                     type: 'solid',
                 },
-                series: [65],
+                series: [],
                 labels: ['Overdue'],
             }
-            var chart = new ApexCharts(document.querySelector("#opentask-taskchart2"), options);
+            var chart = new ApexCharts(document.querySelector("#overDueTasks"), options);
             chart.render();
+            axios.get('/adm/get/overdue/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
         });
         $(function() {
             var options = {
@@ -543,15 +602,19 @@
                         }
                     }
                 },
-                colors: ['#00FF00'],
+                colors: ['#2DCA73'],
                 fill: {
                     type: 'solid',
                 },
-                series: [65],
+                series: [],
                 labels: ['Complete'],
             }
-            var chart = new ApexCharts(document.querySelector("#opentask-taskchart3"), options);
+            var chart = new ApexCharts(document.querySelector("#completeTasks"), options);
             chart.render();
+            axios.get('/adm/get/complete/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
         });
         $(function() {
             var options = {
@@ -587,15 +650,19 @@
                         }
                     }
                 },
-                colors: ['#0000FF'],
+                colors: ['#0B69FF'],
                 fill: {
                     type: 'solid',
                 },
-                series: [10],
+                series: [],
                 labels: ['Incomplete'],
             }
-            var chart = new ApexCharts(document.querySelector("#opentask-taskchart4"), options);
+            var chart = new ApexCharts(document.querySelector("#inCompleteTasks"), options);
             chart.render();
+            axios.get('/adm/get/incomplete/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
         });
         $(function() {
             var options = {
@@ -606,8 +673,9 @@
                         enabled: true
                     },
                 },
-                series: [44, 55, 41, 17, 15],
-                colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffa21d", "#ff5252"],
+                series: [],
+                labels: [],
+                colors: ["#FFB800"],
                 legend: {
                     show: false,
                 },
@@ -618,7 +686,7 @@
                             labels: {
                                 show: true,
                                 name: {
-                                    show: true
+                                    show: false
                                 },
                                 value: {
                                     show: true
@@ -631,8 +699,37 @@
                     enabled: false
                 },
             }
-            var chart = new ApexCharts(document.querySelector("#taskfull-dashboard-chart2"), options);
+            var chart = new ApexCharts(document.querySelector("#workStreamsTaskOverview"), options);
             chart.render();
+            // axios.get('/adm/list/projects').then(function(response) {
+            //     console.log(response.data.length);
+            //     var updateData = response.data;
+            //     updateData.forEach(function (data){
+            //         var pName = [];
+            //         var pTasks = [];
+            //         pName=[data.name];
+            //         pTasks=[data.tasks];
+            //         console.log(pName);
+            //         chart.updateOptions({
+            //             labels:pName,
+            //             series:pTasks,
+            //         });
+            //     });
+            // });
+
+            axios.get('/adm/list/projects').then(function(response) {
+                chart.updateOptions({
+                    labels:response.data,
+                });
+            });
+            axios.get('/adm/get/project/tasks').then(function(response) {
+                chart.updateOptions({
+                    series: response.data,
+                });
+                // chart.updateSeries([
+                //     response.data
+                // ]);
+            });
         });
         $(function() {
             var options = {
@@ -687,11 +784,12 @@
             }
             var chart = new ApexCharts(document.querySelector("#pmsOverview"), options);
             chart.render();
+
             axios.get('/adm/get/pms/records').then(function(response) {
                 chart.updateSeries([{
                     name: 'PMOs',
                     data: response.data
-                }])
+                }]);
             })
         });
         $(function() {
@@ -808,18 +906,11 @@
             var options = {
                 chart: {
                     height: 300,
-                    type: 'bar',
+                    type: 'line',
                     stacked: false,
                     toolbar: {
                         show: false,
                     }
-                },
-                plotOptions: {
-                    bar: {
-                        vertical: true,
-                        columnWidth: '30%',
-                        endingShape: 'rounded'
-                    },
                 },
                 colors: ['#FFB800'],
                 series: [],

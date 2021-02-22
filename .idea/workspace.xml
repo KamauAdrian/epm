@@ -15,10 +15,17 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CenterManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CenterManagerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectManagerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskAttachmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskAttachmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/ProjectCreatedJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/ProjectCreatedJob.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_09_074528_create_team_trainers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_09_074528_create_team_trainers_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,19 +181,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/resources/views/Emails" />
       <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/public/assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
     </key>
   </component>
   <component name="RunManager">
@@ -302,7 +309,7 @@
       <workItem from="1613743883814" duration="11363000" />
       <workItem from="1613792753676" duration="5280000" />
       <workItem from="1613800056945" duration="3871000" />
-      <workItem from="1613969410090" duration="8341000" />
+      <workItem from="1613969410090" duration="32265000" />
     </task>
     <servers />
   </component>
@@ -375,10 +382,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613458066626" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613977435238">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613996116498">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613977435238" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613996116498" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

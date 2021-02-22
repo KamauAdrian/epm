@@ -136,6 +136,8 @@ Route::group(['middleware'=>'admin'],function (){
 
     //projects
     Route::get('/adm/{id}/list/projects',[App\Http\Controllers\ProjectController::class, 'index']);
+    Route::get('/adm/list/projects',[App\Http\Controllers\ProjectController::class, 'project_names']);//json array of project names
+    Route::get('/adm/get/project/tasks',[App\Http\Controllers\ProjectController::class, 'project_tasks']);//json array of total tasks per projects
     Route::get('/adm/{id}/list/my/projects',[App\Http\Controllers\ProjectController::class, 'index_my_projects']);
     Route::get('/adm/{id}/list/project/collaborations',[App\Http\Controllers\ProjectController::class, 'index_project_collaborations']);
     Route::get('/list/collaborators/{id}',[App\Http\Controllers\ProjectController::class, 'collaborators']);//json array of collaborators added to project
@@ -149,6 +151,10 @@ Route::group(['middleware'=>'admin'],function (){
     //Projects -> Boards
     Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
     //Projects -> Tasks
+    Route::get('/adm/get/complete/tasks',[App\Http\Controllers\TaskController::class, 'complete_tasks']);//json array of tasks marked as complete
+    Route::get('/adm/get/incomplete/tasks',[App\Http\Controllers\TaskController::class, 'incomplete_tasks']);//json array of tasks Marked incomplete(status 0)
+    Route::get('/adm/get/overdue/tasks',[App\Http\Controllers\TaskController::class, 'overdue_tasks']);//json array of tasks past the due date
+    Route::get('/adm/get/open/tasks',[App\Http\Controllers\TaskController::class, 'open_tasks']);//json array of tasks
     Route::post('/adm/{id}/create/new/task/board_id={board_id}',[App\Http\Controllers\TaskController::class, 'store']);
     Route::get('/adm/{id}/view/task/task_id={task_id}',[App\Http\Controllers\TaskController::class, 'show']);
     Route::post('/adm/{id}/add/task/comment/task_id={task_id}',[App\Http\Controllers\TaskCommentController::class, 'store']);

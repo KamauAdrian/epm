@@ -144,6 +144,25 @@ class ProjectController extends Controller
         return view('Epm.Projects.read',compact('project','boards'));
     }
 
+    public function project_names(){
+            $projects = Project::all();
+//            $project = Project::find(1);
+            $result = [];
+            foreach ($projects as $project) {
+                $result[] = $project->name;
+//                $result[] = ["name" => $project->name, "tasks" => count($project->tasks)];
+            }
+        return response()->json($result);
+    }
+    public function project_tasks(){
+        $projects = Project::all();
+//        $project = Project::find(1);
+        $result = [];
+        foreach ($projects as $project) {
+            $result[] = count($project->tasks);
+        }
+        return response()->json($result);
+    }
     /**
      * Show the form for editing the specified resource.
      *

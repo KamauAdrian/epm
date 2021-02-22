@@ -46,6 +46,7 @@ class TaskController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
+            'due_date'=>'required',
         ]);
         $admin = User::find($id);
         $board = Board::find($board_id);
@@ -237,6 +238,37 @@ class TaskController extends Controller
 
 
         return $response;
+    }
+
+    public function complete_tasks(){
+        $tasks = Task::all();
+        $complete_tasks = Task::where('status',1)->get();
+        $result = round((count($complete_tasks)*100)/count($tasks),2);
+        return response()->json($result);
+    }
+    public function incomplete_tasks(){
+        $tasks = Task::all();
+        $inComplete_tasks = Task::where('status',0)->get();
+        $result = round((count($inComplete_tasks)*100)/count($tasks),2);
+        return response()->json($result);
+    }
+    public function overdue_tasks(){
+        $tasks = Task::all();
+        $today = date('Y-m-d');
+        $overdue_tasks = [];
+        foreach ($tasks as $task){
+            if ($task->due_date<$today){
+                $overdue_tasks[] = $task;
+            }
+        }
+        $result = round((count($overdue_tasks)*100)/count($tasks),2);
+        return response()->json($result);
+    }
+    public function open_tasks(){
+        $tasks = Task::all();
+//        $result = round((count($complete_tasks)*100)/count($tasks),2);
+        $result = count($tasks);
+        return response()->json($result);
     }
 
 

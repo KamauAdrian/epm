@@ -150,7 +150,8 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label>Due Date</label>
-                                                                        <input style="width: auto" type="date" class="form-control" name="due_date" placeholder="Task One">
+                                                                        <input style="width: auto" type="date" class="form-control" name="due_date" required>
+                                                                        <span class="text-danger">{{$errors->first('due_date')}}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-mdd-12">
@@ -232,17 +233,7 @@
                                     <h6>Attachments</h6>
                                     <div class="col-md-12">
                                         <div class="  mt-4">
-                                        <div class="container task-attachments" style="overflow: auto;">
-                                        </div>
-                                            <div class="container mt-4">
-                                                <div style="height: 50px" class="row">
-                                                    <div class="col-sm-12  attachment">
-                                                        <div class="card text-center" style="width:auto" id="add-attachment">
-                                                            <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="container task-attachments" style="overflow: auto;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -256,17 +247,6 @@
                                                         <ol class="list-unstyled task-links">
 
                                                         </ol>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="container mt-2">
-                                                <div style="height: 50px" class="row">
-                                                    <div class="col-md-12  attachment">
-                                                        <div class="card text-center" style="width:auto" id="add-link">
-                                                            <a href="#!" class="attach">
-                                                                <span><i class="fa fa-plus"></i></span> Add a Link
-                                                            </a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -299,6 +279,30 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="container mt-4">
+                                    <div style="height: 50px" class="row">
+                                        <div class="col-sm-12  attachment">
+                                            <div class="card text-center" style="width:auto" id="add-attachment">
+                                                <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="container mt-2">
+                                    <div style="height: 50px" class="row">
+                                        <div class="col-md-12  attachment">
+                                            <div class="card text-center" style="width:auto" id="add-link">
+                                                <a href="#!" class="attach">
+                                                    <span><i class="fa fa-plus"></i></span> Add a Link
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -427,7 +431,8 @@
                                         <input type="hidden" id="modal-modal-attachment-task-id" name="task_id" value="">
                                         <div class="form-group">
                                             <label>Add an Attachment</label>
-                                            <input type="file" class="form-control" name="attachment" required>
+                                            <input type="file" class="form-control" name="attachment">
+                                            <span class="text-danger">{{$errors->first("attachment")}}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -569,7 +574,7 @@
                     var task_assignees = "";
                     if (response_assignees){
                         response_assignees.forEach(function (assignee){
-                            task_assignees+= '<span class="badge badge-pill badge-light-dark">'+assignee+'</span>'
+                            task_assignees+= '<span class="badge badge-pill badge-light-dark">'+assignee+'</span> '
                             // task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
                         });
                     }else {

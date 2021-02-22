@@ -51,10 +51,16 @@ class TaskAttachmentController extends Controller
 
             return $response;
         }
+//        $this->validate($request,[
+//            "attachment"=>"required|mimes:jpeg,png,jpg,zip,pdf"
+//        ]);
         $fileName = '';
         $file_path = '';
-        $file = $request->file('attachment');
-        if ($file->isValid()){
+        $file = '';
+        if ($request->hasFile('attachment')){
+            $file = $request->file('attachment');
+        }
+        if ($file && $file->isValid()){
             $fileName = $file->getClientOriginalName();
             $path=$file->move('Tasks/Attachments',$fileName);
             $file_path=url('/')."/".$path->getPathName();
