@@ -14,7 +14,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/list-admins.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/list-admins.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +300,7 @@
       <workItem from="1613743883814" duration="11363000" />
       <workItem from="1613792753676" duration="5280000" />
       <workItem from="1613800056945" duration="3871000" />
-      <workItem from="1613969410090" duration="873000" />
+      <workItem from="1613969410090" duration="1523000" />
     </task>
     <servers />
   </component>
@@ -371,10 +373,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613458066626" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613969857161">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613970735016">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613969857161" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613970735016" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

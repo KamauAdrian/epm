@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
+
     @include('Epm.layouts.adms-list')
+
 @endsection
 @section('js')
     <script type="text/javascript">
@@ -24,9 +26,9 @@
         });
     </script>
     <script>
-        // $('#myDataTable').DataTable({
-        //     "order": [],
-        // });
+        $('#adminsListDataTable').DataTable({
+            "order": [],
+        });
     </script>
 
 @endsection
