@@ -569,7 +569,7 @@
                     var task_assignees = "";
                     if (response_assignees){
                         response_assignees.forEach(function (assignee){
-                            task_assignees+= '<p style="font-size: 12px"><span class="badge badge-pill badge-light-dark">'+assignee+'</span></p>'
+                            task_assignees+= '<span class="badge badge-pill badge-light-dark">'+assignee+'</span>'
                             // task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
                         });
                     }else {
@@ -617,7 +617,7 @@ console.log(response_task);
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
                         '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response_task.name+'</h6></div></div>'+
                         '<div class="col-md-3"><div class="form-group"><p>Task Assignees: </p></div></div>'+
-                        '<div class="col-md-9"><div class="form-group">'+task_assignees+'<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
+                        '<div class="col-md-9"><div class="form-group"><p style="font-size: 12px">'+task_assignees+'</p><button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
                         '<div class="col-md-3"><div class="form-group"><p>Task Due Date</p></div></div>'+
                         '<div class="col-md-9"><div class="form-group"><p onclick="openModalUpdateDueDate()"><span><i class="fa fa-calendar"></i></span> '+due_date+'</p></div></div>'
                     );
