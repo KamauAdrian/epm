@@ -157,13 +157,9 @@ class CenterManagerController extends Controller
         }
         $new_cm = $cm_user->save();
         if ($new_cm){
-            $data = [
-                'user_id'=>$cm_user->id,
-                'name'=>$cm_user->name,
-                'email'=>$cm_user->email,
-                'phone'=>$cm_user->phone,
-            ];
-            Mail::to($email)->send(new CreatePassword($data));
+            $data = $cm_user;
+            User::SendNewUserAccountActivationEmail($email,$data);
+//            Mail::to($email)->send(new CreatePassword($data));
         }
         //redirect to center managers list page with success messages
         $request->session()->flash('success_message','Center Manager created successfully');
@@ -248,7 +244,6 @@ class CenterManagerController extends Controller
         }
 
         $cms = array_slice($cms_raw[0],1);
-        dd($cms_raw,$cms);
         $role = new Role();
         $cm_role = null;
         $role->name = 'Center Manager';
@@ -272,13 +267,10 @@ class CenterManagerController extends Controller
             $new_cm->role_id=$cm_role;
             $saved_cm = $new_cm->save();
             if ($saved_cm){
-                $data = [
-                    'user_id'=>$new_cm->id,
-                    'name'=>$new_cm->name,
-                    'email'=>$new_cm->email,
-                    'phone'=>$new_cm->phone,
-                ];
-                Mail::to($new_cm->email)->send(new CreatePassword($data));
+                $email = $new_cm->email;
+                $data = $new_cm;
+                User::SendNewUserAccountActivationEmail($email,$data);
+//                Mail::to($new_cm->email)->send(new CreatePassword($data));
             }
         }
         return redirect('/list/all/admins/role_id='.$cm_role)->with('success','Center Managers uploaded Successfully');

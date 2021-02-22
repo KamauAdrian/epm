@@ -126,14 +126,10 @@ class ProjectManagerController extends Controller
 //finally redirect su admin to Project Managers page with a list of other projects managers previously created
         if ($pm_user_saved){
             //create a data array to pass to the mailable class to send email invite
-            $data = [
-                'user_id'=>$pm_user->id,
-                'name' => $pm_user->name,
-                'email' => $pm_user->email,
-                'phone' => $pm_user->phone,
-            ];
+            $data = $pm_user;
 //            call the mailable class and send the email
-            Mail::to($email)->send(new CreatePassword($data));
+            User::SendNewUserAccountActivationEmail($email,$data);
+//            Mail::to($email)->send(new CreatePassword($data));
             //alert su admin success created pm user
             return redirect('/list/all/admins/role_id='.$pm_user->role_id)->with('success','Project Manager Added Successfully');
         }

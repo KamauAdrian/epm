@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TrainersTemplateExport;
 use App\Imports\TrainersImport;
+use App\Jobs\ProjectCreatedJob;
 use App\Mail\CreatePassword;
 use App\Models\Role;
 use App\Models\TrainerAssignmentSubmissionReport;
@@ -81,14 +82,9 @@ class TrainerController extends Controller
                 $new_trainer->role_id=$new_trainer_role;
                 $new_trainer_saved = $new_trainer->save();
                 if ($new_trainer_saved){
-                    $data = [
-                        'user_id'=>$new_trainer->id,
-                        'name'=>$new_trainer->name,
-                        'email'=>$new_trainer->email,
-                        'phone'=>$new_trainer->phone,
-                    ];
+                    $data = $new_trainer;
                     //send Email invite
-                    User::sendNewUserEmail($new_trainer->email,$data);
+                    User::SendNewUserAccountActivationEmail($new_trainer->email,$data);
                 }
             }
             return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers Successfully Uploaded');
@@ -559,7 +555,8 @@ class TrainerController extends Controller
             'email'=>$trainer_adm_user->email,
             'phone'=>$trainer_adm_user->phone,
         ];
-        Mail::to($email)->send(new CreatePassword($data));
+        User::SendNewUserAccountActivationEmail($email,$data);
+//        Mail::to($email)->send(new CreatePassword($data));
     }
 
 //redirect to trainers list as per role

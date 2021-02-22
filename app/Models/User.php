@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Jobs\NewUserActivateAccountJob;
+use App\Jobs\ProjectCreatedJob;
 use App\Mail\CreatePassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -77,7 +79,11 @@ class User extends Authenticatable
     DB::table('users')->where('id',$id)->update($data);
     }
 
-    public static function SendNewUserEmail($email,$data){
-        Mail::to($email)->send(new CreatePassword($data));
+    public static function SendNewUserAccountActivationEmail($email,$data){
+        //dispatch email job
+        $params=[];
+        $params['email']=$email;
+        $params['data']=$data;
+        dispatch(new NewUserActivateAccountJob($params));
     }
 }
