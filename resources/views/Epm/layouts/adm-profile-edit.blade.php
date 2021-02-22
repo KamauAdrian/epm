@@ -18,7 +18,7 @@ $admin_user = $user::find($admin->id);
                         @if($admin_user->role->name == 'Project Manager')
                             <figure class="figure">
                                 <img src="{{url('ProjectManagers/images',$admin_user->image)}}" class="figure-img img-fluid rounded" alt="...">
-                            </figure>>
+                            </figure>
                         @elseif($admin_user->role->name == 'Center Manager')
                             <figure class="figure">
                                 <img src="{{url('CenterManagers/images',$admin_user->image)}}" class="figure-img img-fluid rounded" alt="...">
@@ -32,7 +32,7 @@ $admin_user = $user::find($admin->id);
                                 <img src="{{url('Mentors/images',$admin_user->image)}}" class="figure-img img-fluid rounded" alt="...">
                             </figure>
                         @endif
-                        <label for="">Change Profile Photo</label>
+                        <label>Change Profile Photo</label>
                         <input type="file" name="image" value="{{$admin_user->image}}" class="form-control">
                     </div>
                 @else

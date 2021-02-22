@@ -47,15 +47,8 @@
                                     <label>Select A Type of Question</label>
                                     <div class="form-group">
                                         <input type="radio" onclick="addOpenQuestion('questionQuestion','optionsSelectQuestion')" name="question_type_1" value="Open Question"> Open
-{{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group">--}}
                                         <input type="radio" onclick="addMultiChoiceQuestion('questionQuestion','optionsSelectQuestion')" name="question_type_1" value="Yes or No Question"> Yes or No
-{{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group">--}}
                                         <input type="radio" onclick="addSelectQuestion('questionQuestion','optionsSelectQuestion')" name="question_type_1" value="Dropdown Select Question"> Select (Dropdown with options)
-{{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
                                     </div>
                                     <div class="form-group genQuiz" id="questionQuestion" style="display: none;">
                                         <label>Question</label>
@@ -110,21 +103,20 @@
         }
         function addMultiChoiceQuestion(id_q,id_s){
             var clicked = document.getElementById('multi_question_type_1');
-            if (clicked.checked==true){
+            // if (clicked.checked==true){}
                 var quiz = document.getElementById(id_question);
                 quiz.style.display = 'block'
                 var option = document.getElementById(id_option);
                 option.style.display = 'none'
-            }
+
         }
         function addSelectQuestion(id_q,id_s){
             var clicked = document.getElementById('select_question_type_1');
-            if (clicked.checked==true){
+            // if (clicked.checked==true){}
                 var quiz = document.getElementById(id_question);
                 quiz.style.display = 'block'
                 var option = document.getElementById(id_option);
                 option.style.display = 'block'
-            }
         }
         function addNewOption(id){
             var option = $('.'+id);

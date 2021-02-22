@@ -246,12 +246,14 @@ class CenterManagerController extends Controller
         foreach ($cms_excel as $cm_excel){
             $cms_raw[] = $cm_excel;
         }
+
         $cms = array_slice($cms_raw[0],1);
+        dd($cms_raw,$cms);
         $role = new Role();
         $cm_role = null;
         $role->name = 'Center Manager';
         //check if role already created
-        $exists_role = DB::table('roles')->where('name',$role->name)->first();
+        $exists_role = DB::table('roles')->where('name','Center Manager')->first();
         if ($exists_role){
             $cm_role = $exists_role->id;
         }else{

@@ -59,10 +59,10 @@ class TrainerController extends Controller
             }
             $trainers = array_slice($trainers_raw[0],1);
             $role = new Role();
-            $new_trainer_role = '';
+            $new_trainer_role = null;
             $role->name = 'Trainer';
             //check if role already created
-            $exists_role = DB::table('roles')->where('name',$role->name)->first();
+            $exists_role = DB::table('roles')->where('name','Trainer')->first();
             if ($exists_role){
                 $new_trainer_role = $exists_role->id;
             }else{
@@ -79,10 +79,8 @@ class TrainerController extends Controller
                 $new_trainer->county=$trainer[5];
                 $new_trainer->is_admin=1;
                 $new_trainer->role_id=$new_trainer_role;
-            try {
-                if ($new_trainer->save()==false){
-                    throw new \Exception();
-                }else{
+                $new_trainer_saved = $new_trainer->save();
+                if ($new_trainer_saved){
                     $data = [
                         'user_id'=>$new_trainer->id,
                         'name'=>$new_trainer->name,
@@ -92,15 +90,8 @@ class TrainerController extends Controller
                     //send Email invite
                     User::sendNewUserEmail($new_trainer->email,$data);
                 }
-
-            }catch (\Exception $eu){
-                if ($eu){
-                    return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('error','Trainers Not Uploaded Please Confirm no Duplicate Entries in Your Excel File');
-                }
-                return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers Successfully Uploaded');
             }
-
-            }
+            return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers Successfully Uploaded');
         }
     }
 
