@@ -276,6 +276,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/leave/application/application_id={application_id}',[App\Http\Controllers\AdminController::class,'employee_leave_application']);
     Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_request']);
 
+    //Awards
+    Route::get('/adm/{id}/create/new/award',[App\Http\Controllers\AwardController::class,'create']);
+    Route::get('/list/all/users',[App\Http\Controllers\AdminController::class,'admins']);
 });
 //project managers routes
 Route::group(['middleware'=>'project.managers'],function (){

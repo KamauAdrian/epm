@@ -59,6 +59,21 @@ class AdminController extends Controller
 //        return view('Epm.Layouts.adm-dashboard');
     }
 
+    public function admins(){
+        $admins_raw = User::all();
+        $admins = [];
+        foreach ($admins_raw as $user){
+            if ($user->role->name!='Su Admin'){
+                $admins[] = $user;
+            }
+        }
+        $result = [];
+        foreach ($admins as $admin){
+            $result[] = $admin;
+        }
+        return response()->json($result);
+    }
+
     public function index()
     {
         return view('Epm.layouts.adm-dashboard');

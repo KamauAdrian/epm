@@ -435,7 +435,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Award Title</h5>
+                            <a href="#!"><h5>Award Title</h5></a>
                         </div>
                         <div class="card-body">
 
