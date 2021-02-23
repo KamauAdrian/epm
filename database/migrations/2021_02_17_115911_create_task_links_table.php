@@ -17,6 +17,7 @@ class CreateTaskLinksTable extends Migration
             $table->id();
             $table->text('name');
             $table->bigInteger('task_id')->unsigned();
+            $table->bigInteger('creator_id')->unsigned();
             $table->timestamps();
             $table->foreign('task_id')
                 ->references('id')->on('tasks')

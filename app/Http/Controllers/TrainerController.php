@@ -11,6 +11,7 @@ use App\Models\TrainerAssignmentSubmissionReport;
 use App\Models\TrainerDailyAttendanceReport;
 use App\Models\TrainerDailyPhysicalTrainingReport;
 use App\Models\TrainerDailyVirtualTrainingReport;
+use App\Models\TrainerOfficeSupply;
 use App\Models\TrainerReport;
 use App\Models\TrainerSkillCompetence;
 use App\Models\TrainerTrainingTaskRole;
@@ -399,6 +400,7 @@ class TrainerController extends Controller
      */
     public function store(Request $request)
 {
+//    dd($request->all());
     $this->validate($request,
         [
             'name' => ['required', 'string', 'max:255'],
@@ -409,6 +411,9 @@ class TrainerController extends Controller
             'county' => ['required'],
             'location' => ['required'],
             'start_date' => ['required'],
+            'office_supplies_contract' => ['required'],
+            'office_supplies_tag' => ['required'],
+            'office_supplies_laptop' => ['required'],
         ]
     );
 //        dd($request->all());
@@ -428,9 +433,6 @@ class TrainerController extends Controller
     $trainer_adm_user->is_admin = 1;
     $trainer_adm_user->role_id = '';
     $trainer_adm_user->speciality = $request->speciality;
-    $trainer_adm_user->office_supplies = $request->office_supplies;
-    $trainer_adm_user->laptop_type = $request->laptop_type;
-    $trainer_adm_user->laptop_serial_number = $request->laptop_serial_number;
     $trainer_adm_user->bio = $request->bio;
     //before saving a user create a new role(Trainer) save the role and assign user to role_id
     $role = new Role();
@@ -454,12 +456,25 @@ class TrainerController extends Controller
     //save trainer admin user
     $trainer_adm_user_saved = $trainer_adm_user->save();
     if ($trainer_adm_user_saved){
-        $data = [
-            'user_id'=>$trainer_adm_user->id,
-            'name'=>$trainer_adm_user->name,
-            'email'=>$trainer_adm_user->email,
-            'phone'=>$trainer_adm_user->phone,
-        ];
+        $office_supplies = new TrainerOfficeSupply();
+        $office_supplies->contract = $request->office_supplies_contract;
+        $office_supplies->laptop = $request->office_supplies_laptop;
+        $office_supplies->laptop_type = $request->laptop_type;
+        $office_supplies->laptop_serial_number = $request->laptop_serial_number;
+        $office_supplies->tag = $request->office_supplies_tag;
+        $contractName='';
+        $contractDownloadLink='';
+        if ($request->hasFile('contract')){
+            $contract = $request->file('contract');
+            $contractName = $contract->getClientOriginalName();
+            $path = $contract->move('Trainers/Contract');
+            $contractDownloadLink = url("/")."/".$path->getPathname();
+        }
+        $office_supplies->contract_name = $contractName;
+        $office_supplies->contract_download_link = $contractDownloadLink;
+        $office_supplies->trainer_id = $trainer_adm_user->id;
+        $office_supplies->save();
+        $data = $trainer_adm_user;
         User::SendNewUserAccountActivationEmail($email,$data);
 //        Mail::to($email)->send(new CreatePassword($data));
     }
@@ -479,7 +494,7 @@ class TrainerController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

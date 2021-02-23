@@ -111,7 +111,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="checkRole6" checked="checked" disabled>
+                                                    <input type="checkbox" class="form-check-input" id="checkRole6" disabled>
                                                     <label class="form-check-label">Other</label>
                                                 </div>
                                             </div>

@@ -417,6 +417,7 @@ class AdminController extends Controller
     }
 
     public function employee_leave_request(Request $request, $id){
+//dd($request->all());
         $messeges = [
             'leave_type.required'=>'Please select the leave type your are taking'
         ];
