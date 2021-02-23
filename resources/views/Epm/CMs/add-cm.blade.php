@@ -20,9 +20,6 @@
 @endsection
 
 @section('js')
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
 {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
         new Vue({

@@ -202,23 +202,29 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/trainer/daily/attendance/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_attendance']);
     Route::get('/adm/{id}/view/trainer/daily/virtual/training/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_virtual']);
     Route::get('/adm/{id}/view/trainer/daily/physical/training/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_physical']);
-    Route::get('/adm/{id}/view/trainer/assignment/submission/reports',[App\Http\Controllers\AdminController::class, 'reports_by_trainers_assignment']);
-    Route::get('/adm/{id}/view/daily/attendance/reports',[App\Http\Controllers\TrainerController::class, 'daily_attendance_reports']);
-    Route::get('/adm/{id}/view/daily/attendance/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'daily_attendance_report']);
-    Route::get('/adm/{id}/submit/daily/attendance/report',[App\Http\Controllers\TrainerController::class, 'daily_attendance_report_submit']);
-    Route::post('/adm/{id}/save/daily/attendance/report',[App\Http\Controllers\TrainerController::class, 'daily_attendance_report_save']);
-    Route::get('/adm/{id}/view/daily/virtual/training/reports',[App\Http\Controllers\TrainerController::class, 'virtual_training_reports']);
-    Route::get('/adm/{id}/view/daily/virtual/training/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'virtual_training_report']);
-    Route::get('/adm/{id}/submit/daily/virtual/training/report',[App\Http\Controllers\TrainerController::class, 'virtual_training_report_submit']);
-    Route::post('/adm/{id}/save/daily/virtual/training/report',[App\Http\Controllers\TrainerController::class, 'virtual_training_report_save']);
-    Route::get('/adm/{id}/view/daily/physical/training/reports',[App\Http\Controllers\TrainerController::class, 'daily_physical_reports']);
-    Route::get('/adm/{id}/view/daily/physical/training/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'daily_physical_report']);
-    Route::get('/adm/{id}/submit/daily/physical/training/report',[App\Http\Controllers\TrainerController::class, 'daily_physical_report_submit']);
-    Route::post('/adm/{id}/save/daily/physical/training/report',[App\Http\Controllers\TrainerController::class, 'daily_physical_report_save']);
-    Route::get('/adm/{id}/view/assignment/submission/reports',[App\Http\Controllers\TrainerController::class, 'assignment_submission_reports']);
-    Route::get('/adm/{id}/view/assignment/submission/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'assignment_submission_report']);
-    Route::get('/adm/{id}/submit/assignment/report',[App\Http\Controllers\TrainerController::class, 'assignment_submission_report_submit']);
-    Route::post('/adm/{id}/save/assignment/report',[App\Http\Controllers\TrainerController::class, 'assignment_submission_report_save']);
+    Route::get('/adm/{id}/view/trainer/assignment/submission/reports',[App\Http\Controllers\TrainerAssignmentSubmissionReportController::class, 'index']);
+    Route::get('/adm/{id}/submit/assignment/report',[App\Http\Controllers\TrainerAssignmentSubmissionReportController::class, 'create']);
+    Route::post('/adm/{id}/save/assignment/report',[App\Http\Controllers\TrainerAssignmentSubmissionReportController::class, 'store']);
+    //Trainer Daily Attendance Reports
+    Route::get('/adm/{id}/view/daily/attendance/reports',[App\Http\Controllers\TrainerDailyAttedanceReportController::class, 'index']);
+    Route::get('/adm/{id}/view/daily/attendance/report/report_id={report_id}',[App\Http\Controllers\TrainerDailyAttedanceReportController::class, 'show']);
+    Route::get('/adm/{id}/submit/daily/attendance/report',[App\Http\Controllers\TrainerDailyAttedanceReportController::class, 'create']);
+    Route::post('/adm/{id}/save/daily/attendance/report',[App\Http\Controllers\TrainerDailyAttedanceReportController::class, 'store']);
+//    Route::get('/adm/{id}/view/daily/virtual/training/reports',[App\Http\Controllers\TrainerController::class, 'virtual_training_reports']);
+//    Route::get('/adm/{id}/view/daily/virtual/training/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'virtual_training_report']);
+    ////Trainer Daily Training Reports
+    Route::get('/adm/{id}/view/daily/training/reports',[App\Http\Controllers\TrainerDailyTrainingReportController::class, 'index']);
+    Route::get('/adm/{id}/submit/daily/training/report',[App\Http\Controllers\TrainerDailyTrainingReportController::class, 'create']);
+    Route::post('/adm/{id}/save/daily/training/report',[App\Http\Controllers\TrainerDailyTrainingReportController::class, 'store']);
+    Route::get('/adm/{id}/view/daily/training/report/{report_id}',[App\Http\Controllers\TrainerDailyTrainingReportController::class, 'show']);
+//    Route::get('/adm/{id}/submit/daily/virtual/training/report',[App\Http\Controllers\TrainerController::class, 'virtual_training_report_submit']);
+//    Route::post('/adm/{id}/save/daily/virtual/training/report',[App\Http\Controllers\TrainerController::class, 'virtual_training_report_save']);
+//    Route::get('/adm/{id}/view/daily/physical/training/reports',[App\Http\Controllers\TrainerController::class, 'daily_physical_reports']);
+//    Route::get('/adm/{id}/view/daily/physical/training/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'daily_physical_report']);
+//    Route::get('/adm/{id}/submit/daily/physical/training/report',[App\Http\Controllers\TrainerController::class, 'daily_physical_report_submit']);
+//    Route::post('/adm/{id}/save/daily/physical/training/report',[App\Http\Controllers\TrainerController::class, 'daily_physical_report_save']);
+//    Route::get('/adm/{id}/view/assignment/submission/reports',[App\Http\Controllers\TrainerController::class, 'assignment_submission_reports']);
+//    Route::get('/adm/{id}/view/assignment/submission/report/report_id={report_id}',[App\Http\Controllers\TrainerController::class, 'assignment_submission_report']);
 
     //centers
     Route::get('/adm/{id}/list/centers',[App\Http\Controllers\CenterController::class, 'index']);
@@ -277,8 +283,21 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_request']);
 
     //Awards
+    Route::get('/adm/{id}/list/awards',[App\Http\Controllers\AwardController::class,'index']);
     Route::get('/adm/{id}/create/new/award',[App\Http\Controllers\AwardController::class,'create']);
+    Route::post('/adm/{id}/save/new/award',[App\Http\Controllers\AwardController::class,'store']);
+    Route::get('/adm/{id}/view/award/{award_id}',[App\Http\Controllers\AwardController::class,'show']);
+    Route::get('/adm/{id}/edit/award/{award_id}',[App\Http\Controllers\AwardController::class,'edit']);
+    Route::post('/adm/{id}/update/award/{award_id}',[App\Http\Controllers\AwardController::class,'update']);
     Route::get('/list/all/users',[App\Http\Controllers\AdminController::class,'admins']);
+
+//    Announcements
+    Route::get('/adm/{id}/list/announcements',[App\Http\Controllers\AnnouncementController::class,'index']);
+    Route::get('/adm/{id}/add/new/announcement',[App\Http\Controllers\AnnouncementController::class,'create']);
+    Route::post('/adm/{id}/save/new/announcement',[App\Http\Controllers\AnnouncementController::class,'store']);
+    Route::get('/adm/{id}/view/announcement/{announcement_id}',[App\Http\Controllers\AnnouncementController::class,'show']);
+    Route::get('/adm/{id}/edit/announcement/{announcement_id}',[App\Http\Controllers\AnnouncementController::class,'edit']);
+    Route::post('/adm/{id}/update/announcement/{announcement_id}',[App\Http\Controllers\AnnouncementController::class,'update']);
 });
 //project managers routes
 Route::group(['middleware'=>'project.managers'],function (){
@@ -302,12 +321,6 @@ Route::group(['middleware'=>'center.managers'],function (){
     Route::get('/adm/{id}/submit/pre/registration/checklist',[App\Http\Controllers\CenterManagerController::class, 'check_list_submit']);
     Route::get('/adm/{id}/3/months/work/plan',[App\Http\Controllers\CenterManagerController::class, 'work_plan']);
     Route::get('/adm/{id}/monthly/reports',[App\Http\Controllers\CenterManagerController::class, 'monthly_reports']);
-
-    Route::get('/cm/list/centers',[App\Http\Controllers\CenterManagerController::class, 'centers']);
-    Route::get('/cm/list/trainers',[App\Http\Controllers\CenterManagerController::class, 'trainers_list']);
-    Route::get('/cm/add/trainer',[App\Http\Controllers\CenterManagerController::class, 'trainer_add']);
-    Route::get('/cm/list/sessions',[App\Http\Controllers\CenterManagerController::class, 'sessions_list']);
-    Route::get('/cm/add/session',[App\Http\Controllers\CenterManagerController::class, 'session_add']);
 });
 
 //trainers routes

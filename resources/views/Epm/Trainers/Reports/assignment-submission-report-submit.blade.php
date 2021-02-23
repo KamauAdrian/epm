@@ -17,7 +17,7 @@
                             <h1 class="f-w-400">Ajira Digital Curriculum Trainers-Assignment Submission</h1>
                         </div>
                         {{--                            @include('Epm.layouts.trainer-add')--}}
-                        <form action="{{url('/adm/'.$auth_admin->id.'/save/assignment/report')}}" method="post">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/assignment/report')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
@@ -120,13 +120,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Kindly Upload your complete assignment as a Word Document</label>
-                                        <input type="file" name="assignment" class="form-control" placeholder="Upload assignment" required>
+                                        <input type="file" name="assignment" class="form-control" required>
                                         <span class="text-danger">{{$errors->first('assignment')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12" id="btn_submit">
                                     <div class="form-group float-right mt-2">
-                                        <button type="submit" class="btn btn-outline-primary btn-block mb-3">Submit</button>
+                                        <button type="submit" class="btn btn-outline-info btn-block mb-3">Submit</button>
                                     </div>
                                 </div>
                             </div>

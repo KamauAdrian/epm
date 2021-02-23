@@ -60,7 +60,7 @@ class AdminController extends Controller
     }
 
     public function admins(){
-        $admins_raw = User::all();
+        $admins_raw = User::orderBy('name','Asc')->get();
         $admins = [];
         foreach ($admins_raw as $user){
             if ($user->role->name!='Su Admin'){
@@ -801,13 +801,6 @@ class AdminController extends Controller
         }
     }
 
-    public function reports_by_trainers_assignment($id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            $reports = DB::table('trainer_assignment_submission_reports')->orderBy('created_at','desc')->get();
-            return view('Epm.Reports.trainer-assignment-submission-reports',compact('reports'));
-        }
-    }
 
     //sessions
 

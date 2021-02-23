@@ -10,32 +10,13 @@
     ?>
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-12 mb-2">
-                <h1 class="d-inline-block mb-0 font-weight-normal">Assignment Submission Reports</h1>
+            <div class="col-sm-12">
+                <h1 class="d-inline-block mb-0 font-weight-normal">Daily Training Reports</h1>
                 @if($auth_admin->role->name == 'Trainer')
-                    <a href="{{url('/adm/'.$auth_admin->id.'/submit/assignment/report')}}" class="float-right">
-                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Assignment</button>
+                    <a href="{{url('/adm/'.$auth_admin->id.'/submit/daily/training/report')}}" class="float-right">
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Report</button>
                     </a>
                 @endif
-            </div>
-            <div class="col-sm-12">
-                <center>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                </center>
             </div>
             <div class="col-sm-12 mt-2">
                 <div class="card">
@@ -43,7 +24,7 @@
                         <div class="table-responsive">
                             <table id="reportsTableList" class="table table-center mb-0 ">
                                 <thead>
-                                <tr> <th>Report</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                                 @if($reports)
                                     <tbody>
@@ -56,7 +37,7 @@
                                                 <div class="media">
                                                     <div class="media-body ml-3 align-self-center">
                                                         <h5 class="mb-1">{{$report->name}}</h5>
-                                                        <p class="mb-0">{{$report->email}}</p>
+                                                        <p class="mb-1">{{$report->email}}</p>
                                                     </div>
                                                 </div>
                                             </td>
@@ -64,14 +45,14 @@
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fa fa-list"></i></span></a>
-                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/training/report/'.$report->id)}}" class="btn btn-sm btn-outline-info" title="View Report"><span><i class="fa fa-list"></i></span></a>
+                                                        <a href="#!" class="btn btn-sm btn-outline-danger" title="Delete Report"><span><i class="fa fa-trash"></i></span></a>
                                                     </div>
                                                 </td>
                                             @else
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/report/report_id='.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
+                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/training/report/'.$report->id)}}" class="btn btn-sm btn-outline-info" title="View"><span><i class="fa fa-list"></i></span></a>
                                                     </div>
                                                 </td>
                                             @endif
@@ -88,8 +69,6 @@
     </div>
 @endsection
 @section('js')
-    <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready( function () {
             $('#reportsTableList').DataTable();

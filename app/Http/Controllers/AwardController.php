@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Award;
 use Illuminate\Http\Request;
 
 class AwardController extends Controller
@@ -13,7 +14,8 @@ class AwardController extends Controller
      */
     public function index()
     {
-        //
+        $awards = Award::orderBy('created_at','desc')->get();
+        return view('Epm.Awards.index',compact('awards'));
     }
 
     /**
@@ -32,9 +34,26 @@ class AwardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+//        dd($request->all());
+        $messages = [
+            'description.required'=>'Please Provide A Short Award Description'
+        ];
+        $this->validate($request,[
+            'name'=>'required',
+            'description'=>'required',
+        ],$messages);
+        $new_award = new Award();
+        $new_award->name = $request->name;
+        $new_award->position_one = $request->award_winner_p1;
+        $new_award->position_two = $request->award_winner_p2;
+        $new_award->position_three = $request->award_winner_p3;
+        $new_award->description = $request->description;
+        $award_saved = $new_award->save();
+        if ($award_saved){
+            return redirect('/adm/main/dashboard/#awards')->with("success","{$new_award->name} Created Successfully");
+        }
     }
 
     /**
@@ -54,9 +73,13 @@ class AwardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$award_id)
     {
-        //
+        $award = Award::find($award_id);
+        if ($award){
+
+            return view('Epm.Awards.edit',compact('award'));
+        }
     }
 
     /**
@@ -66,9 +89,9 @@ class AwardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$award_id)
     {
-        //
+        dd($request->all());
     }
 
     /**

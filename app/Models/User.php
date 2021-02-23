@@ -75,6 +75,10 @@ class User extends Authenticatable
     public function tasks(){
         return $this->belongsToMany('App\Model\Task','assignee_task','assignee_id','task_id');
     }
+
+    public function awards(){
+        return $this->belongsToMany('App\Models\Award','award_user','winner_id','award_id');
+    }
     public static function updateUser($id,$data){
     DB::table('users')->where('id',$id)->update($data);
     }

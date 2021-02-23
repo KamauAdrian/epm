@@ -18,6 +18,7 @@ class CreateTaskAttachmentsTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->bigInteger('task_id')->unsigned();
+            $table->bigInteger('creator_id')->unsigned();
             $table->timestamps();
             $table->foreign('task_id')
                 ->references('id')->on('tasks')

@@ -240,10 +240,11 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/training/sessions/allocations')}}">Training Sessions Allocations</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/reports')}}">Daily Attendance Report</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/reports')}}">Daily Virtual Training Report</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/physical/training/reports')}}">Daily Physical Training Report</a></li>
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/assignment/submission/reports')}}">Assigment submission</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/reports')}}">Daily Attendance Reports</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/training/reports')}}">Daily Training Reports</a></li>
+{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/reports')}}">Daily Virtual Training Report</a></li>--}}
+{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/physical/training/reports')}}">Daily Physical Training Report</a></li>--}}
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/assignment/submission/reports')}}">Assigment submission</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/competence/reports')}}">Competency Reports</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/leave/applications')}}">Leave Applications</a></li>
             </ul>

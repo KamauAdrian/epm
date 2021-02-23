@@ -235,7 +235,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-outline-primary float-right">Submit</button>
+                                                <button type="submit" class="btn btn-outline-info float-right">Apply</button>
                                             </div>
                                         </div>
 

@@ -34,216 +34,251 @@
         <h2 class="font-weight-normal text-center">Hi {{$auth_admin->name}}, Welcome to eMobilis Portal</h2>
     </div>
     <div class="col-md-12">
-        <p>Our Mission</p>
-        <p>The mission of eMobilis is to create opportunities for African youth by training them on digital, software and other technologies that prepare them for the future of work by equipping them with marketable, industry driven skills.</p>
-    </div>
-    <div class="col-md-12">
-        <p>Our Vision</p>
-        <p>Our vision is to empower local youth to tap into the myriad opportunities that the mobile, technology and software development industry offers so that they can innovate, create and improve their situation in life through use of digital tools.</p>
-    </div>
-{{--    ///////// rem copied data to sample page--}}
-    <div class="col-md-12">
-        <div class="row">
-{{--            //pmo--}}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <h5 class="card-title">PMO</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div>
-                                    @if($pm_role)
-                                    <span style="font-size:30px">
-                                        <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @else
-                                        <span style="font-size:30px">
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{--            //center Manger--}}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <h5 class="card-title">Center Managers</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div style="font-size:30px">
-                                    @if($cm_role)
-                                    <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($cms)}}</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @else
-                                        <span>
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{--            //trainers--}}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <h5 class="card-title">Trainers</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div style="font-size:30px">
-                                    @if($trainer_role)
-                                    <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($trainers)}}</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @else
-                                        <span>
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{--            //Work Streams--}}
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
 
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <h5 class="card-title">Work Streams</h5>
                         </div>
-                        <div class="card-body">
+                        <div class="col-md-6">
                             <div class="row">
-                                <div style="font-size:30px">
-                                    @if($projects)
-                                    <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($projects)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
-                                    </span>
-                                    @else
-                                        <span>
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-briefcase ml-4"></i></p>
-                                    </span>
-                                    @endif
+                                <div class="col-md-12">
+                                    <p>Our Mission</p>
+                                    <p>The mission of eMobilis is to create opportunities for African youth by training them on digital, software and other technologies that prepare them for the future of work by equipping them with marketable, industry driven skills.</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{--            //Centers--}}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <h5 class="card-title">Centers</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div style="font-size:30px">
-                                    @if($centers)
-                                    <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($centers)}}</span> <i class="fa fa-building ml-4"></i></p>
-                                    </span>
-                                    @else
-                                        <span>
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-building ml-4"></i></p>
-                                    </span>
-                                    @endif
+                                <div class="col-md-12">
+                                    <p>Our Vision</p>
+                                    <p>Our vision is to empower local youth to tap into the myriad opportunities that the mobile, technology and software development industry offers so that they can innovate, create and improve their situation in life through use of digital tools.</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{--            //Trainees--}}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <h5 class="card-title">Trainees</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div style="font-size:30px">
-                                    @if($trainees)
-                                    <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($trainees)}}</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @else
-                                        <span>
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </div>
-
-{{--    ///////// rem copied data to sample page--}}
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div id="openTasks"></div>
-{{--                                <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
-                                <h5 class="text-info">Open Tasks</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div id="overDueTasks"></div>
-{{--                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
-                                <h5 class="text-danger">Overdue Tasks</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div id="completeTasks"></div>
-                                <h5 class="text-success">Complete Tasks</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div id="inCompleteTasks"></div>
-                                <h5 class="text-primary">Incomplete Tasks</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="font-weight-normal">Tasks by Work Streams</h3>
-                        <div id="workStreamsTaskOverview" class="mb-4 mt-5"></div>
-                        @if($projects)
-                            <div>
-                                @foreach($projects as $project)
-                                    <p class="mb-3">{{$project->name}} <span class="float-right h6 mb-0 text-body">{{count($project->tasks)}}</span></p>
-                                @endforeach
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 3 pending tasks <span class="float-right h6 mb-0 text-body">4</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>New order received <span class="float-right h6 mb-0 text-body">6</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">28</span></p>--}}
-{{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 4 pending tasks <span class="float-right h6 mb-0 text-body">9</span></p>--}}
+        </div>
+    </div>
+{{--    ///////// rem copied data to sample page--}}
+    <div class="col-md-12">
+        <ddiv class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        {{--            //pmo--}}
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <h5 class="card-title">PMO</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div>
+                                            @if($pm_role)
+                                                <span style="font-size:30px">
+                                        <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @else
+                                                <span style="font-size:30px">
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        @endif
+                        </div>
+                        {{--            //center Manger--}}
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <h5 class="card-title">Center Managers</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div style="font-size:30px">
+                                            @if($cm_role)
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($cms)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @else
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--            //trainers--}}
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <h5 class="card-title">Trainers</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div style="font-size:30px">
+                                            @if($trainer_role)
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($trainers)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @else
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--            //Work Streams--}}
+
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <h5 class="card-title">Work Streams</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div style="font-size:30px">
+                                            @if($projects)
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($projects)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
+                                    </span>
+                                            @else
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-briefcase ml-4"></i></p>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--            //Centers--}}
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <h5 class="card-title">Centers</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div style="font-size:30px">
+                                            @if($centers)
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($centers)}}</span> <i class="fa fa-building ml-4"></i></p>
+                                    </span>
+                                            @else
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-building ml-4"></i></p>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--            //Trainees--}}
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <h5 class="card-title">Trainees</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div style="font-size:30px">
+                                            @if($trainees)
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($trainees)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @else
+                                                <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ddiv>
+    </div>
+
+{{--    ///////// rem copied data to sample page--}}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Tasks</h5>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <div id="openTasks"></div>
+                                            {{--                                <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
+                                            <h5 class="text-info">Open Tasks</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <div id="overDueTasks"></div>
+                                            {{--                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
+                                            <h5 class="text-danger">Overdue Tasks</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <div id="completeTasks"></div>
+                                            <h5 class="text-success">Complete Tasks</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <div id="inCompleteTasks"></div>
+                                            <h5 class="text-primary">Incomplete Tasks</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="font-weight-normal">Tasks by Work Streams</h3>
+                                    <div id="workStreamsTaskOverview" class="mb-4 mt-5"></div>
+                                    @if($projects)
+                                        <div>
+                                            @foreach($projects as $project)
+                                                <p class="mb-3">{{$project->name}} <span class="float-right h6 mb-0 text-body">{{count($project->tasks)}}</span></p>
+                                            @endforeach
+                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
+                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 3 pending tasks <span class="float-right h6 mb-0 text-body">4</span></p>--}}
+                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>New order received <span class="float-right h6 mb-0 text-body">6</span></p>--}}
+                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">28</span></p>--}}
+                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 4 pending tasks <span class="float-right h6 mb-0 text-body">9</span></p>--}}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -429,39 +464,156 @@
 {{--        </div>--}}
 {{--    </div>--}}
 {{--//best performer--}}
-    <div class="col-md-12">
-        <div class="row">
-{{--            @foreach($best_performers as $best_performer)--}}
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="#!"><h5>Award Title</h5></a>
-                        </div>
-                        <div class="card-body">
-
-                            <figure class="figure"><img src="{{url('assets/images/user.png')}}" alt="" style="height: 150px;width: 150px;"></figure>
-                            <p>Best Performer name</p>
-                        </div>
+    <div class="col-md-12" id="awards">
+        <div class="card">
+            <div class="card-header">
+                <h5>Awards</h5>
+                <a href="{{url('/adm/'.$auth_admin->id.'/create/new/award')}}" class="btn btn-outline-info float-right">Create Award</a>
+            </div>
+            <?php
+            $awards = \App\Models\Award::orderBy('created_at','desc')->limit(3)->get();
+            ?>
+            @if($awards)
+                <div class="card-body">
+                    <div class="col-md-12">
+                        @foreach($awards as $award)
+                            <div class="row">
+                               @if($award->position_one)
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header pb-0 mb-2">
+                                                {{$award->name}}
+                                            </div>
+                                            <?php
+                                            $winner_position_one = \App\Models\User::find($award->position_one)
+                                            ?>
+                                            <div class="card-body text-center">
+                                                <div class="d-inline-flex align-items-end justify-content-end">
+                                                    <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">
+                                                </div>
+                                                <h5 class="mt-4">{{$winner_position_one->name}}</h5>
+                                                <p>Position One</p>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>
+                                                    <a href="{{url("adm/view/adm/".$winner_position_one->id."/profile/role_id=".$winner_position_one->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>
+{{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                   @if($award->position_two)
+                                       <div class="col-md-4">
+                                           <div class="card">
+                                               <div class="card-header pb-0 mb-2">
+                                                   {{$award->name}}
+                                               </div>
+                                               <?php
+                                               $winner_position_two = \App\Models\User::find($award->position_two)
+                                               ?>
+                                               <div class="card-body text-center">
+                                                   <div class="d-inline-flex align-items-end justify-content-end">
+                                                       <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">
+                                                   </div>
+                                                   <h5 class="mt-4">{{$winner_position_two->name}}</h5>
+                                                   <p>Position Two</p>
+                                                   <div class="btn-group">
+                                                       <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>
+                                                       <a href="{{url("adm/view/adm/".$winner_position_two->id."/profile/role_id=".$winner_position_two->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>
+                                                       {{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   @endif
+                                   @if($award->position_three)
+                                       <div class="col-md-4">
+                                           <div class="card">
+                                               <div class="card-header pb-0 mb-2">
+                                                   {{$award->name}}
+                                               </div>
+                                               <?php
+                                               $winner_position_three = \App\Models\User::find($award->position_three)
+                                               ?>
+                                               <div class="card-body text-center">
+                                                   <div class="d-inline-flex align-items-end justify-content-end">
+                                                       <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">
+                                                   </div>
+                                                   <h5 class="mt-4">{{$winner_position_three->name}}</h5>
+                                                   <p>Position Three</p>
+                                                   <div class="btn-group">
+                                                       <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>
+                                                       <a href="{{url("adm/view/adm/".$winner_position_three->id."/profile/role_id=".$winner_position_three->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>
+                                                       {{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   @endif
+                            </div>
+                        @endforeach
+                        <a href="{{url('/adm/'.$auth_admin->id.'/list/awards')}}" class="float-right">View All Awards <span><i class="fa fa-arrow-right"></i></span></a>
                     </div>
                 </div>
-{{--            @endforeach--}}
+            @endif
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="row">
-{{--            @foreach($announcements as $announcement)--}}
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="#!"><h5>Announcement Title</h5></a>
-                        </div>
-                        <div class="card-body">
-                            <figure class="figure"><img src="{{url('assets/images/user.png')}}" alt="" style="height: 150px;width: 150px;"></figure>
-                            <p>Short Desc Date</p>
+    <div class="col-md-12" id="announcements">
+        <div class="card">
+            <div class="card-header">
+                <h5>Announcements</h5>
+                <a href="{{url('/adm/'.$auth_admin->id.'/add/new/announcement')}}" class="btn btn-outline-info float-right">Add Announcement</a>
+            </div>
+            <?php
+//            $announcements = \App\Models\Announcement::orderBy('created_at','desc')->limit(3)->get();
+            ?>
+{{--            @if($announcements)--}}
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="row">
+{{--                            @foreach($announcements as $announcement)--}}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">
+                                    <div class="card-header">
+                                        <div class="media">
+{{--                                            <img src="{{url('assets/images/uikit/card-icon-1.svg')}}" alt="images" class="img-fluid">--}}
+                                            <div class="media-body ml-3">
+                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>
+                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>
+                                            </div>
+                                        </div>
+{{--                                        <div class="card-header-right">--}}
+{{--                                            <div class="btn-group card-option">--}}
+{{--                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                                    <i class="feather icon-more-horizontal"></i>--}}
+{{--                                                </button>--}}
+{{--                                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">--}}
+{{--                                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>--}}
+{{--                                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>--}}
+{{--                                                </ul>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+                                    </div>
+                                </div>
+                            </div>
+{{--                                <div class="col-md-4">--}}
+{{--                                    <div class="card">--}}
+{{--                                        <div class="card-header">--}}
+{{--                                            <a href="#!"><h5>Announcement Title</h5></a>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="card-body">--}}
+{{--                                            <figure class="figure"><img src="{{url('assets/images/user.png')}}" alt="" style="height: 150px;width: 150px;"></figure>--}}
+{{--                                            <p>Short Desc Date</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
                         </div>
                     </div>
+                    <a href="{{url('/adm/'.$auth_admin->id.'/list/announcements')}}" class="float-right">View All Announcements <span><i class="fa fa-arrow-right"></i></span></a>
                 </div>
-{{--            @endforeach--}}
+{{--            @endif--}}
         </div>
     </div>
 @endsection
