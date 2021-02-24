@@ -44,11 +44,11 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Our Mission</p>
+                                    <p><b>Our Mission</b></p>
                                     <p>The mission of eMobilis is to create opportunities for African youth by training them on digital, software and other technologies that prepare them for the future of work by equipping them with marketable, industry driven skills.</p>
                                 </div>
                                 <div class="col-md-12">
-                                    <p>Our Vision</p>
+                                    <p><b>Our Vision</b></p>
                                     <p>Our vision is to empower local youth to tap into the myriad opportunities that the mobile, technology and software development industry offers so that they can innovate, create and improve their situation in life through use of digital tools.</p>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
     <div class="col-md-12">
         <ddiv class="card">
             <div class="card-header">
-
+                <h5>Overview</h5>
             </div>
             <div class="card-body">
                 <div class="col-md-12">
@@ -471,87 +471,103 @@
                 <a href="{{url('/adm/'.$auth_admin->id.'/create/new/award')}}" class="btn btn-outline-info float-right">Create Award</a>
             </div>
             <?php
-            $awards = \App\Models\Award::orderBy('created_at','desc')->limit(3)->get();
+            $awards = \App\Models\Award::orderBy('created_at','desc')->limit(6)->get();
             ?>
             @if($awards)
                 <div class="card-body">
                     <div class="col-md-12">
-                        @foreach($awards as $award)
-                            <div class="row">
-                               @if($award->position_one)
-                                    <div class="col-md-4">
+                        <div class="row">
+                            @foreach($awards as $award)
+                                <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-header pb-0 mb-2">
                                                 {{$award->name}}
                                             </div>
                                             <?php
-                                            $winner_position_one = \App\Models\User::find($award->position_one)
+                                            $winner_position_one = \App\Models\User::find($award->position_one);
+                                            $image = '';
+                                            $profile_image = $winner_position_one->image;
+                                            if ($profile_image==null){
+                                                $gender = $winner_position_one->gender;
+                                                if ($gender=="Male"){
+                                                    $image = 'assets/images/male.jpeg';
+                                                }else{
+                                                    $image = 'assets/images/female.jpeg';
+                                                }
+                                            }else{
+                                                $role = $winner_position_one->role->name;
+                                                if ($role=="Center Manager"){
+                                                    $image = "CenterManagers/images/".$profile_image;
+                                                }
+                                                if ($role=="Project Manager"){
+                                                    $image = "ProjectManagers/images/".$profile_image;
+                                                }
+                                            }
                                             ?>
                                             <div class="card-body text-center">
                                                 <div class="d-inline-flex align-items-end justify-content-end">
-                                                    <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">
+                                                    <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-xl">
                                                 </div>
                                                 <h5 class="mt-4">{{$winner_position_one->name}}</h5>
                                                 <p>Position One</p>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>
+{{--                                                    <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>--}}
                                                     <a href="{{url("adm/view/adm/".$winner_position_one->id."/profile/role_id=".$winner_position_one->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>
 {{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                @endif
-                                   @if($award->position_two)
-                                       <div class="col-md-4">
-                                           <div class="card">
-                                               <div class="card-header pb-0 mb-2">
-                                                   {{$award->name}}
-                                               </div>
-                                               <?php
-                                               $winner_position_two = \App\Models\User::find($award->position_two)
-                                               ?>
-                                               <div class="card-body text-center">
-                                                   <div class="d-inline-flex align-items-end justify-content-end">
-                                                       <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">
-                                                   </div>
-                                                   <h5 class="mt-4">{{$winner_position_two->name}}</h5>
-                                                   <p>Position Two</p>
-                                                   <div class="btn-group">
-                                                       <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>
-                                                       <a href="{{url("adm/view/adm/".$winner_position_two->id."/profile/role_id=".$winner_position_two->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>
-                                                       {{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   @endif
-                                   @if($award->position_three)
-                                       <div class="col-md-4">
-                                           <div class="card">
-                                               <div class="card-header pb-0 mb-2">
-                                                   {{$award->name}}
-                                               </div>
-                                               <?php
-                                               $winner_position_three = \App\Models\User::find($award->position_three)
-                                               ?>
-                                               <div class="card-body text-center">
-                                                   <div class="d-inline-flex align-items-end justify-content-end">
-                                                       <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">
-                                                   </div>
-                                                   <h5 class="mt-4">{{$winner_position_three->name}}</h5>
-                                                   <p>Position Three</p>
-                                                   <div class="btn-group">
-                                                       <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>
-                                                       <a href="{{url("adm/view/adm/".$winner_position_three->id."/profile/role_id=".$winner_position_three->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>
-                                                       {{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   @endif
-                            </div>
+{{--                                   @if($award->position_two)--}}
+{{--                                       <div class="col-md-4">--}}
+{{--                                           <div class="card">--}}
+{{--                                               <div class="card-header pb-0 mb-2">--}}
+{{--                                                   {{$award->name}}--}}
+{{--                                               </div>--}}
+{{--                                               <?php--}}
+{{--                                               $winner_position_two = \App\Models\User::find($award->position_two)--}}
+{{--                                               ?>--}}
+{{--                                               <div class="card-body text-center">--}}
+{{--                                                   <div class="d-inline-flex align-items-end justify-content-end">--}}
+{{--                                                       <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">--}}
+{{--                                                   </div>--}}
+{{--                                                   <h5 class="mt-4">{{$winner_position_two->name}}</h5>--}}
+{{--                                                   <p>Position Two</p>--}}
+{{--                                                   <div class="btn-group">--}}
+{{--                                                       <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>--}}
+{{--                                                       <a href="{{url("adm/view/adm/".$winner_position_two->id."/profile/role_id=".$winner_position_two->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+{{--                                                       --}}{{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+{{--                                                   </div>--}}
+{{--                                               </div>--}}
+{{--                                           </div>--}}
+{{--                                       </div>--}}
+{{--                                   @endif--}}
+{{--                                   @if($award->position_three)--}}
+{{--                                       <div class="col-md-4">--}}
+{{--                                           <div class="card">--}}
+{{--                                               <div class="card-header pb-0 mb-2">--}}
+{{--                                                   {{$award->name}}--}}
+{{--                                               </div>--}}
+{{--                                               <?php--}}
+{{--                                               $winner_position_three = \App\Models\User::find($award->position_three)--}}
+{{--                                               ?>--}}
+{{--                                               <div class="card-body text-center">--}}
+{{--                                                   <div class="d-inline-flex align-items-end justify-content-end">--}}
+{{--                                                       <img src="{{url('assets/images/user/avatar-2.jpg')}}" alt="images" class="img-fluid avtar avtar-xl">--}}
+{{--                                                   </div>--}}
+{{--                                                   <h5 class="mt-4">{{$winner_position_three->name}}</h5>--}}
+{{--                                                   <p>Position Three</p>--}}
+{{--                                                   <div class="btn-group">--}}
+{{--                                                       <button type="button" class="btn btn-outline-info rounded border mr-3">Send Message</button>--}}
+{{--                                                       <a href="{{url("adm/view/adm/".$winner_position_three->id."/profile/role_id=".$winner_position_three->role_id)}}"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+{{--                                                       --}}{{--                                                    <a href="#!"><button type="button" class="btn btn-outline-info rounded border">View Profile</button></a>--}}
+{{--                                                   </div>--}}
+{{--                                               </div>--}}
+{{--                                           </div>--}}
+{{--                                       </div>--}}
+{{--                                   @endif--}}
                         @endforeach
+                        </div>
                         <a href="{{url('/adm/'.$auth_admin->id.'/list/awards')}}" class="float-right">View All Awards <span><i class="fa fa-arrow-right"></i></span></a>
                     </div>
                 </div>
@@ -565,22 +581,27 @@
                 <a href="{{url('/adm/'.$auth_admin->id.'/add/new/announcement')}}" class="btn btn-outline-info float-right">Add Announcement</a>
             </div>
             <?php
-//            $announcements = \App\Models\Announcement::orderBy('created_at','desc')->limit(3)->get();
+            $announcements = \App\Models\Announcement::orderBy('created_at','desc')->limit(3)->get();
             ?>
-{{--            @if($announcements)--}}
+            @if($announcements)
                 <div class="card-body">
                     <div class="col-md-12">
                         <div class="row">
-{{--                            @foreach($announcements as $announcement)--}}
+                            @foreach($announcements as $announcement)
                             <div class="col-md-4">
+                                <a target="_blank" href="{{$announcement->link}}">
                                 <div class="card">
-                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">
+{{--                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">--}}
+                                    <img class="card-img-top" src="{{url("Announcement/image_videos/".$announcement->image_video)}}" alt="Card IMAGES">
                                     <div class="card-header">
                                         <div class="media">
 {{--                                            <img src="{{url('assets/images/uikit/card-icon-1.svg')}}" alt="images" class="img-fluid">--}}
                                             <div class="media-body ml-3">
-                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>
-                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>
+{{--                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>--}}
+                                                <h5 class="mb-2">{{$announcement->title}}</h5>
+{{--                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>--}}
+                                                <div style="color: grey;font-size: 14px" class="mb-0">{{$announcement->description}}</div>
+                                                <div style="color: grey;font-size: 12px" class="mt-4">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
                                             </div>
                                         </div>
 {{--                                        <div class="card-header-right">--}}
@@ -596,24 +617,14 @@
 {{--                                        </div>--}}
                                     </div>
                                 </div>
+                                </a>
                             </div>
-{{--                                <div class="col-md-4">--}}
-{{--                                    <div class="card">--}}
-{{--                                        <div class="card-header">--}}
-{{--                                            <a href="#!"><h5>Announcement Title</h5></a>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="card-body">--}}
-{{--                                            <figure class="figure"><img src="{{url('assets/images/user.png')}}" alt="" style="height: 150px;width: 150px;"></figure>--}}
-{{--                                            <p>Short Desc Date</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            @endforeach--}}
+                            @endforeach
                         </div>
                     </div>
                     <a href="{{url('/adm/'.$auth_admin->id.'/list/announcements')}}" class="float-right">View All Announcements <span><i class="fa fa-arrow-right"></i></span></a>
                 </div>
-{{--            @endif--}}
+            @endif
         </div>
     </div>
 @endsection
@@ -653,7 +664,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -40,
-                                fontSize: '22px'
+                                fontSize: '14px'
                             }
                         }
                     }
@@ -701,7 +712,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -40,
-                                fontSize: '22px'
+                                fontSize: '14px'
                             }
                         }
                     }
@@ -749,7 +760,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -40,
-                                fontSize: '22px'
+                                fontSize: '14px'
                             }
                         }
                     }
@@ -797,7 +808,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -40,
-                                fontSize: '22px'
+                                fontSize: '14px'
                             }
                         }
                     }
@@ -827,7 +838,7 @@
                 },
                 series: [],
                 labels: [],
-                colors: ["#FFB800"],
+                colors: ["#FFB800","#B92DB7","#B92D67","#FF7F6A"],
                 legend: {
                     show: false,
                 },

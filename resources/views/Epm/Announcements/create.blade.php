@@ -22,28 +22,36 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" class="form-control" placeholder="Announcement Title" value="{{old('title')}}">
+                                <input type="text" name="title" class="form-control" placeholder="Announcement Title" value="{{old('title')}}" required>
                                 <span class="text-danger">{{$errors->first('title')}}</span>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Link</label>
-                                <input type="text" name="link" class="form-control" placeholder="Add A link To Announcement" value="{{old('link')}}">
+                                <label>Announcement Link</label>
+                                <input type="text" name="link" class="form-control" placeholder="Add A link To Announcement" value="{{old('link')}}" required>
                                 <span class="text-danger">{{$errors->first('link')}}</span>
                             </div>
                         </div>
+{{--                        <div class="col-sm-12">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>Announcement Type</label>--}}
+{{--                                div.form--}}
+{{--                                <input type="file" name="image_video" class="form-control" required>--}}
+{{--                                <span class="text-danger">{{$errors->first('link')}}</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Upload An Image Or A Video Of The Announcement</label>
-                                <input type="file" name="image_video" class="form-control">
+                                <label>Upload Image</label>
+                                <input type="file" name="image_video" class="form-control" required>
                                 <span class="text-danger">{{$errors->first('link')}}</span>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Short Description</label>
-                                <textarea name="description" class="form-control" placeholder="A short Announcement Description" cols="30" rows="5">{{old('description')}}</textarea>
+                                <textarea name="description" class="form-control" placeholder="A short Announcement Description" cols="30" rows="5" required>{{old('description')}}</textarea>
                                 <span class="text-danger">{{$errors->first('description')}}</span>
                             </div>
                         </div>

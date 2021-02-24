@@ -81,9 +81,9 @@
                                                         foreach ($assignees as $assignee){
                                                             $split_name = explode(' ',$assignee->name);
                                                             if (count($split_name)>1){
-                                                                $avatar_icon_name[] = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                                                                $avatar_icon_name[] = $split_name[0];
                                                             }else{
-                                                                $avatar_icon_name[] = substr($assignee->name,0,1);
+                                                                $avatar_icon_name[] = $assignee->name;
                                                             }
                                                         }
                                                     }
@@ -105,7 +105,7 @@
                                                                 <div class="mt-2">
                                                                     @if($avatar_icon_name)
                                                                         @foreach($avatar_icon_name as $name)
-                                                                            <button class="btn btn-icon" >{{$name}}</button>
+                                                                            <p><span class="badge badge-pill badge-success p-2">{{$name}}</span></p>
                                                                         @endforeach
                                                                     @endif
                                                                         <a href="#!" title="Assign new Collaborators" class="btn btn-icon">
@@ -574,7 +574,7 @@
                     var task_assignees = "";
                     if (response_assignees){
                         response_assignees.forEach(function (assignee){
-                            task_assignees+= '<span class="badge badge-pill badge-light-dark">'+assignee+'</span> '
+                            task_assignees+= '<span class="badge badge-pill badge-success p-2">'+assignee+'</span> '
                             // task_assignees+= '<button class="btn btn-icon m-2" onclick="openModalRemoveAssignee()">'+assignee+'</button>'
                         });
                     }else {

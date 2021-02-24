@@ -34,10 +34,10 @@ $auth_admin = auth()->user();
                             </td>
 
                             <td>
-                                {{$session->start_time}}
+                                {{$session->start_date}}
                             </td>
                             <td>
-                                {{$session->end_time}}
+                                {{$session->end_date}}
                             </td>
                             <td>
                                 {{$session->institution}}

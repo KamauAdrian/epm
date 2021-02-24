@@ -17,7 +17,8 @@ class CreateAnnouncementsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('link');
-            $table->string('url');//public path to videos and or images
+            $table->string('image_video');//videos and or image file name
+            $table->string('image_video_url');//public path to videos and or images
             $table->text('description');
             $table->timestamps();
         });

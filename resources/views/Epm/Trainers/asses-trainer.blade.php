@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/star-rating-svg.css')}}">
 @endsection
 
 @section('content')
@@ -77,7 +78,10 @@
                                             </tr>
                                             <tr>
                                                 <td><ul><li>greeted the audience warmly.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" value="{{old('delivery[0]')}}" required></td>
+                                                <td>
+                                                    <div class="my-rating-6" data-rating="2.5"></div>
+{{--                                                    <input type="text" style="border: none" name="delivery[]" class="form-control" value="{{old('delivery[0]')}}" required>--}}
+                                                </td>
                                                 <td><ul><li>maintained good eye contact <br> with the audience.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
                                             </tr>
@@ -211,10 +215,6 @@
 @endsection
 
 @section('js')
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
         new Vue({
             components: {
@@ -262,6 +262,21 @@
             methods:{
             },
         })
+        $(".my-rating-6").starRating({
+            totalStars: 5,
+            emptyColor: 'lightgray',
+            hoverColor: 'salmon',
+            activeColor: 'cornflowerblue',
+            initialRating: 4,
+            strokeWidth: 0,
+            useGradient: false,
+            minRating: 1,
+            callback: function(currentRating, $el){
+                alert('rated ' + currentRating);
+                console.log('DOM element ', $el);
+            }
+        });
     </script>
+    <script src="{{url('assets/js/jquery.star-rating-svg.js')}}"></script>
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
 @endsection

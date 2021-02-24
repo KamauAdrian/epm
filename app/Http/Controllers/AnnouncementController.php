@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
+use App\Models\Award;
+use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
+//use FFMpeg\FFMpeg;
 
 class AnnouncementController extends Controller
 {
@@ -13,7 +17,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::orderBy('created_at','desc')->get();
+        return view('Epm.Announcements.index',compact('announcements'));
     }
 
     /**
@@ -34,7 +39,33 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_announcement = new Announcement();
+        $new_announcement->title = $request->title;
+        $new_announcement->link = $request->link;
+        $new_announcement->description = $request->description;
+        $fileName = '';
+        $fileUrl = '';
+        if ($request->hasFile('image_video')){
+
+            $file = $request->file('image_video');
+            $fileName = $file->getClientOriginalName();
+//            if(preg_match('/^.*\.(mp4|mov|mpg|mpeg|wmv|mkv)$/i', $fileName)) {
+//                $ffmpeg = new FFMpeg();
+//                $video = $ffmpeg->open($fileName);
+//                dd($video);
+//                $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1));
+//                dd($frame);
+//                $frame->save($thumbnail);
+//            }else{
+//                $path = $file->move('Announcement/image_videos',$fileName);
+//            }
+            $path = $file->move('Announcement/image_videos',$fileName);
+            $fileUrl = url("/")."/".$path->getPathname();
+        }
+        $new_announcement->image_video = $fileName;
+        $new_announcement->image_video_url = $fileUrl;
+        $new_announcement->save();
+        return redirect('/adm/main/dashboard/#announcements')->with("success","New Announcement Added Successfully");
     }
 
     /**

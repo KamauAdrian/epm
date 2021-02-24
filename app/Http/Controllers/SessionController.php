@@ -49,52 +49,27 @@ class SessionController extends Controller
      */
     public function store(Request $request,$id)
     {
-//        dd($request->all());
         $messages = [
             'name.required'=>'Hey Session Name Please',
-            'mode.required'=>'Please Select The Session Mode',
+            'type.required'=>'Please Select The Session Mode',
         ];
         $this->validate($request,[
             'name'=>'required',
-            'date'=>'required',
-            'mode'=>'required',
-            'start_time'=>'required',
-            'end_time'=>'required',
+            'type'=>'required',
+            'start_date'=>'required',
+            'end_date'=>'required',
             'category'=>'required',
-            'about'=>'required',
         ],$messages);
         $session = new TrainingSession();
         $session->name = $request->name;
-        $session->date = $request->date;
-        $session->start_time = $request->start_time;
-        $session->end_time = $request->end_time;
-        $session->institution = $request->institution;
-        $session->county = $request->county;
-        $session->location = $request->location;
-        $session->location_lat_long = $request->location_lat_long;
+        $session->start_date = $request->start_date;
+        $session->end_date = $request->end_date;
         $session->category = $request->category;
-        $session->mode = $request->mode;
-        $classes = null;
+        $session->type = $request->type;
         $session->type = $request->type;
         $session->about = $request->about;
-        $trainers_list = null;
-        if ($request->input('trainers')){
-            $trainers_list = $request->input('trainers');
-        }
-        if ($request->input('s_classes')){
-            $classes = $request->input('s_classes');
-        }
-        $saved = $session->save();
-        if ($saved){
-            $saved_session = TrainingSession::find($session->id);
-            if ($trainers_list!=null){
-                $saved_session->trainers()->attach($trainers_list);
-            }
-            if ($classes!=null){
-                $saved_session->classes()->attach($classes);
-            }
-        }
-        return redirect('/adm/'.$id.'/list/sessions')->with('success','New Session successfully created');
+        $session->save();
+        return redirect("/adm/".$id."/view/session/".$session->id)->with("success","New Session Created Successfully");
     }
 
     /**
@@ -107,6 +82,8 @@ class SessionController extends Controller
     {
         //        $data = new ExcelReader();
         $trainingSession = TrainingSession::find($session_id);
+        $days = strtotime($trainingSession->end_date)-strtotime($trainingSession->start_date);
+//        dd($days/60/60/24);
         return view('Epm.Sessions.view-session',compact('trainingSession'));
     }
 
