@@ -138,7 +138,7 @@ class TrainerController extends Controller
     }
 
     public function save_trainer_assessment(Request $request, $id){
-//        dd($request->delivery[0]);
+
         $messages = [
             'trainer_id.required'=>'Please select Trainer'
         ];
