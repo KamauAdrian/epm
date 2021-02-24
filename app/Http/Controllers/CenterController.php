@@ -35,7 +35,7 @@ class CenterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         $this->validate($request,
             [
@@ -52,10 +52,10 @@ class CenterController extends Controller
         $center_saved = $center->save();
         if ($center_saved) {
             $request->session()->flash('message', 'Center Added Successfully');
-            return redirect('/adm/list/centers')->with('success', $request->session()->get('message'));
+            return redirect("/adm/".$id."/view/center/".$center->id)->with("success", $request->session()->get('message'));
         }else{
             $request->session()->flash('message', 'An error occurred when trying to create Center please try again later');
-            return redirect('/adm/list/centers')->with('error', $request->session()->get('message'));
+            return redirect("/adm/".$id."/list/centers")->with("error", $request->session()->get('message'));
         }
     }
 
@@ -67,8 +67,11 @@ class CenterController extends Controller
      */
     public function show($id,$center_id)
     {
-        $center = DB::table('centers')->where('id',$center_id)->first();
-        return view('Epm.Centers.view-center',compact('center'));
+        $center = Center::find($center_id);
+        if ($center){
+          return view('Epm.Centers.view-center',compact('center'));
+        }
+//        $center = DB::table('centers')->where('id',$center_id)->first();
     }
 
     /**

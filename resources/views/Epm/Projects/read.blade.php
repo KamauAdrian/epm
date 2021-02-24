@@ -24,8 +24,8 @@
         }
         .attach{
             border: 1px dashed #7E858E;
-            border-radius: 2%;
-            padding: 10px;
+            border-radius: 5px;
+            padding: 9px;
             color: #7E858E;
         }
         .modal .modal-footer{
@@ -95,15 +95,16 @@
                                                                 <div class="card-text">{{$task->name}}</div>
                                                             </div>
                                                             <div class="mt-4">
+                                                                <div style="font-size: 12px" class="text-small text-muted">Due Date</div>
                                                                 <div class="">
                                                                     @if($task->due_date)
-                                                                        {{$task->due_date}}
+                                                                       <span style="font-size: 12px"> {{$task->due_date}}</span>
                                                                     @else
                                                                         <div class=""><i class="fa fa-calendar"></i> No Due Date</div>
                                                                     @endif
                                                                 </div>
                                                                 <div class="mt-2">
-                                                                    <p style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</p>
+                                                                    <div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>
                                                                     @if($avatar_icon_name)
                                                                         @foreach($avatar_icon_name as $name)
                                                                             <span class="badge badge-pill badge-success p-2">{{$name}}</span>
@@ -273,38 +274,44 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button class="btn btn-outline-info float-right btn-task-comment" type="submit">
-                                                    Comment
+                                                <button class="btn ml-2 attach" type="button" id="add-attachment">
+                                                    Add Attachment
+                                                </button>
+                                                <button class="btn ml-2 attach" type="button" id="add-link">
+                                                    Add Link
+                                                </button>
+                                                <button class="btn btn-outline-info float-right btn-task-comment ml-2" type="submit">
+                                                    Post Comment
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-12">
-                                <div class="container mt-4">
-                                    <div style="height: 50px" class="row">
-                                        <div class="col-sm-12  attachment">
-                                            <div class="card text-center" style="width:auto" id="add-attachment">
-                                                <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="container mt-2">
-                                    <div style="height: 50px" class="row">
-                                        <div class="col-md-12  attachment">
-                                            <div class="card text-center" style="width:auto" id="add-link">
-                                                <a href="#!" class="attach">
-                                                    <span><i class="fa fa-plus"></i></span> Add a Link
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="container mt-4">--}}
+{{--                                    <div style="height: 50px" class="row">--}}
+{{--                                        <div class="col-sm-12  attachment">--}}
+{{--                                            <div class="card text-center" style="width:auto" id="add-attachment">--}}
+{{--                                                <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="container mt-2">--}}
+{{--                                    <div style="height: 50px" class="row">--}}
+{{--                                        <div class="col-md-12  attachment">--}}
+{{--                                            <div class="card text-center" style="width:auto" id="add-link">--}}
+{{--                                                <a href="#!" class="attach">--}}
+{{--                                                    <span><i class="fa fa-plus"></i></span> Add a Link--}}
+{{--                                                </a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -431,8 +438,9 @@
                                         <input type="hidden" name="user_id" value="{{$auth_admin->id}}">
                                         <input type="hidden" id="modal-modal-attachment-task-id" name="task_id" value="">
                                         <div class="form-group">
-                                            <label>Add an Attachment</label>
-                                            <input type="file" class="form-control" name="attachment">
+                                            <label>Add Attachment</label>
+                                            <p class="text-small"><b>Please note:</b> Only add PDFs or Images as attachments. For Word, Excel or PowerPoint documents, add the Google Drive link instead.</p>
+                                            <input type="file" class="form-control" name="attachment" accept=".pdf,.png,.jpeg,.jpg,.giff,.bpm">
                                             <span class="text-danger">{{$errors->first("attachment")}}</span>
                                         </div>
                                     </div>
@@ -537,6 +545,7 @@
         $('#modalAddAttachment').on('hidden.bs.modal', function () {
             // do something…
             $("#modalTaskDetailed").modal('show');
+
             $('#modalTaskDetailed').animate({
                 scrollTop: $('#modalTaskDetailedAttachments')[0].scrollHeight
             }, "slow");
@@ -622,10 +631,16 @@ console.log(response_task);
                     $('#modalTaskDetailed .modal-body .task-details').html(
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
                         '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response_task.name+'</h6></div></div>'+
-                        '<div class="col-md-3"><div class="form-group"><p>Task Assignees: </p></div></div>'+
-                        '<div class="col-md-9"><div class="form-group">'+task_assignees+'<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
-                        '<div class="col-md-3"><div class="form-group"><p>Task Due Date</p></div></div>'+
-                        '<div class="col-md-9"><div class="form-group"><p onclick="openModalUpdateDueDate()"><span><i class="fa fa-calendar"></i></span> '+due_date+'</p></div></div>'
+                        '<div class="mt-4">'+
+                        '<div style="font-size: 12px" class="text-small text-muted">Due Date</div>'+
+                        '<div class="">'+
+                        '<span style="font-size: 12px" onclick="openModalUpdateDueDate()">'+due_date+'</span>'+
+                        '</div>'+
+                        '<div class="mt-2">'+
+                        '<div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>'+task_assignees+
+                        '<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button>'+
+                        '</div>'+
+                        '</div>'
                     );
 
                     // console.log(task_assignees);
@@ -856,6 +871,7 @@ console.log(response_task);
                     if (response){
                         // $("#modalTaskDetailed").modal('hide');
                         $("#modalAddAttachment").modal('hide');
+
                     }
                 }
             });

@@ -110,7 +110,7 @@
                                                 <td><ul><li>greeted the audience warmly.</li></ul></td>
                                                 <td>
                                                     <div class='rating-stars text-center'>
-                                                        <ul id='starsq1'>
+                                                        <ul id='delivery_q1' class="stars_hover" onclick="trainerRating('delivery_q1')">
                                                             <li class='star' title='Poor' data-value='1'>
                                                                 <i class='fa fa-star fa-fw'></i>
                                                             </li>
@@ -128,12 +128,12 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-{{--                                                    <input type="text" style="border: none" name="delivery[]" class="form-control" value="{{old('delivery[0]')}}" required>--}}
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q1">
                                                 </td>
                                                 <td><ul><li>maintained good eye contact <br> with the audience.</li></ul></td>
                                                 <td>
                                                     <div class='rating-stars text-center'>
-                                                        <ul id='stars'>
+                                                        <ul id='body_language_q1' onclick="trainerRating('body_language_q1')" class="stars_hover">
                                                             <li class='star' title='Poor' data-value='1'>
                                                                 <i class='fa fa-star fa-fw'></i>
                                                             </li>
@@ -151,42 +151,189 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-{{--                                                    <input type="text" style="border: none" name="body_language[]" class="form-control" required>--}}
+                                                    <input type="text" name="body_language[]" value="" id="rating_body_language_q1">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used a voice loud and clear<br />enough to hear easily.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='delivery_q2' class="stars_hover" onclick="trainerRating('delivery_q2')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q2">
+                                                </td>
                                                 <td><ul><li>was friendly and smiled.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='body_language_q2' onclick="trainerRating('body_language_q2')" class="stars_hover">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="body_language[]" value="" id="rating_body_language_q2">
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>delivered a talk designed in a <br>logical way from beginning to <br>middle and end,</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='delivery_q3' class="stars_hover" onclick="trainerRating('delivery_q3')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q3">
+                                                </td>
                                                 <td><ul><li>used body language to help <br>communicate ideas visually</li></ul></td>
                                                 <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>clearly described what to expect <br> from the presentation.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='delivery_q4' class="stars_hover" onclick="trainerRating('delivery_q4')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q4">
+                                                </td>
                                                 <td class="thead-light"><b>Audience Participation</b> — the trainer:</td>
                                                 <td><input type="text" style="border: none" name="" class="form-control" disabled></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used effective examples and <br> illustrations.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='delivery_q5' class="stars_hover" onclick="trainerRating('delivery_q5')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q5">
+                                                </td>
                                                 <td><ul><li>involved the audience.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>defined unfamiliar technical terms.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='delivery_q6' class="stars_hover" onclick="trainerRating('delivery_q6')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q6">
+                                                </td>
                                                 <td><ul><li>handled questions and <br>comments with calm courtesy.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>summarized the main points <br> before finishing.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="delivery[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='delivery_q7' class="stars_hover" onclick="trainerRating('delivery_q7')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="delivery[]" value="" id="rating_delivery_q7">
+                                                </td>
                                                 <td><ul><li>broke up lectures/discussion at <br>appropriate points.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
@@ -198,37 +345,163 @@
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used visual aids</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='visual_aids_q1' class="stars_hover" onclick="trainerRating('visual_aids_q1')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="visual_aids[]" value="" id="rating_visual_aids_q1">
+                                                </td>
                                                 <td><ul><li>clarified or rephrased questions <br>to elicit audience participation.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="audience_participation[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>made sure materials could be <br>read easily from where I was <br>sitting.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='visual_aids_q2' class="stars_hover" onclick="trainerRating('visual_aids_q2')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="visual_aids[]" value="" id="rating_visual_aids_q2">
+                                                </td>
                                                 <td class="thead-light"><b>Technical Competency</b> — the trainer:</td>
                                                 <td><input type="text" style="border: none" name="" class="form-control" disabled></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>got the point across in a clear and <br>simple way.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='visual_aids_q3' class="stars_hover" onclick="trainerRating('visual_aids_q3')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="visual_aids[]" value="" id="rating_visual_aids_q3">
+                                                </td>
                                                 <td><ul><li>taught technically accurate <br>content.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>did not block the screen or <br> flipchart.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='visual_aids_q4' class="stars_hover" onclick="trainerRating('visual_aids_q4')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="visual_aids[]" value="" id="rating_visual_aids_q4">
+                                                </td>
                                                 <td><ul><li>answered technical questions <br>from the audience.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>talked to the audience rather than <br> to the screen or flipchart.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='visual_aids_q5' class="stars_hover" onclick="trainerRating('visual_aids_q5')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="visual_aids[]" value="" id="rating_visual_aids_q5">
+                                                </td>
                                                 <td><ul><li>gauged audience level of <br>technical knowledge and <br>adjusted the presentation <br>accordingly.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used key words rather than <br> sentences</li></ul></td>
-                                                <td><input type="text" style="border: none" name="visual_aids[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='visual_aids_q6' class="stars_hover" onclick="trainerRating('visual_aids_q6')">
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="text" name="visual_aids[]" value="" id="rating_visual_aids_q6">
+                                                </td>
                                                 <td><ul><li>accurately broke down <br>technical/complex concepts in a <br>way participants could <br>understand.</li></ul></td>
                                                 <td><input type="text" style="border: none" name="technical_competence[]" class="form-control" required></td>
                                             </tr>
@@ -330,29 +603,13 @@
             },
             methods:{
             },
-        })
-        $(".my-rating-6").starRating({
-            totalStars: 5,
-            emptyColor: 'lightgray',
-            hoverColor: 'salmon',
-            activeColor: 'cornflowerblue',
-            initialRating: 4,
-            strokeWidth: 0,
-            useGradient: false,
-            minRating: 1,
-            callback: function(currentRating, $el){
-                alert('rated ' + currentRating);
-                console.log('DOM element ', $el);
-            }
         });
     </script>
     <script>
         $(document).ready(function(){
-
             /* 1. Visualizing things on Hover - See next part for action on click */
-            $('#starsq1 li').on('mouseover', function(){
+            $('.stars_hover li').on('mouseover', function(){
                 var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-
                 // Now highlight all the stars that's not after the current hovered star
                 $(this).parent().children('li.star').each(function(e){
                     if (e < onStar) {
@@ -368,34 +625,23 @@
                     $(this).removeClass('hover');
                 });
             });
-
-
-            /* 2. Action to perform on click */
-            $('#starsq1 li').on('click', function(){
+        });
+        /* 2. Action to perform on click */
+        function trainerRating(id){
+            $('#'+id+' li').on('click', function(){
                 var onStar = parseInt($(this).data('value'), 10); // The star currently selected
                 var stars = $(this).parent().children('li.star');
-
                 for (i = 0; i < stars.length; i++) {
                     $(stars[i]).removeClass('selected');
                 }
-
                 for (i = 0; i < onStar; i++) {
                     $(stars[i]).addClass('selected');
                 }
-                // // JUST RESPONSE (Not needed)
-                // var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-                // var msg = "";
-                // if (ratingValue > 1) {
-                //     msg = "Thanks! You rated this " + ratingValue + " stars.";
-                // }
-                // else {
-                //     msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
-                // }
-                // responseMessage(msg);
-                var ratingValue = parseInt($('#starsq1 li.selected').last().data('value'), 10);
+                var ratingValue = parseInt($('#'+id+' li.selected').last().data('value'), 10);
+                $("#rating_"+id).val(ratingValue);
                 console.log("rated "+ratingValue+ " Star");
             });
-        });
+        }
     </script>
     <script src="{{url('assets/js/jquery.star-rating-svg.js')}}"></script>
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>

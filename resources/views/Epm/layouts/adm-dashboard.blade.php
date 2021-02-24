@@ -66,154 +66,296 @@
             </div>
             <div class="card-body">
                 <div class="col-md-12">
-                    <div class="row">
-                        {{--            //pmo--}}
-                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager")
+                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager")
+                        <div class="row">
+                            {{--            //pmo--}}
                             <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">PMO</h5>
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">PMO</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div>
+                                                @if($pm_role)
+                                                    <span style="font-size:30px">
+                                            <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @else
+                                                    <span style="font-size:30px">
+                                            <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div>
-                                            @if($pm_role)
-                                                <span style="font-size:30px">
-                                        <p class="text-center "><span class="float-left ml-4">{{count($pms)}}</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                            @else
-                                                <span style="font-size:30px">
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
-                                    </span>
-                                            @endif
+                            </div>
+                            {{--            //center Manager--}}
+                            <div class="col-md-4">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Center Managers</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($cm_role)
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">{{count($cms)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @else
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--            //trainers--}}
+                            <div class="col-md-4">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Trainers</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($trainer_role)
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">{{count($trainers)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @else
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--            //Work Streams--}}
+                            <div class="col-md-4">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Work Streams</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($projects)
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">{{count($projects)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
+                                        </span>
+                                                @else
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-briefcase ml-4"></i></p>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--            //Centers--}}
+                            <div class="col-md-4">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Centers</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($centers)
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">{{count($centers)}}</span> <i class="fa fa-building ml-4"></i></p>
+                                        </span>
+                                                @else
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-building ml-4"></i></p>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--            //Trainees--}}
+                            <div class="col-md-4">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Trainees</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($trainees)
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">{{count($trainees)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @else
+                                                    <span>
+                                            <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                        </span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endif
-                        {{--            //center Manager--}}
-                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager" || $auth_admin->role->name =="Center Manager")
-                            <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Center Managers</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="font-size:30px">
-                                            @if($cm_role)
-                                                <span>
+                    @endif
+
+                    @if($auth_admin->role->name == "Center Manager")
+                        <div class="row">
+                            {{--            //center Manager--}}
+                            <div class="col-md-6">
+                                <div class="card" style="width: 100%">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Center Managers</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($cm_role)
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">{{count($cms)}}</span> <i class="fa fa-user ml-4"></i></p>
                                     </span>
-                                            @else
-                                                <span>
+                                                @else
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
                                     </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @endif
-                        {{--            //trainers--}}
-                            <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Trainers</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="font-size:30px">
-                                            @if($trainer_role)
-                                                <span>
+                            {{--            //trainers--}}
+                            <div class="col-md-6">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Trainers</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($trainer_role)
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">{{count($trainers)}}</span> <i class="fa fa-user ml-4"></i></p>
                                     </span>
-                                            @else
-                                                <span>
+                                                @else
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
                                     </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {{--            //Work Streams--}}
-                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager")
-                            <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Work Streams</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="font-size:30px">
-                                            @if($projects)
-                                                <span>
-                                        <p class="text-center "><span class="float-left ml-4">{{count($projects)}}</span> <i class="fa fa-briefcase ml-4"></i></p>
-                                    </span>
-                                            @else
-                                                <span>
-                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-briefcase ml-4"></i></p>
-                                    </span>
-                                            @endif
-                                        </div>
+                            {{--            //Centers--}}
+                            <div class="col-md-6">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Centers</h5>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        {{--            //Centers--}}
-                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager" || $auth_admin->role->name =="Center Manager")
-                            <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Centers</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="font-size:30px">
-                                            @if($centers)
-                                                <span>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($centers)
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">{{count($centers)}}</span> <i class="fa fa-building ml-4"></i></p>
                                     </span>
-                                            @else
-                                                <span>
+                                                @else
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-building ml-4"></i></p>
                                     </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @endif
-                        {{--            //Trainees--}}
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Trainees</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="font-size:30px">
-                                            @if($trainees)
-                                                <span>
+                            {{--            //Trainees--}}
+                            <div class="col-md-6">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Trainees</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($trainees)
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">{{count($trainees)}}</span> <i class="fa fa-user ml-4"></i></p>
                                     </span>
-                                            @else
-                                                <span>
+                                                @else
+                                                    <span>
                                         <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
                                     </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
+                    @if($auth_admin->role->name == "Trainer")
+                        <div class="row">
+                            {{--            //trainers--}}
+                            <div class="col-md-6">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Trainers</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($trainer_role)
+                                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($trainers)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                                @else
+                                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--            //Trainees--}}
+                            <div class="col-md-6">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Trainees</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div style="font-size:30px">
+                                                @if($trainees)
+                                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">{{count($trainees)}}</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                                @else
+                                                    <span>
+                                        <p class="text-center "><span class="float-left ml-4">0</span> <i class="fa fa-user ml-4"></i></p>
+                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </ddiv>

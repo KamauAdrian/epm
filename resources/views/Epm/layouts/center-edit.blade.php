@@ -60,14 +60,12 @@ $auth_admin = auth()->user();
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Brief Center Description</label>
-                            <textarea class="form-control" name="description" cols="30" rows="5">
-                                {{$center->description}}
-                        </textarea>
+                            <textarea class="form-control" name="description" cols="30" rows="5">{{$center->description}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <button type="submit" class="float-left btn btn-outline-info">Update</button>
+                        <div class="form-group float-right">
+                            <button type="submit" class="float-left btn btn-outline-info">Update Center</button>
                         </div>
                     </div>
                 </div>

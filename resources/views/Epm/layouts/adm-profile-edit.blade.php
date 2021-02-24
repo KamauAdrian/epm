@@ -201,7 +201,7 @@ $admin_user = $user::find($admin->id);
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="form-group float-right">
                             <button type="submit" class="float-left btn btn-outline-info">Update</button>
                         </div>
                     </div>

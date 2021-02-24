@@ -269,12 +269,7 @@ class AdminController extends Controller
             $result = Auth::attempt(['email'=>$admin_info['email'],'password'=>$admin_info['password']]);
             if ($result){
                 $user = Auth::user();
-                if ($user->role->name == 'Project Manager'){
-                    return redirect('/adm/pmo/dashboard');
-                }else{
-                    return redirect('/adm/main/dashboard');
-                }
-
+                return redirect('/adm/main/dashboard');
             }else{
                 $request->session()->flash('error','Password error');
                 return redirect()->back()->with('message',$request->session()->get('error'));

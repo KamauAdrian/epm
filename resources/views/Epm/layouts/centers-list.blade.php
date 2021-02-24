@@ -7,9 +7,10 @@ $auth_admin = auth()->user();
             <table id="CentersList" class="table table-center mb-0 ">
                 <thead>
                 <tr>
-                    <th>Centers</th>
+                    <th>Center</th>
                     <th>County</th>
                     <th>Town</th>
+                    <th>Center Managers</th>
                     <th class="text-right">Actions</th>
                 </tr>
                 </thead>
@@ -19,7 +20,11 @@ $auth_admin = auth()->user();
                         <tr>
                             <td>
                                 <div class="media">
-                                    <span class="avtar"><img src="{{url('assets/images/center.jpeg')}}" alt="images" class="img-fluid"></span>
+                                    @if($center->image!=null)
+                                        <span class="avtar"><img src="{{url('Centers/images/'.$center->image)}}" alt="images" class="img-fluid"></span>
+                                    @else
+                                        <span class="avtar"><img src="{{url('assets/images/center.jpeg')}}" alt="images" class="img-fluid"></span>
+                                    @endif
                                     <div class="media-body ml-3 align-self-center">
                                         <h5 class="mb-1">{{$center->name}}</h5>
                                     </div>
@@ -27,6 +32,7 @@ $auth_admin = auth()->user();
                             </td>
                             <td>{{$center->county}}</td>
                             <td>{{$center->location}}</td>
+                            <td>{{count($center->centerManagers)}}</td>
                             @if(auth()->user()->role->name == 'Su Admin' || auth()->user()->role->name == 'Project Manager')
                                 <td class="text-right">
                                     <div class="float-right">
@@ -44,7 +50,7 @@ $auth_admin = auth()->user();
                             @else
                                 <td class="text-right">
                                     <div class="float-right">
-                                        <a href="{{url('/view/center',$center->id)}}" class="btn btn-sm btn-outline-info" title="View">
+                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/center',$center->id)}}" class="btn btn-sm btn-outline-info" title="View">
                                             <span><i class="fa fa-list"></i></span>
                                         </a>
                                     </div>

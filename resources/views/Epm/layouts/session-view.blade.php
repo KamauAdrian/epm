@@ -187,8 +187,8 @@ $auth_admin = auth()->user();
 
 <div class="col-md-12">
     <div class="card">
+        <div class="card-header"><h6 class="text-small">Trainees on the Session</h6></div>
         <div class="card-body">
-            <h6 class="text-small">Trainees on the Session</h6>
             <div class="table-responsive">
                 <table id="traineesList" class="table table-center mb-0 ">
                     <thead>

@@ -21,7 +21,9 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
+
                 @include('Epm.layouts.centers-list')
+
                 @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                     <a href="{{url('/adm/'.$auth_admin->id.'/add/center')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add Center</a>
                 @endif

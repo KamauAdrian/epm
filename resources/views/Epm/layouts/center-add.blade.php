@@ -33,7 +33,7 @@ $auth_admin = auth()->user();
         </div>
         <div class="col-sm-12">
             <div class="form-group float-right">
-                <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Add Center</button>
+                <button type="submit" class="btn btn-outline-info btn-lg mb-3">Add Center</button>
             </div>
         </div>
     </div>
