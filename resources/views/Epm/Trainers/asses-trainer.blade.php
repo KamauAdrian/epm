@@ -2,7 +2,37 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
+    <script src="{{url('assets/js/jquery.min.js')}}"></script>
     <link rel="stylesheet" href="{{url('/assets/css/star-rating-svg.css')}}">
+    <style>
+        .rating-stars ul {
+            list-style-type:none;
+            padding:0;
+
+            -moz-user-select:none;
+            -webkit-user-select:none;
+        }
+        .rating-stars ul > li.star {
+            display:inline-block;
+
+        }
+
+        /* Idle State of the stars */
+        .rating-stars ul > li.star > i.fa {
+            font-size:1.0em; /* Change the size of the stars */
+            color:#ccc; /* Color on idle state */
+        }
+
+        /* Hover state of the stars */
+        .rating-stars ul > li.star.hover > i.fa {
+            color:#FFCC36;
+        }
+
+        /* Selected state of the stars */
+        .rating-stars ul > li.star.selected > i.fa {
+            color:#FF912C;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -79,11 +109,50 @@
                                             <tr>
                                                 <td><ul><li>greeted the audience warmly.</li></ul></td>
                                                 <td>
-                                                    <div class="my-rating-6" data-rating="2.5"></div>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='starsq1'>
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
 {{--                                                    <input type="text" style="border: none" name="delivery[]" class="form-control" value="{{old('delivery[0]')}}" required>--}}
                                                 </td>
                                                 <td><ul><li>maintained good eye contact <br> with the audience.</li></ul></td>
-                                                <td><input type="text" style="border: none" name="body_language[]" class="form-control" required></td>
+                                                <td>
+                                                    <div class='rating-stars text-center'>
+                                                        <ul id='stars'>
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+{{--                                                    <input type="text" style="border: none" name="body_language[]" class="form-control" required>--}}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><ul><li>used a voice loud and clear<br />enough to hear easily.</li></ul></td>
@@ -275,6 +344,57 @@
                 alert('rated ' + currentRating);
                 console.log('DOM element ', $el);
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+
+            /* 1. Visualizing things on Hover - See next part for action on click */
+            $('#starsq1 li').on('mouseover', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                // Now highlight all the stars that's not after the current hovered star
+                $(this).parent().children('li.star').each(function(e){
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function(){
+                $(this).parent().children('li.star').each(function(e){
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            /* 2. Action to perform on click */
+            $('#starsq1 li').on('click', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                var stars = $(this).parent().children('li.star');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+                // // JUST RESPONSE (Not needed)
+                // var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                // var msg = "";
+                // if (ratingValue > 1) {
+                //     msg = "Thanks! You rated this " + ratingValue + " stars.";
+                // }
+                // else {
+                //     msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+                // }
+                // responseMessage(msg);
+                var ratingValue = parseInt($('#starsq1 li.selected').last().data('value'), 10);
+                console.log("rated "+ratingValue+ " Star");
+            });
         });
     </script>
     <script src="{{url('assets/js/jquery.star-rating-svg.js')}}"></script>
