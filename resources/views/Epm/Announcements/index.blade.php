@@ -40,7 +40,16 @@
                                     @foreach($announcements as $announcement)
                                         <tr>
                                             <td>
+                                                <?php
+                                                $image = '';
+                                                if ($announcement->image!=null){
+                                                    $image = "Announcement/images/".$announcement->image;
+                                                }else{
+                                                    $image = "assets/images/icon_video.png";
+                                                }
+                                                ?>
                                                 <div class="media">
+                                                    <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
                                                     <div class="media-body ml-3 align-self-center">
                                                         <a target="_blank" href="{{$announcement->link}}">
                                                             <h5 class="mb-1">{{$announcement->title}}</h5>

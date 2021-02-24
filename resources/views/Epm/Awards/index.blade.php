@@ -47,9 +47,9 @@
                                             <td>
                                                 <div class="media">
                                                     <div class="media-body ml-3 align-self-center">
-                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/award',$award->id)}}">
+{{--                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/award',$award->id)}}">--}}
                                                             <h5 class="mb-1">{{$award->name}}</h5>
-                                                        </a>
+{{--                                                        </a>--}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -77,13 +77,15 @@
                                                         }
                                                         ?>
                                                     @endif
-                                                    <div class="media">
-                                                        <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
-                                                        <div class="media-body ml-3 align-self-center">
-                                                            <h5 class="mb-1">{{$winner_position_one->name}}</h5>
-{{--                                                                <p class="mb-0">Chicago</p>--}}
-                                                        </div>
-                                                    </div>
+                                                        <a href="{{url("adm/view/adm/".$winner_position_one->id."/profile/role_id=".$winner_position_one->role_id)}}">
+                                                            <div class="media">
+                                                            <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
+                                                            <div class="media-body ml-3 align-self-center">
+                                                                <h5 class="mb-1">{{$winner_position_one->name}}</h5>
+    {{--                                                                <p class="mb-0">Chicago</p>--}}
+                                                            </div>
+                                                            </div>
+                                                        </a>
                                             </td>
                                             <td>
                                                     @if($award->position_two)
@@ -109,13 +111,15 @@
                                                     }
                                                     ?>
                                                 @endif
-                                                <div class="media">
-                                                    <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
-                                                    <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$winner_position_two->name}}</h5>
-                                                        {{--                                                                <p class="mb-0">Chicago</p>--}}
+                                                <a href="{{url("adm/view/adm/".$winner_position_two->id."/profile/role_id=".$winner_position_two->role_id)}}">
+                                                    <div class="media">
+                                                        <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
+                                                        <div class="media-body ml-3 align-self-center">
+                                                            <h5 class="mb-1">{{$winner_position_two->name}}</h5>
+                                                            {{--                                                                <p class="mb-0">Chicago</p>--}}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </td>
                                             <td>
                                                     @if($award->position_three)
@@ -141,13 +145,15 @@
                                                     }
                                                     ?>
                                                 @endif
-                                                <div class="media">
-                                                    <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
-                                                    <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$winner_position_three->name}}</h5>
-                                                        {{--                                                                <p class="mb-0">Chicago</p>--}}
+                                                <a href="{{url("adm/view/adm/".$winner_position_three->id."/profile/role_id=".$winner_position_three->role_id)}}">
+                                                    <div class="media">
+                                                        <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
+                                                        <div class="media-body ml-3 align-self-center">
+                                                            <h5 class="mb-1">{{$winner_position_three->name}}</h5>
+                                                            {{--                                                                <p class="mb-0">Chicago</p>--}}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </td>
 
 {{--                                            @if($auth_admin->role->name != 'Su Admin')--}}
