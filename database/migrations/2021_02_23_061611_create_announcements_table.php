@@ -16,9 +16,10 @@ class CreateAnnouncementsTable extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('link');
-            $table->string('image_video');//videos and or image file name
-            $table->string('image_video_url');//public path to videos and or images
+            $table->text('link');
+            $table->string('image')->nullable();//videos and or image file name
+            $table->string('image_url')->nullable();//public path to videos and or images
+            $table->text('video_link')->nullable();
             $table->text('description');
             $table->timestamps();
         });

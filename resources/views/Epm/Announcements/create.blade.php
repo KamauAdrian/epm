@@ -33,6 +33,24 @@
                                 <span class="text-danger">{{$errors->first('link')}}</span>
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Announcement Type</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 ml-4">
+                                    <div class="form-group">
+                                        <input type="radio" name="type" onclick="showVideoInputLink()" value="Video"> Video
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="radio" name="type" onclick="showImageInputUpload()" value="Image"> Image
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span class="text-danger">{{$errors->first('type')}}</span>
+                            </div>
+                        </div>
 {{--                        <div class="col-sm-12">--}}
 {{--                            <div class="form-group">--}}
 {{--                                <label>Announcement Type</label>--}}
@@ -41,11 +59,16 @@
 {{--                                <span class="text-danger">{{$errors->first('link')}}</span>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" style="display: none" id="announcement_img_upload">
                             <div class="form-group">
                                 <label>Upload Image</label>
-                                <input type="file" name="image_video" class="form-control" required>
-                                <span class="text-danger">{{$errors->first('link')}}</span>
+                                <input type="file" name="image" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12" style="display: none" id="announcement_video_link">
+                            <div class="form-group">
+                                <label>Announcement Video Link</label>
+                                <input type="text" name="video_link" class="form-control" placeholder="Paste Video Link Here">
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -72,6 +95,20 @@
 @section('js')
     {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
+        var video = $("#announcement_video_link");
+        var image = $("#announcement_img_upload");
+        function showVideoInputLink(){
+            document.getElementById('announcement_video_link').style.display="block";
+            document.getElementById('announcement_img_upload').style.display="none";
+            console.log(document.getElementById('announcement_img_upload').value);
+            // video.attr("style","display=block");
+        }
+        function showImageInputUpload(){
+            document.getElementById('announcement_video_link').style.display="none";
+            document.getElementById('announcement_img_upload').style.display="block";
+            // video.attr("style","display=none");
+            // image.attr("style","display=block");
+        }
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,

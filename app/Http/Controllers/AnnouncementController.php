@@ -39,31 +39,27 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $new_announcement = new Announcement();
         $new_announcement->title = $request->title;
         $new_announcement->link = $request->link;
         $new_announcement->description = $request->description;
-        $fileName = '';
-        $fileUrl = '';
-        if ($request->hasFile('image_video')){
+        $type=$request->type;
+        if ($type=="Video"){
+            $new_announcement->video_link = $request->video_link;
+        }else{
+            $fileName = '';
+            $fileUrl = '';
+            if ($request->hasFile('image')){
 
-            $file = $request->file('image_video');
-            $fileName = $file->getClientOriginalName();
-//            if(preg_match('/^.*\.(mp4|mov|mpg|mpeg|wmv|mkv)$/i', $fileName)) {
-//                $ffmpeg = new FFMpeg();
-//                $video = $ffmpeg->open($fileName);
-//                dd($video);
-//                $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1));
-//                dd($frame);
-//                $frame->save($thumbnail);
-//            }else{
-//                $path = $file->move('Announcement/image_videos',$fileName);
-//            }
-            $path = $file->move('Announcement/image_videos',$fileName);
-            $fileUrl = url("/")."/".$path->getPathname();
+                $file = $request->file('image');
+                $fileName = $file->getClientOriginalName();
+                $path = $file->move('Announcement/images',$fileName);
+                $fileUrl = url("/")."/".$path->getPathname();
+            }
+            $new_announcement->image = $fileName;
+            $new_announcement->image_url = $fileUrl;
         }
-        $new_announcement->image_video = $fileName;
-        $new_announcement->image_video_url = $fileUrl;
         $new_announcement->save();
         return redirect('/adm/main/dashboard/#announcements')->with("success","New Announcement Added Successfully");
     }

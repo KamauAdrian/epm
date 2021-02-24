@@ -592,7 +592,11 @@
                                 <a target="_blank" href="{{$announcement->link}}">
                                 <div class="card">
 {{--                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">--}}
-                                    <img class="card-img-top" src="{{url("Announcement/image_videos/".$announcement->image_video)}}" alt="Card IMAGES">
+                                    @if($announcement->image)
+                                        <img class="card-img-top" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
+                                    @else
+                                        <img class="card-img-top" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
+                                    @endif
                                     <div class="card-header">
                                         <div class="media">
 {{--                                            <img src="{{url('assets/images/uikit/card-icon-1.svg')}}" alt="images" class="img-fluid">--}}
