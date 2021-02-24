@@ -68,7 +68,8 @@
                 <div class="col-md-12">
                     <div class="row">
                         {{--            //pmo--}}
-                        <div class="col-md-4">
+                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager")
+                            <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header">
                                     <h5 class="card-title">PMO</h5>
@@ -90,8 +91,10 @@
                                 </div>
                             </div>
                         </div>
-                        {{--            //center Manger--}}
-                        <div class="col-md-4">
+                        @endif
+                        {{--            //center Manager--}}
+                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager" || $auth_admin->role->name =="Center Manager")
+                            <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header">
                                     <h5 class="card-title">Center Managers</h5>
@@ -113,8 +116,9 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         {{--            //trainers--}}
-                        <div class="col-md-4">
+                            <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header">
                                     <h5 class="card-title">Trainers</h5>
@@ -137,8 +141,8 @@
                             </div>
                         </div>
                         {{--            //Work Streams--}}
-
-                        <div class="col-md-4">
+                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager")
+                            <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header">
                                     <h5 class="card-title">Work Streams</h5>
@@ -160,8 +164,10 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         {{--            //Centers--}}
-                        <div class="col-md-4">
+                        @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager" || $auth_admin->role->name =="Center Manager")
+                            <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header">
                                     <h5 class="card-title">Centers</h5>
@@ -183,6 +189,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         {{--            //Trainees--}}
                         <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
@@ -213,15 +220,16 @@
     </div>
 
 {{--    ///////// rem copied data to sample page--}}
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>Tasks</h5>
-            </div>
-            <div class="card-body">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-8">
+    @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager")
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Tasks</h5>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="card">
@@ -259,23 +267,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="font-weight-normal">Tasks by Work Streams</h3>
-                                    <div id="workStreamsTaskOverview" class="mb-4 mt-5"></div>
-                                    @if($projects)
-                                        <div>
-                                            @foreach($projects as $project)
-                                                <p class="mb-3">{{$project->name}} <span class="float-right h6 mb-0 text-body">{{count($project->tasks)}}</span></p>
-                                            @endforeach
-                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
-                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 3 pending tasks <span class="float-right h6 mb-0 text-body">4</span></p>--}}
-                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>New order received <span class="float-right h6 mb-0 text-body">6</span></p>--}}
-                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>Incoming requests <span class="float-right h6 mb-0 text-body">28</span></p>--}}
-                                            {{--                                <p class="mb-3"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>You have 4 pending tasks <span class="float-right h6 mb-0 text-body">9</span></p>--}}
-                                        </div>
-                                    @endif
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="font-weight-normal">Tasks by Work Streams</h3>
+                                        <div id="workStreamsTaskOverview" class="mb-4 mt-5"></div>
+                                        @if($projects)
+                                            <div>
+                                                @foreach($projects as $project)
+                                                    <p class="mb-3">{{$project->name}} <span class="float-right h6 mb-0 text-body">{{count($project->tasks)}}</span></p>
+                                                @endforeach
+                                                {{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -283,7 +288,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
 {{--    <div class="col-md-12">--}}
 {{--        <div class="row">--}}
@@ -593,19 +598,19 @@
                                 <div class="card">
 {{--                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">--}}
                                     @if($announcement->image)
-                                        <img class="card-img-top" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
+                                        <img class="card-img-top" style="height: 250px" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
                                     @else
-                                        <img class="card-img-top" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
+                                        <img class="card-img-top"  style="height: 250px" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
                                     @endif
                                     <div class="card-header">
                                         <div class="media">
 {{--                                            <img src="{{url('assets/images/uikit/card-icon-1.svg')}}" alt="images" class="img-fluid">--}}
-                                            <div class="media-body ml-3">
+                                            <div style="height: 150px" class="media-body ml-3">
 {{--                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>--}}
                                                 <h5 class="mb-2">{{$announcement->title}}</h5>
 {{--                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>--}}
                                                 <div style="color: grey;font-size: 14px" class="mb-0">{{$announcement->description}}</div>
-                                                <div style="color: grey;font-size: 12px" class="mt-4">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
+                                                <div style="color: grey;font-size: 12px; position: absolute; bottom: 0;" class="mt-4 mb-2">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
                                             </div>
                                         </div>
 {{--                                        <div class="card-header-right">--}}

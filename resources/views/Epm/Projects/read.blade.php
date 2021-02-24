@@ -103,9 +103,10 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="mt-2">
+                                                                    <p style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</p>
                                                                     @if($avatar_icon_name)
                                                                         @foreach($avatar_icon_name as $name)
-                                                                            <p><span class="badge badge-pill badge-success p-2">{{$name}}</span></p>
+                                                                            <span class="badge badge-pill badge-success p-2">{{$name}}</span>
                                                                         @endforeach
                                                                     @endif
                                                                         <a href="#!" title="Assign new Collaborators" class="btn btn-icon">
@@ -622,7 +623,7 @@ console.log(response_task);
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
                         '<div class="col-md-12"><div class="form-group"><h6 class="text-center">'+response_task.name+'</h6></div></div>'+
                         '<div class="col-md-3"><div class="form-group"><p>Task Assignees: </p></div></div>'+
-                        '<div class="col-md-9"><div class="form-group"><p style="font-size: 12px">'+task_assignees+'</p><button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
+                        '<div class="col-md-9"><div class="form-group">'+task_assignees+'<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button></div></div>'+
                         '<div class="col-md-3"><div class="form-group"><p>Task Due Date</p></div></div>'+
                         '<div class="col-md-9"><div class="form-group"><p onclick="openModalUpdateDueDate()"><span><i class="fa fa-calendar"></i></span> '+due_date+'</p></div></div>'
                     );
