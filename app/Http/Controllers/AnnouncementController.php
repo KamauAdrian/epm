@@ -39,7 +39,7 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $new_announcement = new Announcement();
         $new_announcement->title = $request->title;
         $new_announcement->link = $request->link;
