@@ -15,7 +15,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Awards/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Awards/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Announcements/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Announcements/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +170,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EPM" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/Announcement/images" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
@@ -177,19 +178,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/resources/views/Emails" />
-      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
-      <recent name="$PROJECT_DIR$/public/assets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
       <recent name="$PROJECT_DIR$/resources/views/Epm" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/Announcement/images" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/resources/views/Emails" />
+      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
     </key>
   </component>
   <component name="RunManager">
@@ -308,7 +309,8 @@
       <workItem from="1613969410090" duration="35287000" />
       <workItem from="1614053684825" duration="34996000" />
       <workItem from="1614138506070" duration="8005000" />
-      <workItem from="1614157724467" duration="2196000" />
+      <workItem from="1614157724467" duration="24147000" />
+      <workItem from="1614226292194" duration="773000" />
     </task>
     <servers />
   </component>
@@ -352,11 +354,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1606914575160" />
-    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1614067913946">
+    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1614160194664">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="464" y="121" key="FileChooserDialogImpl/0.0.1360.728/0.0.1360.728@0.0.1360.728" timestamp="1608364782150" />
-    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614067913946" />
+    <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614160194664" />
     <state x="462" y="86" width="431" height="551" key="NewPhpClassDialog" timestamp="1612166310247">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -381,10 +383,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613458066626" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614146514787">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614227117777">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614146514787" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614227117777" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

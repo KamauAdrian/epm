@@ -28,13 +28,6 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Announcement Link</label>
-                                <input type="text" name="link" class="form-control" placeholder="Add A link To Announcement" value="{{old('link')}}" required>
-                                <span class="text-danger">{{$errors->first('link')}}</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
                                 <label>Announcement Type</label>
                             </div>
                             <div class="row">
@@ -62,13 +55,13 @@
                         <div class="col-sm-12" style="display: none" id="announcement_img_upload">
                             <div class="form-group">
                                 <label>Upload Image</label>
-                                <input type="file" name="image" class="form-control">
+                                <input type="file" name="image" class="form-control" accept=".png,.jpeg,.jpg">
                             </div>
                         </div>
-                        <div class="col-sm-12" style="display: none" id="announcement_video_link">
+                        <div class="col-sm-12" style="display: none" id="announcement_link">
                             <div class="form-group">
-                                <label>Announcement Video Link</label>
-                                <input type="text" name="video_link" class="form-control" placeholder="Paste Video Link Here">
+                                <label>Announcement Link</label>
+                                <input type="text" name="announcement_link" class="form-control" placeholder="Paste Link Here">
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -98,13 +91,12 @@
         var video = $("#announcement_video_link");
         var image = $("#announcement_img_upload");
         function showVideoInputLink(){
-            document.getElementById('announcement_video_link').style.display="block";
+            document.getElementById('announcement_link').style.display="block";
             document.getElementById('announcement_img_upload').style.display="none";
-            console.log(document.getElementById('announcement_img_upload').value);
             // video.attr("style","display=block");
         }
         function showImageInputUpload(){
-            document.getElementById('announcement_video_link').style.display="none";
+            document.getElementById('announcement_link').style.display="block";
             document.getElementById('announcement_img_upload').style.display="block";
             // video.attr("style","display=none");
             // image.attr("style","display=block");

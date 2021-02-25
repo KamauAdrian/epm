@@ -736,7 +736,7 @@
                         <div class="row">
                             @foreach($announcements as $announcement)
                             <div class="col-md-4">
-                                <a target="_blank" href="{{$announcement->link}}">
+                                <a target="_blank" href="{{$announcement->announcement_link}}">
                                 <div class="card">
 {{--                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">--}}
                                     @if($announcement->image)

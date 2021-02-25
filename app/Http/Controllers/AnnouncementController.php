@@ -42,16 +42,13 @@ class AnnouncementController extends Controller
 //        dd($request->all());
         $new_announcement = new Announcement();
         $new_announcement->title = $request->title;
-        $new_announcement->link = $request->link;
+        $new_announcement->announcement_link = $request->announcement_link;
         $new_announcement->description = $request->description;
         $type=$request->type;
-        if ($type=="Video"){
-            $new_announcement->video_link = $request->video_link;
-        }else{
+        if ($type=="Image"){
             $fileName = '';
             $fileUrl = '';
             if ($request->hasFile('image')){
-
                 $file = $request->file('image');
                 $fileName = $file->getClientOriginalName();
                 $path = $file->move('Announcement/images',$fileName);
