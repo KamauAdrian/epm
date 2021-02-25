@@ -42,7 +42,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h6>Daily Training Reports</h6>
+                        <h6>Training Reports</h6>
                     </div>
                     <div class="card-body">
                         <div class="row" >

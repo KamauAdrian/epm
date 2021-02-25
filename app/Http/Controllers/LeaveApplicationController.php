@@ -97,6 +97,7 @@ class LeaveApplicationController extends Controller
         $leave_application->next_of_kin_email = $request->next_of_kin_email;
         $leave_application->next_of_kin_phone = $request->next_of_kin_phone;
         $leave_application->general_comment_concern = $request->general_comment_concern;
+        $leave_application->status = 0;
 
         $leave_application->save();
 

@@ -33,5 +33,8 @@ class TrainingSession extends Model
     public function classes(){
         return $this->belongsToMany('App\Models\SessionClass','training_session_classes','session_id','class_id');
     }
+    public function trainingDays(){
+        return $this->hasMany('App\Models\TrainingDay','session_id','id');
+    }
 
 }

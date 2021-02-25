@@ -7,12 +7,10 @@ $auth_admin = auth()->user();
             <table id="sessionsTable" class="table table-center mb-0 ">
                 <thead>
                 <tr>
-                    <th>Sessions</th>
-                    <th>Date</th>
-                    <th>Start At</th>
-                    <th>Ends At</th>
-                    <th>Institution</th>
-                    <th>Town</th>
+                    <th>Session</th>
+                    <th>Category</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th class="text-right">Status</th>
                 </tr>
                 </thead>
@@ -30,21 +28,15 @@ $auth_admin = auth()->user();
                                 </div>
                             </td>
                             <td>
-                                {{$session->date}}
+                                {{$session->category}}
                             </td>
-
                             <td>
                                 {{$session->start_date}}
                             </td>
                             <td>
                                 {{$session->end_date}}
                             </td>
-                            <td>
-                                {{$session->institution}}
-                            </td>
-                            <td>
-                                {{$session->location}}
-                            </td>
+
                             @if($session->status=='Pending' && $auth_admin->role->name =='Su Admin' || $auth_admin->role->name == 'Project Manager')
                             <td class="text-right">
                                 <div class="btn-group">

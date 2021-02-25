@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group float-right">
-                                        <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Create Class</button>
+                                        <button type="submit" class="btn btn-outline-info btn-lg mb-3">Create Class</button>
                                     </div>
                                 </div>
                             </div>

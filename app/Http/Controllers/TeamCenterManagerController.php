@@ -51,13 +51,14 @@ class TeamCenterManager extends Controller
             'name'=>'required',
             'about'=>'required',
         ]);
-//        dd($request->all());
+        dd($request->all());
         $admin = User::find($id);
         $cms_team = new \App\Models\TeamCenterManager();
         $cms_team->name = $request->name;
         $cms_team->description = $request->about;
         $team_leaders = $request->input('team_leader_ids');
         $cms_team->creator_id = Auth::id();
+
         $new_team_created = $cms_team->save();
 
         if ($new_team_created && $team_leaders!=null){
@@ -141,7 +142,7 @@ class TeamCenterManager extends Controller
 //        dd($request->all());
         $admin = User::find($id);
         $cm_team_member_s_id = $request->input('cm_team_member_s_id');
-        $team_cm =   \App\Models\TeamCenterManager::find($team_id);
+        $team_cm =  TeamCenterManager::find($team_id);
         $team_cm->centerManagers()->attach($cm_team_member_s_id);
         return redirect('/adm/'.$id.'/list/team/cms')->with('success','Center Managers Successfully added to team');
     }

@@ -15,22 +15,22 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LeaveApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LeaveApplicationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/LeaveApplicationAcceptedJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/LeaveApplicationAcceptedJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/LeaveApplicationRejectedJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/LeaveApplicationRejectedJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/LeaveApplicationAccepted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/LeaveApplicationAccepted.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/LeaveApplicationRejected.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/LeaveApplicationRejected.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/EmployeeLeaveApplication.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/EmployeeLeaveApplication.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_26_065828_create_employee_leave_applications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_26_065828_create_employee_leave_applications_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamCenterManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TrainingSession.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainingSession.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Classes/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Classes/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Classes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Classes/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-training-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-training-report-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/asses-trainer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/asses-trainer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-application.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-application.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-applications.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-applications.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/Reports/template-create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/Reports/template-create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/cm-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/cm-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-trainers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-trainers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/sessions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/sessions.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/view-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/view-session.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/Cms/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/Cms/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-training-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-training-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add-trainers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/session-add-trainers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/session-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/session-view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sessions-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sessions-list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -325,7 +325,7 @@
       <workItem from="1614053684825" duration="34996000" />
       <workItem from="1614138506070" duration="8005000" />
       <workItem from="1614157724467" duration="24147000" />
-      <workItem from="1614226292194" duration="12190000" />
+      <workItem from="1614226292194" duration="27173000" />
     </task>
     <servers />
   </component>
@@ -394,14 +394,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1610344476754" />
-    <state x="347" y="159" key="run.anything.popup" timestamp="1613458066626">
+    <state x="347" y="159" key="run.anything.popup" timestamp="1614249648821">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613458066626" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614238148382">
+    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614249648821" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614253461526">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614238148382" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614253461526" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

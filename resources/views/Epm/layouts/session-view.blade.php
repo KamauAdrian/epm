@@ -2,8 +2,6 @@
 <?php
 $auth_admin = auth()->user();
 ?>
-<div class="col-md-12">
-</div>
     <div class="col-md-4">
         <h6><span class="text-small" style="font-size: 14px">Session Name:</span></h6>
         <h3 class="font-weight-normal">{{$trainingSession->name}}</h3>
@@ -32,7 +30,7 @@ $auth_admin = auth()->user();
                 @if($auth_admin->role->name == 'Su Admin')
                 <ul class = "dropdown-menu" role = "menu">
                     <li><a href = "{{url('/adm/'.$auth_admin->id.'/confirm/session/session_id='.$trainingSession->id)}}">Approve Session</a></li>
-{{--                    <li><a href = "#!">Delete Session</a></li>--}}
+                    <li><a href = "#!">Delete Session</a></li>
                 </ul>
                 @endif
             </div>

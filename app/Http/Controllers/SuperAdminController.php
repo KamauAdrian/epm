@@ -50,16 +50,13 @@ class SuperAdminController extends Controller
             {
                 if($user->role_id ==1)
                 {
-                    $response["message"]="Cannot login as {$user->name}";
-//                    return $response;
-                    return redirect('/')->with('error',"Cannot login as User {$user->name}");
+                    return redirect('/adm/main/dashboard')->with('error',"Cannot login as User {$user->name}");
                 }
-//                Auth::logout($current_logged_in_admin);
                 Auth::login($user);
-                return redirect("/")->with('success',"Successfully logged in as {$user->name}");
+                return redirect("/adm/main/dashboard")->with('success',"Successfully logged in as {$user->name}");
             }
             else{
-                return redirect('/')->with('error',"User {$id} not found");
+                return redirect('/adm/main/dashboard')->with('error',"User {$id} not found");
             }
         }
     }

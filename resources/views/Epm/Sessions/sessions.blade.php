@@ -43,7 +43,9 @@
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready( function () {
-            $('#sessionsTable').DataTable();
+            $('#sessionsTable').DataTable({
+                "order":[],
+            });
         } );
     </script>
 @endsection

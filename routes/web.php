@@ -70,17 +70,17 @@ Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'center
     Route::get('/reports/pms',[App\Http\Controllers\SuperAdminController::class, 'reports_pms']);
     //teams
     //teams (Center Managers)
-    Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\TeamCenterManager::class, 'index']);
+    Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'index']);
     Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\AdminController::class, 'team_trainers_list']);
     Route::get('/add-team-trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_add']);
     Route::post('/adm/{id}/save/team/trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_save']);
     Route::get('/adm/{id}/add/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_add']);
     Route::post('/adm/{id}/save/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_save']);
     Route::get('/cms/teams',[App\Http\Controllers\SuperAdminController::class, 'team_cms']);
-    Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\TeamCenterManager::class, 'create']);
-    Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\TeamCenterManager::class, 'store']);
-    Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManager::class, 'add_members']);
-    Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManager::class, 'store_members']);
+    Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'create']);
+    Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'store']);
+    Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManagerController::class, 'add_members']);
+    Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManagerController::class, 'store_members']);
     //ajira clubs
     Route::get('/ajira-clubs',[App\Http\Controllers\SuperAdminController::class, 'ajira_clubs']);
 
@@ -256,14 +256,18 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/add/session',[App\Http\Controllers\SessionController::class, 'create']);
     Route::post('/adm/{id}/save/session',[App\Http\Controllers\SessionController::class, 'store']);
     Route::get('/adm/{id}/view/session/{session_id}',[App\Http\Controllers\SessionController::class, 'show']);
+    Route::get('/adm/{id}/view/session/{session_id}/training/day/{day_id}',[App\Http\Controllers\SessionController::class, 'training_per_day']);
     Route::get('/adm/{id}/confirm/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'session_approve']);
     Route::get('/adm/{id}/edit/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'edit']);
     Route::get('/adm/{id}/update/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'update']);
     Route::get('/adm/{id}/delete/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'destroy']);
     //Session (Trainers)
     Route::get('/new/session/trainers/{id}',[App\Http\Controllers\SessionController::class, 'new_session_trainers']);//json array of trainers not in the session
-    Route::get('/adm/{id}/session/{session_id}/add/trainers',[App\Http\Controllers\SessionController::class, 'create_trainers']);
-    Route::post('/adm/{id}/session/{session_id}/save/trainers',[App\Http\Controllers\SessionController::class, 'store_trainers']);
+    Route::get('/new/session/classes/{id}',[App\Http\Controllers\SessionController::class, 'new_session_classes']);//json array of classes not in the session
+    Route::get('/adm/{id}/session/{session_id}/day/{day_id}/add/trainers',[App\Http\Controllers\SessionController::class, 'create_trainers']);
+    Route::post('/adm/{id}/session/{session_id}/day/{day_id}/save/trainers',[App\Http\Controllers\SessionController::class, 'store_trainers']);
+    Route::get('/adm/{id}/session/{session_id}/day/{day_id}/add/classes',[App\Http\Controllers\SessionController::class, 'create_classes']);
+    Route::post('/adm/{id}/session/{session_id}/day/{day_id}/save/classes',[App\Http\Controllers\SessionController::class, 'store_classes']);
     //Session (Trainees)
     Route::get('/adm/{id}/session/{session_id}/add/trainees',[App\Http\Controllers\SessionController::class, 'create_trainees']);
     Route::post('/adm/{id}/session/{session_id}/save/trainees',[App\Http\Controllers\SessionController::class, 'store_trainees']);
