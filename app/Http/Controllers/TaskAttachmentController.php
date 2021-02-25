@@ -42,7 +42,7 @@ class TaskAttachmentController extends Controller
      */
     public function store(Request $request, $id,$task_id)
     {
-        dd($request->all());
+//        dd($request->all());
         $this->validate($request,[
 
         ]);

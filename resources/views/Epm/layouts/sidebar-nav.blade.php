@@ -114,10 +114,10 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @endif
     <li class="nav-item pcoded-hasmenu">
-        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Sessions</span></a>
+        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Trainings</span></a>
         <ul class="pcoded-submenu">
-            <li><a href="{{url('adm/'.$auth_admin->id.'/list/classes')}}">View Cohorts</a></li>
-            <li><a href="{{url('/adm/'.$auth_admin->id.'/list/sessions')}}">View Sessions</a></li>
+            <li><a href="{{url('adm/'.$auth_admin->id.'/list/classes')}}">Cohorts</a></li>
+            <li><a href="{{url('/adm/'.$auth_admin->id.'/list/sessions')}}">Trainings</a></li>
         </ul>
     </li>
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')

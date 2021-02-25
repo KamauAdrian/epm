@@ -12,7 +12,7 @@
                 <div class="auth-side-form">
                     <div class="auth-content">
                         <div class="text-center">
-                            <h1 class="f-w-400">Add a New Session</h1>
+                            <h1 class="f-w-400">Add a New Training</h1>
                         </div>
                         <?php
                         $auth_admin = auth()->user();
@@ -20,62 +20,98 @@
                         <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/session')}}">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>SESSION NAME</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}">
-                                        <span class="text-danger">{{$errors->first('name')}}</span>
-                                    </div>
-                                </div>
+{{--                                <div class="col-md-12">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label>SESSION NAME</label>--}}
+{{--                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{old('name')}}">--}}
+{{--                                        <span class="text-danger">{{$errors->first('name')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="col-sm-12">
-                                    <div class="form-group" id="category">
-                                        <label>SESSION CATEGORY</label>
-                                        <category v-model="selectedCategory" :options="categories"
-                                                  placeholder="Select The Session Category"
+                                    <div class="form-group" id="training">
+                                        <label>SELECT TRAINING</label>
+                                        <multiselect v-model="selectedTraining" :options="trainings"
+                                                  placeholder="Select Training"
                                                   :searchable="true" :close-on-select="true">
-                                        </category>
-                                        <input type="hidden" name="category" :value="selectedCategory">
-                                        <span class="text-danger">{{$errors->first('category')}}</span>
+                                        </multiselect>
+                                        <input type="hidden" name="training" :value="selectedTraining">
+                                        <span class="text-danger">{{$errors->first('training')}}</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>SESSION TYPE</label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 ml-4">
-                                            <div class="form-group">
-                                                <input type="radio" name="type" value="Physical"> Physical
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="radio" name="type" value="Virtual"> Virtual
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="radio" name="type" value="TOT"> TOT
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <span class="text-danger">{{$errors->first('type')}}</span>
-                                    </div>
-                                </div>
+{{--                                <div class="col-sm-12">--}}
+{{--                                    <div class="form-group" id="category">--}}
+{{--                                        <label>SELECT CATEGORY</label>--}}
+{{--                                        <category v-model="selectedCategory" :options="categories"--}}
+{{--                                                  placeholder="Select The Session Category"--}}
+{{--                                                  :searchable="true" :close-on-select="true">--}}
+{{--                                        </category>--}}
+{{--                                        <input type="hidden" name="category" :value="selectedCategory">--}}
+{{--                                        <span class="text-danger">{{$errors->first('category')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-sm-12">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label>SESSION TYPE</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-sm-12 ml-4">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <input type="radio" name="type" value="Physical"> Physical--}}
+{{--                                            </div>--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <input type="radio" name="type" value="Virtual"> Virtual--}}
+{{--                                            </div>--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <input type="radio" name="type" value="TOT"> TOT--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <span class="text-danger">{{$errors->first('type')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>SESSION START DATE</label>
+                                        <label>TRAINING START DATE</label>
                                         <input type="date" name="start_date" class="form-control" id="sessionStartDate" value="{{old('start_date')}}">
                                         <span class="text-danger">{{$errors->first('start_date')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>SESSION END DATE</label>
+                                        <label>TRAINING END DATE</label>
                                         <input type="date" name="end_date" class="form-control" id="sessionEndDate" value="{{old('end_date')}}">
                                         <span class="text-danger">{{$errors->first('end_date')}}</span>
                                     </div>
                                 </div>
+                                @if($trainers!='')
+                                    <div class="col-sm-12">
+                                        <div class="form-group" id="trainers">
+                                            <label>SELECT TRAINERS</label>
+                                            <multiselect :options="trainers" v-model="selectedTrainer"
+                                                         placeholder="Select Session Trainers" label="name" track-by="id"
+                                                         :searchable="true" :close-on-select="true"
+                                                         multiple>
+                                            </multiselect>
+                                            <input type="hidden" name="trainers[]" v-for="trainer in selectedTrainer"  :value="trainer.id">
+                                            <span class="text-danger">{{$errors->first('trainers[]')}}</span>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="trainingType">
+                                        <label>TRAINING TYPE</label>
+                                        <multiselect v-model="selectedTraining" :options="trainings"
+                                                     placeholder="Select Training"
+                                                     :searchable="true" :close-on-select="true">
+                                        </multiselect>
+                                        <input type="hidden" name="training" :value="selectedTraining">
+                                        <span class="text-danger">{{$errors->first('training')}}</span>
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>SESSION ABOUT</label>
+                                        <label>TRAINING DESCRIPTION</label>
                                         <textarea name="about" class="form-control" placeholder="Short Session Description" cols="30" rows="5">{{old('about')}}</textarea>
                                         <span class="text-danger">{{$errors->first('about')}}</span>
                                     </div>
@@ -209,6 +245,37 @@
 
         new Vue({
             components: {
+                Multiselect: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedTraining: [],
+                    trainings: [
+                        'Physical',
+                        'Virtual',
+                        'TOT',
+                    ],
+                }
+            },
+        }).$mount('#training')
+
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedTraining: [],
+                    trainings: [
+                        'Public',
+                        'Private',
+                    ],
+                }
+            },
+        }).$mount('#trainingType')
+
+        new Vue({
+            components: {
                 county: window.VueMultiselect.default,
             },
             data() {
@@ -226,23 +293,6 @@
             methods:{
             },
         }).$mount('#county')
-        new Vue({
-            components: {
-                Multiselect: window.VueMultiselect.default,
-            },
-            data() {
-                return {
-                    selectedType: null,
-                    types: [
-                        'Private',
-                        'Public',
-                    ],
-                }
-            },
-            methods:{
-                getSessionType(){},
-            },
-        }).$mount('#session_type')
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -311,7 +361,7 @@
                     selectedCategory: null,
                     categories: [
                         'Data Entry/Management','Virtual Assistant','Transcription',
-                        'Digital Marketing/Ecommerce','Content Writing and Translation'
+                        'Digital Marketing/Ecommerce','Content Writing and Translation', 'All Categories'
                     ],
                 }
             },

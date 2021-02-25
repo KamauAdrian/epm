@@ -7,7 +7,7 @@ $auth_admin = auth()->user();
             <table id="sessionsTable" class="table table-center mb-0 ">
                 <thead>
                 <tr>
-                    <th>Session</th>
+                    <th>Training</th>
                     <th>Category</th>
                     <th>Start Date</th>
                     <th>End Date</th>
