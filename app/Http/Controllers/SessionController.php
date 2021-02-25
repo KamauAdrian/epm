@@ -52,6 +52,7 @@ class SessionController extends Controller
      */
     public function store(Request $request,$id)
     {
+        dd($request->all());
         $messages = [
             'name.required'=>'Hey Session Name Please',
             'type.required'=>'Please Select The Session Mode',

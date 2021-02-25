@@ -15,7 +15,6 @@
                 <?php
                 $auth_admin = auth()->user();
                 ?>
-
                 <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/new/announcement')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
