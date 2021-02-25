@@ -751,7 +751,7 @@
 {{--                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>--}}
                                                 <h5 class="mb-2">{{$announcement->title}}</h5>
 {{--                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>--}}
-                                                <div class="d-inline-block text-truncate" style="max-height: 100px;">{{$announcement->description}}</div>
+                                                <div class="d-inline-block text-truncate" style="max-height: 100px; max-width: 100%;">{{$announcement->description}}</div>
                                                 <div style="color: grey;font-size: 12px; position: absolute; bottom: 0;" class="mt-4 mb-2">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
                                             </div>
                                         </div>
