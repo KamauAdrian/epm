@@ -10,15 +10,40 @@
     ?>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-12">
-                <div class="text-center">
-                    <h1 class="f-w-400">Employee Leave Form</h1>
-                </div>
+            <div class="col-sm-6 d-flex align-items-center mb-4">
+                <h1 class="d-inline-block mb-0 font-weight-normal">Employee Leave Application</h1>
             </div>
+            @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager")
+                <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
+                    @if($application->status==0)
+                        <a href="{{url('/adm/'.$auth_admin->id.'/reject/employee/leave/'.$application->id)}}">
+                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Reject Leave</button>
+                        </a>
+                        <a href="{{url('/adm/'.$auth_admin->id.'/accept/employee/leave/'.$application->id)}}">
+                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Accept Leave</button>
+                        </a>
+                    @elseif($application->status==1)
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-success" disabled>Leave Accepted</button>
+                    @else
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-success" disabled>Leave Rejected</button>
+                    @endif
+                </div>
+            @endif
+            @if($auth_admin->role->name == "Trainer")
+                <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
+                    @if($application->status==0)
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-success" disabled>Pending</button>
+                    @elseif($application->status==1)
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-success" disabled>Leave Accepted</button>
+                    @else
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-success" disabled>Leave Rejected</button>
+                    @endif
+                </div>
+            @endif
+        </div>
             <?php
                 $types = '';
             ?>
-
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -28,15 +53,15 @@
                                 <form action="#!">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <p>The annual leave entitlement is in accordance with Kenya labour law. As an Employee of eMobilis you are entitled to twenty-one (21) working days of leave plus any public holidays in compliance with Kenya Labour Laws.</p>
-                                                <br />
-                                                <p>According to Section 29 of Employment Act, 2007, female employees shall be entitled to 3 Calendar months maternity leave on full pay in addition to any period of annual leave.</p>
-                                                <br />
-                                                <p>Male employees shall be entitled 2 Calendar weeks paternity leave with full pay. And it cannot be extended without salary deduction.  The employee shall be required to produce a certificate of the expectant partner medical condition from a qualified medical practitioner or midwife.</p>
-                                            </div>
-                                        </div>
+{{--                                        <div class="col-md-12">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <p>The annual Leave entitlement is in accordance with Kenya labour law. As an Employee of eMobilis you are entitled to twenty-one (21) working days of Leave plus any public holidays in compliance with Kenya Labour Laws.</p>--}}
+{{--                                                <br />--}}
+{{--                                                <p>According to Section 29 of Employment Act, 2007, female employees shall be entitled to 3 Calendar months maternity Leave on full pay in addition to any period of annual Leave.</p>--}}
+{{--                                                <br />--}}
+{{--                                                <p>Male employees shall be entitled 2 Calendar weeks paternity Leave with full pay. And it cannot be extended without salary deduction.  The employee shall be required to produce a certificate of the expectant partner medical condition from a qualified medical practitioner or midwife.</p>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Full Name</label>
@@ -157,7 +182,7 @@
                                         @endif
 {{--                                        <div class="col-md-12">--}}
 {{--                                            <div class="form-group">--}}
-{{--                                                <label>If you have taken sick off or study leave, kindly attach doctors note or examination timetable</label>--}}
+{{--                                                <label>If you have taken sick off or study Leave, kindly attach doctors note or examination timetable</label>--}}
 {{--                                                <input type="file" name="applicant_sick_off_study_leave_proof" class="form-control">--}}
 {{--                                            </div>--}}
 {{--                                        </div>--}}

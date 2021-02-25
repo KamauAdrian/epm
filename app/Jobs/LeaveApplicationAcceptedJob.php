@@ -2,12 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Mail\LeaveApplicationAccepted;
+use App\Mail\TaskAttachmentAdded;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class LeaveApplicationAcceptedJob implements ShouldQueue
 {
@@ -18,9 +21,10 @@ class LeaveApplicationAcceptedJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    private $params;
+    public function __construct($params)
     {
-        //
+        $this->params = $params;
     }
 
     /**
@@ -30,6 +34,9 @@ class LeaveApplicationAcceptedJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        //send email
+        $email=$this->params['email'];
+        $application=$this->params['application'];
+        Mail::to($email)->send(new LeaveApplicationAccepted($application));
     }
 }

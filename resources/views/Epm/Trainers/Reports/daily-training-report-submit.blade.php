@@ -78,7 +78,9 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="radio" name="training_type" value="Physical Training"> Physical Training
-                                        <span class="text-danger">{{$errors->first('total_trainees')}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="radio" name="training_type" value="TOT"> TOT
                                     </div>
                                 </div>
                                 <div class="col-md-12">

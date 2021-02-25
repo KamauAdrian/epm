@@ -117,7 +117,7 @@
                         <div class="row" >
                             <div class="col-md-6">
                                 {{--                                    <a href="#!">--}}
-                                <a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/leave/applications')}}">
+                                <a href="{{url('/adm/'.$auth_admin->id.'/view/leave/applications')}}">
                                     <button type="button" class="btn btn-sm btn-outline-info" style="font-size: 14px; width: 150px;"><p class="align-self-center">View <br> Reports</p></button>
                                 </a>
                             </div>

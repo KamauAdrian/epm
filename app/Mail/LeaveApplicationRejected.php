@@ -16,9 +16,10 @@ class LeaveApplicationRejected extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public  $data;
+    public function __construct($application)
     {
-        //
+        $this->data = $application;
     }
 
     /**
@@ -28,6 +29,7 @@ class LeaveApplicationRejected extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $subject = "Leave Application Rejected";
+        return $this->view('Emails.Leave.rejected')->subject($subject);
     }
 }

@@ -30,15 +30,27 @@
                         <div class="table-responsive">
                             <table id="leavesTableList" class="table table-center mb-0 ">
                                 <thead>
-                                <tr>
-                                    <th>Applications</th>
-                                    <th>Date</th>
-                                    <th class="text-right">Actions</th>
-                                </tr>
+                                    <tr>
+                                        <th>Applications</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
                                 </thead>
                                 @if($applications!='')
                                     <tbody>
                                     @foreach($applications as $application)
+                                        <?php
+                                        $format_date = date('l dS M Y',strtotime($application->application_date));
+                                        $status = "";
+                                        if ($application->status == 0){
+                                            $status = "Pending";
+                                        }elseif ($application->status == 1){
+                                            $status = "Accepted";
+                                        }else{
+                                            $status = "Rejected";
+                                        }
+                                        ?>
                                         <tr>
                                             <td>
                                                 <div class="media">
@@ -48,8 +60,10 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <?php $format_date = date('l dS M Y',strtotime($application->application_date)); ?>
                                                 {{$format_date}}
+                                            </td>
+                                            <td>
+                                                {{$status}}
                                             </td>
                                             @if($auth_admin->role->name != 'Su Admin')
                                                 <td class="text-right">
@@ -66,9 +80,10 @@
                                                         <a href="{{url('/adm/'.$auth_admin->id.'/view/leave/application/application_id='.$application->id)}}" class="btn btn-sm btn-outline-info" title="View">
                                                             <span><i class="fa fa-list"></i></span>
                                                         </a>
-                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="Edit">
-                                                            {{--                                                        <a href="{{url('/adm/edit/adm/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-info" title="Edit">--}}
-                                                            <span><i class="fa fa-pencil-alt"></i></span></a>
+{{--                                                        <a href="#!" class="btn btn-sm btn-outline-info" title="Edit">--}}
+{{--                                                            --}}{{--                                                        <a href="{{url('/adm/edit/adm/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-info" title="Edit">--}}
+{{--                                                            <span><i class="fa fa-pencil-alt"></i></span>--}}
+{{--                                                        </a>--}}
                                                         <a href="#!" class="btn btn-sm btn-outline-danger deleteAdmin" data-toggle="modal" data-target="#deleteAdmin" title="Delete">
                                                             {{--                                                        <a href="#!" data-url="{{url('/delete/admin/'.$admin->id.'/profile/role_id='.$role->id)}}" class="btn btn-sm btn-outline-danger deleteAdmin" data-toggle="modal" data-target="#deleteAdmin" title="Delete">--}}
                                                             <span><i class="fa fa-trash"></i></span>

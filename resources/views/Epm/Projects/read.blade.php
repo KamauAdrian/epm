@@ -1054,7 +1054,7 @@ console.log(response_task);
         // // // Check for unsaved data
         // window.onbeforeunload = function() {
         //     if (change.length() > 0) {
-        //         return 'There are unsaved changes. Are you sure you want to leave?';
+        //         return 'There are unsaved changes. Are you sure you want to Leave?';
         //     }
         // }
     </script>

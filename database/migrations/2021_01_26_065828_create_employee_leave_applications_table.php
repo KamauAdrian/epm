@@ -37,10 +37,11 @@ class CreateEmployeeLeaveApplicationsTable extends Migration
             $table->string('next_of_kin_email');
             $table->string('next_of_kin_phone');
             $table->string('general_comment_concern');
+            $table->string('status')->default(0);
+            $table->text('reason')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

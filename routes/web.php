@@ -274,13 +274,16 @@ Route::group(['middleware'=>'admin'],function (){
     //mentors
     Route::post('/save-mentor',[App\Http\Controllers\AdminController::class, 'mentor_save']);
 
-    //employee leave form
-    Route::get('/adm/{id}/apply/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_form']);
-    Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\AdminController::class,'employee_leave_applications']);
-    Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\AdminController::class,'trainer_leave_applications']);
-    Route::get('/adm/{id}/view/trainer/leave/applications',[App\Http\Controllers\AdminController::class,'adm_view_trainer_leave_applications']);
-    Route::get('/adm/{id}/view/leave/application/application_id={application_id}',[App\Http\Controllers\AdminController::class,'employee_leave_application']);
-    Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\AdminController::class,'employee_leave_request']);
+    //employee Leave form
+    Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\LeaveApplicationController::class,'index']);
+    Route::get('/adm/{id}/apply/employee/leave',[App\Http\Controllers\LeaveApplicationController::class,'create']);
+    Route::post('/adm/{id}/request/employee/leave',[App\Http\Controllers\LeaveApplicationController::class,'store']);
+    Route::get('/adm/{id}/view/leave/application/application_id={application_id}',[App\Http\Controllers\LeaveApplicationController::class,'show']);
+    Route::get('/adm/{id}/accept/employee/leave/{application_id}',[App\Http\Controllers\LeaveApplicationController::class,'accept_leave']);
+    Route::post('/adm/{id}/accept/employee/leave/{application_id}',[App\Http\Controllers\LeaveApplicationController::class,'accept_leave_save']);
+    Route::get('/adm/{id}/reject/employee/leave/{application_id}',[App\Http\Controllers\LeaveApplicationController::class,'reject_leave']);
+    Route::post('/adm/{id}/reject/employee/leave/{application_id}',[App\Http\Controllers\LeaveApplicationController::class,'reject_leave_save']);
+//    Route::get('/adm/{id}/view/Leave/applications',[App\Http\Controllers\AdminController::class,'employee_leave_applications']);
 
     //Awards
     Route::get('/adm/{id}/list/awards',[App\Http\Controllers\AwardController::class,'index']);

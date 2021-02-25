@@ -377,89 +377,13 @@ class AdminController extends Controller
 
     }
 
-    public function employee_leave_form($id){
-        if (Auth::user()->id == $id){
-            return view('Epm.Forms.leave-form');
-        }
-    }
-
     public function employee_leave_applications($id){
         if (Auth::user()->id == $id){
             $applications = EmployeeLeaveApplication::where('applicant_id',$id)->get();
-            return view('Epm.Forms.leave-applications');
+            return view('Epm.Forms.Leave-applications');
         }
     }
 
-    public function employee_leave_application($id,$application_id){
-        if (Auth::user()->id == $id){
-            $application = EmployeeLeaveApplication::find($application_id);
-            return view('Epm.Trainers.leave-application',compact('application'));
-        }
-    }
-
-    public function trainer_leave_applications($id){
-        if (Auth::user()->id == $id){
-            $applications = EmployeeLeaveApplication::where('applicant_id',$id)->get();
-            return view('Epm.Trainers.leave-applications',compact('applications'));
-        }
-    }
-
-    public function adm_view_trainer_leave_applications($id){
-        if (Auth::user()->id == $id){
-            $applications = EmployeeLeaveApplication::orderBy('created_at','desc')->get();
-            return view('Epm.Trainers.leave-applications',compact('applications'));
-        }
-    }
-
-    public function employee_leave_request(Request $request, $id){
-//dd($request->all());
-        $messeges = [
-            'leave_type.required'=>'Please select the leave type your are taking'
-        ];
-        $this->validate($request,[
-            'leave_type'=>['required'],
-        ],$messeges);
-        $leave_applicant = User::find($id);
-        $leave_application = new EmployeeLeaveApplication();
-        //applicant info
-        $leave_application->applicant_name = $leave_applicant->name;
-        $leave_application->applicant_id = $leave_applicant->id;
-        $leave_application->applicant_email = $leave_applicant->email;
-        $leave_application->applicant_phone = $leave_applicant->phone;
-        $leave_application->applicant_employee_number = $leave_applicant->employee_number;
-        $leave_application->application_date = $request->application_date;
-        $leave_application->leave_days = $request->leave_days;
-        $leave_application->other_leave_type = $request->other_leave_type;
-        $leave_application->leave_first_day = $request->leave_first_day;
-        $leave_application->leave_last_day = $request->leave_last_day;
-        $leave_application->applicant_duty_station = $request->applicant_duty_station;
-        $leave_application->applicant_maternity_leave_due_date = $request->applicant_maternity_leave_due_date;
-        //proof of sick off or study leave file upload (doctors note or exam timetable)
-        $fileName = '';
-        if ($request->hasFile('applicant_sick_off_study_leave_proof')){
-            $image = $request->file('applicant_sick_off_study_leave_proof');
-            if ($image->isValid()){
-                $fileName = $image->getClientOriginalName();
-            }
-            $image->move('LeaveApplications/Proof',$fileName);
-        }
-        $leave_application->applicant_sick_off_study_leave_proof = $fileName;
-        //colleague info (to take over responsibility)
-        $leave_application->colleague_name = $request->colleague_name;
-        $leave_application->colleague_email = $request->colleague_email;
-        $leave_application->colleague_phone = $request->colleague_phone;
-        $leave_application->colleague_designation = $request->colleague_designation;
-        $leave_application->colleague_duty_station = $request->colleague_duty_station;
-        $leave_application->next_of_kin_name = $request->next_of_kin_name;
-        $leave_application->next_of_kin_email = $request->next_of_kin_email;
-        $leave_application->next_of_kin_phone = $request->next_of_kin_phone;
-        $leave_application->general_comment_concern = $request->general_comment_concern;
-
-        $leave_application->save();
-
-        return redirect('/adm/'.$id.'/view/leave/applications')->with('success','leave Application Success');
-
-    }
 //Reports
     public function reports_templates($id){
         $admin = User::find($id);
@@ -519,12 +443,7 @@ class AdminController extends Controller
         return response()->json($result);
     }
 
-    public function report_template_create($id){
-        $admin = User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            return view('Epm.Reports.template-create');
-        }
-    }
+
     public function report_template_create_pmo($id){
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){

@@ -73,7 +73,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Evaluation Date</label>
-                                        <input type="date" name="date" class="form-control" required>
+                                        <?php $date = date('Y-m-d') ?>
+                                        <input type="date" name="date" class="form-control" value="{{$date}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
