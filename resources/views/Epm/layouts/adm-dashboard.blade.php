@@ -744,14 +744,15 @@
                                     @else
                                         <img class="card-img-top"  style="height: 250px" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
                                     @endif
-                                    <div class="card-header">
+                                    <div class="card-header" style="height: 200px">
                                         <div class="media">
 {{--                                            <img src="{{url('assets/images/uikit/card-icon-1.svg')}}" alt="images" class="img-fluid">--}}
-                                            <div style="height: 150px" class="media-body ml-3">
+                                            <div class="media-body ml-3">
 {{--                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>--}}
                                                 <h5 class="mb-2">{{$announcement->title}}</h5>
 {{--                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>--}}
-                                                <div class="d-inline-block text-truncate" style="max-height: 100px; max-width: 100%;">{{$announcement->description}}</div>
+{{--                                                class="d-inline-block text-truncate" style="max-height: 100px; max-width: 100%;"--}}
+                                                <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">{{mb_strimwidth($announcement->description, 0, 120, "...")}}</div>
                                                 <div style="color: grey;font-size: 12px; position: absolute; bottom: 0;" class="mt-4 mb-2">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
                                             </div>
                                         </div>

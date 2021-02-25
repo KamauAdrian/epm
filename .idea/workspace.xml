@@ -15,6 +15,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Announcements/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Announcements/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -311,7 +313,7 @@
       <workItem from="1614157724467" duration="24147000" />
       <workItem from="1614226292194" duration="27432000" />
       <workItem from="1614256101398" duration="5019000" />
-      <workItem from="1614273853377" duration="851000" />
+      <workItem from="1614273853377" duration="5452000" />
     </task>
     <servers />
   </component>
@@ -384,10 +386,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614249648821" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614274541303">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614277408418">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614274541303" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614277408418" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

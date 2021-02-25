@@ -78,9 +78,12 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$announcement_id)
     {
-        //
+        $announcement = Announcement::find($announcement_id);
+        if ($announcement){
+            return view("Epm.Announcements.edit",compact("announcement"));
+        }
     }
 
     /**
@@ -90,9 +93,38 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$announcement_id)
     {
-        //
+        $announcement = Announcement::find($announcement_id);
+        if ($announcement){
+            $type_image = $announcement->image;
+            if ($type_image){
+                $fileName = '';
+                $fileUrl = '';
+                if ($request->hasFile('image')){
+                    $file = $request->file('image');
+                    $fileName = $file->getClientOriginalName();
+                    $path = $file->move('Announcement/images',$fileName);
+                    $fileUrl = url("/")."/".$path->getPathname();
+                }
+                $data = [
+                    'title'=>$request->title,
+                    'description'=>$request->description,
+                    'announcement_link'=>$request->announcement_link,
+                    'image'=>$fileName,
+                    'image_url'=>$fileUrl,
+                ];
+                $announcement->update($data);
+            }else{
+                $data = [
+                    'title'=>$request->title,
+                    'description'=>$request->description,
+                    'announcement_link'=>$request->announcement_link,
+                ];
+                $announcement->update($data);
+            }
+            return redirect("/adm/".$id."/list/announcements")->with("success","Announcement Updated Successfully");
+        }
     }
 
     /**

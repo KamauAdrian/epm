@@ -51,7 +51,7 @@
                                                 <div class="media">
                                                     <img src="{{url($image)}}" alt="images" class="img-fluid avtar avtar-s">
                                                     <div class="media-body ml-3 align-self-center">
-                                                        <a target="_blank" href="{{$announcement->link}}">
+                                                        <a target="_blank" href="{{$announcement->announcement_link}}">
                                                             <h5 class="mb-1">{{$announcement->title}}</h5>
                                                         </a>
                                                     </div>
@@ -65,7 +65,7 @@
                                             @if($auth_admin->role->name != 'Su Admin')
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a target="_blank" href="{{url($announcement->link)}}" class="btn btn-sm btn-outline-info" title="View">
+                                                        <a target="_blank" href="{{$announcement->announcement_link}}" class="btn btn-sm btn-outline-info" title="View">
                                                             <span><i class="fa fa-list"></i></span>
                                                         </a>
                                                     </div>
@@ -73,7 +73,7 @@
                                             @else
                                                 <td class="text-right">
                                                     <div class="float-right">
-                                                        <a target="_blank" href="{{url($announcement->link)}}" class="btn btn-sm btn-outline-info" title="View">
+                                                        <a target="_blank" href="{{$announcement->announcement_link}}" class="btn btn-sm btn-outline-info" title="View">
                                                             <span><i class="fa fa-list"></i></span>
                                                         </a>
                                                         <a href="{{url('/adm/'.$auth_admin->id.'/edit/announcement/'.$announcement->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
