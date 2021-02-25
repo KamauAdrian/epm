@@ -2,18 +2,10 @@
 <?php $auth_admin = auth()->user(); ?>
 <div class="m-header">
     <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-
-    @if($auth_admin->role->name == 'Project Manager')
-        <a href="{{url('/adm/pmo/dashboard')}}" class="b-brand">
-            <!-- ========   change your logo hear   ============ -->
-            <img src="{{url('assets/images/epm-logo.jpeg')}}" alt="" class="logo">
-        </a>
-    @else
-        <a href="{{url('/adm/main/dashboard')}}" class="b-brand">
-            <!-- ========   change your logo hear   ============ -->
-            <img src="{{url('assets/images/epm-logo.jpeg')}}" alt="" class="logo">
-        </a>
-    @endif
+    <a href="{{url('/adm/main/dashboard')}}" class="b-brand">
+        <!-- ========   change your logo hear   ============ -->
+        <img src="{{url('assets/images/epm-logo.jpeg')}}" alt="" class="logo">
+    </a>
 
     <a href="#!" class="mob-toggler">
         <i class="feather icon-more-vertical"></i>
