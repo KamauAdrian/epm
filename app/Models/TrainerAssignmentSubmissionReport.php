@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TrainerAssignmentSubmissionReport extends Model
 {
     use HasFactory;
+
+    public function owner(){
+        return $this->belongsTo("App\Models\User",'trainer_id');
+    }
 }

@@ -15,13 +15,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerDailyAttedanceReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerDailyAttedanceReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TrainerDailyAttendanceReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainerDailyAttendanceReport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_054515_create_trainer_daily_attendance_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_054515_create_trainer_daily_attendance_reports_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-report-submit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerAssignmentSubmissionReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerAssignmentSubmissionReportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TrainerAssignmentSubmissionReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainerAssignmentSubmissionReport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_071214_create_trainer_assignment_submission_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_071214_create_trainer_assignment_submission_reports_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-assignment-submission-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-assignment-submission-reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/assignment-submission-report-submit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,7 +316,7 @@
       <workItem from="1614226292194" duration="27432000" />
       <workItem from="1614256101398" duration="5019000" />
       <workItem from="1614273853377" duration="7531000" />
-      <workItem from="1614310006373" duration="5396000" />
+      <workItem from="1614310006373" duration="7310000" />
     </task>
     <servers />
   </component>
@@ -391,10 +389,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614249648821" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614315197972">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614316829385">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614315197972" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614316829385" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

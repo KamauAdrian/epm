@@ -23,39 +23,39 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="reportsTableList" class="table table-center mb-0 ">
-                                @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager")
-                                    <thead>
+                                <thead>
                                     <tr> <th>Reports</th> <th>Date</th> <th>Training Job Category</th> <th class="text-right">Actions</th> </tr>
-                                    </thead>
-                                @endif
-                                @if($auth_admin->role->name == 'Trainer')
-                                    <thead>
-                                    <tr> <th>Reports</th> <th>Date</th> <th>Training Job Category</th> </tr>
-                                    </thead>
-                                @endif
+                                </thead>
                                 @if($reports)
                                     <tbody>
                                     @foreach($reports as $report)
                                         <?php
-                                        $format_date = date('l dS M Y',strtotime($report->date));
+                                        $format_date = date('l dS M Y',strtotime($report->created_at));
+                                        $trainer = $report->owner;
 //                                        dd($report);
                                         ?>
                                         <tr>
                                             <td>
                                                 <div class="media">
                                                     <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$report->name}}</h5>
-                                                        <p class="mb-0">{{$report->email}}</p>
+                                                        <h5 class="mb-1">{{$trainer->name}}</h5>
+                                                        <p class="mb-0">{{$trainer->email}}</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>{{$format_date}}</td>
-                                            <td>{{$report->speciality}}</td>
+                                            <td>{{$trainer->speciality}}</td>
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                                 <td class="text-right">
                                                     <div class="float-right">
                                                         <a href="{{url("$report->assignment_link")}}" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
                                                         <a href="#!" class="btn btn-sm btn-outline-danger" title="Delete Report"><span><i class="fa fa-trash"></i></span></a>
+                                                    </div>
+                                                </td>
+                                            @else
+                                                <td class="text-right">
+                                                    <div class="float-right">
+                                                        <a href="{{url("$report->assignment_link")}}" class="btn btn-sm btn-outline-info" title="Download Report"><span><i class="fa fa-download"></i></span></a>
                                                     </div>
                                                 </td>
                                             @endif

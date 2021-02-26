@@ -19,10 +19,12 @@ class TrainerAssignmentSubmissionReportController extends Controller
         $admin = User::find($id);
         if ($admin){
             if ($admin->role->name == "Su Admin"){
-                $reports = DB::table('trainer_assignment_submission_reports')->orderBy('created_at','desc')->get();
+//                $reports = DB::table('trainer_assignment_submission_reports')->orderBy('created_at','desc')->get();
+                $reports = TrainerAssignmentSubmissionReport::orderBy('created_at','desc')->get();
                 return view('Epm.Reports.trainer-assignment-submission-reports',compact('reports'));
             }elseif ($admin->role->name == "Trainer"){
-                $reports = DB::table('trainer_assignment_submission_reports')->orderBy('created_at','desc')->where('trainer_id',$admin->id)->get();
+//                $reports = DB::table('trainer_assignment_submission_reports')->orderBy('created_at','desc')->where('trainer_id',$admin->id)->get();
+                $reports = TrainerAssignmentSubmissionReport::orderBy('created_at','desc')->where('trainer_id',$admin->id)->get();
                 return view('Epm.Reports.trainer-assignment-submission-reports',compact('reports'));
             }
         }
@@ -51,16 +53,11 @@ class TrainerAssignmentSubmissionReportController extends Controller
      */
     public function store(Request $request,$id)
     {
+//        dd($request->all());
         $trainer = User::find($id);
         if ($trainer){
             $assignment_submission_report = new TrainerAssignmentSubmissionReport();
-            $assignment_submission_report->name = $trainer->name;
-            $assignment_submission_report->email = $trainer->email;
-            $assignment_submission_report->phone = $trainer->phone;
-            $assignment_submission_report->employee_number = $trainer->employee_number;
-            $assignment_submission_report->date = $request->date;
             $assignment_submission_report->trainer_id = $trainer->id;
-            $assignment_submission_report->speciality = $request->training_category;
             $fileName = '';
             $fileUrl = '';
             if ($request->hasFile('assignment')){

@@ -15,14 +15,9 @@ class CreateTrainerAssignmentSubmissionReportsTable extends Migration
     {
         Schema::create('trainer_assignment_submission_reports', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('employee_number');
-            $table->date('date');
             $table->integer('trainer_id')->unsigned();
-            $table->string('speciality');
             $table->string('assignment');
+            $table->string('assignment_link');
             $table->timestamps();
         });
     }
