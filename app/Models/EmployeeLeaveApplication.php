@@ -15,6 +15,9 @@ class EmployeeLeaveApplication extends Model
     ];
 
     public function types(){
-        return $this->hasMany('');
+        return $this->hasMany("App\Models\EmployeeLeaveType","leave_id");
+    }
+    public function owner(){
+        return $this->belongsTo("App\Models\User","applicant_id");
     }
 }

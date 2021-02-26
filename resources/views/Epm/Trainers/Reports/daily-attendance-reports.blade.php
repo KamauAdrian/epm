@@ -37,12 +37,14 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <div class="media">
-                                                    <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$trainer->name}}</h5>
-                                                        <p class="mb-0">{{$trainer->email}}</p>
+                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/report/report_id='.$report->id)}}">
+                                                    <div class="media" style="color: grey;">
+                                                        <div class="media-body ml-3 align-self-center">
+                                                            <h5 class="mb-1">{{$trainer->name}}</h5>
+                                                            <p class="mb-0">{{$trainer->email}}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </td>
                                             <td>{{$format_date}}</td>
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')

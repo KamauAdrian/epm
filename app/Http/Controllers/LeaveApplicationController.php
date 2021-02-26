@@ -7,6 +7,7 @@ use App\Jobs\LeaveApplicationRejectedJob;
 use App\Mail\LeaveApplicationAccepted;
 use App\Mail\LeaveApplicationRejected;
 use App\Models\EmployeeLeaveApplication;
+use App\Models\EmployeeLeaveType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +25,11 @@ class LeaveApplicationController extends Controller
         $admin = User::find($id);
         if ($admin){
             if ($admin->role->name == "Su Admin" || $admin->role->name == "Project Manager"){
-                $applications = EmployeeLeaveApplication::orderBy('created_at','desc')->get();
+                $applications = EmployeeLeaveApplication::orderBy("created_at","desc")->get();
                 return view('Epm.Trainers.leave-applications',compact('applications'));
             }
             if ($admin->role->name == "Trainer"){
-                $applications = EmployeeLeaveApplication::where('applicant_id',$id)->get();
+                $applications = EmployeeLeaveApplication::orderBy("created_at","desc")->where('applicant_id',$id)->get();
                 return view('Epm.Trainers.leave-applications',compact('applications'));
             }
         }
@@ -55,54 +56,63 @@ class LeaveApplicationController extends Controller
      */
     public function store(Request $request,$id)
     {
-        //dd($request->all());
+//        dd($request->all());
+        $leave_applicant = User::find($id);
         $messeges = [
             'leave_type.required'=>'Please select the Leave type your are taking'
         ];
         $this->validate($request,[
             'leave_type'=>['required'],
         ],$messeges);
-        $leave_applicant = User::find($id);
-        $leave_application = new EmployeeLeaveApplication();
-        //applicant info
-        $leave_application->applicant_name = $leave_applicant->name;
-        $leave_application->applicant_id = $leave_applicant->id;
-        $leave_application->applicant_email = $leave_applicant->email;
-        $leave_application->applicant_phone = $leave_applicant->phone;
-        $leave_application->applicant_employee_number = $leave_applicant->employee_number;
-        $leave_application->application_date = $request->application_date;
-        $leave_application->leave_days = $request->leave_days;
-        $leave_application->other_leave_type = $request->other_leave_type;
-        $leave_application->leave_first_day = $request->leave_first_day;
-        $leave_application->leave_last_day = $request->leave_last_day;
-        $leave_application->applicant_duty_station = $request->applicant_duty_station;
-        $leave_application->applicant_maternity_leave_due_date = $request->applicant_maternity_leave_due_date;
-        //proof of sick off or study Leave file upload (doctors note or exam timetable)
-        $fileName = '';
-        if ($request->hasFile('applicant_sick_off_study_leave_proof')){
-            $image = $request->file('applicant_sick_off_study_leave_proof');
-            if ($image->isValid()){
-                $fileName = $image->getClientOriginalName();
+        if ($leave_applicant){
+            $leave_application = new EmployeeLeaveApplication();
+            //applicant info
+            $leave_application->applicant_id = $leave_applicant->id;
+            $leave_types = $request->leave_type;
+            $leave_application->leave_days = $request->leave_days;
+            $leave_application->other_leave_type = $request->other_leave_type;
+            $leave_application->leave_first_day = $request->leave_first_day;
+            $leave_application->leave_last_day = $request->leave_last_day;
+            $leave_application->applicant_duty_station = $request->applicant_duty_station;
+            $leave_application->applicant_maternity_leave_due_date = $request->applicant_maternity_leave_due_date;
+            //proof of sick off or study Leave file upload (doctors note or exam timetable)
+            $fileName = '';
+            if ($request->hasFile('applicant_sick_off_study_leave_proof')){
+                $image = $request->file('applicant_sick_off_study_leave_proof');
+                if ($image->isValid()){
+                    $fileName = $image->getClientOriginalName();
+                }
+                $image->move('LeaveApplications/Proof',$fileName);
             }
-            $image->move('LeaveApplications/Proof',$fileName);
+            $leave_application->applicant_sick_off_study_leave_proof = $fileName;
+            //colleague info (to take over responsibility)
+            $leave_application->colleague_name = $request->colleague_name;
+            $leave_application->colleague_email = $request->colleague_email;
+            $leave_application->colleague_phone = $request->colleague_phone;
+            $leave_application->colleague_designation = $request->colleague_designation;
+            $leave_application->colleague_duty_station = $request->colleague_duty_station;
+            $leave_application->next_of_kin_name = $request->next_of_kin_name;
+            $leave_application->next_of_kin_email = $request->next_of_kin_email;
+            $leave_application->next_of_kin_phone = $request->next_of_kin_phone;
+            $leave_application->general_comment_concern = $request->general_comment_concern;
+            $leave_application->status = 0;
+            $types = [];
+            if ($leave_types!=null){
+                foreach ($leave_types as $leave_type){
+                    $types[] = $leave_type;
+                }
+            }
+            $leave_type_request_saved = $leave_application->save();
+            if ($leave_type_request_saved){
+                foreach ($types as $type){
+                    $new_type = new EmployeeLeaveType();
+                    $new_type->name = $type;
+                    $new_type->leave_id = $leave_application->id;
+                    $new_type->save();
+                }
+                return redirect('/adm/'.$id.'/view/leave/applications')->with('success','Leave Application Success');
+            }
         }
-        $leave_application->applicant_sick_off_study_leave_proof = $fileName;
-        //colleague info (to take over responsibility)
-        $leave_application->colleague_name = $request->colleague_name;
-        $leave_application->colleague_email = $request->colleague_email;
-        $leave_application->colleague_phone = $request->colleague_phone;
-        $leave_application->colleague_designation = $request->colleague_designation;
-        $leave_application->colleague_duty_station = $request->colleague_duty_station;
-        $leave_application->next_of_kin_name = $request->next_of_kin_name;
-        $leave_application->next_of_kin_email = $request->next_of_kin_email;
-        $leave_application->next_of_kin_phone = $request->next_of_kin_phone;
-        $leave_application->general_comment_concern = $request->general_comment_concern;
-        $leave_application->status = 0;
-
-        $leave_application->save();
-
-        return redirect('/adm/'.$id.'/view/leave/applications')->with('success','Leave Application Success');
-
     }
 
     /**
@@ -114,7 +124,9 @@ class LeaveApplicationController extends Controller
     public function show($id,$application_id)
     {
         if (Auth::user()->id == $id){
+
             $application = EmployeeLeaveApplication::find($application_id);
+
             return view('Epm.Trainers.leave-application',compact('application'));
         }
     }

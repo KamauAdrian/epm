@@ -41,7 +41,8 @@
                                     <tbody>
                                     @foreach($applications as $application)
                                         <?php
-                                        $format_date = date('l dS M Y',strtotime($application->application_date));
+                                        $format_date = date('l dS M, Y',strtotime($application->created_at));
+                                        $applicant = $application->owner;
                                         $status = "";
                                         if ($application->status == 0){
                                             $status = "Pending";
@@ -53,11 +54,13 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <div class="media">
-                                                    <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$application->applicant_name}}</h5>
+                                                <a href="{{url('/adm/'.$auth_admin->id.'/view/leave/application/application_id='.$application->id)}}">
+                                                    <div class="media" style="color: grey">
+                                                        <div class="media-body ml-3 align-self-center">
+                                                            <h5 class="mb-1">{{$applicant->name}}</h5>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </td>
                                             <td>
                                                 {{$format_date}}

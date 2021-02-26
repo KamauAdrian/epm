@@ -37,32 +37,31 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" name="applicant_name" class="form-control" value="{{$auth_admin->name}}" disabled>
+                                                <input type="text" class="form-control" value="{{$auth_admin->name}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input type="email" name="applicant_email" class="form-control" value="{{$auth_admin->email}}" disabled>
+                                                <input type="email" class="form-control" value="{{$auth_admin->email}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input type="text" name="applicant_phone" class="form-control" value="{{$auth_admin->phone}}" disabled>
+                                                <input type="text" class="form-control" value="{{$auth_admin->phone}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Employee Number</label>
-                                                <input type="text" name="applicant_employee_number" class="form-control" value="{{$auth_admin->employee_number}}" disabled>
+                                                <input type="text" class="form-control" value="{{$auth_admin->employee_number}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Date of Leave Application</label>
-                                                <?php $application_date = date('Y-m-d'); ?>
-                                                <input type="date" name="application_date" class="form-control" value="{{$application_date}}" readonly>
+                                                <input type="date" class="form-control" value="{{date('Y-m-d')}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

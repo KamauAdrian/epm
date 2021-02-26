@@ -7,6 +7,13 @@
 @section('content')
     <?php
     $auth_admin = auth()->user();
+    $applicant = $application->owner;
+    $types = $application->types;
+    $names = [];
+    foreach ($types as $type){
+        $names [] = $type->name;
+    }
+    $array_string = implode(", ",$names);
     ?>
     <div class="col-md-12">
         <div class="row">
@@ -41,9 +48,6 @@
                 </div>
             @endif
         </div>
-            <?php
-                $types = '';
-            ?>
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -65,89 +69,49 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" class="form-control" value="{{$application->applicant_name}}" readonly>
+                                                <input type="text" class="form-control" value="{{$applicant->name}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input type="email" class="form-control" value="{{$application->applicant_email}}" readonly>
+                                                <input type="email" class="form-control" value="{{$applicant->email}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input type="text" class="form-control" value="{{$application->applicant_phone}}" readonly>
+                                                <input type="text" class="form-control" value="{{$applicant->phone}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Employee Number</label>
-                                                <input type="text" class="form-control" value="{{$application->applicant_employee_number}}" readonly>
+                                                <input type="text" class="form-control" value="{{$applicant->employee_number}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Date of Leave Application</label>
-                                                <input type="date" name="application_date" class="form-control" value="{{$application->application_date}}" readonly>
+                                                <input type="date" name="application_date" class="form-control" value="{{date("Y-m-d",strtotime($application->created_at))}}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>What type of Leave are you taking?</label>
-                                                <div class="form-check">
-                                                    <input type="checkbox" value="Annual Leave" class="form-check-input" disabled>
-                                                    <label class="form-check-label">Annual Leave</label>
-                                                </div>
+                                                <label>Leave Type</label>
+                                                <input type="text" class="form-control" value="{{$array_string}}" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input type="checkbox" value="Sick Leave" class="form-check-input" disabled>
-                                                    <label class="form-check-label">Sick Leave</label>
+                                        @if($application->other_leave_type)
+                                            <div class="col-md-12" id="otherSpecify">
+                                                <div class="form-group">
+                                                    <label>Other Leave Type</label>
+                                                    <div class="form-check">
+                                                        <input type="text" class="form-control" name="other_leave_type" value="{{$application->other_leave_type}}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input type="checkbox" value="Maternity Leave" class="form-check-input" disabled>
-                                                    <label class="form-check-label">Maternity Leave</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input type="checkbox" value="Study Leave" class="form-check-input" disabled>
-                                                    <label class="form-check-label">Study Leave</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input type="checkbox" value="Off day" class="form-check-input" disabled>
-                                                    <label class="form-check-label">Off day - taken only if you worked during National Holiday</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="checkRole6" disabled>
-                                                    <label class="form-check-label">Other</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12" id="otherSpecify" style="display: none;">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input type="text" class="form-control" name="other_leave_type" placeholder="Please specify what type of leave you are taking">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endif
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>How many leave days are you taking?</label>
