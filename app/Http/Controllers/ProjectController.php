@@ -230,7 +230,8 @@ class ProjectController extends Controller
 
     public function collaborators($id){
         $collaborators = Project::find($id)->collaborators;
-        return response()->json($collaborators);
+        $response = response()->json($collaborators);
+        return $response;
     }
 
     public function invite_collaborators($project_id){

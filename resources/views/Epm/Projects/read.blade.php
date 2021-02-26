@@ -358,7 +358,7 @@
                                         <div project_id="{{$project->id}}" class="form-group" id="collaborators">
                                             <label>Assignee</label>
                                             <multiselect v-model="selectedPmo" :options="pmos"
-                                                         placeholder="Search" track-by="id" label="name"
+                                                         placeholder="Search" :track-by="trackBy" label="name"
                                                          :searchable="true" :close-on-select="true" multiple>
                                             </multiselect>
                                             <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
@@ -525,13 +525,38 @@
             $("#modalTaskDetailed").modal('hide');
             $("#modalUpdateAssignee").modal('show');
         }
+        $('#modalUpdateAssignee').on('show.bs.modal', function () {
+            // do something…
+            var formUpdateAssignees = document.getElementById('form-update-assignees');
+            formUpdateAssignees.onsubmit = function(event) {
+                $.ajaxSetup({
+                    header:$('meta[name="_token"]').attr('content')
+                })
+                event.preventDefault();
+                var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+                var task_id = $("#modal-modal-assignee-task-id").val();
+                var formData = $("#form-update-assignees").serializeArray();
+                $.ajax({
+                    url: '/adm/'+user_id+'/assign/task/'+task_id+'/new/collaborator',
+                    type: 'post',
+                    data:formData,
+                    success: function(response){
+                        $("#modalUpdateAssignee").modal('hide');
+                    }
+                });
+
+                // No back end to actually submit to!
+                // alert('Open the console to see the submit data!');
+                return true;
+            };
+        })
+
         $('#modalUpdateAssignee').on('hidden.bs.modal', function () {
             // do something…
             $("#modalTaskDetailed").modal('show');
         })
 
         function openModalUpdateDueDate(){
-          //  var userId = "{{Auth::user()->id}}";
            // var taskId = document.getElementById('modal-modal-date-task-id');
            // taskId.append(document.getElementById('modal-modal-task-task-id').innerText);
             $("#modalTaskDetailed").modal('hide');
@@ -551,6 +576,10 @@
             }, "slow");
         });
 
+        $('#modalTaskDetailed').on('hidden.bs.modal', function () {
+           {{--var url = "/adm/{{auth()->user()->id}}/view/project/2";--}}
+           {{-- window.location = url;--}}
+        });
         $('#modalTaskDetailed').on('show.bs.modal', function () {
 
             $('.task-comments').empty();
@@ -667,7 +696,7 @@ console.log(response_task);
 
                         var url = $(this).attr('data-url');
                         console.log(url);
-                        window.location=url;
+                        window.location = url;
                         // No back end to actually submit to!
                         // alert('Open the console to see the submit data!');
                         return true;
@@ -751,7 +780,6 @@ console.log(response_task);
             theme: 'snow'
         });
         var formComments = document.getElementById('form-comments');
-        var formUpdateAssignees = document.getElementById('form-update-assignees');
         var formUpdateDueDate = document.getElementById('form-update-due-date');
         var formAddAttachment = document.getElementById('form-add-attachment');
         var formAddLink = document.getElementById('form-add-link');
@@ -801,27 +829,6 @@ console.log(response_task);
                         scrollTop: $('#modalTaskDetailedComments')[0].scrollHeight
                     }, "slow");
 
-                }
-            });
-
-            // No back end to actually submit to!
-            // alert('Open the console to see the submit data!');
-            return true;
-        };
-        formUpdateAssignees.onsubmit = function(event) {
-            $.ajaxSetup({
-                header:$('meta[name="_token"]').attr('content')
-            })
-            event.preventDefault();
-            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
-            var task_id = $("#modal-modal-assignee-task-id").val();
-            var formData = $("#form-update-assignees").serializeArray();
-            $.ajax({
-                url: '/adm/'+user_id+'/assign/task/'+task_id+'/new/collaborator',
-                type: 'post',
-                data:formData,
-                success: function(response){
-                    $("#modalUpdateAssignee").modal('hide');
                 }
             });
 
@@ -985,12 +992,14 @@ console.log(response_task);
             },
             data() {
                 return {
+                    trackBy: 'id',
+                    initialValues: [2,9,13],
                     selectedPmo: null,
                     pmos: [],
                 }
             },
             mounted () {
-                this.getAssignees()
+                this.getAssignees();
             },
             methods:{
                 getAssignees(){
@@ -998,16 +1007,21 @@ console.log(response_task);
                         .get('/list/collaborators/'+this.$el.attributes.project_id.value)
                         .then(response => {
                             this.pmos = response.data;
-                            console.log(this.$el.attributes.project_id.value);
-                        })
-                        .catch(error => {
-                            console.log(error)
-                            this.errored = true
-                        })
-                        .finally(() => this.loading = true)
+                        }).catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        }).finally(() => this.loading = true);
                 },
             },
-        }).$mount('#collaborators')
+            watch: {
+                initialValues: {
+                    immediate: true,
+                    handler(values) {
+                        this.selectedPmo = this.pmos.filter(x => values.includes(x[this.trackBy]));
+                    }
+                }
+            },
+        }).$mount('#collaborators');
         $(document).ready(function (){
             $('#tableProjects').DataTable();
         });

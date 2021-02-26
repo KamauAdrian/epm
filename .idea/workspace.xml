@@ -15,14 +15,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LeaveApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LeaveApplicationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/EmployeeLeaveApplication.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/EmployeeLeaveApplication.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_26_065828_create_employee_leave_applications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_26_065828_create_employee_leave_applications_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Forms/leave-form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-assignment-submission-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/trainer-assignment-submission-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/Reports/daily-attendance-reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-application.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-application.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-applications.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/leave-applications.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +315,7 @@
       <workItem from="1614226292194" duration="27432000" />
       <workItem from="1614256101398" duration="5019000" />
       <workItem from="1614273853377" duration="7531000" />
-      <workItem from="1614310006373" duration="11357000" />
+      <workItem from="1614310006373" duration="23039000" />
     </task>
     <servers />
   </component>
