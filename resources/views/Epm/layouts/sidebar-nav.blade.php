@@ -63,7 +63,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
 {{--    @endif--}}
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Trainers</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Trainers</span></a>
             <ul class="pcoded-submenu">
                 @if($trainer_role)
                     <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
@@ -74,7 +74,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @elseif($auth_admin->role->name == 'Trainer')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Trainers</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Trainers</span></a>
             <ul class="pcoded-submenu">
                     <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
             </ul>

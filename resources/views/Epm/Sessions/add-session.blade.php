@@ -17,74 +17,74 @@
                         <?php
                         $auth_admin = auth()->user();
                         ?>
-                        @include('Epm.layouts.session-add')
-{{--                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/session')}}">--}}
-{{--                            @csrf--}}
-{{--                            <div class="row">--}}
-{{--                                <div class="col-sm-12">--}}
-{{--                                    <div class="form-group" id="training">--}}
-{{--                                        <label>SELECT TRAINING</label>--}}
-{{--                                        <multiselect id="multiSelectTraining" v-model="selectedTraining" :options="trainings"--}}
-{{--                                                  placeholder="Select Training"--}}
-{{--                                                  :searchable="true" :close-on-select="true">--}}
-{{--                                        </multiselect>--}}
-{{--                                        <input type="text" id="selected_training" name="training" :value="selectedTraining">--}}
-{{--                                        <span class="text-danger">{{$errors->first('training')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>TRAINING START DATE</label>--}}
-{{--                                        <input type="date" name="start_date" class="form-control" id="sessionStartDate" value="{{old('start_date')}}">--}}
-{{--                                        <span class="text-danger">{{$errors->first('start_date')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>TRAINING END DATE</label>--}}
-{{--                                        <input type="date" name="end_date" class="form-control" id="sessionEndDate" value="{{old('end_date')}}">--}}
-{{--                                        <span class="text-danger">{{$errors->first('end_date')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                @if($trainers!='')--}}
-{{--                                    <div class="col-sm-12">--}}
-{{--                                        <div class="form-group" id="trainers">--}}
-{{--                                            <label>SELECT TRAINERS</label>--}}
-{{--                                            <multiselect :options="trainers" v-model="selectedTrainer"--}}
-{{--                                                         placeholder="Select Session Trainers" label="name" track-by="id"--}}
-{{--                                                         :searchable="true" :close-on-select="true"--}}
-{{--                                                         multiple>--}}
-{{--                                            </multiselect>--}}
-{{--                                            <input type="hidden" name="trainers[]" v-for="trainer in selectedTrainer"  :value="trainer.id">--}}
-{{--                                            <span class="text-danger">{{$errors->first('trainers[]')}}</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                                <div class="col-sm-12">--}}
-{{--                                    <div class="form-group" id="trainingType">--}}
-{{--                                        <label>TRAINING TYPE</label>--}}
-{{--                                        <multiselect v-model="selectedTraining" :options="trainings"--}}
-{{--                                                     placeholder="Select Training"--}}
-{{--                                                     :searchable="true" :close-on-select="true">--}}
-{{--                                        </multiselect>--}}
-{{--                                        <input type="hidden" name="training" :value="selectedTraining">--}}
-{{--                                        <span class="text-danger">{{$errors->first('training')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-sm-12">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>TRAINING DESCRIPTION</label>--}}
-{{--                                        <textarea name="about" class="form-control" placeholder="Short Session Description" cols="30" rows="5">{{old('about')}}</textarea>--}}
-{{--                                        <span class="text-danger">{{$errors->first('about')}}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-sm-12">--}}
-{{--                                        <div class="form-group float-right">--}}
-{{--                                            <button type="submit" class="btn btn-outline-info float-right">Add Session</button>--}}
-{{--                                        </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
+{{--                        @include('Epm.layouts.session-add')--}}
+                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/save/session')}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="training">
+                                        <label>SELECT TRAINING</label>
+                                        <multiselect id="multiSelectTraining" v-model="selectedTraining" :options="trainings"
+                                                  placeholder="Select Training"
+                                                  :searchable="true" :close-on-select="true">
+                                        </multiselect>
+                                        <input type="text" id="selected_training" name="training" :value="selectedTraining">
+                                        <span class="text-danger">{{$errors->first('training')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>TRAINING START DATE</label>
+                                        <input type="date" name="start_date" class="form-control" id="sessionStartDate" value="{{old('start_date')}}">
+                                        <span class="text-danger">{{$errors->first('start_date')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>TRAINING END DATE</label>
+                                        <input type="date" name="end_date" class="form-control" id="sessionEndDate" value="{{old('end_date')}}">
+                                        <span class="text-danger">{{$errors->first('end_date')}}</span>
+                                    </div>
+                                </div>
+                                @if($trainers!='')
+                                    <div class="col-sm-12">
+                                        <div class="form-group" id="trainers">
+                                            <label>SELECT TRAINERS</label>
+                                            <multiselect :options="trainers" v-model="selectedTrainer"
+                                                         placeholder="Select Session Trainers" label="name" track-by="id"
+                                                         :searchable="true" :close-on-select="true"
+                                                         multiple>
+                                            </multiselect>
+                                            <input type="hidden" name="trainers[]" v-for="trainer in selectedTrainer"  :value="trainer.id">
+                                            <span class="text-danger">{{$errors->first('trainers[]')}}</span>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="trainingType">
+                                        <label>TRAINING TYPE</label>
+                                        <multiselect v-model="selectedTraining" :options="trainings"
+                                                     placeholder="Select Training"
+                                                     :searchable="true" :close-on-select="true">
+                                        </multiselect>
+                                        <input type="hidden" name="training" :value="selectedTraining">
+                                        <span class="text-danger">{{$errors->first('training')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>TRAINING DESCRIPTION</label>
+                                        <textarea name="about" class="form-control" placeholder="Short Session Description" cols="30" rows="5">{{old('about')}}</textarea>
+                                        <span class="text-danger">{{$errors->first('about')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                        <div class="form-group float-right">
+                                            <button type="submit" class="btn btn-outline-info float-right">Add Session</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -56,7 +56,7 @@ $auth_admin = auth()->user();
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="sessionsTable" class="table table-center mb-0 ">
+                            <table id="cmsListTable" class="table table-center mb-0 ">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
