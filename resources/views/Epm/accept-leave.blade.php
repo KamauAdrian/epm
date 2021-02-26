@@ -16,6 +16,7 @@
     <div class="col-md-12">
         <?php
         $auth_admin = auth()->user();
+        $applicant = $application->owner;
         ?>
         <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/accept/employee/leave/'.$application->id)}}">
             @csrf
@@ -23,25 +24,25 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Employee Name</label>
-                        <input type="text" value="{{$application->applicant_name}}" class="form-control" readonly>
+                        <input type="text" value="{{$applicant->name}}" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Employee Email Address</label>
-                        <input type="text" value="{{$application->applicant_email}}" class="form-control" readonly>
+                        <input type="text" value="{{$applicant->email}}" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Employee Phone</label>
-                        <input type="text" value="{{$application->applicant_phone}}" class="form-control" readonly>
+                        <input type="text" value="{{$applicant->phone}}" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Employee Employee Number</label>
-                        <input type="text" value="{{$application->applicant_employee_number}}" class="form-control" readonly>
+                        <input type="text" value="{{$applicant->employee_number}}" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="col-sm-12">
