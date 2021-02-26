@@ -39,7 +39,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="{{url('assets/images/eMobilis-E-shot-2.jpg')}}" style="width: 100%" alt="eMobilis">
+                            <img src="{{url('assets/images/eMobilis-Slider-7.jpg')}}" style="width: 100%" alt="eMobilis">
                         </div>
                         <div class="col-md-6">
                             <div class="row">
