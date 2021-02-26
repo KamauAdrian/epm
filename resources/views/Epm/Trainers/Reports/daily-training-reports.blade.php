@@ -11,7 +11,7 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="d-inline-block mb-0 font-weight-normal">Training Reports</h1>
+                <h1 class="d-inline-block mb-0 font-weight-normal">Daily Training Reports</h1>
                 @if($auth_admin->role->name == 'Trainer')
                     <a href="{{url('/adm/'.$auth_admin->id.'/submit/daily/training/report')}}" class="float-right">
                         <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Report</button>

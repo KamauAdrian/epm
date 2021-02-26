@@ -16,6 +16,7 @@
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Centers/view-center.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Centers/view-center.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +314,7 @@
       <workItem from="1614256101398" duration="5019000" />
       <workItem from="1614273853377" duration="7531000" />
       <workItem from="1614310006373" duration="33515000" />
-      <workItem from="1614371108076" duration="368000" />
+      <workItem from="1614371108076" duration="673000" />
     </task>
     <servers />
   </component>

@@ -49,7 +49,9 @@
                     <h1 class="d-inline-block mb-0 font-weight-normal">{{$project->name}}</h1>
                 </div>
                 <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
-{{--                    <p>Due {{date('l dS M Y',strtotime($project->due_date))}}</p>--}}
+                    <a href="{{url('/adm/'.$auth_admin->id.'/project/'.$project->id.'/overview')}}">
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Work Stream Overview</button>
+                    </a>
                     <a href="{{url('/adm/'.$auth_admin->id.'/edit/project/'.$project->id)}}">
                         <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Invite Teammates</button>
                     </a>
@@ -633,7 +635,7 @@
                         var childAttachmentDiv="";
                         for (x = 0; x < temparray.length; x++) {
                             var attachment = temparray[x];
-                            childAttachmentDiv += '<div id="attachment-'+attachment.id+'" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" class="attachment-download" data-url="'+attachment.url+'"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon attachment-download" data-url="'+attachment.url+'"><i class="fa fa-download"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="'+attachment.id+'"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
+                            childAttachmentDiv += '<div id="attachment-'+attachment.id+'" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" title="'+attachment.full_name+'" class="attachment-download" data-url="'+attachment.url+'"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon attachment-download" data-url="'+attachment.url+'"><i class="fa fa-download"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="'+attachment.id+'"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
                         }
                         rowAttachmentDiv +=childAttachmentDiv + '</div>';
                         attachmentsContainer.append(rowAttachmentDiv);

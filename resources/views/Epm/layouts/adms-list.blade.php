@@ -68,7 +68,7 @@
                         <table id="adminsListDataTable" class="table table-center mb-0">
                             @if($role->name == 'Project Manager')
                                 <thead>
-                                <tr> <th>PMO</th> <th>Active Projects</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>PMO</th> <th>Active Work Streams</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                             @elseif($role->name == 'Center Manager')
                                 <thead>
@@ -124,7 +124,17 @@
                                             </div>
                                         </td>
                                         @if($role->name == 'Project Manager')
-                                            <td>9 <i class="feather icon-arrow-up text-success"></i></td>
+                                            <?php
+                                            $projects = $admin->projects;
+                                            $total_projects = '';
+                                            if ($projects){
+                                                $total_projects = count($projects);
+                                            }else{
+                                                $total_projects = 0;
+                                            }
+
+                                            ?>
+                                            <td>{{$total_projects}} <i class="feather icon-arrow-up text-success"></i></td>
                                         @elseif($role->name == 'Center Manager')
                                             <?php
                                             $center = '';

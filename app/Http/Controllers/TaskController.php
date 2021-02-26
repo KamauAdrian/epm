@@ -91,8 +91,17 @@ class TaskController extends Controller
             $project = Project::find($board->project_id);
             $project_boards = $project->boards;
             $comments = $task->comments;
-            if ($task->attachments){
-                $response_attachments = $task->attachments;
+            $attachments = $task->attachments;
+            if ($attachments){
+                foreach ($attachments as $attachment){
+                    $response_attachments[] = [
+                        "id" => $attachment->id,
+                        "name" => mb_strimwidth($attachment->name,0,25,"..."),
+                        "full_name" => $attachment->name,
+                        "url" => $attachment->url,
+                    ];
+                }
+//                $response_attachments = $task->attachments;
             }
             if ($task->links){
                 $response_links = $task->links;

@@ -686,40 +686,41 @@
                         <div class="row">
                             @foreach($announcements as $announcement)
                             <div class="col-md-4">
-                                <a target="_blank" href="{{$announcement->announcement_link}}">
                                 <div class="card">
 {{--                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">--}}
-                                    @if($announcement->image)
-                                        <img class="card-img-top" style="height: 250px" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
-                                    @else
-                                        <img class="card-img-top"  style="height: 250px" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
-                                    @endif
-                                    <div class="card-header" style="height: 200px">
+                                    <a target="_blank" href="{{$announcement->announcement_link}}">
+                                        @if($announcement->image)
+                                            <img class="card-img-top" style="height: 250px" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
+                                        @else
+                                            <img class="card-img-top"  style="height: 250px" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
+                                        @endif
+                                    </a>
+                                    <div class="card-header">
+                                        <div class="card-header-right ml-2">
+                                            <div class="btn-group card-option">
+                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="feather icon-more-horizontal"></i>
+                                                </button>
+                                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" style="height: 200px;">
                                         <div class="media">
-{{--                                            <img src="{{url('assets/images/uikit/card-icon-1.svg')}}" alt="images" class="img-fluid">--}}
                                             <div class="media-body ml-3">
-{{--                                                <h6 class="mb-2">Death Star original maps and blueprint.pdf</h6>--}}
-                                                <h5 class="mb-2">{{$announcement->title}}</h5>
-{{--                                                <p class="mb-0">by Ashoka T. • 06/20/2019 at 6:43 PM </p>--}}
-{{--                                                class="d-inline-block text-truncate" style="max-height: 100px; max-width: 100%;"--}}
+                                                <div>
+                                                    <h5 class="mb-2">{{$announcement->title}}</h5>
+                                                    {{--                                                    <span class="text-right"><i class="feather icon-more-horizontal"></i></span>--}}
+                                                </div>
                                                 <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">{{mb_strimwidth($announcement->description, 0, 120, "...")}}</div>
                                                 <div style="color: grey;font-size: 12px; position: absolute; bottom: 0;" class="mt-4 mb-2">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
                                             </div>
                                         </div>
-{{--                                        <div class="card-header-right">--}}
-{{--                                            <div class="btn-group card-option">--}}
-{{--                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                                                    <i class="feather icon-more-horizontal"></i>--}}
-{{--                                                </button>--}}
-{{--                                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">--}}
-{{--                                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>--}}
-{{--                                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>--}}
-{{--                                                </ul>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
                                     </div>
                                 </div>
-                                </a>
                             </div>
                             @endforeach
                         </div>

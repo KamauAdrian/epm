@@ -144,6 +144,13 @@ class ProjectController extends Controller
         return view('Epm.Projects.read',compact('project','boards'));
     }
 
+    public function overview($id,$project_id)
+    {
+        $admin = User::find($id);
+        $project = Project::find($project_id);
+        return view('Epm.Projects.overview',compact('project'));
+    }
+
     public function project_names(){
             $projects = Project::all();
 //            $project = Project::find(1);

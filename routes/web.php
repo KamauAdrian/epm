@@ -97,6 +97,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/create/new/project',[App\Http\Controllers\ProjectController::class, 'create']);
     Route::post('/adm/{id}/save/new/project',[App\Http\Controllers\ProjectController::class, 'store']);
     Route::get('/adm/{id}/view/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'show']);
+    Route::get('/adm/{id}/project/{project_id}/overview',[App\Http\Controllers\ProjectController::class, 'overview']);
     Route::get('/new/collaborators/project_id={project_id}',[App\Http\Controllers\ProjectController::class, 'invite_collaborators']);//json array of new collaborators not in project
     Route::get('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
