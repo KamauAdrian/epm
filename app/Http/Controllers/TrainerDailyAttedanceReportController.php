@@ -17,11 +17,18 @@ class TrainerDailyAttedanceReportController extends Controller
      */
     public function index($id)
     {
-        $trainer = User::find($id);
-        if ($trainer->role->name == 'Trainer') {
+        $admin = User::find($id);
+        if ($admin){
+            if ($admin->role->name == "Su Admin") {
 //            $reports = DB::table('trainer_daily_attendance_reports')->where('trainer_id',$id)->get();
-            $reports = TrainerDailyAttendanceReport::orderBy("created_at","desc")->where("trainer_id",$id)->get();
-            return view('Epm.Trainers.Reports.daily-attendance-reports',compact('trainer','reports'));
+                $reports = TrainerDailyAttendanceReport::orderBy("created_at","desc")->get();
+                return view('Epm.Trainers.Reports.daily-attendance-reports',compact('reports'));
+            }
+            if ($admin->role->name == 'Trainer') {
+//            $reports = DB::table('trainer_daily_attendance_reports')->where('trainer_id',$id)->get();
+                $reports = TrainerDailyAttendanceReport::orderBy("created_at","desc")->where("trainer_id",$id)->get();
+                return view('Epm.Trainers.Reports.daily-attendance-reports',compact('reports'));
+            }
         }
     }
 
