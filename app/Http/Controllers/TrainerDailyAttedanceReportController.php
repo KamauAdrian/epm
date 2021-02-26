@@ -19,7 +19,8 @@ class TrainerDailyAttedanceReportController extends Controller
     {
         $trainer = User::find($id);
         if ($trainer->role->name == 'Trainer') {
-            $reports = DB::table('trainer_daily_attendance_reports')->where('trainer_id',$id)->get();
+//            $reports = DB::table('trainer_daily_attendance_reports')->where('trainer_id',$id)->get();
+            $reports = TrainerDailyAttendanceReport::orderBy("created_at","desc")->where("trainer_id",$id)->get();
             return view('Epm.Trainers.Reports.daily-attendance-reports',compact('trainer','reports'));
         }
     }
@@ -45,26 +46,19 @@ class TrainerDailyAttedanceReportController extends Controller
      */
     public function store(Request $request,$id)
     {
+//        dd($request->all());
         $messages = [
             'training_task_role.required'=>'Your Role/Task of the day is required'
         ];
         $this->validate($request,[
-            'date'=>'required',
             'training_task_role'=>'required',
         ],$messages);
         $trainer = User::find($id);
-        if ($trainer->role->name == 'Trainer'){
+        if ($trainer){
             $daily_attendance_report = new TrainerDailyAttendanceReport();
-            $daily_attendance_report->name = $trainer->name;
-            $daily_attendance_report->email = $trainer->email;
-            $daily_attendance_report->phone = $trainer->phone;
-            $daily_attendance_report->employee_number = $trainer->employee_number;
             $daily_attendance_report->trainer_id = $trainer->id;
-            $daily_attendance_report->speciality = $request->speciality;
             $task_roles = $request->training_task_role;
             $daily_attendance_report->other_training_task_roles = $request->other_training_task_roles;
-            $daily_attendance_report->date = $request->date;
-            $daily_attendance_report->time = $request->time;
             $daily_attendance_report->comments = $request->comments;
             $attendance_submitted = $daily_attendance_report->save();
             $trainer_training_task_role = null;
@@ -75,9 +69,9 @@ class TrainerDailyAttedanceReportController extends Controller
                     $trainer_training_task_role->daily_attendance_report_id = $daily_attendance_report->id;
                     $trainer_training_task_role->save();
                 }
-                return redirect('/adm/' . $id . '/view/daily/attendance/reports')->with('success', 'Daily Attendance Report Submitted Successfully');
+                return redirect("/adm/" . $id . "/view/daily/attendance/reports")->with("success", "Daily Attendance Report Submitted Successfully");
             }elseif ($attendance_submitted && $task_roles == null){
-                return redirect('/adm/'.$id.'/view/daily/attendance/reports')->with('success','Daily Attendance Report Submitted Successfully');
+                return redirect("/adm/".$id."/view/daily/attendance/reports")->with("success","Daily Attendance Report Submitted Successfully");
             }
         }
     }

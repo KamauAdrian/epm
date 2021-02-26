@@ -15,16 +15,9 @@ class CreateTrainerDailyAttendanceReportsTable extends Migration
     {
         Schema::create('trainer_daily_attendance_reports', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->integer('trainer_id')->unsigned();
-            $table->string('email');
-            $table->string('phone');
-            $table->string('employee_number');
-            $table->date('date');
-            $table->string('time');
-            $table->string('speciality');
-            $table->string('other_training_task_roles');
-            $table->string('comments');
+            $table->string('other_training_task_roles')->nullable();
+            $table->string('comments')->nullable();
             $table->timestamps();
         });
     }

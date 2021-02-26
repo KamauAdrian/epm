@@ -20,25 +20,6 @@
                     </a>
                 @endif
             </div>
-            <div class="col-sm-12">
-                <center>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                </center>
-            </div>
             <div class="col-sm-12 mt-2">
                 <div class="card">
                     <div class="card-body">
@@ -51,14 +32,15 @@
                                     <tbody>
                                     @foreach($reports as $report)
                                         <?php
-                                        $format_date = date('l dS M Y',strtotime($report->date))
+                                        $format_date = date('l dS M Y',strtotime($report->created_at));
+                                        $trainer = $report->owner;
                                         ?>
                                         <tr>
                                             <td>
                                                 <div class="media">
                                                     <div class="media-body ml-3 align-self-center">
-                                                        <h5 class="mb-1">{{$report->name}}</h5>
-                                                        <p class="mb-0">{{$report->email}}</p>
+                                                        <h5 class="mb-1">{{$trainer->name}}</h5>
+                                                        <p class="mb-0">{{$trainer->email}}</p>
                                                     </div>
                                                 </div>
                                             </td>

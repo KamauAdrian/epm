@@ -7,6 +7,7 @@
 @section('content')
     <?php
     $auth_admin = auth()->user();
+    $trainer = $report->owner;
     ?>
     @if($auth_admin->role->name =='Trainer')
         <div class="page-header">
@@ -35,31 +36,31 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$report->name}}" disabled>
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->name}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email Address</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$report->email}}" disabled>
+                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$trainer->email}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$report->phone}}" disabled>
+                                        <input type="text" name="name" class="form-control" placeholder="Luke S" value="{{$trainer->phone}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{$report->date}}" disabled>
+                                        <input type="text" name="email" class="form-control" placeholder="Luke S" value="{{date("Y-m-d",strtotime($report->created_at))}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Training Job Category</label>
-                                        <input type="text" class="form-control" value="{{$report->speciality}}" disabled>
+                                        <input type="text" class="form-control" value="{{$trainer->speciality}}" disabled>
                                     </div>
                                 </div>
                                 <?php
@@ -86,12 +87,6 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>The Time You were Training</label>
-                                        <input type="time" name="time" class="form-control" value="{{$report->time}}" disabled>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Comments</label>

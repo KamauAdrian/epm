@@ -12,4 +12,8 @@ class TrainerDailyAttendanceReport extends Model
     public function roles(){
         return $this->hasMany('App\Models\TrainerTrainingTaskRole','daily_attendance_report_id');
     }
+
+    public function owner(){
+        return $this->belongsTo('App\Models\User','trainer_id');
+    }
 }
