@@ -68,19 +68,21 @@ Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'center
     Route::get('/reports/cms',[App\Http\Controllers\SuperAdminController::class, 'reports_cms']);
     Route::get('/reports/trainers',[App\Http\Controllers\SuperAdminController::class, 'reports_trainers']);
     Route::get('/reports/pms',[App\Http\Controllers\SuperAdminController::class, 'reports_pms']);
-    //teams
+    //TEAMS
     //teams (Center Managers)
     Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'index']);
-    Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\AdminController::class, 'team_trainers_list']);
-    Route::get('/add-team-trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_add']);
-    Route::post('/adm/{id}/save/team/trainers',[App\Http\Controllers\SuperAdminController::class, 'team_trainers_save']);
-    Route::get('/adm/{id}/add/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_add']);
-    Route::post('/adm/{id}/save/team/trainer/members/team_id={team_id}',[App\Http\Controllers\SuperAdminController::class, 'team_trainer_members_save']);
+    Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\TeamTrainerController::class, 'index']);
     Route::get('/cms/teams',[App\Http\Controllers\SuperAdminController::class, 'team_cms']);
     Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'create']);
     Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'store']);
     Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManagerController::class, 'add_members']);
     Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManagerController::class, 'store_members']);
+
+    //teams (Trainers)
+    Route::get('/adm/{id}/create/team/trainers',[App\Http\Controllers\TeamTrainerController::class, 'create']);
+    Route::post('/adm/{id}/save/team/trainers',[App\Http\Controllers\TeamTrainerController::class, 'store']);
+    Route::get('/adm/{id}/add/team/trainer/members/team_id={team_id}',[App\Http\Controllers\TeamTrainerController::class, 'edit']);
+    Route::post('/adm/{id}/save/team/trainer/members/team_id={team_id}',[App\Http\Controllers\TeamTrainerController::class, 'update']);
     //ajira clubs
     Route::get('/ajira-clubs',[App\Http\Controllers\SuperAdminController::class, 'ajira_clubs']);
 

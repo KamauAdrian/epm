@@ -404,51 +404,6 @@ class SuperAdminController extends Controller
         return view('Epm.SuAdmins.Teams.team-trainers',compact('teams'));
     }
 
-    public function team_trainers_add(){
-        $trainers = '';
-
-        $role = DB::table('roles')->where('name','Trainer')->first();
-
-        if ($role){
-            $trainers = DB::table('users')->where('role_id',$role->id)->get();
-        }
-        return view('Epm.Teams.add-team-trainers',compact('trainers'));
-    }
-
-    public function team_trainers_save(Request $request,$id){
-        $admin = User::find($id);
-        $trainers_team = new TeamTrainer();
-        $trainers_team->name = $request->name;
-        $trainers_team->description = $request->about;;
-        $team_leaders = $request->input('team_leader_ids');
-        $trainers_team->creator_id = Auth::id();
-        $new_team_created = $trainers_team->save();
-        if ($new_team_created){
-            $saved_team = TeamTrainer::find($trainers_team->id);
-            $team_leader_ids = [];
-            foreach ($team_leaders as $team_leader){
-                $team_leader_ids[] = [
-                  'team_leader_id'=>$team_leader,
-                  'team_id'=>$saved_team->id,
-                ];
-            }
-            $saved_team->trainers()->attach($team_leaders);
-            DB::table('team_trainer_leaders')->insert($team_leader_ids);
-        }
-        return redirect('/adm/'.$admin->id.'/list/team/trainers');
-    }
-    public function team_trainer_members_add($id,$team_id){
-        $team = DB::table('team_trainers')->where('id',$team_id)->first();
-        return view('Epm.Teams.add-team-trainer-member',compact('team'));
-    }
-
-    public function team_trainer_members_save(Request $request,$id,$team_id){
-        $admin = User::find($id);
-        $trainer_team_member_s_id = $request->trainer_team_member_s_id;
-        $trainer_team = TeamTrainer::find($team_id);
-        $trainer_team->trainers()->attach($trainer_team_member_s_id);
-        return redirect('/adm/'.$admin->id.'/list/team/trainers')->with('success','Trainer(s) Successfully added to team');
-    }
 
     /**
      * Teams (Team Center Managers)

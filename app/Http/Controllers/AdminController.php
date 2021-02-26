@@ -787,10 +787,6 @@ class AdminController extends Controller
      * Teams
      */
 
-    public function team_trainers_list(){
-        $teams = DB::table('team_trainers')->orderBy('created_at','desc')->get();
-        return view('Epm.Teams.trainers',compact('teams'));
-    }
 
     public function create()
     {

@@ -15,10 +15,17 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Sessions/add-session.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_09_074528_create_team_trainers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_09_074528_create_team_trainers_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainer-member.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainers.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/trainers.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainer-members-add.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-add.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-list.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +322,7 @@
       <workItem from="1614226292194" duration="27432000" />
       <workItem from="1614256101398" duration="5019000" />
       <workItem from="1614273853377" duration="7531000" />
-      <workItem from="1614310006373" duration="23039000" />
+      <workItem from="1614310006373" duration="28189000" />
     </task>
     <servers />
   </component>
@@ -339,22 +346,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="141" y="6" width="1084" height="722" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1606293559656" />
-    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614142877220">
+    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614333949731">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1614142877220" />
+    <state x="426" y="166" width="520" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1614333949731" />
     <state x="274" y="0" width="798" height="726" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1612767883769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="274" y="0" width="798" height="726" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1612767883769" />
-    <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610542790890">
+    <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1614335150433">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1610542790890" />
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614236444873">
+    <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614335150433" />
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614334283622">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614236444873" />
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614334283622" />
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606914575160">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
