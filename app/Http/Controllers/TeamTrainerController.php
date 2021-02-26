@@ -63,7 +63,7 @@ class TeamTrainerController extends Controller
             $team_leaders = $request->input('team_leader_ids');
             $trainers_team->creator_id = $admin->id;
             $new_team_created = $trainers_team->save();
-            if ($new_team_created){
+            if ($new_team_created && $team_leaders!=null){
                 $saved_team = TeamTrainer::find($trainers_team->id);
                 $team_leader_ids = [];
                 foreach ($team_leaders as $team_leader){

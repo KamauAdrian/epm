@@ -14,18 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_09_074528_create_team_trainers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_09_074528_create_team_trainers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainer-member.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/add-team-trainers.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/trainers.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainer-members-add.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-add.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/team-trainers-list.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamTrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeamTrainerController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,7 +311,7 @@
       <workItem from="1614226292194" duration="27432000" />
       <workItem from="1614256101398" duration="5019000" />
       <workItem from="1614273853377" duration="7531000" />
-      <workItem from="1614310006373" duration="28668000" />
+      <workItem from="1614310006373" duration="28974000" />
     </task>
     <servers />
   </component>

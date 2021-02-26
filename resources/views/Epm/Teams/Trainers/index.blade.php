@@ -74,7 +74,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @if(count($team_leaders_raw)<=2)
+                                                @if($team_leaders)
                                                         {{implode(",",$team_leaders)}}
                                                 @elseif(count($team_leaders_raw)==0)
                                                     No Team Leaders
