@@ -42,7 +42,7 @@ Route::group(['middleware'=>'super_admin'],function (){
     Route::get('/login/as/{id}',[App\Http\Controllers\SuperAdminController::class, 'login_as']);
 });
     //shared responsibility
-Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
+    Route::get('/centers',[App\Http\Controllers\SuperAdminController::class, 'centers']);
     //cms
 //    Route::get('/list-cms',[App\Http\Controllers\SuperAdminController::class, 'cms_list']);
     Route::get('/cms',[App\Http\Controllers\SuperAdminController::class, 'cms']);//json array of cms
@@ -99,15 +99,15 @@ Route::post('/update/password/{id}',[App\Http\Controllers\AdminController::class
 Route::group(['middleware'=>'admin'],function (){
     // index dashboard
     Route::get('/adm/main/dashboard',[App\Http\Controllers\AdminController::class, 'index']);
-    Route::get('/adm/pmo/dashboard',[App\Http\Controllers\AdminController::class, 'index_pmo']);
-    Route::get('/adm/get/admins/records',[App\Http\Controllers\AdminController::class, 'dashboard_actors']);
-    Route::get('/adm/get/pms/records',[App\Http\Controllers\AdminController::class, 'dashboard_pms']);
-    Route::get('/adm/get/centers/records',[App\Http\Controllers\AdminController::class, 'dashboard_centers']);
-    Route::get('/adm/get/cms/records',[App\Http\Controllers\AdminController::class, 'dashboard_cms']);
-    Route::get('/adm/get/trainers/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainers']);
-    Route::get('/adm/get/mentors/records',[App\Http\Controllers\AdminController::class, 'dashboard_mentors']);
-    Route::get('/adm/get/sessions/records',[App\Http\Controllers\AdminController::class, 'dashboard_sessions']);
-    Route::get('/adm/get/trainees/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainees']);
+//    Route::get('/adm/pmo/dashboard',[App\Http\Controllers\AdminController::class, 'index_pmo']);
+//    Route::get('/adm/get/admins/records',[App\Http\Controllers\AdminController::class, 'dashboard_actors']);
+//    Route::get('/adm/get/pms/records',[App\Http\Controllers\AdminController::class, 'dashboard_pms']);
+//    Route::get('/adm/get/centers/records',[App\Http\Controllers\AdminController::class, 'dashboard_centers']);
+//    Route::get('/adm/get/cms/records',[App\Http\Controllers\AdminController::class, 'dashboard_cms']);
+//    Route::get('/adm/get/trainers/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainers']);
+//    Route::get('/adm/get/mentors/records',[App\Http\Controllers\AdminController::class, 'dashboard_mentors']);
+//    Route::get('/adm/get/sessions/records',[App\Http\Controllers\AdminController::class, 'dashboard_sessions']);
+//    Route::get('/adm/get/trainees/records',[App\Http\Controllers\AdminController::class, 'dashboard_trainees']);
     //save admins
     Route::post('/adm/{id}/save/pm',[App\Http\Controllers\ProjectManagerController::class, 'store']);
     //list admins

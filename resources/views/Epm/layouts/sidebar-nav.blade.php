@@ -90,7 +90,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     @endif
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/cms')}}">Team CMs</a></li>
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/trainers')}}">Team Trainers</a></li>--}}
@@ -99,7 +99,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @elseif($auth_admin->role->name == 'Center Manager')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
                 <li><a href="#!">My Teams</a></li>
@@ -107,7 +107,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @elseif($auth_admin->role->name == 'Trainer')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-circle"></i></span><span class="pcoded-mtext">Teams</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
             <ul class="pcoded-submenu">
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
                 <li><a href="#!">My Teams</a></li>
@@ -123,7 +123,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     </li>
     @if($auth_admin->role->name == "Trainer")
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Resources</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span><span class="pcoded-mtext">Resources</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="#!">Physical Training</a></li>
                 <li><a href="#!">Virtual Training</a></li>
@@ -157,7 +157,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     @endif
     @if($auth_admin->role->name == 'Su Admin')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/templates')}}">Templates</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">Performance Appraisals</a></li>
@@ -176,7 +176,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @elseif($auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <?php
                 $appraisal_submit = \App\Models\Appraisal::where('pmo_id',$auth_admin->id)->get();
@@ -203,7 +203,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         ?>
     @if($cm_reports)
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 @foreach($cm_reports as $cm_report)
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$cm_report->id)}}">{{$cm_report->name}}</a></li>
@@ -214,7 +214,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     @endif
     @elseif($auth_admin->role->name == 'Trainer')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Reports</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/training/sessions/allocations')}}">Training Sessions Allocations</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/reports')}}">Daily Attendance Reports</a></li>

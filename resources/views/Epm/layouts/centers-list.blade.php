@@ -19,16 +19,18 @@ $auth_admin = auth()->user();
                     @foreach($centers as $center)
                         <tr>
                             <td>
-                                <div class="media">
-                                    @if($center->image!=null)
-                                        <span class="avtar"><img src="{{url('Centers/images/'.$center->image)}}" alt="images" class="img-fluid"></span>
-                                    @else
-                                        <span class="avtar"><img src="{{url('assets/images/center.jpeg')}}" alt="images" class="img-fluid"></span>
-                                    @endif
-                                    <div class="media-body ml-3 align-self-center">
-                                        <h5 class="mb-1">{{$center->name}}</h5>
+                                <a href="{{url('/adm/'.$auth_admin->id.'/view/center',$center->id)}}">
+                                    <div class="media">
+                                        @if($center->image!=null)
+                                            <span class="avtar"><img src="{{url('Centers/images/'.$center->image)}}" alt="images" class="img-fluid"></span>
+                                        @else
+                                            <span class="avtar"><img src="{{url('assets/images/center.jpeg')}}" alt="images" class="img-fluid"></span>
+                                        @endif
+                                        <div class="media-body ml-3 align-self-center">
+                                            <h5 class="mb-1">{{$center->name}}</h5>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </td>
                             <td>{{$center->county}}</td>
                             <td>{{$center->location}}</td>
