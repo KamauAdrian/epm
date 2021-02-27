@@ -565,7 +565,8 @@
         <div class="card">
             <div class="card-header">
                 <h5>Awards</h5>
-                <a href="{{url('/adm/'.$auth_admin->id.'/create/new/award')}}" class="btn btn-outline-info float-right">Create Award</a>
+                <a href="{{url('/adm/'.$auth_admin->id.'/list/awards')}}" class="btn btn-outline-info float-right ml-2">View All</a>
+                <a href="{{url('/adm/'.$auth_admin->id.'/create/new/award')}}" class="btn btn-outline-info float-right mr-2">Create Award</a>
             </div>
             <?php
             $awards = \App\Models\Award::orderBy('created_at','desc')->limit(6)->get();
@@ -675,7 +676,8 @@
         <div class="card">
             <div class="card-header">
                 <h5>Announcements</h5>
-                <a href="{{url('/adm/'.$auth_admin->id.'/add/new/announcement')}}" class="btn btn-outline-info float-right">Add Announcement</a>
+                <a href="{{url('/adm/'.$auth_admin->id.'/list/announcements')}}" class="btn btn-outline-info float-right ml-2">View All</a>
+                <a href="{{url('/adm/'.$auth_admin->id.'/add/new/announcement')}}" class="btn btn-outline-info float-right mr-2">Add Announcement</a>
             </div>
             <?php
             $announcements = \App\Models\Announcement::orderBy('created_at','desc')->limit(3)->get();
@@ -695,19 +697,21 @@
                                             <img class="card-img-top"  style="height: 250px" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
                                         @endif
                                     </a>
-                                    <div class="card-header">
-                                        <div class="card-header-right ml-2">
-                                            <div class="btn-group card-option">
-                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="feather icon-more-horizontal"></i>
-                                                </button>
-                                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
-                                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
-                                                </ul>
+                                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager")
+                                        <div class="card-header">
+                                            <div class="card-header-right ml-2">
+                                                <div class="btn-group card-option">
+                                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="feather icon-more-horizontal"></i>
+                                                    </button>
+                                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                                            <a href="{{url('/adm/'.$auth_admin->id.'/edit/announcement/'.$announcement->id)}}"><li class="dropdown-item">Edit</li></a>
+                                                            <a href="#!"><li class="dropdown-item close-card">Delete</li></a>
+                                                        </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                     <div class="card-body" style="height: 200px;">
                                         <div class="media">
                                             <div class="media-body ml-3">
@@ -715,8 +719,47 @@
                                                     <h5 class="mb-2">{{$announcement->title}}</h5>
                                                     {{--                                                    <span class="text-right"><i class="feather icon-more-horizontal"></i></span>--}}
                                                 </div>
-                                                <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">{{mb_strimwidth($announcement->description, 0, 120, "...")}}</div>
+                                                <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">{{mb_strimwidth($announcement->description, 0, 120, "...")}}
+                                                    <div class="dropdown">
+                                                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown"><span><u>Read More</u></span></a>
+                                                        <div class="dropdown-menu p-1" style="width: 400px;">
+                                                            {{$announcement->description}}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div style="color: grey;font-size: 12px; position: absolute; bottom: 0;" class="mt-4 mb-2">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="deleteAdminUser" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{--                    {{url('/adm-delete-pm','hiddenValue')}}--}}
+                                                    <h5 class="text-danger">Are you sure you want to delete this Admin?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="" id="form-delete-user" method="post">
+                                                        @csrf
+                                                        <button data-data="" id="btn-delete-user" type="submit" class="btn btn-outline-success">
+                                                            Yes Delete
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                                {{--                        <div class="modal-footer">--}}
+                                                {{--                            <form id="deleteAdminForm" action="" method="post">--}}
+                                                {{--                                @csrf--}}
+                                                {{--                                <button type="submit" class="btn btn-outline-success">Yes Delete</button>--}}
+                                                {{--                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>--}}
+                                                {{--                            </form>--}}
+                                                {{--                        </div>--}}
                                             </div>
                                         </div>
                                     </div>
