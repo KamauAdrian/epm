@@ -14,34 +14,72 @@
         </div>
         <div class="row">
             <div class="table-responsive">
-                <table class="table" id="tableProjectTasks">
+                <table class="table table-bordered" id="tableProjectTasks">
                     <thead>
                     <tr>
-                        <th>Date Opened</th>
+                        <th>Activity</th>
                         <th>Task</th>
+                        <th>Date Opened</th>
                         <th>Collaborators Involved</th>
                         <th>Due Date</th>
                         <th>Completion Date</th>
                         <th class="text-right">Status</th>
                     </tr>
                     </thead>
-                    <?php $tasks = $project->tasks ?>
+                    <?php
+                    $activities = $project->activities;
+                    $tasks = $project->tasks
+                    ?>
                     @if($tasks)
                         <tbody>
-                            @foreach($tasks as $task)
-{{--                                <tr>--}}
-{{--                                    <td>{{$task->created_at}}</td>--}}
-{{--                                    <td>{{$task->name}}</td>--}}
-{{--                                    <td>{{$task->name}}</td>--}}
-{{--                                    <td>{{$task->due_date}}</td>--}}
-{{--                                </tr>--}}
+                            @foreach($activities as $key=>$activity)
+                                <?php
+                                $tasks_raw = $activity->tasks;
+                                $tasks_array = [];
+                                foreach ($tasks_raw as $task_raw){
+                                    $tasks_array[] = $task_raw;
+                                }
+                                $tasks = array_slice($tasks_array,1);
+                                ?>
+                                <tr>
+                                    <td rowspan="{{count($tasks_raw)}}">{{$activity->name}}</td>
+                                    <td>{{$tasks_array[0]->name}}</td>
+                                    <td>{{date("dS M Y",strtotime($tasks_array[0]->created_at))}}</td>
+                                    <td>{{count($tasks_array[0]->assignees)}}</td>
+                                    <td>{{date("dS M Y",strtotime($tasks_array[0]->due_date))}}</td>
+                                    <td>{{date("dS M Y",strtotime($tasks_array[0]->completion_date))}}</td>
+                                    <td>
+                                        @if($tasks_array[0]->status ==0)
+                                            In Complete
+                                        @else
+                                            Complete
+                                        @endif
+                                    </td>
+                                </tr>
+                                @foreach($tasks as $task)
+                                    <tr>
+                                        <td>{{$task->name}}</td>
+                                        <td>{{date("dS M y",strtotime($task->created_at))}}</td>
+                                        <td>{{count($task->assignees)}}</td>
+                                        <td>{{date("dS M Y",strtotime($task->due_date))}}</td>
+                                        <td>{{date("dS M Y",strtotime($task->completion_date))}}</td>
+                                        <td>
+                                            @if($task->status ==0)
+                                                In Complete
+                                            @else
+                                                Complete
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endforeach
                         </tbody>
                     @endif
                     <tfoot>
                         <tr>
-                            <th>Date Opened</th>
+                            <th>Activity</th>
                             <th>Task</th>
+                            <th>Date Opened</th>
                             <th>Collaborators Involved</th>
                             <th>Due Date</th>
                             <th>Completion Date</th>

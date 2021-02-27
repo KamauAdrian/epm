@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->date('due_date');
             $table->text('description')->nullable();
             $table->integer('status')->default(0);
+            $table->date('completion_date')->nullable();
             $table->integer('creator_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
             $table->bigInteger('board_id')->unsigned();

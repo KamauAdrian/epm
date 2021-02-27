@@ -15,6 +15,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_10_123518_create_tasks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/overview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/overview.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainers/training-sessions-allocations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainers/training-sessions-allocations.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adm-dashboard.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -314,7 +319,7 @@
       <workItem from="1614273853377" duration="7531000" />
       <workItem from="1614310006373" duration="33515000" />
       <workItem from="1614371108076" duration="5366000" />
-      <workItem from="1614396955547" duration="4000000" />
+      <workItem from="1614396955547" duration="8187000" />
     </task>
     <servers />
   </component>
@@ -387,10 +392,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614249648821" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614397110165">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614404966930">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614397110165" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614404966930" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

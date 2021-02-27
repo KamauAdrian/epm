@@ -198,7 +198,8 @@ class TaskController extends Controller
             $collaborators = $task->project->collaborators;
             if ($status==0){
                 $data = [
-                    'status'=>1
+                    'status'=>1,
+                    'completion_date'=>date("Y-m-d"),
                 ];
                 $task->update($data);
                 $message="Complete";
@@ -218,7 +219,8 @@ class TaskController extends Controller
                 }
             }else{
                 $data = [
-                    'status'=>0
+                    'status'=>0,
+                    'completion_date'=>null,
                 ];
                 $task->update($data);
 

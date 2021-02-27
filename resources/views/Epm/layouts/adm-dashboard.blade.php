@@ -722,7 +722,7 @@
                                                 <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">{{mb_strimwidth($announcement->description, 0, 120, "...")}}
                                                     <div class="dropdown">
                                                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown"><span><u>Read More</u></span></a>
-                                                        <div class="dropdown-menu p-1" style="width: 400px;">
+                                                        <div class="dropdown-menu p-4" style="width: 400px;">
                                                             {{$announcement->description}}
                                                         </div>
                                                     </div>
