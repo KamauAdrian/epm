@@ -28,6 +28,7 @@
                 <?php
                 $auth_admin = auth()->user();
                 $supervisor = \App\Models\AppraisalSupervisor::where('appraisal_id',$appraisal->id)->first();
+                $pmo = \App\Models\User::find($appraisal->pmo_id);
                 $self_scores = [];
                 $supervisor_scores = [];
                 foreach ($appraisal->selfScores as $score_raw_self){
@@ -37,23 +38,6 @@
                     $supervisor_scores[] = $score_raw_supervisor;
                 }
                 ?>
-                <center>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                </center>
                 <form action="#!" method="post">
                     @csrf
                     <div class="row">
@@ -69,7 +53,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->pmo}}" readonly>
+                                        <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$pmo->name}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -81,13 +65,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Employee Number</label>
-                                        <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$appraisal->pmo_employee_number}}" readonly>
+                                        <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$pmo->employee_number}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Department</label>
-                                        <input type="text" name="departmment" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$appraisal->pmo_department}}" readonly>
+                                        <input type="text" name="departmment" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$pmo->department}}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +98,7 @@
                                     @if($appraisal->question_one)
                                         <tr>
                                             <td>1</td>
-                                            <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
+                                            <td>{!! $appraisal->question_one !!}</td>
                                             <td>
                                                 {!! $self_scores[0]->self_score !!}
                                             </td>
@@ -137,7 +121,7 @@
                                     @if($appraisal->question_two)
                                         <tr>
                                             <td>2</td>
-                                            <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
+                                            <td>{!! $appraisal->question_two !!}</td>
                                             <td>
                                                 {!! $self_scores[1]->self_score !!}
                                             </td>
@@ -160,7 +144,7 @@
                                     @if($appraisal->question_three)
                                         <tr>
                                             <td>3</td>
-                                            <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
+                                            <td>{!! $appraisal->question_three !!}</td>
                                             <td>
                                                 {!! $self_scores[2]->self_score !!}
                                             </td>
@@ -183,7 +167,7 @@
                                     @if($appraisal->question_four)
                                         <tr>
                                             <td>4</td>
-                                            <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
+                                            <td>{!! $appraisal->question_four !!}</td>
                                             <td>
                                                 {!! $self_scores[3]->self_score !!}
                                             </td>
@@ -206,7 +190,7 @@
                                     @if($appraisal->question_five)
                                         <tr>
                                             <td>5</td>
-                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
+                                            <td>{!! $appraisal->question_five !!}</td>
 {{--                                            <td>{!! $appraisal->question_five !!}</td>--}}
                                             <td>
                                                 {!! $self_scores[4]->self_score !!}

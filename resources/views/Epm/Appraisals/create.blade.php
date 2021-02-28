@@ -9,27 +9,6 @@
     {{--    @include('Epm.layouts.Reports.templates')--}}
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-12">
-                <center>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                </center>
-            </div>
-        </div>
-        <div class="row">
             <div class="auth-wrapper align-items-stretch bg-white">
                 <div class="auth-side-form">
                     <div class="auth-content">
@@ -39,7 +18,7 @@
                         <?php
                         $auth_admin = auth()->user();
                         ?>
-                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/add/pmo/performance/appraisal')}}">
+                        <form class="my-5" id="create_appraisal" method="post" action="{{url('/adm/'.$auth_admin->id.'/add/pmo/performance/appraisal')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
@@ -75,24 +54,29 @@
                                         <label>Appraisal Questions</label>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" cols="auto" rows="5" name="question_one" placeholder="Add Question One"></textarea>
+                                        <div id="question_one"></div>
+                                        <input type="hidden" id="input_question_one" name="question_one" value="">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" cols="auto" rows="5" name="question_two" placeholder="Add Question Two"></textarea>
+                                        <div id="question_two"></div>
+                                        <input type="hidden" id="input_question_two" name="question_two" value="">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" cols="auto" rows="5" name="question_three" placeholder="Add Question Three"></textarea>
+                                        <div id="question_three"></div>
+                                        <input type="hidden" id="input_question_three" name="question_three" value="">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" cols="auto" rows="5" name="question_four" placeholder="Add Question Four"></textarea>
+                                        <div id="question_four"></div>
+                                        <input type="hidden" id="input_question_four" name="question_four" value="">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" cols="auto" rows="5" name="question_five" placeholder="Add Question Five"></textarea>
+                                        <div id="question_five"></div>
+                                        <input type="hidden" id="input_question_five" name="question_five" value="">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group float-right">
-                                        <button type="submit" class="btn btn-outline-primary btn-lg mb-3">Create Appraisal</button>
+                                        <button type="submit" class="btn btn-outline-info btn-lg mb-3">Create Appraisal</button>
                                     </div>
                                 </div>
                             </div>
@@ -104,11 +88,91 @@
     </div>
 @endsection
 @section('js')
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script type="text/javascript">
+        var quiz1 = new Quill("#question_one", {
+            modules: {
+                toolbar: true
+            },
+            placeholder: "Add Question One",
+            theme: "snow"
+        });
+        var quiz2 = new Quill("#question_two", {
+            modules: {
+                toolbar: true
+            },
+            placeholder: "Add Question Two",
+            theme: "snow"
+        });var quiz3 = new Quill("#question_three", {
+            modules: {
+                toolbar: true
+            },
+            placeholder: "Add Question Three",
+            theme: "snow"
+        });var quiz4 = new Quill("#question_four", {
+            modules: {
+                toolbar: true
+            },
+            placeholder: "Add Question Four",
+            theme: "snow"
+        });var quiz5 = new Quill("#question_five", {
+            modules: {
+                toolbar: true
+            },
+            placeholder: "Add Question Five",
+            theme: "snow"
+        });
+
+        var input_q_one = document.getElementById("#input_question_one");
+        var q_one = quiz1.root.innerHTML;
+        var Delta = Quill.import('delta');
+        // Store accumulated changes
+        var change = new Delta();
+        quiz1.on('text-change', function(delta) {
+            quiz1Change = change.compose(delta);
+        });
+        quiz2.on('text-change', function(delta) {
+            quiz2Change = change.compose(delta);
+        });
+        quiz3.on('text-change', function(delta) {
+            quiz3Change = change.compose(delta);
+        });
+        quiz4.on('text-change', function(delta) {
+            quiz4Change = change.compose(delta);
+        });
+        quiz5.on('text-change', function(delta) {
+            quiz5Change = change.compose(delta);
+        });
+        // Save periodically
+        setInterval(function() {
+            if (quiz1Change.length() > 0) {
+                console.log('Saving changes', change);
+                $("#input_question_one").val(quiz1.root.innerHTML);
+                quiz1Change = new Delta();
+            }
+            if (quiz2Change.length() > 0) {
+                $("#input_question_two").val(quiz2.root.innerHTML);
+                quiz2Change = new Delta();
+            }
+            if (quiz3Change.length() > 0) {
+                $("#input_question_three").val(quiz3.root.innerHTML);
+                quiz3Change = new Delta();
+            }
+            if (quiz4Change.length() > 0) {
+                $("#input_question_four").val(quiz4.root.innerHTML);
+                quiz4Change = new Delta();
+            }
+            if (quiz5Change.length() > 0) {
+                $("#input_question_five").val(quiz5.root.innerHTML);
+                quiz5Change = new Delta();
+            }
+        }, 1000);
+        // Check for unsaved data
+        window.onbeforeunload = function() {
+            if (change.length() > 0) {
+                return 'There are unsaved changes. Are you sure you want to leave?';
+            }
+        }
+
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,

@@ -71,7 +71,15 @@
                                         <td style="white-space: normal">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h5 style="font-size: 14px;">{{$board->name}}</h5>
+                                                    <div>
+                                                        <p class="float-left" style="font-size: 14px;">{{$board->name}}</p>
+                                                        <button type="button" class=" float-right btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="feather icon-more-horizontal"></i>
+                                                        </button>
+                                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                                            <a href="{{url('/adm/'.$auth_admin->id.'/edit/activity/'.$board->id)}}"><li class="dropdown-item">Edit Activity</li></a>
+                                                            <a href="#!"><li class="dropdown-item close-card">Delete Activity</li></a>
+                                                        </ul></div>
                                                 </div>
                                                 <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
                                                 @foreach($tasks as $task)
@@ -160,7 +168,7 @@
                                                                 </div>
                                                                 <div class="col-mdd-12">
                                                                     <div class="form-group float-right">
-                                                                        <input class="btn btn-outline-primary" type="submit" value="Add Task">
+                                                                        <input class="btn btn-outline-info" type="submit" value="Add Task">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -177,18 +185,24 @@
                                         <div class="row" style="display: none;" id="add-new-board">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post">
-                                                        @csrf
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label>Activity Name</label>
-                                                                <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
+                                                    <div class="col-md-12">
+                                                        <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post">
+                                                            @csrf
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Activity Name</label>
+                                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group text-left">
+                                                                        <input class="btn btn-outline-info" type="submit" value="Create Activity">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group float-right">
-                                                            <input class="btn btn-outline-primary" type="submit" value="Create Activity">
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -33,11 +33,11 @@ class AppraisalController extends Controller
     {
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
-            $appraisals = Appraisal::where('status',0)->get();
+            $appraisals = Appraisal::orderBy("created_at","desc")->where('status',0)->get();
 //            dd($appraisals);
             return view('Epm.Appraisals.index',compact('appraisals'));
         }elseif ($admin->role->name == 'Project Manager'){
-            $appraisals = Appraisal::where('pmo_id',$admin->id)->where('status',0)->get();
+            $appraisals = Appraisal::orderBy("created_at","desc")->where('pmo_id',$admin->id)->where('status',0)->get();
             return view('Epm.Appraisals.index',compact('appraisals'));
         }
     }
@@ -143,6 +143,7 @@ class AppraisalController extends Controller
      */
     public function store(Request $request,$id)
     {
+//        dd($request->all());
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
             $messages = [
@@ -164,9 +165,9 @@ class AppraisalController extends Controller
             foreach ($request->supervisor_emails as $key=>$supervisor_email){
                 $supervisors[$key] += ['email'=>$supervisor_email];
             }
-            $appraisal->pmo = $request->pmo;
-            $appraisal->pmo_email = $request->pmo_email;
-            $appraisal->pmo_id = $request->pmo_id;
+//            dd($supervisors);
+            $appraisal_pmo = User::find($request->pmo_id);
+            $appraisal->pmo_id = $appraisal_pmo->id;
             $appraisal->pmo_status = 0;
             $appraisal->status = 0;
             $appraisal->question_one = $request->question_one;
@@ -177,13 +178,12 @@ class AppraisalController extends Controller
 //            dd($supervisors);
             $saved = $appraisal->save();
             if ($saved){
-                $pmo_email = $appraisal->pmo_email;
                 $pmo = [
                     'user_id'=>$appraisal->id,
                     'name'=>$appraisal->pmo,
-                    'email'=>$appraisal->pmo_email,
+                    'email'=>$appraisal_pmo->email,
                 ];
-                Mail::to($pmo_email)->send(new PmoAppraisalNotification($pmo));
+                Mail::to($appraisal_pmo->email)->send(new PmoAppraisalNotification($pmo));
                 foreach ($supervisors as $supervisor){
                     $new_supervisor = new AppraisalSupervisor();
                     $new_supervisor->supervisor = $supervisor['name'];

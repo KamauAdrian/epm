@@ -78,7 +78,7 @@
                                     @if($appraisal->question_one)
                                         <tr id="appraisal_report_q1">
                                             <td>1</td>
-                                            <td>{!! nl2br(e($appraisal->question_one))!!}</td>
+                                            <td>{!! $appraisal->question_one !!}</td>
                                             <td><input type="text" id="self_score_q1" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <div id="self_comment_q1" style="width: 100%">
@@ -91,7 +91,7 @@
                                     @if($appraisal->question_two)
                                         <tr id="appraisal_report_q2">
                                             <td>2</td>
-                                            <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
+                                            <td>{!! $appraisal->question_two !!}</td>
                                             <td><input id="self_score_q2" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <div id="self_comment_q2" style="width: 100%">
@@ -104,7 +104,7 @@
                                     @if($appraisal->question_three)
                                         <tr id="appraisal_report_q3">
                                             <td>3</td>
-                                            <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
+                                            <td>{!! $appraisal->question_three !!}</td>
                                             <td><input id="self_score_q3" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <div id="self_comment_q3" style="width: 100%">
@@ -117,7 +117,7 @@
                                     @if($appraisal->question_four)
                                         <tr id="appraisal_report_q4">
                                             <td>4</td>
-                                            <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
+                                            <td>{!! $appraisal->question_four !!}</td>
                                             <td><input id="self_score_q4" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <div id="self_comment_q4" style="width: 100%">
@@ -130,7 +130,7 @@
                                     @if($appraisal->question_five)
                                         <tr id="appraisal_report_q5">
                                             <td>5</td>
-                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
+                                            <td>{!! $appraisal->question_five !!}</td>
                                             <td><input id="self_score_q5" type="text" name="self_score[]"  placeholder="" required></td>
                                             <td>
                                                 <div id="self_comment_q5" style="width: 100%">
@@ -175,7 +175,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group float-right mt-2">
-                                <button type="submit" class="btn btn-outline-primary btn-block mb-3">Submit Report</button>
+                                <button type="submit" class="btn btn-outline-info btn-block mb-3">Submit Report</button>
                             </div>
                         </div>
 

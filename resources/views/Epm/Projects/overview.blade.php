@@ -45,7 +45,24 @@
                                     <td rowspan="{{count($tasks_raw)}}">{{$activity->name}}</td>
                                     <td>{{$tasks_array[0]->name}}</td>
                                     <td>{{date("dS M Y",strtotime($tasks_array[0]->created_at))}}</td>
-                                    <td>{{count($tasks_array[0]->assignees)}}</td>
+                                    <td>
+                                        <?php
+                                        $task_assignees = $tasks_array[0]->assignees;
+                                        $task_assignees_names = [];
+                                        foreach ($task_assignees as $task_assignee){
+                                            $names = $task_assignee->name;
+                                            $split_name = explode(" ",$names);
+                                            if (count($split_name)>1){
+                                                $task_assignees_names[] = $split_name[0];
+                                            }else{
+                                                $task_assignees_names[] = $names;
+                                            }
+                                        }
+                                        ?>
+                                        @foreach($task_assignees_names as $task_assignee_name)
+                                            {{$task_assignee_name}}<br />
+                                        @endforeach
+                                    </td>
                                     <td>{{date("dS M Y",strtotime($tasks_array[0]->due_date))}}</td>
                                     <td>{{date("dS M Y",strtotime($tasks_array[0]->completion_date))}}</td>
                                     <td>
@@ -60,7 +77,24 @@
                                     <tr>
                                         <td>{{$task->name}}</td>
                                         <td>{{date("dS M y",strtotime($task->created_at))}}</td>
-                                        <td>{{count($task->assignees)}}</td>
+                                        <td>
+                                            <?php
+                                            $task_assignees = $task->assignees;
+                                            $task_assignees_names = [];
+                                            foreach ($task_assignees as $task_assignee){
+                                                $names = $task_assignee->name;
+                                                $split_name = explode(" ",$names);
+                                                if (count($split_name)>1){
+                                                    $task_assignees_names[] = $split_name[0];
+                                                }else{
+                                                    $task_assignees_names[] = $names;
+                                                }
+                                            }
+                                            ?>
+                                            @foreach($task_assignees_names as $task_assignee_name)
+                                                {{$task_assignee_name}}
+                                            @endforeach
+                                        </td>
                                         <td>{{date("dS M Y",strtotime($task->due_date))}}</td>
                                         <td>{{date("dS M Y",strtotime($task->completion_date))}}</td>
                                         <td>

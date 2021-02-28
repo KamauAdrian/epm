@@ -42,14 +42,15 @@
                             @foreach($appraisals as $appraisal)
                                 <tr>
                                     <?php
+                                    $pmo = \App\Models\User::find($appraisal->pmo_id);
                                     $pmo_status = $appraisal->pmo_status;
                                     ?>
                                     <td>
                                         @if($pmo_status==1)
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">{{$appraisal->pmo}}</a>
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/appraisal_id='.$appraisal->id)}}">{{$pmo->name}}</a>
                                         @else
                                             <a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisal/template/appraisal_id='.$appraisal->id)}}">
-                                                {{$appraisal->pmo}}
+                                                {{$pmo->name}}
                                             </a>
                                         @endif
                                     </td>
@@ -61,6 +62,7 @@
                                         foreach ($supervisors_raw as $supervisor){
                                             $supervisors[]=$supervisor->supervisor;
                                         }
+//                                        dd($supervisors);
                                         //                                        $names = implode(',',$supervisors);
                                         ?>
                                         @foreach($supervisors as $supervisor)

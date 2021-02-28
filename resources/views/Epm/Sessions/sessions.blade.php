@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
                 @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
-                    <a href="{{url('/adm/'.$auth_admin->id.'/add/session')}}">
+                    <a href="{{url('/adm/'.$auth_admin->id.'/add/new/training')}}">
                         <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-plus mr-2"></i>Add Training</button>
                     </a>
                 @endif
@@ -30,7 +30,7 @@
                 @include('Epm.layouts.sessions-list')
 
                 @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
-                    <a href="{{url('/adm/'.$auth_admin->id.'/add/session')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add Training</a>
+                    <a href="{{url('/adm/'.$auth_admin->id.'/add/new/training')}}" class="mb-0 text-body"><i class="feather icon-plus mr-2"></i>Add Training</a>
                 @endif
             </div>
         </div>

@@ -25,23 +25,6 @@
                 <?php
                 $auth_admin = auth()->user();
                 ?>
-                <center>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="text-success"><h5>{{session()->get('success')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="text-danger"><h5>{{session()->get('error')}}</h5></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                </center>
                 <form action="#!" method="">
                     @csrf
                     <div class="row">
@@ -90,7 +73,7 @@
                                     @if($template->question_one)
                                         <tr>
                                             <td>1</td>
-                                            <td>{!! nl2br(e($template->question_one)) !!}</td>
+                                            <td>{!!  $template->question_one !!}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -100,7 +83,7 @@
                                     @if($template->question_two)
                                         <tr>
                                             <td>2</td>
-                                            <td>{!! nl2br(e($template->question_two)) !!}</td>
+                                            <td>{!! $template->question_two !!}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -110,7 +93,7 @@
                                     @if($template->question_three)
                                         <tr>
                                             <td>3</td>
-                                            <td>{!! nl2br(e($template->question_three)) !!}</td>
+                                            <td>{!! $template->question_three !!}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -120,7 +103,7 @@
                                     @if($template->question_four)
                                         <tr>
                                             <td>4</td>
-                                            <td>{!! nl2br(e($template->question_four)) !!}</td>
+                                            <td>{!! $template->question_four !!}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -130,7 +113,7 @@
                                     @if($template->question_five)
                                         <tr>
                                             <td>5</td>
-                                            <td>{!! nl2br(e($template->question_five)) !!}</td>
+                                            <td>{!! $template->question_five !!}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>

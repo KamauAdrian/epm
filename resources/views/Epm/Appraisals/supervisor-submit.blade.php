@@ -28,6 +28,7 @@
 
                 <?php
                 $auth_admin = auth()->user();
+                $pmo = \App\Models\User::find($appraisal->pmo_id);
                 ?>
                 <form id="form-submit-appraisal">
                     <?php
@@ -41,7 +42,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$appraisal->pmo}}" readonly>
+                                <input type="text" name="name" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="Luke S" value="{{$pmo->name}}" readonly>
                                 <input id="form_appraisal_appraisal_id" type="hidden" name="name"   value="{{$appraisal->id}}">
                                 <input id="form_appraisal_pmo_id" type="hidden" name="name"   value="{{$appraisal->pmo_id}}">
                             </div>
@@ -55,13 +56,13 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Employee Number</label>
-                                <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$appraisal->pmo_employee_number}}" readonly>
+                                <input type="text" name="employee_number" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="00198" value="{{$pmo->employee_number}}" readonly>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Department</label>
-                                <input type="text" name="department" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$appraisal->pmo_department}}" readonly>
+                                <input type="text" name="department" style="border: none; border-bottom: 1px solid #000000;" class="form-control" placeholder="(County, Constituency)" value="{{$pmo->department}}" readonly>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -85,7 +86,7 @@
                                     @if($appraisal->question_one)
                                         <tr id="appraisal_report_q1">
                                             <td>1</td>
-                                            <td>{!! nl2br(e($appraisal->question_one)) !!}</td>
+                                            <td>{!! $appraisal->question_one !!}</td>
                                             <td>
                                                 {!! $scores[0]->self_score !!}
                                             </td>
@@ -102,7 +103,7 @@
                                     @if($appraisal->question_two)
                                         <tr id="appraisal_report_q2">
                                             <td>2</td>
-                                            <td>{!! nl2br(e($appraisal->question_two)) !!}</td>
+                                            <td>{!! $appraisal->question_two !!}</td>
                                             <td>
                                                 {!! $scores[1]->self_score !!}
                                             </td>
@@ -119,7 +120,7 @@
                                     @if($appraisal->question_three)
                                         <tr id="appraisal_report_q3">
                                             <td>3</td>
-                                            <td>{!! nl2br(e($appraisal->question_three)) !!}</td>
+                                            <td>{!! $appraisal->question_three !!}</td>
                                             <td>
                                                 {!! $scores[2]->self_score !!}
                                             </td>
@@ -136,7 +137,7 @@
                                     @if($appraisal->question_four)
                                         <tr id="appraisal_report_q4">
                                             <td>4</td>
-                                            <td>{!! nl2br(e($appraisal->question_four)) !!}</td>
+                                            <td>{!! $appraisal->question_four !!}</td>
                                             <td>
                                                 {!! $scores[3]->self_score !!}
                                             </td>
@@ -153,7 +154,7 @@
                                     @if($appraisal->question_five)
                                         <tr id="appraisal_report_q5">
                                             <td>5</td>
-                                            <td>{!! nl2br(e($appraisal->question_five)) !!}</td>
+                                            <td>{!! $appraisal->question_five !!}</td>
                                             <td>
                                                 {!! $scores[4]->self_score !!}
                                             </td>
