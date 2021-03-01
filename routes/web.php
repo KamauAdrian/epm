@@ -219,11 +219,14 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/add/new/training',[App\Http\Controllers\TrainingController::class, 'create']);
     Route::post('/adm/{id}/save/training',[App\Http\Controllers\TrainingController::class, 'store']);
     Route::get('/adm/{id}/view/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'show']);
-    Route::get('/adm/{id}/view/training/{training_id}/training/day/{day_id}',[App\Http\Controllers\TrainingController::class, 'training_per_day']);
-    Route::get('/adm/{id}/confirm/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'session_approve']);
+    Route::get('/adm/{id}/confirm/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'approve']);
     Route::get('/adm/{id}/edit/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'edit']);
     Route::get('/adm/{id}/update/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'update']);
     Route::get('/adm/{id}/delete/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'destroy']);
+
+    //Trainings(Per Day Day one ...)
+    Route::get('/adm/{id}/view/training/{training_id}/day/{day_id}/{key}',[App\Http\Controllers\TrainingDayController::class, 'show']);
+
     //Trainings(Sessions)
     Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\SessionController::class, 'index']);
     Route::get('/adm/{id}/add/session',[App\Http\Controllers\SessionController::class, 'create']);
@@ -307,6 +310,10 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/save/team/trainers',[App\Http\Controllers\TeamTrainerController::class, 'store']);
     Route::get('/adm/{id}/add/team/trainer/members/team_id={team_id}',[App\Http\Controllers\TeamTrainerController::class, 'edit']);
     Route::post('/adm/{id}/save/team/trainer/members/team_id={team_id}',[App\Http\Controllers\TeamTrainerController::class, 'update']);
+
+    // Email Messaging
+    Route::get('/adm/{id}/emails/inbox',[App\Http\Controllers\EmailMessageController::class, 'index']);
+    Route::get('/adm/{id}/compose/email',[App\Http\Controllers\EmailMessageController::class, 'compose']);
 });
 
 //Center managers routes

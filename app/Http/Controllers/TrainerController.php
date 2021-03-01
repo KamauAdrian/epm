@@ -30,7 +30,7 @@ class TrainerController extends Controller
      * Show the form for uploading Trainers.
      */
     public function request_upload_trainers($id){
-        return view('Epm.Trainers.upload-trainers');
+        return view("Epm.Trainers.upload-trainers");
     }
 
     /**
@@ -38,7 +38,7 @@ class TrainerController extends Controller
      */
     public function download_trainers_excel_template()
     {
-        return Excel::download(new TrainersTemplateExport(), 'trainers.xlsx');
+        return Excel::download(new TrainersTemplateExport(), "trainers.xlsx");
     }
 
     /**
@@ -46,25 +46,27 @@ class TrainerController extends Controller
      */
     public function upload_trainers(Request $request,$id){
         $admin = User::find($id);
-
-        if ($admin->role->name == 'Su Admin'){
+        if ($admin->role->name == "Su Admin"){
             $messages = [
-                'trainers.required'=>'Please Select trainers Excel File to Upload',
+                "trainers.required"=>"Please Select trainers Excel File to Upload",
             ];
             $this->validate($request,[
-                'trainers'=>'required',
+                "trainers"=>"required",
             ],$messages);
-            $trainers_excel = Excel::toArray(new TrainersImport(), $request->file('trainers'));
+            $trainers_excel = Excel::toArray(new TrainersImport(), $request->file("trainers"));
+//            dd($trainers_excel);
             $trainers_raw = [];
             foreach ($trainers_excel as $trainer_excel){
                 $trainers_raw[] = $trainer_excel;
             }
+//            dd($trainers_raw);
             $trainers = array_slice($trainers_raw[0],1);
             $role = new Role();
             $new_trainer_role = null;
-            $role->name = 'Trainer';
+            $role->name = "Trainer";
             //check if role already created
-            $exists_role = DB::table('roles')->where('name','Trainer')->first();
+//            $exists_role = DB::table("roles")->where("name","Trainer")->first();
+            $exists_role = Role::where("name","Trainer")->first();
             if ($exists_role){
                 $new_trainer_role = $exists_role->id;
             }else{
@@ -84,11 +86,12 @@ class TrainerController extends Controller
                 $new_trainer_saved = $new_trainer->save();
                 if ($new_trainer_saved){
                     $data = $new_trainer;
+                    $email = $new_trainer->email;
                     //send Email invite
-                    User::SendNewUserAccountActivationEmail($new_trainer->email,$data);
+                    User::SendNewUserAccountActivationEmail($email,$data);
                 }
             }
-            return redirect('/list/all/admins/role_id='.$new_trainer_role)->with('success','Trainers Successfully Uploaded');
+            return redirect("/list/all/admins/role_id=".$new_trainer_role)->with("success","Trainers Successfully Uploaded");
         }
     }
 
@@ -96,10 +99,12 @@ class TrainerController extends Controller
      * Return a json array of Trainers.
      */
     public function trainers(){
-        $role = DB::table('roles')->where('name','Trainer')->first();
+//        $role = DB::table('roles')->where('name','Trainer')->first();
+        $role = Role::where("name","Trainer")->first();
         $result = [];
         if ($role){
-            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+//            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+            $trainers = User::where("role_id",$role->id)->get();
             if (!empty($trainers)){
                 foreach ($trainers as $trainer){
                     $result[]=$trainer;
@@ -111,13 +116,15 @@ class TrainerController extends Controller
 
     public function asses_trainer($id){
         $admin = User::find($id);
-        $trainers = '';
-        $role = DB::table('roles')->where('name','Trainer')->first();
+        $trainers = "";
+//        $role = DB::table('roles')->where('name','Trainer')->first();
+        $role = Role::where("name","Trainer")->first();
         if ($role){
-            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+//            $trainers = DB::table('users')->where('role_id',$role->id)->get();
+            $trainers = User::where("role_id",$role->id)->get();
         }
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            return view('Epm.Trainers.asses-trainer',compact('trainers'));
+        if ($admin->role->name == "Su Admin" || $admin->role->name == "Project Manager"){
+            return view("Epm.Trainers.asses-trainer",compact("trainers"));
         }
     }
 

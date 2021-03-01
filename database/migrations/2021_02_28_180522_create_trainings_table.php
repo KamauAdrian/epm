@@ -15,12 +15,14 @@ class CreateTrainingsTable extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->string('training');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('center')->nullable();
-            $table->string('institution')->nullable();
-            $table->string('description');
+            $table->string("training");
+            $table->date("start_date");
+            $table->date("end_date");
+            $table->string("type");
+            $table->string("center")->nullable();
+            $table->string("institution")->nullable();
+            $table->string("description");
+            $table->string("status")->default("Pending");
             $table->timestamps();
         });
     }

@@ -12,6 +12,9 @@ class TrainingDay extends Model
     public function session(){
         return $this->belongsTo('App\Models\TrainingSession','session_id');
     }
+    public function training(){
+        return $this->belongsTo('App\Models\Training','training_id');
+    }
 
     public function trainees(){
         return $this->belongsToMany('App\Models\Trainee','trainee_session_single_day','day_id','trainee_id');

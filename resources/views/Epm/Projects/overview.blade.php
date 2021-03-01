@@ -28,19 +28,22 @@
                     </thead>
                     <?php
                     $activities = $project->activities;
-                    $tasks = $project->tasks
+//                    $tasks = $project->tasks;
+//                    dd($activities,$tasks);
                     ?>
-                    @if($tasks)
+                    @if($activities)
+                        @foreach($activities as $key=>$activity)
                         <tbody>
-                            @foreach($activities as $key=>$activity)
-                                <?php
-                                $tasks_raw = $activity->tasks;
-                                $tasks_array = [];
-                                foreach ($tasks_raw as $task_raw){
-                                    $tasks_array[] = $task_raw;
-                                }
-                                $tasks = array_slice($tasks_array,1);
-                                ?>
+                            <?php
+                            $tasks_raw = $activity->tasks;
+                            $tasks_array = [];
+                            foreach ($tasks_raw as $task_raw){
+                                $tasks_array[] = $task_raw;
+                            }
+                            $tasks = array_slice($tasks_array,1);
+//                                dd($tasks);
+                            ?>
+                            @if(count($tasks_raw)>=1)
                                 <tr>
                                     <td rowspan="{{count($tasks_raw)}}">{{$activity->name}}</td>
                                     <td>{{$tasks_array[0]->name}}</td>
@@ -73,41 +76,49 @@
                                         @endif
                                     </td>
                                 </tr>
-                                @foreach($tasks as $task)
-                                    <tr>
-                                        <td>{{$task->name}}</td>
-                                        <td>{{date("dS M y",strtotime($task->created_at))}}</td>
-                                        <td>
-                                            <?php
-                                            $task_assignees = $task->assignees;
-                                            $task_assignees_names = [];
-                                            foreach ($task_assignees as $task_assignee){
-                                                $names = $task_assignee->name;
-                                                $split_name = explode(" ",$names);
-                                                if (count($split_name)>1){
-                                                    $task_assignees_names[] = $split_name[0];
-                                                }else{
-                                                    $task_assignees_names[] = $names;
+                                @if($tasks)
+                                    @foreach($tasks as $task)
+                                        <tr>
+                                            <td>{{$task->name}}</td>
+                                            <td>{{date("dS M y",strtotime($task->created_at))}}</td>
+                                            <td>
+                                                <?php
+                                                $task_assignees = $task->assignees;
+                                                $task_assignees_names = [];
+                                                foreach ($task_assignees as $task_assignee){
+                                                    $names = $task_assignee->name;
+                                                    $split_name = explode(" ",$names);
+                                                    if (count($split_name)>1){
+                                                        $task_assignees_names[] = $split_name[0];
+                                                    }else{
+                                                        $task_assignees_names[] = $names;
+                                                    }
                                                 }
-                                            }
-                                            ?>
-                                            @foreach($task_assignees_names as $task_assignee_name)
-                                                {{$task_assignee_name}}
-                                            @endforeach
-                                        </td>
-                                        <td>{{date("dS M Y",strtotime($task->due_date))}}</td>
-                                        <td>{{date("dS M Y",strtotime($task->completion_date))}}</td>
-                                        <td>
-                                            @if($task->status ==0)
-                                                In Complete
-                                            @else
-                                                Complete
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endforeach
+                                                ?>
+                                                @foreach($task_assignees_names as $task_assignee_name)
+                                                    {{$task_assignee_name}}
+                                                @endforeach
+                                            </td>
+                                            <td>{{date("dS M Y",strtotime($task->due_date))}}</td>
+                                            <td>{{date("dS M Y",strtotime($task->completion_date))}}</td>
+                                            <td>
+                                                @if($task->status ==0)
+                                                    In Complete
+                                                @else
+                                                    Complete
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            @else
+                                <tr>
+                                    <td>{{$activity->name}}</td>
+                                    <td class="text-center" colspan="5">No Tasks</td>
+                                </tr>
+                            @endif
                         </tbody>
+                        @endforeach
                     @endif
                     <tfoot>
                         <tr>

@@ -104,7 +104,7 @@
 <script src="{{url('assets/js/pages/front.js')}}"></script>
 <script>
     $(document).ready(function (){
-        $("#tableListDataTable").DataTable({
+        $("#tableListDataTable").dataTable({
             "order":[],
         });
     });

@@ -268,7 +268,7 @@ class TaskController extends Controller
         $today = date('Y-m-d');
         $overdue_tasks = [];
         foreach ($tasks as $task){
-            if ($task->due_date<$today){
+            if ($task->due_date<$today && $task->status==0){
                 $overdue_tasks[] = $task;
             }
         }

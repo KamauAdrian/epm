@@ -58,7 +58,7 @@
         <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Trainings Per Day</h5>
+                        <h5>Days</h5>
                     </div>
                     <div class="card-body">
                         <div class="col-md-12">
@@ -71,6 +71,7 @@
                                 <a href="{{url("adm/".$auth_admin->id."/view/session/".$trainingSession->id."/training/day/".$day->id)}}">
                                     <div class="card" style="color: grey">
                                     <div class="card-header">
+                                        Day {{$key+1}}
                                         {{date('dS M Y',strtotime($day->day))}}
                                     </div>
                                     <div class="card-body">
