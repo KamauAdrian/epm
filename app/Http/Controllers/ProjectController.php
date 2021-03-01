@@ -154,15 +154,20 @@ class ProjectController extends Controller
     public function complete_tasks($project_id){
         $project = Project::find($project_id);
         $tasks = $project->tasks();
-        $complete_tasks = $tasks->where('status',1)->get();
-        $result = round((count($complete_tasks)*100)/count($project->tasks),2);
+        $result = "";
+        if (count($project->tasks)>0){
+            $complete_tasks = $tasks->where('status',1)->get();
+            $result = round((count($complete_tasks)*100)/count($project->tasks),2);
+        }else{
+            $result = 0;
+        }
         return response()->json($result);
     }
     public function incomplete_tasks($project_id){
         $project = Project::find($project_id);
         $tasks = $project->tasks();
         $result = "";
-        if ($tasks>0){
+        if (count($project->tasks)>0){
             $inComplete_tasks = $tasks->where("status",0)->get();
             $result = round((count($inComplete_tasks)*100)/count($project->tasks),2);
         }else{
@@ -175,7 +180,7 @@ class ProjectController extends Controller
         $tasks = $project->tasks;
         $today = date('Y-m-d');
         $overdue_tasks = [];
-        if ($tasks>0){
+        if (count($project->tasks)>0){
             foreach ($tasks as $task){
                 if ($task->due_date<$today && $task->status==0){
                     $overdue_tasks[] = $task;
