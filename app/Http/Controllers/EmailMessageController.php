@@ -49,8 +49,10 @@ class EmailMessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$mail_id)
     {
+        $admin = User::find($id);
+//        $mail = EmailMessage::find($mail_id);
         return view("Epm.Communication.Emails.read");
     }
 

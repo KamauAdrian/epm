@@ -317,6 +317,7 @@ Route::group(['middleware'=>'admin'],function (){
     // Email Messaging
     Route::get('/adm/{id}/emails/inbox',[App\Http\Controllers\EmailMessageController::class, 'index']);
     Route::get('/adm/{id}/compose/email',[App\Http\Controllers\EmailMessageController::class, 'create']);
+    Route::get('/adm/{id}/read/email/{mail_id}',[App\Http\Controllers\EmailMessageController::class, 'show']);
 });
 
 //Center managers routes
