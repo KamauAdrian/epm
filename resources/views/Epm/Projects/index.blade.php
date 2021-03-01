@@ -76,15 +76,6 @@
                                </tr>
                            @endforeach
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Work Streams</th>
-                            <th>Date Created</th>
-                            <th>Collaborators</th>
-                            <th>Due Date</th>
-                            <th class="text-right">Actions</th>
-                        </tr>
-                        </tfoot>
                     @endif
                 </table>
             </div>

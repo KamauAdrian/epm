@@ -10,10 +10,11 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-      'name',
-        'due_date',
-        'description',
-        'status'
+        "name",
+        "due_date",
+        "description",
+        "status",
+        "completion_date"
     ];
 
     public function assignees(){

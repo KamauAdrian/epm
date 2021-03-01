@@ -5,11 +5,60 @@
 @endsection
 
 @section('content')
-    <?php $auth_admin = auth()->user(); ?>
+    <?php
+    $auth_admin = auth()->user();
+    $date = date("Y-m-d");
+    $date_7_days_later = date("Y-m-d",strtotime("+7 days",strtotime($date)));
+//    dd($date_7_days_later);
+    ?>
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12 d-flex align-items-center mb-4">
                 <h1 class="d-inline-block mb-0 font-weight-normal">{{$project->name}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Tasks</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <div id="completeTasks"></div>
+                                                    <h5 class="text-success">Complete Tasks</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <div id="inCompleteTasks"></div>
+                                                    <h5 class="text-primary">Incomplete Tasks</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <div id="overDueTasks"></div>
+                                                    {{--                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
+                                                    <h5 class="text-danger">Overdue Tasks</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -67,7 +116,11 @@
                                         @endforeach
                                     </td>
                                     <td>{{date("dS M Y",strtotime($tasks_array[0]->due_date))}}</td>
+                                    @if($tasks_array[0]->completion_date)
                                     <td>{{date("dS M Y",strtotime($tasks_array[0]->completion_date))}}</td>
+                                    @else
+                                        <td class="text-center">-</td>
+                                    @endif
                                     <td>
                                         @if($tasks_array[0]->status ==0)
                                             In Complete
@@ -100,7 +153,11 @@
                                                 @endforeach
                                             </td>
                                             <td>{{date("dS M Y",strtotime($task->due_date))}}</td>
-                                            <td>{{date("dS M Y",strtotime($task->completion_date))}}</td>
+                                            @if($task->completion_date)
+                                                <td>{{date("dS M Y",strtotime($task->completion_date))}}</td>
+                                            @else
+                                                <td class="text-center">-</td>
+                                            @endif
                                             <td>
                                                 @if($task->status ==0)
                                                     In Complete
@@ -114,23 +171,12 @@
                             @else
                                 <tr>
                                     <td>{{$activity->name}}</td>
-                                    <td class="text-center" colspan="5">No Tasks</td>
+                                    <td class="text-center" colspan="5">No Tasks Yet for This Activity</td>
                                 </tr>
                             @endif
                         </tbody>
                         @endforeach
                     @endif
-                    <tfoot>
-                        <tr>
-                            <th>Activity</th>
-                            <th>Task</th>
-                            <th>Date Opened</th>
-                            <th>Collaborators Involved</th>
-                            <th>Due Date</th>
-                            <th>Completion Date</th>
-                            <th class="text-right">Status</th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
             <div class="modal fade" id="ModalDeleteWorkStream" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -164,6 +210,153 @@
 
 @section('js')
     <script>
+        $(function() {
+            var options = {
+                chart: {
+                    type: 'radialBar',
+                    offsetY: -20,
+                    sparkline: {
+                        enabled: true
+                    },
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: "#D7DFE9",
+                            strokeWidth: '97%',
+                            margin: 5, // margin is in pixels
+                            shadow: {
+                                enabled: true,
+                                top: 2,
+                                left: 0,
+                                color: '#999',
+                                opacity: 1,
+                                blur: 2
+                            }
+                        },
+                        dataLabels: {
+                            value: {
+                                offsetY: -40,
+                                fontSize: '14px'
+                            }
+                        }
+                    }
+                },
+                colors: ['#FF0B37'],
+                fill: {
+                    type: 'solid',
+                },
+                series: [],
+                labels: ['Overdue'],
+            }
+            var chart = new ApexCharts(document.querySelector("#overDueTasks"), options);
+            chart.render();
+            var project_id = 2;
+            axios.get('/adm/get/project/'+project_id+'/overdue/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
+        });
+        $(function() {
+            var options = {
+                chart: {
+                    type: 'radialBar',
+                    offsetY: -20,
+                    sparkline: {
+                        enabled: true
+                    },
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: "#D7DFE9",
+                            strokeWidth: '97%',
+                            margin: 5, // margin is in pixels
+                            shadow: {
+                                enabled: true,
+                                top: 2,
+                                left: 0,
+                                color: '#999',
+                                opacity: 1,
+                                blur: 2
+                            }
+                        },
+                        dataLabels: {
+                            value: {
+                                offsetY: -40,
+                                fontSize: '14px'
+                            }
+                        }
+                    }
+                },
+                colors: ['#2DCA73'],
+                fill: {
+                    type: 'solid',
+                },
+                series: [],
+                labels: ['Complete'],
+            }
+            var chart = new ApexCharts(document.querySelector("#completeTasks"), options);
+            chart.render();
+            var project_id = 2;
+            axios.get('/adm/get/project/'+project_id+'/complete/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
+        });
+        $(function() {
+            var options = {
+                chart: {
+                    type: 'radialBar',
+                    offsetY: -20,
+                    sparkline: {
+                        enabled: true
+                    },
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: "#D7DFE9",
+                            strokeWidth: '97%',
+                            margin: 5, // margin is in pixels
+                            shadow: {
+                                enabled: true,
+                                top: 2,
+                                left: 0,
+                                color: '#999',
+                                opacity: 1,
+                                blur: 2
+                            }
+                        },
+                        dataLabels: {
+                            value: {
+                                offsetY: -40,
+                                fontSize: '14px'
+                            }
+                        }
+                    }
+                },
+                colors: ['#0B69FF'],
+                fill: {
+                    type: 'solid',
+                },
+                series: [],
+                labels: ['Incomplete'],
+            }
+            var chart = new ApexCharts(document.querySelector("#inCompleteTasks"), options);
+            chart.render();
+            var project_id = 2;
+            axios.get('/adm/get/project/'+project_id+'/incomplete/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
+        });
         $(".deleteWorkStream").click(function () {
             var url = $(this).attr('data-url');
             $("#form-delete-work-stream").attr("action",url);

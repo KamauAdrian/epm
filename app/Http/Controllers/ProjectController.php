@@ -7,6 +7,7 @@ use App\Mail\CreatePassword;
 use App\Mail\ProjectCollaborationInvite;
 use App\Models\Project;
 use App\Models\Role;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -149,6 +150,33 @@ class ProjectController extends Controller
         $admin = User::find($id);
         $project = Project::find($project_id);
         return view('Epm.Projects.overview',compact('project'));
+    }
+    public function complete_tasks($project_id){
+        $project = Project::find($project_id);
+        $tasks = $project->tasks();
+        $complete_tasks = $tasks->where('status',1)->get();
+        $result = round((count($complete_tasks)*100)/count($project->tasks),2);
+        return response()->json($result);
+    }
+    public function incomplete_tasks($project_id){
+        $project = Project::find($project_id);
+        $tasks = $project->tasks();
+        $inComplete_tasks = $tasks->where('status',0)->get();
+        $result = round((count($inComplete_tasks)*100)/count($project->tasks),2);
+        return response()->json($result);
+    }
+    public function overdue_tasks($project_id){
+        $project = Project::find($project_id);
+        $tasks = $project->tasks;
+        $today = date('Y-m-d');
+        $overdue_tasks = [];
+        foreach ($tasks as $task){
+            if ($task->due_date<$today && $task->status==0){
+                $overdue_tasks[] = $task;
+            }
+        }
+        $result = round((count($overdue_tasks)*100)/count($tasks),2);
+        return response()->json($result);
     }
 
     public function project_names(){

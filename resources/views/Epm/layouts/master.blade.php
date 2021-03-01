@@ -91,6 +91,7 @@
 
 <!-- Required Js -->
 <script src="{{url('assets/js/plugins/bootstrap.min.js')}}"></script>
+<script src="{{url('assets/js/plugins/apexcharts.min.js')}}"></script>
 <script src="{{url('assets/js/pcoded.min.js')}}"></script>
 <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
 <script src="{{url('assets/dist/vue.js')}}"></script>

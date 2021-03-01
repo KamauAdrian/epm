@@ -776,7 +776,6 @@
 @endsection
 @section('js')
     <!-- Required Js -->
-    <script src="{{url('assets/js/plugins/apexcharts.min.js')}}"></script>
     <script src="{{url('assets/dist/axios.js')}}"></script>
     <script src="{{url('assets/js/plugins/moment.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/daterangepicker.js')}}"></script>

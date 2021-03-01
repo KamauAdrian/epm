@@ -102,8 +102,11 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/edit/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'edit']);
     Route::post('/adm/{id}/update/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'update']);
     Route::post('/adm/{id}/delete/project/{project_id}',[App\Http\Controllers\ProjectController::class, 'destroy']);
-
-    //Projects -> Boards
+    //Project tasks overview
+    Route::get('/adm/get/project/{project_id}/complete/tasks',[App\Http\Controllers\ProjectController::class, 'complete_tasks']);//json array of tasks marked as complete
+    Route::get('/adm/get/project/{project_id}/incomplete/tasks',[App\Http\Controllers\ProjectController::class, 'incomplete_tasks']);//json array of tasks Marked incomplete(status 0)
+    Route::get('/adm/get/project/{project_id}/overdue/tasks',[App\Http\Controllers\ProjectController::class, 'overdue_tasks']);//json array of tasks past the due date
+    //Projects -> Boards/Activities
     Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
 
     //Projects -> Tasks
@@ -313,7 +316,7 @@ Route::group(['middleware'=>'admin'],function (){
 
     // Email Messaging
     Route::get('/adm/{id}/emails/inbox',[App\Http\Controllers\EmailMessageController::class, 'index']);
-    Route::get('/adm/{id}/compose/email',[App\Http\Controllers\EmailMessageController::class, 'compose']);
+    Route::get('/adm/{id}/compose/email',[App\Http\Controllers\EmailMessageController::class, 'create']);
 });
 
 //Center managers routes
