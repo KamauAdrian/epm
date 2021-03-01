@@ -15,6 +15,7 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-center mb-4">
                 <h1 class="d-inline-block mb-0 font-weight-normal">{{$project->name}}</h1>
+                <div id="projectId" style="display: none">{{$project->id}}</div>
             </div>
         </div>
         <div class="row">
@@ -253,7 +254,7 @@
             }
             var chart = new ApexCharts(document.querySelector("#overDueTasks"), options);
             chart.render();
-            var project_id = 2;
+            var project_id = document.getElementById("projectId").innerText;
             axios.get('/adm/get/project/'+project_id+'/overdue/tasks').then(function(response) {
                 console.log(response.data);
                 chart.updateSeries([response.data]);
@@ -302,7 +303,7 @@
             }
             var chart = new ApexCharts(document.querySelector("#completeTasks"), options);
             chart.render();
-            var project_id = 2;
+            var project_id = document.getElementById("projectId").innerText;
             axios.get('/adm/get/project/'+project_id+'/complete/tasks').then(function(response) {
                 console.log(response.data);
                 chart.updateSeries([response.data]);
@@ -351,7 +352,7 @@
             }
             var chart = new ApexCharts(document.querySelector("#inCompleteTasks"), options);
             chart.render();
-            var project_id = 2;
+            var project_id = document.getElementById("projectId").innerText;
             axios.get('/adm/get/project/'+project_id+'/incomplete/tasks').then(function(response) {
                 console.log(response.data);
                 chart.updateSeries([response.data]);

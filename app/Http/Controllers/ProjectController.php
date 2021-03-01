@@ -180,6 +180,7 @@ class ProjectController extends Controller
         $tasks = $project->tasks;
         $today = date('Y-m-d');
         $overdue_tasks = [];
+        $result = "";
         if (count($project->tasks)>0){
             foreach ($tasks as $task){
                 if ($task->due_date<$today && $task->status==0){
