@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-sm-12 text-center mb-4">
-                    <h1 class="d-inline-block mb-0 font-weight-normal">Complete Tasks</h1>
+                    <h1 class="d-inline-block mb-0 font-weight-normal">In Complete Tasks</h1>
                 </div>
             </div>
             <div class="row">
