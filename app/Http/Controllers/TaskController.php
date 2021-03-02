@@ -251,6 +251,26 @@ class TaskController extends Controller
         return $response;
     }
 
+    public function complete_tasks_overview($id){
+        $tasks = Task::where('status',1)->get();
+        return view("Epm.Tasks.complete",compact("tasks"));
+    }
+    public function incomplete_tasks_overview($id){
+        $tasks = Task::where('status',0)->get();
+        return view("Epm.Tasks.incomplete",compact("tasks"));
+    }
+    public function overdue_tasks_overview(){
+        $tasks_raw = Task::all();
+        $today = date('Y-m-d');
+        $tasks = [];
+        foreach ($tasks_raw as $task_raw){
+            if ($task_raw->due_date<$today && $task_raw->status==0){
+                $tasks[] = $task_raw;
+            }
+        }
+        return view("Epm.Tasks.complete",compact("tasks"));
+    }
+
     public function complete_tasks(){
         $tasks = Task::all();
         $complete_tasks = Task::where('status',1)->get();

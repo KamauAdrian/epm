@@ -131,6 +131,10 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/assign/task/{task_id}/new/collaborator',[App\Http\Controllers\TaskController::class, 'update_assignees']);
     Route::post('/adm/{id}/update/task/{task_id}/due_date',[App\Http\Controllers\TaskController::class, 'update_due_date']);
     Route::post('/adm/{id}/mark/task/{task_id}/complete',[App\Http\Controllers\TaskController::class, 'mark_complete']);
+    //projects -> Tasks (Attachments)
+    Route::get('/adm/{id}/view/complete/tasks',[App\Http\Controllers\TaskController::class, 'complete_tasks_overview']);
+    Route::get('/adm/{id}/view/incomplete/tasks',[App\Http\Controllers\TaskController::class, 'incomplete_tasks_overview']);
+    Route::get('/adm/{id}/view/overdue/tasks',[App\Http\Controllers\TaskController::class, 'overdue_tasks_overview']);
 
     //projects -> Tasks (Attachments)
     Route::post('/adm/{id}/add/task/{task_id}/attachment',[App\Http\Controllers\TaskAttachmentController::class, 'store']);

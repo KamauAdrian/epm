@@ -22,28 +22,34 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div id="inCompleteTasks"></div>
-                        <h5 class="text-primary">Incomplete Tasks</h5>
+                <a href="{{url("/adm/".$auth_admin->id."/view/incomplete/tasks")}}">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div id="inCompleteTasks"></div>
+                            <h5 class="text-primary">Incomplete Tasks</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div id="completeTasks"></div>
-                        <h5 class="text-success">Complete Tasks</h5>
+                <a href="{{url("/adm/".$auth_admin->id."/view/complete/tasks")}}">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div id="completeTasks"></div>
+                            <h5 class="text-success">Complete Tasks</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div id="overDueTasks"></div>
-                        <h5 class="text-danger">Overdue Tasks</h5>
+                <a href="{{url("/adm/".$auth_admin->id."/view/overdue/tasks")}}">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div id="overDueTasks"></div>
+                            <h5 class="text-danger">Overdue Tasks</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
             <div class="row">
