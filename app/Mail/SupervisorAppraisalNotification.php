@@ -17,11 +17,13 @@ class SupervisorAppraisalNotification extends Mailable
      * @return void
      */
 
-    public  $data;
+    public  $supervisor;
+    public  $pmo;
 
-    public function __construct($pmo_supervisor)
+    public function __construct($pmo_supervisor,$pmo_pmo)
     {
-        $this->data = $pmo_supervisor;
+        $this->supervisor = $pmo_supervisor;
+        $this->pmo = $pmo_pmo;
     }
 
     /**

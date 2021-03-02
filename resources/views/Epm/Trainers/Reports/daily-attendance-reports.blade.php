@@ -15,9 +15,19 @@
             <div class="col-sm-12">
                 <h1 class="d-inline-block mb-0 font-weight-normal">Daily Attendance Reports</h1>
                 @if($auth_admin->role->name == 'Trainer')
-                    <a href="{{url('/adm/'.$auth_admin->id.'/submit/daily/attendance/report')}}" class="float-right">
-                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Attendance</button>
-                    </a>
+                    <?php
+                    date_default_timezone_set("Africa/Nairobi");
+                    $current_time = date("Y-m-d H:i:s");
+                    $start_time = date("Y-m-d 00:00:00");
+                    $end_time = date("Y-m-d 10:00:00");
+                    ?>
+                    @if($current_time>=$start_time && $current_time<=$end_time)
+                        <a href="{{url('/adm/'.$auth_admin->id.'/submit/daily/attendance/report')}}" class="float-right">
+                            <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Submit Attendance</button>
+                        </a>
+                        @else
+                            <button type="button" onclick="alert('Sorry Time Expired')" class="mr-2 btn d-block ml-auto btn-dark disabled">Submit Attendance</button>
+                    @endif
                 @endif
             </div>
             <div class="col-sm-12 mt-2">

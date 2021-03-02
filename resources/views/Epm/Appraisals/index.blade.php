@@ -33,6 +33,7 @@
                             <th>Name</th>
                             <th>Supervisors - Status</th>
                             <th>PMO Status</th>
+                            <th>Created At</th>
                             <th class="text-right">Actions</th>
                         </tr>
                         </thead>
@@ -86,6 +87,9 @@
                                         @elseif($pmo_status==0)
                                             Pending
                                         @endif
+                                    </td>
+                                    <td>
+                                       {{date("dS M Y",strtotime($appraisal->created_at))}}
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-group">

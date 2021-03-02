@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PerformanceAppraisalSubmitJob;
+use App\Jobs\PerformanceAppraisalSuperviseJob;
 use App\Mail\PmoAppraisalNotification;
 use App\Mail\PmoAppraisalSupervisedNotification;
 use App\Mail\PmoAppraisalSuperviseNotification;
@@ -155,17 +157,7 @@ class AppraisalController extends Controller
             ],$messages);
 //            $appraisal = new PmoPerformanceAppraisalReport();
             $appraisal = new Appraisal();
-            $supervisors = [];
-            foreach ($request->supervisor_ids as $supervisor_id){
-                $supervisors[] = ['supervisor_id'=>$supervisor_id];
-            }
-            foreach ($request->supervisor_names as $key=>$supervisor_name){
-                $supervisors[$key] += ['name'=>$supervisor_name];
-            }
-            foreach ($request->supervisor_emails as $key=>$supervisor_email){
-                $supervisors[$key] += ['email'=>$supervisor_email];
-            }
-//            dd($supervisors);
+            $supervisors = $request->supervisor_ids;
             $appraisal_pmo = User::find($request->pmo_id);
             $appraisal->pmo_id = $appraisal_pmo->id;
             $appraisal->pmo_status = 0;
@@ -178,29 +170,30 @@ class AppraisalController extends Controller
 //            dd($supervisors);
             $saved = $appraisal->save();
             if ($saved){
-                $pmo = [
-                    'user_id'=>$appraisal->id,
-                    'name'=>$appraisal->pmo,
+                $params_pmo = [
+                    'data'=>$appraisal_pmo,
                     'email'=>$appraisal_pmo->email,
                 ];
-                Mail::to($appraisal_pmo->email)->send(new PmoAppraisalNotification($pmo));
+
+                dispatch(new PerformanceAppraisalSubmitJob($params_pmo));
+//                Mail::to($appraisal_pmo->email)->send(new PmoAppraisalNotification($pmo));
                 foreach ($supervisors as $supervisor){
+                    $pmo_supervisor = User::find($supervisor);
+//                    $pmo_pmo = User::find($supervisor);
                     $new_supervisor = new AppraisalSupervisor();
-                    $new_supervisor->supervisor = $supervisor['name'];
-                    $new_supervisor->supervisor_email = $supervisor['email'];
-                    $new_supervisor->supervisor_id = $supervisor['supervisor_id'];
+                    $new_supervisor->supervisor = $pmo_supervisor->name;
+                    $new_supervisor->supervisor_email = $pmo_supervisor->email;
+                    $new_supervisor->supervisor_id = $pmo_supervisor->id;
                     $new_supervisor->appraisal_id = $appraisal->id;
                     $supervisor_saved = $new_supervisor->save();
                     if ($supervisor_saved){
-                        $pmo_supervisor = [
-                            'user_id'=>$new_supervisor->id,
-                            'name'=>$new_supervisor->supervisor,
-                            'email'=>$new_supervisor->supervisor_email,
-                            'pmo_name'=>$appraisal->pmo,
+                        $params_supervisor = [
+                            'email'=>$pmo_supervisor->email,
+                            'data_supervisor'=>$pmo_supervisor,
+                            'data_pmo'=>$appraisal_pmo,
                         ];
-
-                        $supervisor_email = $pmo_supervisor['email'];
-                        Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
+                       dispatch(new PerformanceAppraisalSuperviseJob($params_supervisor));
+//                        Mail::to($supervisor_email)->send(new SupervisorAppraisalNotification($pmo_supervisor));
                     }
                 }
             }
