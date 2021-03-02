@@ -22,6 +22,15 @@ class TrainingController extends Controller
         return view('Epm.Trainings.index',compact('trainings'));
     }
 
+    public function physical($id)
+    {
+        return view('Epm.Trainings.TimeTable.physical-time-table');
+    }
+    public function virtual($id)
+    {
+        return view('Epm.Trainings.TimeTable.Virtual.virtual-assistant');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

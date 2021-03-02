@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class CmReportController extends Controller
+class ReportTemplateController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $admin = User::find($id);
+        if ($admin){
+
+//            return view('Epm.Reports.Templates.Pmo.index');
+
+        }
     }
 
     /**
@@ -21,9 +27,12 @@ class CmReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $admin = User::find($id);
+        if ($admin){
+            return view('Epm.Reports.Templates.Cms.create');
+        }
     }
 
     /**
@@ -34,7 +43,7 @@ class CmReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

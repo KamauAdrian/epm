@@ -32,16 +32,16 @@
                                         <div class="col-md-4">
                                             <div class="card">
                                                 <div class="card-body text-center">
-                                                    <div id="completeTasks"></div>
-                                                    <h5 class="text-success">Complete Tasks</h5>
+                                                    <div id="inCompleteTasks"></div>
+                                                    <h5 class="text-primary">Incomplete Tasks</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="card">
                                                 <div class="card-body text-center">
-                                                    <div id="inCompleteTasks"></div>
-                                                    <h5 class="text-primary">Incomplete Tasks</h5>
+                                                    <div id="completeTasks"></div>
+                                                    <h5 class="text-success">Complete Tasks</h5>
                                                 </div>
                                             </div>
                                         </div>

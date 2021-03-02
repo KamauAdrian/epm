@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-sm-6 d-block d-sm-flex align-items-center justify-content-end mb-4 text-right">
                     <a href="{{url('/adm/'.$auth_admin->id.'/project/'.$project->id.'/overview')}}">
-                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Work Stream Overview</button>
+                        <button type="button" class="mr-2 btn d-block ml-auto btn-outline-info">Gantt Chat</button>
                     </a>
                     <a href="{{url('/adm/'.$auth_admin->id.'/edit/project/'.$project->id)}}">
                         <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Invite Teammates</button>

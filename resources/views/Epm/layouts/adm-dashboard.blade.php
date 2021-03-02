@@ -310,256 +310,6 @@
             </div>
         </ddiv>
     </div>
-
-{{--    ///////// rem copied data to sample page--}}
-    @if($auth_admin->role->name =="Su Admin" || $auth_admin->role->name =="Project Manager")
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Tasks</h5>
-                </div>
-                <div class="card-body">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <div id="openTasks"></div>
-                                            {{--                                <h5 class="text-success">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
-                                            <h5 class="text-info">Open Tasks</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <div id="overDueTasks"></div>
-                                            {{--                                <h5 class="text-danger">10.5%<i class="mr-2 ml-1 feather icon-arrow-up"></i><small class="text-body">Since last week</small></h5>--}}
-                                            <h5 class="text-danger">Overdue Tasks</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <div id="completeTasks"></div>
-                                            <h5 class="text-success">Complete Tasks</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <div id="inCompleteTasks"></div>
-                                            <h5 class="text-primary">Incomplete Tasks</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="font-weight-normal">Tasks by Work Streams</h3>
-                                        <div id="workStreamsTaskOverview" class="mb-4 mt-5"></div>
-                                        @if($projects)
-                                            <div>
-                                                @foreach($projects as $project)
-                                                    <p class="mb-3">{{$project->name}} <span class="float-right h6 mb-0 text-body">{{count($project->tasks)}}</span></p>
-                                                @endforeach
-                                                {{--                                <p class="mb-3"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>You have 2 pending requests.. <span class="float-right h6 mb-0 text-body">7</span></p>--}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-
-{{--    <div class="col-md-12">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-md-12">--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-body">--}}
-{{--                        //project managers--}}
-{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')--}}
-{{--                            <div class="row">--}}
-{{--                            <div class="col-sm-12 mb-4 align-items-center justify-content-between">--}}
-{{--                                <h2 class="font-weight-normal mb-0">PMO</h2>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div id="pmsOverview"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div class="p-4 border rounded">--}}
-{{--                                    @if($pm_role)--}}
-{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($pms)}}</h1>--}}
-{{--                                    @endif--}}
-{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-{{--                                    <div class="rounded bg-light p-3">--}}
-{{--                                        <div class="media align-items-center">--}}
-{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
-{{--                                            <div class="media-body ml-3">--}}
-{{--                                                Operations is the Department with the most PMOs--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                            //Centers--}}
-{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')--}}
-{{--                            <div class="row">--}}
-{{--                            <div class="col-sm-12 mb-4 align-items-center justify-content-between">--}}
-{{--                                <h2 class="font-weight-normal mb-0">Center Managers</h2>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div id="cmsOverview"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div class="p-4 border rounded">--}}
-{{--                                    @if($cm_role)--}}
-{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($cms)}}</h1>--}}
-{{--                                    @endif--}}
-{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-{{--                                    <div class="rounded bg-light p-3">--}}
-{{--                                        <div class="media align-items-center">--}}
-{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
-{{--                                            <div class="media-body ml-3">--}}
-{{--                                                Operations is the Department with the most PMOs--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                            //center Managers--}}
-{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')--}}
-{{--                            <div class="row">--}}
-{{--                            <div class="col-sm-12 mb-4 align-items-center justify-content-between">--}}
-{{--                                <h2 class="font-weight-normal mb-0">Centers</h2>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div id="centersOverview"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div class="p-4 border rounded">--}}
-{{--                                    @if($centers)--}}
-{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($centers)}}</h1>--}}
-{{--                                    @endif--}}
-{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-{{--                                    <div class="rounded bg-light p-3">--}}
-{{--                                        <div class="media align-items-center">--}}
-{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
-{{--                                            <div class="media-body ml-3">--}}
-{{--                                                Operations is the Department with the most PMOs--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                            //Trainers--}}
-{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')--}}
-{{--                            <div class="row">--}}
-{{--                            <div class="col-sm-12 align-items-center justify-content-between mb-4">--}}
-{{--                                <h2 class="font-weight-normal mb-0">Trainers</h2>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div id="trainersOverview"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div class="p-4 border rounded">--}}
-{{--                                    @if($trainer_role)--}}
-{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainers)}}</h1>--}}
-{{--                                    @endif--}}
-{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-{{--                                    <div class="rounded bg-light p-3">--}}
-{{--                                        <div class="media align-items-center">--}}
-{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
-{{--                                            <div class="media-body ml-3">--}}
-{{--                                                Digital Marketing is the category with the most Trainers--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                            //sessions--}}
-{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')--}}
-{{--                            <div class="row">--}}
-{{--                            <div class="col-sm-12 align-items-center justify-content-between mb-4">--}}
-{{--                                <h2 class="font-weight-normal mb-0">Sessions</h2>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div id="sessionsOverview"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div class="p-4 border rounded">--}}
-{{--                                    @if($sessions)--}}
-{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($sessions)}}</h1>--}}
-{{--                                    @endif--}}
-{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-{{--                                    <div class="rounded bg-light p-3">--}}
-{{--                                        <div class="media align-items-center">--}}
-{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
-{{--                                            <div class="media-body ml-3">--}}
-{{--                                                Operations is the Category with the most Sessions Trained--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                            //Trainees--}}
-{{--                        @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Trainer')--}}
-{{--                            <div class="row">--}}
-{{--                            <div class="col-sm-12 align-items-center justify-content-between mb-4">--}}
-{{--                                <h2 class="font-weight-normal mb-0">Trainees</h2>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div id="traineesOverview"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6">--}}
-{{--                                <div class="p-4 border rounded">--}}
-{{--                                    @if($trainees)--}}
-{{--                                        <h1 class="display-4 d-inline-block font-weight-normal">{{count($trainees)}}</h1>--}}
-{{--                                    @endif--}}
-{{--                                    <p class="text-danger d-inline-block mb-0">4.9%<i class="mr-2 ml-1 feather icon-arrow-down"></i></p>--}}
-{{--                                    --}}{{----}}{{--                                    <p class="text-uppercase">TRAINEES</p>--}}
-{{--                                    <div class="rounded bg-light p-3">--}}
-{{--                                        <div class="media align-items-center">--}}
-{{--                                            <i class="feather icon-alert-circle h2 mb-0"></i>--}}
-{{--                                            <div class="media-body ml-3">--}}
-{{--                                                February was the month with the most Trainees registered--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 {{--//best performer--}}
     <div class="col-md-12" id="awards">
         <div class="card">
@@ -694,7 +444,19 @@
                                         @if($announcement->image)
                                             <img class="card-img-top" style="height: 250px" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
                                         @else
-                                            <img class="card-img-top"  style="height: 250px" src="{{url("assets/images/icon_video.png")}}" alt="Card IMAGES">
+                                            <?php
+//                                            https://www.youtube.com/watch?v=WQDauPyl7yA
+                                            $v_id = null;
+                                            $announcement_link = $announcement->announcement_link;
+                                            $split_announcement_link = explode("v=",$announcement_link);
+                                            if (count($split_announcement_link)>1){
+                                            $v_link = explode("=",$announcement->announcement_link);
+                                            $v_id = "https://img.youtube.com/vi/".$v_link[1]."/0.jpg";
+                                            }else{
+                                                $v_id = url("assets/images/icon_video.png");
+                                            }
+                                            ?>
+                                            <img class="card-img-top"  style="height: 250px" src="{{$v_id}}" alt="Card IMAGES">
                                         @endif
                                     </a>
                                     @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager")
@@ -775,10 +537,6 @@
     </div>
 @endsection
 @section('js')
-    <!-- Required Js -->
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    <script src="{{url('assets/js/plugins/moment.min.js')}}"></script>
-    <script src="{{url('assets/js/plugins/daterangepicker.js')}}"></script>
     <script>
         $(function() {
             var options = {

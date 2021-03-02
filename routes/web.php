@@ -72,7 +72,12 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/update/adm/{id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'adm_profile_update']);
     Route::post('adm/{id}/delete/admin/{admin_id}/profile/role_id={role_id}',[App\Http\Controllers\AdminController::class, 'destroy']);
 
-    //reports
+    //Reports ->Center Managers
+    Route::get('/adm/{id}/view/cms/reports',[App\Http\Controllers\CmsReportController::class, 'index']);
+    Route::get('/adm/{id}/create/cms/report/template',[App\Http\Controllers\CmsReportController::class, 'create']);
+    Route::post('/adm/{id}/generate/cms/report/template',[App\Http\Controllers\CmsReportController::class, 'store']);
+
+    //Reports
     Route::get('/adm/{id}/view/reports/templates',[App\Http\Controllers\AdminController::class, 'reports_templates']);
     Route::get('/adm/{id}/create/new/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create']);
     Route::get('/adm/{id}/create/new/pmo/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create_pmo']);
@@ -80,8 +85,14 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/create/new/trainer/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create_trainer']);
     Route::get('/actors',[App\Http\Controllers\AdminController::class, 'report_actors']);//json array of trainers
     Route::get('/pmos',[App\Http\Controllers\AdminController::class, 'report_actors_pmos']);//json array of trainers
-    Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
-    Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
+//    Route::post('/adm/{id}/generate/report/template',[App\Http\Controllers\AdminController::class, 'report_template_generate']);
+
+
+
+
+//    Reports Template With question types
+    Route::get('/adm/{id}/create/report/template',[App\Http\Controllers\ReportTemplateController::class, 'index']);
+    Route::post('/adm/{id}/generate/template',[App\Http\Controllers\ReportTemplateController::class, 'store']);
 
     // Project managers
     Route::get('/list/all/pmo',[App\Http\Controllers\ProjectManagerController::class, 'pmo']);//json array of trainers
@@ -230,6 +241,10 @@ Route::group(['middleware'=>'admin'],function (){
     //Trainings(Per Day Day one ...)
     Route::get('/adm/{id}/view/training/{training_id}/day/{day_id}/{key}',[App\Http\Controllers\TrainingDayController::class, 'show']);
 
+    //Trainings(Time tables)
+    Route::get('/adm/{id}/view/physical/training/timetable',[App\Http\Controllers\TrainingController::class, 'physical']);
+    Route::get('/adm/{id}/view/virtual/training/timetable',[App\Http\Controllers\TrainingController::class, 'virtual']);
+
     //Trainings(Sessions)
     Route::get('/adm/{id}/list/sessions',[App\Http\Controllers\SessionController::class, 'index']);
     Route::get('/adm/{id}/add/session',[App\Http\Controllers\SessionController::class, 'create']);
@@ -333,3 +348,8 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('/admin-logout',[App\Http\Controllers\AdminController::class, 'admin_logout']);
     Route::get('/adm-profile/{id}',[App\Http\Controllers\AdminController::class, 'admin_profile']);
 });
+
+//Route::get('/twitterUserTimeLine', 'TwitterController@twitterUserTimeLine');
+Route::get('/twitterUserTimeLine',[App\Http\Controllers\TwitterController::class, 'index']);
+//Route::get('/tweet',[App\Http\Controllers\TwitterController::class, 'create']);
+Route::post('/tweet', ['as'=>'post.tweet','uses'=>'TwitterController@create']);

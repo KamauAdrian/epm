@@ -16,7 +16,7 @@
                         <?php
                         $auth_admin = auth()->user();
                         ?>
-                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/generate/pmo/report/template')}}">
+                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/generate/template')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
@@ -53,7 +53,7 @@
                                     <div class="form-group genQuiz" id="questionQuestion1" style="display: none;">
                                         <label>Question</label>
                                         <input type="text" name="question1" class="form-control" placeholder="Report question ie No of youths trained">
-{{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
+                                        {{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
                                     </div>
                                     <div class="form-group" id="optionsSelectQuestion1" style="display: none;">
                                         <label>Options</label>
@@ -96,26 +96,26 @@
         function addOpenQuestion(id){
             // var clicked = document.getElementById('open_question_type_'+id);
             // if (clicked.checked==true){}
-                var quiz = document.getElementById('questionQuestion'+id);
-                quiz.style.display = 'block'
-                var option = document.getElementById('optionsSelectQuestion'+id);
-                option.style.display = 'none'
+            var quiz = document.getElementById('questionQuestion'+id);
+            quiz.style.display = 'block'
+            var option = document.getElementById('optionsSelectQuestion'+id);
+            option.style.display = 'none'
         }
         function addMultiChoiceQuestion(id){
             // var clicked = document.getElementById('multi_question_type_'+id);
             // if (clicked.checked==true){}
-                var quiz = document.getElementById('questionQuestion'+id);
-                quiz.style.display = 'block'
-                var option = document.getElementById('optionsSelectQuestion'+id);
-                option.style.display = 'none'
+            var quiz = document.getElementById('questionQuestion'+id);
+            quiz.style.display = 'block'
+            var option = document.getElementById('optionsSelectQuestion'+id);
+            option.style.display = 'none'
 
         }
         function addSelectQuestion(id){
             // var clicked = document.getElementById('select_question_type_'+id);
-                var quiz = document.getElementById('questionQuestion'+id);
-                quiz.style.display = 'block'
-                var option = document.getElementById('optionsSelectQuestion'+id);
-                option.style.display = 'block'
+            var quiz = document.getElementById('questionQuestion'+id);
+            quiz.style.display = 'block'
+            var option = document.getElementById('optionsSelectQuestion'+id);
+            option.style.display = 'block'
         }
         function addNewOption(id){
             var option = $('.addOption'+id);
@@ -123,7 +123,7 @@
         }
         var id = $(".addReportQuestion").last().attr("id");
         $(document).on("click", "#addNewQuestion", function(){
-             id++;
+            id++;
             console.log(id);
             var newQuiz =
                 '<div id="'+id+'" class="col-sm-12 addReportQuestion">' +
@@ -147,18 +147,8 @@
                 '</a> ' +
                 '</div> ' +
                 '</div>';
-            // var oldQuiz = $('.addReportQuestion');
-            // $(newQuiz).children(":nth-child(3)").attr('id',question_id+index);
-            // $(newQuiz).children(":nth-child(4)").attr('id',option_id+index);
-            // $(newQuiz).children(":nth-child(2)").children(":first").attr('onclick','addOpenQuestion('+question_id+index+','+option_id+index+')').attr('name','question_type_'+index);
-            // $(newQuiz).children(":nth-child(2)").children(":nth-child(2)").attr("onclick",'addMultiChoiceQuestion('+question_id+index+','+option_id+index+')').attr('name','question_type_'+index);
-            // $(newQuiz).children(":nth-child(2)").children(":nth-child(3)").attr("onclick",'addSelectQuestion('+question_id+index+','+option_id+index+')').attr('name','question_type_'+index);
             $(newQuiz).insertAfter(".addReportQuestion:last");
-            // console.log(newQuiz);
-
         });
-
-
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -191,71 +181,3 @@
     </script>
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
 @endsection
-
-{{--@section('new')--}}
-{{--    <div class='input-form'>--}}
-{{--        <input type='text' placeholder='Enter name' id='name_1' class='txt' >--}}
-{{--        <input type='text' placeholder='Enter email' id='email_1' class='txt' >--}}
-{{--    </div>--}}
-{{--    <input type='button' id='but_add' value='Add new'>--}}
-
-
-{{--<div style="display:none;" class="col-sm-12 addNewReportQuestion" id="newReportQuestion">--}}
-{{--    <label>Select A Type of Question</label>--}}
-{{--    <div class="form-group">--}}
-{{--        <input type="radio" onclick="addOpenQuestion()" name="question_type_1" value="Open Question"> Open--}}
-{{--        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--    </div>--}}
-{{--    <div class="form-group">--}}
-{{--        <input type="radio" onclick="addMultiChoiceQuestion()" name="question_type_1" value="Open Question"> Yes or No--}}
-{{--        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--    </div>--}}
-{{--    <div class="form-group">--}}
-{{--        <input type="radio" onclick="addSelectQuestion()" name="question_type_1" value="Open Question"> Select--}}
-{{--        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--    </div>--}}
-
-{{--    <div class="form-group" id="questionQuestion" style="display: none;">--}}
-{{--        <label>Question</label>--}}
-{{--        <input type="text" name="questions[]" class="form-control" placeholder="Report question ie No of youths trained">--}}
-{{--        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--    </div>--}}
-{{--    <div class="form-group" id="choicesMultiChoiceQuestion" style="display: none;">--}}
-{{--        <label>Choices</label>--}}
-{{--        <div class="addChoice mb-3">--}}
-{{--            <input type="text" name="questions[]" class="form-control" placeholder="Add Choice">--}}
-{{--            <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--        </div>--}}
-{{--        <a class="float-right" href="#!" style="color: #7E858E;" onclick="addNewChoice()"><span><i class="fa fa-plus"></i></span> Add Another Choice</a>--}}
-{{--    </div>--}}
-{{--    <div class="form-group" id="optionsSelectQuestion" style="display: none;">--}}
-{{--        <label>Options</label>--}}
-{{--        <div class="addOption mb-3">--}}
-{{--            <input type="text" name="questions[]" class="form-control" placeholder="Add Option">--}}
-{{--            <span class="text-danger">{{$errors->first('questions')}}</span>--}}
-{{--        </div>--}}
-{{--        <a class="float-right" href="#!" style="color: #7E858E;" onclick="addNewOption()"><span><i class="fa fa-plus"></i></span> Add Another Option</a>--}}
-{{--    </div>--}}
-{{--</div>--}}
-{{--    <script>--}}
-{{--        $(document).ready(function(){--}}
-{{--            $('#but_add').click(function(){--}}
-{{--                // Selecting last id--}}
-{{--                var lastname_id = $('.input-form input[type=text]:nth-child(1)').last().attr('id');--}}
-{{--                var split_id = lastname_id.split('_');--}}
-{{--                // New index--}}
-{{--                var index = Number(split_id[1]) + 1;--}}
-{{--                // Create clone--}}
-{{--                var newel = $('.input-form:last').clone(true);--}}
-{{--                // Set id of new element--}}
-{{--                $(newel).find('input[type=text]:nth-child(1)').attr("id","name_"+index);--}}
-{{--                $(newel).find('input[type=text]:nth-child(2)').attr("id","email_"+index);--}}
-{{--                // Set value--}}
-{{--                $(newel).find('input[type=text]:nth-child(1)').val("name_"+index);--}}
-{{--                $(newel).find('input[type=text]:nth-child(2)').val("email_"+index);--}}
-{{--                // Insert element--}}
-{{--                $(newel).insertAfter(".input-form:last");--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}

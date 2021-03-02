@@ -1,6 +1,11 @@
 @extends("Epm.layouts.master")
 
+@section("styles")
+    <link rel="stylesheet" href="{{url("assets/css/plugins/trumbowyg.min.css")}}">
+@endsection
+
 @section("content")
+    <?php $auth_admin = auth()->user(); ?>
     <div class="col-md-12">
         <!-- [ breadcrumb ] start -->
     {{--    <div class="page-header">--}}
@@ -55,7 +60,7 @@
                                 <!-- [ email-left section ] start -->
                                 <div class="col-xl-2 col-md-3">
                                     <div class="mb-3">
-                                        <a href="adm-em-compose.html" class="btn waves-effect waves-light btn-rounded btn-outline-info">+ Compose</a>
+                                        <a href="{{url("/adm/".$auth_admin->id."/compose/email")}}" class="btn waves-effect waves-light btn-rounded btn-outline-info">+ Compose</a>
                                     </div>
                                     <ul class="mb-2 nav nav-tab flex-column nav-pills">
                                         <li class="nav-item mail-section">
@@ -123,4 +128,7 @@
         </div>
         <!-- [ Invoice ] end -->
     </div>
+@endsection
+@section("js")
+    <script src="{{url("assets/js/plugins/trumbowyg.min.js")}}"></script>
 @endsection

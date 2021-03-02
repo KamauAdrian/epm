@@ -20,6 +20,32 @@
 {{--                </a>--}}
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div id="inCompleteTasks"></div>
+                        <h5 class="text-primary">Incomplete Tasks</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div id="completeTasks"></div>
+                        <h5 class="text-success">Complete Tasks</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div id="overDueTasks"></div>
+                        <h5 class="text-danger">Overdue Tasks</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
             <div class="row">
             <div class="table-responsive">
                 <table class="table" id="tableProjects">
@@ -117,6 +143,150 @@
     <script src="{{url('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
     <script>
+        $(function() {
+            var options = {
+                chart: {
+                    type: 'radialBar',
+                    offsetY: -20,
+                    sparkline: {
+                        enabled: true
+                    },
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: "#D7DFE9",
+                            strokeWidth: '97%',
+                            margin: 5, // margin is in pixels
+                            shadow: {
+                                enabled: true,
+                                top: 2,
+                                left: 0,
+                                color: '#999',
+                                opacity: 1,
+                                blur: 2
+                            }
+                        },
+                        dataLabels: {
+                            value: {
+                                offsetY: -40,
+                                fontSize: '14px'
+                            }
+                        }
+                    }
+                },
+                colors: ['#FF0B37'],
+                fill: {
+                    type: 'solid',
+                },
+                series: [],
+                labels: ['Overdue'],
+            }
+            var chart = new ApexCharts(document.querySelector("#overDueTasks"), options);
+            chart.render();
+            axios.get('/adm/get/overdue/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
+        });
+        $(function() {
+            var options = {
+                chart: {
+                    type: 'radialBar',
+                    offsetY: -20,
+                    sparkline: {
+                        enabled: true
+                    },
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: "#D7DFE9",
+                            strokeWidth: '97%',
+                            margin: 5, // margin is in pixels
+                            shadow: {
+                                enabled: true,
+                                top: 2,
+                                left: 0,
+                                color: '#999',
+                                opacity: 1,
+                                blur: 2
+                            }
+                        },
+                        dataLabels: {
+                            value: {
+                                offsetY: -40,
+                                fontSize: '14px'
+                            }
+                        }
+                    }
+                },
+                colors: ['#2DCA73'],
+                fill: {
+                    type: 'solid',
+                },
+                series: [],
+                labels: ['Complete'],
+            }
+            var chart = new ApexCharts(document.querySelector("#completeTasks"), options);
+            chart.render();
+            axios.get('/adm/get/complete/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
+        });
+        $(function() {
+            var options = {
+                chart: {
+                    type: 'radialBar',
+                    offsetY: -20,
+                    sparkline: {
+                        enabled: true
+                    },
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: "#D7DFE9",
+                            strokeWidth: '97%',
+                            margin: 5, // margin is in pixels
+                            shadow: {
+                                enabled: true,
+                                top: 2,
+                                left: 0,
+                                color: '#999',
+                                opacity: 1,
+                                blur: 2
+                            }
+                        },
+                        dataLabels: {
+                            value: {
+                                offsetY: -40,
+                                fontSize: '14px'
+                            }
+                        }
+                    }
+                },
+                colors: ['#0B69FF'],
+                fill: {
+                    type: 'solid',
+                },
+                series: [],
+                labels: ['Incomplete'],
+            }
+            var chart = new ApexCharts(document.querySelector("#inCompleteTasks"), options);
+            chart.render();
+            axios.get('/adm/get/incomplete/tasks').then(function(response) {
+                console.log(response.data);
+                chart.updateSeries([response.data]);
+            });
+        });
         $(".deleteWorkStream").click(function () {
             var url = $(this).attr('data-url');
             $("#form-delete-work-stream").attr("action",url);

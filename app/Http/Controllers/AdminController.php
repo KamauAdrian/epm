@@ -368,6 +368,12 @@ class AdminController extends Controller
     }
 
 
+    public function report_template_create($id){
+        $admin = User::find($id);
+        if ($admin->role->name == 'Su Admin'){
+            return view('Epm.Reports.template-create');
+        }
+    }
     public function report_template_create_pmo($id){
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin'){
@@ -376,15 +382,16 @@ class AdminController extends Controller
     }
 
     public function report_template_generate(Request $request,$id){
+//        dd($request->all());
         $admin = User::find($id);
         if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
             //validate the request
-//            $this->validate($request,[
-//                'name'=>'required',
-//                'required_fields'=>'required',
-//                'questions'=>'required',
-//                'target_groups'=>'required',
-//            ]);
+            $this->validate($request,[
+                'name'=>'required',
+                'required_fields'=>'required',
+                'questions'=>'required',
+                'target_groups'=>'required',
+            ]);
             //create a new report template(add questions to a report)
             $report_template = new ReportTemplate();
             $report_template->name = $request->name;
@@ -428,7 +435,7 @@ class AdminController extends Controller
                     DB::table('report_template_fields')->insert($fields);
                 }
             }
-            return redirect('/adm/'.$id.'/view/reports/template')->with('success','Report Template Created successfully');
+            return redirect('/adm/'.$id.'/view/reports/templates')->with('success','Report Template Created successfully');
         }
     }
 
