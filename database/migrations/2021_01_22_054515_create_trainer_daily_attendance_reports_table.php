@@ -18,6 +18,7 @@ class CreateTrainerDailyAttendanceReportsTable extends Migration
             $table->integer('trainer_id')->unsigned();
             $table->string('other_training_task_roles')->nullable();
             $table->string('comments')->nullable();
+            $table->dateTime('date_time');
             $table->timestamps();
         });
     }

@@ -36,13 +36,15 @@
                         <div class="table-responsive">
                             <table id="reportsTableList" class="table table-center mb-0 ">
                                 <thead>
-                                <tr> <th>Reports</th> <th>Date</th> <th class="text-right">Actions</th> </tr>
+                                <tr> <th>Reports</th> <th>Date</th><th>Time</th> <th class="text-right">Actions</th> </tr>
                                 </thead>
                                 @if($reports)
                                     <tbody>
                                     @foreach($reports as $report)
                                         <?php
-                                        $format_date = date('l dS M Y',strtotime($report->created_at));
+                                            date_default_timezone_set("Africa/Nairobi");
+                                        $format_date = date('l dS M, Y',strtotime($report->created_at));
+                                        $format_time = date('h:i:sa',strtotime($report->created_at));
                                         $trainer = $report->owner;
                                         ?>
                                         <tr>
@@ -57,6 +59,7 @@
                                                 </a>
                                             </td>
                                             <td>{{$format_date}}</td>
+                                            <td>{{$format_time}}</td>
                                             @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
                                                 <td class="text-right">
                                                     <div class="float-right">

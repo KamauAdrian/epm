@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
     {{--    <link href="{{url('quill-1.3.6/docs/assets/css/styles.css')}}" rel="stylesheet">--}}
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        strong { font-weight: bold !important; }
+    </style>
     @yield('styles')
     <script src="{{url('assets/js/vendor-all.min.js')}}"></script>
 </head>

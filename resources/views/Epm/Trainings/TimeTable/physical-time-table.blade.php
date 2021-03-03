@@ -8,276 +8,507 @@
             </div>
             <div class="table-responsive">
 {{--                Day one--}}
-                <table class="table table-bordered">
-                    <thead>
+                <div class="col-md-12" id="dayOne">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
                             <th>Day One</th>
                             <th>Time</th>
                             <th>Session</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td rowspan="9"></td>
-                            <td>8:00- 8:30am<br />
+                            <td><b>8:00- 8:30am</b><br />
                                 (Duration: 30 minutes)
                             </td>
-                            <td>Arrival and Registration<br />
-                                Opening Prayer
+                            <td>
+                                <ul>
+                                    <b>
+                                        <li>Arrival and Registration</li><br />
+                                        <li> Opening Prayer</li><br />
+                                    </b>
+                                </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td>8:30-8:45am<br />
+                            <td><b>8:30-8:45am</b><br />
                                 (Duration: 15 minutes)
                             </td>
-                            <td>Covid 19 Health Protocols/ Code of Conduct.<br />
-                                Dos and Don'ts
-
+                            <td>
+                                <ul>
+                                    <b>
+                                        <li> Covid 19 Health Protocols/ Code of Conduct.</li><br />
+                                        <li> Dos and Don'ts</li>
+                                    </b>
+                                </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td>8:45-9:00<br />
+                            <td><b>8:45-9:00</b><br />
                                 (Duration: 15 minutes)
                             </td>
-                            <td>Opening Ceremony:<br />
-                                Remarks Ministry of ICT<br />
+                            <td><b>Opening Ceremony</b><br />
+                                <b>Remarks:</b> Ministry of ICT<br />
                                 Madam Zilpher Owiti
                             </td>
                         </tr>
                         <tr>
-                            <td>9:00-10:00 Am<br />
+                            <td><b>9:00-10:00 Am</b><br />
                                 (Duration: 2hrs)
                             </td>
-                            <td>Introduction to Online work<br />
-                                Online work<br />
-                                Advantages of online work<br />
-                                Disadvantages of online work<br />
-                                GETTING STARTED AS AN ONLINE WORKER<br />
-                                Basic tools to get you started<br />
-                                Basic skills you require as an online worke
+                            <td><b>Introduction to Online work</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Online work<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Advantages of online work<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Disadvantages of online work<br />
+                                <br />
+                                <b>GETTING STARTED AS AN ONLINE WORKER</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Basic tools to get you started<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Basic skills you require as an online worker
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                Health Break: 10:00 am-10:15 am (15 minutes)
+                                <b>Health Break: 10:00 am-10:15 am (15 minutes)</b>
                             </td>
                         </tr>
                         <tr>
-                            <td>10:15am - 11:00am<br />
+                            <td><b>10:15am - 11:00am</b><br />
                                 (Duration 45 Minutes )
                             </td>
-                            <td>SOFT SKILLS<br />
-                                Organizational skill<br />
-                                Communication skills<br />
-                                Online Ethics and netiquette<br />
-                                Problem-solving skills<br />
-                                Leadership skills<br />
-                                Stress management skills<br />
-                                Collaboration and teamwork<br />
-                                Negotiation Skills
+                            <td><b>SOFT SKILLS</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Organizational skill<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Communication skills<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Online Ethics and netiquette<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Problem-solving skills<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Leadership skills<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Stress management skills<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Collaboration and teamwork<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Negotiation Skills
                             </td>
                         </tr>
                         <tr>
-                            <td>11:00am - 12:00pm<br />
+                            <td><b>11:00am - 12:00pm</b><br />
                                 (Duration 1hour
                             </td>
-                            <td>Jobs Available Online<br />
-                                Virtual Assistant<br />
-                                Writing and Translation<br />
-                                Digital Marketing and ecommerce<br />
-                                Data management<br />
-                                Transcription
+                            <td><b>Jobs Available Online</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Virtual Assistant<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Writing and Translation<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Digital Marketing and ecommerce<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Data management<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Transcription
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                LUNCH BREAK 12:00-1:00 pm (1 hour)
+                                <b>LUNCH BREAK 12:00-1:00 pm (1 hour)</b>
                             </td>
                         </tr>
                         <tr>
-                            <td>1:00 pm- 3:00pm<br />
+                            <td><b>1:00 pm- 3:00pm</b><br />
                                 (Duration:  2 Hours)
                             </td>
-                            <td>Job Category 1: Virtual Assistance<br />
-                                VA Contracts<br />
-                                Digital Calendar Management<br />
-                                Email Management<br />
-                                Designing using Canva.com<br />
-                                Flight booking<br />
-                                DropBox Managemen
+                            <td><b>Job Category 1: Virtual Assistance</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> VA Contracts<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Digital Calendar Management<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Email Management<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Designing using Canva.com<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Flight booking<br />
+                                <span><i class="fa fa-arrow-right"></i></span> DropBox Management
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
 {{--                Day Two--}}
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Day Two</th>
-                        <th>Time</th>
-                        <th>Session</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td rowspan="7"></td>
-                        <td>8:00- 8:30am<br />
-                            (Duration: 30 minutes)
-                        </td>
-                        <td>Arrival and Registration<br />
-                            Opening Prayer<br />
-                            Covid 19 Health Protocols/ Code of Conduct.<br />
-                            Dos and Don'ts
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8:30-9:00<br />
-                            (Duration: 30 minutes)
-                        </td>
-                        <td>Recap of previous day<br />
-                            training and assignment
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9:00-11:00 Am<br />
-                            (Duration: 2hrs)
-                        </td>
-                        <td>Job Category 2: Content Writing<br />
-                            Introduction to Content Writing<br />
-                            Clients who require content writing services<br />
-                            Roles of content writers<br />
-                            Skills required Tools required for content writing<br />
-                            Common types of content writing jobs you can find on online<br />
-                            Referencing work and avoiding plagiarism<br />
-                            Plagiarism checkers<br />
-                            How to make money blogging<br />
-                            Sample profile for a content writer
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" colspan="2">
-                            Health Break: 11:00 am-11:15 am (15 minutes)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>11:15am - 12:00pm<br />
-                            (Duration 45 Minutes )
-                        </td>
-                        <td>Payment Method (Opening<br />
-                            paypal Account)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" colspan="2">
-                            LUNCH BREAK 12:00-1:00 pm (1 hour)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1:00 pm- 3:00pm<br />
-                            (Duration:  2 Hours)
-                        </td>
-                        <td>SIGNING-UP ON ONLINE PLATFORMS<br />
-                            Upwork<br />
-                            Fiverr<br />
-                            Guru.com
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="col-md-12" id="dayTwo">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Day Two</th>
+                            <th>Time</th>
+                            <th>Session</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="7"></td>
+                            <td><b>8:00- 8:30am</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>
+                                <ul>
+                                    <b>
+                                        <li>Arrival and Registration</li><br />
+                                        <li> Opening Prayer</li><br />
+                                        <li> Covid 19 Health Protocols/ Code of Conduct.</li><br />
+                                        <li> Dos and Don'ts</li>
+                                    </b>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>8:30-9:00</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>Recap of previous day<br />
+                                training and assignment
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>9:00-11:00 Am</b><br />
+                                (Duration: 2hrs)
+                            </td>
+                            <td><b>Job Category 2: Content Writing</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Introduction to Content Writing<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Clients who require content writing services<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Roles of content writers<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Skills required Tools required for content writing<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Common types of content writing jobs you can find on online<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Referencing work and avoiding plagiarism<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Plagiarism checkers<br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to make money blogging<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Sample profile for a content writer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>Health Break: 11:00 am-11:15 am (15 minutes)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>11:15am - 12:00pm</b><br />
+                                (Duration 45 Minutes )
+                            </td>
+                            <td><b>Payment Method</b> <br /> (Opening paypal Account)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>LUNCH BREAK 12:00-1:00 pm (1 hour)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>1:00 pm- 3:00pm</b><br />
+                                (Duration:  2 Hours)
+                            </td>
+                            <td><b>SIGNING-UP ON ONLINE PLATFORMS</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Upwork<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Fiverr<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Guru.com
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 {{--                Day Three--}}
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Day Three</th>
-                        <th>Time</th>
-                        <th>Session</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td rowspan="7"></td>
-                        <td>8:00- 8:30am<br />
-                            (Duration: 30 minutes)
-                        </td>
-                        <td>Arrival and Registration<br />
-                            Opening Prayer<br />
-                            Covid 19 Health Protocols/ Code of Conduct.<br />
-                            Dos and Don'ts
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8:30-9:00<br />
-                            (Duration: 30 minutes)
-                        </td>
-                        <td>Recap of previous day<br />
-                            training and assignment
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9:00-11:00 Am<br />
-                            (Duration: 2hrs)
-                        </td>
-                        <td>Job Category 3: Digital Marketing & eCommerce<br />
-                            Introduction to Digital Marketing<br />
-                            Introduction to eCommerce<br />
-                            The E-Commerce industry in Kenya<br />
-                            Jumia<br />
-                            J-FORCE<br />
-                            Wowzi<br />
-                            Kilimall<br />
-                            Job Category 2: Digital Marketing Cont...<br />
-                            How to earn through Ad sense<br />
-                            SEO, SEM<br />
-                            Email Marketing<br />
-                            How to bid for  digital marketing jobs<br />
-                            Tips to help you succeed in e-commerce business<br />
-                            Sources to learn digital marketing skills<br />
-                            Job Category 2: Digital Marketing<br />
-                            How to start a social media business<br />
-                            Autoresponders<br />
-                            Examples of autoresponders<br />
-                            Job Category 2: Digital Marketing Cont...<br />
-                            Social Media Marketing<br />
-                            Facebook<br />
-                            Twitter<br />
-                            LinkedIn<br />
-                            Instagram<br />
-                            Pinterest<br />
-                            YouTube<br />
-                            Yelp<br />
-                            What does it takes to be a social media manager?<br />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" colspan="2">
-                            Health Break: 11:00 am-11:15 am (15 minutes)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>11:15am - 12:00pm<br />
-                            (Duration 45 Minutes )
-                        </td>
-                        <td>Payment Method (Opening<br />
-                            paypal Account)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" colspan="2">
-                            LUNCH BREAK 12:00-1:00 pm (1 hour)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1:00 pm- 3:00pm<br />
-                            (Duration:  2 Hours)
-                        </td>
-                        <td>SIGNING-UP ON ONLINE PLATFORMS<br />
-                            Upwork<br />
-                            Fiverr<br />
-                            Guru.com
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="col-md-12" id="dayThree">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Day Three</th>
+                            <th>Time</th>
+                            <th>Session</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="7"></td>
+                            <td><b>8:00- 8:30am</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>
+                                <ul>
+                                    <b>
+                                        <li>Arrival and Registration</li><br />
+                                        <li> Opening Prayer</li><br />
+                                        <li> Covid 19 Health Protocols/ Code of Conduct.</li><br />
+                                        <li> Dos and Don'ts</li>
+                                    </b>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>8:30-9:00</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>Recap of previous day<br />
+                                training and assignment
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>9:00-11:00 Am</b><br />
+                                (Duration: 2hrs)
+                            </td>
+                            <td><b>Job Category 3:<br /> Digital Marketing & eCommerce</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Introduction to Digital Marketing<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Introduction to eCommerce<br />
+                                <span><i class="fa fa-arrow-right"></i></span> The E-Commerce industry in Kenya<br />
+                                Jumia<br />
+                                J-FORCE<br />
+                                Wowzi<br />
+                                Kilimall<br />
+                                <br />
+                                <b>Job Category 2: Digital Marketing Cont...</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to earn through Ad sense<br />
+                                <span><i class="fa fa-arrow-right"></i></span> SEO, SEM<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Email Marketing<br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to bid for  digital marketing jobs<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Tips to help you succeed in e-commerce business<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Sources to learn digital marketing skills<br />
+                                <br />
+                                <b>Job Category 2: Digital Marketing</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to start a social media business<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Autoresponders<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Examples of autoresponders<br />
+                                <br />
+                                <b>Job Category 2: Digital Marketing Cont...</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> <b>Social Media Marketing</b><br />
+                                Facebook<br />
+                                Twitter<br />
+                                LinkedIn<br />
+                                Instagram<br />
+                                Pinterest<br />
+                                YouTube<br />
+                                Yelp<br />
+                                <span><i class="fa fa-arrow-right"></i></span> What does it takes to be<br /> a social media manager?<br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>Health Break: 11:00 am-11:15 am (15 minutes)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>11:15am - 12:00pm</b><br />
+                                (Duration 45 Minutes )
+                            </td>
+                            <td><b>Payment Method</b> <br /> (Opening paypal Account)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>LUNCH BREAK 12:00-1:00 pm (1 hour)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>1:00 pm- 3:00pm</b><br />
+                                (Duration:  2 Hours)
+                            </td>
+                            <td><b>SIGNING-UP ON ONLINE PLATFORMS</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Upwork<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Fiverr<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Guru.com
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{--                Day Four--}}
+                <div class="col-md-12" id="dayFour">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Day Four</th>
+                            <th>Time</th>
+                            <th>Session</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="7"></td>
+                            <td><b>8:00- 8:30am</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>
+                                <ul>
+                                    <b>
+                                        <li>Arrival and Registration</li><br />
+                                        <li> Opening Prayer</li><br />
+                                        <li> Covid 19 Health Protocols/ Code of Conduct.</li><br />
+                                        <li> Dos and Don'ts</li>
+                                    </b>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>8:30-9:00</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>Recap of previous day<br />
+                                training and assignment
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>9:00-11:00 Am</b><br />
+                                (Duration: 2hrs)
+                            </td>
+                            <td><b>Job Category 4: Transcription</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Introduction to Transcription<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Essential Tools you will require<br /> to transcribe<br />
+                                <span style="font-size: 20px;">.</span> Formatting Timestamps<br />
+                                <span style="font-size: 20px;">.</span> Transcription formats<br />
+                                <br />
+                                <b>Assignment : SEO<br />Content Writing 1<br />Individual<br /></b>
+                                <span><i class="fa fa-arrow-right"></i></span> Assignment on page<br />40 of the trainers<br />Manual<br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>Health Break: 11:00 am-11:15 am (15 minutes)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>11:15am - 12:00pm</b><br />
+                                (Duration 45 Minutes )
+                            </td>
+                            <td><b>BIDDING PROCESS</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Procedure for Bidding<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Tips on writing<br /> successful bids<br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to accept and<br /> view a job offer<br /> and contract.<br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to submit work<br /> and request for<br /> payment on Upwork<br />
+                                <span><i class="fa fa-arrow-right"></i></span> How to get consistent<br /> online jobs and maintain<br /> long-term clients
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b> LUNCH BREAK 12:00-1:00 pm (1 hour)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>1:00 pm- 3:00pm</b><br />
+                                (Duration:  2 Hours)
+                            </td>
+                            <td><b>Job Category 4: Transcription</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Signing up on QA World<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Setting up GoTranscript<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Take away Transcription<br /> 2 (3) Individual Assignment<br /> on Page 90 of the<br /> Trainers Manual
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{--                Day Five--}}
+                <div class="col-md-12" id="dayFive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Day Five</th>
+                            <th>Time</th>
+                            <th>Session</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="9"></td>
+                            <td><b>8:00- 8:30am</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>
+                                <ul>
+                                    <b>
+                                        <li>Arrival and Registration</li><br />
+                                        <li> Opening Prayer</li><br />
+                                        <li> Covid 19 Health Protocols/ Code of Conduct.</li><br />
+                                        <li> Dos and Don'ts</li>
+                                    </b>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>8:30-9:00</b><br />
+                                (Duration: 30 minutes)
+                            </td>
+                            <td>Assignment presentation per group
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>9:00-11:00 Am</b><br />
+                                (Duration: 2hrs)
+                            </td>
+                            <td><b>Job Category 5: <br />Data Entry/ Management</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Introduction to <br />Data Management/entry<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Clients who require data<br /> management services<br />
+                                <br />
+                                <b>Job Category 5: <br />Data Entry/ Management</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Cleaning data<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Sorting and Filtering<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Pivot Tables<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Data Visualization<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Formulas and Functions<br /> in Excel<br />
+                                <span><i class="fa fa-arrow-right"></i></span> A practical example of<br /> data entry gigs on Upwork.<br />
+                                <br />
+                                <b>Data Entry/ Management</b><br />
+                                <span><i class="fa fa-arrow-right"></i></span> Skills required for<br />
+                                data management<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Processing data to<br />
+                                different formats<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Sample profile of a<br />
+                                data entry expert<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Web Research<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Tools used by a <br />
+                                web researcher<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Skills required for <br />
+                                a web researcher<br />
+                                <span><i class="fa fa-arrow-right"></i></span> Techniques used for<br />
+                                web research
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>Health Break: 11:00 am-11:15 am (15 minutes)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>11:15am - 12:00pm</b><br />
+                                (Duration 45 Minutes )
+                            </td>
+                            <td><b>Q & A Session & <br /> Transition to<br /> Mentorship<br />
+                                    MENTORSHIP <br />INDUCTION (5<br /> MENTORS TO <br />ONBOARD TRAINEES<br /> IN THE FIVE CATEGORIES)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <b>LUNCH BREAK 12:00-1:00 pm (1 hour)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>1:00 pm- 3:00pm</b><br />
+                                (Duration:  2 Hours)
+                            </td>
+                            <td>JOB LINKAGE <br />
+                                KEPSA - Representative <br />
+                                <br />
+                                JUMIA Job <br /> Linkage <br /> Presentation, <br /> platform sign-up <br /> and Q&A Session.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>4:00 - 4:45pm</b><br />
+                                (Duration:  45 minutes)
+                            </td>
+                            <td><b>Edith - Introduction of the<br /> Ajira Clubs Concept <br />
+                                    <br />
+                                    Introduction of Ajira Club<br /> Leaders to the Students.<br />
+                                    <br />
+                                    Determination of Next steps.</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>4:45 pm - 5:15pm</b><br />
+                                (Duration:  30 minutes)
+                            </td>
+                            <td>
+                                <b>Awards of Best Trainees <br />
+                                    <br />
+                                    Closing Ceremony<br />
+                                    Ministry of ICT :</b>
+                                Closing Remarks and vote of Thanks.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

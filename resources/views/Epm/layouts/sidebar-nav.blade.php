@@ -137,7 +137,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <li><a href="{{url('/adm/'.$auth_admin->id.'/list/trainings')}}">Trainings</a></li>
         </ul>
     </li>
-    @if($auth_admin->role->name == "Trainer")
+    @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager" || $auth_admin->role->name == "Trainer")
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span><span class="pcoded-mtext">Resources</span></a>
             <ul class="pcoded-submenu">
@@ -149,7 +149,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     @endif
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
         <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span><span class="pcoded-mtext">Ajira Clubs</span></a>
+            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-trophy"></i></span><span class="pcoded-mtext">Ajira Clubs</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="#!">View Clubs</a></li>
             </ul>

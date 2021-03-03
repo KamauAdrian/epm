@@ -64,6 +64,9 @@ class TrainerDailyAttedanceReportController extends Controller
         if ($trainer){
             $daily_attendance_report = new TrainerDailyAttendanceReport();
             $daily_attendance_report->trainer_id = $trainer->id;
+            date_default_timezone_set("Africa/Nairobi");
+            $date_time = date("Y-m-d H:i:s");
+            $daily_attendance_report->date_time = $date_time;
             $task_roles = $request->training_task_role;
             $daily_attendance_report->other_training_task_roles = $request->other_training_task_roles;
             $daily_attendance_report->comments = $request->comments;

@@ -105,8 +105,8 @@
                 return {
                     selectedDepartment: this.saved_department(),
                     departments: [
-                        'Training','Monitoring And Evaluation','Ajira Youth Empowerment Centers (AYECs)','Operations',
-                        'Mentorship','Ajira Clubs','Program Management Office (PMO)',
+                        'Ajira Clubs','Ajira Youth Empowerment Centers (AYECs)','Mentorship','Monitoring And Evaluation','Operations',
+                        'Program Management Office (PMO)','Training'
                     ],
                 }
             },
