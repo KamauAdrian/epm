@@ -441,19 +441,19 @@
                                 <div class="card">
 {{--                                    <img class="card-img-top" src="{{url('assets/images/slider/img-slide-3.jpg')}}" alt="Card IMAGES">--}}
                                     <a target="_blank" href="{{$announcement->announcement_link}}">
-                                        @if($announcement->image)
+                                        @if($announcement->type =="Image")
                                             <img class="card-img-top" style="height: 250px" src="{{url("Announcement/images/".$announcement->image)}}" alt="Card IMAGES">
-                                        @else
+
+                                        @endif
+                                        @if($announcement->type =="Video")
                                             <?php
-//                                            https://www.youtube.com/watch?v=WQDauPyl7yA
-                                            $v_id = null;
-                                            $announcement_link = $announcement->announcement_link;
-                                            $split_announcement_link = explode("v=",$announcement_link);
-                                            if (count($split_announcement_link)>1){
-                                            $v_link = explode("=",$announcement->announcement_link);
-                                            $v_id = "https://img.youtube.com/vi/".$v_link[1]."/0.jpg";
-                                            }else{
-                                                $v_id = url("assets/images/icon_video.png");
+                                            $url = $announcement->announcement_link;
+//                                            $url = "https://www.youtube.com/watch?v=wSQU-OqfVJU&feature=youtu.be";
+                                            $v_id="";
+                                            $url_components = parse_url($url);
+                                            parse_str($url_components["query"], $params);
+                                            if ($params){
+                                                $v_id ="https://img.youtube.com/vi/".$params['v']."/0.jpg";
                                             }
                                             ?>
                                             <img class="card-img-top"  style="height: 250px" src="{{$v_id}}" alt="Card IMAGES">

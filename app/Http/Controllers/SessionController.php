@@ -25,7 +25,7 @@ class SessionController extends Controller
         //        $sessions = TrainingSession::orderBy('created_at','desc')->get();
 //        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get();
         $sessions = TrainingSession::orderBy("created_at","desc")->get();
-        return view('Epm.Sessions.sessions',compact('sessions'));
+        return view('Epm.Sessions.index',compact('sessions'));
     }
 
     /**

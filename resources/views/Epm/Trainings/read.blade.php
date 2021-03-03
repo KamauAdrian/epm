@@ -13,7 +13,25 @@
         $session_date = date_create($training->start_date);
         $split_date = date_format($session_date,'l dS M Y');
         $days = $training->trainingDays;
-        //    dd($days);
+        $center = $training->center;
+        $trainers_raw = $training->trainers;
+        $trainers = [];
+        foreach ($trainers_raw as $trainer_raw){
+            $trainers[] = $trainer_raw->name;
+        }
+        $classes_raw = $training->classes;
+        $classes = [];
+        foreach ($classes_raw as $class_raw){
+            $classes[] = $class_raw->name;
+        }
+        $centers_raw = $training->centers;
+        $centers = [];
+        foreach ($centers_raw as $center_raw){
+            $centers[] = $center_raw->name;
+        }
+//        dd($trainers_raw);
+//        dd($training->start_date,$training->end_date);
+
         ?>
         <div class="row">
             <div class="col-md-12">
@@ -51,105 +69,99 @@
                                 <h6><span class="text-small" style="font-size: 14px">Scheduled Dates</span></h6>
                                 <p class="font-weight-normal">Start: {{date('dS M Y',strtotime($training->start_date))}} <br /> End: {{date('dS M Y',strtotime($training->end_date))}}</p>
                             </div>
+                            @if($training->training == "Physical" || $training->training == "TOT")
+                                <div class="col-md-4">
+                                    @if($trainers)
+                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                        @foreach($trainers as $trainer)
+                                            {{$trainer}}<br />
+                                        @endforeach
+                                    @else
+                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                        <a href="#!">
+                                            <button type="button" title="Choose Training Center" class="btn btn-icon icon-s">
+                                                <i class="feather icon-plus"></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    @if($centers)
+                                        <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
+                                        @foreach($centers as $center)
+                                            {{$center}}<br />
+                                        @endforeach
+                                    @else
+                                        <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
+                                        <a href="#!">
+                                            <button type="button" title="Choose Training Center" class="btn btn-icon icon-s">
+                                                <i class="feather icon-plus"></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    @if($classes)
+                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
+                                        @foreach($classes as $class)
+                                            {{$class}}<br />
+                                        @endforeach
+                                    @else
+                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
+                                        <a href="#!">
+                                            <button type="button" title="Add Classes To Training" class="btn btn-icon icon-s">
+                                                <i class="feather icon-plus"></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
+                            @if($training->training == "Virtual")
+                                <div class="col-md-6">
+                                    @if($trainers)
+                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                        @foreach($trainers as $trainer)
+                                            {{$trainer}}<br />
+                                        @endforeach
+                                    @else
+                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                        <a href="#!">
+                                            <button type="button" title="Choose Training Center" class="btn btn-icon icon-s">
+                                                <i class="feather icon-plus"></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    @if($classes)
+                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
+                                        @foreach($classes as $class)
+                                            {{$class}}<br />
+                                        @endforeach
+                                    @else
+                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
+                                        <a href="#!">
+                                            <button type="button" title="Add Classes To Training" class="btn btn-icon icon-s">
+                                                <i class="feather icon-plus"></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Days</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            @foreach($days as $key=>$day)
-                                <?php
-                                $trainers = $day->trainers;
-                                $classes = $day->classes;
-                                $trainees = $day->trainees;
-                                ?>
-                                <div class="card" style="color: grey">
-                                    <div class="card-header mb-0">
-                                        Day {{$key+1}}
-                                        {{date('dS M Y',strtotime($day->day))}}
-                                        <button type="button" class="btn float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="feather icon-more-horizontal"></i>
-                                        </button>
-                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/edit/training/'.$training->id)}}"><li class="dropdown-item">Edit</li></a>
-                                            <a href="#!"><li class="dropdown-item close-card">Delete</li></a>
-                                        </ul>
-                                    </div>
-                                    <a href="{{url("adm/".$auth_admin->id."/view/training/".$training->id."/day/".$day->id."/".$key)}}">
-                                        <div class="card-body mt-0">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <h6 class="text-small" style="font-size: 14px">Trainers</h6>
-                                                    @foreach($trainers as $trainer)
-                                                        <?php
-                                                        $split_name = explode(' ',$trainer->name);
-                                                        $avatar_icon_name = '';
-                                                        if (count($split_name)>1){
-                                                            $avatar_icon_name = $split_name[0];
-                                                        }else{
-                                                            $avatar_icon_name = $trainer->name;
-                                                        }
-                                                        ?>
-                                                        <span class="badge badge-pill badge-success p-2">{{$avatar_icon_name}}</span>
-                                                    @endforeach
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <h6 class="text-small" style="font-size: 14px">Classes/Cohorts</h6>
-                                                    @foreach($classes as $class)
-                                                        <?php
-                                                        $split_name = explode(' ',$class->name);
-                                                        $name = '';
-                                                        if (count($split_name)>1){
-                                                            $name = $split_name[0];
-                                                        }else{
-                                                            $name = $class->name;
-                                                        }
-                                                        ?>
-                                                        <span class="badge badge-pill badge-success p-2">{{$name}}</span>
-                                                    @endforeach
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <h6 class="text-small" style="font-size: 14px">Trainees</h6>
-                                                        </div>
-                                                        @if($trainees)
-                                                            <div class="col-md-12">
-                                                                <table class="table">
-                                                                    <tr>
-                                                                        <td><span><i class="fa fa-male"></i> Male</span></td>
-                                                                        <td>24</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><span><i class="fa fa-female"></i> Female</span></td>
-                                                                        <td>24</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Total</td>
-                                                                        <td>42</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                        @else
-                                                            No Trainees Yet
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+                @if($training->training == "Physical")
+                    @include("Epm.Trainings.Physical.index")
+                @endif
+                @if($training->training == "Virtual")
+                    @include("Epm.Trainings.Virtual.index")
+                @endif
+                @if($training->training == "TOT")
+                    @include("Epm.Trainings.TOT.index")
+                @endif
             </div>
         </div>
     </div>

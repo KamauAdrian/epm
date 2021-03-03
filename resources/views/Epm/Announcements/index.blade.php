@@ -42,10 +42,16 @@
                                             <td>
                                                 <?php
                                                 $image = '';
-                                                if ($announcement->image!=null){
+                                                if ($announcement->type=="Image"){
                                                     $image = "Announcement/images/".$announcement->image;
-                                                }else{
-                                                    $image = "assets/images/icon_video.png";
+                                                }
+                                                if($announcement->type=="Video"){
+                                                    $url = $announcement->announcement_link;
+                                                    $url_components = parse_url($url);
+                                                    parse_str($url_components["query"], $params);
+                                                    if ($params){
+                                                        $image ="https://img.youtube.com/vi/".$params['v']."/0.jpg";
+                                                    }
                                                 }
                                                 ?>
                                                 <div class="media">

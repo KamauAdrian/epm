@@ -47,12 +47,11 @@ class TrainingDayController extends Controller
     public function show($id,$training_id,$day_id,$key)
     {
         $trainingDay = TrainingDay::find($day_id);
-        $day = $key+1;
 //        dd($trainingDay);
         if ($trainingDay ){
-            $training = $trainingDay->training;
+//            $training = $trainingDay->training;
 //            dd($training,$day);
-            return view("Epm.Trainings.Day.read",compact("training","trainingDay","day"));
+            return view("Epm.Trainings.Day.read",compact("trainingDay"));
         }
     }
 

@@ -15,6 +15,7 @@ class CreateAnnouncementsTable extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->string('title');
             $table->text('link');
             $table->string('image')->nullable();//videos and or image file name

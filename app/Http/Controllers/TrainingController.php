@@ -66,29 +66,41 @@ class TrainingController extends Controller
                 'training'=>'required',
                 'type'=>'required',
                 'start_date'=>'required',
-                'end_date'=>'required',
                 'about'=>'required',
             ],$messages);
             $training = new Training();
             $training->training = $request->training;
             $training->start_date = $request->start_date;
-            $training->end_date = $request->end_date;
+            $end_time = "";
+            if ($request->training == "Physical" || $request->training == "TOT"){
+                $end_time = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
+            }
+            if ($request->training == "Virtual"){
+                $end_time = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
+            }
+            $training->end_date = $end_time;
             $training->type = $request->type;
             $training->description = $request->about;
+            $trainers = $request->trainers;
             $training_saved = $training->save();
             if ($training_saved){
                 $start = date_create($training->start_date);
                 $end = date_create($training->end_date);
-                $interval = date_diff($start, $end)->format('%d%');
+                $interval = date_diff($start, $end)->format("%d%");
                 $days = [];
                 for ($i=0;$i<=$interval;$i++){
-                    $days[] = date('Y-m-d',strtotime("+$i day", strtotime($training->start_date)));
+                    $days[] = date("Y-m-d",strtotime("+$i day", strtotime($training->start_date)));
                 }
-                foreach ($days as $day){
+//                dd($training->start_date,$interval,$end_time);
+                foreach ($days as $key=>$day){
                     $training_day = new TrainingDay();
-                    $training_day->day = $day;
+                    $training_day->date = $day;
+                    $training_day->day = $key+1;
                     $training_day->training_id = $training->id;
                     $training_day->save();
+                }
+                foreach ($trainers as $trainer){
+                    $training->trainers()->attach($trainer);
                 }
 //                dd($training->start_date,$interval,$training->end_date,$days);
                 return redirect("/adm/".$id."/view/training/".$training->id)->with("success","New Training Created Successfully");
@@ -106,13 +118,9 @@ class TrainingController extends Controller
     {
         $training = Training::find($training_id);
         if ($training){
-            if ($training->training == "Physical"){
-                return view('Epm.Trainings.Physical.index',compact('training'));
-            }if ($training->training == "Virtual"){
-                return view('Epm.Trainings.Virtual.index',compact('training'));
-            }if ($training->training == "TOT"){
-                return view('Epm.Trainings.TOT.index',compact('training'));
-            }
+
+            return view('Epm.Trainings.read',compact('training'));
+
         }
 
     }

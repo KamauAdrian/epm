@@ -45,6 +45,7 @@ class AnnouncementController extends Controller
         $new_announcement->announcement_link = $request->announcement_link;
         $new_announcement->description = $request->description;
         $type=$request->type;
+        $new_announcement->type = $type;
         if ($type=="Image"){
             $fileName = '';
             $fileUrl = '';

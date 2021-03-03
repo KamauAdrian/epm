@@ -32,18 +32,11 @@
                                         <span class="text-danger">{{$errors->first('training')}}</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>TRAINING START DATE</label>
                                         <input type="date" name="start_date" class="form-control" id="sessionStartDate" value="{{old('start_date')}}">
                                         <span class="text-danger">{{$errors->first('start_date')}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>TRAINING END DATE</label>
-                                        <input type="date" name="end_date" class="form-control" id="sessionEndDate" value="{{old('end_date')}}">
-                                        <span class="text-danger">{{$errors->first('end_date')}}</span>
                                     </div>
                                 </div>
                                 @if($trainers!='')

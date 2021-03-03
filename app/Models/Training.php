@@ -13,24 +13,28 @@ class Training extends Model
         'start_date',
         'end_date',
         'type',
-        'center',
+        'center_id',
         'institution',
         'description',
         'status',
     ];
 
-//    public function trainees(){
-//        return $this->belongsToMany('App\Models\Trainee','trainee_training_session','training_session_id','trainee_id');
-//    }
-//
-//    //each training session belongs to many trainers
-//    public function trainers(){
-//        return $this->belongsToMany('App\Models\User','trainer_training_session','training_session_id','trainer_id');
-//    }
-//
-//    public function classes(){
-//        return $this->belongsToMany('App\Models\SessionClass','training_session_classes','session_id','class_id');
-//    }
+    public function trainees(){
+        return $this->belongsToMany('App\Models\Trainee','trainee_training','training_id','trainee_id');
+    }
+
+    public function centers(){
+        return $this->belongsToMany('App\Models\Center','training_centers','training_id','center_id');
+    }
+
+    //each training session belongs to many trainers
+    public function trainers(){
+        return $this->belongsToMany('App\Models\User','trainer_training','training_id','trainer_id');
+    }
+
+    public function classes(){
+        return $this->belongsToMany('App\Models\SessionClass','training_classes','training_id','class_id');
+    }
     public function trainingDays(){
         return $this->hasMany('App\Models\TrainingDay','training_id','id');
     }
