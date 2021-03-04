@@ -18,6 +18,11 @@
     <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Codedthemes" />
+    <meta property="og:url"                content="https://tunitrivia.fun/trivia/201/play" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="Hot Seat  🔥🔥 254" />
+    <meta property="og:description"        content="How Kenyan are You?!" />
+    <meta property="og:image"              content="https://create.tunitrivia.com/triviapics/EOYDCZNU.png" />
     <!-- Favicon icon -->
     <link rel="icon" href="{{url('assets/images/favicon.ico')}}" type="image/x-icon">
 {{--    <link rel="icon" href="{{url('assets/images/favicon.png')}}" type="image/x-icon">--}}

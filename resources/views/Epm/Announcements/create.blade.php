@@ -35,7 +35,7 @@
                                         <input type="radio" name="type" onclick="showVideoInputLink()" value="Video"> Video
                                     </div>
                                     <div class="form-group">
-                                        <input type="radio" name="type" onclick="showImageInputUpload()" value="Image"> Image
+                                        <input type="radio" name="type" onclick="showImageInputUpload()" value="Image"> Link (Article/Website)
                                     </div>
                                 </div>
                             </div>
@@ -53,13 +53,13 @@
 {{--                        </div>--}}
                         <div class="col-sm-12" style="display: none" id="announcement_img_upload">
                             <div class="form-group">
-                                <label>Upload Image</label>
+                                <label>Announcement Image</label>
                                 <input type="file" name="image" class="form-control" accept=".png,.jpeg,.jpg">
                             </div>
                         </div>
                         <div class="col-sm-12" style="display: none" id="announcement_link">
                             <div class="form-group">
-                                <label>Announcement Link</label>
+                                <label>Link</label>
                                 <input type="text" name="announcement_link" class="form-control" placeholder="Paste Link Here">
                             </div>
                         </div>

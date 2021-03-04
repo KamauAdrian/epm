@@ -481,13 +481,18 @@
                                                     <h5 class="mb-2">{{$announcement->title}}</h5>
                                                     {{--                                                    <span class="text-right"><i class="feather icon-more-horizontal"></i></span>--}}
                                                 </div>
-                                                <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">{{mb_strimwidth($announcement->description, 0, 120, "...")}}
-                                                    <div class="dropdown">
+                                                <div style="color: grey;font-size: 14px; height: 150px;" class="mb-0">
+                                                    @if(strlen($announcement->description)>120)
+                                                    {!! nl2br(mb_strimwidth($announcement->description, 0, 120, "...")) !!}
+                                                    <div class="dropdown float-right">
                                                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown"><span><u>Read More</u></span></a>
                                                         <div class="dropdown-menu p-4" style="width: 400px;">
                                                             {!! nl2br($announcement->description) !!}
                                                         </div>
                                                     </div>
+                                                    @else
+                                                        {!! nl2br($announcement->description) !!}
+                                                    @endif
                                                 </div>
                                                 <div style="color: grey;font-size: 12px; position: absolute; bottom: 0;" class="mt-4 mb-2">{{date('l dS M, Y',strtotime($announcement->created_at))}}</div>
                                             </div>
