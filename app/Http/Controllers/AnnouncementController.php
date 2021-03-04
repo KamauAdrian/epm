@@ -42,7 +42,12 @@ class AnnouncementController extends Controller
 //        dd($request->all());
         $new_announcement = new Announcement();
         $new_announcement->title = $request->title;
-        $new_announcement->announcement_link = $request->announcement_link;
+//        $link = $request->announcement_link;
+        $link = "https://emobilispm.com";
+//        $link = url("/");
+        $tags = get_meta_tags($link);
+        dd($link,$tags);
+        $new_announcement->announcement_link = $link;
         $new_announcement->description = $request->description;
         $type=$request->type;
         $new_announcement->type = $type;
