@@ -74,18 +74,37 @@ class TrainingController extends Controller
             $training->venue = $request->venue;
             $training->start_date = $request->start_date;
             $end_time = "";
+            $venue = "";
             if ($request->training == "Physical" || $request->training == "TOT"){
+                $venue = $request->venue;
                 $end_time = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
             }
             if ($request->training == "Virtual"){
                 $end_time = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
             }
+            $training->venue = $venue;
+            $centers = null;
+            $institutions = null;
+            if ($venue=="Centers (AYECs)"){
+                $centers = $request->centers;
+            }
+            if ($venue=="Institution (University/Tvet)"){
+                $institutions = $request->institutions;
+            }
+//            dd($institutions,$venue);
+//            dd($request->all());
             $training->end_date = $end_time;
             $training->type = $request->type;
             $training->description = $request->about;
             $trainers = $request->trainers;
             $training_saved = $training->save();
             if ($training_saved){
+                if ($centers){
+                    $training->centers()->attach($centers);
+                }
+                if ($institutions){
+//                    $training->institutions()->attach($institutions);
+                }
                 $start = date_create($training->start_date);
                 $end = date_create($training->end_date);
                 $interval = date_diff($start, $end)->format("%d%");

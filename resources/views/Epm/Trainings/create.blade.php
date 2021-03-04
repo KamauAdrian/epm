@@ -25,22 +25,43 @@
                                     <div class="form-group" id="training">
                                         <label>SELECT TRAINING</label>
                                         <multiselect id="multiSelectTraining" v-model="selectedTraining" :options="trainings"
-                                                     placeholder="Select Training"
+                                                     placeholder="Select Training" @close="alertClosed"
                                                      :searchable="true" :close-on-select="true">
                                         </multiselect>
+{{--                                        <pre>{{$data }}</pre>--}}
                                         <input type="hidden" id="selected_training" name="training" :value="selectedTraining">
                                         <span class="text-danger">{{$errors->first('training')}}</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group" id="trainingVenue">
-                                        <label>Training Venue</label>
+                                <div class="col-md-12">
+                                    <div class="form-group" id="trainingVenue" style="display: none;">
+                                        <label>TRAINING VENUE</label>
                                         <multiselect v-model="selectedVenue" :options="venues"
-                                                     placeholder="Select Venue Where Training Will Happen"
+                                                     placeholder="Select Venue" @close="alertClosed"
                                                      :searchable="true" :close-on-select="true">
                                         </multiselect>
                                         <input type="hidden" name="venue" :value="selectedVenue">
                                         <span class="text-danger">{{$errors->first('venue')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group" id="trainingVenueCenter" style="display: none;">
+                                        <label>CENTER</label>
+                                        <multiselect v-model="selectedCenters" :options="centers"
+                                                     placeholder="Select Center" track-by="id" label="name"
+                                                     :searchable="true" :close-on-select="true" multiple>
+                                        </multiselect>
+                                        <input type="hidden" v-for="center in selectedCenters" name="centers[]" :value="center.id">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group" id="trainingVenueInstitution" style="display: none;">
+                                        <label>INSTITUTION</label>
+                                        <multiselect v-model="selectedInstitutions" :options="institutions"
+                                                     placeholder="Select Institution" track-by="id" label="name"
+                                                     :searchable="true" :close-on-select="true" multiple>
+                                        </multiselect>
+                                        <input type="hidden" v-for="institution in selectedInstitutions" name="institutions[]" :value="institution.id">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -99,33 +120,64 @@
 @section('js')
     {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
-        var start_date = '';
-        var end_date = '';
-        $("#sessionStartDate").change(function (){
-            start_date = $("#sessionStartDate").val();
-            console.log(start_date);
-        });
-
-        $("#sessionEndDate").change(function (){
-            end_date = $("#sessionEndDate").val();
-            console.log(end_date,end_date-start_date);
-        });
-
-        console.log(start_date,end_date);
-        function sessionModePhysical(){
-            document.getElementById('sessionMode').style.display='block';
-            document.getElementById('session_type').style.display='none';
-            document.getElementById('sessionLink').style.display='none';
-        }
-        function sessionModeVirtual(){
-            document.getElementById('sessionMode').style.display='none';
-            document.getElementById('session_type').style.display='block';
-            document.getElementById('sessionLink').style.display='block';
-        }
-
         function generateSessionLink(){
             document.getElementById('sessionGoogleMeetLink').disabled= true;
         }
+        new Vue({
+            el: "#training",
+            components: {
+                Multiselect: window.VueMultiselect.default,
+            },
+            data:{
+                selectedTraining: [],
+                trainings: [
+                    'Physical',
+                    'Virtual',
+                    'TOT',
+                ],
+            },
+            methods:{
+                alertClosed:function(){
+                    var opselected = this.selectedTraining;
+                    var centerInstitution = document.getElementById("trainingVenue");
+                    if(opselected=="Physical" || opselected=="TOT"){
+                        centerInstitution.style.display="block";
+                    }
+                    if(opselected=="Virtual"){
+                        centerInstitution.style.display="none";
+                    }
+                },
+            },
+        });
+        new Vue({
+            el: "#trainingVenue",
+            components: {
+                multiselect: window.VueMultiselect.default,
+            },
+            data:{
+                selectedVenue: [],
+                venues: [
+                    'Centers (AYECs)',
+                    'Institution (University/Tvet)',
+                ],
+            },
+            methods:{
+                alertClosed:function(){
+                    var opselected = this.selectedVenue;
+                    var venueCenter = document.getElementById("trainingVenueCenter");
+                    var venueInstitution = document.getElementById("trainingVenueInstitution");
+                    if(opselected=="Centers (AYECs)"){
+                        venueCenter.style.display="block";
+                        venueInstitution.style.display="none";
+                    }
+                    if(opselected=="Institution (University/Tvet)"){
+                        venueCenter.style.display="none";
+                        venueInstitution.style.display="block";
+                    }
+                },
+            },
+        });
+
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -134,28 +186,63 @@
                 return {
                     selectedTraining: [],
                     trainings: [
-                        'Physical',
-                        'Virtual',
-                        'TOT',
+                        'Public',
+                        'Private',
                     ],
                 }
             },
-        }).$mount('#training');
+        }).$mount('#trainingType');
+
         new Vue({
+            el: "#trainingVenueCenter",
             components: {
-                multiselect: window.VueMultiselect.default,
+                Multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
             },
-            data() {
-                return {
-                    selectedVenue: [],
-                    venues: [
-                        'Centers (AYECs)',
-                        'Institution (University/Tvet)',
-                        'Virtual',
-                    ],
-                }
+            data:{
+                selectedCenters: null,
+                centers: [],
             },
-        }).$mount('#trainingVenue');
+            mounted () {
+                this.getCenters()
+            },
+            methods:{
+                getCenters(){
+                    axios
+                        .get('/centers')
+                        .then(response => {
+                            this.centers = response.data
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true)
+                },
+            },
+        });
+        new Vue({
+            el: "#trainingVenueInstitution",
+            components: {
+                Multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data:{
+                selectedInstitutions: null,
+                institutions: [
+                    {id:1,name:'Africa Nazarene University'},
+                    {id:2,name:'Chuka University'},
+                    {id:3,name:'Daystar University'},
+                    {id:4,name:'Dedan Kimathi University of Technology'},
+                    {id:5,name:'Egerton University'},
+                    {id:5,name:'Gretsa University'},
+                    {id:5,name:'Jomo Kenyatta University of Agriculture and Technology'},
+                ],
+            },
+            methods:{
+
+            },
+        });
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -185,68 +272,6 @@
                 },
             },
         }).$mount('#trainingTrainers');
-        new Vue({
-            components: {
-                Multiselect: window.VueMultiselect.default,
-            },
-            data() {
-                return {
-                    selectedTraining: [],
-                    trainings: [
-                        'Public',
-                        'Private',
-                    ],
-                }
-            },
-        }).$mount('#trainingType');
-        // new Vue({
-        //     components: {
-        //         county: window.VueMultiselect.default,
-        //     },
-        //     data() {
-        //         return {
-        //             selectedCounty: null,
-        //             counties: [
-        //                 'Baringo','Bomet','Bungoma','Busia','Elgeyo Marakwet','Embu','Garissa','Homa Bay', 'Kajiado',
-        //                 'Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale', 'Laikipia',
-        //                 'Lamu','Machakos','Makueni','Mandera','Meru','Migori','Marsabit','Muranga','Nairobi','Nakuru','Nandi',
-        //                 'Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita Taveta','Tana River','Tharaka Nithi',
-        //                 'Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'
-        //             ],
-        //         }
-        //     },
-        //     methods:{
-        //     },
-        // }).$mount('#county');
-        new Vue({
-            components: {
-                Multiselect: window.VueMultiselect.default,
-                axios: window.axios.defaults,
-            },
-            data() {
-                return {
-                    selectedTrainer: null,
-                    trainers: [],
-                }
-            },
-            mounted () {
-                this.getTrainers()
-            },
-            methods:{
-                getTrainers(){
-                    axios
-                        .get('/trainers')
-                        .then(response => {
-                            this.trainers = response.data
-                        })
-                        .catch(error => {
-                            console.log(error)
-                            this.errored = true
-                        })
-                        .finally(() => this.loading = true)
-                },
-            },
-        }).$mount('#trainers');
         // new Vue({
         //     components: {
         //         Multiselect: window.VueMultiselect.default,

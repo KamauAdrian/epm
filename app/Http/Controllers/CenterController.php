@@ -16,7 +16,15 @@ class CenterController extends Controller
     public function index($id)
     {
         $centers = Center::orderBy('created_at','desc')->get();
+
         return view('Epm.Centers.centers',compact('centers'));
+
+    }
+
+    public function centers()
+    {
+        $centers = Center::orderBy("created_at","desc")->get();
+        return response()->json($centers);
     }
 
     /**

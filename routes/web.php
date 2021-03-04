@@ -207,6 +207,7 @@ Route::group(['middleware'=>'admin'],function (){
 
     //centers
     Route::get('/adm/{id}/list/centers',[App\Http\Controllers\CenterController::class, 'index']);
+    Route::get('/centers',[App\Http\Controllers\CenterController::class, 'centers']);
     Route::get('/adm/{id}/view/center/{center_id}',[App\Http\Controllers\CenterController::class, 'show']);
     Route::get('/adm/{id}/add/center',[App\Http\Controllers\CenterController::class, 'create']);
     Route::post('/adm/{id}/save/center',[App\Http\Controllers\CenterController::class, 'store']);
