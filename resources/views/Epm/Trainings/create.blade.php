@@ -32,6 +32,17 @@
                                         <span class="text-danger">{{$errors->first('training')}}</span>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="trainingVenue">
+                                        <label>Training Venue</label>
+                                        <multiselect v-model="selectedVenue" :options="venues"
+                                                     placeholder="Select Venue Where Training Will Happen"
+                                                     :searchable="true" :close-on-select="true">
+                                        </multiselect>
+                                        <input type="hidden" name="venue" :value="selectedVenue">
+                                        <span class="text-danger">{{$errors->first('venue')}}</span>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>TRAINING START DATE</label>
@@ -41,13 +52,13 @@
                                 </div>
                                 @if($trainers!='')
                                     <div class="col-sm-12">
-                                        <div class="form-group" id="trainers">
+                                        <div class="form-group" id="trainingTrainers">
                                             <label>SELECT TRAINERS</label>
-                                            <multiselect :options="trainers" v-model="selectedTrainer"
+                                            <Multiselect :options="trainers" v-model="selectedTrainer"
                                                          placeholder="Select Trainers" label="name" track-by="id"
                                                          :searchable="true" :close-on-select="true"
                                                          multiple>
-                                            </multiselect>
+                                            </Multiselect>
                                             <input type="hidden" name="trainers[]" v-for="trainer in selectedTrainer"  :value="trainer.id">
                                             <span class="text-danger">{{$errors->first('trainers[]')}}</span>
                                         </div>
@@ -115,14 +126,6 @@
         function generateSessionLink(){
             document.getElementById('sessionGoogleMeetLink').disabled= true;
         }
-
-        // $("#training").children(":nth-child(2)").on("change",function (){
-        //     alert("change detected");
-        // });
-
-        console.log($("#selected_training").val());
-        // console.log($("#training").children(":nth-child(2)").text);
-
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -137,42 +140,22 @@
                     ],
                 }
             },
-        }).$mount('#training')
-
+        }).$mount('#training');
         new Vue({
             components: {
-                Multiselect: window.VueMultiselect.default,
+                multiselect: window.VueMultiselect.default,
             },
             data() {
                 return {
-                    selectedTraining: [],
-                    trainings: [
-                        'Public',
-                        'Private',
+                    selectedVenue: [],
+                    venues: [
+                        'Centers (AYECs)',
+                        'Institution (University/Tvet)',
+                        'Virtual',
                     ],
                 }
             },
-        }).$mount('#trainingType')
-
-        new Vue({
-            components: {
-                county: window.VueMultiselect.default,
-            },
-            data() {
-                return {
-                    selectedCounty: null,
-                    counties: [
-                        'Baringo','Bomet','Bungoma','Busia','Elgeyo Marakwet','Embu','Garissa','Homa Bay', 'Kajiado',
-                        'Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale', 'Laikipia',
-                        'Lamu','Machakos','Makueni','Mandera','Meru','Migori','Marsabit','Muranga','Nairobi','Nakuru','Nandi',
-                        'Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita Taveta','Tana River','Tharaka Nithi',
-                        'Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'
-                    ],
-                }
-            },
-            methods:{
-            },
-        }).$mount('#county')
+        }).$mount('#trainingVenue');
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -201,7 +184,40 @@
                         .finally(() => this.loading = true)
                 },
             },
-        }).$mount('#trainers')
+        }).$mount('#trainingTrainers');
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default,
+            },
+            data() {
+                return {
+                    selectedTraining: [],
+                    trainings: [
+                        'Public',
+                        'Private',
+                    ],
+                }
+            },
+        }).$mount('#trainingType');
+        // new Vue({
+        //     components: {
+        //         county: window.VueMultiselect.default,
+        //     },
+        //     data() {
+        //         return {
+        //             selectedCounty: null,
+        //             counties: [
+        //                 'Baringo','Bomet','Bungoma','Busia','Elgeyo Marakwet','Embu','Garissa','Homa Bay', 'Kajiado',
+        //                 'Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale', 'Laikipia',
+        //                 'Lamu','Machakos','Makueni','Mandera','Meru','Migori','Marsabit','Muranga','Nairobi','Nakuru','Nandi',
+        //                 'Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita Taveta','Tana River','Tharaka Nithi',
+        //                 'Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'
+        //             ],
+        //         }
+        //     },
+        //     methods:{
+        //     },
+        // }).$mount('#county');
         new Vue({
             components: {
                 Multiselect: window.VueMultiselect.default,
@@ -209,19 +225,19 @@
             },
             data() {
                 return {
-                    selectedSessionClass: null,
-                    session_classes: [],
+                    selectedTrainer: null,
+                    trainers: [],
                 }
             },
             mounted () {
-                this.getClasses()
+                this.getTrainers()
             },
             methods:{
-                getClasses(){
+                getTrainers(){
                     axios
-                        .get('/session/classes')
+                        .get('/trainers')
                         .then(response => {
-                            this.session_classes = response.data
+                            this.trainers = response.data
                         })
                         .catch(error => {
                             console.log(error)
@@ -230,24 +246,53 @@
                         .finally(() => this.loading = true)
                 },
             },
-        }).$mount('#sessionClasses')
-        new Vue({
-            el: '#category',
-            components: {
-                category: window.VueMultiselect.default,
-            },
-            data() {
-                return {
-                    selectedCategory: null,
-                    categories: [
-                        'Data Entry/Management','Virtual Assistant','Transcription',
-                        'Digital Marketing/Ecommerce','Content Writing and Translation', 'All Categories'
-                    ],
-                }
-            },
-            methods:{
-            },
-        })
+        }).$mount('#trainers');
+        // new Vue({
+        //     components: {
+        //         Multiselect: window.VueMultiselect.default,
+        //         axios: window.axios.defaults,
+        //     },
+        //     data() {
+        //         return {
+        //             selectedSessionClass: null,
+        //             session_classes: [],
+        //         }
+        //     },
+        //     mounted () {
+        //         this.getClasses()
+        //     },
+        //     methods:{
+        //         getClasses(){
+        //             axios
+        //                 .get('/session/classes')
+        //                 .then(response => {
+        //                     this.session_classes = response.data
+        //                 })
+        //                 .catch(error => {
+        //                     console.log(error)
+        //                     this.errored = true
+        //                 })
+        //                 .finally(() => this.loading = true)
+        //         },
+        //     },
+        // }).$mount('#sessionClasses');
+        // new Vue({
+        //     el: '#category',
+        //     components: {
+        //         category: window.VueMultiselect.default,
+        //     },
+        //     data() {
+        //         return {
+        //             selectedCategory: null,
+        //             categories: [
+        //                 'Data Entry/Management','Virtual Assistant','Transcription',
+        //                 'Digital Marketing/Ecommerce','Content Writing and Translation', 'All Categories'
+        //             ],
+        //         }
+        //     },
+        //     methods:{
+        //     },
+        // });
         function activatePlacesSearch() {
             var input = document.getElementById('location');
             var autocomplete = new google.maps.places.Autocomplete(input);

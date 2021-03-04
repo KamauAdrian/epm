@@ -55,6 +55,7 @@ class TrainingController extends Controller
      */
     public function store(Request $request,$id)
     {
+//        dd($request->all());
         $admin = User::find($id);
         if ($admin){
 //            dd($request->all());
@@ -70,6 +71,7 @@ class TrainingController extends Controller
             ],$messages);
             $training = new Training();
             $training->training = $request->training;
+            $training->venue = $request->venue;
             $training->start_date = $request->start_date;
             $end_time = "";
             if ($request->training == "Physical" || $request->training == "TOT"){
@@ -128,13 +130,14 @@ class TrainingController extends Controller
     public function approve($id,$training_id)
     {
         $admin_user = User::find($id);
-        if ($admin_user->role->name == "Su Admin" || $admin_user->role->name == "Project Manager"){
-            $status = [
-                "status"=>"Approved"
-            ];
-//            $trainingConfirm = DB::table('training_sessions')->where('id',$training_id)->update($status);
-            $trainingConfirm = Training::find($training_id)->update($status);
-            return redirect("/adm/".$id."/view/training/".$training_id)->with("success","Successfully approved Training");
+        if ($admin_user){
+            if ($admin_user->role->name == "Su Admin" || $admin_user->role->name == "Project Manager"){
+                $status = [
+                    "status"=>"Approved"
+                ];
+                Training::find($training_id)->update($status);
+                return redirect("/adm/".$id."/view/training/".$training_id)->with("success","Successfully approved Training");
+            }
         }
     }
 
@@ -144,7 +147,17 @@ class TrainingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $training_id)
+    {
+        //
+    }
+
+    public function edit_centers($id, $training_id)
+    {
+
+    }
+
+    public function edit_classes($id, $training_id)
     {
         //
     }
@@ -156,10 +169,28 @@ class TrainingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $training_id)
     {
         //
     }
+
+    public function update_centers(Request $request, $id, $training_id)
+    {
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $centers = $request->centers;
+            }
+        }
+    }
+
+    public function update_classes(Request $request, $id, $training_id)
+    {
+        //
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

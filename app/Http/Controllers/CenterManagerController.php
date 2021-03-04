@@ -274,6 +274,5 @@ class CenterManagerController extends Controller
             }
         }
         return redirect('/list/all/admins/role_id='.$cm_role)->with('success','Center Managers uploaded Successfully');
-
     }
 }

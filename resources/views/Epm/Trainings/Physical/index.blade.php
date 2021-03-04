@@ -1,3 +1,13 @@
+@section('styles')
+    <style>
+        .card .training-day :hover{
+            background-color: lightgray;
+        }
+    </style>
+@endsection
+<?php
+$auth_admin = auth()->user();
+?>
 <div class="card">
     <div class="card-header">
         <h5>Days</h5>
@@ -10,43 +20,30 @@
                 $classes = $day->classes;
                 $trainees = $day->trainees;
                 ?>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5>Day {{$day->day}}</h5>
-                                {{date("dS M Y",strtotime($day->date))}}
-                            </div>
-                            <div class="col-md-4">
-                                <h5>Trainers</h5>
-                                Trainers
-                            </div>
-                            <div class="col-md-4">
-                                <h5>Trainees</h5>
+                    <a href="{{url("/adm/".$auth_admin->id."/view/training/".$training->id."/day/".$day->day."/".$day->id)}}">
+                        <div class="card training-day" style="color: grey;">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        Female:
+                                    <div class="col-md-3">
+                                        <h5>Day {{$day->day}}</h5>
+                                        {{date("dS M Y",strtotime($day->date))}}
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <h5>Trainees (Female)</h5>
                                         12
                                     </div>
-                                    <div class="col-md-6">
-                                        Male:
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <h5>Trainees (Male)</h5>
                                         12
                                     </div>
-                                    <div class="col-md-6">
-                                        Total:
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <h5>Trainees (Total)</h5>
                                         24
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </a>
             @endforeach
         </div>
     </div>

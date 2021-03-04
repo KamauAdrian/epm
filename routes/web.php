@@ -238,12 +238,18 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/save/training',[App\Http\Controllers\TrainingController::class, 'store']);
     Route::get('/adm/{id}/view/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'show']);
     Route::get('/adm/{id}/confirm/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'approve']);
-    Route::get('/adm/{id}/edit/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'edit']);
-    Route::get('/adm/{id}/update/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'update']);
-    Route::get('/adm/{id}/delete/training/training_id={session_id}',[App\Http\Controllers\TrainingController::class, 'destroy']);
+    Route::get('/adm/{id}/edit/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'edit']);
+    Route::get('/adm/{id}/update/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'update']);
+    Route::get('/adm/{id}/delete/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'destroy']);
 
+    //Training -> (Update)
+    Route::get('/adm/{id}/update/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'edit_centers']);
+    Route::post('/adm/{id}/save/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'update_centers']);
+    Route::get('/adm/{id}/update/training/{training_id}/classes',[App\Http\Controllers\TrainingController::class, 'edit_classes']);
+    Route::post('/adm/{id}/save/training/{training_id}/classes',[App\Http\Controllers\TrainingController::class, 'update_classes']);
     //Trainings(Per Day Day one ...)
-    Route::get('/adm/{id}/view/training/{training_id}/day/{day_id}/{key}',[App\Http\Controllers\TrainingDayController::class, 'show']);
+    Route::get('/adm/{id}/view/training/{training_id}/day/{day}/{day_id}',[App\Http\Controllers\TrainingDayController::class, 'show']);
+    Route::get('/adm/{id}/edit/training/{training_id}/day/{day}/{day_id}/session/{session_id}',[App\Http\Controllers\TrainingDayController::class, 'edit']);
 
     //Trainings(Time tables)
     Route::get('/adm/{id}/view/physical/training/timetable',[App\Http\Controllers\TrainingController::class, 'physical']);

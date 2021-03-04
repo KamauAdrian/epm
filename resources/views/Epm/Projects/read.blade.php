@@ -597,11 +597,9 @@
            {{-- window.location = url;--}}
         });
         $('#modalTaskDetailed').on('show.bs.modal', function () {
-
             $('.task-comments').empty();
             $('.task-attachments').empty();
             $('.task-links').empty();
-
             var userId ="{{Auth::user()->id}}";
             var taskId = document.getElementById('modal-modal-task-task-id').innerText;
             console.log(taskId);

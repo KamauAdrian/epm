@@ -16,6 +16,7 @@ class CreateTrainingsTable extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->string("training");
+            $table->string("venue");
             $table->date("start_date");
             $table->date("end_date");
             $table->string("type");

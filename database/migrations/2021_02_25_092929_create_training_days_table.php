@@ -15,8 +15,9 @@ class CreateTrainingDaysTable extends Migration
     {
         Schema::create('training_days', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
-            $table->integer('session_id')->unsigned();
+            $table->integer('day');
+            $table->date('date');
+            $table->integer('training_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -44,14 +44,12 @@ class TrainingDayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id,$training_id,$day_id,$key)
+    public function show($id,$training_id,$day,$day_id)
     {
         $trainingDay = TrainingDay::find($day_id);
-//        dd($trainingDay);
         if ($trainingDay ){
-//            $training = $trainingDay->training;
-//            dd($training,$day);
-            return view("Epm.Trainings.Day.read",compact("trainingDay"));
+
+            return view("Epm.Trainings.Day.index",compact("trainingDay"));
         }
     }
 
@@ -61,9 +59,14 @@ class TrainingDayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$training_id,$day,$day_id,$session_id)
     {
-        //
+        $day = TrainingDay::find($day_id);
+        if ($day){
+
+            return view("Epm.Trainings.Day.edit",compact("day"));
+        }
+
     }
 
     /**
