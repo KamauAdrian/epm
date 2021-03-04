@@ -485,7 +485,7 @@
                                                     <div class="dropdown">
                                                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown"><span><u>Read More</u></span></a>
                                                         <div class="dropdown-menu p-4" style="width: 400px;">
-                                                            {!! $announcement->description !!}
+                                                            {!! nl2br($announcement->description) !!}
                                                         </div>
                                                     </div>
                                                 </div>
