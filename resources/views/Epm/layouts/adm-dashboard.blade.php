@@ -567,7 +567,7 @@
                            <div class="card-header">
                                Facebook
                            </div>
-                           <div class="card-body">
+                           <div class="card-body" style="width: 100%;">
                                <div class="fb-page" data-href="https://www.facebook.com/eMobilisMobileTech/"
                                     data-tabs="timeline,events" data-width="" data-height="600"
                                     data-small-header="false" data-adapt-container-width="true"
