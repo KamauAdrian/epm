@@ -19,6 +19,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="" />
     <meta name="image" content="https://create.tunitrivia.com/triviapics/EOYDCZNU.png" />
+    <meta property="og:image" content="https://create.tunitrivia.com/triviapics/EOYDCZNU.png" />
     <!-- Favicon icon -->
     <link rel="icon" href="{{url('assets/images/favicon.ico')}}" type="image/x-icon">
 {{--    <link rel="icon" href="{{url('assets/images/favicon.png')}}" type="image/x-icon">--}}
