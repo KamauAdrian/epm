@@ -37,6 +37,8 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=255022315384009&autoLogAppEvents=1" nonce="DndW4yft"></script>
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
     <div class="loader-track">

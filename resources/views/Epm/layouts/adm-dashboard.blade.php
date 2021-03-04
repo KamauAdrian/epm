@@ -1,7 +1,12 @@
 @extends('Epm.layouts.master')
 
 @section('styles')
-    <link rel="stylesheet" href="{{url('assets/css/plugins/daterangepicker.css')}}">
+    <style>
+        #footer{
+
+            /*background-color: #7E858E;*/
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -539,6 +544,46 @@
                 </div>
             @endif
         </div>
+    </div>
+    <div class="col-md-12" id="footer">
+       <div class="card">
+           <div class="card-body">
+               <div class="row m-3">
+                   <div class="col-md-6 mt-2">
+                       <div class="card">
+                           <div class="card-header">
+                               Twitter
+                           </div>
+                           <div class="card-body">
+                               <div>
+                                   <a data-tweet-limit="" data-height="600" class="twitter-timeline" href="https://twitter.com/eMobilis?ref_src=twsrc%5Etfw">Tweets by eMobilis</a>
+                                   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6 mt-2">
+                       <div class="card">
+                           <div class="card-header">
+                               Facebook
+                           </div>
+                           <div class="card-body">
+                               <div class="fb-page" data-href="https://www.facebook.com/eMobilisMobileTech/"
+                                    data-tabs="timeline,events" data-width="450" data-height="600"
+                                    data-small-header="false" data-adapt-container-width="true"
+                                    data-hide-cover="false" data-show-facepile="true">
+                                   <blockquote cite="https://www.facebook.com/eMobilisMobileTech/" class="fb-xfbml-parse-ignore">
+                                       <a href="https://www.facebook.com/eMobilisMobileTech/">
+                                           eMobilis Mobile Technology  Institute
+                                       </a>
+                                   </blockquote>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
     </div>
 @endsection
 @section('js')
