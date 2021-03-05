@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-12" style="padding-left: 150px; padding-right: 150px">
                 <div class="text-center">
-                    <h1 class="f-w-400">Add a New Project Manager</h1>
+                    <h1 class="f-w-400">Add a New PMO</h1>
                 </div>
                 @include('Epm.layouts.pm-add')
             </div>

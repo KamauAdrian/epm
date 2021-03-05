@@ -88,19 +88,15 @@
                                 </div>
                                 @if($training->venue == "Centers (AYECs)")
                                     <div class="col-md-4">
-                                        @if($centers)
                                             <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
                                             @foreach($centers as $center)
                                                 {{$center}}<br />
                                             @endforeach
-                                        @else
-                                            <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
                                             <a href="#!" data-toggle="modal" class="openModalAddCenter" data-training_id="{{$training->id}}"  id="openModalAddCenter}}" >
-                                                <button type="button" title="Choose Training Center" class="btn btn-icon icon-s">
+                                                <button type="button" title="Add Other Training Centers" class="btn btn-icon icon-s">
                                                     <i class="feather icon-plus"></i>
                                                 </button>
                                             </a>
-                                        @endif
                                     </div>
                                 @else
 {{--                                    <div class="col-md-4">--}}
@@ -191,15 +187,25 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-md-12">
-                                        <div style="display: none" id="modal-modal-training-id"></div>
+                                        <div style="display: block" id="modal-modal-training-id"></div>
                                         <form action="">
                                             <div class="row">
+                                                <div class="col-md-12" id="">
+                                                    <?php
+                                                    $centers = \App\Models\Center::all();
+                                                    ?>
+                                                    {{json_encode($centers)}}<br />
+                                                    @foreach($centers as $center)
+                                                    {{json_encode($center)}}<br />
+                                                    @endforeach
+                                                </div>
+                                                <div style="display: none" id="modal-modal-training-centers">{{json_encode($centers)}}</div>
                                                 <div class="col-md-12">
                                                     <div class="form-group" id="trainingCenters">
                                                         <label>Select Centers</label>
-                                                        <multiselect v-model="selectedCenters" :options="centers"
-                                                                     placeholder="Select Center" label="name" track-by="id"
-                                                                     :searchable="true" :close-on-select="true">
+                                                        <multiselect v-model="selectedCenters" v-bind:options="centers"
+                                                                     placeholder="Select Center" label="name" :track-by="trackBy"
+                                                                     :searchable="true" :close-on-select="true" multiple>
                                                         </multiselect>
 {{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
                                                             <input type="hidden" v-for="center in selectedCenters" name="centers[]" :value="center.id">
@@ -224,34 +230,84 @@
 @section("js")
     <script>
         new Vue({
+            el: "#trainingCenters",
             components: {
                 multiselect: window.VueMultiselect.default,
                 axios: window.axios.defaults,
             },
-            data() {
-                return {
-                    selectedCenters: null,
-                    centers: [],
-                }
-            },
-            mounted () {
-                this.getCenters()
+            data:{
+                trackBy: "id",
+                initialValues: [3],
+                selectedCenters: null,
+                centers: [
+                    // document.getElementById("modal-modal-training-centers").innerText
+                    this.getCenters()
+                ],
             },
             methods:{
                 getCenters(){
-                    axios
-                        .get('/centers')
-                        .then(response => {
-                            this.centers = response.data
-                        })
-                        .catch(error => {
-                            console.log(error)
-                            this.errored = true
-                        })
-                        .finally(() => this.loading = true)
+                    return document.getElementById("modal-modal-training-centers").innerText;
+                    // console.log("t Cennters "+tCenters);
+                    // this.centers=tCenters;
+                    // axios
+                    //     .get('/centers')
+                    //     .then(response => {
+                    //         this.centers = response.data;
+                    //         console.log("centers json "+response.data);
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error)
+                    //         this.errored = true
+                    //     })
+                    //     .finally(() => this.loading = true);
+                },
+            },
+            watch: {
+                initialValues: {
+                    immediate: true,
+                    handler(values) {
+                        this.selectedCenters = this.centers.filter(x => values.includes(x[this.trackBy]));
+                    }
+                }
+            }
+        });
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data() {
+                return {
+                    trackBy: 'id',
+                    initialValues: [9,13],
+                    selectedPmo: null,
+                    pmos: [],
                 }
             },
-        }).$mount('#trainingCenters')
+            mounted () {
+                this.getAssignees();
+            },
+            methods:{
+                getAssignees(){
+                    axios
+                        .get('/list/collaborators/'+this.$el.attributes.project_id.value)
+                        .then(response => {
+                            this.pmos = response.data;
+                        }).catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    }).finally(() => this.loading = true);
+                },
+            },
+            watch: {
+                initialValues: {
+                    immediate: true,
+                    handler(values) {
+                        this.selectedPmo = this.pmos.filter(x => values.includes(x[this.trackBy]));
+                    }
+                }
+            },
+        }).$mount('#collaborators');
         $('.openModalAddCenter').click(function(event){
             event.preventDefault();
             var taskId=$(this).attr("data-training_id");

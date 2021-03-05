@@ -55,7 +55,7 @@ class TrainingController extends Controller
      */
     public function store(Request $request,$id)
     {
-//        dd($request->all());
+        dd($request->all());
         $admin = User::find($id);
         if ($admin){
 //            dd($request->all());

@@ -64,6 +64,17 @@
                                         <input type="hidden" v-for="institution in selectedInstitutions" name="institutions[]" :value="institution.id">
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="trainingType">
+                                        <label>PUBLIC/PRIVATE</label>
+                                        <multiselect v-model="selectedTraining" :options="trainings"
+                                                     placeholder="Public/Private"
+                                                     :searchable="true" :close-on-select="true">
+                                        </multiselect>
+                                        <input type="hidden" name="type" :value="selectedTraining">
+                                        <span class="text-danger">{{$errors->first('type')}}</span>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>TRAINING START DATE</label>
@@ -85,17 +96,6 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="col-sm-12">
-                                    <div class="form-group" id="trainingType">
-                                        <label>PUBLIC/PRIVATE</label>
-                                        <multiselect v-model="selectedTraining" :options="trainings"
-                                                     placeholder="Public/Private"
-                                                     :searchable="true" :close-on-select="true">
-                                        </multiselect>
-                                        <input type="hidden" name="type" :value="selectedTraining">
-                                        <span class="text-danger">{{$errors->first('type')}}</span>
-                                    </div>
-                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>TRAINING DESCRIPTION</label>

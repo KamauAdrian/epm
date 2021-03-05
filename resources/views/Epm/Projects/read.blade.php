@@ -1007,7 +1007,7 @@ console.log(response_task);
             data() {
                 return {
                     trackBy: 'id',
-                    initialValues: [2,9,13],
+                    initialValues: [9,13],
                     selectedPmo: null,
                     pmos: [],
                 }
