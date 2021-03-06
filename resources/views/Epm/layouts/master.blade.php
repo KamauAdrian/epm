@@ -34,6 +34,8 @@
     </style>
     @yield('styles')
     <script src="{{url('assets/js/vendor-all.min.js')}}"></script>
+    <script src="https://unpkg.com/vue"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>--}}
 </head>
 
 <body>

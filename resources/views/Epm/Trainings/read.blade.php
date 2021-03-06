@@ -5,7 +5,7 @@
     {{--    @include('Epm.layouts.session-view')--}}
     <div class="col-md-12">
         <?php
-        $auth_admin = auth()->user();
+        use App\Models\Center;$auth_admin = auth()->user();
         $session_date = date_create($training->start_date);
         $split_date = date_format($session_date,'l dS M Y');
         $days = $training->trainingDays;
@@ -71,7 +71,7 @@
                                 <p class="font-weight-normal">Start: {{date('dS M Y',strtotime($training->start_date))}} <br /> End: {{date('dS M Y',strtotime($training->end_date))}}</p>
                             </div>
                             @if($training->training == "Physical" || $training->training == "TOT")
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     @if($trainers)
                                         <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
                                         @foreach($trainers as $trainer)
@@ -87,7 +87,7 @@
                                     @endif
                                 </div>
                                 @if($training->venue == "Centers (AYECs)")
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                             <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
                                             @foreach($centers as $center)
                                                 {{$center}}<br />
@@ -99,7 +99,7 @@
                                             </a>
                                     </div>
                                 @else
-{{--                                    <div class="col-md-4">--}}
+{{--                                    <div class="col-md-3">--}}
 {{--                                        @if($institutions)--}}
 {{--                                            <h6><span class="text-small" style="font-size: 14px">Institutions</span></h6>--}}
 {{--                                            @foreach($institutions as $institution)--}}
@@ -115,7 +115,7 @@
 {{--                                        @endif--}}
 {{--                                    </div>--}}
                                 @endif
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     @if($classes)
                                         <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
                                         @foreach($classes as $class)
@@ -129,6 +129,11 @@
                                             </button>
                                         </a>
                                     @endif
+                                </div>
+                                <div class="col-md-3">
+                                    <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
+                                    <span class="mr-2"><i class="fa fa-user"></i> Male 20 </span> <span class="ml-2"><i class="fa fa-user"></i> Female 20</span><br />
+                                    <span>Total 40</span>
                                 </div>
                             @endif
                             @if($training->training == "Virtual")
@@ -187,23 +192,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-md-12">
-                                        <div style="display: block" id="modal-modal-training-id"></div>
+                                        <div style="display: none;" id="modal-modal-training-id"></div>
                                         <form action="">
                                             <div class="row">
-                                                <div class="col-md-12" id="">
-                                                    <?php
-                                                    $centers = \App\Models\Center::all();
-                                                    ?>
-                                                    {{json_encode($centers)}}<br />
-                                                    @foreach($centers as $center)
-                                                    {{json_encode($center)}}<br />
-                                                    @endforeach
-                                                </div>
-                                                <div style="display: none" id="modal-modal-training-centers">{{json_encode($centers)}}</div>
                                                 <div class="col-md-12">
                                                     <div class="form-group" id="trainingCenters">
                                                         <label>Select Centers</label>
-                                                        <multiselect v-model="selectedCenters" v-bind:options="centers"
+                                                        <multiselect v-model="selectedCenters" :options="centers"
                                                                      placeholder="Select Center" label="name" :track-by="trackBy"
                                                                      :searchable="true" :close-on-select="true" multiple>
                                                         </multiselect>
@@ -229,47 +224,64 @@
 @endsection
 @section("js")
     <script>
-        new Vue({
+        let tCenters = new Vue({
             el: "#trainingCenters",
             components: {
                 multiselect: window.VueMultiselect.default,
                 axios: window.axios.defaults,
             },
-            data:{
-                trackBy: "id",
-                initialValues: [3],
-                selectedCenters: null,
-                centers: [
-                    // document.getElementById("modal-modal-training-centers").innerText
-                    this.getCenters()
-                ],
+            data: function () {
+                return {
+                    trackBy:"id",
+                    initialValues: [1,0,10],
+                    selectedCenters: [],
+                    centers:[
+                        {id:0,name:"Adrian"},
+                        {id:10,name:"Adrian 010"},
+                        // oldCenters
+                        // {"id":1,"name":"Test Center One","county":"Homa Bay","location":"HomaBay Post Office","location_lat_long":"-0.5298372,34.45709179999999","image":"icon_video.png","description":"This Center is So Cool","created_at":"2021-02-24T11:50:31.000000Z","updated_at":"2021-02-24T11:50:31.000000Z"}
+                    ]
+                }
             },
             methods:{
-                getCenters(){
-                    return document.getElementById("modal-modal-training-centers").innerText;
-                    // console.log("t Cennters "+tCenters);
-                    // this.centers=tCenters;
-                    // axios
-                    //     .get('/centers')
-                    //     .then(response => {
-                    //         this.centers = response.data;
-                    //         console.log("centers json "+response.data);
-                    //     })
-                    //     .catch(error => {
-                    //         console.log(error)
-                    //         this.errored = true
-                    //     })
-                    //     .finally(() => this.loading = true);
+                getCenters: function(){
+                    axios
+                        .get('/centers')
+                        .then(response => {
+                            this.allCenters = response.data;
+                            this.updateCenters();
+                            console.log("centers json "+response.data);
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true);
+                },
+                updateCenters: function () {
+                    let total = this.allCenters.length;
+                    for (i=0;i<total;i++){
+                        let all = this.centers.push(this.allCenters[i]);
+                    }
                 },
             },
             watch: {
+                centers:{
+                    created () {
+                        this.getCenters();
+                    },
+                },
                 initialValues: {
                     immediate: true,
                     handler(values) {
-                        this.selectedCenters = this.centers.filter(x => values.includes(x[this.trackBy]));
+                        console.log("Found centers at this point "+this.centers.length);
+                        console.log(values);
+                        this.selectedCenters = this.centers.filter(r => values.includes(r[this.trackBy]));
+                        // this.selectedCenters = centers[1];
+                        // this.centers.filter(x => values.includes(x[this.trackBy]));
                     }
                 }
-            }
+            },
         });
         new Vue({
             components: {
