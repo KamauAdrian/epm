@@ -15,35 +15,30 @@ $auth_admin = auth()->user();
     <div class="card-body">
         <div class="col-md-12">
             @foreach($days as $key=>$day)
-                <?php
-                $trainers = $day->trainers;
-                $classes = $day->classes;
-                $trainees = $day->trainees;
-                ?>
-                    <a href="{{url("/adm/".$auth_admin->id."/view/training/".$training->id."/day/".$day->day."/".$day->id)}}">
-                        <div class="card training-day" style="color: grey;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h5>Day {{$day->day}}</h5>
-                                        {{date("dS M Y",strtotime($day->date))}}
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5>Trainees (Female)</h5>
-                                        12
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5>Trainees (Male)</h5>
-                                        12
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5>Trainees (Total)</h5>
-                                        24
-                                    </div>
+                <a href="{{url("/adm/".$auth_admin->id."/view/training/".$training->id."/day/".$day->id)}}">
+                    <div class="card training-day" style="color: grey;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Day {{$day->day}}</h5>
+                                    {{date("dS M Y",strtotime($day->date))}}
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Trainees (Female)</h5>
+                                    12
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Trainees (Male)</h5>
+                                    12
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Trainees (Total)</h5>
+                                    24
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
+                </a>
             @endforeach
         </div>
     </div>

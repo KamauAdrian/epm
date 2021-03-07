@@ -18,9 +18,9 @@ class TeamCenterManager extends Model
     ];
 
     public function centerManagers(){
-        return $this->belongsToMany('App\Models\User','team_cm_member','team_id','center_manager_id');
+        return $this->belongsToMany("App\Models\User","team_cm_member","team_id","center_manager_id");
     }
     public function teamLeaders(){
-        return $this->hasMany('App\Models\TeamCmsLeader','team_id');
+        return $this->belongsToMany("App\Models\User","team_cms_leaders","team_id","team_leader_id");
     }
 }

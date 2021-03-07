@@ -15,10 +15,10 @@
         foreach ($trainers_raw as $trainer_raw){
             $trainers[] = $trainer_raw->name;
         }
-        $classes_raw = $training->classes;
-        $classes = [];
-        foreach ($classes_raw as $class_raw){
-            $classes[] = $class_raw->name;
+        $cohorts_raw = $training->cohorts;
+        $cohorts = [];
+        foreach ($cohorts_raw as $cohort_raw){
+            $cohorts[] = $cohort_raw->cohort_name;
         }
         $centers_raw = $training->centers;
         $centers = [];
@@ -35,6 +35,11 @@
 
         ?>
         <div class="row">
+            <div class="col-md-12 mb-2">
+                <a class="float-right" href="{{url("/adm/".$auth_admin->id."/view/training/".$training->id."/session/allocations")}}">
+                    <button class="btn btn-outline-info">Training Session Allocations</button>
+                </a>
+            </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -72,15 +77,13 @@
                             </div>
                             @if($training->training == "Physical" || $training->training == "TOT")
                                 <div class="col-md-3">
+                                    <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
                                     @if($trainers)
-                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
                                         @foreach($trainers as $trainer)
                                             {{$trainer}}<br />
                                         @endforeach
-                                    @else
-                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
-                                        <a href="#!">
-                                            <button type="button" title="Choose Training Center" class="btn btn-icon icon-s">
+                                        <a href="#!" data-toggle="modal" class="openModalUpdateTrainers">
+                                            <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
                                                 <i class="feather icon-plus"></i>
                                             </button>
                                         </a>
@@ -89,10 +92,12 @@
                                 @if($training->venue == "Centers (AYECs)")
                                     <div class="col-md-3">
                                             <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
+                                        @if($centers)
                                             @foreach($centers as $center)
                                                 {{$center}}<br />
                                             @endforeach
-                                            <a href="#!" data-toggle="modal" class="openModalAddCenter" data-training_id="{{$training->id}}"  id="openModalAddCenter}}" >
+                                        @endif
+                                            <a href="#!" data-toggle="modal" class="openModalUpdateCenters">
                                                 <button type="button" title="Add Other Training Centers" class="btn btn-icon icon-s">
                                                     <i class="feather icon-plus"></i>
                                                 </button>
@@ -116,19 +121,17 @@
 {{--                                    </div>--}}
                                 @endif
                                 <div class="col-md-3">
-                                    @if($classes)
-                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
-                                        @foreach($classes as $class)
-                                            {{$class}}<br />
+                                    <h6><span class="text-small" style="font-size: 14px">Classes/Cohorts</span></h6>
+                                    @if($cohorts)
+                                        @foreach($cohorts as $key=>$cohort)
+                                            {{$key+1}}.{{$cohort}}<br />
                                         @endforeach
-                                    @else
-                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
-                                        <a href="#!">
-                                            <button type="button" title="Add Classes To Training" class="btn btn-icon icon-s">
-                                                <i class="feather icon-plus"></i>
-                                            </button>
-                                        </a>
                                     @endif
+                                    <a href="#!" data-toggle="modal" class="openModalUpdateCohorts">
+                                        <button type="button" title="Add Classes/Cohorts to Training" class="btn btn-icon icon-s">
+                                            <i class="feather icon-plus"></i>
+                                        </button>
+                                    </a>
                                 </div>
                                 <div class="col-md-3">
                                     <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
@@ -182,7 +185,7 @@
                 @if($training->training == "TOT")
                     @include("Epm.Trainings.TOT.index")
                 @endif
-                    <div class="modal fade" id="modalAddCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="modalUpdateTrainers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -192,18 +195,90 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-md-12">
-                                        <div style="display: none;" id="modal-modal-training-id"></div>
-                                        <form action="">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/trainers")}}" method="post">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group" id="trainingCenters">
+                                                    <div class="form-group" id="trainingTrainers" training_id="{{$training->id}}">
+                                                        <label>Select Trainers</label>
+                                                        <multiselect v-model="selectedTrainers" :options="trainers"
+                                                                     placeholder="Select Trainer" label="name" :track-by="trackBy"
+                                                                     :searchable="true" :close-on-select="false" multiple>
+                                                        </multiselect>
+{{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
+                                                            <input type="hidden" v-for="trainer in selectedTrainers" name="trainers[]" :value="trainer.id">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group float-right">
+                                                        <input type="submit" class="btn btn-outline-info" value="Save">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalUpdateCenters" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/centers")}}" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" id="trainingCenters" training_id="{{$training->id}}">
                                                         <label>Select Centers</label>
                                                         <multiselect v-model="selectedCenters" :options="centers"
                                                                      placeholder="Select Center" label="name" :track-by="trackBy"
-                                                                     :searchable="true" :close-on-select="true" multiple>
+                                                                     :searchable="true" :close-on-select="false" multiple>
                                                         </multiselect>
 {{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
                                                             <input type="hidden" v-for="center in selectedCenters" name="centers[]" :value="center.id">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group float-right">
+                                                        <input type="submit" class="btn btn-outline-info" value="Save">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalUpdateCohorts" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/cohorts")}}" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" id="cohorts" training_id="{{$training->id}}">
+                                                        <label>Select Classes/Cohorts</label>
+                                                        <multiselect v-model="selectedCohorts" :options="cohorts"
+                                                                     placeholder="Select Class" label="cohort_name" :track-by="trackBy"
+                                                                     :searchable="true" :close-on-select="false" multiple>
+                                                        </multiselect>
+{{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
+                                                            <input type="hidden" v-for="cohort in selectedCohorts" name="cohorts[]" :value="cohort.id">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -224,7 +299,65 @@
 @endsection
 @section("js")
     <script>
-        let tCenters = new Vue({
+        $('.openModalUpdateTrainers').click(function(event){
+            event.preventDefault();
+            $("#modalUpdateTrainers").modal('show');
+        });
+        $('.openModalUpdateCenters').click(function(event){
+            event.preventDefault();
+            $("#modalUpdateCenters").modal('show');
+        });
+        $('.openModalUpdateCohorts').click(function(event){
+            event.preventDefault();
+            $("#modalUpdateCohorts").modal('show');
+        });
+        new Vue({
+            el: "#trainingTrainers",
+            components: {
+                multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data: function () {
+                return {
+                    trackBy:"id",
+                    selectedTrainers: [],
+                    trainers: [],
+                    initialTrainers: [],
+                }
+            },
+            methods:{
+                getAllTrainers: function(){
+                    axios
+                        .get('/trainers')
+                        .then(response => {
+                            this.trainers = response.data;
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true);
+                },
+            },
+            mounted () {
+                this.getAllTrainers();
+            },
+            watch: {
+                trainers:{
+                    immediate: false,
+                    handler(values){
+                        axios.get("/training/"+this.$el.attributes.training_id.value+"/trainers").then(response => {this.initialTrainers = response.data;});
+                    },
+                },
+                initialTrainers: {
+                    immediate: false,
+                    handler(values) {
+                        this.selectedTrainers = this.trainers.filter(r => values.includes(r[this.trackBy]));
+                    }
+                }
+            },
+        });
+        new Vue({
             el: "#trainingCenters",
             components: {
                 multiselect: window.VueMultiselect.default,
@@ -233,24 +366,20 @@
             data: function () {
                 return {
                     trackBy:"id",
-                    initialValues: [1,0,10],
                     selectedCenters: [],
-                    centers:[
-                        {id:0,name:"Adrian"},
-                        {id:10,name:"Adrian 010"},
-                        // oldCenters
-                        // {"id":1,"name":"Test Center One","county":"Homa Bay","location":"HomaBay Post Office","location_lat_long":"-0.5298372,34.45709179999999","image":"icon_video.png","description":"This Center is So Cool","created_at":"2021-02-24T11:50:31.000000Z","updated_at":"2021-02-24T11:50:31.000000Z"}
-                    ]
+                    centers: [],
+                    initialValues: [],
                 }
             },
             methods:{
-                getCenters: function(){
+                getAllCenters: function(){
                     axios
                         .get('/centers')
                         .then(response => {
-                            this.allCenters = response.data;
-                            this.updateCenters();
-                            console.log("centers json "+response.data);
+                            this.centers = response.data;
+                            // this.allCenters = response.data;
+                            // this.updateCenters();
+                            // console.log("centers json "+response.data);
                         })
                         .catch(error => {
                             console.log(error)
@@ -258,73 +387,84 @@
                         })
                         .finally(() => this.loading = true);
                 },
-                updateCenters: function () {
-                    let total = this.allCenters.length;
-                    for (i=0;i<total;i++){
-                        let all = this.centers.push(this.allCenters[i]);
-                    }
-                },
+                // updateCenters: function () {
+                //     let total = this.allCenters.length;
+                //     for (i=0;i<total;i++){
+                //         let all = this.centers.push(this.allCenters[i]);
+                //     }
+                // },
+            },
+            mounted () {
+                this.getAllCenters();
             },
             watch: {
                 centers:{
-                    created () {
-                        this.getCenters();
+                    immediate: false,
+                    handler(values){
+                        axios.get("/training/"+this.$el.attributes.training_id.value+"/centers").then(response => {this.initialValues = response.data;});
                     },
                 },
                 initialValues: {
                     immediate: true,
                     handler(values) {
-                        console.log("Found centers at this point "+this.centers.length);
-                        console.log(values);
                         this.selectedCenters = this.centers.filter(r => values.includes(r[this.trackBy]));
-                        // this.selectedCenters = centers[1];
-                        // this.centers.filter(x => values.includes(x[this.trackBy]));
                     }
                 }
             },
         });
         new Vue({
+            el: "#cohorts",
             components: {
-                Multiselect: window.VueMultiselect.default,
+                multiselect: window.VueMultiselect.default,
                 axios: window.axios.defaults,
             },
-            data() {
+            data: function () {
                 return {
-                    trackBy: 'id',
-                    initialValues: [9,13],
-                    selectedPmo: null,
-                    pmos: [],
+                    trackBy:"id",
+                    selectedCohorts: [],
+                    cohorts: [],
+                    initialValues: [],
                 }
             },
-            mounted () {
-                this.getAssignees();
-            },
             methods:{
-                getAssignees(){
+                getAllCohorts: function(){
                     axios
-                        .get('/list/collaborators/'+this.$el.attributes.project_id.value)
+                        .get('/cohorts')
                         .then(response => {
-                            this.pmos = response.data;
-                        }).catch(error => {
-                        console.log(error);
-                        this.errored = true;
-                    }).finally(() => this.loading = true);
+                            this.cohorts = response.data;
+                            // this.allClasses = response.data;
+                            // this.updateClasses();
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true);
                 },
+                // updateClasses: function () {
+                //     let total = this.allClasses.length;
+                //     for (i=0;i<total;i++){
+                //         let all = this.classes.push(this.allClasses[i]);
+                //     }
+                // },
+            },
+            mounted () {
+                this.getAllCohorts();
             },
             watch: {
+                cohorts:{
+                    immediate: false,
+                    handler(values){
+                        axios.get("/training/"+this.$el.attributes.training_id.value+"/cohorts").then(response => {this.initialValues = response.data;});
+                    },
+                },
                 initialValues: {
                     immediate: true,
                     handler(values) {
-                        this.selectedPmo = this.pmos.filter(x => values.includes(x[this.trackBy]));
+                        this.selectedCohorts = this.cohorts.filter(r => values.includes(r[this.trackBy]));
                     }
                 }
             },
-        }).$mount('#collaborators');
-        $('.openModalAddCenter').click(function(event){
-            event.preventDefault();
-            var taskId=$(this).attr("data-training_id");
-            $("#modal-modal-training-id").text(taskId);
-            $("#modalAddCenter").modal('show');
         });
     </script>
 @endsection

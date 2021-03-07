@@ -1,9 +1,5 @@
 @extends('Epm.layouts.master')
 
-@section('styles')
-    <link rel="stylesheet" href="{{url('/assets/dist/vue-multiselect.min.css')}}">
-@endsection
-
 @section('content')
     <div class="col-md-12">
         <div class="row">
@@ -28,15 +24,26 @@
                                 </div>
                                 @if($cms!='')
                                     <div class="col-sm-12">
-                                        <div class="form-group" id="cms">
+                                        <div class="form-group" id="cmsLeaders">
                                             <label>Select Team Leaders</label>
-                                            <multiselect name="cms" v-model="selectedCm" :options="cms"
+                                            <multiselect v-model="selectedCms" :options="cms"
                                                          placeholder="Search" label="name" track-by="id"
                                                          :searchable="true" :close-on-select="true" multiple>
                                             </multiselect>
-                                            <input type="hidden" v-for="cm in selectedCm" name="team_leader_ids[]" :value="cm.id">
+                                            <input type="hidden" v-for="cm in selectedCms" name="team_leaders[]" :value="cm.id">
+                                            <span class="text-danger">{{$errors->first('team_leaders')}}</span>
                                         </div>
                                     </div>
+{{--                                    <div class="col-sm-12">--}}
+{{--                                        <div class="form-group" id="cmsMembers">--}}
+{{--                                            <label>Select Team Members</label>--}}
+{{--                                            <multiselect name="cms" v-model="selectedCms" :options="cms"--}}
+{{--                                                         placeholder="Search" label="name" track-by="id"--}}
+{{--                                                         :searchable="true" :close-on-select="true" multiple>--}}
+{{--                                            </multiselect>--}}
+{{--                                            <input type="hidden" v-for="cm in selectedCms" name="team_members[]" :value="cm.id">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 @endif
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -62,19 +69,16 @@
 @endsection
 
 @section('js')
-    <script src="{{url('assets/dist/vue-multiselect.min.js')}}"></script>
-    <script src="{{url('assets/dist/vue.js')}}"></script>
-    <script src="{{url('assets/dist/axios.js')}}"></script>
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
         new Vue({
+            el:"#cmsLeaders",
             components: {
                 Multiselect: window.VueMultiselect.default,
                 axios: window.axios.defaults,
             },
             data() {
                 return {
-                    selectedCm: null,
+                    selectedCms: null,
                     cms: [],
                 }
             },
@@ -95,7 +99,37 @@
                         .finally(() => this.loading = true)
                 }
             },
-        }).$mount('#cms')
+        });
+        new Vue({
+            el:"#cmsMembers",
+            components: {
+                Multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data() {
+                return {
+                    selectedCms: null,
+                    cms: [],
+                }
+            },
+            mounted () {
+                this.getCms()
+            },
+            methods:{
+                getCms(){
+                    axios
+                        .get('/cms')
+                        .then(response => {
+                            this.cms = response.data
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true)
+                }
+            },
+        });
     </script>
     <style src="{{url('assets/dist/vue-multiselect.min.css')}}"></style>
 @endsection

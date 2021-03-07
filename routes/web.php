@@ -235,6 +235,9 @@ Route::group(['middleware'=>'admin'],function (){
 
     //Trainings
     Route::get('/adm/{id}/list/trainings',[App\Http\Controllers\TrainingController::class, 'index']);
+    Route::get('/training/{training_id}/trainers',[App\Http\Controllers\TrainingController::class, 'trainers']);//json array of trainers added to training
+    Route::get('/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'centers']);//json array of centers where training taking place
+    Route::get('/training/{training_id}/cohorts',[App\Http\Controllers\TrainingController::class, 'cohorts']);//json array of classes added to training
     Route::get('/adm/{id}/add/new/training',[App\Http\Controllers\TrainingController::class, 'create']);
     Route::post('/adm/{id}/save/training',[App\Http\Controllers\TrainingController::class, 'store']);
     Route::get('/adm/{id}/view/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'show']);
@@ -243,13 +246,16 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/update/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'update']);
     Route::get('/adm/{id}/delete/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'destroy']);
 
-    //Training -> (Update)
-    Route::get('/adm/{id}/update/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'edit_centers']);
-    Route::post('/adm/{id}/save/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'update_centers']);
-    Route::get('/adm/{id}/update/training/{training_id}/classes',[App\Http\Controllers\TrainingController::class, 'edit_classes']);
-    Route::post('/adm/{id}/save/training/{training_id}/classes',[App\Http\Controllers\TrainingController::class, 'update_classes']);
+    //Training -> (Updates)
+    Route::post('/adm/{id}/update/training/{training_id}/trainers',[App\Http\Controllers\TrainingController::class, 'update_trainers']);
+    Route::post('/adm/{id}/update/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'update_centers']);
+    Route::post('/adm/{id}/update/training/{training_id}/cohorts',[App\Http\Controllers\TrainingController::class, 'update_cohorts']);
+
+    //Training -> (Session Allocations)
+    Route::get('/adm/{id}/view/training/{training_id}/session/allocations',[App\Http\Controllers\TrainingSessionAllocationController::class, 'index']);
+
     //Trainings(Per Day Day one ...)
-    Route::get('/adm/{id}/view/training/{training_id}/day/{day}/{day_id}',[App\Http\Controllers\TrainingDayController::class, 'show']);
+    Route::get('/adm/{id}/view/training/{training_id}/day/{day_id}',[App\Http\Controllers\TrainingDayController::class, 'show']);
     Route::get('/adm/{id}/edit/training/{training_id}/day/{day}/{day_id}/session/{session_id}',[App\Http\Controllers\TrainingDayController::class, 'edit']);
 
     //Trainings(Time tables)
@@ -266,6 +272,24 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/edit/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'edit']);
     Route::get('/adm/{id}/update/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'update']);
     Route::get('/adm/{id}/delete/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'destroy']);
+
+
+    //Trainings ->Physical Training Resources
+    Route::get('/adm/{id}/view/physical/training/resources',[App\Http\Controllers\PhysicalTrainingResourceController::class, 'index']);
+    Route::get('/adm/{id}/add/physical/training/resources',[App\Http\Controllers\PhysicalTrainingResourceController::class, 'create']);
+    Route::post('/adm/{id}/save/physical/training/resources',[App\Http\Controllers\PhysicalTrainingResourceController::class, 'store']);
+
+
+    //Trainings ->Virtual Training Resources
+    Route::get('/adm/{id}/view/virtual/training/resources',[App\Http\Controllers\VirtualTrainingResourceController::class, 'index']);
+    Route::get('/adm/{id}/add/virtual/training/resources',[App\Http\Controllers\VirtualTrainingResourceController::class, 'create']);
+    Route::post('/adm/{id}/save/virtual/training/resources',[App\Http\Controllers\VirtualTrainingResourceController::class, 'store']);
+
+
+    //Trainings ->Tot Training Resources
+    Route::get('/adm/{id}/view/tot/training/resources',[App\Http\Controllers\TotTrainingResourceController::class, 'index']);
+    Route::get('/adm/{id}/add/tot/training/resources',[App\Http\Controllers\TotTrainingResourceController::class, 'create']);
+    Route::post('/adm/{id}/add/save/training/resources',[App\Http\Controllers\TotTrainingResourceController::class, 'store']);
 
     //Session (Trainers)
     Route::get('/new/session/trainers/{id}',[App\Http\Controllers\SessionController::class, 'new_session_trainers']);//json array of trainers not in the session
@@ -311,26 +335,27 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/edit/announcement/{announcement_id}',[App\Http\Controllers\AnnouncementController::class,'edit']);
     Route::post('/adm/{id}/update/announcement/{announcement_id}',[App\Http\Controllers\AnnouncementController::class,'update']);
 
-    //Classes
-    Route::get('/adm/{id}/list/classes',[App\Http\Controllers\ClassController::class, 'index']);
-    Route::get('/adm/{id}/create/class',[App\Http\Controllers\ClassController::class, 'create']);
-    Route::post('/adm/{id}/save/class',[App\Http\Controllers\ClassController::class, 'store']);
-    Route::get('/adm/{id}/view/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'show']);
-    Route::get('/adm/{id}/edit/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'edit']);
-    Route::post('/adm/{id}/update/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'update']);
-    Route::post('/adm/{id}/delete/class/class_id={class_id}',[App\Http\Controllers\ClassController::class, 'destroy']);
-    Route::get('/session/classes',[App\Http\Controllers\ClassController::class, 'classes']);//json array of classes
+    //Cohorts -> (Classes)
+    Route::get('/adm/{id}/list/cohorts',[App\Http\Controllers\CohortController::class, 'index']);
+    Route::get('/adm/{id}/create/cohort',[App\Http\Controllers\CohortController::class, 'create']);
+    Route::post('/adm/{id}/save/cohort',[App\Http\Controllers\CohortController::class, 'store']);
+    Route::get('/adm/{id}/view/cohort/{cohort_id}',[App\Http\Controllers\CohortController::class, 'show']);
+    Route::get('/adm/{id}/edit/cohort/{cohort_id}',[App\Http\Controllers\CohortController::class, 'edit']);
+    Route::post('/adm/{id}/update/cohort/{cohort_id}',[App\Http\Controllers\CohortController::class, 'update']);
+    Route::post('/adm/{id}/delete/cohort/{cohort_id}',[App\Http\Controllers\CohortController::class, 'destroy']);
+    Route::get('/cohorts',[App\Http\Controllers\CohortController::class, 'cohorts']);//json array of cohorts
 
     //TEAMS
     //teams (Center Managers)
-    Route::get('/cms',[App\Http\Controllers\SuperAdminController::class, 'cms']);//json array of cms
-    Route::get('/cms/new/{id}',[App\Http\Controllers\SuperAdminController::class, 'cms_new']);//json array of cms(new ->not in team)
+    Route::get('/cms',[App\Http\Controllers\CenterManagerController::class, 'cms']);//json array of all cms
+//    Route::get('/cms/new/{id}',[App\Http\Controllers\SuperAdminController::class, 'cms_new']);//json array of cms(new ->not in team)
+    Route::get('/team/{team_id}/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'cms']);//json array of cms in team
     Route::get('/adm/{id}/list/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'index']);
-    Route::get('/cms/teams',[App\Http\Controllers\SuperAdminController::class, 'team_cms']);
-    Route::get('/adm/{id}/add/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'create']);
+//    Route::get('/cms/teams',[App\Http\Controllers\SuperAdminController::class, 'team_cms']);
+    Route::get('/adm/{id}/create/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'create']);
     Route::post('/adm/{id}/save/team/cms',[App\Http\Controllers\TeamCenterManagerController::class, 'store']);
-    Route::get('/adm/{id}/add/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManagerController::class, 'add_members']);
-    Route::post('/adm/{id}/save/team/cms/members/team_id={team_id}',[App\Http\Controllers\TeamCenterManagerController::class, 'store_members']);
+    Route::post('/adm/{id}/update/cms/team/{team_id}/leaders',[App\Http\Controllers\TeamCenterManagerController::class, 'update_leaders']);
+    Route::post('/adm/{id}/update/cms/team/{team_id}/members',[App\Http\Controllers\TeamCenterManagerController::class, 'update_members']);
 
     //teams (Trainers)
     Route::get('/adm/{id}/list/team/trainers',[App\Http\Controllers\TeamTrainerController::class, 'index']);

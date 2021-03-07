@@ -133,7 +133,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
     <li class="nav-item pcoded-hasmenu">
         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Trainings</span></a>
         <ul class="pcoded-submenu">
-            <li><a href="{{url('adm/'.$auth_admin->id.'/list/classes')}}">Cohorts</a></li>
+            <li><a href="{{url('adm/'.$auth_admin->id.'/list/cohorts')}}">Cohorts</a></li>
             <li><a href="{{url('/adm/'.$auth_admin->id.'/list/trainings')}}">Trainings</a></li>
         </ul>
     </li>

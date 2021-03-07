@@ -104,7 +104,7 @@ class TrainerController extends Controller
         $result = [];
         if ($role){
 //            $trainers = DB::table('users')->where('role_id',$role->id)->get();
-            $trainers = User::where("role_id",$role->id)->get();
+            $trainers = User::orderBy("name")->where("role_id",$role->id)->get();
             if (!empty($trainers)){
                 foreach ($trainers as $trainer){
                     $result[]=$trainer;

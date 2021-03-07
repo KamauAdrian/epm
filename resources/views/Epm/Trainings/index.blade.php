@@ -70,7 +70,7 @@
                                         <span>TOT Trainings</span>
                                     </a>
                                 </li>
-                            @else
+                            @elseif($tots)
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-tot-tab" data-toggle="pill" href="#pills-tot" role="tab" aria-controls="pills-tot" aria-selected="false">
                                     <span>TOT Trainings</span>

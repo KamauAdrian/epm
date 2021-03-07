@@ -55,7 +55,7 @@ class TrainingController extends Controller
      */
     public function store(Request $request,$id)
     {
-        dd($request->all());
+//        dd($request->all());
         $admin = User::find($id);
         if ($admin){
 //            dd($request->all());
@@ -73,27 +73,32 @@ class TrainingController extends Controller
             $training->training = $request->training;
             $training->venue = $request->venue;
             $training->start_date = $request->start_date;
-            $end_time = "";
+            $end_date = "";
             $venue = "";
             if ($request->training == "Physical" || $request->training == "TOT"){
                 $venue = $request->venue;
-                $end_time = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
+                $end_date = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
             }
             if ($request->training == "Virtual"){
-                $end_time = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
+                $end_date = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
             }
             $training->venue = $venue;
             $centers = null;
             $institutions = null;
+            $cohorts = null;
             if ($venue=="Centers (AYECs)"){
                 $centers = $request->centers;
             }
             if ($venue=="Institution (University/Tvet)"){
                 $institutions = $request->institutions;
             }
+            if ($request->cohorts){
+                $cohorts = $request->cohorts;
+            }
+//            dd($request->all(),$cohorts);
 //            dd($institutions,$venue);
 //            dd($request->all());
-            $training->end_date = $end_time;
+            $training->end_date = $end_date;
             $training->type = $request->type;
             $training->description = $request->about;
             $trainers = $request->trainers;
@@ -104,6 +109,9 @@ class TrainingController extends Controller
                 }
                 if ($institutions){
 //                    $training->institutions()->attach($institutions);
+                }
+                if ($cohorts){
+                    $training->cohorts()->attach($cohorts);
                 }
                 $start = date_create($training->start_date);
                 $end = date_create($training->end_date);
@@ -123,9 +131,40 @@ class TrainingController extends Controller
                 foreach ($trainers as $trainer){
                     $training->trainers()->attach($trainer);
                 }
-//                dd($training->start_date,$interval,$training->end_date,$days);
                 return redirect("/adm/".$id."/view/training/".$training->id)->with("success","New Training Created Successfully");
             }
+        }
+    }
+
+    //return json array of centers where training is taking place
+    public function trainers($training_id){
+        $training = Training::find($training_id);
+        if ($training){
+            $trainers = [];
+            foreach ($training->trainers as $trainer){
+                $trainers[] = $trainer->id;
+            }
+            return response()->json($trainers);
+        }
+    }
+    public function centers($training_id){
+        $training = Training::find($training_id);
+        if ($training){
+            $centers = [];
+            foreach ($training->centers as $center){
+                $centers[] = $center->id;
+            }
+            return response()->json($centers);
+        }
+    }
+    public function cohorts($training_id){
+        $training = Training::find($training_id);
+        if ($training){
+            $cohorts = [];
+            foreach ($training->cohorts as $cohort){
+                $cohorts[] = $cohort->id;
+            }
+            return response()->json($cohorts);
         }
     }
 
@@ -171,16 +210,6 @@ class TrainingController extends Controller
         //
     }
 
-    public function edit_centers($id, $training_id)
-    {
-
-    }
-
-    public function edit_classes($id, $training_id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -193,20 +222,49 @@ class TrainingController extends Controller
         //
     }
 
+    public function update_trainers(Request $request, $id, $training_id)
+    {
+//        dd($request->all());
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $trainers = $request->trainers;
+                $training->trainers()->detach();
+                $training->trainers()->attach($trainers);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Training Trainers Updated Successfully");
+            }
+        }
+    }
+
     public function update_centers(Request $request, $id, $training_id)
     {
+//        dd($request->all());
         $admin = User::find($id);
         if ($admin){
             $training = Training::find($training_id);
             if ($training){
                 $centers = $request->centers;
+//                dd($centers);
+                $training->centers()->detach();
+                $training->centers()->attach($centers);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Training Centers Updated Successfully");
             }
         }
     }
 
-    public function update_classes(Request $request, $id, $training_id)
+    public function update_cohorts(Request $request, $id, $training_id)
     {
-        //
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $cohorts = $request->cohorts;
+                $training->cohorts()->detach();
+                $training->cohorts()->attach($cohorts);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Training Cohorts Updated Successfully");
+            }
+        }
     }
 
 

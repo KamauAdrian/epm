@@ -33,6 +33,28 @@
                                         <span class="text-danger">{{$errors->first('training')}}</span>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="trainingType">
+                                        <label>PUBLIC/PRIVATE</label>
+                                        <multiselect v-model="selectedTraining" :options="trainings"
+                                                     placeholder="Public/Private"
+                                                     :searchable="true" :close-on-select="true">
+                                        </multiselect>
+                                        <input type="hidden" name="type" :value="selectedTraining">
+                                        <span class="text-danger">{{$errors->first('type')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group" id="cohorts">
+                                        <label>SELECT CLASSES/COHORTS</label>
+                                        <multiselect v-model="selectedCohorts" :options="cohorts"
+                                                     placeholder="Select Cohorts" :track-by="trackBy" label="cohort_name"
+                                                     :searchable="true" :close-on-select="false" multiple>
+                                        </multiselect>
+                                        <input type="hidden" v-for="cohort in selectedCohorts" name="cohorts[]" :value="cohort.id">
+                                        <span class="text-danger">{{$errors->first('cohorts')}}</span>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group" id="trainingVenue" style="display: none;">
                                         <label>TRAINING VENUE</label>
@@ -59,20 +81,9 @@
                                         <label>INSTITUTION</label>
                                         <multiselect v-model="selectedInstitutions" :options="institutions"
                                                      placeholder="Select Institution" track-by="id" label="name"
-                                                     :searchable="true" :close-on-select="true" multiple>
+                                                     :searchable="true" :close-on-select="false" multiple>
                                         </multiselect>
                                         <input type="hidden" v-for="institution in selectedInstitutions" name="institutions[]" :value="institution.id">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group" id="trainingType">
-                                        <label>PUBLIC/PRIVATE</label>
-                                        <multiselect v-model="selectedTraining" :options="trainings"
-                                                     placeholder="Public/Private"
-                                                     :searchable="true" :close-on-select="true">
-                                        </multiselect>
-                                        <input type="hidden" name="type" :value="selectedTraining">
-                                        <span class="text-danger">{{$errors->first('type')}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -88,7 +99,7 @@
                                             <label>SELECT TRAINERS</label>
                                             <Multiselect :options="trainers" v-model="selectedTrainer"
                                                          placeholder="Select Trainers" label="name" track-by="id"
-                                                         :searchable="true" :close-on-select="true"
+                                                         :searchable="true" :close-on-select="false"
                                                          multiple>
                                             </Multiselect>
                                             <input type="hidden" name="trainers[]" v-for="trainer in selectedTrainer"  :value="trainer.id">
@@ -272,6 +283,46 @@
                 },
             },
         }).$mount('#trainingTrainers');
+        new Vue({
+            el: "#cohorts",
+            components: {
+                multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data: function () {
+                return {
+                    trackBy:"id",
+                    selectedCohorts: [],
+                    cohorts: [],
+                    initialValues: [],
+                }
+            },
+            methods:{
+                getAllCohorts: function(){
+                    axios
+                        .get('/cohorts')
+                        .then(response => {
+                            this.cohorts = response.data;
+                            // this.allClasses = response.data;
+                            // this.updateClasses();
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true);
+                },
+                // updateClasses: function () {
+                //     let total = this.allClasses.length;
+                //     for (i=0;i<total;i++){
+                //         let all = this.classes.push(this.allClasses[i]);
+                //     }
+                // },
+            },
+            mounted () {
+                this.getAllCohorts();
+            },
+        });
         // new Vue({
         //     components: {
         //         Multiselect: window.VueMultiselect.default,

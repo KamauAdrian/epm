@@ -72,6 +72,21 @@ class CenterManagerController extends Controller
 
     }
 
+    public function cms(){
+        $role = DB::table('roles')->where('name','Center Manager')->first();
+        $result = [];
+        if ($role){
+//            $cms = DB::table('users')->where('role_id',$role->id)->get();
+            $cms = User::where("role_id",$role->id)->get();
+            if (!empty($cms)){
+                foreach ($cms as $cm){
+                    $result[]=$cm;
+                }
+            }
+            return response()->json($result);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

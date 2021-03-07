@@ -35,8 +35,8 @@ class Training extends Model
         return $this->belongsToMany('App\Models\User','trainer_training','training_id','trainer_id');
     }
 
-    public function classes(){
-        return $this->belongsToMany('App\Models\SessionClass','training_classes','training_id','class_id');
+    public function cohorts(){
+        return $this->belongsToMany('App\Models\Cohort','cohort_training','training_id','cohort_id');
     }
     public function trainingDays(){
         return $this->hasMany('App\Models\TrainingDay','training_id','id');

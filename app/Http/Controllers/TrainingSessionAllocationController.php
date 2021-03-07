@@ -3,20 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Training;
-use App\Models\TrainingDay;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class TrainingDayController extends Controller
+class TrainingSessionAllocationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id,$training_id)
     {
-        //
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                if ($training->training == "Physical"){
+                    return view("Epm.Trainings.Physical.SessionAllocations.index");
+                }
+                if ($training->training == "Virtual"){
+                    return view("Epm.Trainings.Virtual.SessionAllocations.index");
+                }
+                if ($training->training == "TOT"){
+                    return view("Epm.Trainings.TOT.SessionAllocations.index");
+                }
+
+            }
+        }
     }
 
     /**
@@ -46,32 +60,9 @@ class TrainingDayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id,$training_id,$day_id)
+    public function show($id)
     {
-        $admin = User::find($id);
-        if ($admin){
-            $training = Training::find($training_id);
-            if ($training){
-                if ($training->training == "Physical"){
-                    $trainingDay = TrainingDay::find($day_id);
-                    if ($trainingDay ){
-                        return view("Epm.Trainings.Physical.read",compact("trainingDay"));
-                    }
-                }
-                if ($training->training == "Virtual"){
-                    $trainingDay = TrainingDay::find($day_id);
-                    if ($trainingDay ){
-                        return view("Epm.Trainings.Virtual.read",compact("trainingDay"));
-                    }
-                }
-                if ($training->training == "TOT"){
-                    $trainingDay = TrainingDay::find($day_id);
-                    if ($trainingDay ){
-                        return view("Epm.Trainings.TOT.read",compact("trainingDay"));
-                    }
-                }
-            }
-        }
+        //
     }
 
     /**
@@ -80,14 +71,9 @@ class TrainingDayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,$training_id,$day,$day_id,$session_id)
+    public function edit($id)
     {
-        $day = TrainingDay::find($day_id);
-        if ($day){
-
-            return view("Epm.Trainings.Day.edit",compact("day"));
-        }
-
+        //
     }
 
     /**

@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SessionClass;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class ClassController extends Controller
+class TotTrainingResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-
+        //
     }
 
     /**
@@ -24,9 +21,9 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-
+        //
     }
 
     /**
@@ -35,6 +32,10 @@ class ClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -53,7 +54,10 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
+    public function edit($id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -62,19 +66,19 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, $class_id)
+    public function update(Request $request, $id)
     {
-        $admin=User::find($id);
-        if ($admin->role->name == 'Su Admin' || $admin->role->name == 'Project Manager'){
-            $data = [
-                'name'=>$request->name,
-                'description'=>$request->description,
-            ];
-            $class = SessionClass::find($class_id);
-            $class->update($data);
-            return redirect('/adm/'.$id.'/list/classes')->with('success','Class Updated Successfully');
-        }
+        //
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }
