@@ -77,66 +77,106 @@
                             </div>
                             @if($training->training == "Physical" || $training->training == "TOT")
                                 <div class="col-md-3">
-                                    <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
-                                    @if($trainers)
-                                        @foreach($trainers as $trainer)
-                                            {{$trainer}}<br />
-                                        @endforeach
-                                        <a href="#!" data-toggle="modal" class="openModalUpdateTrainers">
-                                            <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
-                                                <i class="feather icon-plus"></i>
-                                            </button>
-                                        </a>
-                                    @endif
+                                    <div class="card">
+                                        <div class="card-body" style="height: 250px; overflow: auto;">
+                                            <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                            @if($trainers)
+                                                @foreach($trainers as $trainer)
+                                                    {{$trainer}}<br />
+                                                @endforeach
+                                                <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                    <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
+                                                        <i class="feather icon-plus"></i>
+                                                    </button>
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 @if($training->venue == "Centers (AYECs)")
                                     <div class="col-md-3">
-                                            <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
-                                        @if($centers)
-                                            @foreach($centers as $center)
-                                                {{$center}}<br />
-                                            @endforeach
-                                        @endif
-                                            <a href="#!" data-toggle="modal" class="openModalUpdateCenters">
-                                                <button type="button" title="Add Other Training Centers" class="btn btn-icon icon-s">
+                                        <div class="card">
+                                            <div class="card-body" style="height: 250px; overflow: auto;">
+                                                <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
+                                                @if($centers)
+                                                    @foreach($centers as $center)
+                                                        {{$center}}<br />
+                                                    @endforeach
+                                                @endif
+                                                <a href="#!" data-toggle="modal" class="openModalUpdateCenters mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                    <button type="button" title="Add Other Training Centers" class="btn btn-icon icon-s">
+                                                        <i class="feather icon-plus"></i>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @elseif($training->venue == "Institution (University/Tvet)")
+                                    <div class="col-md-3">
+{{--                                        <div class="card">--}}
+{{--                                            <div class="card-body" style="height: 250px; overflow: auto;">--}}
+{{--                                                <h6><span class="text-small" style="font-size: 14px">Institutions</span></h6>--}}
+{{--                                                @if($institutions)--}}
+{{--                                                    @foreach($institutions as $institution)--}}
+{{--                                                        {{$institution}}<br />--}}
+{{--                                                    @endforeach--}}
+{{--                                                    <a href="#!" class="mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">--}}
+{{--                                                        <button type="button" title="Choose Training Institution" class="btn btn-icon icon-s">--}}
+{{--                                                            <i class="feather icon-plus"></i>--}}
+{{--                                                        </button>--}}
+{{--                                                    </a>--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+                                    </div>
+                                @endif
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <div class="card-body" style="height: 250px; overflow: auto;">
+                                            <h6><span class="text-small" style="font-size: 14px">Classes/Cohorts</span></h6>
+                                            @if($cohorts)
+                                                @foreach($cohorts as $key=>$cohort)
+                                                    {{$key+1}}.{{$cohort}}<br />
+                                                @endforeach
+                                            @endif
+                                            <a href="#!" style="position: absolute; right: 0; bottom: 0" data-toggle="modal" class="openModalUpdateCohorts mb-2 mr-3">
+                                                <button type="button" title="Add Classes/Cohorts to Training" class="btn btn-icon icon-s">
                                                     <i class="feather icon-plus"></i>
                                                 </button>
                                             </a>
+                                        </div>
                                     </div>
-                                @else
-{{--                                    <div class="col-md-3">--}}
-{{--                                        @if($institutions)--}}
-{{--                                            <h6><span class="text-small" style="font-size: 14px">Institutions</span></h6>--}}
-{{--                                            @foreach($institutions as $institution)--}}
-{{--                                                {{$institution}}<br />--}}
-{{--                                            @endforeach--}}
-{{--                                        @else--}}
-{{--                                            <h6><span class="text-small" style="font-size: 14px">Institutions</span></h6>--}}
-{{--                                            <a href="#!">--}}
-{{--                                                <button type="button" title="Choose Training Institution" class="btn btn-icon icon-s">--}}
-{{--                                                    <i class="feather icon-plus"></i>--}}
-{{--                                                </button>--}}
-{{--                                            </a>--}}
-{{--                                        @endif--}}
-{{--                                    </div>--}}
-                                @endif
-                                <div class="col-md-3">
-                                    <h6><span class="text-small" style="font-size: 14px">Classes/Cohorts</span></h6>
-                                    @if($cohorts)
-                                        @foreach($cohorts as $key=>$cohort)
-                                            {{$key+1}}.{{$cohort}}<br />
-                                        @endforeach
-                                    @endif
-                                    <a href="#!" data-toggle="modal" class="openModalUpdateCohorts">
-                                        <button type="button" title="Add Classes/Cohorts to Training" class="btn btn-icon icon-s">
-                                            <i class="feather icon-plus"></i>
-                                        </button>
-                                    </a>
                                 </div>
                                 <div class="col-md-3">
-                                    <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
-                                    <span class="mr-2"><i class="fa fa-user"></i> Male 20 </span> <span class="ml-2"><i class="fa fa-user"></i> Female 20</span><br />
-                                    <span>Total 40</span>
+                                    <div class="card">
+                                        <div class="card-body" style="height: 250px; overflow: auto;">
+                                            <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+{{--                                                            <div class="card">--}}
+{{--                                                                <div class="card-body">--}}
+                                                                    <span>Male <br /> 20 </span>
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+                                                        </div>
+                                                        <div class="col-md-12">
+{{--                                                            <div class="card">--}}
+                                                                <span>Female <br /> 200</span>
+{{--                                                            </div>--}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+{{--                                                    <div class="card">--}}
+                                                        Total <br>
+                                                        20
+{{--                                                    </div>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
                             @if($training->training == "Virtual")

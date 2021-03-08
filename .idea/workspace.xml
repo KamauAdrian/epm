@@ -15,22 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CenterManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CenterManagerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClassController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClassController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamCenterManagerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TeamCenterManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TeamCenterManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TeamCmsLeader.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Training.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Training.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Teams/Cms/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Teams/Cms/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -345,6 +330,8 @@
       <workItem from="1615124227892" duration="8750000" />
       <workItem from="1615135422039" duration="3998000" />
       <workItem from="1615139806385" duration="226000" />
+      <workItem from="1615140052332" duration="120000" />
+      <workItem from="1615176540479" duration="3384000" />
     </task>
     <servers />
   </component>
@@ -417,10 +404,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615006799977" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615137359975">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615178740686">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615137359975" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615178740686" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
