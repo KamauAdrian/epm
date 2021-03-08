@@ -26,9 +26,9 @@ class Training extends Model
     public function centers(){
         return $this->belongsToMany('App\Models\Center','training_centers','training_id','center_id');
     }
-//    public function institutions(){
-//        return $this->belongsToMany('App\Models\Center','training_institutions','training_id','institution_id');
-//    }
+    public function institutions(){
+        return $this->belongsToMany('App\Models\Institution','training_institutions','training_id','institution_id');
+    }
 
     //each training session belongs to many trainers
     public function trainers(){

@@ -15,7 +15,23 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BoardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BoardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CmsReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CmsReportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Board.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Board.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Training.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Training.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_28_180522_create_trainings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_28_180522_create_trainings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/CMs/Reports/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/CMs/Reports/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Reports/Templates/Cms/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Reports/Templates/Cms/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/adms-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,19 +195,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/TOT" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/Resources" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical" />
       <recent name="$PROJECT_DIR$/public/Announcement/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
     </key>
   </component>
   <component name="RunManager">
@@ -331,7 +347,7 @@
       <workItem from="1615135422039" duration="3998000" />
       <workItem from="1615139806385" duration="226000" />
       <workItem from="1615140052332" duration="120000" />
-      <workItem from="1615176540479" duration="3384000" />
+      <workItem from="1615176540479" duration="31704000" />
     </task>
     <servers />
   </component>
@@ -363,10 +379,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614335150433" />
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615136301989">
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615190141095">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615136301989" />
+    <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615190141095" />
     <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606914575160">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -400,14 +416,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1610344476754" />
-    <state x="347" y="159" width="672" height="677" key="run.anything.popup" timestamp="1615006799977">
+    <state x="347" y="159" width="672" height="677" key="run.anything.popup" timestamp="1615191687432">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="347" y="159" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615006799977" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615178740686">
+    <state x="347" y="159" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615191687432" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615210652947">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615178740686" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615210652947" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

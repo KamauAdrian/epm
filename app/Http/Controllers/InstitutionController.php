@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Board;
-use App\Models\User;
+use App\Models\Institution;
 use Illuminate\Http\Request;
 
-class BoardController extends Controller
+class InstitutionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +15,14 @@ class BoardController extends Controller
     public function index()
     {
         //
+    }
+
+    public function institutions()
+    {
+        $institutions = Institution::orderBy("name")->get();
+        if ($institutions){
+            return response()->json($institutions);
+        }
     }
 
     /**
@@ -34,14 +41,9 @@ class BoardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id,$project_id)
+    public function store(Request $request)
     {
-        $board = $request->all();
-        $new_board = new Board();
-        $new_board->name = $board['name'];
-        $new_board->project_id = $project_id;
-        $new_board->save();
-        return redirect('adm/'.$id.'/view/project/'.$project_id)->with('success','New Activity Created Successfully');
+        //
     }
 
     /**
@@ -73,19 +75,9 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, $activity_id)
+    public function update(Request $request, $id)
     {
-        $admin = User::find($id);
-        if ($admin){
-            $activity = Board::find($activity_id);
-            if ($activity){
-                $data = [
-                    'name'=>$request->name,
-                ];
-                $activity->update($data);
-                return redirect("/adm/".$admin->id."/view/project/".$activity->project->id)->with("success","Activity Updated Successfully");
-            }
-        }
+        //
     }
 
     /**

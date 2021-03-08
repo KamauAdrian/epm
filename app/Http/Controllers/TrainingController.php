@@ -58,15 +58,16 @@ class TrainingController extends Controller
 //        dd($request->all());
         $admin = User::find($id);
         if ($admin){
-//            dd($request->all());
             $messages = [
                 'training.required'=>'Please Select Training',
                 'type.required'=>'Please Select Whether Public or Private',
+                'cohort.required'=>'Please Select Class/Cohort',
             ];
             $this->validate($request,[
                 'training'=>'required',
                 'type'=>'required',
                 'start_date'=>'required',
+                'cohort'=>'required',
                 'about'=>'required',
             ],$messages);
             $training = new Training();
@@ -83,36 +84,19 @@ class TrainingController extends Controller
                 $end_date = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
             }
             $training->venue = $venue;
-            $centers = null;
-            $institutions = null;
-            $cohorts = null;
             if ($venue=="Centers (AYECs)"){
-                $centers = $request->centers;
+                $training->center_id = $request->center;
             }
             if ($venue=="Institution (University/Tvet)"){
-                $institutions = $request->institutions;
+                $training->institution_id = $request->institution;
             }
-            if ($request->cohorts){
-                $cohorts = $request->cohorts;
-            }
-//            dd($request->all(),$cohorts);
-//            dd($institutions,$venue);
-//            dd($request->all());
+            $training->cohort_id = $request->cohort;
             $training->end_date = $end_date;
             $training->type = $request->type;
             $training->description = $request->about;
             $trainers = $request->trainers;
             $training_saved = $training->save();
             if ($training_saved){
-                if ($centers){
-                    $training->centers()->attach($centers);
-                }
-                if ($institutions){
-//                    $training->institutions()->attach($institutions);
-                }
-                if ($cohorts){
-                    $training->cohorts()->attach($cohorts);
-                }
                 $start = date_create($training->start_date);
                 $end = date_create($training->end_date);
                 $interval = date_diff($start, $end)->format("%d%");
@@ -120,7 +104,6 @@ class TrainingController extends Controller
                 for ($i=0;$i<=$interval;$i++){
                     $days[] = date("Y-m-d",strtotime("+$i day", strtotime($training->start_date)));
                 }
-//                dd($training->start_date,$interval,$end_time);
                 foreach ($days as $key=>$day){
                     $training_day = new TrainingDay();
                     $training_day->date = $day;
@@ -165,6 +148,16 @@ class TrainingController extends Controller
                 $cohorts[] = $cohort->id;
             }
             return response()->json($cohorts);
+        }
+    }
+    public function institutions($training_id){
+        $training = Training::find($training_id);
+        if ($training){
+            $institutions = [];
+            foreach ($training->institutions as $institution){
+                $institutions[] = $institution->id;
+            }
+            return response()->json($institutions);
         }
     }
 
@@ -232,7 +225,7 @@ class TrainingController extends Controller
                 $trainers = $request->trainers;
                 $training->trainers()->detach();
                 $training->trainers()->attach($trainers);
-                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Training Trainers Updated Successfully");
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Trainers Updated Successfully");
             }
         }
     }
@@ -248,7 +241,7 @@ class TrainingController extends Controller
 //                dd($centers);
                 $training->centers()->detach();
                 $training->centers()->attach($centers);
-                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Training Centers Updated Successfully");
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Centers Updated Successfully");
             }
         }
     }
@@ -262,7 +255,20 @@ class TrainingController extends Controller
                 $cohorts = $request->cohorts;
                 $training->cohorts()->detach();
                 $training->cohorts()->attach($cohorts);
-                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Training Cohorts Updated Successfully");
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Cohorts Updated Successfully");
+            }
+        }
+    }
+    public function update_institutions(Request $request, $id, $training_id)
+    {
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $institutions = $request->institutions;
+                $training->institutions()->detach();
+                $training->institutions()->attach($institutions);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Institutions Updated Successfully");
             }
         }
     }

@@ -5,7 +5,7 @@
     {{--    @include('Epm.layouts.session-view')--}}
     <div class="col-md-12">
         <?php
-        use App\Models\Center;$auth_admin = auth()->user();
+        use App\Models\Center;use App\Models\Cohort;use App\Models\Institution;$auth_admin = auth()->user();
         $session_date = date_create($training->start_date);
         $split_date = date_format($session_date,'l dS M Y');
         $days = $training->trainingDays;
@@ -15,31 +15,11 @@
         foreach ($trainers_raw as $trainer_raw){
             $trainers[] = $trainer_raw->name;
         }
-        $cohorts_raw = $training->cohorts;
-        $cohorts = [];
-        foreach ($cohorts_raw as $cohort_raw){
-            $cohorts[] = $cohort_raw->cohort_name;
-        }
-        $centers_raw = $training->centers;
-        $centers = [];
-        foreach ($centers_raw as $center_raw){
-            $centers[] = $center_raw->name;
-        }
-//        $institutions_raw = $training->institutions;
-//        $institutions = [];
-//        foreach ($institutions_raw as $institution_raw){
-//            $institutions[] = $institution_raw->name;
-//        }
-//        dd($trainers_raw);
-//        dd($training->start_date,$training->end_date);
-
+        $cohort = Cohort::find($training->cohort_id);
+        $center= Center::find($training->center_id);
+        $institution = Institution::find($training->institution_id)
         ?>
         <div class="row">
-            <div class="col-md-12 mb-2">
-                <a class="float-right" href="{{url("/adm/".$auth_admin->id."/view/training/".$training->id."/session/allocations")}}">
-                    <button class="btn btn-outline-info">Training Session Allocations</button>
-                </a>
-            </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -78,11 +58,11 @@
                             @if($training->training == "Physical" || $training->training == "TOT")
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="card-body" style="height: 250px; overflow: auto;">
+                                        <div class="card-body" style="height: 150px; overflow: auto;">
                                             <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
                                             @if($trainers)
-                                                @foreach($trainers as $trainer)
-                                                    {{$trainer}}<br />
+                                                @foreach($trainers as $key=>$trainer)
+                                                    {{$key+1}}.{{$trainer}}<br />
                                                 @endforeach
                                                 <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
                                                     <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
@@ -96,83 +76,53 @@
                                 @if($training->venue == "Centers (AYECs)")
                                     <div class="col-md-3">
                                         <div class="card">
-                                            <div class="card-body" style="height: 250px; overflow: auto;">
-                                                <h6><span class="text-small" style="font-size: 14px">Centers</span></h6>
-                                                @if($centers)
-                                                    @foreach($centers as $center)
-                                                        {{$center}}<br />
-                                                    @endforeach
+                                            <div class="card-body" style="height: 150px; overflow: auto;">
+                                                <h6><span class="text-small" style="font-size: 14px">Center</span></h6>
+                                                @if($center)
+                                                    {{$center->name}}
                                                 @endif
-                                                <a href="#!" data-toggle="modal" class="openModalUpdateCenters mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                    <button type="button" title="Add Other Training Centers" class="btn btn-icon icon-s">
-                                                        <i class="feather icon-plus"></i>
-                                                    </button>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 @elseif($training->venue == "Institution (University/Tvet)")
                                     <div class="col-md-3">
-{{--                                        <div class="card">--}}
-{{--                                            <div class="card-body" style="height: 250px; overflow: auto;">--}}
-{{--                                                <h6><span class="text-small" style="font-size: 14px">Institutions</span></h6>--}}
-{{--                                                @if($institutions)--}}
-{{--                                                    @foreach($institutions as $institution)--}}
-{{--                                                        {{$institution}}<br />--}}
-{{--                                                    @endforeach--}}
-{{--                                                    <a href="#!" class="mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">--}}
-{{--                                                        <button type="button" title="Choose Training Institution" class="btn btn-icon icon-s">--}}
-{{--                                                            <i class="feather icon-plus"></i>--}}
-{{--                                                        </button>--}}
-{{--                                                    </a>--}}
-{{--                                                @endif--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        <div class="card">
+                                            <div class="card-body" style="height: 150px; overflow: auto;">
+                                                <h6><span class="text-small" style="font-size: 14px">Institution</span></h6>
+                                                @if($institution)
+                                                    {{$institution->name}}
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 @endif
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="card-body" style="height: 250px; overflow: auto;">
-                                            <h6><span class="text-small" style="font-size: 14px">Classes/Cohorts</span></h6>
-                                            @if($cohorts)
-                                                @foreach($cohorts as $key=>$cohort)
-                                                    {{$key+1}}.{{$cohort}}<br />
-                                                @endforeach
+                                        <div class="card-body" style="height: 150px; overflow: auto;">
+                                            <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
+                                            @if($cohort)
+                                               {{$cohort->name}}
                                             @endif
-                                            <a href="#!" style="position: absolute; right: 0; bottom: 0" data-toggle="modal" class="openModalUpdateCohorts mb-2 mr-3">
-                                                <button type="button" title="Add Classes/Cohorts to Training" class="btn btn-icon icon-s">
-                                                    <i class="feather icon-plus"></i>
-                                                </button>
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="card-body" style="height: 250px; overflow: auto;">
+                                        <div class="card-body" style="height: 150px; overflow: auto;">
                                             <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-12">
-{{--                                                            <div class="card">--}}
-{{--                                                                <div class="card-body">--}}
-                                                                    <span>Male <br /> 20 </span>
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
+                                                            <span>Male <br /> 20 </span>
                                                         </div>
                                                         <div class="col-md-12">
-{{--                                                            <div class="card">--}}
-                                                                <span>Female <br /> 200</span>
-{{--                                                            </div>--}}
+                                                            <span>Female <br /> 200</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-{{--                                                    <div class="card">--}}
-                                                        Total <br>
-                                                        20
-{{--                                                    </div>--}}
+                                                    Total <br> 20
                                                 </div>
                                             </div>
                                         </div>
@@ -196,18 +146,9 @@
                                     @endif
                                 </div>
                                 <div class="col-md-6">
-                                    @if($classes)
-                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
-                                        @foreach($classes as $class)
-                                            {{$class}}<br />
-                                        @endforeach
-                                    @else
-                                        <h6><span class="text-small" style="font-size: 14px">Classes</span></h6>
-                                        <a href="#!">
-                                            <button type="button" title="Add Classes To Training" class="btn btn-icon icon-s">
-                                                <i class="feather icon-plus"></i>
-                                            </button>
-                                        </a>
+                                    @if($cohort)
+                                        <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
+                                        {{$class}}<br />
                                     @endif
                                 </div>
                             @endif
@@ -297,6 +238,42 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="modalUpdateInstitutions" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/institutions")}}" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" id="trainingInstitutions" training_id="{{$training->id}}">
+                                                        <label>Select Institutions</label>
+                                                        <multiselect v-model="selectedInstitutions" :options="institutions"
+                                                                     placeholder="Select Institution" label="name" :track-by="trackBy"
+                                                                     :searchable="true" :close-on-select="false" multiple>
+                                                        </multiselect>
+{{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
+                                                            <input type="hidden" v-for="institution in selectedInstitutions" name="institutions[]" :value="institution.id">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group float-right">
+                                                        <input type="submit" class="btn btn-outline-info" value="Save">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal fade" id="modalUpdateCohorts" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -350,6 +327,10 @@
         $('.openModalUpdateCohorts').click(function(event){
             event.preventDefault();
             $("#modalUpdateCohorts").modal('show');
+        });
+        $('.openModalUpdateInstitutions').click(function(event){
+            event.preventDefault();
+            $("#modalUpdateInstitutions").modal('show');
         });
         new Vue({
             el: "#trainingTrainers",
@@ -448,6 +429,61 @@
                     immediate: true,
                     handler(values) {
                         this.selectedCenters = this.centers.filter(r => values.includes(r[this.trackBy]));
+                    }
+                }
+            },
+        });
+        new Vue({
+            el: "#trainingInstitutions",
+            components: {
+                multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data: function () {
+                return {
+                    trackBy:"id",
+                    selectedInstitutions: [],
+                    institutions: [],
+                    initialValues: [],
+                }
+            },
+            methods:{
+                getAllInstitutions: function(){
+                    axios
+                        .get('/institutions')
+                        .then(response => {
+                            this.institutions = response.data;
+                            // this.allCenters = response.data;
+                            // this.updateCenters();
+                            // console.log("centers json "+response.data);
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true);
+                },
+                // updateCenters: function () {
+                //     let total = this.allCenters.length;
+                //     for (i=0;i<total;i++){
+                //         let all = this.centers.push(this.allCenters[i]);
+                //     }
+                // },
+            },
+            mounted () {
+                this.getAllInstitutions();
+            },
+            watch: {
+                institutions:{
+                    immediate: false,
+                    handler(values){
+                        axios.get("/training/"+this.$el.attributes.training_id.value+"/institutions").then(response => {this.initialValues = response.data;});
+                    },
+                },
+                initialValues: {
+                    immediate: true,
+                    handler(values) {
+                        this.selectedInstitutions = this.institutions.filter(r => values.includes(r[this.trackBy]));
                     }
                 }
             },

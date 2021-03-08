@@ -88,40 +88,42 @@
                                 @foreach($admins as $admin)
                                     <tr>
                                         <td>
-                                            <div class="media">
-                                                @if($admin->image)
-                                                    @if($role->name == 'Project Manager')
-                                                        <span><img src="{{url('ProjectManagers/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
-                                                    @elseif($role->name == 'Center Manager')
-                                                        <span><img src="{{url('CenterManagers/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
-                                                    @elseif($role->name == 'Trainer')
-                                                        <span><img src="{{url('Trainers/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
-                                                    @elseif($role->name == 'Mentor')
-                                                        <span><img src="{{url('Mentors/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
-                                                    @endif
+                                            <a href="{{url('/adm/view/adm/'.$admin->id.'/profile/role_id='.$role->id)}}">
+                                                <div class="media">
+                                                    @if($admin->image)
+                                                        @if($role->name == 'Project Manager')
+                                                            <span><img src="{{url('ProjectManagers/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
+                                                        @elseif($role->name == 'Center Manager')
+                                                            <span><img src="{{url('CenterManagers/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
+                                                        @elseif($role->name == 'Trainer')
+                                                            <span><img src="{{url('Trainers/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
+                                                        @elseif($role->name == 'Mentor')
+                                                            <span><img src="{{url('Mentors/images',$admin->image)}}" alt="images" class="avtar img-fluid"></span>
+                                                        @endif
                                                     @else
-                                                    <?php
-                                                    $name = $admin->name;
-                                                    $id = $admin->id;
-                                                    $split_name = explode(' ',$name);
-                                                    $avatar_icon = '';
-                                                    if (count($split_name)>1){
-                                                        $avatar_icon = substr($split_name[0],0,1).substr(end($split_name),0,1);
-                                                    }else{
-                                                        $avatar_icon = substr($name,0,1);
-                                                    }
-                                                    ?>
-                                                    @if($admin->gender =='Male')
-                                                        <span class="avtar"><img src="{{url('assets/images/male.jpeg')}}" alt="images" class="img-fluid"></span>
-                                                    @elseif($admin->gender =='Female')
-                                                        <span class="avtar"><img src="{{url('assets/images/female.jpeg')}}" alt="images" class="img-fluid"></span>
+                                                        <?php
+                                                        $name = $admin->name;
+                                                        $id = $admin->id;
+                                                        $split_name = explode(' ',$name);
+                                                        $avatar_icon = '';
+                                                        if (count($split_name)>1){
+                                                            $avatar_icon = substr($split_name[0],0,1).substr(end($split_name),0,1);
+                                                        }else{
+                                                            $avatar_icon = substr($name,0,1);
+                                                        }
+                                                        ?>
+                                                        @if($admin->gender =='Male')
+                                                            <span class="avtar"><img src="{{url('assets/images/male.jpeg')}}" alt="images" class="img-fluid"></span>
+                                                        @elseif($admin->gender =='Female')
+                                                            <span class="avtar"><img src="{{url('assets/images/female.jpeg')}}" alt="images" class="img-fluid"></span>
+                                                        @endif
                                                     @endif
-                                                @endif
-                                                <div class="media-body ml-3 align-self-center">
-                                                    <h5 class="mb-1">{{$admin->name}}</h5>
-                                                    <p class="mb-0">{{$admin->email}}</p>
+                                                    <div class="media-body ml-3 align-self-center">
+                                                        {{$admin->name}}
+                                                        <p class="mb-0">{{$admin->email}}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </td>
                                         @if($role->name == 'Project Manager')
                                             <?php

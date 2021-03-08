@@ -76,7 +76,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/cms/reports',[App\Http\Controllers\CmsReportController::class, 'index']);
     Route::get('/adm/{id}/create/cms/report/template',[App\Http\Controllers\CmsReportController::class, 'create']);
     Route::post('/adm/{id}/generate/cms/report/template',[App\Http\Controllers\CmsReportController::class, 'store']);
-
+    Route::get('/adm/{id}/view/cms/report/template/{report_id}',[App\Http\Controllers\CmsReportController::class, 'template']);
+    Route::get('/question/{question_id}/options',[App\Http\Controllers\CmsReportController::class, 'options']);//json array of options for a select question
+    Route::get('/adm/{id}/view/cms/report/{report_id}',[App\Http\Controllers\CmsReportController::class, 'show']);
     //Reports
     Route::get('/adm/{id}/view/reports/templates',[App\Http\Controllers\AdminController::class, 'reports_templates']);
     Route::get('/adm/{id}/create/new/report/template',[App\Http\Controllers\AdminController::class, 'report_template_create']);
@@ -119,6 +121,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/get/project/{project_id}/overdue/tasks',[App\Http\Controllers\ProjectController::class, 'overdue_tasks']);//json array of tasks past the due date
     //Projects -> Boards/Activities
     Route::post('/adm/{id}/create/new/board/project_id={project_id}',[App\Http\Controllers\BoardController::class, 'store']);
+    Route::post('/adm/{id}/update/activity/{activity_id}',[App\Http\Controllers\BoardController::class, 'update']);
 
     //Projects -> Tasks
     Route::get('/adm/get/complete/tasks',[App\Http\Controllers\TaskController::class, 'complete_tasks']);//json array of tasks marked as complete
@@ -238,6 +241,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/training/{training_id}/trainers',[App\Http\Controllers\TrainingController::class, 'trainers']);//json array of trainers added to training
     Route::get('/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'centers']);//json array of centers where training taking place
     Route::get('/training/{training_id}/cohorts',[App\Http\Controllers\TrainingController::class, 'cohorts']);//json array of classes added to training
+    Route::get('/training/{training_id}/institutions',[App\Http\Controllers\TrainingController::class, 'institutions']);//json array of institutions added to training
     Route::get('/adm/{id}/add/new/training',[App\Http\Controllers\TrainingController::class, 'create']);
     Route::post('/adm/{id}/save/training',[App\Http\Controllers\TrainingController::class, 'store']);
     Route::get('/adm/{id}/view/training/{training_id}',[App\Http\Controllers\TrainingController::class, 'show']);
@@ -250,6 +254,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/update/training/{training_id}/trainers',[App\Http\Controllers\TrainingController::class, 'update_trainers']);
     Route::post('/adm/{id}/update/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'update_centers']);
     Route::post('/adm/{id}/update/training/{training_id}/cohorts',[App\Http\Controllers\TrainingController::class, 'update_cohorts']);
+    Route::post('/adm/{id}/update/training/{training_id}/institutions',[App\Http\Controllers\TrainingController::class, 'update_institutions']);
 
     //Training -> (Session Allocations)
     Route::get('/adm/{id}/view/training/{training_id}/session/allocations',[App\Http\Controllers\TrainingSessionAllocationController::class, 'index']);
@@ -344,6 +349,10 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/update/cohort/{cohort_id}',[App\Http\Controllers\CohortController::class, 'update']);
     Route::post('/adm/{id}/delete/cohort/{cohort_id}',[App\Http\Controllers\CohortController::class, 'destroy']);
     Route::get('/cohorts',[App\Http\Controllers\CohortController::class, 'cohorts']);//json array of cohorts
+
+    //Institutions
+    Route::get('/adm/{id}/list/institutions',[App\Http\Controllers\InstitutionController::class, 'index']);
+    Route::get('/institutions',[App\Http\Controllers\InstitutionController::class, 'institutions']);//json array of cohorts
 
     //TEAMS
     //teams (Center Managers)

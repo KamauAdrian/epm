@@ -94,6 +94,8 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Training</th>
+                                                        <th>Institution/Center</th>
+                                                        <th>Class/Cohort</th>
                                                         <th>Start Date</th>
                                                         <th>End Date</th>
                                                         <th class="text-right">Status</th>
@@ -101,16 +103,38 @@
                                                     </thead>
                                                         <tbody>
                                                         @foreach($physical_trainings as $key=>$physical_training)
+                                                            <?php
+                                                            $center = "";
+                                                            $institution = "";
+                                                            $cohort = \App\Models\Cohort::find($physical_training->cohort_id);
+                                                            if ($physical_training->venue == "Centers (AYECs)"){
+                                                                $center = \App\Models\Center::find($physical_training->center_id);
+                                                            }
+                                                            if ($physical_training->venue == "Institution (University/Tvet)"){
+                                                                $institution = \App\Models\Institution::find($physical_training->institution_id);
+                                                            }
+                                                            ?>
                                                             <tr>
                                                                 <td>{{count($physical_trainings)-$key}}</td>
                                                                 <td>
                                                                     <div class="media">
                                                                         <div class="media-body ml-3 align-self-center">
                                                                             <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$physical_training->id)}}">
-                                                                                <h5 class="mb-1">{{$physical_training->training}}</h5>
+                                                                                {{$physical_training->training}}
                                                                             </a>
                                                                         </div>
                                                                     </div>
+                                                                </td>
+                                                                <td>
+                                                                    @if($institution)
+                                                                        {{$institution->name}}
+                                                                    @endif
+                                                                    @if($center)
+                                                                        {{$center->name}}
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    {{$cohort->cohort_name}}
                                                                 </td>
                                                                 <td>
                                                                     {{date("dS M Y",strtotime($physical_training->start_date))}}
@@ -171,6 +195,8 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Training</th>
+                                                        <th>Institution/Center</th>
+                                                        <th>Class/Cohort</th>
                                                         <th>Start Date</th>
                                                         <th>End Date</th>
                                                         <th class="text-right">Status</th>
@@ -178,16 +204,38 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($virtual_trainings as $key=>$virtual_training)
+                                                        <?php
+                                                        $center = "";
+                                                        $institution = "";
+                                                        $cohort = \App\Models\Cohort::find($virtual_training->cohort_id);
+                                                        if ($virtual_training->venue == "Centers (AYECs)"){
+                                                            $center = \App\Models\Center::find($virtual_training->center_id);
+                                                        }
+                                                        if ($virtual_training->venue == "Institution (University/Tvet)"){
+                                                            $institution = \App\Models\Institution::find($virtual_training->institution_id);
+                                                        }
+                                                        ?>
                                                         <tr>
                                                             <td>{{count($virtual_trainings)-$key}}</td>
                                                             <td>
                                                                 <div class="media">
                                                                     <div class="media-body ml-3 align-self-center">
                                                                         <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$virtual_training->id)}}">
-                                                                            <h5 class="mb-1">{{$virtual_training->training}}</h5>
+                                                                            {{$virtual_training->training}}
                                                                         </a>
                                                                     </div>
                                                                 </div>
+                                                            </td>
+                                                            <td>
+                                                                @if($institution)
+                                                                    {{$institution->name}}
+                                                                @endif
+                                                                @if($center)
+                                                                    {{$center->name}}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                {{$cohort->cohort_name}}
                                                             </td>
                                                             <td>
                                                                 {{date("dS M Y",strtotime($virtual_training->start_date))}}
@@ -247,6 +295,8 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Training</th>
+                                                        <th>Institution/Center</th>
+                                                        <th>Class/Cohort</th>
                                                         <th>Start Date</th>
                                                         <th>End Date</th>
                                                         <th class="text-right">Status</th>
@@ -254,16 +304,38 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($virtual_trainings as $key=>$virtual_training)
+                                                        <?php
+                                                        $center = "";
+                                                        $institution = "";
+                                                        $cohort = \App\Models\Cohort::find($virtual_training->cohort_id);
+                                                        if ($virtual_training->venue == "Centers (AYECs)"){
+                                                            $center = \App\Models\Center::find($virtual_training->center_id);
+                                                        }
+                                                        if ($virtual_training->venue == "Institution (University/Tvet)"){
+                                                            $institution = \App\Models\Institution::find($virtual_training->institution_id);
+                                                        }
+                                                        ?>
                                                         <tr>
                                                             <td>{{count($virtual_trainings)-$key}}</td>
                                                             <td>
                                                                 <div class="media">
                                                                     <div class="media-body ml-3 align-self-center">
                                                                         <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$virtual_training->id)}}">
-                                                                            <h5 class="mb-1">{{$virtual_training->training}}</h5>
+                                                                            {{$virtual_training->training}}
                                                                         </a>
                                                                     </div>
                                                                 </div>
+                                                            </td>
+                                                            <td>
+                                                                @if($institution)
+                                                                    {{$institution->name}}
+                                                                @endif
+                                                                @if($center)
+                                                                    {{$center->name}}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                {{$cohort->cohort_name}}
                                                             </td>
                                                             <td>
                                                                 {{date("dS M Y",strtotime($virtual_training->start_date))}}
@@ -324,6 +396,8 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Training</th>
+                                                        <th>Institution/Center</th>
+                                                        <th>Class/Cohort</th>
                                                         <th>Start Date</th>
                                                         <th>End Date</th>
                                                         <th class="text-right">Status</th>
@@ -331,16 +405,38 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($tots as $key=>$tot)
+                                                        <?php
+                                                        $center = "";
+                                                        $institution = "";
+                                                        $cohort = \App\Models\Cohort::find($tot->cohort_id);
+                                                        if ($tot->venue == "Centers (AYECs)"){
+                                                            $center = \App\Models\Center::find($tot->center_id);
+                                                        }
+                                                        if ($tot->venue == "Institution (University/Tvet)"){
+                                                            $institution = \App\Models\Institution::find($tot->institution_id);
+                                                        }
+                                                        ?>
                                                         <tr>
                                                             <td>{{count($tots)-$key}}</td>
                                                             <td>
                                                                 <div class="media">
                                                                     <div class="media-body ml-3 align-self-center">
                                                                         <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$tot->id)}}">
-                                                                            <h5 class="mb-1">{{$tot->training}}</h5>
+                                                                            {{$tot->training}}
                                                                         </a>
                                                                     </div>
                                                                 </div>
+                                                            </td>
+                                                            <td>
+                                                                @if($institution)
+                                                                    {{$institution->name}}
+                                                                @endif
+                                                                @if($center)
+                                                                    {{$center->name}}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                {{$cohort->cohort_name}}
                                                             </td>
                                                             <td>
                                                                 {{date("dS M Y",strtotime($tot->start_date))}}
@@ -400,6 +496,8 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Training</th>
+                                                        <th>Institution/Center</th>
+                                                        <th>Class/Cohort</th>
                                                         <th>Start Date</th>
                                                         <th>End Date</th>
                                                         <th class="text-right">Status</th>
@@ -407,16 +505,38 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($tots as $key=>$tot)
+                                                        <?php
+                                                        $center = "";
+                                                        $institution = "";
+                                                        $cohort = \App\Models\Cohort::find($tot->cohort_id);
+                                                        if ($tot->venue == "Centers (AYECs)"){
+                                                            $center = \App\Models\Center::find($tot->center_id);
+                                                        }
+                                                        if ($tot->venue == "Institution (University/Tvet)"){
+                                                            $institution = \App\Models\Institution::find($tot->institution_id);
+                                                        }
+                                                        ?>
                                                         <tr>
                                                             <td>{{count($tots)-$key}}</td>
                                                             <td>
                                                                 <div class="media">
                                                                     <div class="media-body ml-3 align-self-center">
                                                                         <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$tot->id)}}">
-                                                                            <h5 class="mb-1">{{$tot->training}}</h5>
+                                                                            {{$tot->training}}
                                                                         </a>
                                                                     </div>
                                                                 </div>
+                                                            </td>
+                                                            <td>
+                                                                @if($institution)
+                                                                    {{$institution->name}}
+                                                                @endif
+                                                                @if($center)
+                                                                    {{$center->name}}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                {{$cohort->cohort_name}}
                                                             </td>
                                                             <td>
                                                                 {{date("dS M Y",strtotime($tot->start_date))}}

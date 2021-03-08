@@ -83,6 +83,11 @@ class User extends Authenticatable
     public function awards(){
         return $this->belongsToMany('App\Models\Award','award_user','winner_id','award_id');
     }
+
+    public function cmReports(){
+        return $this->belongsToMany('App\Models\CmsReport','cms_report_reports','cm_id','report_id');
+    }
+
     public static function updateUser($id,$data){
     DB::table('users')->where('id',$id)->update($data);
     }

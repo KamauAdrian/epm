@@ -16,7 +16,7 @@
                         <?php
                         $auth_admin = auth()->user();
                         ?>
-                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/generate/template')}}">
+                        <form class="my-5" method="post" action="{{url('/adm/'.$auth_admin->id.'/generate/cms/report/template')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
@@ -34,13 +34,13 @@
                                 <div id="1" class="col-sm-12 addReportQuestion">
                                     <label>Select A Type of Question</label>
                                     <div class="form-group">
-                                        <input type="radio" onclick="addOpenQuestion(1)" name="question_1_type" value="Open Question"> Open
-                                        <input type="radio" onclick="addMultiChoiceQuestion(1)" name="question_1_type" value="Yes or No Question"> Yes or No
-                                        <input type="radio" onclick="addSelectQuestion(1)" name="question_1_type" value="Dropdown Select Question"> Select (Dropdown with options)
+                                        <input type="radio" onclick="addOpenQuestion(1)" name="question_1_type" value="Open"> Open
+                                        <input type="radio" onclick="addMultiChoiceQuestion(1)" name="question_1_type" value="Yes/No"> Yes or No
+                                        <input type="radio" onclick="addSelectQuestion(1)" name="question_1_type" value="Dropdown"> Select (Dropdown with options)
                                     </div>
                                     <div class="form-group genQuiz" id="questionQuestion1" style="display: none;">
                                         <label>Question</label>
-                                        <input type="text" name="question1" class="form-control" placeholder="Report question ie No of youths trained">
+                                        <input type="text" name="questions[]" class="form-control" placeholder="Report question ie No of youths trained">
                                         {{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
                                     </div>
                                     <div class="form-group" id="optionsSelectQuestion1" style="display: none;">
@@ -113,13 +113,13 @@
                 '<div id="'+id+'" class="col-sm-12 addReportQuestion">' +
                 '<label>Select A Type of Question</label> ' +
                 '<div class="form-group"> ' +
-                '<input type="radio" onclick="addOpenQuestion('+id+')" name="question_'+id+'_type" value="Open Question"> Open ' +
-                '<input type="radio" onclick="addMultiChoiceQuestion('+id+')" name="question_'+id+'_type" value="Yes or No Question"> Yes or No ' +
-                '<input type="radio" onclick="addSelectQuestion('+id+')" name="question_'+id+'_type" value="Dropdown Select Question"> Select (Dropdown with options) ' +
+                '<input type="radio" onclick="addOpenQuestion('+id+')" name="question_'+id+'_type" value="Open"> Open ' +
+                '<input type="radio" onclick="addMultiChoiceQuestion('+id+')" name="question_'+id+'_type" value="Yes/No"> Yes or No ' +
+                '<input type="radio" onclick="addSelectQuestion('+id+')" name="question_'+id+'_type" value="Dropdown"> Select (Dropdown with options) ' +
                 '</div> ' +
                 '<div class="form-group genQuiz" id="questionQuestion'+id+'" style="display: none;"> ' +
                 '<label>Question</label> ' +
-                '<input type="text" name="question'+id+'" class="form-control" placeholder="Report question ie No of youths trained">' +
+                '<input type="text" name="questions[]" class="form-control" placeholder="Report question ie No of youths trained">' +
                 '</div> ' +
                 '<div class="form-group" id="optionsSelectQuestion'+id+'" style="display: none;"> ' +
                 '<label>Options</label> ' +

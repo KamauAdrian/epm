@@ -77,7 +77,7 @@
                                                             <i class="feather icon-more-horizontal"></i>
                                                         </button>
                                                         <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                                            <a href="{{url('/adm/'.$auth_admin->id.'/edit/activity/'.$board->id)}}"><li class="dropdown-item">Edit Activity</li></a>
+                                                            <a href="#!" data-toggle="modal" class="openModalUpdateActivity" data_url="{{"/adm/".$auth_admin->id."/update/activity/".$board->id}}" data_activity_name="{{$board->name}}"><li class="dropdown-item">Edit Activity</li></a>
                                                             <a href="#!"><li class="dropdown-item close-card">Delete Activity</li></a>
                                                         </ul></div>
                                                 </div>
@@ -332,6 +332,34 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="ModalUpdateActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="modal-update-activity" action="" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Activity Name</label>
+                                            <input id="form-activity-name" style="width: auto" type="text" class="form-control" name="name" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group text-left">
+                                            <input class="btn btn-outline-info" type="submit" value="Update Activity">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
             <div class="modal fade modalTop" id="modalRemoveAssignee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -515,6 +543,17 @@
 @section('js')
     <script>
         $(document).ready(function(){
+            $('.openModalUpdateActivity').click(function(event){
+                event.preventDefault();
+                let url = $(this).attr("data_url");
+                let activityName = $(this).attr("data_activity_name");
+                let form = $("#modal-update-activity");
+                let formActivityName = $("#form-activity-name");
+                formActivityName.val(activityName);
+                form.attr("action",url);
+                console.log(url);
+                $("#ModalUpdateActivity").modal('show');
+            });
             $('.openModalTask').click(function(event){
                 event.preventDefault();
                 var taskId=$(this).attr("data-task_id");

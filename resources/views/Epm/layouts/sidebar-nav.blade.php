@@ -1,6 +1,6 @@
 <!--sidebar nav -->
 <?php
-use App\Models\PmoPerformanceAppraisal;$auth_admin = auth()->user();
+use App\Models\CmsReport;use App\Models\PmoPerformanceAppraisal;$auth_admin = auth()->user();
 $pm_role = \App\Models\Role::where('name','Project Manager')->first();
 $cm_role = \App\Models\Role::where('name','Center Manager')->first();
 $trainer_role = \App\Models\Role::where('name','Trainer')->first();
@@ -45,21 +45,27 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>
             <ul class="pcoded-submenu">
                 @if($pm_role)
-                    <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">View PMO</a></li>
-                @else
-                    <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Project Manager')}}">Add PMO</a></li>
+                    <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">PMO</a></li>
+                    @if($auth_admin->role->name == 'Su Admin')
+                        <li>
+                            <a href="#!">Reports</a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">Performance Appraisals</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 @endif
             </ul>
         </li>
     @endif
-    @if($auth_admin->role->name == 'Trainer')
-        <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>
-            <ul class="pcoded-submenu">
-                <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">View PMO</a></li>
-            </ul>
-        </li>
-    @endif
+{{--    @if()--}}
+{{--        <li class="nav-item pcoded-hasmenu">--}}
+{{--            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>--}}
+{{--            <ul class="pcoded-submenu">--}}
+{{--                <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">PMO</a></li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
+{{--    @endif--}}
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-sitemap"></i></span><span class="pcoded-mtext">Centers</span></a>
@@ -202,15 +208,14 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </li>
     @elseif($auth_admin->role->name == 'Center Manager')
         <?php
-        $cm_role_id = $cm_role->id;
-        $cm_reports = $cm_role->templates;
+        $cm_reports = CmsReport::orderBy("created_at","desc")->get();
         ?>
     @if($cm_reports)
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
                 @foreach($cm_reports as $cm_report)
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/template_id='.$cm_report->id)}}">{{$cm_report->name}}</a></li>
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/cms/report/'.$cm_report->id)}}">{{$cm_report->name}}</a></li>
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/team/reports')}}">{{$cm_report->name}}</a></li>--}}
                 @endforeach
             </ul>
@@ -220,7 +225,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/training/sessions/allocations')}}">Training Sessions Allocations</a></li>
+{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/training/sessions/allocations')}}">Training Sessions Allocations</a></li>--}}
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/attendance/reports')}}">Daily Attendance Reports</a></li>
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/training/reports')}}">Daily Training Reports</a></li>
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/daily/virtual/training/reports')}}">Daily Virtual Training Report</a></li>--}}

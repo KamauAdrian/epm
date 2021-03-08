@@ -20,7 +20,9 @@ class CreateTrainingsTable extends Migration
             $table->date("start_date");
             $table->date("end_date");
             $table->string("type");
-            $table->string("institution")->nullable();
+            $table->integer("center_id")->unsigned()->nullable();
+            $table->integer("institution_id")->unsigned()->nullable();
+            $table->integer("cohort_id")->unsigned();
             $table->string("description");
             $table->string("status")->default("Pending");
             $table->timestamps();

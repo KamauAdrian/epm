@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Board extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "name"
+    ];
 
     public function project(){
         return $this->belongsTo('App\Models\Project','project_id');
