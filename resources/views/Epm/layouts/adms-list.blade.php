@@ -120,7 +120,7 @@
                                                     @endif
                                                     <div class="media-body ml-3 align-self-center">
                                                         {{$admin->name}}
-                                                        <p class="mb-0">{{$admin->email}}</p>
+                                                        <p style="color: #000000;" class="mb-0">{{$admin->email}}</p>
                                                     </div>
                                                 </div>
                                             </a>

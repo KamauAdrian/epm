@@ -33,9 +33,9 @@
                                 </div>
                                 <div id="1" class="col-sm-12 addReportQuestion">
                                     <label>Select A Type of Question</label>
-                                    <div class="form-group">
-                                        <input type="radio" onclick="addOpenQuestion(1)" name="question_1_type" value="Open"> Open
-                                        <input type="radio" onclick="addMultiChoiceQuestion(1)" name="question_1_type" value="Yes/No"> Yes or No
+                                    <div class="form-group ml-4">
+                                        <input type="radio" onclick="addOpenQuestion(1)" name="question_1_type" value="Open"> Open <br />
+                                        <input type="radio" onclick="addMultiChoiceQuestion(1)" name="question_1_type" value="Yes/No"> Yes or No <br />
                                         <input type="radio" onclick="addSelectQuestion(1)" name="question_1_type" value="Dropdown"> Select (Dropdown with options)
                                     </div>
                                     <div class="form-group genQuiz" id="questionQuestion1" style="display: none;">
@@ -43,7 +43,7 @@
                                         <input type="text" name="questions[]" class="form-control" placeholder="Report question ie No of youths trained">
                                         {{--                                        <span class="text-danger">{{$errors->first('questions')}}</span>--}}
                                     </div>
-                                    <div class="form-group" id="optionsSelectQuestion1" style="display: none;">
+                                    <div class="form-group ml-4 mr-4" id="optionsSelectQuestion1" style="display: none;">
                                         <label>Options</label>
                                         <div class="addOption1 mb-3">
                                             <input type="text" name="optionsQuestion1[]" class="form-control" placeholder="Add Option">
@@ -112,16 +112,16 @@
             var newQuiz =
                 '<div id="'+id+'" class="col-sm-12 addReportQuestion">' +
                 '<label>Select A Type of Question</label> ' +
-                '<div class="form-group"> ' +
-                '<input type="radio" onclick="addOpenQuestion('+id+')" name="question_'+id+'_type" value="Open"> Open ' +
-                '<input type="radio" onclick="addMultiChoiceQuestion('+id+')" name="question_'+id+'_type" value="Yes/No"> Yes or No ' +
+                '<div class="form-group ml-4"> ' +
+                '<input type="radio" onclick="addOpenQuestion('+id+')" name="question_'+id+'_type" value="Open"> Open <br />' +
+                '<input type="radio" onclick="addMultiChoiceQuestion('+id+')" name="question_'+id+'_type" value="Yes/No"> Yes or No <br />' +
                 '<input type="radio" onclick="addSelectQuestion('+id+')" name="question_'+id+'_type" value="Dropdown"> Select (Dropdown with options) ' +
                 '</div> ' +
                 '<div class="form-group genQuiz" id="questionQuestion'+id+'" style="display: none;"> ' +
                 '<label>Question</label> ' +
                 '<input type="text" name="questions[]" class="form-control" placeholder="Report question ie No of youths trained">' +
                 '</div> ' +
-                '<div class="form-group" id="optionsSelectQuestion'+id+'" style="display: none;"> ' +
+                '<div class="form-group ml-4 mr-4" id="optionsSelectQuestion'+id+'" style="display: none;"> ' +
                 '<label>Options</label> ' +
                 '<div class="addOption'+id+' mb-3"> ' +
                 '<input type="text" name="optionsQuestion'+id+'[]" class="form-control" placeholder="Add Option">' +

@@ -1,9 +1,5 @@
 @extends('Epm.layouts.master')
 
-@section('styles')
-    <link rel="stylesheet" href="{{url('assets/css/plugins/dataTables.bootstrap4.min.css')}}">
-@endsection
-
 @section('content')
     <?php
     $auth_admin = auth()->user();
@@ -40,8 +36,6 @@
                                     <th colspan="6">Training Sessions Allocation</th>
                                 </tr>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
                                     <th>Time</th>
                                     <th>Session</th>
                                     <th>Facilitators</th>

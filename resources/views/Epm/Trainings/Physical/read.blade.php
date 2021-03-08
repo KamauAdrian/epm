@@ -51,7 +51,7 @@
                                                     <td>
                                                         Adrian <br /> Claire <br /> Laureen
                                                         {{--                                        <a href="{{url("/adm/".$auth_admin->id."/edit/training/".$trainingDay->training_id."/day/".$trainingDay->day."/".$trainingDay->id."/session/1")}}" class="float-right">--}}
-                                                        <a href="#!" class="float-right">
+                                                        <a href="#!" data-toggle="modal"  class="openModalUpdateSessionFacilitators float-right">
                                                             <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
                                                                 <i class="feather icon-plus"></i>
                                                             </button>
@@ -319,6 +319,42 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="modalUpdateSessionFacilitators" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-md-12">
+                                    <form action="{{url("/adm/".$auth_admin->id."/add/training/".$trainingDay->training->id."/day/".$trainingDay->id."/facilitators")}}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group" id="trainingCenters1" training_id="{{$trainingDay->training->id}}">
+                                                    <label>Select Trainers</label>
+                                                    <multiselect v-model="selectedTrainers" :options="trainers"
+                                                                 placeholder="Select Trainers" label="name" :track-by="trackBy"
+                                                                 :searchable="true" :close-on-select="true" multiple>
+                                                    </multiselect>
+                                                    {{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
+                                                    <input type="hidden" v-for="trainer in selectedTrainers" name="trainers[]" :value="trainer.id">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group float-right">
+                                                    <input type="submit" class="btn btn-outline-info" value="Save">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 
@@ -326,6 +362,64 @@
 
 @section("js")
     <script>
+        $('.openModalUpdateSessionFacilitators').click(function(event){
+            event.preventDefault();
+            $("#modalUpdateSessionFacilitators").modal('show');
+        });
         $('#traineesList').DataTable();
+        new Vue({
+            el: "#trainingCenters1",
+            components: {
+                multiselect: window.VueMultiselect.default,
+                axios: window.axios.defaults,
+            },
+            data: function () {
+                return {
+                    trackBy:"id",
+                    selectedTrainers: [],
+                    trainers: [],
+                    initialValues: [],
+                }
+            },
+            methods:{
+                getTrainers: function(){
+                    axios
+                        .get("/training/"+this.$el.attributes.training_id.value+"/facilitators")
+                        .then(response => {
+                            this.trainers = response.data;
+                            // this.allClasses = response.data;
+                            // this.updateClasses();
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = true);
+                },
+                // updateClasses: function () {
+                //     let total = this.allClasses.length;
+                //     for (i=0;i<total;i++){
+                //         let all = this.classes.push(this.allClasses[i]);
+                //     }
+                // },
+            },
+            mounted () {
+                this.getTrainers();
+            },
+            // watch: {
+            //     trainers:{
+            //         immediate: false,
+            //         handler(values){
+            //             axios.get("/training/"+this.$el.attributes.training_id.value+"/trainers").then(response => {this.initialValues = response.data;});
+            //         },
+            //     },
+            //     initialValues: {
+            //         immediate: true,
+            //         handler(values) {
+            //             this.selectedCohorts = this.cohorts.filter(r => values.includes(r[this.trackBy]));
+            //         }
+            //     }
+            // },
+        });
     </script>
 @endsection

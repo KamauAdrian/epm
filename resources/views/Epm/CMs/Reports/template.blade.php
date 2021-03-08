@@ -75,7 +75,7 @@
                                             @endif
                                             @if($question->question_type == "Dropdown")
                                                 <div class="col-md-12">
-                                                    <div class="form-group quizOptions" id="q{{$key+1}}Options" quiz_id="{{$question->id}}">
+                                                    <div class="form-group" id="qOptions" quiz_id="{{$question->id}}">
                                                         <label>{{$question->question}}</label>
                                                         <multiselect v-model="SelectedOptions" :options="options"
                                                                      placeholder="Select Your Answer" label="option" :track-by="trackBy"

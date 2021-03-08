@@ -19,6 +19,14 @@ class TrainingDayController extends Controller
         //
     }
 
+    public function trainers($training_id){
+        $training = Training::find($training_id);
+        if ($training){
+            $trainers = $training->trainers;
+            return response()->json($trainers);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -100,6 +108,20 @@ class TrainingDayController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function update_facilitators(Request $request, $id, $training_id, $day_id)
+    {
+        $admin = User::find($id);
+        if($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $day = TrainingDay::find($day_id);
+                if ($day){
+                    dd($request->all());
+                }
+            }
+        }
     }
 
     /**

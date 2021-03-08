@@ -261,6 +261,8 @@ Route::group(['middleware'=>'admin'],function (){
 
     //Trainings(Per Day Day one ...)
     Route::get('/adm/{id}/view/training/{training_id}/day/{day_id}',[App\Http\Controllers\TrainingDayController::class, 'show']);
+    Route::post('/adm/{id}/add/training/{training_id}/day/{day_id}/facilitators',[App\Http\Controllers\TrainingDayController::class, 'update_facilitators']);
+    Route::get('/training/{training_id}/facilitators',[App\Http\Controllers\TrainingDayController::class, 'trainers']);
     Route::get('/adm/{id}/edit/training/{training_id}/day/{day}/{day_id}/session/{session_id}',[App\Http\Controllers\TrainingDayController::class, 'edit']);
 
     //Trainings(Time tables)
