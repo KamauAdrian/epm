@@ -114,7 +114,7 @@ class TrainingController extends Controller
                 foreach ($trainers as $trainer){
                     $training->trainers()->attach($trainer);
                 }
-                return redirect("/adm/".$id."/view/training/".$training->id)->with("success","New Training Created Successfully");
+                return redirect("/adm/".$id."/view/training/".$training->id)->with("success","New {$training->training} Training Created Successfully");
             }
         }
     }

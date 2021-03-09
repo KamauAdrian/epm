@@ -51,31 +51,19 @@
                                     </a>
                                 </li>
                             @endif
-                            @if($virtual_trainings && !$physical_trainings)
+                            @if($virtual_trainings)
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="pills-virtual-tab" data-toggle="pill" href="#pills-virtual" role="tab" aria-controls="pills-virtual" aria-selected="false">
-                                        <span>Virtual Trainings</span>
-                                    </a>
-                                </li>
-                            @elseif($virtual_trainings)
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-virtual-tab" data-toggle="pill" href="#pills-virtual" role="tab" aria-controls="pills-virtual" aria-selected="false">
+                                    <a class="nav-link @if(!$physical_trainings) active @endif " id="pills-virtual-tab" data-toggle="pill" href="#pills-virtual" role="tab" aria-controls="pills-virtual" aria-selected="false">
                                         <span>Virtual Trainings</span>
                                     </a>
                                 </li>
                             @endif
-                            @if($tots && !$physical_trainings && !$virtual_trainings)
+                            @if($tots)
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="pills-tot-tab" data-toggle="pill" href="#pills-tot" role="tab" aria-controls="pills-tot" aria-selected="false">
+                                    <a class="nav-link @if(!$physical_trainings && !$virtual_trainings)active @endif" id="pills-tot-tab" data-toggle="pill" href="#pills-tot" role="tab" aria-controls="pills-tot" aria-selected="false">
                                         <span>TOT Trainings</span>
                                     </a>
                                 </li>
-                            @elseif($tots)
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-tot-tab" data-toggle="pill" href="#pills-tot" role="tab" aria-controls="pills-tot" aria-selected="false">
-                                    <span>TOT Trainings</span>
-                                </a>
-                            </li>
                             @endif
                             </ul>
                         <div class="tab-content" id="pills-tabContent">
@@ -83,6 +71,9 @@
                                 <div class="tab-pane fade show active" id="pills-physical" role="tabpanel" aria-labelledby="pills-physical-tab">
                                     <div class="card">
                                         <div class="card-header">
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/physical/training/timetable')}}" class="float-left">
+                                                <button type="button" class="btn btn-outline-info">Physical Training Resources</button>
+                                            </a>
                                             <a href="{{url('/adm/'.$auth_admin->id.'/view/physical/training/timetable')}}" class="float-right">
                                                 <button type="button" class="btn btn-outline-info">Physical Training Timetable</button>
                                             </a>
@@ -180,110 +171,13 @@
                                     </div>
                                 </div>
                             @endif
-                            @if($virtual_trainings && !$physical_trainings)
-                                <div class="tab-pane fade show active" id="pills-virtual" role="tabpanel" aria-labelledby="pills-virtual-tab">
+                            @if($virtual_trainings)
+                                <div class="tab-pane fade show @if(!$physical_trainings) active @endif " id="pills-virtual" role="tabpanel" aria-labelledby="pills-virtual-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/virtual/training/timetable')}}" class="float-right">
-                                                <button type="button" class="btn btn-outline-info">Virtual Training Timetable</button>
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/virtual/training/timetable')}}" class="float-left">
+                                                <button type="button" class="btn btn-outline-info">Virtual Training Resources</button>
                                             </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="tableListDataTable1" class="table table-center mb-0 ">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Training</th>
-                                                        <th>Institution/Center</th>
-                                                        <th>Class/Cohort</th>
-                                                        <th>Start Date</th>
-                                                        <th>End Date</th>
-                                                        <th class="text-right">Status</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($virtual_trainings as $key=>$virtual_training)
-                                                        <?php
-                                                        $center = "";
-                                                        $institution = "";
-                                                        $cohort = \App\Models\Cohort::find($virtual_training->cohort_id);
-                                                        if ($virtual_training->venue == "Centers (AYECs)"){
-                                                            $center = \App\Models\Center::find($virtual_training->center_id);
-                                                        }
-                                                        if ($virtual_training->venue == "Institution (University/Tvet)"){
-                                                            $institution = \App\Models\Institution::find($virtual_training->institution_id);
-                                                        }
-                                                        ?>
-                                                        <tr>
-                                                            <td>{{count($virtual_trainings)-$key}}</td>
-                                                            <td>
-                                                                <div class="media">
-                                                                    <div class="media-body ml-3 align-self-center">
-                                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$virtual_training->id)}}">
-                                                                            {{$virtual_training->training}}
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                @if($institution)
-                                                                    {{$institution->name}}
-                                                                @endif
-                                                                @if($center)
-                                                                    {{$center->name}}
-                                                                @endif
-                                                            </td>
-                                                            <td>
-                                                                {{$cohort->cohort_name}}
-                                                            </td>
-                                                            <td>
-                                                                {{date("dS M Y",strtotime($virtual_training->start_date))}}
-                                                            </td>
-                                                            <td>
-                                                                {{date("dS M Y",strtotime($virtual_training->end_date))}}
-                                                            </td>
-
-                                                            @if($virtual_training->status=='Pending' && $auth_admin->role->name =='Su Admin' || $auth_admin->role->name == 'Project Manager')
-                                                                <td class="text-right">
-                                                                    <div class="btn-group">
-                                                                        <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                                                                            <span class="badge badge-pill badge-light-dark">{{$virtual_training->status}}</span>
-                                                                            <span class = "caret"></span>
-                                                                        </button>
-                                                                        <ul class = "dropdown-menu" role = "menu">
-                                                                            <li><a href = "{{url('/view-session',$virtual_training->id)}}">View Training</a></li>
-                                                                            <li><a href = "{{url('/adm/'.$auth_admin->id.'/confirm/session/session_id='.$virtual_training->id)}}">Approve Training</a></li>
-                                                                            <li><a href = "#!">Delete Training</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            @else
-                                                                <td class="text-right">
-                                                                    <div class="btn-group">
-                                                                        <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                                                                            <span class="badge badge-pill badge-light-dark">{{$virtual_training->status}}</span>
-                                                                            <span class = "caret"></span>
-                                                                        </button>
-                                                                        <ul class = "dropdown-menu" role = "menu">
-                                                                            <li><a href ="{{url('/adm/view/session',$virtual_training->id)}}">View Training</a></li>
-                                                                            <li><a href ="#!">Delete Training</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            @endif
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @elseif($virtual_trainings)
-                                <div class="tab-pane fade show" id="pills-virtual" role="tabpanel" aria-labelledby="pills-virtual-tab">
-                                    <div class="card">
-                                        <div class="card-header">
                                             <a href="{{url('/adm/'.$auth_admin->id.'/view/virtual/training/timetable')}}" class="float-right">
                                                 <button type="button" class="btn btn-outline-info">Virtual Training Timetable</button>
                                             </a>
@@ -381,110 +275,13 @@
                                     </div>
                                 </div>
                             @endif
-                            @if($tots && !$physical_trainings && !$virtual_trainings)
-                                <div class="tab-pane fade show active" id="pills-tot" role="tabpanel" aria-labelledby="pills-tot-tab">
+                            @if($tots)
+                                <div class="tab-pane fade show @if(!$physical_trainings && !$virtual_trainings) active @endif" id="pills-tot" role="tabpanel" aria-labelledby="pills-tot-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/tot/training/timetable')}}" class="float-right">
-                                                <button type="button" class="btn btn-outline-info">TOT Training Timetable</button>
+                                            <a href="{{url('/adm/'.$auth_admin->id.'/view/tot/training/timetable')}}" class="float-left">
+                                                <button type="button" class="btn btn-outline-info">TOT Training Resources</button>
                                             </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="tableListDataTable2" class="table table-center mb-0 ">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Training</th>
-                                                        <th>Institution/Center</th>
-                                                        <th>Class/Cohort</th>
-                                                        <th>Start Date</th>
-                                                        <th>End Date</th>
-                                                        <th class="text-right">Status</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($tots as $key=>$tot)
-                                                        <?php
-                                                        $center = "";
-                                                        $institution = "";
-                                                        $cohort = \App\Models\Cohort::find($tot->cohort_id);
-                                                        if ($tot->venue == "Centers (AYECs)"){
-                                                            $center = \App\Models\Center::find($tot->center_id);
-                                                        }
-                                                        if ($tot->venue == "Institution (University/Tvet)"){
-                                                            $institution = \App\Models\Institution::find($tot->institution_id);
-                                                        }
-                                                        ?>
-                                                        <tr>
-                                                            <td>{{count($tots)-$key}}</td>
-                                                            <td>
-                                                                <div class="media">
-                                                                    <div class="media-body ml-3 align-self-center">
-                                                                        <a href="{{url('/adm/'.$auth_admin->id.'/view/training',$tot->id)}}">
-                                                                            {{$tot->training}}
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                @if($institution)
-                                                                    {{$institution->name}}
-                                                                @endif
-                                                                @if($center)
-                                                                    {{$center->name}}
-                                                                @endif
-                                                            </td>
-                                                            <td>
-                                                                {{$cohort->cohort_name}}
-                                                            </td>
-                                                            <td>
-                                                                {{date("dS M Y",strtotime($tot->start_date))}}
-                                                            </td>
-                                                            <td>
-                                                                {{date("dS M Y",strtotime($tot->end_date))}}
-                                                            </td>
-
-                                                            @if($tot->status=='Pending' && $auth_admin->role->name =='Su Admin' || $auth_admin->role->name == 'Project Manager')
-                                                                <td class="text-right">
-                                                                    <div class="btn-group">
-                                                                        <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                                                                            <span class="badge badge-pill badge-light-dark">{{$tot->status}}</span>
-                                                                            <span class = "caret"></span>
-                                                                        </button>
-                                                                        <ul class = "dropdown-menu" role = "menu">
-                                                                            <li><a href = "{{url('/view-session',$tot->id)}}">View Training</a></li>
-                                                                            <li><a href = "{{url('/adm/'.$auth_admin->id.'/confirm/session/session_id='.$tot->id)}}">Approve Training</a></li>
-                                                                            <li><a href = "#!">Delete Training</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            @else
-                                                                <td class="text-right">
-                                                                    <div class="btn-group">
-                                                                        <button type = "button" class = "btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                                                                            <span class="badge badge-pill badge-light-dark">{{$tot->status}}</span>
-                                                                            <span class = "caret"></span>
-                                                                        </button>
-                                                                        <ul class = "dropdown-menu" role = "menu">
-                                                                            <li><a href ="{{url('/adm/view/session',$tot->id)}}">View Training</a></li>
-                                                                            <li><a href ="#!">Delete Training</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            @endif
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @elseif($tots)
-                                <div class="tab-pane fade show" id="pills-tot" role="tabpanel" aria-labelledby="pills-tot-tab">
-                                    <div class="card">
-                                        <div class="card-header">
                                             <a href="{{url('/adm/'.$auth_admin->id.'/view/tot/training/timetable')}}" class="float-right">
                                                 <button type="button" class="btn btn-outline-info">TOT Training Timetable</button>
                                             </a>

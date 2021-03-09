@@ -168,7 +168,7 @@
                                 <div class="col-md-6">
                                     @if($cohort)
                                         <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
-                                        {{$class}}<br />
+                                        {{$cohort}}<br />
                                     @endif
                                 </div>
                             @endif
