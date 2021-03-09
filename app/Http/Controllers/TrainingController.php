@@ -230,45 +230,47 @@ class TrainingController extends Controller
         }
     }
 
-    public function update_centers(Request $request, $id, $training_id)
+    public function update_center(Request $request, $id, $training_id)
     {
 //        dd($request->all());
         $admin = User::find($id);
         if ($admin){
             $training = Training::find($training_id);
             if ($training){
-                $centers = $request->centers;
-//                dd($centers);
-                $training->centers()->detach();
-                $training->centers()->attach($centers);
-                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Centers Updated Successfully");
+                $center = [
+                    'center_id'=>$request->center,
+                ];
+                $training->update($center);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Center Updated Successfully");
             }
         }
     }
 
-    public function update_cohorts(Request $request, $id, $training_id)
+    public function update_cohort(Request $request, $id, $training_id)
     {
         $admin = User::find($id);
         if ($admin){
             $training = Training::find($training_id);
             if ($training){
-                $cohorts = $request->cohorts;
-                $training->cohorts()->detach();
-                $training->cohorts()->attach($cohorts);
-                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Cohorts Updated Successfully");
+                $cohort = [
+                    'cohort_id'=>$request->cohort,
+                ];
+                $training->update($cohort);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Cohort Updated Successfully");
             }
         }
     }
-    public function update_institutions(Request $request, $id, $training_id)
+    public function update_institution(Request $request, $id, $training_id)
     {
         $admin = User::find($id);
         if ($admin){
             $training = Training::find($training_id);
             if ($training){
-                $institutions = $request->institutions;
-                $training->institutions()->detach();
-                $training->institutions()->attach($institutions);
-                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Institutions Updated Successfully");
+                $institution = [
+                    'institution_id'=>$request->institution,
+                ];
+                $training->update($institution);
+                return redirect("/adm/".$admin->id."/view/training/".$training->id)->with("success","Institution Updated Successfully");
             }
         }
     }

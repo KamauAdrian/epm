@@ -14,7 +14,8 @@ class Training extends Model
         'end_date',
         'type',
         'center_id',
-        'institution',
+        'cohort_id',
+        'institution_id',
         'description',
         'status',
     ];
@@ -23,21 +24,11 @@ class Training extends Model
         return $this->belongsToMany('App\Models\Trainee','trainee_training','training_id','trainee_id');
     }
 
-    public function centers(){
-        return $this->belongsToMany('App\Models\Center','training_centers','training_id','center_id');
-    }
-    public function institutions(){
-        return $this->belongsToMany('App\Models\Institution','training_institutions','training_id','institution_id');
-    }
-
     //each training session belongs to many trainers
     public function trainers(){
         return $this->belongsToMany('App\Models\User','trainer_training','training_id','trainer_id');
     }
 
-    public function cohorts(){
-        return $this->belongsToMany('App\Models\Cohort','cohort_training','training_id','cohort_id');
-    }
     public function trainingDays(){
         return $this->hasMany('App\Models\TrainingDay','training_id','id');
     }

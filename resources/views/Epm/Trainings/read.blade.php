@@ -80,6 +80,12 @@
                                                 <h6><span class="text-small" style="font-size: 14px">Center</span></h6>
                                                 @if($center)
                                                     {{$center->name}}
+                                                @else
+                                                    <a href="#!" data-toggle="modal" class="openModalUpdateCenter mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                        <button type="button" title="Add Center" class="btn btn-icon icon-s">
+                                                            <i class="feather icon-plus"></i>
+                                                        </button>
+                                                    </a>
                                                 @endif
                                             </div>
                                         </div>
@@ -91,6 +97,12 @@
                                                 <h6><span class="text-small" style="font-size: 14px">Institution</span></h6>
                                                 @if($institution)
                                                     {{$institution->name}}
+                                                @else
+                                                    <a href="#!" data-toggle="modal" class="openModalUpdateInstitution mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                        <button type="button" title="Add Institution" class="btn btn-icon icon-s">
+                                                            <i class="feather icon-plus"></i>
+                                                        </button>
+                                                    </a>
                                                 @endif
                                             </div>
                                         </div>
@@ -101,7 +113,15 @@
                                         <div class="card-body" style="height: 150px; overflow: auto;">
                                             <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
                                             @if($cohort)
-                                               {{$cohort->name}}
+
+                                               <b>Category:</b> {{$cohort->category}} <br />
+                                               <b>Cohort:</b> {{$cohort->name}}
+                                            @else
+                                                <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                    <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
+                                                        <i class="feather icon-plus"></i>
+                                                    </button>
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
@@ -202,7 +222,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="modalUpdateCenters" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="modalUpdateCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -212,18 +232,18 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-md-12">
-                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/centers")}}" method="post">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/center")}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group" id="trainingCenters" training_id="{{$training->id}}">
-                                                        <label>Select Centers</label>
-                                                        <multiselect v-model="selectedCenters" :options="centers"
+                                                    <div class="form-group" id="trainingCenters">
+                                                        <label>Select Center</label>
+                                                        <multiselect v-model="selectedCenter" :options="centers"
                                                                      placeholder="Select Center" label="name" :track-by="trackBy"
-                                                                     :searchable="true" :close-on-select="false" multiple>
+                                                                     :searchable="true" :close-on-select="true">
                                                         </multiselect>
 {{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
-                                                            <input type="hidden" v-for="center in selectedCenters" name="centers[]" :value="center.id">
+                                                            <input type="hidden" v-for="center in selectedCenter" name="center" :value="selectedCenter.id">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -238,7 +258,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="modalUpdateInstitutions" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="modalUpdateInstitution" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -248,18 +268,18 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-md-12">
-                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/institutions")}}" method="post">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/institution")}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group" id="trainingInstitutions" training_id="{{$training->id}}">
-                                                        <label>Select Institutions</label>
-                                                        <multiselect v-model="selectedInstitutions" :options="institutions"
+                                                    <div class="form-group" id="trainingInstitutions">
+                                                        <label>Select Institution</label>
+                                                        <multiselect v-model="selectedInstitution" :options="institutions"
                                                                      placeholder="Select Institution" label="name" :track-by="trackBy"
-                                                                     :searchable="true" :close-on-select="false" multiple>
+                                                                     :searchable="true" :close-on-select="true">
                                                         </multiselect>
 {{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
-                                                            <input type="hidden" v-for="institution in selectedInstitutions" name="institutions[]" :value="institution.id">
+                                                            <input type="hidden" v-for="institution in selectedInstitution" name="institution" :value="selectedInstitution.id">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -274,7 +294,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="modalUpdateCohorts" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="modalUpdateCohort" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -284,18 +304,18 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-md-12">
-                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/cohorts")}}" method="post">
+                                        <form action="{{url("/adm/".$auth_admin->id."/update/training/".$training->id."/cohort")}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group" id="cohorts" training_id="{{$training->id}}">
-                                                        <label>Select Classes/Cohorts</label>
-                                                        <multiselect v-model="selectedCohorts" :options="cohorts"
+                                                    <div class="form-group" id="cohorts">
+                                                        <label>Select Class/Cohort</label>
+                                                        <multiselect v-model="selectedCohort" :options="cohorts"
                                                                      placeholder="Select Class" label="cohort_name" :track-by="trackBy"
-                                                                     :searchable="true" :close-on-select="false" multiple>
+                                                                     :searchable="true" :close-on-select="true">
                                                         </multiselect>
 {{--                                                        <input type="hidden" v-for="center in selectedCenter" name="center_id" :value="selectedCenter.id">--}}
-                                                            <input type="hidden" v-for="cohort in selectedCohorts" name="cohorts[]" :value="cohort.id">
+                                                            <input type="hidden" v-for="cohort in selectedCohort" name="cohort" :value="selectedCohort.id">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -320,17 +340,17 @@
             event.preventDefault();
             $("#modalUpdateTrainers").modal('show');
         });
-        $('.openModalUpdateCenters').click(function(event){
+        $('.openModalUpdateCenter').click(function(event){
             event.preventDefault();
-            $("#modalUpdateCenters").modal('show');
+            $("#modalUpdateCenter").modal('show');
         });
-        $('.openModalUpdateCohorts').click(function(event){
+        $('.openModalUpdateCohort').click(function(event){
             event.preventDefault();
-            $("#modalUpdateCohorts").modal('show');
+            $("#modalUpdateCohort").modal('show');
         });
-        $('.openModalUpdateInstitutions').click(function(event){
+        $('.openModalUpdateInstitution').click(function(event){
             event.preventDefault();
-            $("#modalUpdateInstitutions").modal('show');
+            $("#modalUpdateInstitution").modal('show');
         });
         new Vue({
             el: "#trainingTrainers",
@@ -387,9 +407,9 @@
             data: function () {
                 return {
                     trackBy:"id",
-                    selectedCenters: [],
+                    selectedCenter: [],
                     centers: [],
-                    initialValues: [],
+                    // initialValues: [],
                 }
             },
             methods:{
@@ -418,20 +438,20 @@
             mounted () {
                 this.getAllCenters();
             },
-            watch: {
-                centers:{
-                    immediate: false,
-                    handler(values){
-                        axios.get("/training/"+this.$el.attributes.training_id.value+"/centers").then(response => {this.initialValues = response.data;});
-                    },
-                },
-                initialValues: {
-                    immediate: true,
-                    handler(values) {
-                        this.selectedCenters = this.centers.filter(r => values.includes(r[this.trackBy]));
-                    }
-                }
-            },
+            // watch: {
+            //     centers:{
+            //         immediate: false,
+            //         handler(values){
+            //             axios.get("/training/"+this.$el.attributes.training_id.value+"/centers").then(response => {this.initialValues = response.data;});
+            //         },
+            //     },
+            //     initialValues: {
+            //         immediate: true,
+            //         handler(values) {
+            //             this.selectedCenters = this.centers.filter(r => values.includes(r[this.trackBy]));
+            //         }
+            //     }
+            // },
         });
         new Vue({
             el: "#trainingInstitutions",
@@ -442,9 +462,9 @@
             data: function () {
                 return {
                     trackBy:"id",
-                    selectedInstitutions: [],
+                    selectedInstitution: [],
                     institutions: [],
-                    initialValues: [],
+                    // initialValues: [],
                 }
             },
             methods:{
@@ -473,20 +493,20 @@
             mounted () {
                 this.getAllInstitutions();
             },
-            watch: {
-                institutions:{
-                    immediate: false,
-                    handler(values){
-                        axios.get("/training/"+this.$el.attributes.training_id.value+"/institutions").then(response => {this.initialValues = response.data;});
-                    },
-                },
-                initialValues: {
-                    immediate: true,
-                    handler(values) {
-                        this.selectedInstitutions = this.institutions.filter(r => values.includes(r[this.trackBy]));
-                    }
-                }
-            },
+            // watch: {
+            //     institutions:{
+            //         immediate: false,
+            //         handler(values){
+            //             axios.get("/training/"+this.$el.attributes.training_id.value+"/institutions").then(response => {this.initialValues = response.data;});
+            //         },
+            //     },
+            //     initialValues: {
+            //         immediate: true,
+            //         handler(values) {
+            //             this.selectedInstitutions = this.institutions.filter(r => values.includes(r[this.trackBy]));
+            //         }
+            //     }
+            // },
         });
         new Vue({
             el: "#cohorts",
@@ -497,9 +517,9 @@
             data: function () {
                 return {
                     trackBy:"id",
-                    selectedCohorts: [],
+                    selectedCohort: [],
                     cohorts: [],
-                    initialValues: [],
+                    // initialValues: [],
                 }
             },
             methods:{
@@ -527,20 +547,20 @@
             mounted () {
                 this.getAllCohorts();
             },
-            watch: {
-                cohorts:{
-                    immediate: false,
-                    handler(values){
-                        axios.get("/training/"+this.$el.attributes.training_id.value+"/cohorts").then(response => {this.initialValues = response.data;});
-                    },
-                },
-                initialValues: {
-                    immediate: true,
-                    handler(values) {
-                        this.selectedCohorts = this.cohorts.filter(r => values.includes(r[this.trackBy]));
-                    }
-                }
-            },
+            // watch: {
+            //     cohorts:{
+            //         immediate: false,
+            //         handler(values){
+            //             axios.get("/training/"+this.$el.attributes.training_id.value+"/cohorts").then(response => {this.initialValues = response.data;});
+            //         },
+            //     },
+            //     initialValues: {
+            //         immediate: true,
+            //         handler(values) {
+            //             this.selectedCohorts = this.cohorts.filter(r => values.includes(r[this.trackBy]));
+            //         }
+            //     }
+            // },
         });
     </script>
 @endsection

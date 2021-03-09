@@ -252,9 +252,9 @@ Route::group(['middleware'=>'admin'],function (){
 
     //Training -> (Updates)
     Route::post('/adm/{id}/update/training/{training_id}/trainers',[App\Http\Controllers\TrainingController::class, 'update_trainers']);
-    Route::post('/adm/{id}/update/training/{training_id}/centers',[App\Http\Controllers\TrainingController::class, 'update_centers']);
-    Route::post('/adm/{id}/update/training/{training_id}/cohorts',[App\Http\Controllers\TrainingController::class, 'update_cohorts']);
-    Route::post('/adm/{id}/update/training/{training_id}/institutions',[App\Http\Controllers\TrainingController::class, 'update_institutions']);
+    Route::post('/adm/{id}/update/training/{training_id}/center',[App\Http\Controllers\TrainingController::class, 'update_center']);
+    Route::post('/adm/{id}/update/training/{training_id}/cohort',[App\Http\Controllers\TrainingController::class, 'update_cohort']);
+    Route::post('/adm/{id}/update/training/{training_id}/institution',[App\Http\Controllers\TrainingController::class, 'update_institution']);
 
     //Training -> (Session Allocations)
     Route::get('/adm/{id}/view/training/{training_id}/session/allocations',[App\Http\Controllers\TrainingSessionAllocationController::class, 'index']);
