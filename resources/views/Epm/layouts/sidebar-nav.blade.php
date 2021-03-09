@@ -40,12 +40,12 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+    @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager" || $auth_admin->role->name == "Trainer")
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>
             <ul class="pcoded-submenu">
                 @if($pm_role)
-                    <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">PMO</a></li>
+                    <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">View PMO</a></li>
                     @if($auth_admin->role->name == 'Su Admin')
                         <li>
                             <a href="#!">Reports</a>
@@ -58,47 +58,29 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-{{--    @if()--}}
-{{--        <li class="nav-item pcoded-hasmenu">--}}
-{{--            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Ajira PMO</span></a>--}}
-{{--            <ul class="pcoded-submenu">--}}
-{{--                <li><a href="{{url('/list/all/admins/role_id='.$pm_role->id)}}">PMO</a></li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-{{--    @endif--}}
     @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-sitemap"></i></span><span class="pcoded-mtext">Centers</span></a>
             <ul class="pcoded-submenu">
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/list/centers')}}">Centers</a></li>
-                <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}">Center Managers</a></li>
+                <li>
+                    <a href="#!">Center Managers</a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}">View Center Managers</a></li>
+                        <li><a href="{{url('/adm/'.$auth_admin->id.'/view/cms/reports')}}">Reports</a></li>
+                    </ul>
+                </li>
             </ul>
         </li>
     @endif
-{{--    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')--}}
-{{--        <li class="nav-item pcoded-hasmenu">--}}
-{{--            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Center Managers</span></a>--}}
-{{--            <ul class="pcoded-submenu">--}}
-{{--                <li><a href="{{url('/list/all/admins/role_id='.$cm_role->id)}}">View Center Managers</a></li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-{{--    @endif--}}
-    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
+    @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager" || $auth_admin->role->name == "Center Manager" || $auth_admin->role->name == "Trainer")
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Trainers</span></a>
             <ul class="pcoded-submenu">
                 @if($trainer_role)
                     <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
-                @else
-                    <li><a href="{{url('/adm/'.$auth_admin->id.'/add/admin/role_name=Trainer')}}">Add Trainer</a></li>
+                    <li><a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/reports')}}">Reports</a></li>
                 @endif
-            </ul>
-        </li>
-    @elseif($auth_admin->role->name == 'Trainer')
-        <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">Trainers</span></a>
-            <ul class="pcoded-submenu">
-                    <li><a href="{{url('/list/all/admins/role_id='.$trainer_role->id)}}">View Trainers</a></li>
             </ul>
         </li>
     @endif
@@ -110,32 +92,22 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager')
-        <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
-            <ul class="pcoded-submenu">
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/cms')}}">Team CMs</a></li>
+    <li class="nav-item pcoded-hasmenu">
+        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
+        <ul class="pcoded-submenu">
+            @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager")
+            <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/cms')}}">Team CMs</a></li>
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/trainers')}}">Team Trainers</a></li>--}}
-                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/trainers')}}">Team Trainers</a></li>
-            </ul>
-        </li>
-    @elseif($auth_admin->role->name == 'Center Manager')
-        <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
-            <ul class="pcoded-submenu">
-{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
+            <li><a href="{{url('/adm/'.$auth_admin->id.'/list/team/trainers')}}">Team Trainers</a></li>
+            @elseif($auth_admin->role->name == "Center Manager")
+        {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
                 <li><a href="#!">My Teams</a></li>
-            </ul>
-        </li>
-    @elseif($auth_admin->role->name == 'Trainer')
-        <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Teams</span></a>
-            <ul class="pcoded-submenu">
-{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
+            @elseif($auth_admin->role->name == "Trainer")
+        {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/list/my/teams')}}">My Teams</a></li>--}}
                 <li><a href="#!">My Teams</a></li>
-            </ul>
-        </li>
-    @endif
+            @endif
+        </ul>
+    </li>
     <li class="nav-item pcoded-hasmenu">
         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Trainings</span></a>
         <ul class="pcoded-submenu">
@@ -161,30 +133,31 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-    @if($auth_admin->role->name == 'Su Admin')
-        <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
-            <ul class="pcoded-submenu">
+{{--    @if($auth_admin->role->name == 'Su Admin')--}}
+{{--        <li class="nav-item pcoded-hasmenu">--}}
+{{--            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>--}}
+{{--            <ul class="pcoded-submenu">--}}
 {{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/view/reports/templates')}}">Templates</a></li>--}}
-                @if($pm_role)
-                    <li>
-                        <a href="#!">PMO</a>
-                        <ul class="pcoded-submenu">
-                            <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">Performance Appraisals</a></li>
-                        </ul>
-                    </li>
-                @endif
-                @if($cm_role)
-                    <li><a href="{{url('/adm/'.$auth_admin->id.'/view/cms/reports')}}">CMS</a></li>
-                @endif
-                @if($trainer_role)
-                    <li><a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/reports')}}">Trainers</a></li>
-                @endif
-                <li><a href="#!">Teams</a></li>
-                <li><a href="#!">Centers</a></li>
-            </ul>
-        </li>
-    @elseif($auth_admin->role->name == 'Project Manager')
+{{--                @if($pm_role)--}}
+{{--                    <li>--}}
+{{--                        <a href="#!">PMO</a>--}}
+{{--                        <ul class="pcoded-submenu">--}}
+{{--                            <li><a href="{{url('/adm/'.$auth_admin->id.'/view/performance/appraisals')}}">Performance Appraisals</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                @endif--}}
+{{--                @if($cm_role)--}}
+{{--                    <li><a href="{{url('/adm/'.$auth_admin->id.'/view/cms/reports')}}">CMS</a></li>--}}
+{{--                @endif--}}
+{{--                @if($trainer_role)--}}
+{{--                    <li><a href="{{url('/adm/'.$auth_admin->id.'/view/trainer/reports')}}">Trainers</a></li>--}}
+{{--                @endif--}}
+{{--                <li><a href="#!">Teams</a></li>--}}
+{{--                <li><a href="#!">Centers</a></li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
+{{--    @endif--}}
+    @if($auth_admin->role->name == "Project Manager")
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
@@ -206,7 +179,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
                 <li><a href="#!">Centers</a></li>
             </ul>
         </li>
-    @elseif($auth_admin->role->name == 'Center Manager')
+    @elseif($auth_admin->role->name == "Center Manager")
         <?php
         $cm_reports = CmsReport::orderBy("created_at","desc")->get();
         ?>
@@ -216,12 +189,12 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             <ul class="pcoded-submenu">
                 @foreach($cm_reports as $cm_report)
                 <li><a href="{{url('/adm/'.$auth_admin->id.'/view/cms/report/'.$cm_report->id)}}">{{$cm_report->name}}</a></li>
-{{--                <li><a href="{{url('/adm/'.$auth_admin->id.'/team/reports')}}">{{$cm_report->name}}</a></li>--}}
+                <li><a href="{{url('/adm/'.$auth_admin->id.'/team/reports')}}">{{$cm_report->name}}</a></li>
                 @endforeach
             </ul>
         </li>
     @endif
-    @elseif($auth_admin->role->name == 'Trainer')
+    @elseif($auth_admin->role->name == "Trainer")
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book"></i></span><span class="pcoded-mtext">Reports</span></a>
             <ul class="pcoded-submenu">
@@ -236,7 +209,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
             </ul>
         </li>
     @endif
-    @if($auth_admin->role->name == 'Su Admin' || $auth_admin->role->name == 'Project Manager' || $auth_admin->role->name == 'Center Manager')
+    @if($auth_admin->role->name == "Su Admin" || $auth_admin->role->name == "Project Manager" || $auth_admin->role->name == "Center Manager")
         <li class="nav-item pcoded-hasmenu">
             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user-tie"></i></span><span class="pcoded-mtext">M & E</span></a>
             <ul class="pcoded-submenu">

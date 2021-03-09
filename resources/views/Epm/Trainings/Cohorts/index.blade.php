@@ -59,7 +59,7 @@
                                                         <a href="{{url('/adm/'.$auth_admin->id.'/edit/cohort/'.$cohort->id)}}" class="btn btn-sm btn-outline-info" title="Edit">
                                                             <span><i class="fa fa-pencil-alt"></i></span>
                                                         </a>
-                                                        <a href="#!" class="btn btn-sm btn-outline-danger deleteClass" data-toggle="modal" data-target="#deleteClass" title="Delete">
+                                                        <a href="#!" class="btn btn-sm btn-outline-danger openModalDeleteCohort" data_url="{{url('/adm/'.$auth_admin->id.'/delete/cohort/'.$cohort->id)}}" data-toggle="modal" title="Delete">
                                                             <span><i class="fa fa-trash"></i></span>
                                                         </a>
                                                     </div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="deleteClass" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="modalDeleteCohort" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -94,7 +94,7 @@
                                 <h5 class="text-danger">Are you sure you want to delete this Cohort?</h5>
                             </div>
                             <div class="modal-footer">
-                                <form id="deleteAdminForm" action="{{url('/adm/'.$auth_admin->id.'/delete/cohort/'.$cohort->id)}}" method="post">
+                                <form id="deleteCohortForm" action="" method="post">
                                     @csrf
                                     <button type="submit" class="btn btn-outline-success">Yes Delete</button>
                                     <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>
@@ -114,6 +114,12 @@
 
 @section('js')
     <script>
+        $(".openModalDeleteCohort").click(function (event){
+            event.preventDefault();
+            let url = $(this).attr("data_url");
+            $("#deleteCohortForm").attr("action",url);
+            $("#modalDeleteCohort").modal('show');
+        });
         $(document).ready( function () {
             $('#sessionClasses').DataTable();
         } );

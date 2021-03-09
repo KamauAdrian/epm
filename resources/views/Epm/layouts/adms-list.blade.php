@@ -55,9 +55,9 @@
                         @endif
                     </a>
                 @endif
-            <a href="#!">
-                <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info">Export List</button>
-            </a>
+{{--            <a href="#!">--}}
+{{--                <button type="button" class="ml-2 btn d-block ml-auto btn-outline-info"><i class="feather icon-download mr-2"></i>Export List</button>--}}
+{{--            </a>--}}
         </div>
     </div>
     <div class="row">
