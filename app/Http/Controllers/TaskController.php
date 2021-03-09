@@ -176,6 +176,30 @@ class TaskController extends Controller
 //        dd(count($task->assignees),$assignees);
     }
 
+    public function update_task_name(Request $request, $id,$task_id)
+    {
+        $admin = User::find($id);
+        $response = [];
+        if ($admin){
+            $task = Task::find($task_id);
+            if ($task){
+                $name = [
+                    'name'=>$request->name,
+                ];
+                $response = null;
+                if ($task->update($name)){
+                    $response["code"] = 0;
+                    $response["message"] = 'Task Name Updated Successfully';
+                    $response["data"] = $task;
+                }else{
+                    $response["code"] = 1;
+                    $response["message"] = 'Task Updated Failed';
+                    $response["data"] = $task;
+                }
+            }
+        }
+        return $response;
+    }
     public function update_due_date(Request $request, $id,$task_id)
     {
         $task = Task::find($task_id);

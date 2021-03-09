@@ -9,6 +9,7 @@
         $session_date = date_create($training->start_date);
         $split_date = date_format($session_date,'l dS M Y');
         $days = $training->trainingDays;
+//        dd($training,count($days));
         $center = $training->center;
         $trainers_raw = $training->trainers;
         $trainers = [];
@@ -64,6 +65,8 @@
                                                 @foreach($trainers as $key=>$trainer)
                                                     {{$key+1}}.{{$trainer}}<br />
                                                 @endforeach
+                                            @endif
+                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                 <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
                                                     <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
                                                         <i class="feather icon-plus"></i>
@@ -81,11 +84,13 @@
                                                 @if($center)
                                                     {{$center->name}}
                                                 @else
-                                                    <a href="#!" data-toggle="modal" class="openModalUpdateCenter mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                        <button type="button" title="Add Center" class="btn btn-icon icon-s">
-                                                            <i class="feather icon-plus"></i>
-                                                        </button>
-                                                    </a>
+                                                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                        <a href="#!" data-toggle="modal" class="openModalUpdateCenter mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                            <button type="button" title="Add Center" class="btn btn-icon icon-s">
+                                                                <i class="feather icon-plus"></i>
+                                                            </button>
+                                                        </a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -98,11 +103,13 @@
                                                 @if($institution)
                                                     {{$institution->name}}
                                                 @else
-                                                    <a href="#!" data-toggle="modal" class="openModalUpdateInstitution mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                        <button type="button" title="Add Institution" class="btn btn-icon icon-s">
-                                                            <i class="feather icon-plus"></i>
-                                                        </button>
-                                                    </a>
+                                                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                        <a href="#!" data-toggle="modal" class="openModalUpdateInstitution mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                            <button type="button" title="Add Institution" class="btn btn-icon icon-s">
+                                                                <i class="feather icon-plus"></i>
+                                                            </button>
+                                                        </a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -116,12 +123,15 @@
 
                                                <b>Category:</b> {{$cohort->category}} <br />
                                                <b>Cohort:</b> {{$cohort->name}}
+
                                             @else
-                                                <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                    <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
-                                                        <i class="feather icon-plus"></i>
-                                                    </button>
-                                                </a>
+                                                @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                    <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                        <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
+                                                            <i class="feather icon-plus"></i>
+                                                        </button>
+                                                    </a>
+                                                @endif
                                             @endif
                                         </div>
                                     </div>
@@ -178,6 +188,9 @@
             </div>
             <div class="col-md-12">
                 @if($training->training == "Physical")
+                    <?php
+//                    dd($training);
+                    ?>
                     @include("Epm.Trainings.Physical.index")
                 @endif
                 @if($training->training == "Virtual")

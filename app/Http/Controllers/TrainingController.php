@@ -111,9 +111,8 @@ class TrainingController extends Controller
                     $training_day->training_id = $training->id;
                     $training_day->save();
                 }
-                foreach ($trainers as $trainer){
-                    $training->trainers()->attach($trainer);
-                }
+
+                $training->trainers()->attach($trainers);
                 return redirect("/adm/".$id."/view/training/".$training->id)->with("success","New {$training->training} Training Created Successfully");
             }
         }
