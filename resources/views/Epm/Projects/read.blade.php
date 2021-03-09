@@ -688,10 +688,10 @@
                 },
                 success: function([response_task,response_assignees,response_attachments,response_links,response_comments]){
                     $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
-                    if (response_task.status!=0){
-                        $(".btn-mark-task-complete").text('Completed');
-                    }else{
+                    if (response_task.status==0){
                         $(".btn-mark-task-complete").text('Mark Complete');
+                    }else{
+                        $(".btn-mark-task-complete").text('Completed');
                     }
                     // Add response in Modal body
                     var task_assignees = "";
@@ -826,10 +826,10 @@
                             type: 'post',
                             success: function(response){
                                 // $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
-                                if (response.data.status !=0){
-                                    $(".btn-mark-task-complete").text('Completed');
-                                }else{
+                                if (response.data.status ==0){
                                     $(".btn-mark-task-complete").text('Mark Complete');
+                                }else{
+                                    $(".btn-mark-task-complete").text('Completed');
                                 }
                             }
                         });
