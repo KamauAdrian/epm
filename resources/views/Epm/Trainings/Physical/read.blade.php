@@ -481,7 +481,7 @@
                                 <div class="col-md-12" id="modalTrainingUpdate">
                                     <form id="">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-12" style="display: none;">
                                                 <div class="form-group">
                                                     <label>Session Start Time</label>
                                                     <input class="form-control" type="text" id="session_start_time" name="start_time" value="">

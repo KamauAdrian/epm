@@ -17,7 +17,7 @@ class CreateSessionsTable extends Migration
             $table->id();
             $table->time("start_time");
             $table->time("end_time");
-            $table->integer("day_id");
+            $table->integer("day_id")->unsigned();
             $table->timestamps();
         });
     }
