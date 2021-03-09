@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Session;
 use App\Models\Training;
 use App\Models\TrainingDay;
 use App\Models\User;
@@ -92,7 +93,6 @@ class TrainingDayController extends Controller
     {
         $day = TrainingDay::find($day_id);
         if ($day){
-
             return view("Epm.Trainings.Day.edit",compact("day"));
         }
 
@@ -118,7 +118,27 @@ class TrainingDayController extends Controller
             if ($training){
                 $day = TrainingDay::find($day_id);
                 if ($day){
-                    dd($request->all());
+//                    dd($request->all());
+                    $response = [];
+                    $session = new Session();
+                    $session->start_time = date("H:i:s",strtotime($request->start_time));
+                    $session->end_time = date("H:i:s",strtotime($request->end_time));
+                    $session->day_id = $day->id;
+                    $facilitators = $request->trainers;
+                    $session_saved = $session->save();
+                    if ($session_saved){
+                        $response["session_code"] = 0;
+                        $response["session_message"] = "session Created Successfully";
+                        $response["session"] = $session;
+                        if ($facilitators){
+                            $session->facilitators()->attach($facilitators);
+                            $response["status"] = 0;
+                            $response["message"] = "session Facilitators Updated Success";
+                            $response["url"] = "/adm/".$admin->id."/view/training/".$training->id."/day/".$day->id;
+                        }
+                    }
+                    return $response;
+//                    dd($request->all());
                 }
             }
         }

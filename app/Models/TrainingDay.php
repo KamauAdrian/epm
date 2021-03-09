@@ -10,7 +10,7 @@ class TrainingDay extends Model
     use HasFactory;
 
     public function sessions(){
-        return $this->hasMany('App\Models\Session','session_id');
+        return $this->hasMany('App\Models\Session','day_id');
     }
     public function training(){
         return $this->belongsTo('App\Models\Training','training_id');

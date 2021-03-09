@@ -15,8 +15,8 @@ class CreateSessionFacilitatorPivotTable extends Migration
     {
         Schema::create('session_facilitator', function (Blueprint $table) {
             $table->id();
-            $table->integer("session_id")->unsigned();
-            $table->integer("facilitator_id")->unsigned();
+            $table->foreignId("session_id")->constrained("sessions")->onDelete("cascade");
+            $table->foreignId("facilitator_id")->nullable()->constrained("users","id")->nullOnDelete();
             $table->timestamps();
         });
     }

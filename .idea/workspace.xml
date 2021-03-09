@@ -15,10 +15,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TrainingDay.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainingDay.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_03_115051_create_sessions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_03_115051_create_sessions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_08_060940_create_session_facilitator_pivot_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_08_060940_create_session_facilitator_pivot_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,7 +338,7 @@
       <workItem from="1615140052332" duration="120000" />
       <workItem from="1615176540479" duration="32371000" />
       <workItem from="1615226696978" duration="4514000" />
-      <workItem from="1615261553720" duration="8941000" />
+      <workItem from="1615261553720" duration="24117000" />
     </task>
     <servers />
   </component>
