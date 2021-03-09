@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TraineesTemplateExport;
 use App\Imports\TraineesImport;
+use App\Models\Session;
 use App\Models\SessionClass;
 use App\Models\Trainee;
 use App\Models\TrainingDay;
@@ -26,6 +27,14 @@ class SessionController extends Controller
 //        $sessions = DB::table('training_sessions')->orderBy('created_at','desc')->get();
         $sessions = TrainingSession::orderBy("created_at","desc")->get();
         return view('Epm.Sessions.index',compact('sessions'));
+    }
+
+    public function facilitators($session_id){
+        $session = Session::find($session_id);
+        if ($session){
+            $facilitators = $session->facilitators;
+            return response()->json($facilitators);
+        }
     }
 
     /**

@@ -57,11 +57,17 @@
                                                             @foreach($session_one->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
-                                                            <a href="#!" data-toggle="modal" id="{{$session_one->id}}"  class="openModalUpdateSessionFacilitators float-right">
-                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
-                                                                    <i class="feather icon-plus"></i>
-                                                                </button>
-                                                            </a>
+                                                                @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                    <div style="display: none;">
+                                                                        <input id="start_time_session_{{$session_one->id}}" type="text" name="start_time" value="08:00 AM">
+                                                                        <input id="end_time_session_{{$session_one->id}}" type="text" name="end_time" value="08:30 AM">
+                                                                    </div>
+                                                                    <a href="#!" data-toggle="modal" data-session_id="{{$session_one->id}}" id="{{$session_one->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                        <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                            <i class="feather icon-plus"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -99,6 +105,17 @@
                                                             @foreach($session_2->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
+                                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                <div style="display: none;">
+                                                                    <input id="start_time_session_{{$session_2->id}}" type="text" name="start_time" value="08:30 AM">
+                                                                    <input id="end_time_session_{{$session_2->id}}" type="text" name="end_time" value="08:45 AM">
+                                                                </div>
+                                                                <a href="#!" data-toggle="modal" data-session_id="{{$session_2->id}}" id="{{$session_2->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                    <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                        <i class="feather icon-plus"></i>
+                                                                    </button>
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -132,6 +149,17 @@
                                                             @foreach($session_3->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
+                                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                <div style="display: none;">
+                                                                    <input id="start_time_session_{{$session_3->id}}" type="text" name="start_time" value="08:45 AM">
+                                                                    <input id="end_time_session_{{$session_3->id}}" type="text" name="end_time" value="09:00 AM">
+                                                                </div>
+                                                                <a href="#!" data-toggle="modal" data-session_id="{{$session_3->id}}" id="{{$session_3->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                    <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                        <i class="feather icon-plus"></i>
+                                                                    </button>
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -170,6 +198,17 @@
                                                             @foreach($session_4->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
+                                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                <div style="display: none;">
+                                                                    <input id="start_time_session_{{$session_4->id}}" type="text" name="start_time" value="09:00 AM">
+                                                                    <input id="end_time_session_{{$session_4->id}}" type="text" name="end_time" value="10:00 AM">
+                                                                </div>
+                                                                <a href="#!" data-toggle="modal" data-session_id="{{$session_4->id}}" id="{{$session_4->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                    <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                        <i class="feather icon-plus"></i>
+                                                                    </button>
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -214,6 +253,17 @@
                                                             @foreach($session_6->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
+                                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                <div style="display: none;">
+                                                                    <input id="start_time_session_{{$session_6->id}}" type="text" name="start_time" value="10:15 AM">
+                                                                    <input id="end_time_session_{{$session_6->id}}" type="text" name="end_time" value="11:00 AM">
+                                                                </div>
+                                                                <a href="#!" data-toggle="modal" data-session_id="{{$session_6->id}}" id="{{$session_6->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                    <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                        <i class="feather icon-plus"></i>
+                                                                    </button>
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -250,6 +300,17 @@
                                                             @foreach($session_7->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
+                                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                <div style="display: none;">
+                                                                    <input id="start_time_session_{{$session_7->id}}" type="text" name="start_time" value="11:00 AM">
+                                                                    <input id="end_time_session_{{$session_7->id}}" type="text" name="end_time" value="12:00 PM">
+                                                                </div>
+                                                                <a href="#!" data-toggle="modal" data-session_id="{{$session_7->id}}" id="{{$session_7->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                    <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                        <i class="feather icon-plus"></i>
+                                                                    </button>
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -292,6 +353,17 @@
                                                             @foreach($session_9->facilitators as $facilitator)
                                                                 {{$facilitator->name}}<br />
                                                             @endforeach
+                                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                                <div style="display: none;">
+                                                                    <input id="start_time_session_{{$session_9->id}}" type="text" name="start_time" value="01:00 PM">
+                                                                    <input id="end_time_session_{{$session_9->id}}" type="text" name="end_time" value="03:00 PM">
+                                                                </div>
+                                                                <a href="#!" data-toggle="modal" data-session_id="{{$session_9->id}}" id="{{$session_9->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                    <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                        <i class="feather icon-plus"></i>
+                                                                    </button>
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                                 <div style="display: none;">
@@ -1153,7 +1225,8 @@
                             </div>
                             <div class="modal-body">
                                 <div class="col-md-12" id="modalTrainingUpdate">
-                                    <form id="">
+                                    <form id="" method="post">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-12" style="display: none;">
                                                 <div class="form-group">
@@ -1168,8 +1241,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <div class="form-group" id="trainingCenters1" training_id="{{$trainingDay->training->id}}">
-                                                    <label>Select Trainers</label>
+                                                <div class="form-group" session_id="" id="trainingFacilitators" training_id="{{$trainingDay->training->id}}">
+                                                    <label>Select Session Facilitators</label>
                                                     <multiselect v-model="selectedTrainers" :options="trainers"
                                                                  placeholder="Select Trainers" label="name" :track-by="trackBy"
                                                                  :searchable="true" :close-on-select="true" multiple>
@@ -1199,7 +1272,9 @@
         $('.openModalUpdateSessionFacilitators').click(function(event){
             event.preventDefault();
             let formId = $(this).attr("id");
+            let sessionId = $(this).attr("data-session_id");
             let form = $("#modalTrainingUpdate").children(":first");
+            $("#trainingFacilitators").attr("session_id",sessionId);
             form.attr("id","facilitatorsAddToSession_"+formId);
             let startTime = $("#start_time_session_"+formId).val();
             let endTime = $("#end_time_session_"+formId).val();
@@ -1214,6 +1289,7 @@
             // let formAddFacilitators = $(id);
             formAddFacilitators.onsubmit = function(event) {
                 // Populate hidden form on submit
+                // alert("submitting form");
                 $.ajaxSetup({
                     header:$('meta[name="_token"]').attr('content')
                 })
@@ -1221,6 +1297,7 @@
                 var user_id = {{auth()->user()->id}};
                 var training_id = $("#training_id").val();
                 var day_id = $("#day_id").val();
+                console.log(user_id,training_id,day_id);
                 var startTime = $("#session_start_time").val();
                 var endTime = $("#session_end_time").val();
                 var trainers = $("#session_facilitators").val();
@@ -1231,8 +1308,10 @@
                     type: 'post',
                     data:formData,
                     success: function(response){
-                        $("#modalUpdateSessionFacilitators").modal('hide');
-                        window.location = response.url;
+                        if (response.url){
+                            $("#modalUpdateSessionFacilitators").modal('hide');
+                            window.location = response.url;
+                        }
                     }
                 });
                 return true;
@@ -1241,7 +1320,7 @@
 
         $('#traineesList').DataTable();
         new Vue({
-            el: "#trainingCenters1",
+            el: "#trainingFacilitators",
             components: {
                 multiselect: window.VueMultiselect.default,
                 axios: window.axios.defaults,
@@ -1279,20 +1358,21 @@
             mounted () {
                 this.getTrainers();
             },
-            // watch: {
-            //     trainers:{
-            //         immediate: false,
-            //         handler(values){
-            //             axios.get("/training/"+this.$el.attributes.training_id.value+"/trainers").then(response => {this.initialValues = response.data;});
-            //         },
-            //     },
-            //     initialValues: {
-            //         immediate: true,
-            //         handler(values) {
-            //             this.selectedCohorts = this.cohorts.filter(r => values.includes(r[this.trackBy]));
-            //         }
-            //     }
-            // },
+            watch: {
+                trainers:{
+                    immediate: false,
+                    handler(values){
+                        console.log(this.$el.attributes.session_id.value);
+                        axios.get("/training/session/"+this.$el.attributes.session_id.value+"/facilitators").then(response => {this.initialValues = response.data;});
+                    },
+                },
+                initialValues: {
+                    immediate: true,
+                    handler(values) {
+                        this.selectedTrainers = this.trainers.filter(r => values.includes(r[this.trackBy]));
+                    }
+                }
+            },
         });
     </script>
 @endsection

@@ -125,106 +125,7 @@
                                                                         </a>
                                                                 </div>
                                                             </div>
-                                                            <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}"  id="openModalTask{{$task->id}}" ></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade modalTop" id="modalUpdateAssignee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="" id="form-update-assignees">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <input type="hidden" name="user_id" id="modal-task-assignee-edit-user-id" value="{{$auth_admin->id}}">
-                                                                            <input type="hidden" id="modal-modal-assignee-task-id" name="task_id" value="">
-                                                                            <div project_id="{{$project->id}}" class="form-group" id="collaborators">
-                                                                                <label>Assignee</label>
-                                                                                <multiselect v-model="selectedPmo" :options="pmos"
-                                                                                             placeholder="Search" :track-by="trackBy" label="name"
-                                                                                             :searchable="true" :close-on-select="true" multiple>
-                                                                                </multiselect>
-                                                                                <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <button id="btn-assign-task" type="submit" class="btn btn-outline-success float-right">
-                                                                                    Assign Task
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade modalTop" id="modalUpdateTaskName" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="" id="form-update-task-name">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <input id="modal-modal-task-user-id" type="hidden" name="user_id" value="{{$auth_admin->id}}">
-                                                                            <input  id="modal-modal-task-task-id" type="hidden" name="task_id" value="{{$task->id}}">
-                                                                            <div class="form-group">
-                                                                                <label>Update Task Name</label>
-                                                                                <input type="text" class="form-control" name="name" value="{{$task->name}}">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Update">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade modalTop" id="modalUpdateDueDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="" id="form-update-due-date">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <input id="modal-modal-date-user-id" type="hidden" name="user_id" value="{{$auth_admin->id}}">
-                                                                            <input  id="modal-modal-date-task-id" type="hidden" name="task_id" value="{{$task->id}}">
-                                                                            <div class="form-group">
-                                                                                <label>Update Task Due Date</label>
-                                                                                <input type="date" class="form-control" name="due_date" value="{{$task->due_date}}">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Update">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
+                                                            <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}" data-task_name="{{$task->name}}"  id="openModalForTask{{$task->id}}" ></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -314,11 +215,48 @@
                         </tbody>
                     </table>
                 </div>
+            <div class="modal fade modalTop" id="modalUpdateAssignee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-update-assignees">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="hidden" name="user_id" id="modal-task-assignee-edit-user-id" value="{{$auth_admin->id}}">
+                                        <input type="hidden" id="modal-modal-assignee-task-id" name="task_id" value="">
+                                        <div project_id="{{$project->id}}" class="form-group" id="collaborators">
+                                            <label>Assignee</label>
+                                            <multiselect v-model="selectedPmo" :options="pmos"
+                                                         placeholder="Search" :track-by="trackBy" label="name"
+                                                         :searchable="true" :close-on-select="true" multiple>
+                                            </multiselect>
+                                            <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button id="btn-assign-task" type="submit" class="btn btn-outline-success float-right">
+                                                Assign Task
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="modal fade" id="modalTaskDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" id="" class="btn btn-outline-info btn-mark-task-complete"><span><i class="fa fa-check"></i></span> </button>
+                            <button type="button" id="" class="btn btn-outline-info btn-mark-task-complete"></button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -328,6 +266,7 @@
                                 <div class="row mt-4" style="display: none;">
                                     <div class="col-md-12">
                                         <div id="modal-modal-task-task-id"></div>
+                                        <div id="modal-modal-task-task-name"></div>
                                         <div id="modal-modal-task-user-id"></div>
                                     </div>
                                 </div>
@@ -350,7 +289,7 @@
                                     <h6>Attachments</h6>
                                     <div class="col-md-12">
                                         <div class="  mt-4">
-                                        <div class="container task-attachments" style="overflow: auto;"></div>
+                                            <div class="container task-attachments" style="overflow: auto;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -378,7 +317,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-{{--                                                <input type="hidden" name="about">--}}
+                                                {{--                                                <input type="hidden" name="about">--}}
                                                 <input type="hidden" name="user_id" id="modal-footer-user-id" value="">
                                                 <input type="hidden" name="task_id" id="modal-modal-comments-task-id" value="">
                                                 <input type="hidden" name="csrf_token" id="modal-footer-csrf-token" value="{{csrf_token()}}">
@@ -403,30 +342,92 @@
                                     </div>
                                 </form>
                             </div>
-{{--                            <div class="col-md-12">--}}
-{{--                                <div class="container mt-4">--}}
-{{--                                    <div style="height: 50px" class="row">--}}
-{{--                                        <div class="col-sm-12  attachment">--}}
-{{--                                            <div class="card text-center" style="width:auto" id="add-attachment">--}}
-{{--                                                <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                <div class="container mt-2">--}}
-{{--                                    <div style="height: 50px" class="row">--}}
-{{--                                        <div class="col-md-12  attachment">--}}
-{{--                                            <div class="card text-center" style="width:auto" id="add-link">--}}
-{{--                                                <a href="#!" class="attach">--}}
-{{--                                                    <span><i class="fa fa-plus"></i></span> Add a Link--}}
-{{--                                                </a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="col-md-12">--}}
+                            {{--                                <div class="container mt-4">--}}
+                            {{--                                    <div style="height: 50px" class="row">--}}
+                            {{--                                        <div class="col-sm-12  attachment">--}}
+                            {{--                                            <div class="card text-center" style="width:auto" id="add-attachment">--}}
+                            {{--                                                <a href="#!" class="attach"><span><i class="fa fa-plus"></i> Add an Attachment</span></a>--}}
+                            {{--                                            </div>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
+                            {{--                            <div class="col-md-12">--}}
+                            {{--                                <div class="container mt-2">--}}
+                            {{--                                    <div style="height: 50px" class="row">--}}
+                            {{--                                        <div class="col-md-12  attachment">--}}
+                            {{--                                            <div class="card text-center" style="width:auto" id="add-link">--}}
+                            {{--                                                <a href="#!" class="attach">--}}
+                            {{--                                                    <span><i class="fa fa-plus"></i></span> Add a Link--}}
+                            {{--                                                </a>--}}
+                            {{--                                            </div>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modalTop" id="modalUpdateTaskName" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-update-task-name">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input id="task-user-id" type="hidden" name="user_id" value="">
+                                        <input  id="task-task-id" type="hidden" name="task_id" value="">
+                                        <div class="form-group">
+                                            <label>Update Task Name</label>
+                                            <input type="text" id="task-task-name" class="form-control" name="name" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Update">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modalTop" id="modalUpdateDueDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="form-update-due-date">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input id="modal-modal-date-user-id" type="hidden" name="user_id" value="{{$auth_admin->id}}">
+                                        <input  id="modal-modal-date-task-id" type="hidden" name="task_id" value="{{$task->id}}">
+                                        <div class="form-group">
+                                            <label>Update Task Due Date</label>
+                                            <input type="date" class="form-control" name="due_date" value="{{$task->due_date}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input id="btn-assign-task" type="submit" class="btn btn-outline-success float-right" value="Update">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -458,7 +459,7 @@
                             </form>
                         </div>
                 </div>
-            </div>
+                </div>
             </div>
             <div class="modal fade modalTop" id="modalRemoveAssignee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -579,8 +580,9 @@
             $('.openModalTask').click(function(event){
                 event.preventDefault();
                 var taskId=$(this).attr("data-task_id");
+                var taskName=$(this).attr("data-task_name");
                 $("#modal-modal-task-task-id").text(taskId);
-
+                $("#modal-modal-task-task-name").text(taskName);
                 $("#modalTaskDetailed").modal('show');
             });
             $('#add-attachment').click(function(event){
@@ -675,6 +677,7 @@
             console.log(taskId);
             $("#modal-modal-comments-task-id").val(taskId);
             $("#modal-modal-date-task-id").val(taskId);
+            $("#task-task-id").val(taskId);
             $("#modal-modal-assignee-task-id").val(taskId);
             $("#modal-modal-attachment-task-id").val(taskId);
             $("#modal-modal-link-task-id").val(taskId);
@@ -687,10 +690,12 @@
                     task_id: taskId,
                 },
                 success: function([response_task,response_assignees,response_attachments,response_links,response_comments]){
-                    $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
-                    if (response_task.status==0){
+                    $(".btn-mark-task-complete").attr('id','markTask'+response_task.id+'Complete');
+                    console.log(response_task.status);
+                    if (response_task.status == 0){
                         $(".btn-mark-task-complete").text('Mark Complete');
-                    }else{
+                    }
+                    if(response_task.status == 1){
                         $(".btn-mark-task-complete").text('Completed');
                     }
                     // Add response in Modal body
@@ -815,17 +820,20 @@
                         // return true;
                     });
 
-                    $('#statusTask'+taskId).click(function (event){
+                    $('#markTask'+response_task.id+'Complete').click(function (event){
+                    // $(".btn-mark-task-complete").onclick(function (event){
                         $.ajaxSetup({
                             header:$('meta[name="_token"]').attr('content')
                         })
                         event.preventDefault();
+                        alert("click so far so good");
                         var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
                         $.ajax({
-                            url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',
+                            url: '/adm/'+user_id+'/mark/task/'+response_task.id+'/complete',
                             type: 'post',
                             success: function(response){
                                 // $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
+                                console.log(response.data);
                                 if (response.data.status ==0){
                                     $(".btn-mark-task-complete").text('Mark Complete');
                                 }else{
@@ -920,8 +928,8 @@
                 header:$('meta[name="_token"]').attr('content')
             })
             event.preventDefault();
-            var user_id = $("#modal-modal-task-user-id").val();
-            var task_id = $("#modal-modal-task-task-id").val();
+            var user_id = {{auth()->user()->id}};
+            var task_id = $("#task-task-id").val();
             var formData = $(formUpdateTaskName).serializeArray();
             $.ajax({
                 url: '/adm/'+user_id+'/update/task/'+task_id+'/name',

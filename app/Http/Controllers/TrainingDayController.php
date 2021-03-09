@@ -112,29 +112,48 @@ class TrainingDayController extends Controller
 
     public function update_facilitators(Request $request, $id, $training_id, $day_id)
     {
+//        dd($request->all());
         $admin = User::find($id);
         if($admin){
             $training = Training::find($training_id);
             if ($training){
                 $day = TrainingDay::find($day_id);
                 if ($day){
-//                    dd($request->all());
                     $response = [];
-                    $session = new Session();
-                    $session->start_time = date("H:i:s",strtotime($request->start_time));
-                    $session->end_time = date("H:i:s",strtotime($request->end_time));
-                    $session->day_id = $day->id;
+                    $start_time = date("H:i:s",strtotime($request->start_time));
+                    $end_time = date("H:i:s",strtotime($request->end_time));
                     $facilitators = $request->trainers;
-                    $session_saved = $session->save();
-                    if ($session_saved){
-                        $response["session_code"] = 0;
-                        $response["session_message"] = "session Created Successfully";
-                        $response["session"] = $session;
-                        if ($facilitators){
-                            $session->facilitators()->attach($facilitators);
-                            $response["status"] = 0;
-                            $response["message"] = "session Facilitators Updated Success";
-                            $response["url"] = "/adm/".$admin->id."/view/training/".$training->id."/day/".$day->id;
+                    $exist_session = Session::where("day_id",$day->id)->where("start_time",$start_time)->where("end_time",$end_time)->first();
+//                    dd($request->all());
+                    if ($exist_session && $facilitators){
+                        //detach existing trainers and attach new
+//                        dd($exist_session);
+                        $exist_session->facilitators()->detach();
+                        $exist_session->facilitators()->attach($facilitators);
+                        $response["status"] = 0;
+                        $response["message"] = "session Facilitators Updated Success";
+                        $response["url"] = "/adm/".$admin->id."/view/training/".$training->id."/day/".$day->id;
+                        $response["data"] = $exist_session->facilitators;
+
+                    }else{
+                        $session = new Session();
+                        $session->start_time =$start_time;
+                        $session->end_time = $end_time;
+                        $session->day_id = $day->id;
+//                        dd($facilitators);
+                        $session_saved = $session->save();
+                        if ($session_saved){
+                            $response["session_code"] = 0;
+                            $response["session_message"] = "session Created Successfully";
+                            $response["session"] = $session;
+                            if ($facilitators){
+                                $session->facilitators()->attach($facilitators);
+//                                dd($session->facilitators);
+                                $response["status"] = 0;
+                                $response["message"] = "session Facilitators Updated Success";
+                                $response["url"] = "/adm/".$admin->id."/view/training/".$training->id."/day/".$day->id;
+                                $response["data"] = $facilitators;
+                            }
                         }
                     }
                     return $response;

@@ -266,6 +266,9 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/training/{training_id}/facilitators',[App\Http\Controllers\TrainingDayController::class, 'trainers']);
     Route::get('/adm/{id}/edit/training/{training_id}/day/{day}/{day_id}/session/{session_id}',[App\Http\Controllers\TrainingDayController::class, 'edit']);
 
+    //Trainings(Sessions)
+    Route::get('/training/session/{session_id}/facilitators',[App\Http\Controllers\SessionController::class, 'facilitators']);
+
     //Trainings(Time tables)
     Route::get('/adm/{id}/view/physical/training/timetable',[App\Http\Controllers\TrainingController::class, 'physical']);
     Route::get('/adm/{id}/view/virtual/training/timetable',[App\Http\Controllers\TrainingController::class, 'virtual']);

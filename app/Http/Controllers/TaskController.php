@@ -215,6 +215,7 @@ class TaskController extends Controller
 
     public function mark_complete($id,$task_id)
     {
+//        dd($task_id);
         $response = [];
         $task = Task::find($task_id);
         if ($task){
@@ -243,7 +244,7 @@ class TaskController extends Controller
 
                 }
             }
-            if ($status==1){
+            elseif ($status==1){
                 $data = [
                     'status'=>0,
                     'completion_date'=>null,
