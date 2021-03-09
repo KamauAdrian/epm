@@ -219,13 +219,14 @@ class TaskController extends Controller
         $task = Task::find($task_id);
         if ($task){
             $status = $task->status;
+            $updated = null;
             $collaborators = $task->project->collaborators;
             if ($status==0){
                 $data = [
                     'status'=>1,
                     'completion_date'=>date("Y-m-d"),
                 ];
-                $task->update($data);
+                $updated = $task->update($data);
                 $message="Complete";
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
@@ -241,13 +242,13 @@ class TaskController extends Controller
                    // TaskCompletedJob::dispatch($params);
 
                 }
-            }else{
+            }
+            if ($status==1){
                 $data = [
                     'status'=>0,
                     'completion_date'=>null,
                 ];
-                $task->update($data);
-
+                $updated = $task->update($data);
                 $message="In-Complete";
                 foreach ($collaborators as $collaborator){
                     //dispatch send Task completed emails
@@ -261,17 +262,14 @@ class TaskController extends Controller
                     $params['updated_task']=$updated_task;
                     dispatch(new TaskCompletedJob($params));
 //                    TaskCompletedJob::dispatch($params);
-//
                 }
             }
-
+            if ($updated){
+                $response["result_code"]=0;
+                $response["message"]="Status Updated Successfully";
+                $response["data"]=$task;
+            }
         }
-
-        $response["result_code"]=0;
-        $response["message"]="Status Updated Successfully";
-        $response["data"]=$task;
-
-
         return $response;
     }
 
