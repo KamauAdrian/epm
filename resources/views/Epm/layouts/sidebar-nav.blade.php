@@ -195,7 +195,7 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         <ul class="pcoded-submenu">
           @foreach($cm_reports as $cm_report)
           <li><a href="{{url('/adm/'.$auth_admin->id.'/view/cms/report/'.$cm_report->id)}}">{{$cm_report->name}}</a></li>
-          <li><a href="{{url('/adm/'.$auth_admin->id.'/team/reports')}}">{{$cm_report->name}}</a></li>
+{{--          <li><a href="{{url('/adm/'.$auth_admin->id.'/team/reports')}}">{{$cm_report->name}}</a></li>--}}
           @endforeach
         </ul>
     </li>
