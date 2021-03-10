@@ -577,23 +577,6 @@
                 console.log(url);
                 $("#ModalUpdateActivity").modal('show');
             });
-            $('.openModalTask').click(function(event){
-                event.preventDefault();
-                var taskId=$(this).attr("data-task_id");
-                var taskName=$(this).attr("data-task_name");
-                $("#modal-modal-task-task-id").text(taskId);
-                $("#modal-modal-task-task-name").text(taskName);
-                $("#modalTaskDetailed").modal('show');
-            });
-            $('#add-attachment').click(function(event){
-                $("#modalTaskDetailed").modal('hide');
-                $("#modalAddAttachment").modal('show');
-            });
-            $('#add-link').click(function(event){
-                $("#modalTaskDetailed").modal('hide');
-                $("#modalAddLink").modal('show');
-            });
-
         });
 
         function openModalRemoveAssignee(){
@@ -603,6 +586,17 @@
         function openModalUpdateAssignee(){
             $("#modalTaskDetailed").modal('hide');
             $("#modalUpdateAssignee").modal('show');
+        }
+
+        function openModalUpdateTaskName(){
+            $("#modalTaskDetailed").modal('hide');
+            $("#modalUpdateTaskName").modal('show');
+        }
+        function openModalUpdateDueDate(){
+           // var taskId = document.getElementById('modal-modal-date-task-id');
+           // taskId.append(document.getElementById('modal-modal-task-task-id').innerText);
+            $("#modalTaskDetailed").modal('hide');
+            $("#modalUpdateDueDate").modal('show');
         }
         $('#modalUpdateAssignee').on('show.bs.modal', function () {
             // do something…
@@ -628,25 +622,29 @@
                 // alert('Open the console to see the submit data!');
                 return true;
             };
-        })
+        });
+        $('.openModalTask').click(function(event){
+            event.preventDefault();
+            var taskId=$(this).attr("data-task_id");
+            // var taskName=$(this).attr("data-task_name");
+            // alert("opening modal with task "+taskId+" details");
+            $("#modal-modal-task-task-id").text(taskId);
+            // $("#modal-modal-task-task-name").text(taskName);
+            $("#modalTaskDetailed").modal('show');
+        });
+        $('#add-attachment').click(function(event){
+            $("#modalTaskDetailed").modal('hide');
+            $("#modalAddAttachment").modal('show');
+        });
+        $('#add-link').click(function(event){
+            $("#modalTaskDetailed").modal('hide');
+            $("#modalAddLink").modal('show');
+        });
 
         $('#modalUpdateAssignee').on('hidden.bs.modal', function () {
             // do something…
             $("#modalTaskDetailed").modal('show');
-        })
-
-        function openModalUpdateTaskName(){
-            $("#modalTaskDetailed").modal('hide');
-            $("#modalUpdateTaskName").modal('show');
-        }
-
-        function openModalUpdateDueDate(){
-           // var taskId = document.getElementById('modal-modal-date-task-id');
-           // taskId.append(document.getElementById('modal-modal-task-task-id').innerText);
-            $("#modalTaskDetailed").modal('hide');
-            $("#modalUpdateDueDate").modal('show');
-        }
-
+        });
         $('#modalUpdateTaskName').on('hidden.bs.modal', function () {
             // do something…
             $("#modalTaskDetailed").modal('show');
@@ -665,19 +663,19 @@
         });
 
         $('#modalTaskDetailed').on('hidden.bs.modal', function () {
-           {{--var url = "/adm/{{auth()->user()->id}}/view/project/2";--}}
-           {{-- window.location = url;--}}
+            // location.reload();
         });
         $('#modalTaskDetailed').on('show.bs.modal', function () {
+            // alert("modal ready for you");
             $('.task-comments').empty();
             $('.task-attachments').empty();
             $('.task-links').empty();
-            var userId ="{{Auth::user()->id}}";
+            var userId ="{{auth()->user()->id}}";
             var taskId = document.getElementById('modal-modal-task-task-id').innerText;
-            console.log(taskId);
+            // console.log("task id = "+taskId+" and user id ="+userId);
             $("#modal-modal-comments-task-id").val(taskId);
             $("#modal-modal-date-task-id").val(taskId);
-            $("#task-task-id").val(taskId);
+            // $("#task-task-id").val(taskId);
             $("#modal-modal-assignee-task-id").val(taskId);
             $("#modal-modal-attachment-task-id").val(taskId);
             $("#modal-modal-link-task-id").val(taskId);
@@ -690,6 +688,7 @@
                     task_id: taskId,
                 },
                 success: function([response_task,response_assignees,response_attachments,response_links,response_comments]){
+
                     $(".btn-mark-task-complete").attr('id','markTask'+response_task.id+'Complete');
                     console.log(response_task.status);
                     if (response_task.status == 0){
@@ -710,30 +709,33 @@
                         task_assignees+= '<p class="">No Assignee</p>'
                     }
                     //attachments section
-                    var attachmentsContainer = $('.task-attachments');
-                    attachmentsContainer.empty();
-                    var rowAttachmentDiv = '';
-                    var i,j,temparray,chunk = 2;
-                    for (i=0,j=response_attachments.length; i<j; i+=chunk) {
-                        temparray = response_attachments.slice(i, i + chunk);
-                        rowAttachmentDiv = '<div style="height: 50px" class="row mt-2 mb-2">';
-                        var childAttachmentDiv="";
-                        for (x = 0; x < temparray.length; x++) {
-                            var attachment = temparray[x];
-                            childAttachmentDiv += '<div id="attachment-'+attachment.id+'" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" title="'+attachment.full_name+'" class="attachment-download" data-url="'+attachment.url+'"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon attachment-download" data-url="'+attachment.url+'"><i class="fa fa-download"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="'+attachment.id+'"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
+                    if (response_attachments) {
+                        var attachmentsContainer = $('.task-attachments');
+                        attachmentsContainer.empty();
+                        var rowAttachmentDiv = '';
+                        var i, j, temparray, chunk = 2;
+                        for (i = 0, j = response_attachments.length; i < j; i += chunk) {
+                            temparray = response_attachments.slice(i, i + chunk);
+                            rowAttachmentDiv = '<div style="height: 50px" class="row mt-2 mb-2">';
+                            var childAttachmentDiv = "";
+                            for (x = 0; x < temparray.length; x++) {
+                                var attachment = temparray[x];
+                                childAttachmentDiv += '<div id="attachment-' + attachment.id + '" class="col-sm-6  attachment"> <div class="card attach" style="width:auto"> <div> <div style="float: left"> <a href="#!" title="' + attachment.full_name + '" class="attachment-download" data-url="' + attachment.url + '"> ' + attachment.name + '</a> </div> <div style="float:right"> <span class="btn btn-icon attachment-download" data-url="' + attachment.url + '"><i class="fa fa-download"></i></span> <span class="btn btn-icon ml-2 attachment-delete" data-id="' + attachment.id + '"><i class="fa fa-times"></i></span> </div> </div> </div> </div>';
+                            }
+                            rowAttachmentDiv += childAttachmentDiv + '</div>';
+                            attachmentsContainer.append(rowAttachmentDiv);
                         }
-                        rowAttachmentDiv +=childAttachmentDiv + '</div>';
-                        attachmentsContainer.append(rowAttachmentDiv);
                     }
-                   // atchmts.append('<div class=" attachment"> <a href="#!" class="add-attachment attach"> <span><i class="fa fa-plus"></i></span> </a> </div>');
                     // links section
-                    var linksContainer = $('.task-links');
-                    var linksDiv = '';
-                    for (var y = 0; y < response_links.length; y++) {
-                        var link = response_links[y];
-                        linksDiv += '<li class="attachment" id="link-'+link.id+'"> <div class="card attach" style="width:auto;"> <div class="" style=" width: 90%; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> <a target="_blank" href="'+link.name+'" style=""> ' + link.name + '</a> </div> <div class="text-right"> <span class="btn btn-icon ml-2 link-delete" data-id="'+link.id+'"><i class="fa fa-times"></i></span> </div> </div> </li>';
+                    if (response_links) {
+                        var linksContainer = $('.task-links');
+                        var linksDiv = '';
+                        for (var y = 0; y < response_links.length; y++) {
+                            var link = response_links[y];
+                            linksDiv += '<li class="attachment" id="link-' + link.id + '"> <div class="card attach" style="width:auto;"> <div class="" style=" width: 90%; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> <a target="_blank" href="' + link.name + '" style=""> ' + link.name + '</a> </div> <div class="text-right"> <span class="btn btn-icon ml-2 link-delete" data-id="' + link.id + '"><i class="fa fa-times"></i></span> </div> </div> </li>';
+                        }
+                        linksContainer.append(linksDiv);
                     }
-                    linksContainer.append(linksDiv);
                     var due_date = response_task.due_date;
                     if (response_task.due_date==null){
                         due_date = 'No Due Date';
@@ -741,41 +743,45 @@
                     var description = response_task.description;
                     $('#modalTaskDetailed .modal-body .task-details').html(
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
-                        '<div class="col-md-12"><div class="form-group"><h6 class="text-center" onclick="openModalUpdateTaskName()">'+response_task.name+'</h6></div></div>'+
+                        '<div class="col-md-12">'+
+                        '<div class="form-group">'+
+                        '<h6 class="text-center" onclick="openModalUpdateTaskName()">'+response_task.name+'</h6>'+
+                        '</div>'+
+                        '</div>'+
                         '<div class="mt-4">'+
                         '<div style="font-size: 12px" class="text-small text-muted">Due Date</div>'+
                         '<div class="">'+
                         '<span style="font-size: 12px" onclick="openModalUpdateDueDate()">'+due_date+'</span>'+
                         '</div>'+
                         '<div class="mt-2">'+
-                        '<div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>'+task_assignees+
+                        '<div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>'+
+                        '<div class="">'+
+                        '<span style="font-size: 12px">'+task_assignees+'</span>'+
                         '<button type="button" class="btn btn-icon" onclick="openModalUpdateAssignee()">+</button>'+
+                        '</div>'+
                         '</div>'+
                         '</div>'
                     );
-
                     // console.log(task_assignees);
                     // console.log(response_comments.length);
-                    response_comments.forEach(function (response_comment){
-                        // console.log(response_comment);
-                        // var date_time = response_comment.created_at;
-                        var commentTaskSection =
-                            '<div class="comment mt-4"><div>'+
-                            '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
-                            '<span> '+response_comment.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response_comment.date_time+'</span>' +
-                            '</span><br>'+
-                            '</div>'+
-                            '<div class="mt-2 ml-2">'+response_comment.comment+'</div></div>';
-                        var comments = $('.task-comments');
-                        // console.log(comments);
-                        // comments.innerHTML='';
-                        comments.append(commentTaskSection);
-                    });
-                    // Display Modal
-                    $("#modalTaskDetailed").modal('show');
-
+                    if (response_comments){
+                        response_comments.forEach(function (response_comment){
+                            // console.log(response_comment);
+                            // var date_time = response_comment.created_at;
+                            var commentTaskSection =
+                                '<div class="comment mt-4"><div>'+
+                                '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
+                                '<span> '+response_comment.name+'<span style="font-size: 10px;color:mediumvioletred"> '+response_comment.date_time+'</span>' +
+                                '</span><br>'+
+                                '</div>'+
+                                '<div class="mt-2 ml-2">'+response_comment.comment+'</div></div>';
+                            var comments = $('.task-comments');
+                            // console.log(comments);
+                            // comments.innerHTML='';
+                            comments.append(commentTaskSection);
+                        });
+                    }
                     $('.attachment-download').click(function(event){
-
                         var url = $(this).attr('data-url');
                         console.log(url);
                         window.location = url;
@@ -819,35 +825,33 @@
                         });
                         // return true;
                     });
-
-                    $('#markTask'+response_task.id+'Complete').click(function (event){
-                    // $(".btn-mark-task-complete").onclick(function (event){
-                        $.ajaxSetup({
-                            header:$('meta[name="_token"]').attr('content')
-                        })
-                        event.preventDefault();
-                        alert("click so far so good");
-                        var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
-                        $.ajax({
-                            url: '/adm/'+user_id+'/mark/task/'+response_task.id+'/complete',
-                            type: 'post',
-                            success: function(response){
-                                // $(".btn-mark-task-complete").attr('id','statusTask'+response_task.id);
-                                console.log(response.data);
-                                if (response.data.status ==0){
-                                    $(".btn-mark-task-complete").text('Mark Complete');
-                                }else{
-                                    $(".btn-mark-task-complete").text('Completed');
-                                }
-                            }
-                        });
-                        return true;
-                    });
                 }
+            });
+            // $('#markTask'+taskId.id+'Complete').click(function (event){
+                $(".btn-mark-task-complete").click(function (event){
+                    // alert("hey there wat do you want to do next");
+                $.ajaxSetup({
+                    header:$('meta[name="_token"]').attr('content')
+                });
+                event.preventDefault();
+                alert("click so far so good");
+                var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+                $.ajax({
+                    url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',
+                    type: 'post',
+                    success: function(response){
+                        // console.log(response.data.status);
+                        if (response.data.status == 0){
+                            $(".btn-mark-task-complete").text('Mark Complete');
+                        }else{
+                            $(".btn-mark-task-complete").text('Completed');
+                        }
+                    }
+                });
+                return true;
             });
 
         });
-
 
         $('#modalAddLink').on('hidden.bs.modal', function () {
             // do something…
@@ -1022,34 +1026,6 @@
             // alert('Open the console to see the submit data!');
             return true;
         };
-        // $('.btn-task-comment').click(function(event){
-        //     event.preventDefault();
-        //     var about = document.querySelector('input[name=about]');
-        //     var user_id = document.querySelector('input[name=user_id]').value;
-        //     var task_id = document.querySelector('input[name=task_id]').value;
-        //     var _token   = document.querySelector('input[name=csrf_token]').value;
-        //     console.log(about,user_id,task_id);
-        //     about.value = JSON.stringify(quill.getContents());
-        //     $.ajax({
-        //         url: '/adm/'+user_id+'/add/task/comment/task_id='+task_id,
-        //         type: 'post',
-        //         data: {
-        //             id: user_id,
-        //             task_id: task_id,
-        //             _token: _token,
-        //         },
-        //         success: function(response){
-        //             if (response){
-        //                 quill.root.innerHTML('');
-        //             }
-        //         }
-        //     });
-        //
-        //     // No back end to actually submit to!
-        //     // alert('Open the console to see the submit data!');
-        //     return false;
-        // });
-
         function addNewBoard(){
             var boardForm = document.getElementById('add-new-board');
             if (boardForm.style.display='none'){
@@ -1062,8 +1038,8 @@
             if (taskForm.style.display='none'){
                 taskForm.style.display='block';
             }
-
             new Vue({
+                el: "#assignee_"+id,
                 components: {
                     Multiselect: window.VueMultiselect.default,
                     axios: window.axios.defaults,
@@ -1092,9 +1068,10 @@
                             .finally(() => this.loading = true)
                     },
                 },
-            }).$mount('#assignee_'+id)
+            });
         }
         new Vue({
+            el: "#collaborators",
             components: {
                 Multiselect: window.VueMultiselect.default,
                 axios: window.axios.defaults,
@@ -1130,7 +1107,7 @@
                     }
                 }
             },
-        }).$mount('#collaborators');
+        });
         $(document).ready(function (){
             $('#tableProjects').DataTable();
         });
