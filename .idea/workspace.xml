@@ -16,11 +16,9 @@
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TrainingDay.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainingDay.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/TimeTable/physical-time-table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/TimeTable/physical-time-table.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,19 +182,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/TOT" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/Resources" />
-      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical" />
-      <recent name="$PROJECT_DIR$/public/Announcement/images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/Emails/Appraisals" />
       <recent name="$PROJECT_DIR$/resources/views/Epm" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/Trainers" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/PMs" />
       <recent name="$PROJECT_DIR$/resources/views/Epm/CMs/Trainers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/TOT" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/Resources" />
+      <recent name="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical" />
+      <recent name="$PROJECT_DIR$/public/Announcement/images" />
     </key>
   </component>
   <component name="RunManager">
@@ -339,7 +337,8 @@
       <workItem from="1615176540479" duration="32371000" />
       <workItem from="1615226696978" duration="4514000" />
       <workItem from="1615261553720" duration="37744000" />
-      <workItem from="1615311903120" duration="9567000" />
+      <workItem from="1615311903120" duration="9670000" />
+      <workItem from="1615349030750" duration="3448000" />
     </task>
     <servers />
   </component>

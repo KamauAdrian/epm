@@ -32,8 +32,14 @@ class SessionController extends Controller
     public function facilitators($session_id){
         $session = Session::find($session_id);
         if ($session){
+            $result = [];
             $facilitators = $session->facilitators;
-            return response()->json($facilitators);
+            if ($facilitators){
+                foreach ($facilitators as $facilitator){
+                    $result[] = $facilitator->id;
+                }
+            }
+            return response()->json($result);
         }
     }
 

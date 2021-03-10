@@ -420,7 +420,8 @@
                             <td><b>8:30-9:00</b><br />
                                 (Duration: 30 minutes)
                             </td>
-                            <td>Assignment presentation per group
+                            <td>
+                                Assignment presentation per group
                             </td>
                         </tr>
                         <tr>

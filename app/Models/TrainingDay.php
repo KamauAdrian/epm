@@ -17,15 +17,11 @@ class TrainingDay extends Model
     }
 
     public function trainees(){
-        return $this->belongsToMany('App\Models\Trainee','trainee_session_single_day','day_id','trainee_id');
+        return $this->belongsToMany('App\Models\Trainee','trainee_day','day_id','trainee_id');
     }
 
     //each training session belongs to many trainers
     public function trainers(){
         return $this->belongsToMany('App\Models\User','trainer_session_single_day','day_id','trainer_id');
-    }
-
-    public function classes(){
-        return $this->belongsToMany('App\Models\SessionClass','training_session_classes_single_day','day_id','class_id');
     }
 }
