@@ -431,11 +431,10 @@
                             <form action="" id="form-update-due-date">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input id="modal-modal-date-user-id" type="hidden" name="user_id" value="">
                                         <input  id="modal-modal-date-task-id" type="hidden" name="task_id" value="">
                                         <div class="form-group">
                                             <label>Update Task Due Date</label>
-                                            <input type="date" class="form-control" name="due_date" value="">
+                                            <input type="date" id="modal-modal-date-due-date" class="form-control" name="due_date" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -605,12 +604,14 @@
             $("#modalUpdateAssignee").modal('show');
         }
 
-        function openModalUpdateTaskName(){
-            $("#update-task-task-name").val(name);
+        function openModalUpdateTaskName(taskName){
+            // alert(name);
+            $("#update-task-task-name").val(taskName);
             $("#modalTaskDetailed").modal('hide');
             $("#modalUpdateTaskName").modal('show');
         }
-        function openModalUpdateDueDate(){
+        function openModalUpdateDueDate(dueDate){
+            $("#modal-modal-date-due-date").val(dueDate);
            // var taskId = document.getElementById('modal-modal-date-task-id');
            // taskId.append(document.getElementById('modal-modal-task-task-id').innerText);
             $("#modalTaskDetailed").modal('hide');
@@ -763,13 +764,13 @@
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
                         '<div class="col-md-12">'+
                         '<div class="form-group">'+
-                        '<h6 class="text-center" onclick="openModalUpdateTaskName()">'+response_task.name+'</h6>'+
+                        '<h6 class="text-center" onclick="openModalUpdateTaskName(\''+response_task.name+'\')">'+response_task.name+'</h6>'+
                         '</div>'+
                         '</div>'+
                         '<div class="mt-4">'+
                         '<div style="font-size: 12px" class="text-small text-muted">Due Date</div>'+
                         '<div class="">'+
-                        '<span style="font-size: 12px" onclick="openModalUpdateDueDate()">'+due_date+'</span>'+
+                        '<span style="font-size: 12px" onclick="openModalUpdateDueDate(\''+due_date+'\')">'+due_date+'</span>'+
                         '</div>'+
                         '<div class="mt-2">'+
                         '<div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>'+
@@ -1053,8 +1054,8 @@
         function addNewTask(id){
             // alert("booooooooooom");
             var taskForm = document.getElementById('card-add-new-task-'+id);
-            console.log(taskForm);
-            alert(taskForm.style);
+            // console.log(taskForm);
+            // alert(taskForm.style);
             if (taskForm.style.display='none'){
                 taskForm.style.display='block';
             }
