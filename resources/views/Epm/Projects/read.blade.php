@@ -834,7 +834,6 @@
                     header:$('meta[name="_token"]').attr('content')
                 });
                 event.preventDefault();
-                alert("click so far so good");
                 var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
                 $.ajax({
                     url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',
