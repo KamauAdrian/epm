@@ -15,7 +15,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CmsReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CmsReportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/CMs/Reports/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/CMs/Reports/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/CMs/Reports/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/CMs/Reports/template.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,7 +341,8 @@
       <workItem from="1615226696978" duration="4514000" />
       <workItem from="1615261553720" duration="37744000" />
       <workItem from="1615311903120" duration="9670000" />
-      <workItem from="1615349030750" duration="16811000" />
+      <workItem from="1615349030750" duration="19844000" />
+      <workItem from="1615369221458" duration="7106000" />
     </task>
     <servers />
   </component>
@@ -404,14 +411,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1610344476754" />
-    <state x="347" y="159" width="672" height="677" key="run.anything.popup" timestamp="1615191687432">
+    <state x="347" y="159" width="672" height="677" key="run.anything.popup" timestamp="1615370600336">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="347" y="159" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615191687432" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615355570652">
+    <state x="347" y="159" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615370600336" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615372434547">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615355570652" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615372434547" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

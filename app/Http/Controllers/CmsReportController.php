@@ -22,7 +22,7 @@ class CmsReportController extends Controller
         $admin = User::find($id);
         if ($admin){
             $reports = "";
-            if ($admin->role->name =="Su Admin" || $admin->role->name =="Project Manager" && $admin->department=="Ajira Youth Empowerment Centers (AYECs)"){
+            if ($admin->role->name =="Su Admin" || $admin->department =="Ajira Youth Empowerment Centers (AYECs)"){
                 $reports = CmsReport::orderBy("created_at","desc")->get();
                 return view("Epm.CMs.Reports.index",compact("reports"));
             }
@@ -111,11 +111,9 @@ class CmsReportController extends Controller
     public function show($id, $report_id)
     {
         $admin = User::find($id);
-        $report = CmsReport::find($report_id);
-        if ($admin && $report){
-            if ($admin->role->name == "Trainer"){
-                return view("Epm.CMs.Reports.read",compact("report"));
-            }
+        if ($admin){
+            $report = CmsReport::find($report_id);
+            return view("Epm.CMs.Reports.template",compact("report"));
         }
     }
 

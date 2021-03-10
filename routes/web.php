@@ -76,7 +76,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/view/cms/reports',[App\Http\Controllers\CmsReportController::class, 'index']);
     Route::get('/adm/{id}/create/cms/report/template',[App\Http\Controllers\CmsReportController::class, 'create']);
     Route::post('/adm/{id}/generate/cms/report/template',[App\Http\Controllers\CmsReportController::class, 'store']);
-    Route::get('/adm/{id}/view/cms/report/template/{report_id}',[App\Http\Controllers\CmsReportController::class, 'template']);
+//    Route::get('/adm/{id}/view/cms/report/template/{report_id}',[App\Http\Controllers\CmsReportController::class, 'template']);
     Route::get('/question/{question_id}/options',[App\Http\Controllers\CmsReportController::class, 'options']);//json array of options for a select question
     Route::get('/adm/{id}/view/cms/report/{report_id}',[App\Http\Controllers\CmsReportController::class, 'show']);
     //Reports

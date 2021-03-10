@@ -76,11 +76,15 @@ class TrainingController extends Controller
             $training->start_date = $request->start_date;
             $end_date = "";
             $venue = "";
+            $categories = [];
             if ($request->training == "Physical" || $request->training == "TOT"){
                 $venue = $request->venue;
                 $end_date = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
             }
             if ($request->training == "Virtual"){
+                $categories[] = [
+                    "name"=>"",
+                ];
                 $end_date = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
             }
             $training->venue = $venue;

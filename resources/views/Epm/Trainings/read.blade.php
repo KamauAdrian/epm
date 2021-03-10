@@ -9,6 +9,7 @@
         $session_date = date_create($training->start_date);
         $split_date = date_format($session_date,'l dS M Y');
         $days = $training->trainingDays;
+//        $categories = $training->trainingDays;
 //        dd($training,count($days));
         $center = $training->center;
         $trainers_raw = $training->trainers;
@@ -56,26 +57,50 @@
                                 <h6><span class="text-small" style="font-size: 14px">Scheduled Dates</span></h6>
                                 <p class="font-weight-normal">Start: {{date('dS M Y',strtotime($training->start_date))}} <br /> End: {{date('dS M Y',strtotime($training->end_date))}}</p>
                             </div>
-                            @if($training->training == "Physical" || $training->training == "TOT")
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="card-body" style="height: 150px; overflow: auto;">
-                                            <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
-                                            @if($trainers)
-                                                @foreach($trainers as $key=>$trainer)
-                                                    {{$key+1}}.{{$trainer}}<br />
-                                                @endforeach
-                                            @endif
+                        </div>
+                        <div class="row">
+{{--                            //trainers--}}
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body" style="height: 150px; overflow: auto;">
+                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                        @if($trainers)
+                                            @foreach($trainers as $key=>$trainer)
+                                                {{$key+1}}.{{$trainer}}<br />
+                                            @endforeach
+                                        @endif
+                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                            <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
+                                                    <i class="feather icon-plus"></i>
+                                                </button>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+{{--                            // Classes/Cohort--}}
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body" style="height: 150px; overflow: auto;">
+                                        <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
+                                        @if($cohort)
+                                            <b>Category:</b> {{$cohort->category}} <br />
+                                            <b>Cohort:</b> {{$cohort->name}}
+
+                                        @else
                                             @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                    <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
+                                                <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                    <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
                                                         <i class="feather icon-plus"></i>
                                                     </button>
                                                 </a>
                                             @endif
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
+                            </div>
+                            @if($training->training == "Physical" || $training->training == "TOT")
                                 @if($training->venue == "Centers (AYECs)")
                                     <div class="col-md-3">
                                         <div class="card">
@@ -115,82 +140,56 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="card-body" style="height: 150px; overflow: auto;">
-                                            <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
-                                            @if($cohort)
-
-                                               <b>Category:</b> {{$cohort->category}} <br />
-                                               <b>Cohort:</b> {{$cohort->name}}
-
-                                            @else
-                                                @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                    <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                        <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
-                                                            <i class="feather icon-plus"></i>
-                                                        </button>
-                                                    </a>
-                                                @endif
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="card-body" style="height: 150px; overflow: auto;">
-                                            <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <span>Male <br /> 20 </span>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <span>Female <br /> 200</span>
-                                                        </div>
+                            @endif
+                            @if($training->training == "Virtual")
+                                @if($training->type == "Public")
+{{--                                    <div class="col-md-3">--}}
+{{--                                        <div class="card">--}}
+{{--                                            <div class="card-body text-center" style="height: 150px; overflow: auto;">--}}
+{{--                                                <h6><span class="text-small" style="font-size: 14px">Google Meet Link</span></h6>--}}
+{{--                                                <button type="button" class="btn btn-outline-success mt-3">Copy Invite Link</button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                @else
+{{--                                    <div class="col-md-3" style="display: none;">--}}
+{{--                                        <div class="card">--}}
+{{--                                            <div class="card-body text-center" style="height: 150px; overflow: auto;">--}}
+{{--                                                <h6><span class="text-small" style="font-size: 14px">Google Meet Link</span></h6>--}}
+{{--                                                <button type="button" class="btn btn-outline-success mt-3">Copy Invite Link</button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                @endif
+                            @endif
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body" style="height: 150px; overflow: auto;">
+                                        <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span>Male <br /> 20 </span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span>Female <br /> 200</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    Total <br> 20
-                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                Total <br> 20
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                            @if($training->training == "Virtual")
-                                <div class="col-md-6">
-                                    @if($trainers)
-                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
-                                        @foreach($trainers as $trainer)
-                                            {{$trainer}}<br />
-                                        @endforeach
-                                    @else
-                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
-                                        <a href="#!">
-                                            <button type="button" title="Choose Training Center" class="btn btn-icon icon-s">
-                                                <i class="feather icon-plus"></i>
-                                            </button>
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="col-md-6">
-                                    @if($cohort)
-                                        <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
-                                        {{$cohort}}<br />
-                                    @endif
-                                </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12">
                 @if($training->training == "Physical")
-                    <?php
-//                    dd($training);
-                    ?>
                     @include("Epm.Trainings.Physical.index")
                 @endif
                 @if($training->training == "Virtual")
