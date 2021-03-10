@@ -216,62 +216,70 @@ class TaskController extends Controller
     public function mark_complete($id,$task_id)
     {
 //        dd($task_id);
-        $response = [];
+        $admin = User::find($id);
         $task = Task::find($task_id);
         if ($task){
             $status = $task->status;
             $updated = null;
             $collaborators = $task->project->collaborators;
             if ($status==0){
+//                dd("task incomplete Please mark as complete");
                 $data = [
                     'status'=>1,
                     'completion_date'=>date("Y-m-d"),
                 ];
+//                dd($task);
                 $updated = $task->update($data);
+//                dd($task);
                 $message="Complete";
-                foreach ($collaborators as $collaborator){
-                    //dispatch send Task completed emails
-                    $updated_task = [
-                        'name'=>$collaborator->name,
-                        'task'=>$task->name,
-                        'message'=>$message
-                    ];
-                    $params=[];
-                    $params['email']=$collaborator->email;
-                    $params['updated_task']=$updated_task;
-                    dispatch(new TaskCompletedJob($params));
-                   // TaskCompletedJob::dispatch($params);
-
+                if ($collaborators){
+                    foreach ($collaborators as $collaborator){
+                        //dispatch send Task completed emails
+                        $updated_task = [
+                            'name'=>$collaborator->name,
+                            'task'=>$task->name,
+                            'message'=>$message
+                        ];
+                        $params=[];
+                        $params['email']=$collaborator->email;
+                        $params['updated_task']=$updated_task;
+                        dispatch(new TaskCompletedJob($params));
+                        // TaskCompletedJob::dispatch($params);
+                    }
                 }
             }
             elseif ($status==1){
+//                dd("task complete Please mark as incomplete");
                 $data = [
                     'status'=>0,
                     'completion_date'=>null,
                 ];
                 $updated = $task->update($data);
                 $message="In-Complete";
-                foreach ($collaborators as $collaborator){
-                    //dispatch send Task completed emails
-                    $params=[];
-                    $updated_task = [
-                        'name'=>$collaborator->name,
-                        'task'=>$task->name,
-                        'message'=>$message
-                    ];
-                    $params['email']=$collaborator->email;
-                    $params['updated_task']=$updated_task;
-                    dispatch(new TaskCompletedJob($params));
+                if ($collaborators){
+                    foreach ($collaborators as $collaborator){
+                        //dispatch send Task completed emails
+                        $params=[];
+                        $updated_task = [
+                            'name'=>$collaborator->name,
+                            'task'=>$task->name,
+                            'message'=>$message
+                        ];
+                        $params['email']=$collaborator->email;
+                        $params['updated_task']=$updated_task;
+                        dispatch(new TaskCompletedJob($params));
 //                    TaskCompletedJob::dispatch($params);
+                    }
                 }
             }
             if ($updated){
                 $response["result_code"]=0;
                 $response["message"]="Status Updated Successfully";
                 $response["data"]=$task;
+                return $response;
             }
         }
-        return $response;
+
     }
 
     public function complete_tasks_overview($id){

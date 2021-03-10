@@ -62,7 +62,7 @@
                 </div>
             </div>
         <div class="row">
-                <div class="table-responsive">
+            <div class="table-responsive">
                     <table class="table">
                         <tbody style="overflow: scroll;">
                             @if($boards)
@@ -71,7 +71,7 @@
                                         <td style="white-space: normal">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div>
+    {{--                                                    <div>--}}
                                                         <p class="float-left" style="font-size: 14px;">{{$board->name}}</p>
                                                         <button type="button" class=" float-right btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="feather icon-more-horizontal"></i>
@@ -79,136 +79,153 @@
                                                         <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
                                                             <a href="#!" data-toggle="modal" class="openModalUpdateActivity" data_url="{{"/adm/".$auth_admin->id."/update/activity/".$board->id}}" data_activity_name="{{$board->name}}"><li class="dropdown-item">Edit Activity</li></a>
                                                             <a href="#!"><li class="dropdown-item close-card">Delete Activity</li></a>
-                                                        </ul></div>
+                                                        </ul>
+    {{--                                                    </div>--}}
                                                 </div>
-                                                <?php $tasks = \App\Models\Board::find($board->id)->tasks; ?>
-                                                @foreach($tasks as $task)
-                                                    <?php
-                                                    $assignees = \App\Models\Task::find($task->id)->assignees;
-                                                    //                                                                dd($single_task->assignees);
-                                                    $avatar_icon_name = [];
-                                                    if ($assignees){
-                                                        foreach ($assignees as $assignee){
-                                                            $split_name = explode(' ',$assignee->name);
-                                                            if (count($split_name)>1){
-                                                                $avatar_icon_name[] = $split_name[0];
-                                                            }else{
-                                                                $avatar_icon_name[] = $assignee->name;
+                                                <?php $tasks = \App\Models\Board::find($board->id)->tasks;?>
+                                                    @foreach($tasks as $task)
+                                                        <?php
+                                                        $assignees = \App\Models\Task::find($task->id)->assignees;
+                                                        //                                                                dd($single_task->assignees);
+                                                        $avatar_icon_name = [];
+                                                        if ($assignees){
+                                                            foreach ($assignees as $assignee){
+                                                                $split_name = explode(' ',$assignee->name);
+                                                                if (count($split_name)>1){
+                                                                    $avatar_icon_name[] = $split_name[0];
+                                                                }else{
+                                                                    $avatar_icon_name[] = $assignee->name;
+                                                                }
                                                             }
                                                         }
-                                                    }
-                                                    ?>
+                                                        ?>
+                                                        <div class="col-md-12">
+                                                            <div  class="card tasks">
+                                                                <div class="card-body">
+                                                                    <div class="">
+                                                                        <div class="card-text">{{$task->name}}</div>
+                                                                    </div>
+                                                                    <div class="mt-4">
+                                                                        <div style="font-size: 12px" class="text-small text-muted">Due Date</div>
+                                                                        <div class="">
+                                                                            @if($task->due_date)
+                                                                                <span style="font-size: 12px"> {{$task->due_date}}</span>
+                                                                            @else
+                                                                                <div class=""><i class="fa fa-calendar"></i> No Due Date</div>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="mt-2">
+                                                                            <div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>
+                                                                            @if($avatar_icon_name)
+                                                                                @foreach($avatar_icon_name as $name)
+                                                                                    <span class="badge badge-pill badge-success p-2">{{$name}}</span>
+                                                                                @endforeach
+                                                                            @endif
+                                                                            <a href="#!" title="Assign new Collaborators" class="btn btn-icon">
+                                                                                <i class="feather icon-plus"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}" data-task_name="{{$task->name}}"  id="openModalForTask{{$task->id}}" ></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
                                                 <div class="col-md-12">
-                                                    <div  class="card tasks">
+                                                    <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
                                                         <div class="card-body">
-                                                            <div class="">
-                                                                <div class="card-text">{{$task->name}}</div>
+                                                            <div class="col-md-12">
+                                                                <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" method="post">
+                                                                    <div class="row">
+                                                                        @csrf
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <label>Add A New Task To {{$board->name}}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <label>Name</label>
+                                                                                <input type="text" class="form-control" name="name" placeholder="Task One" required>
+                                                                                <span class="text-danger">{{$errors->first('name')}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">
+                                                                                <label>Assignee</label>
+                                                                                <multiselect v-model="selectedPmo" :options="pmos"
+                                                                                             placeholder="Search" track-by="id" label="name"
+                                                                                             :searchable="true" :close-on-select="true" multiple>
+                                                                                </multiselect>
+                                                                                <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <label>Due Date</label>
+                                                                                <input type="date" class="form-control" name="due_date" required>
+                                                                                <span class="text-danger">{{$errors->first('due_date')}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group float-right">
+                                                                                <input class="btn btn-outline-info" type="submit" value="Add Task">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                            <div class="mt-4">
-                                                                <div style="font-size: 12px" class="text-small text-muted">Due Date</div>
-                                                                <div class="">
-                                                                    @if($task->due_date)
-                                                                       <span style="font-size: 12px"> {{$task->due_date}}</span>
-                                                                    @else
-                                                                        <div class=""><i class="fa fa-calendar"></i> No Due Date</div>
-                                                                    @endif
-                                                                </div>
-                                                                <div class="mt-2">
-                                                                    <div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>
-                                                                    @if($avatar_icon_name)
-                                                                        @foreach($avatar_icon_name as $name)
-                                                                            <span class="badge badge-pill badge-success p-2">{{$name}}</span>
-                                                                        @endforeach
-                                                                    @endif
-                                                                        <a href="#!" title="Assign new Collaborators" class="btn btn-icon">
-                                                                            <i class="feather icon-plus"></i>
-                                                                        </a>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#!" class="stretched-link openModalTask" data-toggle="modal" data-user_id="{{$auth_admin->id}}" data-task_id="{{$task->id}}" data-task_name="{{$task->name}}"  id="openModalForTask{{$task->id}}" ></a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endforeach
-                                            </div>
-                                            <div class="row">
-                                                <div class="card" style="display: none;" id="card-add-new-task-{{$board->id}}">
-                                                    <div class="card-body">
-                                                        <form action="{{url('/adm/'.$auth_admin->id.'/create/new/task/board_id='.$board->id)}}" method="post">
-                                                            <div class="row">
-                                                                @csrf
+                                                @if(count($tasks)>0)
+                                                    <div class="col-md-12">
+                                                        <a href="#!"><p onclick="addNewTask({{$board->id}})" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Add Task</p></a>
+                                                    </div>
+                                                @else
+                                                    <div class="col-md-12">
+                                                        <div class="card" style="border: none;">
+                                                            <div class="card-body">
                                                                 <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label>Add A New Task To {{$board->name}}</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label>Name</label>
-                                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="Task One" required>
-                                                                        <span class="text-danger">{{$errors->first('name')}}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div project_id="{{$board->project_id}}" class="form-group" id="assignee_{{$board->id}}">
-                                                                        <label>Assignee</label>
-                                                                        <multiselect v-model="selectedPmo" :options="pmos"
-                                                                                     placeholder="Search" track-by="id" label="name"
-                                                                                     :searchable="true" :close-on-select="true" multiple>
-                                                                        </multiselect>
-                                                                        <input type="hidden" name="assignees[]" v-for="pm in selectedPmo" :value="pm.id">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label>Due Date</label>
-                                                                        <input style="width: auto" type="date" class="form-control" name="due_date" required>
-                                                                        <span class="text-danger">{{$errors->first('due_date')}}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-mdd-12">
-                                                                    <div class="form-group float-right">
-                                                                        <input class="btn btn-outline-info" type="submit" value="Add Task">
-                                                                    </div>
+                                                                    <a href="#!"><p onclick="addNewTask({{$board->id}})" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Add Task</p></a>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <a href="#!"><p onclick="addNewTask({{$board->id}})" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Add Task</p></a>
+                                                @endif
                                             </div>
                                         </td>
                                     @endforeach
-                                    <td>
-                                        <div class="row" style="display: none;" id="add-new-board">
+                                    <td style="display: none;" id="add-new-board">
+{{--                                        <div class="row" style="display: none;" id="add-new-board">--}}
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="col-md-12">
+{{--                                                    <div class="col-md-12">--}}
                                                         <form action="{{url('/adm/'.$auth_admin->id.'/create/new/board/project_id='.$project->id)}}" method="post">
                                                             @csrf
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label>Activity Name</label>
-                                                                        <input style="width: auto" type="text" class="form-control" name="name" placeholder="ie To DO List" required>
+                                                                        <input type="text" class="form-control" name="name" placeholder="ie To DO List" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-                                                                    <div class="form-group text-left">
+                                                                    <div class="form-group float-right">
                                                                         <input class="btn btn-outline-info" type="submit" value="Create Activity">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                    </div>
+{{--                                                    </div>--}}
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Activity</p></a>
-                                        </div>
+{{--                                        </div>--}}
+{{--                                        <div class="row">--}}
+{{--                                        </div>--}}
+                                    </td>
+                                    <td>
+                                        <a href="#!"><p onclick="addNewBoard()" style="color: #7E858E;" class="text-normal"><span><i class="fa fa-plus"></i></span> Create Activity</p></a>
                                     </td>
                                 </tr>
                             @endif
@@ -387,7 +404,7 @@
                                         <input  id="task-task-id" type="hidden" name="task_id" value="">
                                         <div class="form-group">
                                             <label>Update Task Name</label>
-                                            <input type="text" id="task-task-name" class="form-control" name="name" value="">
+                                            <input type="text" id="update-task-task-name" class="form-control" name="name" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -414,11 +431,11 @@
                             <form action="" id="form-update-due-date">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input id="modal-modal-date-user-id" type="hidden" name="user_id" value="{{$auth_admin->id}}">
-                                        <input  id="modal-modal-date-task-id" type="hidden" name="task_id" value="{{$task->id}}">
+                                        <input id="modal-modal-date-user-id" type="hidden" name="user_id" value="">
+                                        <input  id="modal-modal-date-task-id" type="hidden" name="task_id" value="">
                                         <div class="form-group">
                                             <label>Update Task Due Date</label>
-                                            <input type="date" class="form-control" name="due_date" value="{{$task->due_date}}">
+                                            <input type="date" class="form-control" name="due_date" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -447,11 +464,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Activity Name</label>
-                                            <input id="form-activity-name" style="width: auto" type="text" class="form-control" name="name" value="">
+                                            <input id="form-activity-name" type="text" class="form-control" name="name" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="form-group text-left">
+                                        <div class="form-group float-right">
                                             <input class="btn btn-outline-info" type="submit" value="Update Activity">
                                         </div>
                                     </div>
@@ -589,6 +606,7 @@
         }
 
         function openModalUpdateTaskName(){
+            $("#update-task-task-name").val(name);
             $("#modalTaskDetailed").modal('hide');
             $("#modalUpdateTaskName").modal('show');
         }
@@ -1033,7 +1051,10 @@
         }
 
         function addNewTask(id){
+            // alert("booooooooooom");
             var taskForm = document.getElementById('card-add-new-task-'+id);
+            console.log(taskForm);
+            alert(taskForm.style);
             if (taskForm.style.display='none'){
                 taskForm.style.display='block';
             }
