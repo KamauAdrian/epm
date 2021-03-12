@@ -15,29 +15,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TraineeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TraineeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingDayController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Training.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Training.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TrainingDay.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TrainingDay.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_24_090251_create_trainees_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_24_090251_create_trainees_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_25_092929_create_training_days_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_25_092929_create_training_days_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Day/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Day/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Day/read.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/Day/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Physical/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/TOT/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/TimeTable/virtual-time-table.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,7 +342,7 @@
       <workItem from="1615437405309" duration="7177000" />
       <workItem from="1615447503284" duration="22166000" />
       <workItem from="1615486897822" duration="1521000" />
-      <workItem from="1615523024792" duration="15519000" />
+      <workItem from="1615523024792" duration="19287000" />
     </task>
     <servers />
   </component>

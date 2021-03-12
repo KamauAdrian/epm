@@ -1081,7 +1081,7 @@
                                             </tr>
                                                 <tr>
                                                     <td class="text-center" colspan="3">
-                                                        <b>LUNCH BREAK 1:00 - 2:00pm</b>
+                                                        <b>LUNCH BREAK 1:00 - 1:45pm</b>
                                                     </td>
                                                 </tr>
                                             <tr>
@@ -1142,7 +1142,7 @@
                                                 </td>
                                                 <td>
                                                     @if($session_5)
-                                                        @foreach($session_9->facilitators as $facilitator)
+                                                        @foreach($session_5->facilitators as $facilitator)
                                                             {{$facilitator->name}}<br />
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
@@ -1177,15 +1177,17 @@
                                             <tbody>
                                             <tr>
                                                 <?php
-                                                $session_one_start_time = date("H:i:s",strtotime("08:30 am"));
+                                                $session_one_start_time = date("H:i:s",strtotime("08:00 am"));
                                                 $session_one_end_time = date("H:i:s",strtotime("09:30 am"));
                                                 $session_one = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_one_start_time)->where("end_time",$session_one_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>8:30 - 9:30am</b>
+                                                    <b>8:00 - 9:30am</b>
                                                 </td>
                                                 <td>
-                                                    Introduction to online work
+                                                    Introduction to Online Work<br />
+                                                    Q & A Session
+
                                                 </td>
                                                 <td>
                                                     @if($session_one)
@@ -1194,8 +1196,8 @@
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_one->id}}" type="text" name="start_time" value="08:30 AM">
-                                                                <input id="end_time_session_{{$session_one->id}}" type="text" name="end_time" value="09:30 AM">
+                                                                <input id="start_time_session_{{$session_one->id}}" type="text" name="start_time" value="{{$session_one->start_time}}">
+                                                                <input id="end_time_session_{{$session_one->id}}" type="text" name="end_time" value="{{$session_one->end_time}}">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" data-session_id="{{$session_one->id}}" id="{{$session_one->id}}"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1206,7 +1208,7 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_1" type="text" name="start_time" value="08:30 AM">
+                                                                <input id="start_time_session_1" type="text" name="start_time" value="08:00 AM">
                                                                 <input id="end_time_session_1" type="text" name="end_time" value="09:30 AM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="1"  class="openModalUpdateSessionFacilitators float-right">
@@ -1218,22 +1220,24 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-center" colspan="3">
-                                                    <b>Health Break: 09:30 - 09:40 am</b>
-                                                </td>
-                                            </tr>
+{{--                                            <tr>--}}
+{{--                                                <td class="text-center" colspan="3">--}}
+{{--                                                    <b>Health Break: 09:30 - 09:40 am</b>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
                                             <tr>
                                                 <?php
-                                                $session_2_start_time = date("H:i:s",strtotime("09:40 am"));
-                                                $session_2_end_time = date("H:i:s",strtotime("11:00 am"));
+                                                $session_2_start_time = date("H:i:s",strtotime("09:35 am"));
+                                                $session_2_end_time = date("H:i:s",strtotime("10:35 am"));
                                                 $session_2 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_2_start_time)->where("end_time",$session_2_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>09:40 - 11:00am</b>
+                                                    <b>09:35 - 10:35am</b>
                                                 </td>
                                                 <td>
-                                                    Overview of online job categories
+                                                    Jobs Available Online <br />
+                                                    Overview of Job Categories<br />
+                                                    Q & A Session
                                                 </td>
                                                 <td>
                                                     @if($session_2)
@@ -1242,8 +1246,8 @@
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_2->id}}" type="text" name="start_time" value="09:40 AM">
-                                                                <input id="end_time_session_{{$session_2->id}}" type="text" name="end_time" value="11:00 AM">
+                                                                <input id="start_time_session_{{$session_2->id}}" type="text" name="start_time" value="{{$session_2->start_time}}">
+                                                                <input id="end_time_session_{{$session_2->id}}" type="text" name="end_time" value="{{$session_2->end_time}}">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" data-session_id="{{$session_2->id}}" id="{{$session_2->id}}"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1254,8 +1258,8 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_2" type="text" name="start_time" value="09:40 AM">
-                                                                <input id="end_time_session_2" type="text" name="end_time" value="11:00 AM">
+                                                                <input id="start_time_session_2" type="text" name="start_time" value="09:35 AM">
+                                                                <input id="end_time_session_2" type="text" name="end_time" value="10:35 AM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="2"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1266,22 +1270,23 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-center" colspan="3">
-                                                    <b>Health Break: 11:00 - 11:10 am</b>
-                                                </td>
-                                            </tr>
+{{--                                            <tr>--}}
+{{--                                                <td class="text-center" colspan="3">--}}
+{{--                                                    <b>Health Break: 11:00 - 11:10 am</b>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
                                             <tr>
                                                 <?php
-                                                $session_3_start_time = date("H:i:s",strtotime("11:10 am"));
-                                                $session_3_end_time = date("H:i:s",strtotime("12:30 pm"));
+                                                $session_3_start_time = date("H:i:s",strtotime("10:40 am"));
+                                                $session_3_end_time = date("H:i:s",strtotime("12:50 pm"));
                                                 $session_3 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_3_start_time)->where("end_time",$session_3_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>11:10 - 12:30pm</b>
+                                                    <b>10:40 - 12:50pm</b>
                                                 </td>
                                                 <td>
-                                                    Signing up on online job platforms
+                                                    Opening an Up work/ Fiverr Account<br />
+                                                    Q & A Session
                                                 </td>
                                                 <td>
                                                     @if($session_3)
@@ -1290,8 +1295,8 @@
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_3->id}}" type="text" name="start_time" value="11:10 AM">
-                                                                <input id="end_time_session_{{$session_3->id}}" type="text" name="end_time" value="12:30 PM">
+                                                                <input id="start_time_session_{{$session_3->id}}" type="text" name="start_time" value="{{$session_3->start_time}}">
+                                                                <input id="end_time_session_{{$session_3->id}}" type="text" name="end_time" value="{{$session_3->end_time}}">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" data-session_id="{{$session_3->id}}" id="{{$session_3->id}}"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1302,8 +1307,8 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_3" type="text" name="start_time" value="11:10 AM">
-                                                                <input id="end_time_session_3" type="text" name="end_time" value="12:30 PM">
+                                                                <input id="start_time_session_3" type="text" name="start_time" value="10:40 AM">
+                                                                <input id="end_time_session_3" type="text" name="end_time" value="12:50 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="3"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1315,16 +1320,22 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td class="text-center" colspan="3">
+                                                    <b>LUNCH BREAK 12:50 - 1:35pm</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <?php
-                                                $session_4_start_time = date("H:i:s",strtotime("12:30 pm"));
-                                                $session_4_end_time = date("H:i:s",strtotime("01:00 pm"));
+                                                $session_4_start_time = date("H:i:s",strtotime("1:35 pm"));
+                                                $session_4_end_time = date("H:i:s",strtotime("03:30 pm"));
                                                 $session_4 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_4_start_time)->where("end_time",$session_4_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>12:30 – 1:00pm</b>
+                                                    <b>1:35 – 3:30pm</b>
                                                 </td>
                                                 <td>
-                                                    Q&A
+                                                    Referencing<br />
+                                                    Q & A Session
                                                 </td>
                                                 <td>
                                                     @if($session_4)
@@ -1333,8 +1344,8 @@
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_4->id}}" type="text" name="start_time" value="12:30 PM">
-                                                                <input id="end_time_session_{{$session_4->id}}" type="text" name="end_time" value="01:00 PM">
+                                                                <input id="start_time_session_{{$session_4->id}}" type="text" name="start_time" value="{{$session_4->start_time}}">
+                                                                <input id="end_time_session_{{$session_4->id}}" type="text" name="end_time" value="{{$session_4->end_time}}">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" data-session_id="{{$session_4->id}}" id="{{$session_4->id}}"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1345,8 +1356,8 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_4" type="text" name="start_time" value="12:30 PM">
-                                                                <input id="end_time_session_4" type="text" name="end_time" value="01:00 PM">
+                                                                <input id="start_time_session_4" type="text" name="start_time" value="1:35 PM">
+                                                                <input id="end_time_session_4" type="text" name="end_time" value="3:30 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="4"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1358,31 +1369,27 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-center" colspan="3">
-                                                    <b>LUNCH BREAK 1:00 - 2:00pm</b>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <?php
-                                                $session_5_start_time = date("H:i:s",strtotime("02:00 pm"));
-                                                $session_5_end_time = date("H:i:s",strtotime("02:50 pm"));
+                                                $session_5_start_time = date("H:i:s",strtotime("3:35 pm"));
+                                                $session_5_end_time = date("H:i:s",strtotime("4:20 pm"));
                                                 $session_5 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_5_start_time)->where("end_time",$session_5_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>2:00 – 2:50pm</b>
+                                                    <b>3:35 - 4:20pm</b>
                                                 </td>
                                                 <td>
-                                                    Data Entry
+                                                    Translation<br />
+                                                    Q and A Sessions
                                                 </td>
                                                 <td>
                                                     @if($session_5)
-                                                        @foreach($session_9->facilitators as $facilitator)
+                                                        @foreach($session_5->facilitators as $facilitator)
                                                             {{$facilitator->name}}<br />
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_5->id}}" type="text" name="start_time" value="02:00 PM">
-                                                                <input id="end_time_session_{{$session_5->id}}" type="text" name="end_time" value="02:50 PM">
+                                                                <input id="start_time_session_{{$session_5->id}}" type="text" name="start_time" value="{{$session_5->start_time}}">
+                                                                <input id="end_time_session_{{$session_5->id}}" type="text" name="end_time" value="{{$session_5->start_time}}">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" data-session_id="{{$session_5->id}}" id="{{$session_5->id}}"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1393,8 +1400,8 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_5" type="text" name="start_time" value="02:00 PM">
-                                                                <input id="end_time_session_5" type="text" name="end_time" value="02:50 PM">
+                                                                <input id="start_time_session_5" type="text" name="start_time" value="3:35 PM">
+                                                                <input id="end_time_session_5" type="text" name="end_time" value="04:20 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="5"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1407,25 +1414,25 @@
                                             </tr>
                                             <tr>
                                                 <?php
-                                                $session_6_start_time = date("H:i:s",strtotime("03:00 pm"));
-                                                $session_6_end_time = date("H:i:s",strtotime("04:15 pm"));
+                                                $session_6_start_time = date("H:i:s",strtotime("04:20 pm"));
+                                                $session_6_end_time = date("H:i:s",strtotime("04:30 pm"));
                                                 $session_6 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_6_start_time)->where("end_time",$session_6_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>3:00 – 4:15pm</b>
+                                                    <b>4:20 – 4:30pm</b>
                                                 </td>
                                                 <td>
-                                                    Excel
+                                                    Kahoot Session
                                                 </td>
                                                 <td>
                                                     @if($session_6)
-                                                        @foreach($session_9->facilitators as $facilitator)
+                                                        @foreach($session_6->facilitators as $facilitator)
                                                             {{$facilitator->name}}<br />
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_6->id}}" type="text" name="start_time" value="03:00 PM">
-                                                                <input id="end_time_session_{{$session_6->id}}" type="text" name="end_time" value="04:15 PM">
+                                                                <input id="start_time_session_{{$session_6->id}}" type="text" name="start_time" value="{{$session_6->start_time}}">
+                                                                <input id="end_time_session_{{$session_6->id}}" type="text" name="end_time" value="{{$session_6->end_time}}">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" data-session_id="{{$session_6->id}}" id="{{$session_6->id}}"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -1436,53 +1443,10 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_6" type="text" name="start_time" value="03:00 PM">
-                                                                <input id="end_time_session_6" type="text" name="end_time" value="04:15 PM">
+                                                                <input id="start_time_session_6" type="text" name="start_time" value="4:20 PM">
+                                                                <input id="end_time_session_6" type="text" name="end_time" value="04:30 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="6"  class="openModalUpdateSessionFacilitators float-right">
-                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
-                                                                    <i class="feather icon-plus"></i>
-                                                                </button>
-                                                            </a>
-                                                        @endif
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <?php
-                                                $session_7_start_time = date("H:i:s",strtotime("04:15 pm"));
-                                                $session_7_end_time = date("H:i:s",strtotime("04:30 pm"));
-                                                $session_7 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_7_start_time)->where("end_time",$session_7_end_time)->first();
-                                                ?>
-                                                <td>
-                                                    <b>4:15 – 4:30pm</b>
-                                                </td>
-                                                <td>
-                                                    Kahoot
-                                                </td>
-                                                <td>
-                                                    @if($session_7)
-                                                        @foreach($session_7->facilitators as $facilitator)
-                                                            {{$facilitator->name}}<br />
-                                                        @endforeach
-                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                            <div style="display: none;">
-                                                                <input id="start_time_session_{{$session_7->id}}" type="text" name="start_time" value="04:15 PM">
-                                                                <input id="end_time_session_{{$session_7->id}}" type="text" name="end_time" value="04:30 PM">
-                                                            </div>
-                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_7->id}}" id="{{$session_7->id}}"  class="openModalUpdateSessionFacilitators float-right">
-                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
-                                                                    <i class="feather icon-plus"></i>
-                                                                </button>
-                                                            </a>
-                                                        @endif
-                                                    @else
-                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                            <div style="display: none;">
-                                                                <input id="start_time_session_7" type="text" name="start_time" value="04:15 PM">
-                                                                <input id="end_time_session_7" type="text" name="end_time" value="04:30 PM">
-                                                            </div>
-                                                            <a href="#!" data-toggle="modal" id="7"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
                                                                     <i class="feather icon-plus"></i>
                                                                 </button>
@@ -2501,7 +2465,7 @@
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
                                                                 <input id="start_time_session_1" type="text" name="start_time" value="08:00 AM">
-                                                                <input id="end_time_session_1" type="text" name="end_time" value="09:00 AM">
+                                                                <input id="end_time_session_1" type="text" name="end_time" value="10:00 AM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="1"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -2519,16 +2483,17 @@
                                             {{--                                            </tr>--}}
                                             <tr>
                                                 <?php
-                                                $session_2_start_time = date("H:i:s",strtotime("09:00 am"));
-                                                $session_2_end_time = date("H:i:s",strtotime("11:00 am"));
+                                                $session_2_start_time = date("H:i:s",strtotime("10:00 am"));
+                                                $session_2_end_time = date("H:i:s",strtotime("12:00 pm"));
                                                 $session_2 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_2_start_time)->where("end_time",$session_2_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>09:00 - 11:00am</b>
+                                                    <b>10:00 - 12:00pm</b>
                                                 </td>
                                                 <td>
-                                                    Jobs Available Online <br />
-                                                    Overview of the five Job Categories
+                                                    Assignment Review <br />
+                                                    Review of the Online Work account created <br />
+                                                    Review Payment Methods and Online Accounts
                                                 </td>
                                                 <td>
                                                     @if($session_2)
@@ -2549,8 +2514,8 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_2" type="text" name="start_time" value="09:00 AM">
-                                                                <input id="end_time_session_2" type="text" name="end_time" value="11:00 AM">
+                                                                <input id="start_time_session_2" type="text" name="start_time" value="10:00 AM">
+                                                                <input id="end_time_session_2" type="text" name="end_time" value="12:00 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="2"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -2568,16 +2533,17 @@
                                             {{--                                            </tr>--}}
                                             <tr>
                                                 <?php
-                                                $session_3_start_time = date("H:i:s",strtotime("11:10 am"));
+                                                $session_3_start_time = date("H:i:s",strtotime("12:05 pm"));
                                                 $session_3_end_time = date("H:i:s",strtotime("1:00 pm"));
                                                 $session_3 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_3_start_time)->where("end_time",$session_3_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>11:10 - 1:00pm</b>
+                                                    <b>12:05 - 1:00pm</b>
                                                 </td>
                                                 <td>
-                                                    Opening an Upwork/ Fiverr Account<br />
-                                                    Link to payment Method
+                                                    Adding Payment method<br />
+                                                    Upwork profile<br />
+                                                    Bidding
                                                 </td>
                                                 <td>
                                                     @if($session_3)
@@ -2598,7 +2564,7 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_3" type="text" name="start_time" value="11:10 AM">
+                                                                <input id="start_time_session_3" type="text" name="start_time" value="12:05 PM">
                                                                 <input id="end_time_session_3" type="text" name="end_time" value="1:00 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="3"  class="openModalUpdateSessionFacilitators float-right">
@@ -2618,15 +2584,15 @@
                                             <tr>
                                                 <?php
                                                 $session_4_start_time = date("H:i:s",strtotime("1:45 pm"));
-                                                $session_4_end_time = date("H:i:s",strtotime("3:15 pm"));
+                                                $session_4_end_time = date("H:i:s",strtotime("3:00 pm"));
                                                 $session_4 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_4_start_time)->where("end_time",$session_4_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>1:45 – 3:15pm</b>
+                                                    <b>1:45 – 3:00pm</b>
                                                 </td>
                                                 <td>
-                                                    Social Media Marketing(SMM)<br />
-                                                    Youtube Marketing
+                                                    Questions and Answers<br />
+                                                    Kahoot/Evaluation
                                                 </td>
                                                 <td>
                                                     @if($session_4)
@@ -2648,7 +2614,7 @@
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
                                                                 <input id="start_time_session_4" type="text" name="start_time" value="1:45 PM">
-                                                                <input id="end_time_session_4" type="text" name="end_time" value="3:15 PM">
+                                                                <input id="end_time_session_4" type="text" name="end_time" value="3:00 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="4"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
@@ -2661,19 +2627,20 @@
                                             </tr>
                                             <tr>
                                                 <?php
-                                                $session_5_start_time = date("H:i:s",strtotime("3:20 pm"));
+                                                $session_5_start_time = date("H:i:s",strtotime("3:00 pm"));
                                                 $session_5_end_time = date("H:i:s",strtotime("04:20 pm"));
                                                 $session_5 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_5_start_time)->where("end_time",$session_5_end_time)->first();
                                                 ?>
                                                 <td>
-                                                    <b>3:20 – 4:20pm</b>
+                                                    <b>3:00 – 4:20pm</b>
                                                 </td>
                                                 <td>
-                                                    Ecommerce
+                                                    Mentorship <br />
+                                                    Overview of Mentorship
                                                 </td>
                                                 <td>
                                                     @if($session_5)
-                                                        @foreach($session_9->facilitators as $facilitator)
+                                                        @foreach($session_5->facilitators as $facilitator)
                                                             {{$facilitator->name}}<br />
                                                         @endforeach
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
@@ -2690,10 +2657,293 @@
                                                     @else
                                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
                                                             <div style="display: none;">
-                                                                <input id="start_time_session_5" type="text" name="start_time" value="03:20 PM">
+                                                                <input id="start_time_session_5" type="text" name="start_time" value="03:00 PM">
                                                                 <input id="end_time_session_5" type="text" name="end_time" value="04:20 PM">
                                                             </div>
                                                             <a href="#!" data-toggle="modal" id="5"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        @endif
+                                        @if($category->name == "Content Writing and Translation")
+                                            <tbody>
+                                            <tr>
+                                                <?php
+                                                $session_one_start_time = date("H:i:s",strtotime("08:00 am"));
+                                                $session_one_end_time = date("H:i:s",strtotime("09:30 am"));
+                                                $session_one = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_one_start_time)->where("end_time",$session_one_end_time)->first();
+                                                ?>
+                                                <td>
+                                                    <b>8:00 - 9:30am</b>
+                                                </td>
+                                                <td>
+                                                    Creation of a Payment Method<br />
+                                                    PayPal/Payoneer<br />
+                                                    Q & A Session
+                                                </td>
+                                                <td>
+                                                    @if($session_one)
+                                                        @foreach($session_one->facilitators as $facilitator)
+                                                            {{$facilitator->name}}<br />
+                                                        @endforeach
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_{{$session_one->id}}" type="text" name="start_time" value="{{$session_one->start_time}}">
+                                                                <input id="end_time_session_{{$session_one->id}}" type="text" name="end_time" value="{{$session_one->end_time}}">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_one->id}}" id="{{$session_one->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @else
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_1" type="text" name="start_time" value="08:00 AM">
+                                                                <input id="end_time_session_1" type="text" name="end_time" value="09:30 AM">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" id="1"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            {{--                                            <tr>--}}
+                                            {{--                                                <td class="text-center" colspan="3">--}}
+                                            {{--                                                    <b>Health Break: 09:30 - 09:40 am</b>--}}
+                                            {{--                                                </td>--}}
+                                            {{--                                            </tr>--}}
+                                            <tr>
+                                                <?php
+                                                $session_2_start_time = date("H:i:s",strtotime("09:35 am"));
+                                                $session_2_end_time = date("H:i:s",strtotime("10:35 am"));
+                                                $session_2 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_2_start_time)->where("end_time",$session_2_end_time)->first();
+                                                ?>
+                                                <td>
+                                                    <b>09:35 - 10:35am</b>
+                                                </td>
+                                                <td>
+                                                    Review of Upwork<br />
+                                                    Q & A Session
+                                                </td>
+                                                <td>
+                                                    @if($session_2)
+                                                        @foreach($session_2->facilitators as $facilitator)
+                                                            {{$facilitator->name}}<br />
+                                                        @endforeach
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_{{$session_2->id}}" type="text" name="start_time" value="{{$session_2->start_time}}">
+                                                                <input id="end_time_session_{{$session_2->id}}" type="text" name="end_time" value="{{$session_2->end_time}}">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_2->id}}" id="{{$session_2->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @else
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_2" type="text" name="start_time" value="09:35 AM">
+                                                                <input id="end_time_session_2" type="text" name="end_time" value="10:35 AM">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" id="2"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            {{--                                            <tr>--}}
+                                            {{--                                                <td class="text-center" colspan="3">--}}
+                                            {{--                                                    <b>Health Break: 11:00 - 11:10 am</b>--}}
+                                            {{--                                                </td>--}}
+                                            {{--                                            </tr>--}}
+                                            <tr>
+                                                <?php
+                                                $session_3_start_time = date("H:i:s",strtotime("10:40 am"));
+                                                $session_3_end_time = date("H:i:s",strtotime("12:50 pm"));
+                                                $session_3 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_3_start_time)->where("end_time",$session_3_end_time)->first();
+                                                ?>
+                                                <td>
+                                                    <b>10:40 - 12:50pm</b>
+                                                </td>
+                                                <td>
+                                                    Blogging<br />
+                                                    Q & A Session
+                                                </td>
+                                                <td>
+                                                    @if($session_3)
+                                                        @foreach($session_3->facilitators as $facilitator)
+                                                            {{$facilitator->name}}<br />
+                                                        @endforeach
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_{{$session_3->id}}" type="text" name="start_time" value="{{$session_3->start_time}}">
+                                                                <input id="end_time_session_{{$session_3->id}}" type="text" name="end_time" value="{{$session_3->end_time}}">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_3->id}}" id="{{$session_3->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @else
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_3" type="text" name="start_time" value="10:40 AM">
+                                                                <input id="end_time_session_3" type="text" name="end_time" value="12:50 PM">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" id="3"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center" colspan="3">
+                                                    <b>LUNCH BREAK 12:50 - 1:35pm</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <?php
+                                                $session_4_start_time = date("H:i:s",strtotime("1:35 pm"));
+                                                $session_4_end_time = date("H:i:s",strtotime("03:30 pm"));
+                                                $session_4 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_4_start_time)->where("end_time",$session_4_end_time)->first();
+                                                ?>
+                                                <td>
+                                                    <b>1:35 – 3:30pm</b>
+                                                </td>
+                                                <td>
+                                                    Bidding<br />
+                                                    Q & A Session
+                                                </td>
+                                                <td>
+                                                    @if($session_4)
+                                                        @foreach($session_4->facilitators as $facilitator)
+                                                            {{$facilitator->name}}<br />
+                                                        @endforeach
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_{{$session_4->id}}" type="text" name="start_time" value="{{$session_4->start_time}}">
+                                                                <input id="end_time_session_{{$session_4->id}}" type="text" name="end_time" value="{{$session_4->end_time}}">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_4->id}}" id="{{$session_4->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @else
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_4" type="text" name="start_time" value="1:35 PM">
+                                                                <input id="end_time_session_4" type="text" name="end_time" value="3:30 PM">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" id="4"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <?php
+                                                $session_5_start_time = date("H:i:s",strtotime("3:35 pm"));
+                                                $session_5_end_time = date("H:i:s",strtotime("4:20 pm"));
+                                                $session_5 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_5_start_time)->where("end_time",$session_5_end_time)->first();
+                                                ?>
+                                                <td>
+                                                    <b>3:35 - 4:20pm</b>
+                                                </td>
+                                                <td>
+                                                    Mentorship<br />
+                                                    Q and A Sessions
+                                                </td>
+                                                <td>
+                                                    @if($session_5)
+                                                        @foreach($session_5->facilitators as $facilitator)
+                                                            {{$facilitator->name}}<br />
+                                                        @endforeach
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_{{$session_5->id}}" type="text" name="start_time" value="{{$session_5->start_time}}">
+                                                                <input id="end_time_session_{{$session_5->id}}" type="text" name="end_time" value="{{$session_5->start_time}}">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_5->id}}" id="{{$session_5->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @else
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_5" type="text" name="start_time" value="3:35 PM">
+                                                                <input id="end_time_session_5" type="text" name="end_time" value="04:20 PM">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" id="5"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <?php
+                                                $session_6_start_time = date("H:i:s",strtotime("04:20 pm"));
+                                                $session_6_end_time = date("H:i:s",strtotime("04:30 pm"));
+                                                $session_6 = \App\Models\Session::where("day_id",$trainingDay->id)->where("start_time",$session_6_start_time)->where("end_time",$session_6_end_time)->first();
+                                                ?>
+                                                <td>
+                                                    <b>4:20 – 4:30pm</b>
+                                                </td>
+                                                <td>
+                                                    Kahoot Session
+                                                </td>
+                                                <td>
+                                                    @if($session_6)
+                                                        @foreach($session_6->facilitators as $facilitator)
+                                                            {{$facilitator->name}}<br />
+                                                        @endforeach
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_{{$session_6->id}}" type="text" name="start_time" value="{{$session_6->start_time}}">
+                                                                <input id="end_time_session_{{$session_6->id}}" type="text" name="end_time" value="{{$session_6->end_time}}">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" data-session_id="{{$session_6->id}}" id="{{$session_6->id}}"  class="openModalUpdateSessionFacilitators float-right">
+                                                                <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
+                                                                    <i class="feather icon-plus"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @else
+                                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                                            <div style="display: none;">
+                                                                <input id="start_time_session_6" type="text" name="start_time" value="4:20 PM">
+                                                                <input id="end_time_session_6" type="text" name="end_time" value="04:30 PM">
+                                                            </div>
+                                                            <a href="#!" data-toggle="modal" id="6"  class="openModalUpdateSessionFacilitators float-right">
                                                                 <button type="button" title="Add Session Facilitator" class="btn btn-icon icon-s">
                                                                     <i class="feather icon-plus"></i>
                                                                 </button>

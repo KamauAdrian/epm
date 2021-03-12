@@ -769,7 +769,7 @@
                         '<div class="mt-4">'+
                         '<div style="font-size: 12px" class="text-small text-muted">Due Date</div>'+
                         '<div class="">'+
-                        '<span style="font-size: 12px" onclick="openModalUpdateDueDate(\''+due_date+'\')">'+due_date+'</span>'+
+                        '<a href="#!" title="Click To Update The Task Due Date" onclick="openModalUpdateDueDate(\''+due_date+'\')"><span style="font-size: 12px"><i class="fa fa-calendar"></i> '+due_date+'</span></a>'+
                         '</div>'+
                         '<div class="mt-2">'+
                         '<div style="font-size: 12px" class="text-small text-muted">Assignees/Collaborators</div>'+
@@ -780,12 +780,8 @@
                         '</div>'+
                         '</div>'
                     );
-                    // console.log(task_assignees);
-                    // console.log(response_comments.length);
                     if (response_comments){
                         response_comments.forEach(function (response_comment){
-                            // console.log(response_comment);
-                            // var date_time = response_comment.created_at;
                             var commentTaskSection =
                                 '<div class="comment mt-4"><div>'+
                                 '<button type="button" class="btn btn-icon">'+response_comment.avtar_name+'</button>' +
@@ -794,8 +790,6 @@
                                 '</div>'+
                                 '<div class="mt-2 ml-2">'+response_comment.comment+'</div></div>';
                             var comments = $('.task-comments');
-                            // console.log(comments);
-                            // comments.innerHTML='';
                             comments.append(commentTaskSection);
                         });
                     }
@@ -845,9 +839,6 @@
                     });
                 }
             });
-            // $('#markTask'+taskId.id+'Complete').click(function (event){
-
-
         });
 
         $("#btn-mark-task-complete").click(function (event){
@@ -964,7 +955,6 @@
                     $("#modalUpdateTaskName").modal('hide');
                 }
             });
-
             // No back end to actually submit to!
             // alert('Open the console to see the submit data!');
             return true;
