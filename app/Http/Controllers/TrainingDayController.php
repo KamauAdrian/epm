@@ -61,24 +61,10 @@ class TrainingDayController extends Controller
         if ($admin){
             $training = Training::find($training_id);
             if ($training){
-                if ($training->training == "Physical"){
                     $trainingDay = TrainingDay::find($day_id);
                     if ($trainingDay ){
-                        return view("Epm.Trainings.Physical.read",compact("trainingDay"));
+                        return view("Epm.Trainings.overview",compact("trainingDay"));
                     }
-                }
-                if ($training->training == "Virtual"){
-                    $trainingDay = TrainingDay::find($day_id);
-                    if ($trainingDay ){
-                        return view("Epm.Trainings.Virtual.read",compact("trainingDay"));
-                    }
-                }
-                if ($training->training == "TOT"){
-                    $trainingDay = TrainingDay::find($day_id);
-                    if ($trainingDay ){
-                        return view("Epm.Trainings.TOT.read",compact("trainingDay"));
-                    }
-                }
             }
         }
     }
@@ -127,37 +113,29 @@ class TrainingDayController extends Controller
 //                    dd($request->all());
                     if ($exist_session && $facilitators){
                         //detach existing trainers and attach new
-//                        dd($exist_session);
                         $exist_session->facilitators()->detach();
                         $exist_session->facilitators()->attach($facilitators);
                         $response["status"] = 0;
                         $response["message"] = "session Facilitators Updated Success";
-                        $response["url"] = "/adm/".$admin->id."/view/training/".$training->id."/day/".$day->id;
                         $response["data"] = $exist_session->facilitators;
-
+//                        dd($exist_session);
                     }else{
                         $session = new Session();
                         $session->start_time =$start_time;
                         $session->end_time = $end_time;
                         $session->day_id = $day->id;
-//                        dd($facilitators);
                         $session_saved = $session->save();
                         if ($session_saved){
-                            $response["session_code"] = 0;
-                            $response["session_message"] = "session Created Successfully";
-                            $response["session"] = $session;
                             if ($facilitators){
                                 $session->facilitators()->attach($facilitators);
 //                                dd($session->facilitators);
                                 $response["status"] = 0;
                                 $response["message"] = "session Facilitators Updated Success";
-                                $response["url"] = "/adm/".$admin->id."/view/training/".$training->id."/day/".$day->id;
                                 $response["data"] = $facilitators;
                             }
                         }
                     }
                     return $response;
-//                    dd($request->all());
                 }
             }
         }

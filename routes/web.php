@@ -226,6 +226,7 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/upload/cms',[App\Http\Controllers\CenterManagerController::class, 'upload_cms']);
 
     //trainers
+    Route::get('/trainer/job/categories',[App\Http\Controllers\JobCategoryController::class, 'job_categories']);//job categories for trainers
     Route::get('/adm/{id}/request/upload/trainers',[App\Http\Controllers\TrainerController::class, 'request_upload_trainers']);
     Route::get('/download/trainers/excel/template',[App\Http\Controllers\TrainerController::class, 'download_trainers_excel_template']);
     Route::post('/adm/{id}/upload/new/trainers',[App\Http\Controllers\TrainerController::class, 'upload_trainers']);
@@ -260,6 +261,10 @@ Route::group(['middleware'=>'admin'],function (){
     //Training -> (Session Allocations)
     Route::get('/adm/{id}/view/training/{training_id}/session/allocations',[App\Http\Controllers\TrainingSessionAllocationController::class, 'index']);
 
+    //Trainings per category (if  virtual training)
+    Route::get('/adm/{id}/view/training/{training_id}/category/{category_id}',[App\Http\Controllers\TrainingCategoryController::class, 'index']);
+    Route::get('/adm/{id}/view/training/{training_id}/category/{category_id}/day/{day_id}',[App\Http\Controllers\TrainingCategoryController::class, 'show']);
+
     //Trainings(Per Day Day one ...)
     Route::get('/adm/{id}/view/training/{training_id}/day/{day_id}',[App\Http\Controllers\TrainingDayController::class, 'show']);
     Route::post('/adm/{id}/add/training/{training_id}/day/{day_id}/facilitators',[App\Http\Controllers\TrainingDayController::class, 'update_facilitators']);
@@ -284,6 +289,13 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/update/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'update']);
     Route::get('/adm/{id}/delete/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'destroy']);
 
+    //Training (Trainees)
+    Route::get('/adm/{id}/register/training/{training_id}/day/{day_id}/trainees',[App\Http\Controllers\TraineeController::class, 'create']);
+    Route::post('/adm/{id}/training/{training_id}/day/{day_id}/save/trainees',[App\Http\Controllers\TraineeController::class, 'store']);
+    Route::get('/adm/{id}/training/{training_id}/day/{day_id}/trainees/register',[App\Http\Controllers\TraineeController::class, 'show']);
+    Route::get('/adm/{id}/upload/training/{training_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload']);
+    Route::get('/download/trainees/excel/template',[App\Http\Controllers\TraineeController::class, 'excel_template']);
+    Route::post('/adm/{id}/save/training/{training_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload_store']);
 
     //Trainings ->Physical Training Resources
     Route::get('/adm/{id}/view/physical/training/resources',[App\Http\Controllers\PhysicalTrainingResourceController::class, 'index']);
@@ -309,14 +321,6 @@ Route::group(['middleware'=>'admin'],function (){
     Route::post('/adm/{id}/session/{session_id}/day/{day_id}/save/trainers',[App\Http\Controllers\SessionController::class, 'store_trainers']);
     Route::get('/adm/{id}/session/{session_id}/day/{day_id}/add/classes',[App\Http\Controllers\SessionController::class, 'create_classes']);
     Route::post('/adm/{id}/session/{session_id}/day/{day_id}/save/classes',[App\Http\Controllers\SessionController::class, 'store_classes']);
-
-    //Session (Trainees)
-    Route::get('/adm/{id}/session/{session_id}/add/trainees',[App\Http\Controllers\SessionController::class, 'create_trainees']);
-    Route::post('/adm/{id}/session/{session_id}/save/trainees',[App\Http\Controllers\SessionController::class, 'store_trainees']);
-    Route::get('/adm/{id}/session/{session_id}/upload/trainees',[App\Http\Controllers\SessionController::class, 'upload_trainees']);
-    Route::get('/download/trainees/excel/template',[App\Http\Controllers\SessionController::class, 'download_excel_template']);
-    Route::post('/adm/{id}/session/{session_id}/save/uploaded/trainees',[App\Http\Controllers\SessionController::class, 'store_uploaded_trainees']);
-
 
     //employee Leave form
     Route::get('/adm/{id}/view/leave/applications',[App\Http\Controllers\LeaveApplicationController::class,'index']);

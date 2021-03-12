@@ -17,7 +17,8 @@ class CreateTrainingDaysTable extends Migration
             $table->id();
             $table->integer('day');
             $table->date('date');
-            $table->integer('training_id')->unsigned();
+            $table->foreignId('training_id')->nullable()->constrained("trainings")->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained("job_categories")->nullOnDelete();
             $table->timestamps();
         });
     }

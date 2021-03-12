@@ -273,7 +273,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" id="" class="btn btn-outline-info btn-mark-task-complete"></button>
+                            <button type="button" data-id="" id="btn-mark-task-complete" class="btn btn-outline-info"></button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -391,7 +391,6 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            {{--                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Project Manager</h5>--}}
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -400,7 +399,6 @@
                             <form action="" id="form-update-task-name">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input id="task-user-id" type="hidden" name="user_id" value="">
                                         <input  id="task-task-id" type="hidden" name="task_id" value="">
                                         <div class="form-group">
                                             <label>Update Task Name</label>
@@ -607,6 +605,7 @@
         function openModalUpdateTaskName(taskName){
             // alert(name);
             $("#update-task-task-name").val(taskName);
+            // $("#update-task-task-id").val(taskId);
             $("#modalTaskDetailed").modal('hide');
             $("#modalUpdateTaskName").modal('show');
         }
@@ -694,7 +693,7 @@
             // console.log("task id = "+taskId+" and user id ="+userId);
             $("#modal-modal-comments-task-id").val(taskId);
             $("#modal-modal-date-task-id").val(taskId);
-            // $("#task-task-id").val(taskId);
+            $("#task-task-id").val(taskId);
             $("#modal-modal-assignee-task-id").val(taskId);
             $("#modal-modal-attachment-task-id").val(taskId);
             $("#modal-modal-link-task-id").val(taskId);
@@ -708,13 +707,13 @@
                 },
                 success: function([response_task,response_assignees,response_attachments,response_links,response_comments]){
 
-                    $(".btn-mark-task-complete").attr('id','markTask'+response_task.id+'Complete');
+                   $("#btn-mark-task-complete").attr('data-id',+response_task.id);
                     console.log(response_task.status);
                     if (response_task.status == 0){
-                        $(".btn-mark-task-complete").text('Mark Complete');
+                        $("#btn-mark-task-complete").text('Mark Complete');
                     }
                     if(response_task.status == 1){
-                        $(".btn-mark-task-complete").text('Completed');
+                        $("#btn-mark-task-complete").text('Completed');
                     }
                     // Add response in Modal body
                     var task_assignees = "";
@@ -764,7 +763,7 @@
                         '<div class="col-md-12" style="display: none;" id="modal-task-id">'+response_task.id+'</div>'+
                         '<div class="col-md-12">'+
                         '<div class="form-group">'+
-                        '<h6 class="text-center" onclick="openModalUpdateTaskName(\''+response_task.name+'\')">'+response_task.name+'</h6>'+
+                        '<a href="#!" title="Click To Edit Task Name" onclick="openModalUpdateTaskName(\''+response_task.name+'\')"><h6 class="text-center">'+response_task.name+' <span><i class="fa fa-pencil-alt"></i></span></h6></a>'+
                         '</div>'+
                         '</div>'+
                         '<div class="mt-4">'+
@@ -847,28 +846,31 @@
                 }
             });
             // $('#markTask'+taskId.id+'Complete').click(function (event){
-                $(".btn-mark-task-complete").click(function (event){
-                    // alert("hey there wat do you want to do next");
-                $.ajaxSetup({
-                    header:$('meta[name="_token"]').attr('content')
-                });
-                event.preventDefault();
-                var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
-                $.ajax({
-                    url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',
-                    type: 'post',
-                    success: function(response){
-                        // console.log(response.data.status);
-                        if (response.data.status == 0){
-                            $(".btn-mark-task-complete").text('Mark Complete');
-                        }else{
-                            $(".btn-mark-task-complete").text('Completed');
-                        }
-                    }
-                });
-                return true;
-            });
 
+
+        });
+
+        $("#btn-mark-task-complete").click(function (event){
+            let taskId = $(this).attr("data-id");
+            // alert("hey there wat do you want to do next");
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            });
+            event.preventDefault();
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            $.ajax({
+                url: '/adm/'+user_id+'/mark/task/'+taskId+'/complete',
+                type: 'post',
+                success: function(response){
+                    // console.log(response.data.status);
+                    if (response.data.status == 0){
+                        $("#btn-mark-task-complete").text('Mark Complete');
+                    }else{
+                        $("#btn-mark-task-complete").text('Completed');
+                    }
+                }
+            });
+            return true;
         });
 
         $('#modalAddLink').on('hidden.bs.modal', function () {

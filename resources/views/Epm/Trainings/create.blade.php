@@ -25,7 +25,7 @@
                                     <div class="form-group" id="training">
                                         <label>SELECT TRAINING</label>
                                         <multiselect id="multiSelectTraining" v-model="selectedTraining" :options="trainings"
-                                                     placeholder="Select Training" @close="alertClosed"
+                                                     placeholder="Select Training"
                                                      :searchable="true" :close-on-select="true">
                                         </multiselect>
 {{--                                        <pre>{{$data }}</pre>--}}
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group" id="trainingVenue" style="display: none;">
+                                    <div class="form-group" id="trainingVenue">
                                         <label>TRAINING VENUE</label>
                                         <multiselect v-model="selectedVenue" :options="venues"
                                                      placeholder="Select Venue" @close="alertClosed"
@@ -148,16 +148,16 @@
                 ],
             },
             methods:{
-                alertClosed:function(){
-                    var opselected = this.selectedTraining;
-                    var centerInstitution = document.getElementById("trainingVenue");
-                    if(opselected=="Physical" || opselected=="TOT"){
-                        centerInstitution.style.display="block";
-                    }
-                    if(opselected=="Virtual"){
-                        centerInstitution.style.display="none";
-                    }
-                },
+                // alertClosed:function(){
+                //     var opselected = this.selectedTraining;
+                //     var centerInstitution = document.getElementById("trainingVenue");
+                //     if(opselected=="Physical" || opselected=="TOT"){
+                //         centerInstitution.style.display="block";
+                //     }
+                //     if(opselected=="Virtual"){
+                //         centerInstitution.style.display="none";
+                //     }
+                // },
             },
         });
         new Vue({
@@ -170,6 +170,7 @@
                 venues: [
                     'Centers (AYECs)',
                     'Institution (University/Tvet)',
+                    'Public',
                 ],
             },
             methods:{
@@ -184,6 +185,10 @@
                     if(opselected=="Institution (University/Tvet)"){
                         venueCenter.style.display="none";
                         venueInstitution.style.display="block";
+                    }
+                    if(opselected=="Public"){
+                        venueCenter.style.display="none";
+                        venueInstitution.style.display="none";
                     }
                 },
             },

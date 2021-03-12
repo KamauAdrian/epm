@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TraineesTemplateExport;
+use App\Imports\TraineesImport;
+use App\Models\JobCategory;
+use App\Models\Trainee;
 use App\Models\Training;
 use App\Models\TrainingDay;
+use App\Models\TrainingDayCategory;
 use App\Models\TrainingSession;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrainingController extends Controller
 {
@@ -75,25 +81,21 @@ class TrainingController extends Controller
             $training->venue = $request->venue;
             $training->start_date = $request->start_date;
             $end_date = "";
-            $venue = "";
-            $categories = [];
+//            dd($categories);
             if ($request->training == "Physical" || $request->training == "TOT"){
-                $venue = $request->venue;
                 $end_date = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
             }
             if ($request->training == "Virtual"){
-                $categories[] = [
-                    "name"=>"",
-                ];
                 $end_date = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
             }
-            $training->venue = $venue;
+            $venue = $request->venue;
             if ($venue=="Centers (AYECs)"){
                 $training->center_id = $request->center;
             }
             if ($venue=="Institution (University/Tvet)"){
                 $training->institution_id = $request->institution;
             }
+            $training->venue = $venue;
             $training->cohort_id = $request->cohort;
             $training->end_date = $end_date;
             $training->type = $request->type;
@@ -101,6 +103,7 @@ class TrainingController extends Controller
             $trainers = $request->trainers;
             $training_saved = $training->save();
             if ($training_saved){
+                $training->trainers()->attach($trainers);
                 $start = date_create($training->start_date);
                 $end = date_create($training->end_date);
                 $interval = date_diff($start, $end)->format("%d%");
@@ -108,15 +111,29 @@ class TrainingController extends Controller
                 for ($i=0;$i<=$interval;$i++){
                     $days[] = date("Y-m-d",strtotime("+$i day", strtotime($training->start_date)));
                 }
-                foreach ($days as $key=>$day){
-                    $training_day = new TrainingDay();
-                    $training_day->date = $day;
-                    $training_day->day = $key+1;
-                    $training_day->training_id = $training->id;
-                    $training_day->save();
+                if ($training->training == "Virtual"){
+                    $categories = JobCategory::all()->pluck("id");
+                    $training->categories()->attach($categories);
+                    foreach ($categories as $category){
+                        foreach ($days as $key=>$day){
+                            $training_day = new TrainingDay();
+                            $training_day->date = $day;
+                            $training_day->day = $key+1;
+                            $training_day->training_id = $training->id;
+                            $training_day->category_id = $category;
+                            $training_day->save();
+                        }
+                    }
                 }
-
-                $training->trainers()->attach($trainers);
+                else{
+                    foreach ($days as $key=>$day){
+                        $training_day = new TrainingDay();
+                        $training_day->date = $day;
+                        $training_day->day = $key+1;
+                        $training_day->training_id = $training->id;
+                        $training_day->save();
+                    }
+                }
                 return redirect("/adm/".$id."/view/training/".$training->id)->with("success","New {$training->training} Training Created Successfully");
             }
         }
@@ -174,9 +191,7 @@ class TrainingController extends Controller
     {
         $training = Training::find($training_id);
         if ($training){
-
             return view('Epm.Trainings.read',compact('training'));
-
         }
 
     }

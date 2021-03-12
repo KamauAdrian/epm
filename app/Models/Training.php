@@ -24,6 +24,10 @@ class Training extends Model
         return $this->belongsToMany('App\Models\Trainee','trainee_training','training_id','trainee_id');
     }
 
+    public function categories(){
+        return $this->belongsToMany('App\Models\JobCategory','training_category',"training_id","category_id");
+    }
+
     //each training session belongs to many trainers
     public function trainers(){
         return $this->belongsToMany('App\Models\User','trainer_training','training_id','trainer_id');

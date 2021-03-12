@@ -28,7 +28,7 @@ class CreateTraineesTable extends Migration
             $table->string('id_number');
             $table->integer('age');
             $table->string('interests');
-            $table->string('session_id');
+//            $table->integer('day_id');
             $table->timestamps();
         });
     }
