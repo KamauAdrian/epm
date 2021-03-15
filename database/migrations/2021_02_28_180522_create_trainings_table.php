@@ -17,6 +17,7 @@ class CreateTrainingsTable extends Migration
             $table->id();
             $table->string("training");
             $table->string("venue");
+            $table->string("training_link")->nullable();
             $table->date("start_date");
             $table->date("end_date");
             $table->string("type");

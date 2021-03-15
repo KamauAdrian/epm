@@ -3,6 +3,7 @@
 @section("sessionAllocations")
     <?php
     $auth_admin = auth()->user();
+    $trainees = $trainingDay->trainees;
     ?>
     @if($trainingDay->day == 1)
         <div class="col-md-12">
@@ -1632,4 +1633,128 @@
             </div>
         </div>
     @endif
+    <div class="col-md-6">
+        <div class="card" style="height: 250px;">
+            <div class="card-header">
+                <h6>Communication</h6>
+            </div>
+            <div class="card-body text-center">
+                <div class="media">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#!" title="Email All Trainees">
+                                <button type="button" class="btn btn-lg btn-outline-info" style="font-size: 14px; width: 100px;">
+                                    <span><i class="fa fa-envelope"></i></span> <br> <p class="align-self-center">Email <br> Trainees</p>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#!" title="SMS All Trainees">
+                                <button type="button" class="btn btn-lg btn-outline-info" style="font-size: 14px; width: 100px;">
+                                    <span><i class="fa fa-comment"></i></span> <br> <p class="align-self-center">SMS <br>Trainees</p>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="height: 250px;">
+            <div class="card-header">
+                <h6>Progress</h6>
+            </div>
+            <div class="card-body text-center">
+                <div class="media">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#!" title="Upload Photos">
+                                <button type="button" class="btn btn-lg btn-outline-info" style="font-size: 14px; width: 100px;">
+                                    <span><i class="fa fa-image"></i></span> <br> <p class="align-self-center">Upload <br> Images</p>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#!" title="Impact Stories">
+                                <button type="button" class="btn btn-lg btn-outline-info" style="font-size: 14px; width: 100px;">
+                                    <span><i class="fa fa-pencil-alt"></i></span><p class="align-self-center">Impact <br> Stories </p>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h6 class="text-small">Trainees</h6></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="traineesList" class="table table-center mb-0 ">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($trainees as $trainee)
+                            <tr>
+                                <td>{{$trainee->name}}</td>
+                                <td>{{$trainee->email}}</td>
+                                <td>{{$trainee->phone_number}}</td>
+                                <td>{{$trainee->gender}}</td>
+                                <td class="text-right">
+                                    <div class="float-right">
+                                        <a href="#!" class="btn btn-sm btn-outline-info">
+                                            <span><i class="fa fa-envelope"></i></span>
+                                        </a>
+                                        <a href="#!" class="btn btn-sm btn-outline-info">
+                                            <span><i class="fa fa-comment"></i></span>
+                                        </a>
+                                        <a href="#!" class="btn btn-sm btn-outline-danger">
+                                            <span><i class="fa fa-trash"></i></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{{--    <div class="col-md-4">--}}
+{{--        <div class="card" style="height: 250px;">--}}
+{{--            <div class="card-header">--}}
+{{--                <h6>Comments</h6>--}}
+{{--            </div>--}}
+{{--            <div class="card-body text-center">--}}
+{{--                <div class="media">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            <a href="#!" title="Upload Report">--}}
+{{--                                <button type="button" class="btn btn-lg btn-outline-info align-self-center" style="font-size: 14px; width: 100px;">--}}
+{{--                                    <span><i class="fa fa-comment"></i></span><p class="align-self-center">Add <br> Comment</p>--}}
+{{--                                </button>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            <a href="#!" title="Upload Report">--}}
+{{--                                <button type="button" class="btn btn-lg btn-outline-info align-self-center" style="font-size: 14px; width: 100px;">--}}
+{{--                                    <span><i class="fa fa-book-open"></i></span><p class="align-self-center">View <br> Comment</p>--}}
+{{--                                </button>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection

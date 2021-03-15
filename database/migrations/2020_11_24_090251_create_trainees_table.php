@@ -19,7 +19,7 @@ class CreateTraineesTable extends Migration
             $table->string('gender');
             $table->string('county');
             $table->string('location');
-            $table->string('category');// digital marketing,,data management, transcription, content writing,virtual assistant            $table->string('county');
+            $table->foreignId('category_id')->nullable()->constrained("job_categories")->nullOnDelete();// digital marketing,,data management, transcription, content writing,virtual assistant            $table->string('county');
             $table->string('level_of_computer_literacy');//select beginner,intermediate,proficient
             $table->string('level_of_education');//select secondary, university,..
             $table->string('field_of_study');

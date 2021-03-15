@@ -51,6 +51,60 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
+                        <h5>Trainees</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="{{url("/adm/".$auth_admin->id."/upload/training/".$training->id."/trainees")}}">
+                                    <button type="button" class="btn btn-outline-info mt-3 disabled">Upload</button>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{{url("/adm/".$auth_admin->id."/mark/training/".$training->id."/trainees/register")}}">
+                                    <button type="button" class="btn btn-outline-info mt-3 disabled">Mark Register</button>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{{url("/adm/".$auth_admin->id."/register/new/training/".$training->id."/trainee")}}">
+                                    <button type="button" class="btn btn-outline-info mt-3 disabled">Add Trainee</button>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <table class=" table-bordered p-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Numbers <br /> Tabulation</th>
+                                            <th>General</th>
+                                            <th>Attended <br /> All</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><b>Male:</b></td>
+                                        <td>{{count($training->trainees->where("gender","Male"))}}</td>{{--//general(overall training)--}}
+                                        <td>10</td>{{--//attended all 5 days training)--}}
+                                    </tr>
+                                    <tr>
+                                        <td><b>Female:</b></td>
+                                        <td>{{count($training->trainees->where("gender","Female"))}}</td>{{--//general(overall training)--}}
+                                        <td>10</td>{{--//attended all 5 days training)--}}
+                                    </tr>
+                                    <tr>
+                                        <td><b>Total:</b></td>
+                                        <td>{{count($training->trainees)}}</td>{{--//general(overall training)--}}
+                                        <td>20</td>{{--//attended all 5 days training)--}}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
                         <h5>Days</h5>
                     </div>
                     <div class="card-body">
@@ -66,15 +120,15 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <h5>Trainees (Female)</h5>
-                                                    12
+                                                    {{count($day->trainees->where("gender","Female"))}}
                                                 </div>
                                                 <div class="col-md-3">
                                                     <h5>Trainees (Male)</h5>
-                                                    12
+                                                    {{count($day->trainees->where("gender","Male"))}}
                                                 </div>
                                                 <div class="col-md-3">
                                                     <h5>Trainees (Total)</h5>
-                                                    24
+                                                    {{count($day->trainees)}}
                                                 </div>
                                             </div>
                                         </div>

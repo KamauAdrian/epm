@@ -15,8 +15,25 @@
   <component name="ChangeListManager">
     <list default="true" id="ceecb3c1-63e7-427f-94fb-6d19ef14eb59" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Projects/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TraineeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TraineeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrainingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/JobCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/JobCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_24_090251_create_trainees_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_24_090251_create_trainees_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_28_180522_create_trainings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_28_180522_create_trainings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_10_045905_create_trainee_day_pivot_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_10_045905_create_trainee_day_pivot_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Communication/Emails/compose.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Communication/Emails/compose.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Communication/Emails/inbox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Communication/Emails/inbox.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Communication/Emails/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Communication/Emails/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainees/upload-trainees.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Layouts/days-master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Layouts/days-master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Layouts/training-master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Layouts/training-master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/overview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/overview.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/Trainings/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Epm/layouts/sidebar-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +359,10 @@
       <workItem from="1615437405309" duration="7177000" />
       <workItem from="1615447503284" duration="22166000" />
       <workItem from="1615486897822" duration="1521000" />
-      <workItem from="1615523024792" duration="19287000" />
+      <workItem from="1615523024792" duration="28840000" />
+      <workItem from="1615615218857" duration="23000" />
+      <workItem from="1615654319288" duration="616000" />
+      <workItem from="1615781838347" duration="27969000" />
     </task>
     <servers />
   </component>
@@ -378,10 +398,6 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="416" y="121" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615460421532" />
-    <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606914575160">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="431" y="207" width="494" height="309" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1606914575160" />
     <state x="466" y="121" width="424" height="482" key="FileChooserDialogImpl" timestamp="1614925311652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -415,10 +431,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="159" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615370600336" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615535994757">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615818102818">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615535994757" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615818102818" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -506,6 +522,11 @@
           <url>file://$PROJECT_DIR$/resources/views/Emails/master.blade.php</url>
           <line>225</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/Epm/Trainings/Virtual/read.blade.php</url>
+          <line>9</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

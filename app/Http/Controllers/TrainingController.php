@@ -81,11 +81,13 @@ class TrainingController extends Controller
             $training->venue = $request->venue;
             $training->start_date = $request->start_date;
             $end_date = "";
+            $training_link = null;
 //            dd($categories);
             if ($request->training == "Physical" || $request->training == "TOT"){
                 $end_date = date("Y-m-d",strtotime("+4 days",strtotime($training->start_date)));
             }
             if ($request->training == "Virtual"){
+                $training_link = $request->training_link;
                 $end_date = date("Y-m-d",strtotime("+1 days",strtotime($training->start_date)));
             }
             $venue = $request->venue;
@@ -96,6 +98,7 @@ class TrainingController extends Controller
                 $training->institution_id = $request->institution;
             }
             $training->venue = $venue;
+            $training->training_link = $training_link;
             $training->cohort_id = $request->cohort;
             $training->end_date = $end_date;
             $training->type = $request->type;
@@ -178,6 +181,89 @@ class TrainingController extends Controller
                 $institutions[] = $institution->id;
             }
             return response()->json($institutions);
+        }
+    }
+    public function mark_register_physical_tot($id,$training_id){
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $trainees = $training->trainees;
+//                $day = TrainingDay::find($day_id);
+                return view("Epm.Trainings.trainees-register",compact("training","trainees"));
+            }
+        }
+    }
+
+    public function mark_trainee_physical_tot_present($id,$training_id, $day_id, $trainee_id){
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $day = TrainingDay::find($day_id);
+                $trainee = Trainee::find($trainee_id);
+                $checkIfPresent = $day->trainees()->find($trainee->id);
+//                dd($day->trainees);
+                if ($checkIfPresent){
+                    $response["message"] =$trainee->name." Already Marked as Present";
+                    $response["response_code"] = 0;
+                    $response["response_data"] = $trainee;
+                    return $response;
+//                    return redirect("/adm/".$admin->id."/mark/training/".$training->id."/trainees/register")->with("success","{$trainee->name} Already Marked as Present");
+                }else {
+
+                    $day->trainees()->attach($trainee);
+//                    if ($day->day == 1){
+//                        $training->trainees()->find($trainee->id)->update("day_one",1);
+//                    }
+                    $response["message"] =$trainee->name." Has Been Marked Present";
+                    $response["response_code"] = 0;
+                    $response["response_data"] = $trainee;
+                    return $response;
+//                    return redirect("/adm/" . $admin->id . "/mark/training/" . $training->id . "/trainees/register")->with("success", "{$trainee->name} Has Been Marked Present");
+                }
+
+                }
+        }
+    }
+
+    public function mark_trainee_physical_tot_absent($id,$training_id, $day_id, $trainee_id){
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            if ($training){
+                $day = TrainingDay::find($day_id);
+                $trainee = Trainee::find($trainee_id);
+                $checkIfPresent = $day->trainees()->find($trainee->id);
+//                dd($day->trainees);
+                if ($checkIfPresent){
+                    $day->trainees()->detach($trainee);
+                    $response["message"] =$trainee->name." Marked as Absent";
+                    $response["response_code"] = 0;
+                    $response["response_data"] = $trainee;
+                    return $response;
+//                    return redirect("/adm/".$admin->id."/mark/training/".$training->id."/trainees/register")->with("success","{$trainee->name} Already Marked as Present");
+                }else {
+                    $response["message"] =$trainee->name." Marked as Absent";
+                    $response["response_code"] = 0;
+                    $response["response_data"] = $trainee;
+                    return $response;
+//                    return redirect("/adm/" . $admin->id . "/mark/training/" . $training->id . "/trainees/register")->with("success", "{$trainee->name} Has Been Marked Present");
+                }
+
+            }
+        }
+    }
+
+    public function mark_register_virtual($id,$training_id, $category_id){
+        $admin = User::find($id);
+        if ($admin){
+            $training = Training::find($training_id);
+            $category = JobCategory::find($category_id);
+            if ($training){
+                $trainees = $category->trainees;
+                return view("Epm.Trainings.Trainees.show",compact("training"));
+            }
         }
     }
 

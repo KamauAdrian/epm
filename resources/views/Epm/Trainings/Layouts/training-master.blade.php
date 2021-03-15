@@ -14,6 +14,7 @@
     <div class="col-md-12">
         <?php
         use App\Models\Center;use App\Models\Cohort;use App\Models\Institution;
+        $auth_admin = auth()->user();
         $center = $training->center;
         $trainers_raw = $training->trainers;
         $trainers = [];
@@ -62,130 +63,98 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             {{--                            //trainers--}}
                             <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-body" style="height: 150px; overflow: auto;">
-                                        <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
-                                        @if($trainers)
-                                            @foreach($trainers as $key=>$trainer)
-                                                {{$key+1}}.{{$trainer}}<br />
-                                            @endforeach
-                                        @endif
+                                <h6><span class="text-small" style="font-size: 14px">Trainers</span></h6>
+                                @if($trainers)
+                                    @foreach($trainers as $key=>$trainer)
+                                        {{$key+1}}.{{$trainer}}<br />
+                                    @endforeach
+                                @endif
+                                @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                    <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mt-2 float-left">
+                                        <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
+                                            <i class="feather icon-plus"></i>
+                                        </button>
+                                    </a>
+                                @endif
+                            </div>
+                            {{--                            // Classes/Cohort--}}
+                            <div class="col-md-3">
+                                <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
+                                @if($cohort)
+                                    <b>Category:</b> {{$cohort->category}} <br />
+                                    <b>Cohort:</b> {{$cohort->name}}
+
+                                @else
+                                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                        <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mt-2">
+                                            <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
+                                                <i class="feather icon-plus"></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                @endif
+                            </div>
+                            @if($training->venue == "Centers (AYECs)")
+                                <div class="col-md-3">
+                                    <h6><span class="text-small" style="font-size: 14px">Venue (Center)</span></h6>
+                                    @if($center)
+                                        {{$center->name}}
+                                    @else
                                         @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                            <a href="#!" data-toggle="modal" class="openModalUpdateTrainers mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                <button type="button" title="Add Trainers To Training" class="btn btn-icon icon-s">
+                                            <a href="#!" data-toggle="modal" class="openModalUpdateCenter mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                <button type="button" title="Add Center" class="btn btn-icon icon-s">
                                                     <i class="feather icon-plus"></i>
                                                 </button>
                                             </a>
                                         @endif
-                                    </div>
+                                    @endif
                                 </div>
-                            </div>
-                            {{--                            // Classes/Cohort--}}
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-body" style="height: 150px; overflow: auto;">
-                                        <h6><span class="text-small" style="font-size: 14px">Class/Cohort</span></h6>
-                                        @if($cohort)
-                                            <b>Category:</b> {{$cohort->category}} <br />
-                                            <b>Cohort:</b> {{$cohort->name}}
-
-                                        @else
-                                            @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                <a href="#!" data-toggle="modal" class="openModalUpdateCohort mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                    <button type="button" title="Add Class/Cohort" class="btn btn-icon icon-s">
-                                                        <i class="feather icon-plus"></i>
-                                                    </button>
-                                                </a>
-                                            @endif
+                            @elseif($training->venue == "Institution (University/Tvet)")
+                                <div class="col-md-3">
+                                    <h6><span class="text-small" style="font-size: 14px">Venue (Institution)</span></h6>
+                                    @if($institution)
+                                        {{$institution->name}}
+                                    @else
+                                        @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
+                                            <a href="#!" data-toggle="modal" class="openModalUpdateInstitution mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
+                                                <button type="button" title="Add Institution" class="btn btn-icon icon-s">
+                                                    <i class="feather icon-plus"></i>
+                                                </button>
+                                            </a>
                                         @endif
-                                    </div>
+                                    @endif
                                 </div>
-                            </div>
-                            @if($training->training == "Physical" || $training->training == "TOT")
-                                @if($training->venue == "Centers (AYECs)")
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body" style="height: 150px; overflow: auto;">
-                                                <h6><span class="text-small" style="font-size: 14px">Center</span></h6>
-                                                @if($center)
-                                                    {{$center->name}}
-                                                @else
-                                                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                        <a href="#!" data-toggle="modal" class="openModalUpdateCenter mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                            <button type="button" title="Add Center" class="btn btn-icon icon-s">
-                                                                <i class="feather icon-plus"></i>
-                                                            </button>
-                                                        </a>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                @elseif($training->venue == "Institution (University/Tvet)")
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body" style="height: 150px; overflow: auto;">
-                                                <h6><span class="text-small" style="font-size: 14px">Institution</span></h6>
-                                                @if($institution)
-                                                    {{$institution->name}}
-                                                @else
-                                                    @if($auth_admin->role->name == "Su Admin" || $auth_admin->department == "Training")
-                                                        <a href="#!" data-toggle="modal" class="openModalUpdateInstitution mb-2 mr-3" style="position: absolute; right: 0; bottom: 0">
-                                                            <button type="button" title="Add Institution" class="btn btn-icon icon-s">
-                                                                <i class="feather icon-plus"></i>
-                                                            </button>
-                                                        </a>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
+                            @else
+                                <div class="col-md-3">
+                                    <h6><span class="text-small" style="font-size: 14px">Venue</span></h6>
+                                    Public
+                                </div>
                             @endif
                             @if($training->training == "Virtual")
                                 @if($training->type == "Public")
-                                    {{--                                    <div class="col-md-3">--}}
-                                    {{--                                        <div class="card">--}}
-                                    {{--                                            <div class="card-body text-center" style="height: 150px; overflow: auto;">--}}
-                                    {{--                                                <h6><span class="text-small" style="font-size: 14px">Google Meet Link</span></h6>--}}
-                                    {{--                                                <button type="button" class="btn btn-outline-success mt-3">Copy Invite Link</button>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    <div class="col-md-3">
+                                        <h6><span class="text-small" style="font-size: 14px">Google Meet Link</span></h6>
+                                        <input type="hidden" id="virtual_training_link" value="{{$training->training_link}}">
+                                        <button type="button" onclick="copyMeetingLink()" class="btn btn-outline-success mt-3">Copy Invite Link</button>
+                                    </div>
                                 @else
-                                    {{--                                    <div class="col-md-3" style="display: none;">--}}
-                                    {{--                                        <div class="card">--}}
-                                    {{--                                            <div class="card-body text-center" style="height: 150px; overflow: auto;">--}}
-                                    {{--                                                <h6><span class="text-small" style="font-size: 14px">Google Meet Link</span></h6>--}}
-                                    {{--                                                <button type="button" class="btn btn-outline-success mt-3">Copy Invite Link</button>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    <div class="col-md-3">
+                                        <h6><span class="text-small" style="font-size: 14px">Google Meet Link</span></h6>
+                                        <button type="button" onclick="alert('Link Not Available Contact Admin')" class="btn btn-outline-success mt-3 disabled">Copy Invite Link</button>
+                                    </div>
                                 @endif
                             @endif
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-body" style="height: 150px; overflow: auto;">
-                                        <h6><span class="text-small" style="font-size: 14px">Trainees</span></h6>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <span>Male <br /> 20 </span>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <span>Female <br /> 200</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                Total <br> 20
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -345,6 +314,47 @@
 @endsection
 @section("js")
     <script>
+        function markPresentPhysical(training_id,day_id,trainee_id){
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            });
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            $.ajax({
+                url: '/adm/'+user_id+'/mark/training/'+training_id+'/day/'+day_id+'/trainee/'+trainee_id+'/present',
+                type: 'post',
+                success: function(response){
+                    // console.log(response.data.status);
+                    alert(response.message);
+                }
+            });
+            return true;
+        }
+        function markAbsentPhysical(training_id,day_id,trainee_id){
+            $.ajaxSetup({
+                header:$('meta[name="_token"]').attr('content')
+            });
+            var user_id = "{{\Illuminate\Support\Facades\Auth::user()->id}}";
+            $.ajax({
+                url: '/adm/'+user_id+'/mark/training/'+training_id+'/day/'+day_id+'/trainee/'+trainee_id+'/absent',
+                type: 'post',
+                success: function(response){
+                    // console.log(response.data.status);
+                    alert(response.message);
+                    location.reload();
+                }
+            });
+            return true;
+        }
+        function copyMeetingLink(){
+            var meetingLink = document.getElementById("virtual_training_link");
+            /* Select the text field */
+            meetingLink.select();
+            meetingLink.setSelectionRange(0, 99999); /* For mobile devices */
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+            /* Alert the copied text */
+            alert("Link Copied To Clipboard");
+        }
         $('.openModalUpdateTrainers').click(function(event){
             event.preventDefault();
             $("#modalUpdateTrainers").modal('show');

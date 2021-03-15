@@ -17,6 +17,8 @@ class CreateTraineeDayPivotTable extends Migration
             $table->id();
             $table->foreignId("day_id")->nullable()->constrained("training_days")->nullOnDelete();
             $table->foreignId("trainee_id")->nullable()->constrained("trainees")->nullOnDelete();
+            $table->integer("present")->nullable()->default(0);
+            $table->integer("absent")->nullable()->default(0);
             $table->timestamps();
         });
     }

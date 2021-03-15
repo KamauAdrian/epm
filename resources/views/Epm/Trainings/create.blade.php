@@ -25,10 +25,9 @@
                                     <div class="form-group" id="training">
                                         <label>SELECT TRAINING</label>
                                         <multiselect id="multiSelectTraining" v-model="selectedTraining" :options="trainings"
-                                                     placeholder="Select Training"
+                                                     placeholder="Select Training" @close="alertClosed"
                                                      :searchable="true" :close-on-select="true">
                                         </multiselect>
-{{--                                        <pre>{{$data }}</pre>--}}
                                         <input type="hidden" id="selected_training" name="training" :value="selectedTraining">
                                         <span class="text-danger">{{$errors->first('training')}}</span>
                                     </div>
@@ -42,6 +41,12 @@
                                         </multiselect>
                                         <input type="hidden" name="type" :value="selectedTraining">
                                         <span class="text-danger">{{$errors->first('type')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="display: none;" id="virtualTrainingLink">
+                                    <div class="form-group">
+                                        <label>LINK</label>
+                                        <input type="text" placeholder="Paste link to Virtual Training here" name="training_link" class="form-control" value="{{old('training_link')}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -129,7 +134,6 @@
 @endsection
 
 @section('js')
-    {{--    <script src="{{url('assets/js/index.js')}}"></script>--}}
     <script>
         function generateSessionLink(){
             document.getElementById('sessionGoogleMeetLink').disabled= true;
@@ -148,16 +152,13 @@
                 ],
             },
             methods:{
-                // alertClosed:function(){
-                //     var opselected = this.selectedTraining;
-                //     var centerInstitution = document.getElementById("trainingVenue");
-                //     if(opselected=="Physical" || opselected=="TOT"){
-                //         centerInstitution.style.display="block";
-                //     }
-                //     if(opselected=="Virtual"){
-                //         centerInstitution.style.display="none";
-                //     }
-                // },
+                alertClosed:function(){
+                    var opselected = this.selectedTraining;
+                    var trainingLink = document.getElementById("virtualTrainingLink");
+                    if(opselected=="Virtual"){
+                        trainingLink.style.display="block";
+                    }
+                },
             },
         });
         new Vue({

@@ -290,12 +290,21 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('/adm/{id}/delete/session/session_id={session_id}',[App\Http\Controllers\SessionController::class, 'destroy']);
 
     //Training (Trainees)
-    Route::get('/adm/{id}/register/training/{training_id}/day/{day_id}/trainees',[App\Http\Controllers\TraineeController::class, 'create']);
-    Route::post('/adm/{id}/training/{training_id}/day/{day_id}/save/trainees',[App\Http\Controllers\TraineeController::class, 'store']);
-    Route::get('/adm/{id}/training/{training_id}/day/{day_id}/trainees/register',[App\Http\Controllers\TraineeController::class, 'show']);
-    Route::get('/adm/{id}/upload/training/{training_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload']);
+    Route::get('/adm/{id}/register/new/training/{training_id}/trainee',[App\Http\Controllers\TraineeController::class, 'create']);
+    Route::post('/adm/{id}/training/{training_id}/save/trainee',[App\Http\Controllers\TraineeController::class, 'store']);
+//    Route::post('/adm/{id}/training/{training_id}/day/{day_id}/save/trainees',[App\Http\Controllers\TraineeController::class, 'store_physical_tot']);
+    Route::post('/adm/{id}/training/{training_id}/category/{category_id}/save/trainees',[App\Http\Controllers\TraineeController::class, 'store_virtual']);
+    Route::get('/adm/{id}/mark/training/{training_id}/trainees/register',[App\Http\Controllers\TrainingController::class, 'mark_register_physical_tot']);
+    Route::post('/adm/{id}/mark/training/{training_id}/day/{day_id}/trainee/{trainee_id}/present',[App\Http\Controllers\TrainingController::class, 'mark_trainee_physical_tot_present']);
+    Route::post('/adm/{id}/mark/training/{training_id}/day/{day_id}/trainee/{trainee_id}/absent',[App\Http\Controllers\TrainingController::class, 'mark_trainee_physical_tot_absent']);
+    Route::get('/adm/{id}/mark/training/{training_id}/category/{category_id}/trainees/register',[App\Http\Controllers\TrainingController::class, 'mark_trainee_virtual_present']);
+    Route::post('/adm/{id}/mark/training/{training_id}/category/{category_id}/day/{day_id}/trainee/{trainee_id}/present',[App\Http\Controllers\TrainingController::class, 'mark_register_virtual']);
+//    Route::get('/adm/{id}/training/{training_id}/day/{day_id}/category/{category_id}/trainees/register',[App\Http\Controllers\TraineeController::class, 'show_with_category']);
+    Route::get('/adm/{id}/upload/training/{training_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload_physical_tot']);
+    Route::post('/adm/{id}/save/training/{training_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload_store_physical_tot']);
+    Route::get('/adm/{id}/upload/training/{training_id}/category/{category_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload_virtual']);
+    Route::post('/adm/{id}/save/training/{training_id}/category/{category_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload_store_virtual']);
     Route::get('/download/trainees/excel/template',[App\Http\Controllers\TraineeController::class, 'excel_template']);
-    Route::post('/adm/{id}/save/training/{training_id}/trainees',[App\Http\Controllers\TraineeController::class, 'upload_store']);
 
     //Trainings ->Physical Training Resources
     Route::get('/adm/{id}/view/physical/training/resources',[App\Http\Controllers\PhysicalTrainingResourceController::class, 'index']);

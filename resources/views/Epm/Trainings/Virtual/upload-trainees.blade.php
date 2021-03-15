@@ -12,7 +12,7 @@
                         <div class="text-center">
                             <h1 class="f-w-400">Upload Trainees to Session</h1>
                         </div>
-                        <form action="{{url('/adm/'.$auth_admin->id.'/save/training/'.$training->id.'/trainees')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('/adm/'.$auth_admin->id.'/save/training/'.$training->id.'/category/'.$category->id.'/trainees')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">

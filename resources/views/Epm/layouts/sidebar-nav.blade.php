@@ -224,6 +224,12 @@ $mentor_role = \App\Models\Role::where('name','Mentor')->first();
         </ul>
     </li>
     @endif
+    <li class="nav-item">
+        <a href="{{url("/adm/".$auth_admin->id."/emails/inbox")}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-comment"></i></span><span class="pcoded-mtext">Inbox</span></a>
+{{--        <ul class="pcoded-submenu">--}}
+{{--            <li><a href="{{url("/adm/".$auth_admin->id."/emails/inbox")}}">Inbox</a></li>--}}
+{{--        </ul>--}}
+    </li>
 </ul>
 <div class="card text-center">
     <div class="card-block">

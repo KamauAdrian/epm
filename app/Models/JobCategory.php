@@ -12,4 +12,8 @@ class JobCategory extends Model
     public function trainingDays(){
         return $this->hasMany('App\Models\TrainingDay','category_id','id');
     }
+
+    public function trainees(){
+        return $this->hasMany('App\Models\Trainee','category_id','id');
+    }
 }
